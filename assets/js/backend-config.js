@@ -16,6 +16,19 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
 });
 
 /*
+ * ADMIN VIEW VISIBILITY SAFETY
+ * Author CSS sets the login view to display:grid. Browsers' default [hidden]
+ * rule can otherwise be overridden by that author rule after a successful
+ * login. Enforce the HTML hidden contract for every admin view/component.
+ */
+(function enforceAdminHiddenState(){
+  if (!/\/admin\/?$/i.test(location.pathname)) return;
+  const style = document.createElement('style');
+  style.textContent = '[hidden]{display:none!important}';
+  document.head.appendChild(style);
+})();
+
+/*
  * ADMIN-SPECIFIC OWNER BOOTSTRAP
  * The button below only starts Supabase's normal email/password signup flow.
  * No password is stored in this file or repository. Email confirmation remains
