@@ -6,7 +6,6 @@
     const root = document.documentElement;
     const body = document.body;
 
-    // Public site never exposes owner preview controls.
     const params = new URLSearchParams(location.search);
     if (params.has('preview')) {
       params.delete('preview');
@@ -115,5 +114,5 @@
     document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
   };
 
-  Promise.resolve(window.PORTFOLIO_READY).then(start).catch(start);
+  Promise.resolve(window.PORTFOLIO_CONFIG_READY).then(start).catch(start);
 })();
