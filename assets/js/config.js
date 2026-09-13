@@ -3,6 +3,8 @@
  * Change a module from false to true to publish it.
  * Future modules below are fully implemented; add real content in `content` first,
  * then switch the matching module on. No redesign or rebuild is required.
+ *
+ * Public owner preview is intentionally disabled. Maintenance belongs in /admin/.
  */
 window.PORTFOLIO_CONFIG = {
   owner: {
@@ -26,8 +28,6 @@ window.PORTFOLIO_CONFIG = {
     certificates: true,
     resume: true,
     contact: true,
-
-    // Fully built but hidden until you choose to publish them.
     services: false,
     testimonials: false,
     blog: false,
@@ -35,11 +35,6 @@ window.PORTFOLIO_CONFIG = {
     activity: false
   },
 
-  /**
-   * FUTURE MODULE CONTENT
-   * `published: false` keeps an individual item hidden even when its module is ON.
-   * This lets you prepare drafts first and publish only reviewed/approved entries.
-   */
   content: {
     services: [
       {
@@ -65,13 +60,12 @@ window.PORTFOLIO_CONFIG = {
       }
     ],
 
-    // Add only real articles/notes. Example fields:
-    // { published:true, date:'Sep 2026', readTime:'4 min', title:'...', excerpt:'...', tags:['Java'], url:'https://...' }
     blog: [],
 
     // Add only real testimonials with permission to publish.
-    // Example fields:
-    // { published:true, quote:'...', name:'...', role:'...', organization:'...', relationship:'Former supervisor', verified:true, sourceUrl:'https://...' }
+    // Optional imageUrl supports a public testimonial photo.
+    // Example:
+    // { published:true, quote:'...', name:'...', role:'...', organization:'...', relationship:'Former supervisor', verified:true, sourceUrl:'https://...', imageUrl:'https://...' }
     testimonials: [],
 
     techLab: [
@@ -130,6 +124,6 @@ window.PORTFOLIO_CONFIG = {
     defaultTheme: 'dark',
     showSearch: true,
     showModuleStatus: true,
-    enableOwnerPreview: true
+    enableOwnerPreview: false
   }
 };
