@@ -12,5 +12,5 @@
     while (wrap.firstChild) main.insertBefore(wrap.firstChild, footer);
   };
 
-  Promise.resolve(window.PORTFOLIO_CONFIG_READY).then(start).catch(start);
+  Promise.resolve(window.PORTFOLIO_READY).then(start).catch(start);
 })();
