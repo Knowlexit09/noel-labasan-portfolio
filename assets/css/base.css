@@ -46,6 +46,12 @@ button { cursor: pointer; }
 img { max-width: 100%; display: block; }
 ::selection { background: rgba(22,119,255,.22); }
 
+/* Feature-flag visibility.
+   Explicit !important is intentional because nav links use display:flex. */
+.module-hidden,
+[data-module].module-hidden,
+[data-module-link].module-hidden { display: none !important; }
+
 /* App shell */
 .app-shell { min-height: 100vh; }
 .sidebar {
