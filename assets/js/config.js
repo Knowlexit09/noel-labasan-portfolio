@@ -1,9 +1,7 @@
 /**
- * PORTFOLIO CONFIGURATION
- *
- * Static values below are the safe fallback used when the backend is unavailable.
- * When Supabase is configured, the public site replaces this object with the
- * approved `live` state before rendering modules.
+ * PORTFOLIO MODULE CONFIGURATION
+ * Static fallback used when the secure backend is unavailable.
+ * Public owner preview is intentionally disabled. Maintenance belongs in /admin/.
  */
 window.PORTFOLIO_CONFIG = {
   owner: {
@@ -58,34 +56,3 @@ window.PORTFOLIO_CONFIG = {
     enableOwnerPreview: false
   }
 };
-
-window.PORTFOLIO_CONFIG_READY = (async function loadApprovedLiveConfig(){
-  const backend = window.PORTFOLIO_BACKEND_CONFIG || {};
-  const base = String(backend.supabaseUrl || '').replace(/\/$/,'');
-  const key = String(backend.supabasePublishableKey || '').trim();
-  const table = backend.stateTable || 'portfolio_states';
-  const scope = backend.liveScope || 'live';
-  if (!base || !key) return window.PORTFOLIO_CONFIG;
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), Number(backend.publicReadTimeoutMs || 1800));
-  try {
-    const endpoint = `${base}/rest/v1/${encodeURIComponent(table)}?scope=eq.${encodeURIComponent(scope)}&select=state&limit=1`;
-    const response = await fetch(endpoint, {
-      headers: { apikey: key, Authorization: `Bearer ${key}` },
-      cache: 'no-store',
-      signal: controller.signal
-    });
-    if (!response.ok) return window.PORTFOLIO_CONFIG;
-    const rows = await response.json();
-    const live = rows?.[0]?.state;
-    if (live && typeof live === 'object' && live.owner && live.modules) {
-      window.PORTFOLIO_CONFIG = live;
-    }
-  } catch (error) {
-    console.warn('Using static portfolio fallback configuration.', error?.message || error);
-  } finally {
-    clearTimeout(timeout);
-  }
-  return window.PORTFOLIO_CONFIG;
-})();
