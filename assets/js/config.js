@@ -142,8 +142,16 @@ window.PORTFOLIO_CONFIG = {
 
     resume: {
       url:'resume.html',
+      pdfUrl:'',
+      pdfFileName:'',
+      pdfFileSize:'',
+      pdfUpdatedAt:'',
       title:'View My Resume',
-      description:'Use the printable resume page to view, print, or save a PDF copy.'
+      description:'Use the printable resume page to view, print, or save a PDF copy.',
+      showViewButton:true,
+      showDownloadButton:true,
+      viewLabel:'View Resume',
+      downloadLabel:'Download Resume'
     },
 
     contact: {
