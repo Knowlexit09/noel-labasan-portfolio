@@ -59,3 +59,22 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
     observer.observe(document.body, {subtree:true,childList:true,attributes:true,attributeFilter:['src']});
   });
 })();
+
+/*
+ * ADMIN ENHANCEMENT LOADER
+ * Keeps larger maintenance-only capabilities isolated from the public runtime.
+ * The files are loaded only under /admin/.
+ */
+(function loadAdminEnhancements(){
+  if (!/\/admin\/?$/i.test(location.pathname)) return;
+  const version = '20260915-3';
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = `admin-enhancements.css?v=${version}`;
+  document.head.appendChild(css);
+
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = `admin-enhancements.js?v=${version}`;
+  document.head.appendChild(script);
+})();
