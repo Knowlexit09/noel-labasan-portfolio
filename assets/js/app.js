@@ -22,7 +22,37 @@
     }
     document.querySelectorAll('[data-theme-choice]').forEach(btn => btn.addEventListener('click', () => setTheme(btn.dataset.themeChoice)));
 
-    document.querySelectorAll('[data-sidebar-toggle]').forEach(btn => btn.addEventListener('click', () => body.classList.toggle('sidebar-collapsed')));
+    /*
+     * SIDEBAR TOGGLE
+     * The collapse control itself must never inherit .hide-collapsed, otherwise
+     * the only way to expand the sidebar is a page refresh. Keep the control
+     * visible and update its icon/accessible label for both states.
+     */
+    const sidebarToggleButtons = [...document.querySelectorAll('[data-sidebar-toggle]')];
+    const sidebarBrand = document.querySelector('.sidebar-top .brand-mark');
+
+    function syncSidebarToggle() {
+      const collapsed = body.classList.contains('sidebar-collapsed');
+      sidebarToggleButtons.forEach(btn => {
+        btn.classList.remove('hide-collapsed');
+        btn.textContent = collapsed ? '›' : '‹';
+        btn.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+        btn.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+      });
+      if (sidebarBrand) sidebarBrand.style.display = collapsed ? 'none' : '';
+      const sidebarTop = document.querySelector('.sidebar-top');
+      if (sidebarTop) sidebarTop.style.justifyContent = collapsed ? 'center' : '';
+    }
+
+    sidebarToggleButtons.forEach(btn => {
+      btn.classList.remove('hide-collapsed');
+      btn.addEventListener('click', () => {
+        body.classList.toggle('sidebar-collapsed');
+        syncSidebarToggle();
+      });
+    });
+    syncSidebarToggle();
+
     document.querySelectorAll('[data-mobile-menu]').forEach(btn => btn.addEventListener('click', () => body.classList.toggle('mobile-nav-open')));
     document.querySelectorAll('.sidebar-nav a').forEach(a => a.addEventListener('click', () => body.classList.remove('mobile-nav-open')));
 
