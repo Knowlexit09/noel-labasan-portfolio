@@ -17,6 +17,12 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   ownerEmail: 'noel.ochoa.labasan@gmail.com'
 });
 
+/*
+ * ADMIN VIEW VISIBILITY SAFETY
+ * Scope: PAGE-SPECIFIC /admin.
+ * The authored admin CSS uses display:grid/flex; enforce the semantic hidden
+ * attribute so authentication view switching cannot be overridden by CSS.
+ */
 (function enforceAdminHiddenState(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
   const style = document.createElement('style');
@@ -24,6 +30,12 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   document.head.appendChild(style);
 })();
 
+/*
+ * ADMIN MEDIA PREVIEW PATH NORMALIZER
+ * Scope: PAGE-SPECIFIC /admin.
+ * Static portfolio paths such as assets/images/... are one directory higher
+ * from /admin/. Absolute Supabase URLs are intentionally left untouched.
+ */
 (function normalizeAdminMediaPreviews(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
   const fixImage = img => {
@@ -45,16 +57,21 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   });
 })();
 
-/* Maintenance-only enhancement loader. */
+/*
+ * ADMIN ENHANCEMENT LOADER
+ * Scope: PAGE-SPECIFIC /admin.
+ * Loads optional maintenance modules after the core admin shell. The revision
+ * guard is last because it intentionally owns the final Publish Live behavior.
+ */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20260915-4';
+  const version = '20260915-5';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
   css.href = `admin-enhancements.css?v=${version}`;
   document.head.appendChild(css);
 
-  ['admin-enhancements.js','admin-list-manager.js'].forEach(file => {
+  ['admin-enhancements.js','admin-list-manager.js','admin-revision-fix.js'].forEach(file => {
     const script = document.createElement('script');
     script.defer = true;
     script.src = `${file}?v=${version}`;
