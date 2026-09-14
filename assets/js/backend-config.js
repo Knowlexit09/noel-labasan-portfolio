@@ -29,3 +29,33 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   style.textContent = '[hidden]{display:none!important}';
   document.head.appendChild(style);
 })();
+
+/*
+ * ADMIN MEDIA PREVIEW PATH NORMALIZER
+ * Portfolio content stores root-relative project asset paths such as
+ * `assets/images/...`. Inside /admin/ those paths need one level up. Uploaded
+ * Supabase URLs are absolute and are left untouched.
+ */
+(function normalizeAdminMediaPreviews(){
+  if (!/\/admin\/?$/i.test(location.pathname)) return;
+
+  const fixImage = img => {
+    const src = img?.getAttribute?.('src') || '';
+    if (/^assets\//i.test(src)) img.setAttribute('src', `../${src}`);
+  };
+
+  const fixTree = node => {
+    if (!node || node.nodeType !== 1) return;
+    if (node.matches?.('img')) fixImage(node);
+    node.querySelectorAll?.('img').forEach(fixImage);
+  };
+
+  window.addEventListener('DOMContentLoaded', () => {
+    fixTree(document.body);
+    const observer = new MutationObserver(records => records.forEach(record => {
+      if (record.type === 'attributes') fixImage(record.target);
+      record.addedNodes.forEach(fixTree);
+    }));
+    observer.observe(document.body, {subtree:true,childList:true,attributes:true,attributeFilter:['src']});
+  });
+})();
