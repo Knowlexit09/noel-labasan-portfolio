@@ -22,13 +22,6 @@
     if (el && value != null) el.textContent = value;
   }
 
-  function setHref(selector, value) {
-    const url = safeUrl(value);
-    document.querySelectorAll(selector).forEach(el => {
-      if (url) el.href = url;
-    });
-  }
-
   function renderOwner(cfg) {
     const owner = cfg.owner || {};
     const profileImage = safeUrl(owner.profileImageUrl) || 'assets/images/profile.svg';
@@ -40,7 +33,8 @@
 
     setText('.profile-name', owner.name);
     setText('.profile-role', owner.headline);
-    setText('.availability', owner.availability);
+    const availability = document.querySelector('.availability');
+    if (availability) availability.innerHTML = `<span class="dot"></span>${esc(owner.availability || '')}`;
 
     const brand = document.querySelector('.brand-mark .hide-collapsed');
     if (brand) brand.innerHTML = `<div style="font-size:13px;color:white">${esc(owner.shortName || owner.name || 'Noel Labasan')}</div><div style="font-size:10px;color:#7891a8;font-weight:600">Developer · Support</div>`;
@@ -58,6 +52,13 @@
         el.hidden = false;
       }
     });
+
+    const footer = document.querySelector('.site-footer');
+    if (footer) {
+      const blocks = footer.querySelectorAll(':scope > div');
+      if (blocks[0]) blocks[0].innerHTML = `<strong>${esc(owner.name || '')}</strong><br>${esc(owner.headline || '')}`;
+      if (blocks[1]) blocks[1].innerHTML = `© <span data-year=""></span> ${esc(owner.name || '')}. Built as a lightweight static portfolio.`;
+    }
   }
 
   function renderHero(cfg) {
