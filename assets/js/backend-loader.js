@@ -3,6 +3,7 @@
 
   const fallback = window.PORTFOLIO_CONFIG || {};
   const backend = window.PORTFOLIO_BACKEND_CONFIG || {};
+  const previewKey = 'nl-portfolio-draft-preview';
 
   const mergeConfig = (base, remote) => ({
     ...base,
@@ -13,7 +14,49 @@
     ui: { ...(base.ui || {}), ...(remote.ui || {}) }
   });
 
+  function tryLocalDraftPreview() {
+    const params = new URLSearchParams(location.search);
+    const nonce = params.get('draftPreview');
+    if (!nonce) return null;
+    try {
+      const payload = JSON.parse(localStorage.getItem(previewKey) || 'null');
+      if (!payload || payload.nonce !== nonce || !payload.state || Date.now() > Number(payload.expires || 0)) {
+        localStorage.removeItem(previewKey);
+        return null;
+      }
+      window.PORTFOLIO_PREVIEW_MODE = true;
+      window.PORTFOLIO_PREVIEW_LABEL = payload.label || 'Working Draft';
+      return payload.state;
+    } catch {
+      return null;
+    }
+  }
+
+  function installPreviewBanner() {
+    if (!window.PORTFOLIO_PREVIEW_MODE) return;
+    const run = () => {
+      if (document.querySelector('.draft-preview-banner')) return;
+      const bar = document.createElement('div');
+      bar.className = 'draft-preview-banner';
+      bar.innerHTML = `<b>DRAFT PREVIEW</b>${String(window.PORTFOLIO_PREVIEW_LABEL || 'Working Draft')}<button type="button">Exit preview</button>`;
+      bar.querySelector('button').addEventListener('click', () => {
+        localStorage.removeItem(previewKey);
+        location.href = location.pathname;
+      });
+      document.body.appendChild(bar);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once:true });
+    else run();
+  }
+
   window.PORTFOLIO_READY = (async () => {
+    const previewState = tryLocalDraftPreview();
+    if (previewState) {
+      window.PORTFOLIO_CONFIG = mergeConfig(fallback, previewState);
+      installPreviewBanner();
+      return window.PORTFOLIO_CONFIG;
+    }
+
     const url = String(backend.supabaseUrl || '').replace(/\/$/, '');
     const key = String(backend.supabasePublishableKey || '').trim();
     const table = backend.stateTable || 'portfolio_states';
