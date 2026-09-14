@@ -6,235 +6,127 @@
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="description" content="Private maintenance console for Noel Labasan's portfolio.">
   <title>Portfolio Maintenance | Noel Labasan</title>
-  <link rel="stylesheet" href="admin.css?v=20260913-2">
-  <script src="../assets/js/config.js?v=20260913-2"></script>
-  <script src="../assets/js/backend-config.js?v=20260913-2"></script>
-  <script type="module" src="admin.js?v=20260913-2"></script>
+  <link rel="stylesheet" href="admin.css?v=20260915-2">
+  <link rel="stylesheet" href="admin-extra.css?v=20260915-2">
+  <script src="../assets/js/config.js?v=20260915-2"></script>
+  <script src="../assets/js/backend-config.js?v=20260915-2"></script>
+  <script defer src="admin.js?v=20260915-2"></script>
 </head>
 <body>
-  <div class="ambient" aria-hidden="true">
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
-    <div class="orb orb-c"></div>
-    <div class="grid-fade"></div>
-  </div>
+  <div class="ambient" aria-hidden="true"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div><div class="grid-fade"></div></div>
 
   <main id="loginView" class="login-view">
     <section class="login-shell" aria-labelledby="loginTitle">
-      <div class="login-brand">
-        <div class="admin-logo">N<span>L</span></div>
-        <div>
-          <strong>Noel Labasan</strong>
-          <small>Portfolio Maintenance</small>
-        </div>
-      </div>
-
+      <div class="login-brand"><div class="admin-logo">N<span>L</span></div><div><strong>Noel Labasan</strong><small>Portfolio Maintenance</small></div></div>
       <div class="secure-pill"><span class="pulse-dot"></span> Protected maintenance area</div>
       <h1 id="loginTitle">Welcome back.</h1>
-      <p class="login-copy">Sign in to manage modules, testimonials, content, drafts, and live publishing.</p>
-
+      <p class="login-copy">Sign in to manage modules, images, testimonials, content, drafts, and live publishing.</p>
       <form id="loginForm" class="login-form" novalidate>
-        <label>Email
-          <span class="field-shell">
-            <span class="field-icon">✉</span>
-            <input id="loginEmail" name="email" type="email" autocomplete="username" placeholder="you@example.com" required>
-          </span>
-        </label>
-        <label>Password
-          <span class="field-shell">
-            <span class="field-icon">⌁</span>
-            <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="••••••••••••" required>
-            <button id="passwordToggle" class="field-action" type="button" aria-label="Show password">◉</button>
-          </span>
-        </label>
+        <label>Email<span class="field-shell"><span class="field-icon">✉</span><input id="loginEmail" name="email" type="email" autocomplete="username" placeholder="you@example.com" required></span></label>
+        <label>Password<span class="field-shell"><span class="field-icon">⌁</span><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="••••••••••••" required><button id="passwordToggle" class="field-action" type="button" aria-label="Show password">◉</button></span></label>
         <button id="loginButton" class="primary-action shine" type="submit"><span>Sign in securely</span><b>→</b></button>
         <p id="loginMessage" class="form-message" role="status"></p>
       </form>
-
-      <div id="setupNotice" class="setup-notice" hidden>
-        <div class="setup-icon">⚙</div>
-        <div>
-          <strong>Secure backend setup required</strong>
-          <p>The maintenance UI is ready, but login remains disabled until Supabase is connected. No password is stored in this repository.</p>
-        </div>
-      </div>
-
-      <div class="login-foot">
-        <span id="backendBadge" class="status-dot"><i></i> Checking backend</span>
-        <a href="../">← Back to public portfolio</a>
-      </div>
+      <div id="setupNotice" class="setup-notice" hidden><div class="setup-icon">⚙</div><div><strong>Secure backend setup required</strong><p>Login remains disabled until the backend configuration is available.</p></div></div>
+      <div class="login-foot"><span id="backendBadge" class="status-dot"><i></i> Checking backend</span><a href="../">← Back to public portfolio</a></div>
     </section>
-
     <aside class="login-showcase" aria-hidden="true">
       <div class="showcase-card glass-card float-card one"><span>Modules</span><strong>ON / OFF</strong><small>Publish only what is ready</small></div>
-      <div class="showcase-card glass-card float-card two"><span>Testimonials</span><strong>Review & publish</strong><small>Real, permissioned references only</small></div>
+      <div class="showcase-card glass-card float-card two"><span>Media</span><strong>Upload & preview</strong><small>Profile, projects and credentials</small></div>
       <div class="showcase-card glass-card float-card three"><span>Safe workflow</span><strong>Draft → Live</strong><small>Preview changes before publishing</small></div>
-      <div class="showcase-code glass-card">
-        <i></i><i></i><i></i>
-        <pre>portfolio.admin {
+      <div class="showcase-code glass-card"><i></i><i></i><i></i><pre>portfolio.admin {
   auth: "required",
+  media: "managed",
   drafts: true,
-  publicPreview: false,
   publish: "controlled"
-}</pre>
-      </div>
+}</pre></div>
     </aside>
   </main>
 
   <div id="adminShell" class="admin-shell" hidden>
     <aside class="admin-sidebar">
-      <div class="sidebar-brand">
-        <div class="admin-logo small">N<span>L</span></div>
-        <div><strong>Maintenance</strong><small>Portfolio Console</small></div>
-      </div>
-
+      <div class="sidebar-brand"><div class="admin-logo small">N<span>L</span></div><div><strong>Maintenance</strong><small>Portfolio Console</small></div></div>
       <nav id="adminNav" class="admin-nav" aria-label="Maintenance navigation">
         <button class="active" data-page-target="overview"><span>⌂</span><b>Overview</b></button>
         <button data-page-target="modules"><span>◫</span><b>Modules</b></button>
-        <button data-page-target="testimonials"><span>“</span><b>Testimonials</b></button>
+        <button data-page-target="media"><span>▧</span><b>Media</b></button>
         <button data-page-target="content"><span>✎</span><b>Content</b></button>
+        <button data-page-target="testimonials"><span>“</span><b>Testimonials</b></button>
         <button data-page-target="system"><span>⚙</span><b>System</b></button>
       </nav>
-
-      <div class="sidebar-bottom">
-        <div class="account-card">
-          <span id="accountAvatar">NL</span>
-          <div><strong id="accountEmail">Signed in</strong><small id="accountState">Secure session</small></div>
-        </div>
-        <button id="signOutButton" class="ghost-button danger-hover" type="button">↪ Sign out</button>
-      </div>
+      <div class="sidebar-bottom"><div class="account-card"><span id="accountAvatar">NL</span><div><strong id="accountEmail">Signed in</strong><small id="accountState">Secure session</small></div></div><button id="signOutButton" class="ghost-button danger-hover" type="button">↪ Sign out</button></div>
     </aside>
 
     <section class="admin-main">
-      <header class="admin-topbar">
-        <div>
-          <p class="eyebrow">PORTFOLIO CONTROL CENTER</p>
-          <h1 id="pageTitle">Overview</h1>
-        </div>
-        <div class="top-actions">
-          <span id="saveState" class="save-state"><i></i> All changes saved</span>
-          <button id="saveDraftButton" class="secondary-action" type="button">Save draft</button>
-          <button id="publishButton" class="primary-action compact shine" type="button">Publish live <b>↗</b></button>
-        </div>
-      </header>
+      <header class="admin-topbar"><div><p class="eyebrow">PORTFOLIO CONTROL CENTER</p><h1 id="pageTitle">Overview</h1></div><div class="top-actions"><span id="saveState" class="save-state"><i></i> All changes saved</span><button id="saveDraftButton" class="secondary-action" type="button">Save draft</button><button id="publishButton" class="primary-action compact shine" type="button">Publish live <b>↗</b></button></div></header>
 
       <div class="admin-body">
         <section class="admin-page active" data-page="overview">
-          <div class="welcome-panel glass-panel">
-            <div>
-              <p class="eyebrow">WELCOME BACK</p>
-              <h2>Keep the public portfolio clean.<br><span>Prepare changes safely here.</span></h2>
-              <p>Draft changes first, review them, then publish only when you're ready.</p>
-            </div>
-            <div class="live-orb"><span></span><strong>LIVE</strong><small id="liveUpdated">Waiting for status…</small></div>
-          </div>
-
-          <div class="metric-grid">
-            <article class="metric-card"><span class="metric-icon">◫</span><div><strong id="metricModules">0</strong><small>Published modules</small></div></article>
-            <article class="metric-card"><span class="metric-icon">“</span><div><strong id="metricTestimonials">0</strong><small>Testimonials</small></div></article>
-            <article class="metric-card"><span class="metric-icon">✎</span><div><strong id="metricDrafts">0</strong><small>Prepared content items</small></div></article>
-            <article class="metric-card"><span class="metric-icon">✓</span><div><strong id="metricHealth">Good</strong><small>System status</small></div></article>
-          </div>
-
+          <div class="welcome-panel glass-panel"><div><p class="eyebrow">WELCOME BACK</p><h2>Keep the public portfolio clean.<br><span>Prepare changes safely here.</span></h2><p>Images and content stay in your working draft until you publish.</p></div><div class="live-orb"><span></span><strong>LIVE</strong><small id="liveUpdated">Waiting for status…</small></div></div>
+          <div class="metric-grid"><article class="metric-card"><span class="metric-icon">◫</span><div><strong id="metricModules">0</strong><small>Published modules</small></div></article><article class="metric-card"><span class="metric-icon">▧</span><div><strong id="metricMedia">0</strong><small>Managed images</small></div></article><article class="metric-card"><span class="metric-icon">“</span><div><strong id="metricTestimonials">0</strong><small>Testimonials</small></div></article><article class="metric-card"><span class="metric-icon">✓</span><div><strong id="metricHealth">Good</strong><small>System status</small></div></article></div>
           <div class="overview-grid">
-            <article class="glass-panel overview-card">
-              <div class="panel-heading"><div><p class="eyebrow">QUICK ACTIONS</p><h3>Maintenance shortcuts</h3></div></div>
-              <div class="quick-actions">
-                <button data-go-page="testimonials"><span>＋</span><b>Add testimonial</b><small>Prepare a verified reference</small></button>
-                <button data-go-page="modules"><span>◫</span><b>Manage modules</b><small>Control public navigation</small></button>
-                <button data-go-page="content"><span>✎</span><b>Edit profile</b><small>Update public contact details</small></button>
-                <a href="../" target="_blank" rel="noopener"><span>↗</span><b>Open live site</b><small>View the public portfolio</small></a>
-              </div>
-            </article>
-
-            <article class="glass-panel overview-card">
-              <div class="panel-heading"><div><p class="eyebrow">PUBLISHING</p><h3>Draft → Review → Live</h3></div></div>
-              <ol class="workflow-steps">
-                <li class="done"><i>1</i><div><b>Edit safely</b><span>Changes stay in your working draft.</span></div></li>
-                <li><i>2</i><div><b>Save a draft</b><span>Keep a recoverable server-side copy.</span></div></li>
-                <li><i>3</i><div><b>Publish live</b><span>Public site reads only the approved live state.</span></div></li>
-              </ol>
-            </article>
+            <article class="glass-panel overview-card"><div class="panel-heading"><div><p class="eyebrow">QUICK ACTIONS</p><h3>Maintenance shortcuts</h3></div></div><div class="quick-actions"><button data-go-page="media"><span>▧</span><b>Change images</b><small>Profile, projects, credentials</small></button><button data-go-page="testimonials"><span>＋</span><b>Add testimonial</b><small>Prepare a verified reference</small></button><button data-go-page="modules"><span>◫</span><b>Manage modules</b><small>Control public visibility</small></button><button data-go-page="content"><span>✎</span><b>Edit content</b><small>Profile, copy and structured lists</small></button><a href="../" target="_blank" rel="noopener"><span>↗</span><b>Open live site</b><small>View the public portfolio</small></a></div></article>
+            <article class="glass-panel overview-card"><div class="panel-heading"><div><p class="eyebrow">PUBLISHING</p><h3>Draft → Review → Live</h3></div></div><ol class="workflow-steps"><li class="done"><i>1</i><div><b>Edit safely</b><span>Changes stay in your working draft.</span></div></li><li><i>2</i><div><b>Save a draft</b><span>Keep a recoverable server-side copy.</span></div></li><li><i>3</i><div><b>Publish live</b><span>Public site reads only the approved live state.</span></div></li></ol></article>
           </div>
         </section>
 
-        <section class="admin-page" data-page="modules">
-          <div class="page-intro"><div><p class="eyebrow">PUBLIC VISIBILITY</p><h2>Modules</h2><p>Switching a module OFF hides both its public section and sidebar navigation item.</p></div></div>
-          <div id="moduleGrid" class="module-maintenance-grid"></div>
-        </section>
+        <section class="admin-page" data-page="modules"><div class="page-intro"><div><p class="eyebrow">PUBLIC VISIBILITY</p><h2>Modules</h2><p>Switching a module OFF hides both its public section and sidebar navigation item.</p></div></div><div id="moduleGrid" class="module-maintenance-grid"></div></section>
 
-        <section class="admin-page" data-page="testimonials">
-          <div class="page-intro split">
-            <div><p class="eyebrow">SOCIAL PROOF</p><h2>Testimonials</h2><p>Store only genuine testimonials you have permission to publish.</p></div>
-            <button id="addTestimonialButton" class="primary-action compact shine" type="button">＋ Add testimonial</button>
-          </div>
-          <div id="testimonialAdminList" class="testimonial-admin-list"></div>
-          <div id="testimonialEmpty" class="empty-state" hidden><span>“</span><h3>No testimonials yet</h3><p>Add a real testimonial when you receive one. It can stay unpublished until approved.</p><button class="secondary-action" data-empty-add-testimonial type="button">Add first testimonial</button></div>
+        <section class="admin-page" data-page="media">
+          <div class="page-intro"><div><p class="eyebrow">MEDIA LIBRARY</p><h2>Images & visual assets</h2><p>Upload replacements without editing GitHub files. New uploads remain draft-only until Publish Live.</p></div></div>
+          <article class="glass-panel media-feature-card"><div class="media-preview profile-media-preview"><img id="profileImagePreview" alt="Profile preview"></div><div class="media-editor"><p class="eyebrow">PROFILE PHOTO</p><h3>Main profile image</h3><p>Used in the public sidebar. Square portraits work best.</p><label>Image URL<input id="profileImageUrl" data-media-url="profile" type="url" placeholder="https://..."></label><div class="media-actions"><label class="secondary-action file-action">↑ Upload image<input id="profileImageFile" data-media-file="profile" type="file" accept="image/png,image/jpeg,image/webp"></label><button class="secondary-action danger-hover" data-media-reset="profile" type="button">↶ Reset placeholder</button></div><small>JPG, PNG or WebP · up to 4 MB · recommended 800×800 or larger.</small></div></article>
+
+          <div class="page-intro compact-intro"><div><p class="eyebrow">PROJECT COVERS</p><h2>Featured project images</h2><p>Each cover can use an uploaded image or a direct image URL.</p></div></div><div id="projectMediaGrid" class="media-grid"></div>
+          <div class="page-intro compact-intro"><div><p class="eyebrow">CREDENTIAL IMAGES</p><h2>Training & certificate visuals</h2><p>Optional. Leave blank to keep the current icon-style credential card.</p></div></div><div id="credentialMediaGrid" class="media-grid"></div>
+          <div class="media-note glass-panel"><span>“</span><div><b>Testimonial photos</b><p>Managed inside the Testimonials form so the image stays tied to the correct person.</p></div></div>
         </section>
 
         <section class="admin-page" data-page="content">
-          <div class="page-intro"><div><p class="eyebrow">PROFILE SETTINGS</p><h2>Public information</h2><p>Update the contact and profile details used by the portfolio.</p></div></div>
+          <div class="page-intro"><div><p class="eyebrow">PROFILE SETTINGS</p><h2>Public identity & contact</h2><p>These details are reused across the sidebar, hero, contact section, and links.</p></div></div>
           <form id="profileForm" class="settings-grid glass-panel">
-            <label>Full name<input name="name" type="text"></label>
-            <label>Short name<input name="shortName" type="text"></label>
-            <label class="span-two">Professional headline<input name="headline" type="text"></label>
-            <label>Location<input name="location" type="text"></label>
-            <label>Email<input name="email" type="email"></label>
-            <label>Phone<input name="phone" type="text"></label>
-            <label>Availability<input name="availability" type="text"></label>
-            <label>GitHub URL<input name="github" type="url"></label>
-            <label>LinkedIn URL<input name="linkedin" type="url"></label>
+            <label>Full name<input name="name" type="text"></label><label>Short name<input name="shortName" type="text"></label><label class="span-two">Professional headline<input name="headline" type="text"></label><label>Location<input name="location" type="text"></label><label>Email<input name="email" type="email"></label><label>Phone<input name="phone" type="text"></label><label>Availability<input name="availability" type="text"></label><label>GitHub URL<input name="github" type="url"></label><label>LinkedIn URL<input name="linkedin" type="url"></label>
           </form>
 
-          <div class="page-intro compact-intro"><div><p class="eyebrow">STRUCTURED CONTENT</p><h2>Advanced content editor</h2><p>Services, technical notes, Tech Lab and activity can be edited as validated JSON when needed.</p></div></div>
+          <div class="page-intro compact-intro"><div><p class="eyebrow">CORE COPY</p><h2>Hero, About, Resume & Contact</h2><p>Edit the most visible text without touching source files.</p></div></div>
+          <form id="coreContentForm" class="settings-grid glass-panel">
+            <label>Hero greeting<input data-state-path="content.hero.greeting" type="text"></label><label>Hero role<input data-state-path="content.hero.role" type="text"></label><label class="span-two">Hero value line<input data-state-path="content.hero.value" type="text"></label><label class="span-two">Hero summary<textarea data-state-path="content.hero.summary" rows="3"></textarea></label>
+            <label class="span-two">About heading<input data-state-path="content.about.heading" type="text"></label><label class="span-two">About paragraph 1<textarea data-state-path="content.about.paragraphs.0" rows="4"></textarea></label><label class="span-two">About paragraph 2<textarea data-state-path="content.about.paragraphs.1" rows="4"></textarea></label>
+            <label>Resume title<input data-state-path="content.resume.title" type="text"></label><label>Resume URL<input data-state-path="content.resume.url" type="text"></label><label class="span-two">Resume description<textarea data-state-path="content.resume.description" rows="2"></textarea></label>
+            <label>Contact kicker<input data-state-path="content.contact.kicker" type="text"></label><label>Contact title<input data-state-path="content.contact.title" type="text"></label><label class="span-two">Contact subtitle<input data-state-path="content.contact.subtitle" type="text"></label><label class="span-two">Contact lead<input data-state-path="content.contact.lead" type="text"></label><label class="span-two">Contact description<textarea data-state-path="content.contact.description" rows="3"></textarea></label>
+          </form>
+
+          <div class="page-intro compact-intro"><div><p class="eyebrow">SITE OPTIONS</p><h2>Display preferences</h2></div></div>
+          <div class="settings-grid glass-panel"><label>Default theme<select data-state-path="ui.defaultTheme"><option value="dark">Dark</option><option value="light">Light</option></select></label><label class="toggle-row"><input data-state-path="ui.showSearch" type="checkbox"><span><b>Show portfolio search</b><small>Hide it if you want a cleaner top bar.</small></span></label></div>
+
+          <div class="page-intro compact-intro"><div><p class="eyebrow">STRUCTURED LISTS</p><h2>Advanced content editor</h2><p>These validated JSON editors cover every repeatable list used by the portfolio.</p></div></div>
           <div class="json-editor-grid">
-            <article class="glass-panel json-card"><div><b>Services</b><small>Cards shown when Services is enabled.</small></div><textarea data-json-editor="services" spellcheck="false"></textarea></article>
-            <article class="glass-panel json-card"><div><b>Technical Notes</b><small>Article metadata and links.</small></div><textarea data-json-editor="blog" spellcheck="false"></textarea></article>
-            <article class="glass-panel json-card"><div><b>Tech Lab</b><small>Technical experiments and patterns.</small></div><textarea data-json-editor="techLab" spellcheck="false"></textarea></article>
-            <article class="glass-panel json-card"><div><b>Build Activity</b><small>Meaningful milestones only.</small></div><textarea data-json-editor="activity" spellcheck="false"></textarea></article>
-          </div>
-          <p id="jsonMessage" class="form-message"></p>
+            <article class="glass-panel json-card"><div><b>Hero Stats</b><small>Dashboard-style statistics below the hero.</small></div><textarea data-json-path="content.hero.stats" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>About Approach</b><small>Understand, Build, Protect, Test, Support, Improve.</small></div><textarea data-json-path="content.about.approach" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Projects</b><small>Project title, type, cover URL, tags and case-study link.</small></div><textarea data-json-path="content.projects" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Experience</b><small>Professional timeline entries.</small></div><textarea data-json-path="content.experience" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Skills</b><small>Skill labels and highlight flags.</small></div><textarea data-json-path="content.skills" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Credentials</b><small>Training, badges, icons and optional image URLs.</small></div><textarea data-json-path="content.credentials" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Services</b><small>Cards shown when Services is enabled.</small></div><textarea data-json-path="content.services" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Technical Notes</b><small>Article metadata and links.</small></div><textarea data-json-path="content.blog" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Tech Lab</b><small>Technical experiments and patterns.</small></div><textarea data-json-path="content.techLab" spellcheck="false"></textarea></article>
+            <article class="glass-panel json-card"><div><b>Build Activity</b><small>Meaningful milestones only.</small></div><textarea data-json-path="content.activity" spellcheck="false"></textarea></article>
+          </div><p id="jsonMessage" class="form-message"></p>
+        </section>
+
+        <section class="admin-page" data-page="testimonials">
+          <div class="page-intro split"><div><p class="eyebrow">SOCIAL PROOF</p><h2>Testimonials</h2><p>Store only genuine testimonials you have permission to publish.</p></div><button id="addTestimonialButton" class="primary-action compact shine" type="button">＋ Add testimonial</button></div>
+          <div id="testimonialAdminList" class="testimonial-admin-list"></div><div id="testimonialEmpty" class="empty-state" hidden><span>“</span><h3>No testimonials yet</h3><p>Add a real testimonial when you receive one. It can stay unpublished until approved.</p><button class="secondary-action" data-empty-add-testimonial type="button">Add first testimonial</button></div>
         </section>
 
         <section class="admin-page" data-page="system">
-          <div class="page-intro"><div><p class="eyebrow">MAINTENANCE</p><h2>System</h2><p>Connection health, backups, and recovery controls.</p></div></div>
-          <div class="system-grid">
-            <article class="glass-panel system-card"><span>●</span><div><b>Backend connection</b><strong id="systemBackend">Checking…</strong><small id="systemBackendDetail">Supabase</small></div></article>
-            <article class="glass-panel system-card"><span>◫</span><div><b>Live state</b><strong id="systemLive">—</strong><small>Public configuration</small></div></article>
-            <article class="glass-panel system-card"><span>✎</span><div><b>Draft state</b><strong id="systemDraft">—</strong><small>Private working copy</small></div></article>
-          </div>
-          <article class="glass-panel maintenance-actions">
-            <div><h3>Recovery & backup</h3><p>Download a JSON backup before major edits or restore your working state from the current live version.</p></div>
-            <div class="maintenance-buttons">
-              <button id="exportButton" class="secondary-action" type="button">↓ Export JSON backup</button>
-              <button id="restoreLiveButton" class="secondary-action danger-hover" type="button">↶ Restore draft from live</button>
-            </div>
-          </article>
+          <div class="page-intro"><div><p class="eyebrow">MAINTENANCE</p><h2>System</h2><p>Connection health, backups, and recovery controls.</p></div></div><div class="system-grid"><article class="glass-panel system-card"><span>●</span><div><b>Backend connection</b><strong id="systemBackend">Checking…</strong><small id="systemBackendDetail">Supabase</small></div></article><article class="glass-panel system-card"><span>◫</span><div><b>Live state</b><strong id="systemLive">—</strong><small>Public configuration</small></div></article><article class="glass-panel system-card"><span>✎</span><div><b>Draft state</b><strong id="systemDraft">—</strong><small>Private working copy</small></div></article></div>
+          <article class="glass-panel maintenance-actions"><div><h3>Recovery & backup</h3><p>Download a JSON backup before major edits or restore your working state from the current live version.</p></div><div class="maintenance-buttons"><button id="exportButton" class="secondary-action" type="button">↓ Export JSON backup</button><button id="restoreLiveButton" class="secondary-action danger-hover" type="button">↶ Restore draft from live</button></div></article>
         </section>
       </div>
     </section>
   </div>
 
-  <dialog id="testimonialDialog" class="modal">
-    <form id="testimonialForm" method="dialog" class="modal-card">
-      <div class="modal-head"><div><p class="eyebrow">TESTIMONIAL</p><h2 id="testimonialDialogTitle">Add testimonial</h2></div><button class="icon-close" value="cancel" type="submit">×</button></div>
-      <div class="modal-grid">
-        <label class="span-two">Testimonial<textarea name="quote" rows="5" required placeholder="Exact testimonial text"></textarea></label>
-        <label>Name<input name="name" required placeholder="Full name"></label>
-        <label>Relationship<input name="relationship" placeholder="Former supervisor, colleague, client…"></label>
-        <label>Role<input name="role" placeholder="HR Manager"></label>
-        <label>Organization<input name="organization" placeholder="Company name"></label>
-        <label>Source URL<input name="sourceUrl" type="url" placeholder="Optional LinkedIn/source link"></label>
-        <label>Photo URL<input name="imageUrl" type="url" placeholder="Optional existing public image URL"></label>
-        <label class="span-two upload-field">Optional photo upload<input id="testimonialPhoto" name="photo" type="file" accept="image/png,image/jpeg,image/webp"><small>JPG, PNG or WebP. Uploaded to protected-maintenance media storage and served publicly only by URL.</small></label>
-        <label class="toggle-row"><input name="verified" type="checkbox"><span><b>Permission confirmed</b><small>I have permission to publish this testimonial.</small></span></label>
-        <label class="toggle-row"><input name="published" type="checkbox"><span><b>Publish this item</b><small>Can remain drafted even when the module is enabled.</small></span></label>
-      </div>
-      <p id="testimonialMessage" class="form-message"></p>
-      <div class="modal-actions"><button class="secondary-action" value="cancel" type="submit">Cancel</button><button id="saveTestimonialButton" class="primary-action shine" value="default" type="submit">Save testimonial</button></div>
-    </form>
-  </dialog>
-
+  <dialog id="testimonialDialog" class="modal"><form id="testimonialForm" method="dialog" class="modal-card"><div class="modal-head"><div><p class="eyebrow">TESTIMONIAL</p><h2 id="testimonialDialogTitle">Add testimonial</h2></div><button class="icon-close" value="cancel" type="submit">×</button></div><div class="modal-grid"><label class="span-two">Testimonial<textarea name="quote" rows="5" required placeholder="Exact testimonial text"></textarea></label><label>Name<input name="name" required placeholder="Full name"></label><label>Relationship<input name="relationship" placeholder="Former supervisor, colleague, client…"></label><label>Role<input name="role" placeholder="HR Manager"></label><label>Organization<input name="organization" placeholder="Company name"></label><label>Source URL<input name="sourceUrl" type="url" placeholder="Optional LinkedIn/source link"></label><label>Photo URL<input name="imageUrl" type="url" placeholder="Optional existing public image URL"></label><label class="span-two upload-field">Optional photo upload<input id="testimonialPhoto" name="photo" type="file" accept="image/png,image/jpeg,image/webp"><small>JPG, PNG or WebP. Uploaded to portfolio media storage and published only after you publish the draft.</small></label><label class="toggle-row"><input name="verified" type="checkbox"><span><b>Permission confirmed</b><small>I have permission to publish this testimonial.</small></span></label><label class="toggle-row"><input name="published" type="checkbox"><span><b>Publish this item</b><small>Can remain drafted even when the module is enabled.</small></span></label></div><p id="testimonialMessage" class="form-message"></p><div class="modal-actions"><button class="secondary-action" value="cancel" type="submit">Cancel</button><button id="saveTestimonialButton" class="primary-action shine" value="default" type="submit">Save testimonial</button></div></form></dialog>
   <div id="toastRegion" class="toast-region" aria-live="polite"></div>
 </body>
 </html>
