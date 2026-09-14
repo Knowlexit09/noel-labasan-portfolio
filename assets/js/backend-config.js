@@ -65,13 +65,15 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20260915-5';
-  const css = document.createElement('link');
-  css.rel = 'stylesheet';
-  css.href = `admin-enhancements.css?v=${version}`;
-  document.head.appendChild(css);
+  const version = '20260915-6';
+  ['admin-enhancements.css','admin-resume-manager.css'].forEach(file => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = `${file}?v=${version}`;
+    document.head.appendChild(css);
+  });
 
-  ['admin-enhancements.js','admin-list-manager.js','admin-revision-fix.js'].forEach(file => {
+  ['admin-enhancements.js','admin-list-manager.js','admin-resume-manager.js','admin-revision-fix.js'].forEach(file => {
     const script = document.createElement('script');
     script.defer = true;
     script.src = `${file}?v=${version}`;
