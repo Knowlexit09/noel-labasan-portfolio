@@ -3,13 +3,16 @@
   const backend=window.PORTFOLIO_BACKEND_CONFIG||{};
   const url=String(backend.supabaseUrl||'').replace(/\/$/,'');
   const apiKey=String(backend.supabasePublishableKey||'').trim();
+  const stateTable=backend.stateTable||'portfolio_states';
+  const draftScope=backend.draftScope||'draft';
+  const liveScope=backend.liveScope||'live';
   const sessionKey='nl-portfolio-admin-session';
   const $=s=>document.querySelector(s);
-  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   function session(){try{return JSON.parse(sessionStorage.getItem(sessionKey)||'null')}catch{return null}}
   function headers(){const s=session();return{apikey:apiKey,Authorization:`Bearer ${s?.access_token||apiKey}`}}
   function toast(message,type='success'){const host=$('#toastRegion')||document.body;const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=message;host.appendChild(el);setTimeout(()=>el.remove(),3400)}
-  function setBound(path,value){const field=document.querySelector(`[data-state-path="${path}"]`);if(!field)return; if(field.type==='checkbox')field.checked=Boolean(value);else field.value=value??'';field.dispatchEvent(new Event(field.type==='checkbox'?'change':'input',{bubbles:true}));}
+  function setBound(path,value){const field=document.querySelector(`[data-state-path="${path}"]`);if(!field)return;if(field.type==='checkbox')field.checked=Boolean(value);else field.value=value??'';field.dispatchEvent(new Event(field.type==='checkbox'?'change':'input',{bubbles:true}));}
+  function setField(path,value){const field=document.querySelector(`[data-state-path="${path}"]`);if(!field)return;if(field.type==='checkbox')field.checked=Boolean(value);else field.value=value??'';}
   function getBound(path){const field=document.querySelector(`[data-state-path="${path}"]`);if(!field)return null;return field.type==='checkbox'?field.checked:field.value;}
   function prettyBytes(n){const v=Number(n)||0;if(!v)return '—';if(v<1024)return `${v} B`;if(v<1048576)return `${(v/1024).toFixed(1)} KB`;return `${(v/1048576).toFixed(2)} MB`;}
   function inject(){
@@ -19,7 +22,7 @@
     if(body&&!$('[data-page="resumeManager"]')){const s=document.createElement('section');s.className='admin-page';s.dataset.page='resumeManager';s.innerHTML=`
       <div class="page-intro"><div><p class="eyebrow">RESUME MANAGER</p><h2>Public resume</h2><p>Upload the current PDF, control public actions, and keep changes in Draft until Publish Live.</p></div></div>
       <article class="glass-panel resume-manager-card">
-        <div class="resume-file-status"><div class="resume-doc-icon">PDF</div><div><h3 id="resumeFileName">No PDF uploaded</h3><p id="resumeFileMeta">Fallback currently uses the printable resume page.</p><div class="resume-file-links"><a id="resumePreviewLink" class="secondary-action" target="_blank" rel="noopener">Preview current</a></div></div></div>
+        <div class="resume-file-status"><div class="resume-doc-icon">PDF</div><div><h3 id="resumeFileName">Loading resume…</h3><p id="resumeFileMeta">Checking current draft.</p><div class="resume-file-links"><a id="resumePreviewLink" class="secondary-action" target="_blank" rel="noopener">Preview current</a></div></div></div>
         <div class="resume-upload-panel"><label class="secondary-action file-action">↑ Upload / replace PDF<input id="resumePdfFile" type="file" accept="application/pdf,.pdf"></label><small>PDF only · maximum 8 MB. Uploading updates Draft only until you Publish Live.</small></div>
       </article>
       <div class="settings-grid glass-panel resume-settings-grid">
@@ -39,6 +42,17 @@
     $('#resumeFileMeta').textContent=pdf?`${prettyBytes(size)}${updated?` · updated ${new Date(updated).toLocaleString()}`:''}`:'Fallback currently uses the printable resume page.';
     const link=$('#resumePreviewLink');link.href=pdf||fallback;link.textContent=pdf?'Preview PDF':'Preview fallback';
   }
+  async function loadResumeState(){
+    const s=session();if(!s?.access_token)return;
+    try{
+      const scopes=`${draftScope},${liveScope}`;
+      const r=await fetch(`${url}/rest/v1/${encodeURIComponent(stateTable)}?scope=in.(${encodeURIComponent(scopes)})&select=scope,state,updated_at`,{headers:headers(),cache:'no-store'});
+      if(!r.ok)throw new Error('Could not load resume draft.');
+      const rows=await r.json();const row=rows.find(x=>x.scope===draftScope)||rows.find(x=>x.scope===liveScope);const resume=row?.state?.content?.resume||window.PORTFOLIO_CONFIG?.content?.resume||{};
+      const defaults={url:'resume.html',title:'View My Resume',description:'Use the printable resume page to view, print, or save a PDF copy.',showViewButton:true,showDownloadButton:true,viewLabel:'View Resume',downloadLabel:'Download Resume',pdfUrl:'',pdfFileName:'',pdfFileSize:'',pdfUpdatedAt:''};
+      Object.entries({...defaults,...resume}).forEach(([k,v])=>setField(`content.resume.${k}`,v));refreshCard();
+    }catch(err){toast(err.message,'error');refreshCard()}
+  }
   async function upload(file){
     if(!file)return;
     if(file.type!=='application/pdf'&&!/\.pdf$/i.test(file.name))throw new Error('PDF files only.');
@@ -52,11 +66,11 @@
     refreshCard();toast('Resume PDF uploaded to Draft. Publish Live when ready.');
   }
   function bind(){
-    const nav=$('#adminNav');nav?.addEventListener('click',e=>{const b=e.target.closest('[data-page-target="resumeManager"]');if(!b)return;setTimeout(refreshCard,0)});
+    const nav=$('#adminNav');nav?.addEventListener('click',e=>{const b=e.target.closest('[data-page-target="resumeManager"]');if(!b)return;setTimeout(()=>{if($('#pageTitle'))$('#pageTitle').textContent='Resume';loadResumeState();},0)});
     $('#resumePdfFile')?.addEventListener('change',async e=>{const input=e.currentTarget;const file=input.files?.[0];if(!file)return;input.disabled=true;try{await upload(file)}catch(err){toast(err.message,'error')}finally{input.value='';input.disabled=false}});
     document.addEventListener('input',e=>{if(e.target.matches('[data-state-path^="content.resume."]'))refreshCard()});
     document.addEventListener('change',e=>{if(e.target.matches('[data-state-path^="content.resume."]'))refreshCard()});
   }
-  function boot(){inject();bind();setTimeout(refreshCard,300)}
+  function boot(){inject();bind();setTimeout(loadResumeState,700)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
