@@ -36,6 +36,9 @@
     if (!window.PORTFOLIO_PREVIEW_MODE) return;
     const run = () => {
       if (document.querySelector('.draft-preview-banner')) return;
+      const style = document.createElement('style');
+      style.textContent = '.draft-preview-banner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:99999;background:#f0ad2c;color:#1b1203;border:1px solid #ffd978;border-radius:999px;padding:7px 13px;font:800 11px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;box-shadow:0 12px 30px #0005}.draft-preview-banner b{margin-right:6px}.draft-preview-banner button{border:0;background:#1b1203;color:#fff;border-radius:999px;margin-left:9px;padding:3px 8px;font-size:9px;cursor:pointer}@media(max-width:620px){.draft-preview-banner{top:8px;width:calc(100% - 20px);text-align:center;border-radius:12px}}';
+      document.head.appendChild(style);
       const bar = document.createElement('div');
       bar.className = 'draft-preview-banner';
       bar.innerHTML = `<b>DRAFT PREVIEW</b>${String(window.PORTFOLIO_PREVIEW_LABEL || 'Working Draft')}<button type="button">Exit preview</button>`;
