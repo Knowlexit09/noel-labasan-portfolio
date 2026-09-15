@@ -10,18 +10,21 @@
  */
 (function(){
   'use strict';
+
   const backend=window.PORTFOLIO_BACKEND_CONFIG||{};
   const base=String(backend.supabaseUrl||'').replace(/\/$/,'');
   const key=String(backend.supabasePublishableKey||'').trim();
   const sessionKey='nl-portfolio-admin-session';
   const $=s=>document.querySelector(s);
   const session=()=>{try{return JSON.parse(sessionStorage.getItem(sessionKey)||'null')}catch{return null}};
+
   let synced=false;
   let bound=false;
 
   function inject(){
     const page=$('[data-page="inbox"]');
     if(!page||$('#contactDeliverySettings'))return;
+
     const intro=page.querySelector('.page-intro');
     const card=document.createElement('article');
     card.id='contactDeliverySettings';
@@ -29,7 +32,11 @@
     card.style.marginBottom='18px';
     card.innerHTML=`
       <div class="panel-heading" style="margin-bottom:14px">
-        <div><p class="eyebrow">PUBLIC CONTACT OPTIONS</p><h3 style="margin:0 0 6px">Message delivery</h3><p style="margin:0;color:var(--muted)">Choose which sending options visitors can use. Changes stay in Draft until Publish Live.</p></div>
+        <div>
+          <p class="eyebrow">PUBLIC CONTACT OPTIONS</p>
+          <h3 style="margin:0 0 6px">Message delivery</h3>
+          <p style="margin:0;color:var(--muted)">Choose which sending options visitors can use. Changes stay in Draft until Publish Live.</p>
+        </div>
       </div>
       <div class="settings-grid">
         <label class="toggle-row">
@@ -43,6 +50,7 @@
       </div>
       <div id="contactDeliverySummary" style="margin-top:14px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12px"></div>
       <p id="contactDeliveryWarning" class="form-message" role="status" style="margin:9px 0 0"></p>`;
+
     intro?.after(card);
   }
 
@@ -56,43 +64,80 @@
   function renderSummary(){
     const summary=$('#contactDeliverySummary');
     if(!summary)return;
+
     const {direct,gmail}=values();
-    if(direct&&gmail)summary.innerHTML='<b>Public result:</b> visitors see both <b>Send Message</b> and <b>Send via Gmail</b>, and choose one.';
-    else if(direct)summary.innerHTML='<b>Public result:</b> visitors see only <b>Send Message</b> to the private Admin Inbox.';
-    else if(gmail)summary.innerHTML='<b>Public result:</b> visitors see only <b>Send via Gmail</b>. Gmail sign-in may be required.';
-    else summary.innerHTML='<b>Invalid:</b> at least one contact method must stay enabled.';
+    if(direct&&gmail){
+      summary.innerHTML='<b>Public result:</b> visitors see both <b>Send Message</b> and <b>Send via Gmail</b>, and choose one.';
+    }else if(direct){
+      summary.innerHTML='<b>Public result:</b> visitors see only <b>Send Message</b> to the private Admin Inbox.';
+    }else if(gmail){
+      summary.innerHTML='<b>Public result:</b> visitors see only <b>Send via Gmail</b>. Gmail sign-in may be required.';
+    }else{
+      summary.innerHTML='<b>Invalid:</b> at least one contact method must stay enabled.';
+    }
+  }
+
+  /*
+   * Apply a saved value only after the core admin has finished rendering.
+   * If the field must change, dispatch input so admin.js updates its private
+   * workingState too. This prevents the UI from saying ON while Save Draft
+   * still holds an old/undefined value internally.
+   */
+  function applyBoundValue(field,value){
+    if(!field)return;
+    const desired=Boolean(value);
+    if(field.checked===desired)return;
+    field.checked=desired;
+    field.dispatchEvent(new Event('input',{bubbles:true}));
   }
 
   async function syncFromSavedState(){
     if(synced)return;
+
     const token=session()?.access_token;
     if(!token||!base||!key)return;
+
     try{
       const table=encodeURIComponent(backend.stateTable||'portfolio_states');
       const r=await fetch(`${base}/rest/v1/${table}?scope=in.(draft,live)&select=scope,state,updated_at`,{
-        headers:{apikey:key,Authorization:`Bearer ${token}`},cache:'no-store'
+        headers:{apikey:key,Authorization:`Bearer ${token}`},
+        cache:'no-store'
       });
       if(!r.ok)return;
+
       const rows=await r.json();
-      const row=(rows||[]).find(x=>x.scope===(backend.draftScope||'draft'))||(rows||[]).find(x=>x.scope===(backend.liveScope||'live'));
+      const row=(rows||[]).find(x=>x.scope===(backend.draftScope||'draft'))
+        ||(rows||[]).find(x=>x.scope===(backend.liveScope||'live'));
       const contact=row?.state?.content?.contact||{};
-      const direct=$('#contactDirectToggle');
-      const gmail=$('#contactGmailToggle');
-      if(direct)direct.checked=contact.directInboxEnabled!==false;
-      if(gmail)gmail.checked=contact.gmailEnabled!==false;
+
+      /*
+       * Backward-compatible defaults for portfolios created before these two
+       * settings existed. Both are ON by default. If corrupt/legacy data has
+       * both explicitly OFF, Direct Inbox is restored as the safe fallback.
+       */
+      let direct=contact.directInboxEnabled!==false;
+      let gmail=contact.gmailEnabled!==false;
+      if(!direct&&!gmail)direct=true;
+
+      applyBoundValue($('#contactDirectToggle'),direct);
+      applyBoundValue($('#contactGmailToggle'),gmail);
       synced=true;
       renderSummary();
-    }catch{}
+    }catch{
+      /* Keep core admin usable if the optional settings sync cannot load. */
+    }
   }
 
   function enforceAtLeastOne(changed){
     const direct=$('#contactDirectToggle');
     const gmail=$('#contactGmailToggle');
     if(!direct||!gmail)return;
+
     const warning=$('#contactDeliveryWarning');
     if(!direct.checked&&!gmail.checked){
       changed.checked=true;
-      changed.dispatchEvent(new Event('change',{bubbles:true}));
+      /* Update admin.js workingState without recursively firing this handler. */
+      changed.dispatchEvent(new Event('input',{bubbles:true}));
       if(warning)warning.textContent='At least one contact method must remain ON.';
       setTimeout(()=>{if(warning)warning.textContent=''},2600);
     }
@@ -102,32 +147,40 @@
   function bind(){
     if(bound)return;
     bound=true;
+
     ['#contactDirectToggle','#contactGmailToggle'].forEach(sel=>{
       $(sel)?.addEventListener('change',e=>enforceAtLeastOne(e.currentTarget));
-    });
-    $('#adminNav')?.addEventListener('click',e=>{
-      if(!e.target.closest('[data-page-target="inbox"]'))return;
-      setTimeout(()=>{syncFromSavedState();renderSummary()},0);
+      $(sel)?.addEventListener('input',renderSummary);
     });
   }
 
-  function waitForSession(attempt=0){
-    if(session()?.access_token){syncFromSavedState();return}
-    if(attempt<20)setTimeout(()=>waitForSession(attempt+1),300);
+  /*
+   * Wait for both authentication and the visible admin shell. showAdmin()
+   * renders all bound fields synchronously after revealing the shell, so the
+   * next timer tick is a safe point to normalize these dynamically injected
+   * controls without being overwritten by renderBoundFields().
+   */
+  function waitForAdminReady(attempt=0){
+    const shell=$('#adminShell');
+    if(session()?.access_token&&shell&&!shell.hidden&&$('#contactDeliverySettings')){
+      setTimeout(syncFromSavedState,0);
+      return;
+    }
+    if(attempt<80)setTimeout(()=>waitForAdminReady(attempt+1),100);
   }
 
   function boot(attempt=0){
     inject();
     if(!$('#contactDeliverySettings')){
-      if(attempt<30)setTimeout(()=>boot(attempt+1),100);
+      if(attempt<40)setTimeout(()=>boot(attempt+1),100);
       return;
     }
-    const direct=$('#contactDirectToggle');
-    const gmail=$('#contactGmailToggle');
-    if(direct)direct.checked=true;
-    if(gmail)gmail.checked=true;
-    bind();renderSummary();waitForSession();
+
+    bind();
+    renderSummary();
+    waitForAdminReady();
   }
 
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot());else boot();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot());
+  else boot();
 })();
