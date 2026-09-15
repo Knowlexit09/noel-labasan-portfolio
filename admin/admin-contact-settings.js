@@ -17,6 +17,7 @@
   const $=s=>document.querySelector(s);
   const session=()=>{try{return JSON.parse(sessionStorage.getItem(sessionKey)||'null')}catch{return null}};
   let synced=false;
+  let bound=false;
 
   function inject(){
     const page=$('[data-page="inbox"]');
@@ -91,10 +92,6 @@
     const warning=$('#contactDeliveryWarning');
     if(!direct.checked&&!gmail.checked){
       changed.checked=true;
-      /*
-       * Re-dispatch so admin.js restores the same value in workingState after
-       * its document-level state binding saw the first attempted OFF change.
-       */
       changed.dispatchEvent(new Event('change',{bubbles:true}));
       if(warning)warning.textContent='At least one contact method must remain ON.';
       setTimeout(()=>{if(warning)warning.textContent=''},2600);
@@ -103,6 +100,8 @@
   }
 
   function bind(){
+    if(bound)return;
+    bound=true;
     ['#contactDirectToggle','#contactGmailToggle'].forEach(sel=>{
       $(sel)?.addEventListener('change',e=>enforceAtLeastOne(e.currentTarget));
     });
@@ -117,8 +116,12 @@
     if(attempt<20)setTimeout(()=>waitForSession(attempt+1),300);
   }
 
-  function boot(){
+  function boot(attempt=0){
     inject();
+    if(!$('#contactDeliverySettings')){
+      if(attempt<30)setTimeout(()=>boot(attempt+1),100);
+      return;
+    }
     const direct=$('#contactDirectToggle');
     const gmail=$('#contactGmailToggle');
     if(direct)direct.checked=true;
@@ -126,5 +129,5 @@
     bind();renderSummary();waitForSession();
   }
 
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot());else boot();
 })();
