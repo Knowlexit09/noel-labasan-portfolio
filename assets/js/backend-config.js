@@ -60,20 +60,21 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
 /*
  * ADMIN ENHANCEMENT LOADER
  * Scope: PAGE-SPECIFIC /admin.
- * Loads optional maintenance modules after the core admin shell. The revision
- * guard is last because it intentionally owns the final Publish Live behavior.
+ * Loads optional maintenance modules after the core admin shell. MFA loads
+ * after the Security page because it extends that page and owns the login gate.
+ * The revision guard stays last because it owns the final Publish Live behavior.
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20260916-1';
-  ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css'].forEach(file => {
+  const version = '20260916-2';
+  ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
     css.href = `${file}?v=${version}`;
     document.head.appendChild(css);
   });
 
-  ['admin-enhancements.js','admin-list-manager.js','admin-resume-manager.js','admin-inbox.js','admin-contact-settings.js','admin-security.js','admin-revision-fix.js'].forEach(file => {
+  ['admin-enhancements.js','admin-list-manager.js','admin-resume-manager.js','admin-inbox.js','admin-contact-settings.js','admin-security.js','admin-mfa.js','admin-revision-fix.js'].forEach(file => {
     const script = document.createElement('script');
     script.defer = true;
     script.src = `${file}?v=${version}`;
