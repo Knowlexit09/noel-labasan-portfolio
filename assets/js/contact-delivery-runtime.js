@@ -37,6 +37,20 @@
     }
 
     /*
+     * Do not rely on the HTML hidden attribute alone here. The portfolio button
+     * classes define their own display mode, so an author stylesheet can make a
+     * hidden control visible again. Inline display:none is the final visibility
+     * guard for disabled delivery methods.
+     */
+    function setVisible(el,visible){
+      if(!el)return;
+      el.hidden=!visible;
+      el.style.display=visible?'':'none';
+      el.setAttribute('aria-hidden',visible?'false':'true');
+      el.tabIndex=visible?0:-1;
+    }
+
+    /*
      * Shared action row keeps both choices visually grouped when both are ON.
      * Existing primary submit button is moved, not cloned, so app.js retains
      * its original secure direct-submit handler.
@@ -51,17 +65,20 @@
     }
     if(submit){
       actions.appendChild(submit);
-      submit.hidden=!directEnabled;
       submit.textContent='✉ Send Message';
+      setVisible(submit,directEnabled);
     }
 
-    const gmailButton=document.createElement('button');
-    gmailButton.type='button';
-    gmailButton.className='btn btn-ghost';
-    gmailButton.dataset.gmailContact='';
-    gmailButton.textContent='G Send via Gmail';
-    gmailButton.hidden=!gmailEnabled;
-    actions.appendChild(gmailButton);
+    let gmailButton=form.querySelector('[data-gmail-contact]');
+    if(!gmailButton){
+      gmailButton=document.createElement('button');
+      gmailButton.type='button';
+      gmailButton.className='btn btn-ghost';
+      gmailButton.dataset.gmailContact='';
+      gmailButton.textContent='G Send via Gmail';
+      actions.appendChild(gmailButton);
+    }
+    setVisible(gmailButton,gmailEnabled);
 
     function readPayload(){
       const fd=new FormData(form);
@@ -88,6 +105,7 @@
     }
 
     function openGmail(){
+      if(!gmailEnabled)return;
       const payload=readPayload();
       status.textContent='';
       if(!validate(payload))return;
