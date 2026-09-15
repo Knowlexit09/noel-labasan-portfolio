@@ -132,14 +132,81 @@
       sections.forEach(s => obs.observe(s));
     }
 
+    /*
+     * CONTACT FORM
+     * Scope: PUBLIC CONTACT MODULE.
+     * Sends directly to a Supabase Edge Function. The function owns validation,
+     * spam checks, rate limiting and database insertion; the browser never gets
+     * database write permissions or a service-role key.
+     */
     const form = document.querySelector('[data-contact-form]');
-    if (form) form.addEventListener('submit', e => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const subject = encodeURIComponent(fd.get('subject') || 'Portfolio inquiry');
-      const message = encodeURIComponent(`Name: ${fd.get('name') || ''}\nEmail: ${fd.get('email') || ''}\n\n${fd.get('message') || ''}`);
-      location.href = `mailto:${cfg.owner?.email || 'noel.ochoa.labasan@gmail.com'}?subject=${subject}&body=${message}`;
-    });
+    if (form) {
+      const backend = window.PORTFOLIO_BACKEND_CONFIG || {};
+      const apiBase = String(backend.supabaseUrl || '').replace(/\/$/, '');
+      const apiKey = String(backend.supabasePublishableKey || '').trim();
+      const submit = form.querySelector('button[type="submit"]');
+      const hint = form.querySelector('p');
+      const startedAt = Date.now();
+
+      if (submit) submit.textContent = '✉ Send Message';
+      if (hint) hint.textContent = 'Your message is sent securely to the private portfolio inbox. Your details are used only to respond to your inquiry.';
+
+      const honeypot = document.createElement('input');
+      honeypot.type = 'text';
+      honeypot.name = 'website';
+      honeypot.tabIndex = -1;
+      honeypot.autocomplete = 'off';
+      honeypot.setAttribute('aria-hidden', 'true');
+      honeypot.style.cssText = 'position:absolute;left:-9999px;opacity:0;pointer-events:none';
+      form.appendChild(honeypot);
+
+      const status = document.createElement('p');
+      status.className = 'form-message';
+      status.setAttribute('role', 'status');
+      status.style.marginTop = '10px';
+      form.appendChild(status);
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const payload = {
+          name: String(fd.get('name') || '').trim(),
+          email: String(fd.get('email') || '').trim(),
+          subject: String(fd.get('subject') || '').trim(),
+          message: String(fd.get('message') || '').trim(),
+          website: String(fd.get('website') || ''),
+          startedAt
+        };
+
+        status.textContent = '';
+        if (!payload.name || !payload.email || !payload.subject || payload.message.length < 10) {
+          status.textContent = 'Please complete all fields and enter a message of at least 10 characters.';
+          return;
+        }
+        if (!apiBase || !apiKey) {
+          status.textContent = 'Message service is temporarily unavailable. Please use the email link instead.';
+          return;
+        }
+
+        const original = submit?.textContent || 'Send Message';
+        if (submit) { submit.disabled = true; submit.textContent = 'Sending…'; }
+        try {
+          const response = await fetch(`${apiBase}/functions/v1/portfolio-contact-submit`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', apikey: apiKey },
+            body: JSON.stringify(payload)
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data?.message || 'Message could not be sent.');
+          form.reset();
+          status.textContent = data?.message || 'Thanks — your message was sent.';
+        } catch (error) {
+          status.textContent = error.message || 'Message could not be sent. Please try again.';
+        } finally {
+          if (submit) { submit.disabled = false; submit.textContent = original; }
+        }
+      });
+    }
 
     document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
   };
