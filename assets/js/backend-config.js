@@ -64,21 +64,21 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  * after the Security page because it extends that page and owns the login gate.
  * The QR renderer follows MFA so it can normalize the temporary Supabase SVG.
  * Recovery-code controls load next. Delayed emergency recovery loads after them.
- * Analytics loads before the revision guard and uses only the signed-in AAL2 session.
- * No server secret is exposed in this browser configuration.
+ * Analytics and Operations load before the revision guard and use only the
+ * signed-in AAL2 session. No server secret is exposed in this browser configuration.
  * The revision guard stays last because it owns the final Publish Live behavior.
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20260916-8';
-  ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css'].forEach(file => {
+  const version = '20260916-9';
+  ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css','admin-operations.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
     css.href = `${file}?v=${version}`;
     document.head.appendChild(css);
   });
 
-  ['admin-enhancements.js','admin-list-manager.js','admin-resume-manager.js','admin-inbox.js','admin-contact-settings.js','admin-security.js','admin-mfa.js','admin-mfa-renderer.js','admin-recovery.js','admin-emergency-recovery.js','admin-analytics.js','admin-revision-fix.js'].forEach(file => {
+  ['admin-enhancements.js','admin-list-manager.js','admin-resume-manager.js','admin-inbox.js','admin-contact-settings.js','admin-security.js','admin-mfa.js','admin-mfa-renderer.js','admin-recovery.js','admin-emergency-recovery.js','admin-analytics.js','admin-operations.js','admin-revision-fix.js'].forEach(file => {
     const script = document.createElement('script');
     script.defer = true;
     script.src = `${file}?v=${version}`;
