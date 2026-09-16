@@ -1,0 +1,11 @@
+{
+  "name": "Noel Ochoa Labasan Portfolio",
+  "short_name": "Noel Portfolio",
+  "start_url": "/noel-labasan-portfolio/",
+  "display": "standalone",
+  "background_color": "#071a2b",
+  "theme_color": "#071a2b",
+  "icons": [
+    {"src": "assets/images/favicon.svg", "sizes": "any", "type": "image/svg+xml"}
+  ]
+}
