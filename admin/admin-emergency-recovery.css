@@ -1,0 +1,8 @@
+/*
+ * DELAYED MFA EMERGENCY RECOVERY UI
+ * Scope: PAGE-SPECIFIC /admin Security + recovery dialogs.
+ * Loaded by: assets/js/backend-config.js.
+ * Ownership: admin-emergency-recovery.js only.
+ */
+.emergency-recovery-card .security-note{display:block;margin-top:8px}.emergency-recovery-dialog{width:min(600px,calc(100vw - 24px))}.emergency-state{display:grid;gap:7px;margin:16px 0;padding:14px;border:1px solid rgba(148,163,184,.15);border-radius:13px;background:rgba(4,12,23,.68)}.emergency-state b{font-size:12px;color:#e9f5ff}.emergency-state span{font-size:10px;line-height:1.55;color:#8fa7bd}.emergency-fallback{display:grid;gap:4px;margin:14px 0;padding:11px 12px;border:1px dashed rgba(148,163,184,.18);border-radius:11px;text-align:center;background:rgba(5,15,28,.35)}.emergency-fallback span{font-size:9px;color:#7f94aa}.emergency-fallback .login-security-link{justify-self:center;font-size:10px}.emergency-dialog-actions{flex-wrap:wrap}.emergency-dialog-actions .secondary-action,.emergency-dialog-actions .primary-action{min-height:38px}.emergency-recovery-card button:disabled,.emergency-recovery-dialog button:disabled{opacity:.38;cursor:not-allowed;filter:saturate(.45)}
+@media(max-width:560px){.emergency-dialog-actions{display:grid}.emergency-dialog-actions button{width:100%}.emergency-recovery-card .security-action-stack{display:grid}.emergency-recovery-card .security-action-stack button{width:100%}}
