@@ -1,0 +1,70 @@
+/*
+ * ABOUT APPROACH CARD POLISH
+ * Scope: PAGE-SPECIFIC / public portfolio About section.
+ * Loaded by: index.html after components.css.
+ * Uses: .approach-grid and .approach-item rendered by assets/js/fragments/work.js.
+ * Goal: prevent cramped/overlapping copy while preserving the existing visual language.
+ */
+
+/* Desktop: six approach cards render as two balanced rows of three. */
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+/* Each card gets enough vertical room for icon/number, title, and description. */
+.approach-item {
+  min-width: 0;
+  min-height: 126px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* work.js uses <strong>, so style the actual title element explicitly. */
+.approach-item strong {
+  display: block;
+  width: 100%;
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+/* Description stays on its own block and never collides with the title. */
+.approach-item span {
+  display: block;
+  width: 100%;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Tablet / narrower desktop: two columns. */
+@media (max-width: 1180px) {
+  .approach-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .approach-item {
+    min-height: 116px;
+  }
+}
+
+/* Mobile: keep cards comfortably readable in one column. */
+@media (max-width: 560px) {
+  .approach-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .approach-item {
+    min-height: 0;
+    padding: 15px 14px;
+  }
+}
