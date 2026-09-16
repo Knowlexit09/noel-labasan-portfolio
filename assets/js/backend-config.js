@@ -69,7 +69,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20260916-4';
+  const version = '20260916-5';
   ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
