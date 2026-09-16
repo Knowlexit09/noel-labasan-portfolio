@@ -1,0 +1,80 @@
+/*
+ * PUBLIC ACCESSIBILITY + PERFORMANCE POLISH
+ * Scope: SHARED public portfolio and case-study pages.
+ * Loaded by: index.html and projects/*.html.
+ * Purpose: keyboard visibility, skip navigation, reduced-motion safety,
+ * stable image presentation, and high-contrast/forced-colors resilience.
+ */
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+  transform: translateY(-160%);
+  padding: 10px 14px;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #071a2b;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
+  transition: transform .15s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+/*
+ * GLOBAL KEYBOARD FOCUS
+ * Do not remove native focus without a replacement. :focus-visible keeps the
+ * ring primarily for keyboard users while avoiding visual noise on mouse click.
+ */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 3px solid #58adff;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.sidebar :where(a, button):focus-visible {
+  outline-color: #8dcbff;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+/* Reserve a stable rendering surface while decoded images are pending. */
+.project-cover img,
+.case-hero-cover img,
+.profile-avatar {
+  background: var(--surface-2, #102237);
+}
+
+/* Screen-reader helper for future accessible labels/status text. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline: 2px solid Highlight;
+  }
+  .online-dot,
+  .availability .dot { forced-color-adjust: auto; }
+}
