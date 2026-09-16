@@ -24,16 +24,26 @@
   const fmt=n=>Number(n||0).toLocaleString();
 
   function installCounter(){
-    const footer=document.querySelector('.site-footer');
-    if(!footer||document.querySelector('[data-public-visit-counter]'))return null;
-    const style=document.createElement('style');
-    style.textContent='.public-visit-counter{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font-size:12px;color:var(--muted,#7891a8)}.public-visit-counter b{color:var(--text,#e4edf5);font-weight:800}.public-visit-counter .visit-dot{opacity:.55}';
-    document.head.appendChild(style);
-    const host=document.createElement('div');
-    host.className='public-visit-counter';
-    host.dataset.publicVisitCounter='';
-    host.innerHTML='<b data-visit-user>@knowlexit</b><span class="visit-dot">·</span><span data-visit-count>— visits</span>';
-    footer.firstElementChild?.appendChild(host);
+    const profileName=document.querySelector('.profile-card .profile-name');
+    if(!profileName)return null;
+
+    if(!document.getElementById('publicVisitCounterStyle')){
+      const style=document.createElement('style');
+      style.id='publicVisitCounterStyle';
+      style.textContent='.public-visit-counter{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin:4px 0 7px;font-size:11px;line-height:1.3;color:var(--muted,#7891a8);white-space:nowrap}.public-visit-counter b{color:var(--muted,#7891a8);font-weight:700}.public-visit-counter .visit-dot{opacity:.55}.public-visit-counter [data-visit-count]{font-weight:600}';
+      document.head.appendChild(style);
+    }
+
+    let host=document.querySelector('[data-public-visit-counter]');
+    if(!host){
+      host=document.createElement('div');
+      host.className='public-visit-counter';
+      host.dataset.publicVisitCounter='';
+      host.setAttribute('aria-label','Public portfolio visit count');
+      host.innerHTML='<b data-visit-user>@knowlexit</b><span class="visit-dot">·</span><span data-visit-count>— visits</span>';
+    }
+
+    if(profileName.nextElementSibling!==host)profileName.insertAdjacentElement('afterend',host);
     return host;
   }
 
