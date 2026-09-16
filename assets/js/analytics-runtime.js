@@ -4,10 +4,12 @@
  * Loaded by: index.html after the main app runtime.
  * Depends on: assets/js/backend-config.js.
  *
- * Privacy rules:
+ * Privacy / accuracy rules:
  * - No raw IP address is stored.
  * - Browser visitor/session IDs are random opaque values and are hashed again server-side.
  * - Draft Preview never records a public visit.
+ * - The owner can exclude this browser via the Admin Analytics page.
+ * - The server filters obvious bots and de-duplicates rapid refreshes for page-view counting.
  */
 (function(){
   'use strict';
@@ -19,8 +21,10 @@
   const endpoint=`${base}/functions/v1/portfolio-analytics`;
   const visitorKey='nl-portfolio-visitor-id';
   const sessionKey='nl-portfolio-visit-session-id';
+  const excludeKey='nl-portfolio-analytics-excluded';
   const uuid=()=>crypto.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
   const getStored=(storage,name)=>{try{let v=storage.getItem(name);if(!v){v=uuid();storage.setItem(name,v)}return v}catch{return uuid()}};
+  const isExcluded=()=>{try{return localStorage.getItem(excludeKey)==='1'}catch{return false}};
   const fmt=n=>Number(n||0).toLocaleString();
 
   function installCounter(){
@@ -63,7 +67,7 @@
   async function run(){
     installCounter();
     try{await window.PORTFOLIO_READY}catch{}
-    if(window.PORTFOLIO_PREVIEW_MODE){
+    if(window.PORTFOLIO_PREVIEW_MODE||isExcluded()){
       try{render(await call({action:'public'}))}catch{}
       return;
     }
