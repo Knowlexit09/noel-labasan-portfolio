@@ -1,0 +1,170 @@
+/*
+ * GATCHALIAN CLIENT WORK GALLERY
+ * Scope: PAGE-SPECIFIC /multimedia/gatchalian-meatshop.html.
+ * Depends on: assets/js/gatchalian-client-gallery.js.
+ *
+ * Visual rule: show complete finished artwork with captions below. Historical
+ * campaign context must stay clearly readable and must never overlay the design.
+ */
+
+.gatchalian-more-work[hidden] { display:none!important; }
+
+.gatchalian-client-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+.gatchalian-client-card {
+  min-width:0;
+  overflow:hidden;
+  border:1px solid #253c50;
+  border-radius:18px;
+  background:#081623;
+  box-shadow:0 18px 44px rgba(0,0,0,.22);
+}
+
+.gatchalian-client-art {
+  width:100%;
+  min-height:300px;
+  padding:0;
+  border:0;
+  border-bottom:1px solid #253c50;
+  background:#050c13;
+  display:grid;
+  place-items:center;
+  cursor:zoom-in;
+}
+
+.gatchalian-client-art img {
+  display:block;
+  width:100%;
+  height:100%;
+  max-height:520px;
+  object-fit:contain;
+  background:#050c13;
+}
+
+.gatchalian-client-art:focus-visible {
+  outline:3px solid #68b9ff;
+  outline-offset:-3px;
+}
+
+.gatchalian-client-copy {
+  padding:16px 17px 18px;
+}
+
+.gatchalian-client-meta {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  margin-bottom:8px;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.gatchalian-client-meta span { color:#ff6e72; }
+.gatchalian-client-meta em {
+  color:#a9bdcf;
+  font-style:normal;
+}
+.gatchalian-client-meta b {
+  padding:5px 8px;
+  border:1px solid rgba(255,196,92,.38);
+  border-radius:999px;
+  background:rgba(164,103,5,.2);
+  color:#ffd27a;
+  font-size:8px;
+}
+
+.gatchalian-client-copy > strong {
+  display:block;
+  color:#f6f9fc;
+  font-size:16px;
+  line-height:1.35;
+}
+
+.gatchalian-client-copy p {
+  margin:7px 0 0;
+  color:#b7c6d3;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.gatchalian-gallery-viewer {
+  width:min(1000px,calc(100% - 32px));
+  max-height:92vh;
+  padding:0;
+  border:1px solid #31495d;
+  border-radius:20px;
+  background:#050d15;
+  color:#fff;
+  box-shadow:0 35px 110px rgba(0,0,0,.72);
+}
+
+.gatchalian-gallery-viewer::backdrop {
+  background:rgba(0,6,12,.84);
+  backdrop-filter:blur(7px);
+}
+
+.gatchalian-gallery-viewer-inner {
+  position:relative;
+  display:grid;
+  max-height:92vh;
+  grid-template-rows:minmax(0,1fr) auto;
+}
+
+.gatchalian-gallery-viewer img {
+  display:block;
+  width:100%;
+  max-height:78vh;
+  object-fit:contain;
+  background:#03080d;
+}
+
+.gatchalian-gallery-viewer-close {
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:2;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:50%;
+  background:rgba(5,13,21,.9);
+  color:#fff;
+  font-size:23px;
+  line-height:1;
+}
+
+.gatchalian-gallery-viewer-caption {
+  display:grid;
+  gap:5px;
+  padding:15px 18px 18px;
+  border-top:1px solid #203648;
+  background:#081623;
+}
+
+.gatchalian-gallery-viewer-caption strong {
+  font-size:15px;
+  color:#f8fbff;
+}
+
+.gatchalian-gallery-viewer-caption span {
+  color:#b8c8d5;
+  font-size:11px;
+  line-height:1.55;
+}
+
+@media (max-width:980px) {
+  .gatchalian-client-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+@media (max-width:620px) {
+  .gatchalian-client-grid { grid-template-columns:1fr; }
+  .gatchalian-client-art { min-height:240px; }
+  .gatchalian-gallery-viewer { width:calc(100% - 18px); }
+}
