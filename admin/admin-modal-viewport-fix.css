@@ -1,0 +1,64 @@
+/*
+ * ADMIN MODAL VIEWPORT FIX
+ * Scope: SHARED /admin dialogs.
+ * Loaded by assets/js/backend-config.js after the core Admin stylesheet.
+ *
+ * Purpose:
+ * - Keep native <dialog> modals inside the visible viewport even when the
+ *   underlying Admin page is deeply scrolled.
+ * - Prevent a modal backdrop from appearing by itself while the dialog card is
+ *   positioned outside the visible area.
+ * - Let tall forms (including the Gatchalian More Work editor) scroll inside
+ *   the modal instead of extending beyond the viewport.
+ *
+ * Safety:
+ * - CSS-only presentation patch. No auth, Draft, Live, Supabase, Storage,
+ *   publishing, or portfolio data behavior is changed.
+ */
+
+/* GLOBAL/SHARED ADMIN MODAL POSITIONING
+ * Applies only while an Admin dialog is open. The fixed center anchor avoids
+ * dependence on the document's restored/deep scroll position.
+ */
+dialog.modal[open] {
+  position: fixed !important;
+  inset: 50% auto auto 50% !important;
+  width: min(760px, calc(100vw - 32px)) !important;
+  max-width: min(760px, calc(100vw - 32px)) !important;
+  max-height: calc(100dvh - 32px) !important;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) !important;
+  overflow: auto !important;
+  overscroll-behavior: contain;
+}
+
+/* SHARED ADMIN MODAL CARD
+ * Tall editors remain reachable without moving the dialog outside the viewport.
+ */
+dialog.modal[open] > .modal-card {
+  width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+/* Keep the backdrop predictable while the dialog owns interaction. */
+dialog.modal::backdrop {
+  background: #020711cc;
+  backdrop-filter: blur(8px);
+}
+
+/* MOBILE
+ * Use a smaller safe edge while preserving the same centered behavior.
+ */
+@media (max-width: 620px) {
+  dialog.modal[open] {
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+    max-height: calc(100dvh - 16px) !important;
+  }
+
+  dialog.modal[open] > .modal-card {
+    max-height: calc(100dvh - 16px);
+  }
+}
