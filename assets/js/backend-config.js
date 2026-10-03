@@ -83,13 +83,15 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  * Creative manager and adds owner/AAL2-protected image + MP4 upload controls.
  * The Gatchalian gallery manager follows those controls and saves verified client
  * gallery artwork to Draft only, preserving the same AAL2/RLS boundary.
+ * The shared modal viewport patch keeps long Admin dialogs visible even when the
+ * underlying page has a restored/deep scroll position.
  * No server secret is exposed in this browser configuration.
  * The revision guard stays last because it owns the final Publish Live behavior.
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20261003-4';
-  ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css','admin-operations.css'].forEach(file => {
+  const version = '20261003-5';
+  ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css','admin-operations.css','admin-modal-viewport-fix.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
     css.href = `${file}?v=${version}`;
