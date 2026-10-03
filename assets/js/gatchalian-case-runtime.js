@@ -97,9 +97,9 @@
     ];
 
     host.innerHTML = slides.map((slide,index) => `
-      <article class="campaign-slide" data-view="${slide.view}" data-campaign-slide="${index}" role="img" aria-label="${slide.title}">
-        <div class="campaign-slide-visual" aria-hidden="true"></div>
-        <div class="campaign-slide-copy"><span>${slide.kicker}</span><strong>${slide.title}</strong></div>
+      <article class="campaign-slide" data-view="${slide.view}" data-campaign-slide="${index}" aria-labelledby="campaign-slide-title-${index}">
+        <div class="campaign-slide-visual" role="img" aria-label="${slide.title} artwork"></div>
+        <div class="campaign-slide-copy"><span>${slide.kicker}</span><strong id="campaign-slide-title-${index}">${slide.title}</strong></div>
       </article>`).join('');
 
     dots.innerHTML = slides.map((_,index) => `<button type="button" class="slider-dot${index===0?' active':''}" data-campaign-dot="${index}" aria-label="Show campaign slide ${index+1}"></button>`).join('');
