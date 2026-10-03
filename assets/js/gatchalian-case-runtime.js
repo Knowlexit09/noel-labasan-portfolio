@@ -9,9 +9,12 @@
  *   portfolio-style campaign carousel below the hero.
  * - Preserves a still-valid local Draft Preview when the case-study URL is opened
  *   without the draftPreview query string.
+ * - Keeps this already-uploaded approved case-study media visible on the direct
+ *   case-study URL even while the main Multimedia module remains OFF on Live.
  *
  * Safety:
  * - Draft data is used only from this browser's existing short-lived preview payload.
+ * - Direct-page fallback URLs point only to the user's approved public Supabase media.
  * - Unsafe/non-HTTPS media URLs are ignored.
  * - This runtime never publishes or mutates portfolio state.
  */
@@ -20,6 +23,13 @@
 
   const TARGET_TITLE = 'Gatchalian Meatshop — Social Media Campaign';
   const PREVIEW_KEY = 'nl-portfolio-draft-preview';
+
+  // PAGE-SPECIFIC / APPROVED MEDIA FALLBACK:
+  // The case-study page is already a public URL. These stable public media URLs make
+  // the approved poster/video render reliably even when the main Multimedia module
+  // is still intentionally disabled in Live portfolio state during QA.
+  const APPROVED_COVER_URL = 'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/gatchalian-meatshop-social-media-campaign/1791005767827-cover.png';
+  const APPROVED_VIDEO_URL = 'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/gatchalian-meatshop-social-media-campaign/1791005785243-video.mp4';
 
   const safeHttpUrl = value => {
     const raw = String(value || '').trim();
@@ -146,6 +156,18 @@
     return Boolean(coverUrl || videoUrl);
   }
 
+  function renderApprovedDirectMedia() {
+    return render({
+      content:{
+        multimedia:[{
+          title:TARGET_TITLE,
+          thumbnailUrl:APPROVED_COVER_URL,
+          mediaUrl:APPROVED_VIDEO_URL
+        }]
+      }
+    });
+  }
+
   async function boot() {
     try {
       const ready = window.PORTFOLIO_READY;
@@ -168,12 +190,12 @@
         return;
       }
 
-      const videoFallback = document.querySelector('[data-gatchalian-video-fallback]');
-      if (videoFallback) {
-        videoFallback.innerHTML = 'This direct URL is showing the current Live state. Multimedia is still intentionally OFF on Live. Open <b>Preview draft ↗</b> from Portfolio Maintenance to review the staged campaign video.';
-      }
+      // Direct page fallback: the approved media is already public in portfolio-media.
+      // Keep the page visually complete without showing draft/live instructional text.
+      renderApprovedDirectMedia();
     } catch (error) {
-      console.info('[Gatchalian case] Media state unavailable; keeping fallback state.');
+      console.info('[Gatchalian case] State unavailable; using approved direct media fallback.');
+      renderApprovedDirectMedia();
     }
   }
 
