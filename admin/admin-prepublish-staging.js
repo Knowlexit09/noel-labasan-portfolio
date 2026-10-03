@@ -40,18 +40,22 @@
       category:'Ads & Campaigns',
       label:'Spec Work',
       projectType:'Spec Work',
-      mediaType:'image',
+      mediaType:'video',
       objective:'Present a growing-business problem and communicate a simpler all-in-one operating-system story.',
       audience:'Owners and operators of growing small and medium businesses.',
-      role:'Campaign concept, message hierarchy, storyboard direction, visual system, and portfolio case-study presentation.',
-      description:'A problem-first 9:16 campaign concept moving from scattered manual records and missed follow-ups toward an organized system story for Sales, CRM, Inventory, and Reports.',
+      role:'Campaign concept, message hierarchy, storyboard direction, video editing, visual system, and portfolio case-study presentation.',
+      description:'A 36.48-second vertical Meta Ads campaign moving from scattered manual records and message overload toward an organized business-system story with product analytics, lead/CRM imagery, and a personalized-demo CTA.',
       disclosure:'Staged conservatively as Spec Work / Campaign Concept until ownership, client status, and public-display permission are explicitly verified.',
       tools:['Canva','Photoshop','CapCut'],
-      tags:['Campaign Concept','Business Software','Storyboard','Social Media Ads','Motion Direction'],
+      tags:['Video Editing','Meta Ads','Campaign Concept','Business Software','Storyboard','Social Media Ads'],
       thumbnailUrl:`${publicRoot}assets/images/exponify-campaign-cover.svg`,
-      imageAlt:'Exponify business operations campaign concept cover',
+      imageAlt:'Exponify business operations Meta Ads campaign cover',
       detailsUrl:'multimedia/exponify.html',
-      mediaUrl:'multimedia/exponify.html'
+      mediaUrl:'',
+      canonicalVideoFile:'exponify_meta_ads_web.mp4',
+      sourceVideoFile:'exponify meta ads.mp4',
+      videoSpecs:'1080x1920 · 30 fps · 36.48 sec · H.264/AAC',
+      assetStatus:'Final MP4 received and web-optimized; secure AAL2 Admin storage upload pending.'
     },
     {
       published:true,
@@ -155,7 +159,7 @@
     box.id='prepublishStagingPack';
     box.className='glass-panel';
     box.style.cssText='grid-column:1/-1;margin-top:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap';
-    box.innerHTML='<div><p class="eyebrow" style="margin:0 0 4px">PREPUBLICATION REVIEW SET</p><b style="font-size:11px">Gatchalian + Exponify + Seedlandia + 3 Knowledge Lab starters</b><p style="margin:4px 0 0;color:#71899e;font-size:8px;line-height:1.5">Draft only. Idempotent. Preserves unrelated state. Live is never changed here.</p></div><button id="prepareReviewSetButton" class="secondary-action" type="button">Prepare review set</button>';
+    box.innerHTML='<div><p class="eyebrow" style="margin:0 0 4px">PREPUBLICATION REVIEW SET</p><b style="font-size:11px">Gatchalian + Exponify video + Seedlandia + 3 Knowledge Lab starters</b><p style="margin:4px 0 0;color:#71899e;font-size:8px;line-height:1.5">Draft only. Idempotent. Preserves unrelated state. Live is never changed here.</p></div><button id="prepareReviewSetButton" class="secondary-action" type="button">Prepare review set</button>';
     host.insertAdjacentElement('afterend',box);
     $('#prepareReviewSetButton')?.addEventListener('click',async event=>{
       const button=event.currentTarget;
