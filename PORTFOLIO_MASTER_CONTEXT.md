@@ -5,8 +5,8 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`
-> Last consolidated: **2026-10-03 evening (Asia/Manila), Gatchalian gallery-infrastructure milestone**
-> Latest verified implementation deployment at consolidation: **Run #169 — success**, head `c4db3150e81646a83b58552b780f81ce26fa64c2`.
+> Last consolidated: **2026-10-04 early morning (Asia/Manila), Gatchalian two-piece Draft gallery + final-QA staging milestone**
+> Latest verified **runtime implementation** deployment at consolidation: **Run #177 — success**, head `fd41af6c91e1a05ce53279b8ca8521e11cefb344`. A later context-only commit may trigger an additional Pages run without changing runtime behavior.
 >
 > **New chats must read this file first, then verify the actual `main` branch and latest deployment before changing anything. Do not restart finished work or silently redesign approved assets.**
 
@@ -123,7 +123,7 @@ Important public files include:
 - `assets/js/gatchalian-case-runtime.js` — Gatchalian case-study hero media + Featured Campaign carousel runtime.
 - `assets/css/multimedia-case.css` — Gatchalian visual showcase styling.
 - `assets/js/gatchalian-client-gallery.js` — fail-closed `More Work for Gatchalian Meatshop` renderer + accessible image viewer.
-- `assets/css/gatchalian-client-gallery.css` — complete-artwork gallery/card/lightbox presentation.
+- `assets/css/gatchalian-client-gallery.css` — complete-artwork gallery/card/lightbox presentation, including count-aware curated-set layout.
 - `multimedia/gatchalian-meatshop.html` — Gatchalian case-study/showcase page.
 
 Important Admin files:
@@ -162,6 +162,8 @@ Security model:
 - no service-role key client-side.
 
 Sensitive AAL2 areas include portfolio-state writes, revision/history operations, inbox mutation, and storage upload/replace/delete.
+
+Admin session hardening now also auto-refreshes an expired Supabase access token when a valid refresh token still exists. Storage/REST requests retry only for an actual expired-token failure. If the renewed token no longer satisfies AAL2, the user is required to verify MFA again; the fix does not bypass AAL2 or RLS.
 
 Do not weaken authentication or RLS to simplify maintenance.
 
@@ -324,20 +326,25 @@ Current storage workflow:
 - bucket limit was adjusted to accommodate the final video; Admin uploader remains intentionally below that ceiling.
 - uploads remain owner/AAL2 protected.
 - Admin Creative flow supports the Gatchalian starter + campaign cover + final campaign video upload.
-- `admin-gatchalian-gallery.js` now provides a separate owner/AAL2-protected uploader/editor for additional finished Gatchalian client pieces. It accepts JPG/PNG/WebP up to 8 MB, writes `clientGallery` to Draft only, and does not auto-delete Storage objects on removal.
+- `admin-gatchalian-gallery.js` provides a separate owner/AAL2-protected uploader/editor for additional finished Gatchalian client pieces. It accepts JPG/PNG/WebP up to 8 MB, writes `clientGallery` to Draft only, and does not auto-delete Storage objects on removal.
+- expired Supabase Admin access tokens are now automatically refreshed when possible before protected REST/Storage operations; AAL2 is still required after refresh.
 
-Current portfolio state:
+Current portfolio state verified directly in Supabase on 2026-10-04:
 
 - Draft contains the Gatchalian Multimedia item and stable featured cover/video URLs.
 - Draft Multimedia is enabled for preview/QA.
-- **No `clientGallery` items have been saved yet**; the new More Work section therefore stays fail-closed/hidden.
-- Live Multimedia remains intentionally **OFF**.
+- Draft Gatchalian `clientGallery` contains **2 published historical items**:
+  1. `Murang Karne — Retail Promo` — category `Retail Promotion`, context `Retail promo / product price flyer`, marked `Previous campaign`.
+  2. `Negosyo Package` — category `Reseller / Business Promotion`, context `100-pack reseller business package`, marked `Previous campaign`.
+- Both gallery PNG objects were verified in `portfolio-media`; sizes are approximately 2.52 MB and 2.41 MB.
+- The More Work section therefore renders in Draft Preview and remains fail-closed outside valid state.
+- Live Multimedia remains intentionally **OFF** with zero Live Multimedia items.
 - case-study page remains `noindex,nofollow` until intentional publication.
 - direct case-study runtime can render the approved stored video/cover for case-page QA even when Live Multimedia is off.
-- latest verified implementation deployment: **GitHub Pages Run #169 — success**, head `c4db3150e81646a83b58552b780f81ce26fa64c2`.
-- this environment could verify deployment/state/code but could not visually inspect the rendered GitHub Pages URL; browser visual QA remains required before publication.
+- latest verified **runtime implementation** deployment: **GitHub Pages Run #177 — success**, head `fd41af6c91e1a05ce53279b8ca8521e11cefb344`.
+- the current tool environment can verify deployment/state/code but cannot visually inspect the GitHub Pages URL; final browser visual acceptance remains a user-side approval step before publication.
 
-Do not publish Live until focused Gatchalian QA passes.
+Do not publish Live until focused Gatchalian browser QA passes.
 
 ---
 
@@ -349,32 +356,41 @@ Current accepted direction is a **visual-first showcase**:
 
 1. Hero: project title/details on the left, **actual vertical campaign video on the right**.
 2. **Featured Campaign** visual slider below the hero.
-3. Fail-closed **More Work for Gatchalian Meatshop** gallery when verified additional pieces exist.
+3. **More Work for Gatchalian Meatshop** curated client-work gallery.
 4. Concise Project Overview cards.
 5. Concise Creative Process: Concept -> Design -> Motion -> Final.
 6. Small client/AI-assistance disclosure in the footer.
 
 The Draft Preview badge is **not a live-site issue**; it is expected QA UI and should disappear outside Draft Preview.
 
-## Featured Campaign carousel — CODE FIX COMPLETE, VISUAL QA PENDING
+## Featured Campaign carousel — CODE FIX COMPLETE, FINAL BROWSER ACCEPTANCE PENDING
 
 The earlier aggressive one-board crop/caption-overlay problem was patched in the deployed code:
 
 - main campaign poster uses a dedicated viewport intended to preserve the complete poster region,
 - supporting Liempo + Order Now artwork uses a wider dedicated viewport,
 - full campaign board uses full-contained presentation,
-- captions now live in separate dark caption bars below the artwork,
-- muted text contrast was slightly improved,
+- captions live in separate dark caption bars below the artwork,
+- muted text contrast was improved,
 - slider remains responsive/swipe-capable,
 - video remains fully visible with `object-fit: contain` in its 9:16 frame.
 
-An accessible enlarged image viewer is available for the new More Work gallery. The Featured Campaign itself still needs real desktop/mobile browser inspection before declaring the visual issue fully closed.
+The More Work gallery now also:
+
+- uses count-aware layout so a two-piece curated set does not leave an empty third desktop column,
+- uses a consistent 4:3 contained preview frame for mixed landscape/portrait artwork,
+- keeps the complete artwork visible with `object-fit: contain`,
+- shows category, context, and `Previous campaign` metadata together,
+- uses each item's specific historical note when present,
+- provides an accessible enlarged image viewer for detailed inspection.
+
+A user Draft Preview screenshot already confirmed the More Work section, complete first artwork containment, visible Previous campaign badge, and the transition into Project Overview. The final two-item layout patch was deployed afterward and still needs the user's final desktop/mobile visual approval.
 
 Do not CSS-crop meaningful text from the actual video.
 
 ---
 
-# 12. NEW client-work collection plan — Gatchalian
+# 12. Gatchalian client-work collection
 
 The user supplied many other real Gatchalian Meatshop creatives. Do **not** dump all of them into the Featured Campaign carousel.
 
@@ -390,22 +406,25 @@ Current `Pork, Chicken at Seafood` campaign + final Meta video. This remains the
 
 ### B. More Work for Gatchalian Meatshop
 
-A fail-closed gallery runtime and secure Admin editor are now implemented. The public section stays hidden unless `clientGallery` contains at least one published item with a valid HTTPS image URL.
+The fail-closed gallery runtime and secure Admin editor are implemented and now contain a deliberately small curated Draft set.
 
-Curated candidates from verified user Library searches include finished client work such as:
+Current curated Draft set:
+
+- `Murang Karne — Retail Promo` — historical retail flyer, visibly labeled Previous campaign.
+- `Negosyo Package` — historical reseller/business package, visibly labeled Previous campaign.
+
+Two items are acceptable for the current release candidate because the Featured Campaign already supplies the current campaign work; the archive does not need filler solely to reach three cards. Additional verified pieces can be added later if they materially strengthen the portfolio.
+
+Other candidates from verified user Library searches include:
 
 - Fresh Meat Deals / promotional posters,
-- Murang Karne-type retail promos,
 - Discover Meat Satisfaction-style campaign pieces,
-- Negosyo Package materials,
 - Retail Pricelist designs,
 - Fresh Vegetables & Fruits / Fresh Produce Pricelist,
 - reseller/business materials,
 - other promotional flyers/posts supplied by the user.
 
-Library verification during this milestone found current/usable and historical compositions including `Gatchalian Meatshop Campaign Portfolio(1).png`, `Gatchalian Meatshop Negosyo Package(1).png`, `Gatchalian Meatshop Premium Meat Promo Collage.png`, `Gatchalian Meatshop Fresh Produce Pricelist(1).png`, and `Gatchalian Meatshop Social Media Campaign.png`. Do not assume every found piece is publication-ready; inspect the actual asset and pricing before upload.
-
-The ChatGPT Library files were **not** silently pushed to public Storage. The owner must upload selected finished pieces through the new Admin Creative -> More Work gallery control while signed in at AAL2.
+Library verification found compositions including `Gatchalian Meatshop Campaign Portfolio(1).png`, `Gatchalian Meatshop Negosyo Package(1).png`, `Gatchalian Meatshop Premium Meat Promo Collage.png`, `Gatchalian Meatshop Fresh Produce Pricelist(1).png`, and `Gatchalian Meatshop Social Media Campaign.png`. Do not assume every found piece is publication-ready; inspect the actual asset and pricing before upload.
 
 ### Client-work safety rules
 
@@ -417,9 +436,7 @@ Finished client work may be shown because the user confirmed permission, but:
 - do not imply ownership of the client brand/logo,
 - historical posters with older prices must be labeled as previous/historical campaign work, not current offers.
 
-The Admin gallery editor has a `Campaign period` control. Choosing `Previous campaign / historical pricing` stores the historical flag; the public gallery then displays a visible `Previous campaign` badge plus:
-
-> Pricing shown reflects the original campaign period and is not presented as a current offer.
+The Admin gallery editor has a `Campaign period` control. Choosing `Previous campaign / historical pricing` stores the historical flag; the public gallery displays a visible `Previous campaign` badge and historical note so old offers are not presented as current.
 
 If the Gatchalian collection becomes large, later create a dedicated client collection route such as `/clients/gatchalian-meatshop/` while keeping the current campaign as the featured case study.
 
@@ -511,6 +528,7 @@ Before production baseline/release verify:
 - corrected campaign board,
 - Featured Campaign full-image presentation / no caption overlap,
 - More Work gallery only when verified items exist,
+- More Work two-card desktop balance and one-column mobile stack,
 - More Work image viewer/keyboard close behavior,
 - category filter/search,
 - correct `Client Work` label,
@@ -523,6 +541,7 @@ Before production baseline/release verify:
 ## Admin
 
 - password + TOTP AAL2,
+- expired-session refresh behavior,
 - Creative Manager load/save,
 - Creative Manager edit preserves richer case-study metadata,
 - featured media upload,
@@ -581,27 +600,29 @@ After final QA:
 - direct case runtime fallback/media fix deployed,
 - Featured Campaign carousel code patch for full-artwork framing + separate caption bars,
 - muted case-page contrast refinement,
-- Creative Manager existing-item edit now preserves richer/specialized metadata instead of replacing the whole object,
-- fail-closed More Work public gallery runtime + responsive styling + accessible enlarged image viewer,
+- Creative Manager existing-item edit preserves richer/specialized metadata instead of replacing the whole object,
+- fail-closed More Work public gallery runtime + accessible enlarged image viewer,
 - AAL2/RLS-protected Gatchalian gallery Admin uploader/editor with Draft-only writes and historical-campaign labeling,
-- Admin/backend cache bust integrated for the new gallery tools,
-- latest verified implementation Pages deployment **#169 successful** at `c4db3150e81646a83b58552b780f81ce26fa64c2`,
-- Live Multimedia remains OFF and case page remains noindex,
-- decision maintained to keep a broader Gatchalian Client Work collection separate from the Featured Campaign slider.
+- expired Supabase Admin token auto-refresh/retry hardening deployed; AAL2/RLS preserved,
+- two verified Gatchalian gallery PNGs uploaded and saved to Draft: `Murang Karne — Retail Promo` and `Negosyo Package`,
+- both gallery items marked Previous campaign / historical pricing,
+- two-piece gallery final-QA polish: count-aware desktop layout, contained 4:3 previews, context + historical metadata, item-specific viewer notes,
+- case-page cache bust for the gallery final-QA patch,
+- latest verified runtime Pages deployment **#177 successful** at `fd41af6c91e1a05ce53279b8ca8521e11cefb344`,
+- Live Multimedia remains OFF with zero Live Multimedia items and case page remains `noindex,nofollow`,
+- broader Gatchalian archive remains separate from the Featured Campaign slider.
 
 ## PENDING / next work
 
-1. **Browser-verify the deployed Gatchalian page after Run #169**: direct video playback, full Featured Campaign artwork, captions, contrast, controls, desktop/mobile behavior. This was not visually verified by the current tool environment.
-2. In Admin -> Creative -> **More Work gallery**, upload a small curated set of verified finished Gatchalian client pieces through the owner/AAL2 flow. Do not bulk-dump every Library asset.
-3. Mark every older-price artwork as **Previous campaign / historical pricing**. Current campaign must continue to use ₱150 Liempo and ₱310/kg Pompano.
-4. Use Draft Preview to QA the new More Work gallery, card order, full-image containment, historical badges, image viewer, and mobile layout.
-5. Focused desktop/mobile QA of the complete Gatchalian page and Admin gallery workflow.
-6. Remove `noindex,nofollow` only when intentional publication is approved.
-7. Publish/enable Multimedia through Draft -> Preview -> Publish Live only after QA.
-8. Add Exponify as Project #2 with a different corporate/tech visual language.
-9. Build toward 5–7 strong creative works.
-10. Populate Knowledge Lab after Multimedia has at least one strong public case study.
-11. Perform final one-bagsak QA and production cleanup.
+1. **User final browser approval of Run #177** after a normal refresh/hard refresh: desktop and mobile hero/video, Featured Campaign slides, balanced two-card More Work layout, historical labels/context, enlarged viewer, and section spacing.
+2. If visual QA passes, decide whether publication is intended now. Only then remove `noindex,nofollow` and enable/publish Multimedia through the normal Draft -> Preview -> Publish Live flow.
+3. Perform the broader one-bagsak portfolio QA before declaring the whole portfolio production-final: public navigation/responsiveness/a11y, contact/inbox, resume/projects, analytics/operations, and security checks.
+4. Add Exponify as Multimedia Project #2 with a deliberately different corporate/tech visual language.
+5. Build toward 5–7 strong creative works.
+6. Populate Knowledge Lab after Multimedia has at least one strong public case study.
+7. Create a production baseline / changelog / release marker after the final site-wide QA.
+
+No additional Gatchalian gallery upload is required for the current release candidate unless a new piece clearly strengthens the portfolio.
 
 ---
 
@@ -609,7 +630,7 @@ After final QA:
 
 Send this in a new chat:
 
-> Continue my `Knowlexit09/noel-labasan-portfolio` project. First read `PORTFOLIO_MASTER_CONTEXT.md` from the repository and use it as the primary continuity/source-of-truth. Then verify the actual current `main` branch and latest GitHub Pages deployment before making changes. Do not restart completed architecture or redesign approved assets unless repository evidence or I explicitly ask. Preserve Draft -> Preview -> Publish Live, MFA/AAL2, RLS, analytics/privacy, audit/error logging, and existing working modules. Continue from the latest PENDING section. Current priority is focused Gatchalian QA and staging the new `More Work for Gatchalian Meatshop` gallery: visually verify the deployed Featured Campaign/video, then upload only selected verified finished Gatchalian client pieces through the owner/AAL2 Admin gallery workflow, marking older-price artwork as Previous campaign. Live Multimedia must remain fail-closed until focused QA passes.
+> Continue my `Knowlexit09/noel-labasan-portfolio` project. First read `PORTFOLIO_MASTER_CONTEXT.md` from the repository and use it as the primary continuity/source-of-truth. Then verify the actual current `main` branch and latest GitHub Pages deployment before making changes. Do not restart completed architecture or redesign approved assets unless repository evidence or I explicitly ask. Preserve Draft -> Preview -> Publish Live, MFA/AAL2, RLS, analytics/privacy, audit/error logging, and existing working modules. Continue from the latest PENDING section. The Gatchalian Draft currently has the final featured cover/video plus two verified historical More Work items (`Murang Karne — Retail Promo` and `Negosyo Package`). Current runtime implementation baseline is Pages Run #177 at `fd41af6c91e1a05ce53279b8ca8521e11cefb344`. Priority is final browser approval of the Gatchalian desktop/mobile Draft Preview; Live Multimedia must remain fail-closed until that approval. If it passes, handle intentional publication/noindex removal through the existing safe workflow, then continue the broader one-bagsak portfolio QA and Exponify Project #2.
 
 ---
 
@@ -626,7 +647,7 @@ For every meaningful patch, report:
 Current Multimedia work:
 
 - **Risk level:** Low to Medium depending on storage/state changes.
-- **Primary risks:** stale Draft state, wrong/old creative linked, broken media URL, historical pricing shown as current, layout regressions, gallery/Creative edits overwriting richer metadata, or premature Live publication.
-- **Safeguards:** Draft Preview first, AAL2 owner uploads, RLS, latest-state merge for gallery writes, Creative-item metadata-preserving edits, Live Multimedia remains OFF until approval, case page stays noindex until intended publication, stable stored media, explicit current/historical campaign distinction, Storage files are retained on gallery removal for rollback.
-- **Data/security impact:** no effect on POS, accounting, inventory, or client operational data; auth/RLS remain unchanged. The new gallery writes only portfolio Draft metadata and owner-uploaded public portfolio artwork.
-- **Rollback:** revert the relevant GitHub commit and/or restore prior Draft media metadata; stored media can remain unused without affecting Live. Key implementation baseline before the new gallery infrastructure is `040c4a2edb2b6117dfb645541378187c7ce8430b`; latest verified implementation baseline is `c4db3150e81646a83b58552b780f81ce26fa64c2`.
+- **Primary risks:** stale Draft state, wrong/old creative linked, broken media URL, historical pricing shown as current, layout regressions, gallery/Creative edits overwriting richer metadata, stale/expired Admin auth, or premature Live publication.
+- **Safeguards:** Draft Preview first, AAL2 owner uploads, RLS, expired-session refresh still re-checks AAL2, latest-state merge for gallery writes, Creative-item metadata-preserving edits, Live Multimedia remains OFF until approval, case page stays noindex until intended publication, stable stored media, explicit current/historical campaign distinction, Storage files are retained on gallery removal for rollback.
+- **Data/security impact:** no effect on POS, accounting, inventory, or client operational data; auth/RLS remain enforced. The gallery writes only portfolio Draft metadata and owner-uploaded public portfolio artwork.
+- **Rollback:** revert the relevant GitHub commit and/or restore prior Draft media metadata; stored media can remain unused without affecting Live. Key implementation baseline before the gallery infrastructure is `040c4a2edb2b6117dfb645541378187c7ce8430b`; pre-final-gallery-polish/auth baseline is `a3b1cd15dafb2de17ba3b00672a3ab2cbd03922f`; verified final-QA runtime baseline is `fd41af6c91e1a05ce53279b8ca8521e11cefb344`.
