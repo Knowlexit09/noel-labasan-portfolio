@@ -10,6 +10,8 @@
  * - Refuses to reload while unrelated unsaved Admin changes exist.
  * - Saves only the creative module keys into the current server Draft, preserving
  *   every other field from the latest Draft/Live state.
+ * - Existing item edits merge form-controlled fields into the existing object so
+ *   richer metadata owned by specialized case-study tools is not discarded.
  * - Public modules stay OFF until explicitly enabled here and then Publish Live.
  */
 (function(){
@@ -181,7 +183,7 @@
       const edit=e.target.closest('[data-creative-edit]'),del=e.target.closest('[data-creative-delete]'),up=e.target.closest('[data-creative-up]'),down=e.target.closest('[data-creative-down]');const el=edit||del||up||down;if(!el)return;const kind=el.dataset.creativeEdit||el.dataset.creativeDelete||el.dataset.creativeUp||el.dataset.creativeDown;const i=Number(el.dataset.index);const list=listFor(kind);if(edit)return openEditor(kind,i);if(del){if(confirm('Delete this item from the Creative working draft?')){list.splice(i,1);render()}return}if(up&&i>0){[list[i-1],list[i]]=[list[i],list[i-1]];render()}if(down&&i<list.length-1){[list[i+1],list[i]]=[list[i],list[i+1]];render()}
     });
     $('#creativeDialogClose')?.addEventListener('click',()=>$('#creativeItemDialog').close());$('#creativeDialogCancel')?.addEventListener('click',()=>$('#creativeItemDialog').close());$('#creativeItemDialog')?.addEventListener('cancel',e=>{e.preventDefault();$('#creativeItemDialog').close()});
-    $('#creativeItemForm')?.addEventListener('submit',e=>{e.preventDefault();const item=values(e.currentTarget,editing.kind);if(!item.label&&editing.kind==='tool')return $('#creativeDialogMessage').textContent='Tool name is required.';if(editing.kind!=='tool'&&!item.title)return $('#creativeDialogMessage').textContent='Title is required.';const list=listFor(editing.kind);if(editing.index>=0)list[editing.index]=item;else list.push(item);$('#creativeItemDialog').close();render()});
+    $('#creativeItemForm')?.addEventListener('submit',e=>{e.preventDefault();const item=values(e.currentTarget,editing.kind);if(!item.label&&editing.kind==='tool')return $('#creativeDialogMessage').textContent='Tool name is required.';if(editing.kind!=='tool'&&!item.title)return $('#creativeDialogMessage').textContent='Title is required.';const list=listFor(editing.kind);if(editing.index>=0)list[editing.index]={...list[editing.index],...item};else list.push(item);$('#creativeItemDialog').close();render()});
   }
 
   function boot(){if(!/\/admin\/?$/i.test(location.pathname))return;injectStyles();injectPage();bind()}
