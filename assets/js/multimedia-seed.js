@@ -11,7 +11,7 @@
  * Safety:
  * - Remote Draft/Live state can still override these fallback values.
  * - No secrets or authentication data live here.
- * - The Gatchalian item stays published:false until its final media assets are wired and QA passes.
+ * - The Gatchalian item stays published:false until final media assets are wired and QA passes.
  */
 (function seedMultimediaFallback(){
   'use strict';
@@ -44,9 +44,13 @@
         label:'Client Work',
         projectType:'Client Work',
         mediaType:'video',
-        description:'A real social media campaign combining retail meat product graphics, Meta-ready short-form video, campaign consistency, and a clear order-focused CTA.',
+        objective:'Promote fresh meat products and value pricing while driving local orders.',
+        audience:'Households, local shoppers, and reseller-oriented buyers.',
+        role:'Campaign concept, graphic layout, image refinement, video sequencing, text/price overlays, CTA design, and final review.',
+        description:'A real client campaign combining a locked retail key visual, supporting social posts, and an 18–20 second vertical Meta ad built around clear product grouping, readable prices, vacuum-sealed freshness messaging, and an order-focused CTA.',
+        disclosure:'AI-assisted visuals were used in parts of the workflow; final selection, layout, branding, text/pricing, sequencing, and editing were manually reviewed and assembled.',
         tools:['Canva','Photoshop','CapCut'],
-        tags:['Graphic Design','Video Editing','Social Media','Meta Ads','Food Retail'],
+        tags:['Graphic Design','Video Editing','Social Media','Meta Ads','Food Retail','AI-assisted Workflow'],
         thumbnailUrl:'',
         imageAlt:'Gatchalian Meatshop social media campaign',
         detailsUrl:'multimedia/gatchalian-meatshop.html',
