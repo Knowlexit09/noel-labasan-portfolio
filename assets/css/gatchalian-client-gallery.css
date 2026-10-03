@@ -12,6 +12,7 @@
 .gatchalian-client-grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:stretch;
   gap:16px;
 }
 
@@ -26,9 +27,16 @@
   margin-inline:auto;
 }
 
+/*
+ * Keep every card as one complete block. The artwork frame and caption participate
+ * in normal layout flow so a tall source image can never cover the text below it.
+ */
 .gatchalian-client-card {
   min-width:0;
+  height:100%;
   overflow:hidden;
+  display:flex;
+  flex-direction:column;
   border:1px solid #253c50;
   border-radius:18px;
   background:#081623;
@@ -36,19 +44,27 @@
 }
 
 /*
- * Keep mixed landscape/portrait client work visually balanced while preserving
- * the complete artwork. The enlarged viewer remains available for fine details.
+ * Mixed landscape/portrait artwork uses a stable preview frame. The complete image
+ * is contained inside the frame; unused space becomes the dark letterbox area.
+ * overflow + paint containment are deliberate guards against intrinsic image sizing
+ * escaping into the caption on some browsers.
  */
 .gatchalian-client-art {
+  position:relative;
   width:100%;
   aspect-ratio:4 / 3;
+  min-width:0;
   min-height:0;
+  overflow:hidden;
+  contain:paint;
+  box-sizing:border-box;
   padding:0;
   border:0;
   border-bottom:1px solid #253c50;
   background:#050c13;
   display:grid;
   place-items:center;
+  flex:0 0 auto;
   cursor:zoom-in;
 }
 
@@ -56,8 +72,12 @@
   display:block;
   width:100%;
   height:100%;
-  max-height:none;
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  max-height:100%;
   object-fit:contain;
+  object-position:center;
   background:#050c13;
 }
 
@@ -67,7 +87,11 @@
 }
 
 .gatchalian-client-copy {
+  position:relative;
+  z-index:1;
+  flex:1 0 auto;
   padding:16px 17px 18px;
+  background:#081623;
 }
 
 .gatchalian-client-meta {
