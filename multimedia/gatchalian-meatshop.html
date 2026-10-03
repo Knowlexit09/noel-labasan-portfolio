@@ -12,17 +12,22 @@
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
   <link rel="stylesheet" href="../assets/css/accessibility-performance.css?v=20260916-1">
-  <link rel="stylesheet" href="../assets/css/multimedia-case.css?v=20261003-1">
+  <link rel="stylesheet" href="../assets/css/multimedia-case.css?v=20261003-2">
 
-  <script defer src="../assets/js/config.js"></script>
-  <script defer src="../assets/js/app.js"></script>
+  <!-- SHARED STATE: allows the case page to render the same Draft Preview / Live media URLs used by the portfolio. -->
+  <script defer src="../assets/js/config.js?v=20260915-4"></script>
+  <script defer src="../assets/js/multimedia-seed.js?v=20261003-2"></script>
+  <script defer src="../assets/js/backend-config.js?v=20261003-2"></script>
+  <script defer src="../assets/js/backend-loader.js?v=20260915-4"></script>
+  <script defer src="../assets/js/gatchalian-case-runtime.js?v=20261003-2"></script>
+  <script defer src="../assets/js/app.js?v=20260915-4"></script>
   <script defer src="../assets/js/accessibility-performance.js?v=20260916-1"></script>
 </head>
 <body>
   <main class="case-main">
     <a class="case-back" href="../index.html#multimedia">← Back to Multimedia</a>
 
-    <!-- HERO: real client work. Keep noindex until the approved binary campaign assets are wired and QA passes. -->
+    <!-- HERO: real client work. Keep noindex until final media wiring + focused QA passes. -->
     <section class="multimedia-case-hero">
       <div class="multimedia-case-copy">
         <div class="section-kicker">Client Work · Social Media Advertising</div>
@@ -37,10 +42,11 @@
         <span class="client-badge">✓ Real client work · Portfolio use approved</span>
       </div>
 
-      <div class="creative-stage" role="img" aria-label="Campaign media staging area">
-        <div>
-          <strong>Updated campaign edit is approved; media wiring is still pending.</strong>
-          <p>The current approved revision uses Belly/Liempo at ₱150 and Frozen Pompano at ₱310/kg. The canonical final video is <code>gatchalian campaign meta ads updated.mp4</code>. This page remains noindex until the updated campaign board and video are uploaded to stable public media paths and connected without changing the locked design.</p>
+      <div class="creative-stage" data-gatchalian-stage>
+        <img data-gatchalian-cover hidden alt="Gatchalian Meatshop social media campaign board">
+        <div data-gatchalian-stage-message>
+          <strong>Updated campaign edit is approved; media upload is pending.</strong>
+          <p>The current approved revision uses Belly/Liempo at ₱150 and Frozen Pompano at ₱310/kg. The canonical final video is <code>gatchalian campaign meta ads updated.mp4</code>. This page stays noindex until the updated campaign board and video are uploaded through the secure Creative Manager and focused QA passes.</p>
         </div>
       </div>
     </section>
@@ -80,11 +86,15 @@
         </ul>
       </section>
 
-      <!-- VIDEO APPROACH: documents the final compact four-beat edit instead of showing every product as a separate one-second card. -->
+      <!-- VIDEO APPROACH: final MP4 loads from the Creative Manager media URL. No autoplay. -->
       <section class="case-section" id="video">
         <div class="section-kicker">04 · Video Approach</div>
         <h2>Four focused beats instead of a rushed product slideshow.</h2>
         <p>The final short-form edit uses a food-first hook, a grouped pork/chicken/seafood value message, vacuum-sealed freshness/convenience, and a cooked-meal/order payoff. Product categories and prices stay readable instead of flashing one item per second, while the CTA closes the sequence clearly for mobile viewing.</p>
+        <div class="campaign-video-shell">
+          <video data-gatchalian-video hidden controls playsinline preload="metadata" aria-label="Gatchalian Meatshop campaign video"></video>
+          <p data-gatchalian-video-fallback class="campaign-video-fallback">Final updated Meta video will appear here after the secure media upload is saved to Draft.</p>
+        </div>
       </section>
 
       <!-- PROCESS: transparent about AI assistance while emphasizing manual selection, correction, and final editing. -->
