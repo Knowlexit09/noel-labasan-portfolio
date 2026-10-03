@@ -192,7 +192,7 @@ body {
 .showcase-fact:first-child { padding-left:0; border-left:0; }
 .showcase-fact span {
   display:block;
-  color:#93a7ba;
+  color:#a8b9c9;
   font-size:9px;
   font-weight:800;
   letter-spacing:.08em;
@@ -233,7 +233,7 @@ body {
   display:grid;
   place-items:center;
   padding:24px;
-  color:#9db0c3;
+  color:#afbdca;
   text-align:center;
   font-size:12px;
   line-height:1.7;
@@ -264,11 +264,17 @@ body {
 .showcase-section-head p {
   max-width:660px;
   margin:7px 0 0;
-  color:#9fb0c1;
+  color:#b2c0cd;
   font-size:13px;
 }
 
-/* CAMPAIGN CREATIVE SLIDER. All views reuse the approved uploaded board. */
+/*
+ * CAMPAIGN CREATIVE SLIDER.
+ * The uploaded board already contains the approved main poster plus both supporting
+ * creatives. Each focused slide uses a viewport whose aspect ratio matches the
+ * complete artwork region, so no poster text/details are cut off. Captions live in
+ * a separate bar below the artwork instead of overlaying the design.
+ */
 .campaign-slider {
   position:relative;
   padding:0 46px;
@@ -280,10 +286,9 @@ body {
 }
 
 .campaign-slider-track {
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:minmax(300px,34%);
-  gap:14px;
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scrollbar-width:none;
@@ -294,55 +299,61 @@ body {
 
 .campaign-slide {
   position:relative;
-  min-height:350px;
+  flex:0 0 clamp(300px,32%,390px);
   border:1px solid #263b4e;
   border-radius:17px;
   overflow:hidden;
-  background:#0a1622;
+  background:#07131f;
   scroll-snap-align:start;
   box-shadow:0 18px 42px rgba(0,0,0,.2);
 }
 
+/* Supporting pair is naturally landscape, so give it a wider card. */
+.campaign-slide[data-view="supporting"] {
+  flex-basis:clamp(430px,52%,650px);
+}
+
 .campaign-slide-visual {
-  position:absolute;
-  inset:0;
+  position:relative;
+  width:100%;
   background-image:var(--campaign-cover);
   background-repeat:no-repeat;
-  background-color:#0b1118;
+  background-color:#060d14;
 }
+
+/* Full board: preserve the entire approved composition. */
 .campaign-slide[data-view="full"] .campaign-slide-visual {
+  aspect-ratio:.80;
   background-size:contain;
   background-position:center;
 }
+
+/* Main campaign poster: focus the board's complete top-right poster region. */
 .campaign-slide[data-view="main"] .campaign-slide-visual {
+  aspect-ratio:.75;
   background-size:168% auto;
   background-position:100% 8%;
 }
+
+/* Supporting Liempo + Order Now pair: preserve both complete lower-right artworks. */
 .campaign-slide[data-view="supporting"] .campaign-slide-visual {
+  aspect-ratio:1.92;
   background-size:168% auto;
   background-position:100% 84%;
 }
 
-.campaign-slide::after {
-  content:"";
-  position:absolute;
-  inset:auto 0 0;
-  height:42%;
-  background:linear-gradient(transparent,rgba(2,8,14,.92));
-  pointer-events:none;
-}
-
 .campaign-slide-copy {
-  position:absolute;
+  position:relative;
   z-index:2;
-  left:18px;
-  right:18px;
-  bottom:16px;
+  min-height:72px;
+  padding:14px 16px 15px;
+  border-top:1px solid #22384a;
+  background:#07131f;
   color:#fff;
 }
 .campaign-slide-copy span {
   display:block;
-  color:#ff6262;
+  color:#ff7070;
   font-size:9px;
   font-weight:900;
   letter-spacing:.14em;
@@ -350,8 +361,9 @@ body {
 }
 .campaign-slide-copy strong {
   display:block;
-  margin-top:3px;
-  font-size:17px;
+  margin-top:4px;
+  font-size:16px;
+  line-height:1.3;
 }
 
 .slider-arrow {
@@ -385,7 +397,7 @@ body {
   padding:0;
   border:0;
   border-radius:50%;
-  background:#415467;
+  background:#52677a;
 }
 .slider-dot.active { background:#ff3d4d; }
 
@@ -420,7 +432,7 @@ body {
 }
 .overview-card span,
 .process-card span {
-  color:#ff6262;
+  color:#ff7070;
   font-size:9px;
   font-weight:900;
   letter-spacing:.1em;
@@ -436,7 +448,7 @@ body {
 .overview-card p,
 .process-card p {
   margin:5px 0 0;
-  color:#9fb0c1;
+  color:#adbdcb;
   font-size:11px;
   line-height:1.55;
 }
@@ -449,7 +461,7 @@ body {
   display:flex;
   justify-content:space-between;
   gap:28px;
-  color:#8195a8;
+  color:#9eafbe;
   font-size:10px;
   line-height:1.6;
 }
@@ -461,7 +473,8 @@ body {
   .showcase-facts { grid-template-columns:repeat(2,1fr); gap:16px 0; }
   .showcase-fact:nth-child(3) { padding-left:0; border-left:0; }
   .overview-grid,.process-grid { grid-template-columns:repeat(2,1fr); }
-  .campaign-slider-track { grid-auto-columns:minmax(300px,48%); }
+  .campaign-slide { flex-basis:42%; }
+  .campaign-slide[data-view="supporting"] { flex-basis:66%; }
 }
 
 @media (max-width:760px) {
@@ -483,7 +496,8 @@ body {
   .showcase-section-head { align-items:flex-start; flex-direction:column; gap:8px; }
   .campaign-slider { padding:0 0 46px; }
   .campaign-slider-window { overflow:visible; }
-  .campaign-slider-track { grid-auto-columns:88%; }
+  .campaign-slide { flex-basis:84%; }
+  .campaign-slide[data-view="supporting"] { flex-basis:96%; }
   .slider-arrow { top:auto; bottom:0; transform:none; }
   .slider-arrow.prev { left:calc(50% - 48px); }
   .slider-arrow.next { right:calc(50% - 48px); }
@@ -497,6 +511,7 @@ body {
   .showcase-fact,
   .showcase-fact:nth-child(3) { padding:10px 0 0; border-left:0; border-top:1px solid rgba(255,255,255,.13); }
   .showcase-fact:first-child { border-top:0; padding-top:0; }
-  .campaign-slider-track { grid-auto-columns:94%; }
-  .campaign-slide { min-height:320px; }
+  .campaign-slide { flex-basis:92%; }
+  .campaign-slide[data-view="supporting"] { flex-basis:100%; }
+  .campaign-slide-copy { min-height:68px; padding:12px 14px 14px; }
 }
