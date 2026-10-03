@@ -4,17 +4,16 @@
  *
  * Purpose:
  * - Reads the same merged portfolio state used by the public site.
- * - Displays the approved campaign cover from thumbnailUrl.
- * - Displays the final MP4 from mediaUrl/videoUrl with native controls.
+ * - Puts the final MP4 in the hero with native controls and no autoplay.
+ * - Uses the approved uploaded campaign board as the visual source for a
+ *   portfolio-style campaign carousel below the hero.
  * - Preserves a still-valid local Draft Preview when the case-study URL is opened
- *   without the draftPreview query string (for example after following an internal link).
- * - Never autoplays sound or changes publication state.
+ *   without the draftPreview query string.
  *
- * Fail-closed behavior:
- * - Draft data is used only from this browser's existing 10-minute preview payload.
- * - Expired/invalid preview payloads are ignored.
- * - Missing/unsafe media URLs leave the staging messages visible.
- * - The page stays noindex until publication is intentionally completed.
+ * Safety:
+ * - Draft data is used only from this browser's existing short-lived preview payload.
+ * - Unsafe/non-HTTPS media URLs are ignored.
+ * - This runtime never publishes or mutates portfolio state.
  */
 (function gatchalianCaseRuntime(){
   'use strict';
@@ -72,6 +71,56 @@
     document.body.appendChild(badge);
   }
 
+  function buildGallery(coverUrl) {
+    const host = document.querySelector('[data-campaign-slider-track]');
+    const dots = document.querySelector('[data-campaign-slider-dots]');
+    const prev = document.querySelector('[data-campaign-slider-prev]');
+    const next = document.querySelector('[data-campaign-slider-next]');
+    if (!host || !dots || !coverUrl) return;
+
+    document.documentElement.style.setProperty('--campaign-cover', `url("${coverUrl.replace(/"/g,'%22')}")`);
+
+    const slides = [
+      { view:'main', kicker:'Key Visual', title:'Main Campaign Poster' },
+      { view:'supporting', kicker:'Supporting Creatives', title:'Product Spotlight + Order CTA' },
+      { view:'full', kicker:'Campaign System', title:'Full Portfolio Campaign Board' }
+    ];
+
+    host.innerHTML = slides.map((slide,index) => `
+      <article class="campaign-slide" data-view="${slide.view}" data-campaign-slide="${index}" role="img" aria-label="${slide.title}">
+        <div class="campaign-slide-visual" aria-hidden="true"></div>
+        <div class="campaign-slide-copy"><span>${slide.kicker}</span><strong>${slide.title}</strong></div>
+      </article>`).join('');
+
+    dots.innerHTML = slides.map((_,index) => `<button type="button" class="slider-dot${index===0?' active':''}" data-campaign-dot="${index}" aria-label="Show campaign slide ${index+1}"></button>`).join('');
+
+    const slideEls = [...host.querySelectorAll('[data-campaign-slide]')];
+    const dotEls = [...dots.querySelectorAll('[data-campaign-dot]')];
+    let current = 0;
+
+    const mark = index => {
+      current = Math.max(0,Math.min(index,slideEls.length-1));
+      dotEls.forEach((dot,i) => dot.classList.toggle('active',i===current));
+    };
+
+    const go = index => {
+      const target = slideEls[Math.max(0,Math.min(index,slideEls.length-1))];
+      if (!target) return;
+      target.scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+      mark(Number(target.dataset.campaignSlide || 0));
+    };
+
+    prev?.addEventListener('click',() => go(current<=0?slideEls.length-1:current-1));
+    next?.addEventListener('click',() => go(current>=slideEls.length-1?0:current+1));
+    dotEls.forEach((dot,index) => dot.addEventListener('click',() => go(index)));
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if (visible) mark(Number(visible.target.dataset.campaignSlide || 0));
+    },{root:host,threshold:[.35,.55,.75]});
+    slideEls.forEach(slide => observer.observe(slide));
+  }
+
   function render(config) {
     const item = findProject(config);
     if (!item) return false;
@@ -79,17 +128,7 @@
     const coverUrl = safeHttpUrl(item.thumbnailUrl || item.imageUrl);
     const videoUrl = safeHttpUrl(item.videoUrl || item.mediaUrl);
 
-    const stage = document.querySelector('[data-gatchalian-stage]');
-    const stageMessage = document.querySelector('[data-gatchalian-stage-message]');
-    const cover = document.querySelector('[data-gatchalian-cover]');
-
-    if (coverUrl && cover) {
-      cover.src = coverUrl;
-      cover.alt = item.imageAlt || 'Gatchalian Meatshop social media campaign board';
-      cover.hidden = false;
-      if (stageMessage) stageMessage.hidden = true;
-      if (stage) stage.classList.add('has-media');
-    }
+    if (coverUrl) buildGallery(coverUrl);
 
     const video = document.querySelector('[data-gatchalian-video]');
     const videoFallback = document.querySelector('[data-gatchalian-video-fallback]');
@@ -120,10 +159,6 @@
         return;
       }
 
-      // INTERNAL PREVIEW CONTINUITY:
-      // Admin Preview Draft stores a short-lived payload in this same origin's
-      // localStorage. Following/opening the case page can drop the query string,
-      // so recover that already-authorized browser-local preview for QA only.
       const localPreview = readActiveLocalPreview();
       if (localPreview?.state && hasRenderableMedia(localPreview.state)) {
         window.PORTFOLIO_PREVIEW_MODE = true;
@@ -133,19 +168,15 @@
         return;
       }
 
-      const stageMessage = document.querySelector('[data-gatchalian-stage-message]');
       const videoFallback = document.querySelector('[data-gatchalian-video-fallback]');
-      if (stageMessage) {
-        stageMessage.innerHTML = '<strong>This direct URL is showing the current Live state.</strong><p>Multimedia is still intentionally OFF on Live. Open <b>Preview draft ↗</b> from Portfolio Maintenance, then reopen this case study to review the uploaded campaign image and video before publishing.</p>';
-      }
       if (videoFallback) {
-        videoFallback.textContent = 'The final updated Meta video is staged in Draft and will appear during Draft Preview or after intentional publication.';
+        videoFallback.innerHTML = 'This direct URL is showing the current Live state. Multimedia is still intentionally OFF on Live. Open <b>Preview draft ↗</b> from Portfolio Maintenance to review the staged campaign video.';
       }
     } catch (error) {
-      console.info('[Gatchalian case] Media state unavailable; keeping staging fallback.');
+      console.info('[Gatchalian case] Media state unavailable; keeping fallback state.');
     }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
   else boot();
 })();
