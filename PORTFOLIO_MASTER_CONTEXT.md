@@ -195,7 +195,11 @@ Safety state:
 - the staged Gatchalian fallback item is `published:false`.
 - the case-study page is currently `noindex,nofollow` while binary media is not yet wired.
 
-GitHub Pages run #132 for commit `fd4383813b01efdf0d71c6992d1aeab1ef7cb3b4` completed successfully.
+Recent Gatchalian staging updates on 2026-10-03:
+
+- `assets/js/multimedia-seed.js` now records the approved current prices and canonical updated video filename as staging/QA metadata.
+- `multimedia/gatchalian-meatshop.html` now records the approved current pricing revision and explicitly archives the older price values.
+- The page remains unpublished/noindex until the actual updated poster and video are connected.
 
 ---
 
@@ -468,7 +472,7 @@ The user confirmed:
 - the campaign may be shown in the user's portfolio,
 - the current campaign prices used in the finished work were confirmed for the campaign.
 
-Do not label this project as Concept Campaign anymore.
+Do not label this project as Concept Campaign anymore in portfolio metadata/case-study copy.
 
 Recommended portfolio disclosure:
 
@@ -494,11 +498,13 @@ AI-generated logo/text may be inaccurate. Final production should use the actual
 
 ## Locked campaign artwork
 
-The user explicitly approved and LOCKED the campaign board shown in the conversation on 2026-10-03.
+The user explicitly approved and LOCKED the campaign-board design shown in the conversation on 2026-10-03.
 
 Important rule:
 
 > **DO NOT redesign or replace the approved top/main campaign visual. It is the reference all supporting pieces must follow.**
+
+The visual direction/layout stays locked. Only explicit factual/data corrections requested by the user, such as approved price corrections, may be applied without treating the work as a redesign.
 
 The approved campaign set contains:
 
@@ -514,13 +520,13 @@ Primary spoken/visual direction:
 
 **“Pork, chicken, at seafood—quality meat sa presyong swak sa budget.”**
 
-Product grouping used in the campaign/video:
+Current approved product grouping/prices for the campaign and current portfolio revision:
 
 ### Pork
 
 - Pork Liver — ₱65
 - Kasim/Laman — ₱120
-- Belly/Liempo — ₱145
+- Belly/Liempo — **₱150**
 
 ### Chicken
 
@@ -529,7 +535,9 @@ Product grouping used in the campaign/video:
 ### Seafood
 
 - Fish Fillet — ₱130
-- Frozen Pompano — ₱260/kg
+- Frozen Pompano — **₱310/kg**
+
+The older Belly/Liempo ₱145 and Frozen Pompano ₱260/kg values are **archived/outdated for the current portfolio campaign revision** and must not be reused in the current poster/video/case-study publication.
 
 Selected-items packaging message:
 
@@ -547,17 +555,18 @@ Never use AI-invented addresses or substitute locations.
 
 ## Video campaign status
 
-The user completed the assembled video in CapCut.
+The user completed the assembled video in CapCut and later supplied an updated revision reflecting the current price changes.
 
-Selected final video file:
+Canonical current final video file:
 
-**`gatchalian campaign meta ads.mp4`**
+**`gatchalian campaign meta ads updated.mp4`**
 
-Previous/backup version:
+Backup/archive versions:
 
-**`gatchalian campaign ads.mp4`**
+- `gatchalian campaign meta ads.mp4`
+- `gatchalian campaign ads.mp4`
 
-Use the **Meta Ads** file as the canonical final campaign video unless the user later supplies a newer approved revision.
+Use **`gatchalian campaign meta ads updated.mp4`** as the canonical final campaign video unless the user later supplies a newer approved revision.
 
 The user also generated Flow clips during production, including:
 
@@ -597,26 +606,35 @@ The user does not want to pay for unnecessary AI video subscriptions for this pr
 
 ## Current portfolio integration state
 
-Completed on 2026-10-03:
+Completed/staged on 2026-10-03:
 
-- staged fallback item in `assets/js/multimedia-seed.js`,
+- fallback item in `assets/js/multimedia-seed.js`,
 - case-study stylesheet `assets/css/multimedia-case.css`,
 - staged case page `multimedia/gatchalian-meatshop.html`,
 - index loader updated so the creative fallback schema exists before backend merge,
 - public Multimedia/Knowledge Lab remain OFF,
 - Gatchalian staged item remains `published:false`,
-- case-study page remains `noindex,nofollow`.
+- case-study page remains `noindex,nofollow`,
+- seed/case-study staging metadata now use the latest approved prices: Belly/Liempo ₱150 and Frozen Pompano ₱310/kg,
+- seed/case-study staging metadata now identify `gatchalian campaign meta ads updated.mp4` as the canonical final video.
 
 ### Current blocker before public publish
 
-The final **binary media files are not yet wired into the GitHub repository** through the available connector workflow.
+The updated **binary media files are not yet wired into a stable public media path** through the available connector workflow.
 
-Required assets:
+Required current assets:
 
-1. the locked/approved Gatchalian campaign board image,
-2. `gatchalian campaign meta ads.mp4`.
+1. the updated locked/approved campaign-board image with Belly/Liempo ₱150 and Frozen Pompano ₱310/kg,
+2. `gatchalian campaign meta ads updated.mp4`.
 
-After those files are placed in stable public storage/repository paths:
+Preferred architecture remains:
+
+- keep metadata in portfolio state/code,
+- keep heavy media in stable media storage,
+- do not inline large binaries into JSON state,
+- preserve AAL2/storage security for Admin-managed uploads.
+
+After the updated files are placed in stable public media paths:
 
 - wire the hero image and video into the case-study page,
 - set the staged Multimedia item thumbnail/media URLs,
@@ -869,12 +887,13 @@ Before production baseline/release, verify:
 - module OFF by default before intended publication.
 - staged Gatchalian card/case study.
 - image loading and video poster.
-- final Meta ad video playback.
+- final updated Meta ad video playback.
 - category filter/search.
 - correct Client Work label.
 - no broken media URLs.
 - mobile readability.
 - no autoplay sound.
+- current campaign prices show Belly/Liempo ₱150 and Frozen Pompano ₱310/kg wherever those values appear.
 
 ## Knowledge Lab
 
@@ -948,16 +967,17 @@ After final QA:
 - public `future-modules.js` creative renderer,
 - Gatchalian locked campaign design direction,
 - Gatchalian real-client confirmation/portfolio permission,
-- Gatchalian confirmed campaign prices,
-- Gatchalian final assembled video selected: `gatchalian campaign meta ads.mp4`,
+- Gatchalian current approved campaign prices recorded: Belly/Liempo ₱150 and Frozen Pompano ₱310/kg,
+- updated Gatchalian campaign board generated with the current price corrections while preserving the approved design direction,
+- Gatchalian final updated assembled video selected: `gatchalian campaign meta ads updated.mp4`,
 - staged Gatchalian case-study page/CSS/fallback metadata,
-- GitHub Pages run #132 successful.
+- staged seed/case-study metadata synced to the current prices and canonical updated video filename.
 
 ## PENDING / next work
 
-1. Put the locked campaign-board image into a stable public media path.
-2. Put `gatchalian campaign meta ads.mp4` into a stable public media path.
-3. Wire both assets into `multimedia/gatchalian-meatshop.html` and the Multimedia item metadata.
+1. Put the updated locked campaign-board image into a stable public media path.
+2. Put `gatchalian campaign meta ads updated.mp4` into a stable public media path.
+3. Wire both current assets into `multimedia/gatchalian-meatshop.html` and the Multimedia item metadata.
 4. Focused QA of the Gatchalian case study/video on desktop + mobile.
 5. Change case-study robots from `noindex,nofollow` only when publication is intended.
 6. Mark the staged Gatchalian item `published:true` only after media wiring/QA.
@@ -973,7 +993,7 @@ After final QA:
 
 Use this prompt if the current chat reaches its limit:
 
-> Continue my `Knowlexit09/noel-labasan-portfolio` project. Read `PORTFOLIO_MASTER_CONTEXT.md` first and verify the current `main` branch. Do not restart completed architecture. The current priority is to finish/publicly wire Featured Multimedia Project #1, Gatchalian Meatshop. The locked campaign-board artwork must not be redesigned. The canonical final video is `gatchalian campaign meta ads.mp4`; the older `gatchalian campaign ads.mp4` is backup only. Keep Multimedia fail-closed until the final image/video assets are in stable public paths and focused QA passes. Preserve Draft -> Preview -> Publish, MFA/AAL2, RLS, analytics/privacy, and all existing working modules.
+> Continue my `Knowlexit09/noel-labasan-portfolio` project. Read `PORTFOLIO_MASTER_CONTEXT.md` first and verify the current `main` branch. Do not restart completed architecture. The current priority is to finish/publicly wire Featured Multimedia Project #1, Gatchalian Meatshop. The locked campaign-board design must not be redesigned; the current approved price revision is Belly/Liempo ₱150 and Frozen Pompano ₱310/kg. The canonical final video is `gatchalian campaign meta ads updated.mp4`; `gatchalian campaign meta ads.mp4` and `gatchalian campaign ads.mp4` are backups only. Keep Multimedia fail-closed until the final updated image/video assets are in stable public paths and focused QA passes. Preserve Draft -> Preview -> Publish, MFA/AAL2, RLS, analytics/privacy, and all existing working modules.
 
 ---
 
@@ -990,7 +1010,7 @@ For every meaningful patch, report:
 For current Multimedia staging changes:
 
 - **Risk level:** Low.
-- **Main risk:** incomplete media wiring could produce a broken/empty creative card if published too early.
-- **Safeguard:** Multimedia remains OFF; Gatchalian item remains unpublished; case page remains noindex.
+- **Main risk:** incomplete media wiring could produce a broken/empty creative card if published too early, or an older campaign asset could be linked accidentally.
+- **Safeguard:** Multimedia remains OFF; Gatchalian item remains unpublished; case page remains noindex; current prices/video filename are explicitly recorded in staging metadata.
 - **Data/security impact:** none to business data, authentication, Supabase security, accounting, inventory, or analytics.
-- **Rollback:** revert/delete the staged Multimedia files and remove the `multimedia-seed.js` loader from `index.html`.
+- **Rollback:** revert the Gatchalian staging commits or restore the previous seed/case-study metadata; no live creative module is currently dependent on these unpublished assets.
