@@ -1,17 +1,110 @@
 /*
- * EXPONIFY CASE STUDY
- * Scope: PAGE-SPECIFIC /multimedia/exponify.html
- * Purpose: staging-only corporate/tech visual language for Multimedia Project #2.
- * Ownership: this file is loaded only by the Exponify case page.
+ * EXPONIFY CASE THEME
+ * Scope: PAGE-SPECIFIC /multimedia/exponify.html.
+ * Loaded after assets/css/multimedia-case.css.
+ *
+ * Purpose:
+ * - Reuses the same case-study structure, spacing, video frame, fact cards,
+ *   overview cards, process cards, navigation, and responsive behavior as the
+ *   approved Gatchalian case study.
+ * - Changes only Exponify-specific color treatment and its single verified
+ *   campaign-system visual.
  */
-:root{--ex-bg:#07111f;--ex-surface:#0b1c2d;--ex-surface-2:#10263b;--ex-line:#20435f;--ex-text:#f5fbff;--ex-muted:#9cb2c5;--ex-blue:#59bfff;--ex-teal:#4de2ca;--ex-orange:#ffbc5b;--ex-purple:#aa90ff}
-body{background:radial-gradient(circle at 80% 5%,#123a5b 0,transparent 28rem),linear-gradient(180deg,#07111f,#06101b 58%,#081421);color:var(--ex-text)}
-.ex-case{min-height:100vh;overflow:hidden}.ex-shell{width:min(1180px,calc(100% - 36px));margin:0 auto}.ex-nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0}.ex-brand{display:flex;gap:12px;align-items:center;color:var(--ex-text);text-decoration:none;font-weight:800}.ex-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--ex-blue),var(--ex-teal));color:#062033;font-weight:950}.ex-navlinks{display:flex;gap:22px}.ex-navlinks a{color:var(--ex-muted);text-decoration:none;font-size:13px}.ex-navlinks a:hover,.ex-navlinks a:focus-visible{color:#fff}.ex-hero{padding:76px 0 92px}.ex-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.82fr);gap:72px;align-items:center}.ex-kicker,.ex-section-kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;color:var(--ex-teal)}.ex-label{display:inline-flex;align-items:center;gap:8px;border:1px solid #316083;background:#0b2134;padding:8px 12px;border-radius:999px;color:#b9d9ef;font-size:12px;margin:18px 0}.ex-title{font-size:clamp(54px,7vw,92px);line-height:.95;letter-spacing:-.055em;margin:0;max-width:760px}.ex-title span{display:block;background:linear-gradient(100deg,var(--ex-blue),var(--ex-teal));-webkit-background-clip:text;background-clip:text;color:transparent}.ex-lead{max-width:690px;color:var(--ex-muted);font-size:18px;line-height:1.75;margin:26px 0}.ex-tags{display:flex;flex-wrap:wrap;gap:9px}.ex-tags span{border:1px solid #28465d;border-radius:999px;padding:8px 11px;color:#bed0df;font-size:12px;background:#091828}.ex-cover{position:relative;border:1px solid #2f5a79;border-radius:30px;background:#081725;padding:18px;box-shadow:0 34px 90px rgba(0,0,0,.38)}.ex-cover img{display:block;width:100%;height:auto;border-radius:20px}.ex-cover::before{content:"STAGING CASE STUDY";position:absolute;top:32px;right:34px;background:#07111fe6;border:1px solid #4bb6de;color:#8dddff;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.12em}
-.ex-section{padding:76px 0;border-top:1px solid #ffffff0d}.ex-section-head{max-width:760px;margin-bottom:34px}.ex-section h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.035em;margin:8px 0 14px}.ex-section-head p{color:var(--ex-muted);line-height:1.7}
-.ex-video-section{background:linear-gradient(180deg,#07111f00,#0a1a29 45%,#07111f00)}.ex-video-layout{display:grid;grid-template-columns:minmax(320px,.72fr) minmax(280px,.28fr);gap:20px;align-items:start}.ex-video-frame{justify-self:center;width:min(100%,430px);padding:10px;border-radius:28px;border:1px solid #2d5877;background:#05101b;box-shadow:0 28px 70px rgba(0,0,0,.4)}.ex-video-frame[hidden]{display:none}.ex-video-frame video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:20px;background:#02070b}.ex-video-pending{justify-self:center;width:min(100%,430px);aspect-ratio:9/16;border:1px dashed #3c6f91;border-radius:28px;background:linear-gradient(180deg,#0b2236,#07131f);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px}.ex-video-pending[hidden]{display:none}.ex-video-pending strong{font-size:26px;letter-spacing:-.02em}.ex-video-pending p{max-width:310px;color:var(--ex-muted);font-size:13px;line-height:1.65}.ex-video-facts{border:1px solid var(--ex-line);background:#091827;border-radius:24px;padding:24px}.ex-video-facts>span{display:inline-flex;border-radius:999px;border:1px solid #315d79;background:#0c2639;color:#99dfff;padding:8px 10px;font-size:11px;font-weight:800}.ex-video-facts dl{display:grid;gap:0;margin:20px 0 0}.ex-video-facts dl div{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid #ffffff0c}.ex-video-facts dt{color:#718ca1;font-size:12px}.ex-video-facts dd{margin:0;color:#e8f4fb;font-size:12px;font-weight:750;text-align:right}
-.ex-story{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.ex-scene{border:1px solid var(--ex-line);background:linear-gradient(180deg,#0c1e30,#091725);border-radius:22px;padding:22px;min-height:250px;display:flex;flex-direction:column}.ex-scene-num{font-size:12px;letter-spacing:.14em;color:#6ca7cf;font-weight:900}.ex-scene h3{font-size:24px;margin:22px 0 10px}.ex-scene p{color:var(--ex-muted);font-size:14px;line-height:1.65;margin:0}.ex-scene strong{margin-top:auto;padding-top:22px;color:#d9f4ff;font-size:13px}.ex-scene.problem{box-shadow:inset 0 3px 0 #ff6e7d}.ex-scene.solution{box-shadow:inset 0 3px 0 var(--ex-blue)}.ex-scene.feature{box-shadow:inset 0 3px 0 var(--ex-teal)}.ex-scene.proof{box-shadow:inset 0 3px 0 var(--ex-purple)}.ex-scene.cta{box-shadow:inset 0 3px 0 var(--ex-orange)}
-.ex-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.ex-feature{border:1px solid var(--ex-line);border-radius:22px;padding:24px;background:#091827}.ex-feature i{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:#102f4d;color:var(--ex-blue);font-style:normal;font-size:20px}.ex-feature:nth-child(2) i{background:#10362f;color:var(--ex-teal)}.ex-feature:nth-child(3) i{background:#3b2b16;color:var(--ex-orange)}.ex-feature:nth-child(4) i{background:#2f2546;color:var(--ex-purple)}.ex-feature h3{font-size:20px;margin:18px 0 8px}.ex-feature p{color:var(--ex-muted);font-size:13px;line-height:1.6;margin:0}
-.ex-message{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.ex-message-card{border:1px solid var(--ex-line);background:#091827;border-radius:24px;padding:28px}.ex-message-card h3{font-size:28px;margin:0 0 12px}.ex-message-card p{color:var(--ex-muted);line-height:1.7}.ex-quote{display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#0d3150,#0b342f);font-size:30px;font-weight:900;line-height:1.25}.ex-note{margin-top:18px;border-left:3px solid var(--ex-blue);padding:14px 16px;background:#0a1b2b;color:#a9bfd1;font-size:13px;line-height:1.65}.ex-footer{padding:46px 0 72px;border-top:1px solid #ffffff0d;display:flex;justify-content:space-between;gap:24px;color:#8199ad;font-size:12px}.ex-footer a{color:#bfe9ff;text-decoration:none}
-@media(max-width:980px){.ex-hero-grid{grid-template-columns:1fr;gap:38px}.ex-cover{max-width:760px}.ex-video-layout{grid-template-columns:1fr}.ex-video-facts{width:min(100%,560px);justify-self:center}.ex-story{grid-template-columns:repeat(2,minmax(0,1fr))}.ex-features{grid-template-columns:repeat(2,minmax(0,1fr))}.ex-message{grid-template-columns:1fr}}
-@media(max-width:640px){.ex-shell{width:min(100% - 24px,1180px)}.ex-nav{padding:18px 0}.ex-navlinks{display:none}.ex-hero{padding:48px 0 62px}.ex-video-pending{padding:26px}.ex-video-pending strong{font-size:21px}.ex-story,.ex-features{grid-template-columns:1fr}.ex-scene{min-height:210px}.ex-footer{flex-direction:column}.ex-title{font-size:50px}.ex-lead{font-size:16px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.exponify-case-theme {
+  --campaign-red:#3aa8ff;
+  --campaign-red-soft:rgba(58,168,255,.18);
+  --campaign-blue:#55d8c6;
+  background:#06111c;
+}
+
+.exponify-case-theme .creative-case-navlinks a.active {
+  border-bottom-color:#45c8ff;
+}
+
+.exponify-case-theme .showcase-hero::before {
+  background-image:var(--campaign-cover,url('../images/exponify-campaign-cover.svg'));
+  opacity:.46;
+  filter:blur(26px) saturate(.95);
+}
+
+.exponify-case-theme .showcase-hero::after {
+  background:
+    radial-gradient(circle at 76% 42%,rgba(40,164,255,.18),transparent 30%),
+    radial-gradient(circle at 86% 64%,rgba(48,219,190,.10),transparent 23%),
+    linear-gradient(90deg,rgba(4,14,24,.98) 0%,rgba(4,14,24,.91) 40%,rgba(4,14,24,.55) 68%,rgba(4,14,24,.84) 100%),
+    linear-gradient(180deg,rgba(4,14,24,.15),#06111c 98%);
+}
+
+.exponify-case-theme .showcase-kicker,
+.exponify-case-theme .showcase-section-head .section-kicker,
+.exponify-case-theme .overview-card span,
+.exponify-case-theme .process-card span {
+  color:#62ccff;
+}
+
+.exponify-case-theme .overview-icon,
+.exponify-case-theme .process-icon {
+  background:linear-gradient(135deg,#177fc5,#34c8b2);
+  box-shadow:0 8px 20px rgba(46,166,213,.22);
+}
+
+.exponify-case-theme .case-back,
+.exponify-case-theme .case-disclosure a {
+  color:#78d8ff;
+}
+
+.exponify-case-theme .hero-video-wrap {
+  border-color:rgba(94,201,255,.28);
+  box-shadow:0 34px 80px rgba(0,0,0,.48),0 0 0 1px rgba(77,217,198,.06) inset;
+}
+
+/*
+ * FEATURED CAMPAIGN VISUAL
+ * Exponify currently has one verified campaign-system visual plus the final MP4,
+ * so this intentionally avoids inventing extra artwork merely to mimic a slider.
+ */
+.exponify-feature-board {
+  margin:0;
+  border:1px solid #24465e;
+  border-radius:18px;
+  overflow:hidden;
+  background:#07131f;
+  box-shadow:0 18px 42px rgba(0,0,0,.22);
+}
+
+.exponify-feature-board img {
+  display:block;
+  width:100%;
+  max-height:640px;
+  object-fit:contain;
+  background:#06111c;
+}
+
+.exponify-feature-board figcaption {
+  min-height:76px;
+  padding:15px 18px 16px;
+  border-top:1px solid #244257;
+  background:#07131f;
+}
+
+.exponify-feature-board figcaption span {
+  display:block;
+  color:#62ccff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.exponify-feature-board figcaption strong {
+  display:block;
+  margin-top:4px;
+  color:#f4f8fc;
+  font-size:17px;
+  line-height:1.3;
+}
+
+@media (max-width:760px) {
+  .exponify-feature-board img { max-height:none; }
+}
