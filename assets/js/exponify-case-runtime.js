@@ -1,44 +1,66 @@
 /*
- * EXPONIFY CASE-STUDY RUNTIME
+ * EXPONIFY MULTIMEDIA CASE RUNTIME
  * Scope: PAGE-SPECIFIC /multimedia/exponify.html.
  *
  * Purpose:
- * - Resolves the Exponify Multimedia record from Draft Preview or Live state.
- * - Loads the approved public MP4 into the case-study player when mediaUrl is a
- *   secure HTTP(S) video URL.
- * - Keeps playback manual (no autoplay) and preserves Draft Preview navigation.
+ * - Uses the same hero-video behavior as the approved Gatchalian case study.
+ * - Resolves Exponify from Draft Preview / Live state when available.
+ * - Falls back to the latest verified uploaded Exponify MP4 so the already-uploaded
+ *   asset is visible even when the Draft item mediaUrl was not persisted.
+ * - Preserves an active local Draft Preview when navigating into/out of the case.
  *
  * Safety:
- * - Public read only. Does not write Draft/Live state or storage.
- * - Rejects javascript:/data: and non-HTTP media URLs.
- * - The case page remains noindex until the owner approves publication.
+ * - Read-only. Never mutates Draft, Live, or Storage.
+ * - Accepts HTTPS media URLs only.
+ * - No autoplay; native controls + playsinline only.
+ * - Case page remains noindex until owner publication approval.
  */
 (function exponifyCaseRuntime(){
   'use strict';
 
-  const TITLE = 'exponify — business operations campaign';
-  const $ = selector => document.querySelector(selector);
+  const TARGET_TITLE = 'Exponify — Business Operations Campaign';
+  const PREVIEW_KEY = 'nl-portfolio-draft-preview';
 
-  function normalize(value){
-    return String(value || '').trim().toLowerCase().replace(/\s+/g,' ');
-  }
+  const APPROVED_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/exponify-campaign-cover.svg';
+  const APPROVED_VIDEO_URL = 'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/exponify-business-operations-campaign/1791057046598-video.mp4';
 
-  function safeHttpUrl(value){
+  const safeHttpUrl = value => {
     const raw = String(value || '').trim();
     if (!/^https:\/\//i.test(raw)) return '';
     try {
-      const url = new URL(raw, location.href);
+      const url = new URL(raw);
       return url.protocol === 'https:' ? url.href : '';
     } catch { return ''; }
+  };
+
+  function findProject(config) {
+    const works = Array.isArray(config?.content?.multimedia) ? config.content.multimedia : [];
+    return works.find(item => String(item?.title || '').trim() === TARGET_TITLE) || null;
   }
 
-  function findExponify(){
-    const works = window.PORTFOLIO_CONFIG?.content?.multimedia;
-    if (!Array.isArray(works)) return null;
-    return works.find(item => normalize(item?.title) === TITLE) || null;
+  function readActiveLocalPreview() {
+    try {
+      const payload = JSON.parse(localStorage.getItem(PREVIEW_KEY) || 'null');
+      if (!payload || !payload.state || Date.now() > Number(payload.expires || 0)) {
+        if (payload && Date.now() > Number(payload.expires || 0)) localStorage.removeItem(PREVIEW_KEY);
+        return null;
+      }
+      return payload;
+    } catch { return null; }
   }
 
-  function preserveDraftPreviewLinks(){
+  function installPreviewBadge(label='Working Draft') {
+    if (document.querySelector('.case-draft-preview-badge')) return;
+    const style = document.createElement('style');
+    style.textContent = '.case-draft-preview-badge{position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:99999;background:#f0ad2c;color:#1b1203;border:1px solid #ffd978;border-radius:999px;padding:7px 13px;font:800 11px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;box-shadow:0 12px 30px #0005}.case-draft-preview-badge b{margin-right:6px}@media(max-width:620px){.case-draft-preview-badge{width:calc(100% - 20px);text-align:center;border-radius:12px}}';
+    document.head.appendChild(style);
+    const badge = document.createElement('div');
+    badge.className = 'case-draft-preview-badge';
+    badge.innerHTML = `<b>DRAFT PREVIEW</b>${String(label || 'Working Draft')}`;
+    document.body.appendChild(badge);
+  }
+
+  function preserveDraftPreviewLinks() {
     const nonce = new URLSearchParams(location.search).get('draftPreview');
     if (!nonce) return;
     document.querySelectorAll('a[href^="../index.html"]').forEach(link => {
@@ -49,47 +71,64 @@
     });
   }
 
-  function wireVideo(item){
-    const video = $('[data-ex-video]');
-    const wrap = $('[data-ex-video-wrap]');
-    const pending = $('[data-ex-video-pending]');
-    const status = $('[data-ex-video-status]');
-    if (!video || !wrap || !pending) return;
+  function render(config) {
+    const item = findProject(config) || {};
+    const coverUrl = safeHttpUrl(item.thumbnailUrl || item.imageUrl) || APPROVED_COVER_URL;
+    const videoUrl = safeHttpUrl(item.videoUrl || item.mediaUrl) || APPROVED_VIDEO_URL;
 
-    const url = safeHttpUrl(item?.mediaUrl);
-    if (!url) {
-      wrap.hidden = true;
-      pending.hidden = false;
-      if (status) status.textContent = 'Final MP4 received · secure Draft storage upload pending';
-      return;
-    }
+    document.documentElement.style.setProperty('--campaign-cover', `url("${coverUrl.replace(/"/g,'%22')}")`);
 
-    const source = video.querySelector('source') || document.createElement('source');
-    source.src = url;
-    source.type = 'video/mp4';
-    if (!source.parentNode) video.appendChild(source);
-    video.load();
-    wrap.hidden = false;
-    pending.hidden = true;
-    if (status) status.textContent = window.PORTFOLIO_PREVIEW_MODE ? 'Draft Preview video' : 'Portfolio video';
+    const video = document.querySelector('[data-ex-video]');
+    const fallback = document.querySelector('[data-ex-video-fallback]');
+    if (!video || !videoUrl) return false;
+
+    video.src = videoUrl;
+    video.poster = coverUrl;
+    video.hidden = false;
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.removeAttribute('autoplay');
+    if (fallback) fallback.hidden = true;
 
     video.addEventListener('error', () => {
-      wrap.hidden = true;
-      pending.hidden = false;
-      pending.querySelector('strong')?.replaceChildren(document.createTextNode('Video could not be loaded.'));
-      if (status) status.textContent = 'Video unavailable';
+      video.hidden = true;
+      if (fallback) {
+        fallback.hidden = false;
+        fallback.textContent = 'Video could not be loaded. Refresh the Draft Preview or verify the stored MP4.';
+      }
     }, {once:true});
+
+    return true;
   }
 
-  async function boot(){
+  async function boot() {
     preserveDraftPreviewLinks();
+
     try {
       const ready = window.PORTFOLIO_READY;
-      if (ready && typeof ready.then === 'function') await ready;
-    } catch {}
-    wireVideo(findExponify());
+      const config = ready && typeof ready.then === 'function'
+        ? await ready
+        : (window.PORTFOLIO_CONFIG || {});
+
+      const preview = readActiveLocalPreview();
+      if (window.PORTFOLIO_PREVIEW_MODE) {
+        installPreviewBadge(window.PORTFOLIO_PREVIEW_LABEL || 'Working Draft');
+      } else if (preview?.state) {
+        window.PORTFOLIO_PREVIEW_MODE = true;
+        window.PORTFOLIO_PREVIEW_LABEL = preview.label || 'Working Draft';
+        installPreviewBadge(window.PORTFOLIO_PREVIEW_LABEL);
+        render(preview.state);
+        return;
+      }
+
+      render(config || window.PORTFOLIO_CONFIG || {});
+    } catch (error) {
+      console.info('[Exponify case] State unavailable; using verified uploaded media fallback.');
+      render({content:{multimedia:[]}});
+    }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
   else boot();
 })();
