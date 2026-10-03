@@ -5,8 +5,8 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`
-> Last consolidated: **2026-10-04 early morning (Asia/Manila), Gatchalian two-piece Draft gallery + final-QA staging milestone**
-> Latest verified **runtime implementation** deployment at consolidation: **Run #177 — success**, head `fd41af6c91e1a05ce53279b8ca8521e11cefb344`. A later context-only commit may trigger an additional Pages run without changing runtime behavior.
+> Last consolidated: **2026-10-04 early morning (Asia/Manila), Gatchalian visual-QA pass + final card-containment milestone**
+> Latest verified **runtime implementation** deployment at consolidation: **Run #180 — success**, head `18711cdd51f49827b21014ed0a4673d39877013f`. A later context-only commit may trigger an additional Pages run without changing runtime behavior.
 >
 > **New chats must read this file first, then verify the actual `main` branch and latest deployment before changing anything. Do not restart finished work or silently redesign approved assets.**
 
@@ -123,7 +123,7 @@ Important public files include:
 - `assets/js/gatchalian-case-runtime.js` — Gatchalian case-study hero media + Featured Campaign carousel runtime.
 - `assets/css/multimedia-case.css` — Gatchalian visual showcase styling.
 - `assets/js/gatchalian-client-gallery.js` — fail-closed `More Work for Gatchalian Meatshop` renderer + accessible image viewer.
-- `assets/css/gatchalian-client-gallery.css` — complete-artwork gallery/card/lightbox presentation, including count-aware curated-set layout.
+- `assets/css/gatchalian-client-gallery.css` — complete-artwork gallery/card/lightbox presentation, including count-aware curated-set layout and hard image/caption containment.
 - `multimedia/gatchalian-meatshop.html` — Gatchalian case-study/showcase page.
 
 Important Admin files:
@@ -341,10 +341,10 @@ Current portfolio state verified directly in Supabase on 2026-10-04:
 - Live Multimedia remains intentionally **OFF** with zero Live Multimedia items.
 - case-study page remains `noindex,nofollow` until intentional publication.
 - direct case-study runtime can render the approved stored video/cover for case-page QA even when Live Multimedia is off.
-- latest verified **runtime implementation** deployment: **GitHub Pages Run #177 — success**, head `fd41af6c91e1a05ce53279b8ca8521e11cefb344`.
-- the current tool environment can verify deployment/state/code but cannot visually inspect the GitHub Pages URL; final browser visual acceptance remains a user-side approval step before publication.
+- latest verified **runtime implementation** deployment: **GitHub Pages Run #180 — success**, head `18711cdd51f49827b21014ed0a4673d39877013f`.
+- user browser acceptance of the current Gatchalian Draft Preview is **PASS**. Desktop screenshots confirmed the two-card layout, complete contained artwork, readable captions/metadata, historical labels, and no image/text overlap after the Run #180 containment fix. The user accepted the visual result without requiring a separate additional mobile screenshot; broader site-wide final QA still includes mobile responsiveness.
 
-Do not publish Live until focused Gatchalian browser QA passes.
+Do not publish Live until the user explicitly approves intentional publication.
 
 ---
 
@@ -363,7 +363,7 @@ Current accepted direction is a **visual-first showcase**:
 
 The Draft Preview badge is **not a live-site issue**; it is expected QA UI and should disappear outside Draft Preview.
 
-## Featured Campaign carousel — CODE FIX COMPLETE, FINAL BROWSER ACCEPTANCE PENDING
+## Featured Campaign / Gatchalian visual QA — ACCEPTED
 
 The earlier aggressive one-board crop/caption-overlay problem was patched in the deployed code:
 
@@ -379,12 +379,14 @@ The More Work gallery now also:
 
 - uses count-aware layout so a two-piece curated set does not leave an empty third desktop column,
 - uses a consistent 4:3 contained preview frame for mixed landscape/portrait artwork,
-- keeps the complete artwork visible with `object-fit: contain`,
+- hard-clips the artwork viewport and forces the image to shrink within it, preventing portrait artwork from overlapping the caption area,
+- keeps the complete artwork visible with `object-fit: contain`, using dark letterboxing instead of cropping when aspect ratios differ,
+- keeps image and text as separate card regions so the full card remains readable,
 - shows category, context, and `Previous campaign` metadata together,
 - uses each item's specific historical note when present,
 - provides an accessible enlarged image viewer for detailed inspection.
 
-A user Draft Preview screenshot already confirmed the More Work section, complete first artwork containment, visible Previous campaign badge, and the transition into Project Overview. The final two-item layout patch was deployed afterward and still needs the user's final desktop/mobile visual approval.
+User Draft Preview screenshots confirmed both final gallery cards after the containment patch. `Murang Karne — Retail Promo` and `Negosyo Package` both remain fully contained, captions are readable, historical labels are visible, and the portrait Negosyo artwork no longer overlaps the text. The user accepted the Gatchalian visual QA as complete.
 
 Do not CSS-crop meaningful text from the actual video.
 
@@ -607,20 +609,21 @@ After final QA:
 - two verified Gatchalian gallery PNGs uploaded and saved to Draft: `Murang Karne — Retail Promo` and `Negosyo Package`,
 - both gallery items marked Previous campaign / historical pricing,
 - two-piece gallery final-QA polish: count-aware desktop layout, contained 4:3 previews, context + historical metadata, item-specific viewer notes,
-- case-page cache bust for the gallery final-QA patch,
-- latest verified runtime Pages deployment **#177 successful** at `fd41af6c91e1a05ce53279b8ca8521e11cefb344`,
+- portrait-image overflow/caption-overlap containment fix deployed,
+- refreshed user Draft Preview confirmed both cards remain complete and readable with no image/text overlap,
+- user accepted Gatchalian visual QA as complete; no extra mobile screenshot was required by the user at this stage,
+- latest verified runtime Pages deployment **#180 successful** at `18711cdd51f49827b21014ed0a4673d39877013f`,
 - Live Multimedia remains OFF with zero Live Multimedia items and case page remains `noindex,nofollow`,
 - broader Gatchalian archive remains separate from the Featured Campaign slider.
 
 ## PENDING / next work
 
-1. **User final browser approval of Run #177** after a normal refresh/hard refresh: desktop and mobile hero/video, Featured Campaign slides, balanced two-card More Work layout, historical labels/context, enlarged viewer, and section spacing.
-2. If visual QA passes, decide whether publication is intended now. Only then remove `noindex,nofollow` and enable/publish Multimedia through the normal Draft -> Preview -> Publish Live flow.
-3. Perform the broader one-bagsak portfolio QA before declaring the whole portfolio production-final: public navigation/responsiveness/a11y, contact/inbox, resume/projects, analytics/operations, and security checks.
-4. Add Exponify as Multimedia Project #2 with a deliberately different corporate/tech visual language.
-5. Build toward 5–7 strong creative works.
-6. Populate Knowledge Lab after Multimedia has at least one strong public case study.
-7. Create a production baseline / changelog / release marker after the final site-wide QA.
+1. Decide whether intentional Gatchalian/Multimedia publication is desired now. Only after explicit approval remove `noindex,nofollow` and enable/publish Multimedia through the normal Draft -> Preview -> Publish Live flow.
+2. Perform the broader one-bagsak portfolio QA before declaring the whole portfolio production-final: public navigation/responsiveness/a11y (including mobile), contact/inbox, resume/projects, analytics/operations, and security checks.
+3. Add Exponify as Multimedia Project #2 with a deliberately different corporate/tech visual language.
+4. Build toward 5–7 strong creative works.
+5. Populate Knowledge Lab after Multimedia has at least one strong public case study.
+6. Create a production baseline / changelog / release marker after the final site-wide QA.
 
 No additional Gatchalian gallery upload is required for the current release candidate unless a new piece clearly strengthens the portfolio.
 
@@ -630,7 +633,7 @@ No additional Gatchalian gallery upload is required for the current release cand
 
 Send this in a new chat:
 
-> Continue my `Knowlexit09/noel-labasan-portfolio` project. First read `PORTFOLIO_MASTER_CONTEXT.md` from the repository and use it as the primary continuity/source-of-truth. Then verify the actual current `main` branch and latest GitHub Pages deployment before making changes. Do not restart completed architecture or redesign approved assets unless repository evidence or I explicitly ask. Preserve Draft -> Preview -> Publish Live, MFA/AAL2, RLS, analytics/privacy, audit/error logging, and existing working modules. Continue from the latest PENDING section. The Gatchalian Draft currently has the final featured cover/video plus two verified historical More Work items (`Murang Karne — Retail Promo` and `Negosyo Package`). Current runtime implementation baseline is Pages Run #177 at `fd41af6c91e1a05ce53279b8ca8521e11cefb344`. Priority is final browser approval of the Gatchalian desktop/mobile Draft Preview; Live Multimedia must remain fail-closed until that approval. If it passes, handle intentional publication/noindex removal through the existing safe workflow, then continue the broader one-bagsak portfolio QA and Exponify Project #2.
+> Continue my `Knowlexit09/noel-labasan-portfolio` project. First read `PORTFOLIO_MASTER_CONTEXT.md` from the repository and use it as the primary continuity/source-of-truth. Then verify the actual current `main` branch and latest GitHub Pages deployment before making changes. Do not restart completed architecture or redesign approved assets unless repository evidence or I explicitly ask. Preserve Draft -> Preview -> Publish Live, MFA/AAL2, RLS, analytics/privacy, audit/error logging, and existing working modules. Continue from the latest PENDING section. The Gatchalian Draft currently has the final featured cover/video plus two verified historical More Work items (`Murang Karne — Retail Promo` and `Negosyo Package`). Gatchalian visual QA has been accepted by the user after the final card-containment fix. Current runtime implementation baseline is Pages Run #180 at `18711cdd51f49827b21014ed0a4673d39877013f`. Live Multimedia remains OFF and the case page remains `noindex,nofollow`; do not publish unless the user explicitly approves intentional publication. Next priorities are the publication decision, broader one-bagsak portfolio QA, and Exponify Project #2.
 
 ---
 
@@ -648,6 +651,6 @@ Current Multimedia work:
 
 - **Risk level:** Low to Medium depending on storage/state changes.
 - **Primary risks:** stale Draft state, wrong/old creative linked, broken media URL, historical pricing shown as current, layout regressions, gallery/Creative edits overwriting richer metadata, stale/expired Admin auth, or premature Live publication.
-- **Safeguards:** Draft Preview first, AAL2 owner uploads, RLS, expired-session refresh still re-checks AAL2, latest-state merge for gallery writes, Creative-item metadata-preserving edits, Live Multimedia remains OFF until approval, case page stays noindex until intended publication, stable stored media, explicit current/historical campaign distinction, Storage files are retained on gallery removal for rollback.
+- **Safeguards:** Draft Preview first, AAL2 owner uploads, RLS, expired-session refresh still re-checks AAL2, latest-state merge for gallery writes, Creative-item metadata-preserving edits, hard gallery image/caption containment, Live Multimedia remains OFF until explicit publication approval, case page stays noindex until intended publication, stable stored media, explicit current/historical campaign distinction, Storage files are retained on gallery removal for rollback.
 - **Data/security impact:** no effect on POS, accounting, inventory, or client operational data; auth/RLS remain enforced. The gallery writes only portfolio Draft metadata and owner-uploaded public portfolio artwork.
-- **Rollback:** revert the relevant GitHub commit and/or restore prior Draft media metadata; stored media can remain unused without affecting Live. Key implementation baseline before the gallery infrastructure is `040c4a2edb2b6117dfb645541378187c7ce8430b`; pre-final-gallery-polish/auth baseline is `a3b1cd15dafb2de17ba3b00672a3ab2cbd03922f`; verified final-QA runtime baseline is `fd41af6c91e1a05ce53279b8ca8521e11cefb344`.
+- **Rollback:** revert the relevant GitHub commit and/or restore prior Draft media metadata; stored media can remain unused without affecting Live. Key implementation baseline before the gallery infrastructure is `040c4a2edb2b6117dfb645541378187c7ce8430b`; pre-final-gallery-polish/auth baseline is `a3b1cd15dafb2de17ba3b00672a3ab2cbd03922f`; verified final-QA runtime baseline is `18711cdd51f49827b21014ed0a4673d39877013f`.
