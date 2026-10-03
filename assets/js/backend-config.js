@@ -18,6 +18,20 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
 });
 
 /*
+ * PUBLIC MULTIMEDIA CASE-STUDY ROUTER
+ * Scope: PUBLIC homepage only.
+ * Loaded dynamically so featured Multimedia cards can keep their video URL in
+ * mediaUrl while opening an internal case-study page for recruiter-facing context.
+ */
+(function loadPublicMultimediaCaseLinks(){
+  if (/\/admin\/?$/i.test(location.pathname) || /\/multimedia\//i.test(location.pathname)) return;
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = 'assets/js/multimedia-case-links.js?v=20261003-2';
+  document.head.appendChild(script);
+})();
+
+/*
  * ADMIN VIEW VISIBILITY SAFETY
  * Scope: PAGE-SPECIFIC /admin.
  * The authored admin CSS uses display:grid/flex; enforce the semantic hidden
