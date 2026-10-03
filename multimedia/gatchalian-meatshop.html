@@ -13,13 +13,15 @@
   <link rel="stylesheet" href="../assets/css/responsive.css">
   <link rel="stylesheet" href="../assets/css/accessibility-performance.css?v=20260916-1">
   <link rel="stylesheet" href="../assets/css/multimedia-case.css?v=20261003-6">
+  <link rel="stylesheet" href="../assets/css/gatchalian-client-gallery.css?v=20261003-1">
 
-  <!-- SHARED STATE: Draft Preview / Live media URLs feed the hero video + gallery. -->
+  <!-- SHARED STATE: Draft Preview / Live media URLs feed the hero video + galleries. -->
   <script defer src="../assets/js/config.js?v=20260915-4"></script>
   <script defer src="../assets/js/multimedia-seed.js?v=20261003-2"></script>
-  <script defer src="../assets/js/backend-config.js?v=20261003-3"></script>
+  <script defer src="../assets/js/backend-config.js?v=20261003-4"></script>
   <script defer src="../assets/js/backend-loader.js?v=20260915-4"></script>
   <script defer src="../assets/js/gatchalian-case-runtime.js?v=20261003-6"></script>
+  <script defer src="../assets/js/gatchalian-client-gallery.js?v=20261003-1"></script>
   <script defer src="../assets/js/accessibility-performance.js?v=20260916-1"></script>
 </head>
 <body>
@@ -68,11 +70,11 @@
       </div>
     </section>
 
-    <!-- CAMPAIGN CREATIVE SLIDER: approved board source only; no artwork redesign. -->
+    <!-- FEATURED CAMPAIGN: approved board source only; no artwork redesign. -->
     <section class="showcase-section" id="campaign-creatives" aria-labelledby="campaignCreativesTitle">
       <div class="showcase-section-head">
         <div>
-          <div class="section-kicker">Campaign Creatives</div>
+          <div class="section-kicker">Featured Campaign</div>
           <h2 id="campaignCreativesTitle">Social Media Designs</h2>
           <p>The approved campaign board is presented as a visual slider with the complete key visual, supporting posts, and full campaign system kept readable and free from caption overlays.</p>
         </div>
@@ -86,6 +88,18 @@
         <button class="slider-arrow next" type="button" data-campaign-slider-next aria-label="Next campaign creative">›</button>
         <div class="slider-dots" data-campaign-slider-dots aria-label="Campaign slider pages"></div>
       </div>
+    </section>
+
+    <!-- MORE WORK: fail-closed until verified published gallery images exist in state. -->
+    <section class="showcase-section gatchalian-more-work" data-gatchalian-more-work hidden aria-labelledby="gatchalianMoreWorkTitle">
+      <div class="showcase-section-head">
+        <div>
+          <div class="section-kicker">Client Work Archive</div>
+          <h2 id="gatchalianMoreWorkTitle">More Work for Gatchalian Meatshop</h2>
+          <p>Selected finished client pieces from other campaign periods. Artwork with earlier pricing is clearly labeled as a previous campaign rather than presented as a current offer.</p>
+        </div>
+      </div>
+      <div class="gatchalian-client-grid" data-gatchalian-client-gallery></div>
     </section>
 
     <!-- OVERVIEW: concise summary instead of multiple report-like case-study sections. -->
