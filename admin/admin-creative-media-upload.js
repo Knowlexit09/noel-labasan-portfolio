@@ -9,6 +9,7 @@
  * - Writes returned public URLs into the existing Creative Manager fields:
  *     cover -> thumbnailUrl
  *     video -> mediaUrl
+ * - Adds a safe Gatchalian starter button so the approved client-work metadata does not need to be retyped.
  * - Does NOT publish anything. The normal Save item -> Save creative draft -> Preview -> Publish flow remains authoritative.
  *
  * Security / safety:
@@ -29,6 +30,7 @@
   const bucket = 'portfolio-media';
   const IMAGE_MAX = 8 * 1024 * 1024;
   const VIDEO_MAX = 30 * 1024 * 1024;
+  const GATCHALIAN_TITLE = 'Gatchalian Meatshop — Social Media Campaign';
 
   const $ = selector => document.querySelector(selector);
   const readSession = () => {
@@ -69,9 +71,7 @@
     const session = requireAal2();
     const title = $('#creativeItemForm')?.elements?.title?.value || 'multimedia';
     const isVideo = kind === 'video';
-    const allowed = isVideo
-      ? ['video/mp4']
-      : ['image/jpeg','image/png','image/webp'];
+    const allowed = isVideo ? ['video/mp4'] : ['image/jpeg','image/png','image/webp'];
     const max = isVideo ? VIDEO_MAX : IMAGE_MAX;
 
     if (!allowed.includes(file.type)) {
@@ -185,6 +185,51 @@
     }
   }
 
+  function fillGatchalianStarter() {
+    const form = $('#creativeItemForm');
+    if (!form || !$('#creativeItemDialog')?.open) return;
+    const set = (name, value) => {
+      const field = form.elements.namedItem(name);
+      if (!field) return;
+      field.value = value;
+      field.dispatchEvent(new Event('input', {bubbles:true}));
+    };
+    const published = form.elements.namedItem('published');
+    if (published) published.checked = false;
+    set('title', GATCHALIAN_TITLE);
+    set('category', 'Ads & Campaigns');
+    set('label', 'Client Work');
+    set('mediaType', 'video');
+    set('description', 'A real client campaign combining a locked retail key visual, supporting social posts, and an 18–20 second vertical Meta ad built around clear product grouping, readable prices, vacuum-sealed freshness messaging, and an order-focused CTA.');
+    set('tools', 'Canva, Photoshop, CapCut');
+    set('tags', 'Graphic Design, Video Editing, Social Media, Meta Ads, Food Retail, AI-assisted Workflow');
+    set('imageAlt', 'Gatchalian Meatshop social media campaign board');
+    setMessage('Gatchalian starter loaded. Upload the approved cover and updated MP4, then Save item.');
+    enhanceMultimediaEditor();
+  }
+
+  function injectStarterButton() {
+    if ($('#creativeGatchalianStarter')) return;
+    const addWork = document.querySelector('[data-creative-add="multimedia"]');
+    if (!addWork) return;
+    const button = document.createElement('button');
+    button.id = 'creativeGatchalianStarter';
+    button.type = 'button';
+    button.className = 'secondary-action';
+    button.textContent = '＋ Gatchalian starter';
+    button.title = 'Load the approved Gatchalian Client Work metadata without publishing it.';
+    addWork.insertAdjacentElement('beforebegin', button);
+    button.addEventListener('click', () => {
+      const exists = String($('#creativeMultimediaList')?.textContent || '').includes(GATCHALIAN_TITLE);
+      if (exists) {
+        window.alert('Gatchalian is already in the Creative working list. Edit the existing item instead of creating a duplicate.');
+        return;
+      }
+      addWork.click();
+      setTimeout(fillGatchalianStarter, 0);
+    });
+  }
+
   function injectStyles() {
     if ($('#creativeMediaUploadStyles')) return;
     const style = document.createElement('style');
@@ -193,17 +238,25 @@
       .creative-media-upload-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;margin-top:6px}
       .creative-media-upload-row input[type=file]{min-width:0;width:100%;font-size:9px;color:#7890a5}
       .creative-media-upload-row .secondary-action{min-height:36px;white-space:nowrap}
-      @media(max-width:620px){.creative-media-upload-row{grid-template-columns:1fr}.creative-media-upload-row .secondary-action{width:100%}}
+      #creativeGatchalianStarter{margin-right:7px}
+      @media(max-width:620px){.creative-media-upload-row{grid-template-columns:1fr}.creative-media-upload-row .secondary-action{width:100%}#creativeGatchalianStarter{margin-right:0;margin-bottom:7px}}
     `;
     document.head.appendChild(style);
   }
 
   function boot() {
     injectStyles();
-    const dialog = $('#creativeItemDialog');
-    if (!dialog) return;
-    const observer = new MutationObserver(() => setTimeout(enhanceMultimediaEditor, 0));
-    observer.observe(dialog, {attributes:true,attributeFilter:['open'],subtree:true,childList:true});
+    const setup = () => {
+      injectStarterButton();
+      const dialog = $('#creativeItemDialog');
+      if (!dialog || dialog.dataset.mediaExtensionObserved === 'true') return;
+      dialog.dataset.mediaExtensionObserved = 'true';
+      const observer = new MutationObserver(() => setTimeout(enhanceMultimediaEditor, 0));
+      observer.observe(dialog, {attributes:true,attributeFilter:['open'],subtree:true,childList:true});
+    };
+    setup();
+    const pageObserver = new MutationObserver(setup);
+    pageObserver.observe(document.body, {subtree:true,childList:true});
     document.addEventListener('click', event => {
       if (event.target.closest('[data-creative-add="multimedia"], [data-creative-edit="multimedia"]')) {
         setTimeout(enhanceMultimediaEditor, 0);
