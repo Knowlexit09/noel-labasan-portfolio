@@ -15,6 +15,17 @@
   gap:16px;
 }
 
+/* Curated sets should feel intentional instead of leaving an empty third column. */
+.gatchalian-client-grid[data-count="1"] {
+  grid-template-columns:minmax(0,560px);
+}
+
+.gatchalian-client-grid[data-count="2"] {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:1000px;
+  margin-inline:auto;
+}
+
 .gatchalian-client-card {
   min-width:0;
   overflow:hidden;
@@ -24,9 +35,14 @@
   box-shadow:0 18px 44px rgba(0,0,0,.22);
 }
 
+/*
+ * Keep mixed landscape/portrait client work visually balanced while preserving
+ * the complete artwork. The enlarged viewer remains available for fine details.
+ */
 .gatchalian-client-art {
   width:100%;
-  min-height:300px;
+  aspect-ratio:4 / 3;
+  min-height:0;
   padding:0;
   border:0;
   border-bottom:1px solid #253c50;
@@ -40,7 +56,7 @@
   display:block;
   width:100%;
   height:100%;
-  max-height:520px;
+  max-height:none;
   object-fit:contain;
   background:#050c13;
 }
@@ -164,7 +180,13 @@
 }
 
 @media (max-width:620px) {
-  .gatchalian-client-grid { grid-template-columns:1fr; }
-  .gatchalian-client-art { min-height:240px; }
+  .gatchalian-client-grid,
+  .gatchalian-client-grid[data-count="1"],
+  .gatchalian-client-grid[data-count="2"] {
+    grid-template-columns:1fr;
+    max-width:none;
+    margin-inline:0;
+  }
+  .gatchalian-client-art { aspect-ratio:4 / 3; }
   .gatchalian-gallery-viewer { width:calc(100% - 18px); }
 }
