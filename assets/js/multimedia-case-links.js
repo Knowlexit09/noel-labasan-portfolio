@@ -5,7 +5,8 @@
  *
  * Purpose:
  * - Keeps heavy video in mediaUrl for playback/case-study use.
- * - Routes known featured campaign cards to their richer internal case-study page.
+ * - Routes known featured Multimedia cards to richer internal case-study pages.
+ * - Preserves the Draft Preview nonce when opening an internal case study.
  * - Does not alter filters, publication state, or remote content.
  */
 (function multimediaCaseLinks(){
@@ -13,11 +14,22 @@
 
   const caseLinks = new Map([
     ['gatchalian meatshop — social media campaign', 'multimedia/gatchalian-meatshop.html'],
-    ['gatchalian meatshop - social media campaign', 'multimedia/gatchalian-meatshop.html']
+    ['gatchalian meatshop - social media campaign', 'multimedia/gatchalian-meatshop.html'],
+    ['exponify — business operations campaign', 'multimedia/exponify.html'],
+    ['exponify - business operations campaign', 'multimedia/exponify.html'],
+    ['seedlandia — game visual development', 'multimedia/seedlandia.html'],
+    ['seedlandia - game visual development', 'multimedia/seedlandia.html']
   ]);
 
   function normalize(value) {
     return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  }
+
+  function caseHref(baseHref) {
+    const nonce = new URLSearchParams(location.search).get('draftPreview');
+    if (!nonce) return baseHref;
+    const separator = baseHref.includes('?') ? '&' : '?';
+    return `${baseHref}${separator}draftPreview=${encodeURIComponent(nonce)}`;
   }
 
   function apply() {
@@ -27,7 +39,7 @@
       if (!href) return;
       const link = card.querySelector('.project-link');
       if (!link) return;
-      link.href = href;
+      link.href = caseHref(href);
       link.removeAttribute('target');
       link.removeAttribute('rel');
       link.textContent = 'View case study →';
