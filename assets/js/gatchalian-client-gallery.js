@@ -106,8 +106,9 @@
     image.alt = item.imageAlt;
     title.textContent = item.title;
     note.textContent = item.historical
-      ? 'Previous campaign · Pricing shown reflects the original campaign period.'
+      ? (item.note || 'Previous campaign · Pricing shown reflects the original campaign period and is not presented as a current offer.')
       : (item.note || item.context || item.category);
+    dialog.setAttribute('aria-label', `${item.title} enlarged artwork`);
     dialog.showModal();
   }
 
@@ -116,6 +117,7 @@
     const host = $('[data-gatchalian-client-gallery]');
     if (!section || !host || !items.length) return false;
 
+    host.dataset.count = String(items.length);
     host.innerHTML = items.map((item,index) => `
       <article class="gatchalian-client-card">
         <button type="button" class="gatchalian-client-art" data-gatchalian-gallery-open="${index}" aria-label="Open ${esc(item.title)}">
@@ -124,11 +126,12 @@
         <div class="gatchalian-client-copy">
           <div class="gatchalian-client-meta">
             <span>${esc(item.category)}</span>
-            ${item.historical ? '<b>Previous campaign</b>' : (item.context ? `<em>${esc(item.context)}</em>` : '')}
+            ${item.context ? `<em>${esc(item.context)}</em>` : ''}
+            ${item.historical ? '<b>Previous campaign</b>' : ''}
           </div>
           <strong>${esc(item.title)}</strong>
           ${item.historical
-            ? '<p>Pricing shown reflects the original campaign period and is not presented as a current offer.</p>'
+            ? `<p>${esc(item.note || 'Pricing shown reflects the original campaign period and is not presented as a current offer.')}</p>`
             : (item.note ? `<p>${esc(item.note)}</p>` : '')}
         </div>
       </article>`).join('');
