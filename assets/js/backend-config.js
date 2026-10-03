@@ -182,7 +182,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   }
 
   async function responseShowsExpiredToken(response){
-    if (response.status !== 401) return false;
+    if (response.ok) return false;
     try {
       const text = await response.clone().text();
       return /exp[\s"']*claim.*timestamp|jwt.*expired|expired.*jwt/i.test(text);
