@@ -225,6 +225,8 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  * Creative manager and adds owner/AAL2-protected image + MP4 upload controls.
  * The Gatchalian gallery manager follows those controls and saves verified client
  * gallery artwork to Draft only, preserving the same AAL2/RLS boundary.
+ * The prepublication staging pack can merge approved/staged release-candidate
+ * items into Draft only through the same owner AAL2/RLS boundary.
  * The scroll-restoration guard prevents a stale deep browser scroll from making
  * the login/Admin shell appear blank after authentication view changes.
  * The shared modal viewport patch keeps long Admin dialogs visible even when the
@@ -234,7 +236,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20261004-2';
+  const version = '20261004-3';
   ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css','admin-operations.css','admin-modal-viewport-fix.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
@@ -242,7 +244,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
     document.head.appendChild(css);
   });
 
-  ['admin-scroll-reset.js','admin-enhancements.js','admin-project-dialog-fix.js','admin-list-manager.js','admin-resume-manager.js','admin-inbox.js','admin-contact-settings.js','admin-security.js','admin-mfa.js','admin-mfa-renderer.js','admin-recovery.js','admin-emergency-recovery.js','admin-analytics.js','admin-creative-manager.js','admin-creative-media-upload.js','admin-gatchalian-gallery.js','admin-operations.js','admin-revision-fix.js'].forEach(file => {
+  ['admin-scroll-reset.js','admin-enhancements.js','admin-project-dialog-fix.js','admin-list-manager.js','admin-resume-manager.js','admin-inbox.js','admin-contact-settings.js','admin-security.js','admin-mfa.js','admin-mfa-renderer.js','admin-recovery.js','admin-emergency-recovery.js','admin-analytics.js','admin-creative-manager.js','admin-creative-media-upload.js','admin-gatchalian-gallery.js','admin-prepublish-staging.js','admin-operations.js','admin-revision-fix.js'].forEach(file => {
     const script = document.createElement('script');
     script.defer = true;
     script.src = `${file}?v=${version}`;
