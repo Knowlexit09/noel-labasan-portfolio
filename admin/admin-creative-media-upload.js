@@ -10,6 +10,7 @@
  *     cover -> thumbnailUrl
  *     video -> mediaUrl
  * - Adds a safe Gatchalian starter button so the approved client-work metadata does not need to be retyped.
+ * - File selection now starts the upload automatically to avoid mistaking a locally selected file for a completed upload.
  * - Does NOT publish anything. The normal Save item -> Save creative draft -> Preview -> Publish flow remains authoritative.
  *
  * Security / safety:
@@ -115,35 +116,54 @@
     wrapper.innerHTML = `${label}
       <span class="creative-media-upload-row">
         <input type="file" accept="${accept}" data-creative-upload-file="${kind}">
-        <button class="secondary-action" type="button" data-creative-upload-button="${kind}">Upload ${kind === 'video' ? 'MP4' : 'cover'}</button>
+        <button class="secondary-action" type="button" data-creative-upload-button="${kind}">Choose & upload</button>
       </span>
-      <small class="creative-form-help">${help}</small>`;
+      <small class="creative-form-help">${help} Selecting a file starts the upload automatically.</small>`;
 
     const fileInput = wrapper.querySelector('[data-creative-upload-file]');
     const button = wrapper.querySelector('[data-creative-upload-button]');
-    button.addEventListener('click', async () => {
+    let uploading = false;
+
+    const performUpload = async () => {
+      if (uploading) return;
       const file = fileInput.files?.[0];
-      if (!file) return setMessage(`Choose a ${kind === 'video' ? 'video' : 'cover image'} first.`, true);
+      if (!file) {
+        fileInput.click();
+        return;
+      }
       const form = $('#creativeItemForm');
       const target = form?.elements?.namedItem(targetName);
       if (!target) return setMessage(`Could not find ${targetName} field. Close and reopen the editor.`, true);
 
+      uploading = true;
       button.disabled = true;
-      const original = button.textContent;
+      fileInput.disabled = true;
       button.textContent = 'Uploading…';
       setMessage(`Uploading ${kind === 'video' ? 'video' : 'cover image'} securely…`);
       try {
         const publicUrl = await upload(file, kind);
         target.value = publicUrl;
         target.dispatchEvent(new Event('input', {bubbles:true}));
-        setMessage(`${kind === 'video' ? 'Video' : 'Cover image'} uploaded. Save item, then Save creative draft.`);
+        wrapper.dataset.uploaded = 'true';
+        button.textContent = 'Uploaded ✓';
+        setMessage(`${kind === 'video' ? 'Video' : 'Cover image'} uploaded successfully. Save item, then Save creative draft.`);
       } catch (error) {
+        wrapper.dataset.uploaded = 'false';
+        button.textContent = 'Retry upload';
         setMessage(error.message, true);
       } finally {
+        uploading = false;
+        fileInput.disabled = false;
         button.disabled = false;
-        button.textContent = original;
       }
+    };
+
+    fileInput.addEventListener('change', () => {
+      wrapper.dataset.uploaded = 'false';
+      button.textContent = 'Upload selected file';
+      if (fileInput.files?.[0]) performUpload();
     });
+    button.addEventListener('click', performUpload);
     return wrapper;
   }
 
@@ -204,7 +224,7 @@
     set('tools', 'Canva, Photoshop, CapCut');
     set('tags', 'Graphic Design, Video Editing, Social Media, Meta Ads, Food Retail, AI-assisted Workflow');
     set('imageAlt', 'Gatchalian Meatshop social media campaign board');
-    setMessage('Gatchalian starter loaded. Upload the approved cover and updated MP4, then Save item.');
+    setMessage('Gatchalian starter loaded. Select the approved cover and updated MP4; each upload starts automatically. Then Save item.');
     enhanceMultimediaEditor();
   }
 
@@ -238,6 +258,7 @@
       .creative-media-upload-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;margin-top:6px}
       .creative-media-upload-row input[type=file]{min-width:0;width:100%;font-size:9px;color:#7890a5}
       .creative-media-upload-row .secondary-action{min-height:36px;white-space:nowrap}
+      .creative-media-upload-extension[data-uploaded="true"] .creative-media-upload-row{outline:1px solid rgba(86,196,135,.35);outline-offset:4px;border-radius:8px}
       #creativeGatchalianStarter{margin-right:7px}
       @media(max-width:620px){.creative-media-upload-row{grid-template-columns:1fr}.creative-media-upload-row .secondary-action{width:100%}#creativeGatchalianStarter{margin-right:0;margin-bottom:7px}}
     `;
