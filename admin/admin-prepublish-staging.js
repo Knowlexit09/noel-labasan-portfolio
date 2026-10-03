@@ -28,6 +28,7 @@
   const draftScope = backend.draftScope || 'draft';
   const liveScope = backend.liveScope || 'live';
   const sessionKey = 'nl-portfolio-admin-session';
+  const publicRoot = 'https://knowlexit09.github.io/noel-labasan-portfolio/';
   const $ = selector => document.querySelector(selector);
   const clone = value => JSON.parse(JSON.stringify(value ?? {}));
   const norm = value => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
@@ -47,7 +48,7 @@
       disclosure:'Staged conservatively as Spec Work / Campaign Concept until ownership, client status, and public-display permission are explicitly verified.',
       tools:['Canva','Photoshop','CapCut'],
       tags:['Campaign Concept','Business Software','Storyboard','Social Media Ads','Motion Direction'],
-      thumbnailUrl:'assets/images/exponify-campaign-cover.svg',
+      thumbnailUrl:`${publicRoot}assets/images/exponify-campaign-cover.svg`,
       imageAlt:'Exponify business operations campaign concept cover',
       detailsUrl:'multimedia/exponify.html',
       mediaUrl:'multimedia/exponify.html'
@@ -66,7 +67,7 @@
       disclosure:'The case presents visual/system planning and ongoing personal game-development work. Concept visuals are not presented as final in-game screenshots, and roadmap features are not claimed as already implemented.',
       tools:['Roblox Studio','Blender','Canva'],
       tags:['Game UI','World Map','Farming Game','Roblox','Visual Direction'],
-      thumbnailUrl:'assets/images/seedlandia-game-visuals-cover.svg',
+      thumbnailUrl:`${publicRoot}assets/images/seedlandia-game-visuals-cover.svg`,
       imageAlt:'Seedlandia game world visual development cover',
       detailsUrl:'multimedia/seedlandia.html',
       mediaUrl:'multimedia/seedlandia.html'
