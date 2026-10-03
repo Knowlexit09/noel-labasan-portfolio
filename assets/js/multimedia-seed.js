@@ -51,6 +51,25 @@
         disclosure:'AI-assisted visuals were used in parts of the workflow; final selection, layout, branding, text/pricing, sequencing, and editing were manually reviewed and assembled.',
         tools:['Canva','Photoshop','CapCut'],
         tags:['Graphic Design','Video Editing','Social Media','Meta Ads','Food Retail','AI-assisted Workflow'],
+
+        // MODULE-SPECIFIC / STAGING METADATA:
+        // These values are continuity/QA metadata only. The public renderer ignores unknown fields.
+        // Latest approved campaign pricing supersedes the earlier ₱145 / ₱260 draft values.
+        approvedPrices:{
+          porkLiver:'₱65',
+          kasimLaman:'₱120',
+          bellyLiempo:'₱150',
+          drumstick:'₱90',
+          fishFillet:'₱130',
+          frozenPompano:'₱310/kg'
+        },
+        canonicalVideoFile:'gatchalian campaign meta ads updated.mp4',
+        backupVideoFiles:['gatchalian campaign meta ads.mp4','gatchalian campaign ads.mp4'],
+        assetStatus:'Awaiting stable public campaign-board and video URLs',
+
+        // PUBLIC MEDIA URLS:
+        // Leave blank until the approved binary assets are uploaded to stable public storage.
+        // Publishing remains fail-closed while these are blank and published:false.
         thumbnailUrl:'',
         imageAlt:'Gatchalian Meatshop social media campaign',
         detailsUrl:'multimedia/gatchalian-meatshop.html',
