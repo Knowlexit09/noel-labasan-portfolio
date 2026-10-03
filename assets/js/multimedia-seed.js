@@ -78,6 +78,25 @@
         imageAlt:'Exponify business operations campaign concept cover',
         detailsUrl:'multimedia/exponify.html',
         mediaUrl:'multimedia/exponify.html'
+      },
+      {
+        published:false,
+        title:'Seedlandia — Game Visual Development',
+        category:'Game Visuals',
+        label:'Personal Project',
+        projectType:'Personal Project',
+        mediaType:'image',
+        objective:'Develop a readable visual language for a farming, discovery, collection, progression, pet, and future-combat Roblox world.',
+        audience:'Roblox players, including younger players who benefit from clear navigation and progression cues.',
+        role:'World-map planning, HUD direction, progression UX, visual systems, and game-development iteration.',
+        description:'A personal Roblox game project covering the visual direction for four starter player plots, Mother Tree Village, Green Meadows, Whispering Forest, Crystal Cavern, Duel Arena, future biomes, and a compact mobile-friendly HUD.',
+        disclosure:'The case presents visual/system planning and ongoing personal game-development work. Concept visuals are not presented as final in-game screenshots, and roadmap features are not claimed as already implemented.',
+        tools:['Roblox Studio','Blender','Canva'],
+        tags:['Game UI','World Map','Farming Game','Roblox','Visual Direction'],
+        thumbnailUrl:'assets/images/seedlandia-game-visuals-cover.svg',
+        imageAlt:'Seedlandia game world visual development cover',
+        detailsUrl:'multimedia/seedlandia.html',
+        mediaUrl:'multimedia/seedlandia.html'
       }
     ];
   }
