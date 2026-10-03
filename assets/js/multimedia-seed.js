@@ -77,11 +77,11 @@
         thumbnailUrl:'assets/images/exponify-campaign-cover.svg',
         imageAlt:'Exponify business operations Meta Ads campaign cover',
         detailsUrl:'multimedia/exponify.html',
-        mediaUrl:'',
+        mediaUrl:'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/exponify-business-operations-campaign/1791057046598-video.mp4',
         canonicalVideoFile:'exponify_meta_ads_web.mp4',
         sourceVideoFile:'exponify meta ads.mp4',
         videoSpecs:'1080x1920 · 30 fps · 36.48 sec · H.264/AAC',
-        assetStatus:'Final MP4 received and web-optimized; secure AAL2 Admin storage upload pending.'
+        assetStatus:'Final MP4 received, web-optimized, and uploaded to portfolio-media; Draft binding prepared.'
       },
       {
         published:false,
