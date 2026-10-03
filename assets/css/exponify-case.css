@@ -59,6 +59,11 @@
   box-shadow:0 34px 80px rgba(0,0,0,.48),0 0 0 1px rgba(77,217,198,.06) inset;
 }
 
+/* The verified Exponify player should never reserve a text fallback block. */
+.exponify-case-theme .hero-video-fallback {
+  display:none !important;
+}
+
 /*
  * FEATURED CAMPAIGN VISUAL
  * Exponify currently has one verified campaign-system visual plus the final MP4,
