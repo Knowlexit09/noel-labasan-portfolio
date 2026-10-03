@@ -5,8 +5,8 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`
-> Last consolidated: **2026-10-03 evening (Asia/Manila)**
-> Latest verified GitHub Pages deployment at consolidation: **Run #158 — success**, head `014255df5fc262e642d905f62956975526e8bcc6`.
+> Last consolidated: **2026-10-03 evening (Asia/Manila), Gatchalian gallery-infrastructure milestone**
+> Latest verified implementation deployment at consolidation: **Run #169 — success**, head `c4db3150e81646a83b58552b780f81ce26fa64c2`.
 >
 > **New chats must read this file first, then verify the actual `main` branch and latest deployment before changing anything. Do not restart finished work or silently redesign approved assets.**
 
@@ -115,18 +115,22 @@ Hosted through GitHub Pages from `main` using `.github/workflows/pages.yml`.
 Important public files include:
 
 - `assets/js/config.js` — static fallback content.
-- `assets/js/backend-config.js` — public-safe backend config.
+- `assets/js/backend-config.js` — public-safe backend config + Admin enhancement loader.
 - `assets/js/backend-loader.js` — merges static fallback with remote Live / Draft Preview state.
 - `assets/js/future-modules.js` — public Multimedia + Knowledge Lab rendering/runtime.
 - `assets/css/future.css` — creative/future module styling.
 - `assets/js/multimedia-seed.js` — staged creative fallback schema.
-- `assets/js/gatchalian-case-runtime.js` — Gatchalian case-study media + carousel runtime.
+- `assets/js/gatchalian-case-runtime.js` — Gatchalian case-study hero media + Featured Campaign carousel runtime.
 - `assets/css/multimedia-case.css` — Gatchalian visual showcase styling.
+- `assets/js/gatchalian-client-gallery.js` — fail-closed `More Work for Gatchalian Meatshop` renderer + accessible image viewer.
+- `assets/css/gatchalian-client-gallery.css` — complete-artwork gallery/card/lightbox presentation.
 - `multimedia/gatchalian-meatshop.html` — Gatchalian case-study/showcase page.
 
-Important Admin file:
+Important Admin files:
 
-- `admin/admin-creative-manager.js` — manages Multimedia tools, Multimedia works, Knowledge Lab entries, module toggles, and media upload through Draft first.
+- `admin/admin-creative-manager.js` — manages Multimedia tools, Multimedia works, Knowledge Lab entries, and module toggles through Draft first.
+- `admin/admin-creative-media-upload.js` — owner/AAL2 protected featured Multimedia cover/video upload controls.
+- `admin/admin-gatchalian-gallery.js` — owner/AAL2 protected Gatchalian `clientGallery` upload/editor; writes Draft only and never publishes Live.
 
 Existing systems to preserve:
 
@@ -319,17 +323,19 @@ Current storage workflow:
 - `portfolio-media` supports the required PNG/JPEG/WebP/MP4 MIME types.
 - bucket limit was adjusted to accommodate the final video; Admin uploader remains intentionally below that ceiling.
 - uploads remain owner/AAL2 protected.
-- Admin Creative flow now supports the Gatchalian starter + campaign cover + final campaign video upload.
+- Admin Creative flow supports the Gatchalian starter + campaign cover + final campaign video upload.
+- `admin-gatchalian-gallery.js` now provides a separate owner/AAL2-protected uploader/editor for additional finished Gatchalian client pieces. It accepts JPG/PNG/WebP up to 8 MB, writes `clientGallery` to Draft only, and does not auto-delete Storage objects on removal.
 
 Current portfolio state:
 
-- Draft contains the Gatchalian Multimedia item and stable media URLs.
+- Draft contains the Gatchalian Multimedia item and stable featured cover/video URLs.
 - Draft Multimedia is enabled for preview/QA.
+- **No `clientGallery` items have been saved yet**; the new More Work section therefore stays fail-closed/hidden.
 - Live Multimedia remains intentionally **OFF**.
 - case-study page remains `noindex,nofollow` until intentional publication.
-- direct case-study runtime received a fix so the approved stored video/cover can render for case-page QA even when the Live Multimedia module is still off.
-- latest verified deployment for that direct-media/cache fix: **GitHub Pages Run #158 — success**.
-- post-deploy visual verification of the direct-video fix should still be performed in the browser before final publication.
+- direct case-study runtime can render the approved stored video/cover for case-page QA even when Live Multimedia is off.
+- latest verified implementation deployment: **GitHub Pages Run #169 — success**, head `c4db3150e81646a83b58552b780f81ce26fa64c2`.
+- this environment could verify deployment/state/code but could not visually inspect the rendered GitHub Pages URL; browser visual QA remains required before publication.
 
 Do not publish Live until focused Gatchalian QA passes.
 
@@ -342,38 +348,29 @@ The old report/document-style case study was rejected because it did not feel li
 Current accepted direction is a **visual-first showcase**:
 
 1. Hero: project title/details on the left, **actual vertical campaign video on the right**.
-2. Campaign creatives below the hero.
-3. Concise Project Overview cards.
-4. Concise Creative Process: Concept -> Design -> Motion -> Final.
-5. Small client/AI-assistance disclosure in the footer.
+2. **Featured Campaign** visual slider below the hero.
+3. Fail-closed **More Work for Gatchalian Meatshop** gallery when verified additional pieces exist.
+4. Concise Project Overview cards.
+5. Concise Creative Process: Concept -> Design -> Motion -> Final.
+6. Small client/AI-assistance disclosure in the footer.
 
 The Draft Preview badge is **not a live-site issue**; it is expected QA UI and should disappear outside Draft Preview.
 
-## Current highest-priority visual issue
+## Featured Campaign carousel — CODE FIX COMPLETE, VISUAL QA PENDING
 
-The campaign carousel still needs improvement.
+The earlier aggressive one-board crop/caption-overlay problem was patched in the deployed code:
 
-Current implementation derives multiple carousel views by cropping one full campaign-board image. This creates:
+- main campaign poster uses a dedicated viewport intended to preserve the complete poster region,
+- supporting Liempo + Order Now artwork uses a wider dedicated viewport,
+- full campaign board uses full-contained presentation,
+- captions now live in separate dark caption bars below the artwork,
+- muted text contrast was slightly improved,
+- slider remains responsive/swipe-capable,
+- video remains fully visible with `object-fit: contain` in its 9:16 frame.
 
-- cropped artwork,
-- cut-off poster details,
-- caption overlap with the artwork,
-- a weaker portfolio impression.
+An accessible enlarged image viewer is available for the new More Work gallery. The Featured Campaign itself still needs real desktop/mobile browser inspection before declaring the visual issue fully closed.
 
-**Next carousel fix should:**
-
-- use full-contained artwork instead of aggressive cropping,
-- keep the main campaign poster fully visible,
-- keep the supporting Liempo + Order Now pair fully visible,
-- keep the full campaign board fully visible,
-- place captions in a separate dark caption bar below each image, not over the artwork,
-- optionally support click/tap lightbox/enlarged viewing,
-- use `object-fit: contain` / equivalent visual behavior,
-- preserve swipe/slider behavior on mobile.
-
-Also improve muted-gray text contrast slightly where needed.
-
-Video should remain fully visible in its 9:16 frame; do not CSS-crop meaningful text from the actual video.
+Do not CSS-crop meaningful text from the actual video.
 
 ---
 
@@ -393,7 +390,9 @@ Current `Pork, Chicken at Seafood` campaign + final Meta video. This remains the
 
 ### B. More Work for Gatchalian Meatshop
 
-Create a clean gallery/slider/collection for other finished client work, such as:
+A fail-closed gallery runtime and secure Admin editor are now implemented. The public section stays hidden unless `clientGallery` contains at least one published item with a valid HTTPS image URL.
+
+Curated candidates from verified user Library searches include finished client work such as:
 
 - Fresh Meat Deals / promotional posters,
 - Murang Karne-type retail promos,
@@ -404,7 +403,9 @@ Create a clean gallery/slider/collection for other finished client work, such as
 - reseller/business materials,
 - other promotional flyers/posts supplied by the user.
 
-A file/library search already found Gatchalian assets including examples such as `Gatchalian Meatshop Negosyo Package.png`, `Gatchalian Meatshop Promo Flyer.png`, and `Gatchalian Meatshop Fresh Produce Pricelist.png`. Verify each actual asset before publishing it.
+Library verification during this milestone found current/usable and historical compositions including `Gatchalian Meatshop Campaign Portfolio(1).png`, `Gatchalian Meatshop Negosyo Package(1).png`, `Gatchalian Meatshop Premium Meat Promo Collage.png`, `Gatchalian Meatshop Fresh Produce Pricelist(1).png`, and `Gatchalian Meatshop Social Media Campaign.png`. Do not assume every found piece is publication-ready; inspect the actual asset and pricing before upload.
+
+The ChatGPT Library files were **not** silently pushed to public Storage. The owner must upload selected finished pieces through the new Admin Creative -> More Work gallery control while signed in at AAL2.
 
 ### Client-work safety rules
 
@@ -416,9 +417,9 @@ Finished client work may be shown because the user confirmed permission, but:
 - do not imply ownership of the client brand/logo,
 - historical posters with older prices must be labeled as previous/historical campaign work, not current offers.
 
-Suggested context label for older pieces:
+The Admin gallery editor has a `Campaign period` control. Choosing `Previous campaign / historical pricing` stores the historical flag; the public gallery then displays a visible `Previous campaign` badge plus:
 
-> Selected client work · Previous campaign. Pricing shown reflects the original campaign period.
+> Pricing shown reflects the original campaign period and is not presented as a current offer.
 
 If the Gatchalian collection becomes large, later create a dedicated client collection route such as `/clients/gatchalian-meatshop/` while keeping the current campaign as the featured case study.
 
@@ -508,7 +509,9 @@ Before production baseline/release verify:
 - Gatchalian case layout desktop + mobile,
 - direct and Draft Preview video playback,
 - corrected campaign board,
-- carousel full-image presentation / no caption overlap,
+- Featured Campaign full-image presentation / no caption overlap,
+- More Work gallery only when verified items exist,
+- More Work image viewer/keyboard close behavior,
 - category filter/search,
 - correct `Client Work` label,
 - no broken media URLs,
@@ -521,7 +524,10 @@ Before production baseline/release verify:
 
 - password + TOTP AAL2,
 - Creative Manager load/save,
-- media upload,
+- Creative Manager edit preserves richer case-study metadata,
+- featured media upload,
+- Gatchalian client-gallery upload/edit/reorder/remove-reference/save,
+- gallery save refuses unsafe stale/unsaved Admin state,
 - Draft -> Preview -> Publish Live,
 - unrelated state preserved,
 - Resume Manager,
@@ -573,23 +579,29 @@ After final QA:
 - Draft Gatchalian Multimedia item with stored media URLs,
 - video-led visual portfolio case layout,
 - direct case runtime fallback/media fix deployed,
-- latest verified Pages deployment #158 successful,
-- decision made to create a broader Gatchalian Client Work collection instead of stuffing all posters into the Featured Campaign slider.
+- Featured Campaign carousel code patch for full-artwork framing + separate caption bars,
+- muted case-page contrast refinement,
+- Creative Manager existing-item edit now preserves richer/specialized metadata instead of replacing the whole object,
+- fail-closed More Work public gallery runtime + responsive styling + accessible enlarged image viewer,
+- AAL2/RLS-protected Gatchalian gallery Admin uploader/editor with Draft-only writes and historical-campaign labeling,
+- Admin/backend cache bust integrated for the new gallery tools,
+- latest verified implementation Pages deployment **#169 successful** at `c4db3150e81646a83b58552b780f81ce26fa64c2`,
+- Live Multimedia remains OFF and case page remains noindex,
+- decision maintained to keep a broader Gatchalian Client Work collection separate from the Featured Campaign slider.
 
 ## PENDING / next work
 
-1. Browser-verify the latest direct video fix after Run #158.
-2. Fix Featured Campaign carousel: full-contained visuals, no crop, separate captions, optional lightbox.
-3. Slightly improve muted-text contrast where needed.
-4. Build **More Work for Gatchalian Meatshop** client gallery using verified finished client assets.
-5. Mark historical-price pieces clearly as previous campaigns.
-6. Focused desktop/mobile QA of Gatchalian page.
-7. Remove `noindex,nofollow` only when intentional publication is approved.
-8. Publish/enable Multimedia through Draft -> Preview -> Publish Live only after QA.
-9. Add Exponify as Project #2 with a different corporate/tech visual language.
-10. Build toward 5–7 strong creative works.
-11. Populate Knowledge Lab after Multimedia has at least one strong public case study.
-12. Perform final one-bagsak QA and production cleanup.
+1. **Browser-verify the deployed Gatchalian page after Run #169**: direct video playback, full Featured Campaign artwork, captions, contrast, controls, desktop/mobile behavior. This was not visually verified by the current tool environment.
+2. In Admin -> Creative -> **More Work gallery**, upload a small curated set of verified finished Gatchalian client pieces through the owner/AAL2 flow. Do not bulk-dump every Library asset.
+3. Mark every older-price artwork as **Previous campaign / historical pricing**. Current campaign must continue to use ₱150 Liempo and ₱310/kg Pompano.
+4. Use Draft Preview to QA the new More Work gallery, card order, full-image containment, historical badges, image viewer, and mobile layout.
+5. Focused desktop/mobile QA of the complete Gatchalian page and Admin gallery workflow.
+6. Remove `noindex,nofollow` only when intentional publication is approved.
+7. Publish/enable Multimedia through Draft -> Preview -> Publish Live only after QA.
+8. Add Exponify as Project #2 with a different corporate/tech visual language.
+9. Build toward 5–7 strong creative works.
+10. Populate Knowledge Lab after Multimedia has at least one strong public case study.
+11. Perform final one-bagsak QA and production cleanup.
 
 ---
 
@@ -597,7 +609,7 @@ After final QA:
 
 Send this in a new chat:
 
-> Continue my `Knowlexit09/noel-labasan-portfolio` project. First read `PORTFOLIO_MASTER_CONTEXT.md` from the repository and use it as the primary continuity/source-of-truth. Then verify the actual current `main` branch and latest GitHub Pages deployment before making changes. Do not restart completed architecture or redesign approved assets unless repository evidence or I explicitly ask. Preserve Draft -> Preview -> Publish Live, MFA/AAL2, RLS, analytics/privacy, audit/error logging, and existing working modules. Continue from the latest PENDING section. Current priority is the Gatchalian Multimedia client-work presentation: verify the latest direct video fix, repair the Featured Campaign carousel so artwork is fully visible with separate captions, then build the `More Work for Gatchalian Meatshop` client gallery from verified finished client assets. Live Multimedia must remain fail-closed until focused QA passes.
+> Continue my `Knowlexit09/noel-labasan-portfolio` project. First read `PORTFOLIO_MASTER_CONTEXT.md` from the repository and use it as the primary continuity/source-of-truth. Then verify the actual current `main` branch and latest GitHub Pages deployment before making changes. Do not restart completed architecture or redesign approved assets unless repository evidence or I explicitly ask. Preserve Draft -> Preview -> Publish Live, MFA/AAL2, RLS, analytics/privacy, audit/error logging, and existing working modules. Continue from the latest PENDING section. Current priority is focused Gatchalian QA and staging the new `More Work for Gatchalian Meatshop` gallery: visually verify the deployed Featured Campaign/video, then upload only selected verified finished Gatchalian client pieces through the owner/AAL2 Admin gallery workflow, marking older-price artwork as Previous campaign. Live Multimedia must remain fail-closed until focused QA passes.
 
 ---
 
@@ -614,7 +626,7 @@ For every meaningful patch, report:
 Current Multimedia work:
 
 - **Risk level:** Low to Medium depending on storage/state changes.
-- **Primary risks:** stale Draft state, wrong/old creative linked, broken media URL, historical pricing shown as current, layout regressions, or premature Live publication.
-- **Safeguards:** Draft Preview first, AAL2 owner uploads, Live Multimedia remains OFF until approval, case page stays noindex until intended publication, stable stored media, explicit current/historical campaign distinction.
-- **Data/security impact:** no effect on POS, accounting, inventory, or client operational data; auth/RLS must remain unchanged.
-- **Rollback:** revert the relevant GitHub commit and/or restore prior Draft media metadata; stored media can remain unused without affecting Live.
+- **Primary risks:** stale Draft state, wrong/old creative linked, broken media URL, historical pricing shown as current, layout regressions, gallery/Creative edits overwriting richer metadata, or premature Live publication.
+- **Safeguards:** Draft Preview first, AAL2 owner uploads, RLS, latest-state merge for gallery writes, Creative-item metadata-preserving edits, Live Multimedia remains OFF until approval, case page stays noindex until intended publication, stable stored media, explicit current/historical campaign distinction, Storage files are retained on gallery removal for rollback.
+- **Data/security impact:** no effect on POS, accounting, inventory, or client operational data; auth/RLS remain unchanged. The new gallery writes only portfolio Draft metadata and owner-uploaded public portfolio artwork.
+- **Rollback:** revert the relevant GitHub commit and/or restore prior Draft media metadata; stored media can remain unused without affecting Live. Key implementation baseline before the new gallery infrastructure is `040c4a2edb2b6117dfb645541378187c7ce8430b`; latest verified implementation baseline is `c4db3150e81646a83b58552b780f81ce26fa64c2`.
