@@ -4,140 +4,168 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Case study for the Gatchalian Meatshop social media campaign by Noel Labasan, including static campaign graphics and a short-form Meta ad video.">
+  <meta name="description" content="Gatchalian Meatshop social media campaign by Noel Labasan — graphic design, campaign creatives, and a short-form Meta ad video.">
   <title>Gatchalian Meatshop Social Media Campaign | Noel Labasan</title>
 
-  <!-- PAGE-SPECIFIC DEPENDENCIES: reuse the portfolio shell, then add creative case-study layout. -->
+  <!-- PAGE-SPECIFIC: reuse portfolio tokens, then apply the visual-first creative case layout. -->
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
   <link rel="stylesheet" href="../assets/css/accessibility-performance.css?v=20260916-1">
-  <link rel="stylesheet" href="../assets/css/multimedia-case.css?v=20261003-2">
+  <link rel="stylesheet" href="../assets/css/multimedia-case.css?v=20261003-4">
 
-  <!-- SHARED STATE: allows the case page to render the same Draft Preview / Live media URLs used by the portfolio. -->
+  <!-- SHARED STATE: Draft Preview / Live media URLs feed the hero video + gallery. -->
   <script defer src="../assets/js/config.js?v=20260915-4"></script>
   <script defer src="../assets/js/multimedia-seed.js?v=20261003-2"></script>
-  <script defer src="../assets/js/backend-config.js?v=20261003-2"></script>
+  <script defer src="../assets/js/backend-config.js?v=20261003-3"></script>
   <script defer src="../assets/js/backend-loader.js?v=20260915-4"></script>
-  <script defer src="../assets/js/gatchalian-case-runtime.js?v=20261003-3"></script>
-  <script defer src="../assets/js/app.js?v=20260915-4"></script>
+  <script defer src="../assets/js/gatchalian-case-runtime.js?v=20261003-4"></script>
   <script defer src="../assets/js/accessibility-performance.js?v=20260916-1"></script>
 </head>
 <body>
   <main class="case-main">
-    <a class="case-back" href="../index.html#multimedia">← Back to Multimedia</a>
-
-    <!-- HERO: real client work. Keep noindex until final media wiring + focused QA passes. -->
-    <section class="multimedia-case-hero">
-      <div class="multimedia-case-copy">
-        <div class="section-kicker">Client Work · Social Media Advertising</div>
-        <h1>Gatchalian Meatshop — Social Media Campaign</h1>
-        <p class="case-lead">A coordinated retail campaign combining a locked key visual, supporting social graphics, and an 18–20 second vertical Meta ad focused on readable product pricing, fresh-market visuals, and a clear order CTA.</p>
-        <div class="case-meta">
-          <span class="chip">Canva</span>
-          <span class="chip">Photoshop</span>
-          <span class="chip">CapCut</span>
-          <span class="chip">AI-assisted visuals</span>
-        </div>
-        <span class="client-badge">✓ Real client work · Portfolio use approved</span>
+    <!-- Minimal portfolio nav: keeps the case page feeling like a creative showcase rather than a report. -->
+    <nav class="creative-case-nav" aria-label="Creative portfolio navigation">
+      <a class="creative-case-brand" href="../index.html">
+        <span class="creative-case-brand-mark">NL</span>
+        <span>Noel Labasan</span>
+      </a>
+      <div class="creative-case-navlinks">
+        <a href="../index.html#projects">Projects</a>
+        <a class="active" href="../index.html#multimedia">Multimedia</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
       </div>
+    </nav>
 
-      <div class="creative-stage" data-gatchalian-stage>
-        <img data-gatchalian-cover hidden alt="Gatchalian Meatshop social media campaign board">
-        <div data-gatchalian-stage-message>
-          <strong>Updated campaign edit is approved; media upload is pending.</strong>
-          <p>The current approved revision uses Belly/Liempo at ₱150 and Frozen Pompano at ₱310/kg. The canonical final video is <code>gatchalian campaign meta ads updated.mp4</code>. This page stays noindex until the updated campaign board and video are uploaded through the secure Creative Manager and focused QA passes.</p>
+    <!-- HERO: final video replaces the old poster-side panel. -->
+    <section class="showcase-hero" aria-labelledby="campaignTitle">
+      <div class="showcase-hero-inner">
+        <div class="showcase-copy">
+          <a class="case-back" href="../index.html#multimedia">← Back to Multimedia</a>
+          <div class="showcase-kicker">Client Work</div>
+          <h1 id="campaignTitle">Gatchalian<br>Meatshop</h1>
+          <h2>Social Media Campaign</h2>
+          <p class="showcase-lead">A coordinated retail campaign for Gatchalian Meatshop combining bold social media graphics and a short-form Meta ad focused on pork, chicken, seafood, value pricing, and a clear order call to action.</p>
+
+          <div class="showcase-tools" aria-label="Tools used">
+            <span class="chip">Canva</span>
+            <span class="chip">Photoshop</span>
+            <span class="chip">CapCut</span>
+          </div>
+
+          <div class="showcase-facts" aria-label="Project facts">
+            <div class="showcase-fact"><span>Year</span><strong>2026</strong></div>
+            <div class="showcase-fact"><span>Role</span><strong>Graphic Design<br>Social Media Advertising</strong></div>
+            <div class="showcase-fact"><span>Platform</span><strong>Facebook &amp; Instagram</strong></div>
+            <div class="showcase-fact"><span>Goal</span><strong>Drive local interest and orders</strong></div>
+          </div>
+        </div>
+
+        <div class="hero-video-wrap" aria-label="Gatchalian Meatshop campaign video">
+          <video data-gatchalian-video hidden controls playsinline preload="metadata" aria-label="Gatchalian Meatshop Meta campaign video"></video>
+          <div data-gatchalian-video-fallback class="hero-video-fallback">Campaign video is available in Draft Preview or after intentional publication.</div>
         </div>
       </div>
     </section>
 
-    <!-- QUICK FACTS: concise recruiter-facing context before the longer case-study sections. -->
-    <section class="creative-facts" aria-label="Project summary">
-      <article class="panel creative-fact"><span>Objective</span><strong>Promote fresh meat products and value pricing while driving local orders.</strong></article>
-      <article class="panel creative-fact"><span>Audience</span><strong>Households, local shoppers, and reseller-oriented buyers.</strong></article>
-      <article class="panel creative-fact"><span>Format</span><strong>Campaign board + supporting posts + 18–20 sec vertical Meta ad.</strong></article>
+    <!-- CAMPAIGN CREATIVE SLIDER: approved board source only; no artwork redesign. -->
+    <section class="showcase-section" id="campaign-creatives" aria-labelledby="campaignCreativesTitle">
+      <div class="showcase-section-head">
+        <div>
+          <div class="section-kicker">Campaign Creatives</div>
+          <h2 id="campaignCreativesTitle">Social Media Designs</h2>
+          <p>The approved campaign board is presented as a visual slider so the key visual, supporting posts, and complete campaign system can be viewed without turning the page into a long document.</p>
+        </div>
+      </div>
+
+      <div class="campaign-slider" data-campaign-slider>
+        <button class="slider-arrow prev" type="button" data-campaign-slider-prev aria-label="Previous campaign creative">‹</button>
+        <div class="campaign-slider-window">
+          <div class="campaign-slider-track" data-campaign-slider-track></div>
+        </div>
+        <button class="slider-arrow next" type="button" data-campaign-slider-next aria-label="Next campaign creative">›</button>
+        <div class="slider-dots" data-campaign-slider-dots aria-label="Campaign slider pages"></div>
+      </div>
     </section>
 
-    <div class="creative-grid">
-      <!-- BRIEF: grounded in the approved campaign direction and confirmed product categories. -->
-      <section class="case-section" id="brief">
-        <div class="section-kicker">01 · Brief</div>
-        <h2>Make the offer easy to understand at a glance.</h2>
-        <p>The campaign centers on pork, chicken, and seafood with clear category-led product presentation. The visual system uses Gatchalian Meatshop's red-forward identity with white, warm-gold, and fresh-green accents so the promotional work feels consistent across static and motion pieces.</p>
-      </section>
-
-      <!-- DESIGN DIRECTION: preserves the user's locked top campaign visual as the source direction. -->
-      <section class="case-section" id="direction">
-        <div class="section-kicker">02 · Creative Direction</div>
-        <h2>Bold retail energy without losing readability.</h2>
-        <p>Large headlines, grouped products, high-contrast price badges, fresh-market imagery, and controlled benefit/CTA areas keep the campaign promotional but readable on a phone. The approved top campaign board remains the locked visual reference for every supporting piece and video adaptation.</p>
-      </section>
-
-      <!-- DELIVERABLES: the project is a coordinated campaign rather than a single poster. -->
-      <section class="case-section" id="deliverables">
-        <div class="section-kicker">03 · Deliverables</div>
-        <h2>One campaign, several coordinated outputs.</h2>
-        <ul class="deliverable-list">
-          <li>Main campaign board / grouped product key visual.</li>
-          <li>Pork Belly / Liempo product spotlight supporting post.</li>
-          <li>Order Now / CTA supporting post.</li>
-          <li>18–20 second vertical short-form Meta ad video.</li>
-          <li>Storyboard, product grouping, pricing overlays, narration, and final CTA treatment.</li>
-        </ul>
-      </section>
-
-      <!-- VIDEO APPROACH: final MP4 loads from the Creative Manager media URL. No autoplay. -->
-      <section class="case-section" id="video">
-        <div class="section-kicker">04 · Video Approach</div>
-        <h2>Four focused beats instead of a rushed product slideshow.</h2>
-        <p>The final short-form edit uses a food-first hook, a grouped pork/chicken/seafood value message, vacuum-sealed freshness/convenience, and a cooked-meal/order payoff. Product categories and prices stay readable instead of flashing one item per second, while the CTA closes the sequence clearly for mobile viewing.</p>
-        <div class="campaign-video-shell">
-          <video data-gatchalian-video hidden controls playsinline preload="metadata" aria-label="Gatchalian Meatshop campaign video"></video>
-          <p data-gatchalian-video-fallback class="campaign-video-fallback">Final updated Meta video will appear here after the secure media upload is saved to Draft.</p>
+    <!-- OVERVIEW: concise summary instead of multiple report-like case-study sections. -->
+    <section class="showcase-section" aria-labelledby="overviewTitle">
+      <div class="showcase-section-head">
+        <div>
+          <div class="section-kicker">Project Overview</div>
+          <h2 id="overviewTitle">Built for a clear retail message.</h2>
         </div>
-      </section>
+      </div>
+      <div class="overview-grid">
+        <article class="overview-card">
+          <div class="overview-icon">◎</div>
+          <span>Objective</span>
+          <strong>Promote value-priced meat products.</strong>
+          <p>Make the offer easy to understand and encourage local orders.</p>
+        </article>
+        <article class="overview-card">
+          <div class="overview-icon">◉</div>
+          <span>Audience</span>
+          <strong>Households and local shoppers.</strong>
+          <p>Also supports reseller-oriented buyers looking for accessible product choices.</p>
+        </article>
+        <article class="overview-card">
+          <div class="overview-icon">▧</div>
+          <span>Deliverables</span>
+          <strong>Campaign graphics + short-form video.</strong>
+          <p>Main campaign visual, product spotlight, CTA creative, and Meta ad.</p>
+        </article>
+        <article class="overview-card">
+          <div class="overview-icon">▯</div>
+          <span>Format</span>
+          <strong>Social posts, Reels, and Stories.</strong>
+          <p>Video designed vertically for phone-first Facebook and Instagram viewing.</p>
+        </article>
+      </div>
+    </section>
 
-      <!-- PROCESS: transparent about AI assistance while emphasizing manual selection, correction, and final editing. -->
-      <section class="case-section full" id="process">
-        <div class="section-kicker">05 · Process</div>
-        <h2>AI-assisted production, manually directed and reviewed.</h2>
-        <div class="process-strip">
-          <article class="process-step"><b>1 · Campaign system</b><p>Defined the visual hierarchy, product groups, pricing treatment, palette, and supporting-post roles around the approved key visual.</p></article>
-          <article class="process-step"><b>2 · Visual production</b><p>Created and refined campaign artwork, using AI-assisted visuals only where useful while preserving the original client branding and manually checking text/pricing.</p></article>
-          <article class="process-step"><b>3 · Motion assembly</b><p>Selected motion clips, generated the final narration separately for a consistent voice, then assembled timing, overlays, pacing, and CTA in CapCut.</p></article>
-          <article class="process-step"><b>4 · QA</b><p>Checked product names, confirmed campaign prices, phone readability, branding consistency, narration timing, and final mobile viewing flow.</p></article>
+    <!-- PROCESS: four simple steps, enough context for recruiters without over-documenting. -->
+    <section class="showcase-section" aria-labelledby="processTitle">
+      <div class="showcase-section-head">
+        <div>
+          <div class="section-kicker">Creative Process</div>
+          <h2 id="processTitle">From campaign idea to finished motion.</h2>
         </div>
-      </section>
+      </div>
+      <div class="process-grid">
+        <article class="process-card">
+          <div class="process-icon">◌</div>
+          <span>01 · Concept</span>
+          <strong>Define the campaign system.</strong>
+          <p>Identify product groups, pricing message, campaign goal, and visual direction.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-icon">▧</div>
+          <span>02 · Design</span>
+          <strong>Create the visual assets.</strong>
+          <p>Build category-led layouts, product visuals, price hierarchy, and CTA graphics.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-icon">▷</div>
+          <span>03 · Motion</span>
+          <strong>Turn the campaign into video.</strong>
+          <p>Sequence clips, narration, overlays, transitions, pacing, and the final order CTA.</p>
+        </article>
+        <article class="process-card">
+          <div class="process-icon">✓</div>
+          <span>04 · Final</span>
+          <strong>Review for mobile delivery.</strong>
+          <p>Check branding, readability, updated prices, audio timing, and final export.</p>
+        </article>
+      </div>
+    </section>
 
-      <!-- ROLE: avoids overstating tools that are still in the user's Learning tier. -->
-      <section class="case-section" id="role">
-        <div class="section-kicker">06 · Role & Tools</div>
-        <h2>Concept, layout, image refinement, and video editing.</h2>
-        <p>Role: campaign concept development, graphic layout, product/promo composition, image refinement, video sequencing, text/price overlays, CTA design, and final review. Core tools shown for this project are Canva, Photoshop, and CapCut.</p>
-      </section>
-
-      <!-- REVISION SNAPSHOT: prevents the older campaign prices/video from being reused accidentally. -->
-      <section class="case-section" id="revision">
-        <div class="section-kicker">07 · Approved Revision</div>
-        <h2>Current campaign values are locked for this portfolio version.</h2>
-        <ul class="deliverable-list">
-          <li>Pork Liver — ₱65</li>
-          <li>Kasim/Laman — ₱120</li>
-          <li>Belly/Liempo — ₱150</li>
-          <li>Drumstick — ₱90</li>
-          <li>Fish Fillet — ₱130</li>
-          <li>Frozen Pompano — ₱310/kg</li>
-        </ul>
-        <p>The earlier ₱145 Belly/Liempo and ₱260/kg Frozen Pompano artwork/video values are archived and must not be used for the current published campaign case study.</p>
-      </section>
-
-      <!-- DISCLOSURE: recruiter-facing transparency about AI-assisted portions without understating the user's manual creative/editorial work. -->
-      <section class="case-section" id="disclosure">
-        <div class="section-kicker">08 · Production Disclosure</div>
-        <h2>AI-assisted in parts; final creative decisions were manually reviewed.</h2>
-        <p>Client work: Gatchalian Meatshop. Social media campaign (graphics + short-form video). AI-assisted visuals were used in parts of the workflow; final selection, layout, branding, text/pricing, sequencing, and editing were manually reviewed and assembled.</p>
-      </section>
-    </div>
+    <!-- Small disclosure only; keep process transparent without dominating the work. -->
+    <footer class="case-disclosure">
+      <div>Client work: Gatchalian Meatshop. AI-assisted visuals were used in parts of the workflow; final selection, layout, branding, pricing/text, sequencing, and editing were manually reviewed and assembled.</div>
+      <a href="../index.html#multimedia">Back to Multimedia ↑</a>
+    </footer>
   </main>
 </body>
 </html>
