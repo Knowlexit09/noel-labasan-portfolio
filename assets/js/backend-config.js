@@ -72,6 +72,148 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
 })();
 
 /*
+ * ADMIN SUPABASE SESSION REFRESH SAFETY
+ * Scope: PAGE-SPECIFIC /admin.
+ *
+ * Long-lived Admin tabs can outlive Supabase's short-lived access token. Some
+ * extension modules read the shared sessionStorage token directly, so an upload
+ * could otherwise fail with a raw `exp claim timestamp check failed` response.
+ *
+ * This wrapper is intentionally narrow:
+ * - only REST/Storage calls to this configured Supabase project are considered;
+ * - public requests and Auth endpoints are left alone;
+ * - the existing refresh token is used through Supabase Auth (no server secret);
+ * - refreshed AAL2 sessions must remain AAL2 or the write is stopped and the
+ *   owner is asked to verify the authenticator again;
+ * - a failed/expired refresh token fails closed and requires a new sign-in.
+ */
+(function installAdminSupabaseSessionRefresh(){
+  if (!/\/admin\/?$/i.test(location.pathname)) return;
+  if (window.__portfolioAdminFetchRefreshInstalled) return;
+  window.__portfolioAdminFetchRefreshInstalled = true;
+
+  const backend = window.PORTFOLIO_BACKEND_CONFIG || {};
+  const base = String(backend.supabaseUrl || '').replace(/\/$/, '');
+  const key = String(backend.supabasePublishableKey || '').trim();
+  const sessionKey = 'nl-portfolio-admin-session';
+  const originalFetch = window.fetch.bind(window);
+  let refreshPromise = null;
+
+  function readSession(){
+    try { return JSON.parse(sessionStorage.getItem(sessionKey) || 'null'); }
+    catch { return null; }
+  }
+
+  function storeSession(session){
+    if (session) sessionStorage.setItem(sessionKey, JSON.stringify(session));
+    else sessionStorage.removeItem(sessionKey);
+  }
+
+  function decodeJwt(token){
+    try {
+      const part = String(token || '').split('.')[1];
+      if (!part) return {};
+      const normalized = part.replace(/-/g,'+').replace(/_/g,'/').padEnd(Math.ceil(part.length / 4) * 4,'=');
+      return JSON.parse(decodeURIComponent(atob(normalized).split('').map(char => `%${char.charCodeAt(0).toString(16).padStart(2,'0')}`).join('')));
+    } catch { return {}; }
+  }
+
+  function isManagedSupabaseRequest(input){
+    const raw = typeof input === 'string' ? input : input?.url;
+    if (!raw || !base) return false;
+    try {
+      const requestUrl = new URL(raw, location.href);
+      const projectUrl = new URL(base);
+      return requestUrl.origin === projectUrl.origin && (/^\/rest\/v1\//.test(requestUrl.pathname) || /^\/storage\/v1\//.test(requestUrl.pathname));
+    } catch { return false; }
+  }
+
+  function tokenNeedsRefresh(token){
+    const exp = Number(decodeJwt(token).exp || 0);
+    if (!exp) return false;
+    return exp <= Math.floor(Date.now() / 1000) + 30;
+  }
+
+  async function refreshSession(force=false){
+    const current = readSession();
+    if (!current?.refresh_token) {
+      throw new Error('Your secure Admin session expired. Sign in again, verify your authenticator, then retry.');
+    }
+    if (!force && current.access_token && !tokenNeedsRefresh(current.access_token)) return current;
+    if (refreshPromise) return refreshPromise;
+
+    const previousAal = decodeJwt(current.access_token).aal || 'aal1';
+    refreshPromise = (async () => {
+      const response = await originalFetch(`${base}/auth/v1/token?grant_type=refresh_token`, {
+        method:'POST',
+        headers:{apikey:key,'Content-Type':'application/json'},
+        body:JSON.stringify({refresh_token:current.refresh_token})
+      });
+      const text = await response.text();
+      let data = null;
+      try { data = text ? JSON.parse(text) : null; } catch { data = {message:text}; }
+      if (!response.ok || !data?.access_token) {
+        storeSession(null);
+        throw new Error('Your secure Admin session has expired. Sign in again, verify your authenticator, then retry.');
+      }
+
+      const next = {...current,...data,user:data.user || current.user};
+      storeSession(next);
+      const nextAal = decodeJwt(next.access_token).aal || 'aal1';
+      if (previousAal === 'aal2' && nextAal !== 'aal2') {
+        throw new Error('Session refreshed, but authenticator verification is required again. Open Security, verify your authenticator, then retry.');
+      }
+      return next;
+    })().finally(() => { refreshPromise = null; });
+
+    return refreshPromise;
+  }
+
+  function replaceAuthorization(input, init, oldToken, freshToken){
+    if (!freshToken || !oldToken) return init;
+    const sourceHeaders = init?.headers || (typeof Request !== 'undefined' && input instanceof Request ? input.headers : undefined);
+    const headers = new Headers(sourceHeaders || {});
+    const authorization = headers.get('Authorization') || '';
+    if (authorization === `Bearer ${oldToken}`) {
+      headers.set('Authorization', `Bearer ${freshToken}`);
+      return {...(init || {}),headers};
+    }
+    return init;
+  }
+
+  async function responseShowsExpiredToken(response){
+    if (response.status !== 401) return false;
+    try {
+      const text = await response.clone().text();
+      return /exp[\s"']*claim.*timestamp|jwt.*expired|expired.*jwt/i.test(text);
+    } catch { return false; }
+  }
+
+  window.fetch = async function portfolioAdminFetch(input, init){
+    if (!isManagedSupabaseRequest(input)) return originalFetch(input, init);
+
+    let requestInit = init;
+    let session = readSession();
+    const tokenUsed = session?.access_token || '';
+
+    if (tokenUsed && tokenNeedsRefresh(tokenUsed)) {
+      const fresh = await refreshSession(false);
+      requestInit = replaceAuthorization(input, requestInit, tokenUsed, fresh.access_token);
+      session = fresh;
+    }
+
+    let response = await originalFetch(input, requestInit);
+    if (!(await responseShowsExpiredToken(response))) return response;
+
+    const staleToken = session?.access_token || readSession()?.access_token || '';
+    const fresh = await refreshSession(true);
+    requestInit = replaceAuthorization(input, requestInit, staleToken, fresh.access_token);
+    response = await originalFetch(input, requestInit);
+    return response;
+  };
+})();
+
+/*
  * ADMIN ENHANCEMENT LOADER
  * Scope: PAGE-SPECIFIC /admin.
  * Loads optional maintenance modules after the core admin shell. MFA loads
@@ -90,7 +232,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20261003-5';
+  const version = '20261004-1';
   ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css','admin-operations.css','admin-modal-viewport-fix.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
