@@ -1,17 +1,17 @@
 /*
- * MULTIMEDIA FALLBACK SEED
- * Scope: PUBLIC / SHARED.
+ * MULTIMEDIA + KNOWLEDGE LAB FALLBACK SEED
+ * Scope: PUBLIC / SHARED fallback only.
  * Loaded after config.js and before backend-loader.js.
  *
  * Purpose:
  * - Gives the static fallback a complete schema for Multimedia/Knowledge Lab.
  * - Keeps both creative modules fail-closed by default.
- * - Stages the first real client multimedia case study without publishing it yet.
+ * - Preserves approved/staged creative metadata without silently publishing it.
  *
  * Safety:
- * - Remote Draft/Live state can still override these fallback values.
+ * - Remote Draft/Live state remains authoritative and can override these arrays.
  * - No secrets or authentication data live here.
- * - The Gatchalian item stays published:false until final media assets are wired and QA passes.
+ * - Staging items below use published:false unless explicitly approved in Admin.
  */
 (function seedMultimediaFallback(){
   'use strict';
@@ -51,32 +51,81 @@
         disclosure:'AI-assisted visuals were used in parts of the workflow; final selection, layout, branding, text/pricing, sequencing, and editing were manually reviewed and assembled.',
         tools:['Canva','Photoshop','CapCut'],
         tags:['Graphic Design','Video Editing','Social Media','Meta Ads','Food Retail','AI-assisted Workflow'],
-
-        // MODULE-SPECIFIC / STAGING METADATA:
-        // These values are continuity/QA metadata only. The public renderer ignores unknown fields.
-        // Latest approved campaign pricing supersedes the earlier ₱145 / ₱260 draft values.
-        approvedPrices:{
-          porkLiver:'₱65',
-          kasimLaman:'₱120',
-          bellyLiempo:'₱150',
-          drumstick:'₱90',
-          fishFillet:'₱130',
-          frozenPompano:'₱310/kg'
-        },
+        approvedPrices:{porkLiver:'₱65',kasimLaman:'₱120',bellyLiempo:'₱150',drumstick:'₱90',fishFillet:'₱130',frozenPompano:'₱310/kg'},
         canonicalVideoFile:'gatchalian campaign meta ads updated.mp4',
         backupVideoFiles:['gatchalian campaign meta ads.mp4','gatchalian campaign ads.mp4'],
-        assetStatus:'Awaiting stable public campaign-board and video URLs',
-
-        // PUBLIC MEDIA URLS:
-        // Leave blank until the approved binary assets are uploaded to stable public storage.
-        // Publishing remains fail-closed while these are blank and published:false.
+        assetStatus:'Remote Draft/Live owns the approved stored media URLs.',
         thumbnailUrl:'',
         imageAlt:'Gatchalian Meatshop social media campaign',
         detailsUrl:'multimedia/gatchalian-meatshop.html',
         mediaUrl:''
+      },
+      {
+        published:false,
+        title:'Exponify — Business Operations Campaign',
+        category:'Ads & Campaigns',
+        label:'Spec Work',
+        projectType:'Spec Work',
+        mediaType:'image',
+        objective:'Present a growing-business problem and communicate a simpler all-in-one operating-system story.',
+        audience:'Owners and operators of growing small and medium businesses.',
+        role:'Campaign concept, message hierarchy, storyboard direction, visual system, and portfolio case-study presentation.',
+        description:'A problem-first 9:16 campaign concept moving from scattered manual records and missed follow-ups toward an organized system story for Sales, CRM, Inventory, and Reports.',
+        disclosure:'Staged conservatively as Spec Work / Campaign Concept until ownership, client status, and public-display permission are explicitly verified.',
+        tools:['Canva','Photoshop','CapCut'],
+        tags:['Campaign Concept','Business Software','Storyboard','Social Media Ads','Motion Direction'],
+        thumbnailUrl:'assets/images/exponify-campaign-cover.svg',
+        imageAlt:'Exponify business operations campaign concept cover',
+        detailsUrl:'multimedia/exponify.html',
+        mediaUrl:'multimedia/exponify.html'
       }
     ];
   }
 
-  if (!Array.isArray(cfg.content.knowledgeLab)) cfg.content.knowledgeLab = [];
+  if (!Array.isArray(cfg.content.knowledgeLab)) {
+    cfg.content.knowledgeLab = [
+      {
+        published:false,
+        title:'Keep repeated Photoshop transforms non-destructive',
+        category:'Photoshop',
+        type:'Tip',
+        difficulty:'Beginner',
+        language:'',
+        summary:'Convert artwork to a Smart Object before repeated resizing or transformations so the source remains easier to revise.',
+        shortcut:'Right-click layer → Convert to Smart Object',
+        code:'',
+        explanation:'Useful for ad layouts where the same product image may be resized several times while testing different compositions.',
+        tags:['Photoshop','Workflow','Non-destructive Editing'],
+        runnable:false
+      },
+      {
+        published:false,
+        title:'Responsive cards with CSS Grid minmax()',
+        category:'HTML/CSS',
+        type:'Code Recipe',
+        difficulty:'Beginner',
+        language:'CSS',
+        summary:'Use auto-fit with minmax() to let a card grid adapt without hard-coding separate column counts for every width.',
+        shortcut:'grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));',
+        code:'.demo-card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 16px;\n}\n.demo-card {\n  padding: 20px;\n  border: 1px solid #d7dee8;\n  border-radius: 16px;\n}',
+        explanation:'The browser creates as many columns as fit, then collapses naturally to fewer columns as space decreases.',
+        tags:['CSS','Responsive Design','Grid'],
+        runnable:true
+      },
+      {
+        published:false,
+        title:'Validate numeric input before using it in Java',
+        category:'Java',
+        type:'Code Recipe',
+        difficulty:'Beginner',
+        language:'Java',
+        summary:'Treat user-entered text as untrusted input and handle invalid numbers instead of letting parsing errors break the flow.',
+        shortcut:'Validate → parse → handle failure',
+        code:'static Integer parseQuantity(String raw) {\n    if (raw == null || raw.isBlank()) return null;\n    try {\n        int value = Integer.parseInt(raw.trim());\n        return value >= 0 ? value : null;\n    } catch (NumberFormatException ex) {\n        return null;\n    }\n}',
+        explanation:'This pattern keeps validation explicit. In a real form, show a clear validation message instead of silently accepting a null result.',
+        tags:['Java','Validation','Defensive Programming'],
+        runnable:false
+      }
+    ];
+  }
 })();
