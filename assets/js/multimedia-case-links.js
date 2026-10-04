@@ -18,7 +18,9 @@
     ['exponify — business operations campaign', 'multimedia/exponify.html'],
     ['exponify - business operations campaign', 'multimedia/exponify.html'],
     ['seedlandia — game visual development', 'multimedia/seedlandia.html'],
-    ['seedlandia - game visual development', 'multimedia/seedlandia.html']
+    ['seedlandia - game visual development', 'multimedia/seedlandia.html'],
+    ['qyntro daily — brand identity & packaging', 'multimedia/qyntro-daily.html'],
+    ['qyntro daily - brand identity & packaging', 'multimedia/qyntro-daily.html']
   ]);
 
   function normalize(value) {
