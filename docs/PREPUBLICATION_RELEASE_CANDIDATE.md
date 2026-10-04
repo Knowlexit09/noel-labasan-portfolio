@@ -2,7 +2,7 @@
 
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Status: **STAGING / REVIEW — DO NOT TREAT AS FINAL PUBLIC RELEASE**  
-> Date: 2026-10-04 (Asia/Manila)
+> Date: 2026-10-05 (Asia/Manila)
 
 This file is the final-review checklist for the current portfolio expansion. The owner asked to finish/stage the work first, review it, and personally perform the final **Publish live** action afterward.
 
@@ -33,7 +33,7 @@ Approved current featured campaign values:
 More Work historical gallery:
 
 - `Murang Karne — Retail Promo` — Previous campaign
-- `Negosyo Package` — Previous campaign
+- `Negosyo Package` — Reseller / Business Promotion — Previous campaign
 
 Historical artwork is explicitly labeled so old prices are not represented as current offers.
 
@@ -55,6 +55,8 @@ Direction:
 - verified product UI only if/when real screenshots are added
 - single CTA: personalized demo
 - corporate blue/teal visual language deliberately different from Gatchalian
+- final optimized vertical MP4 is uploaded and the preferred storage URL is prepared for Draft binding
+- one campaign image source drives the hero background, video poster, and Featured Campaign image
 
 Staging route:
 
@@ -84,6 +86,36 @@ Staging route:
 
 `/multimedia/seedlandia.html`
 
+### 4. Qyntro Daily — Brand Identity & Packaging
+
+Classification: **Personal Project**  
+Status: verified genuine personal project, staged, noindex.
+
+Verified source:
+
+- 10-page editable Canva brand guide, design ID `DAHXE6rHNGs`
+- public portfolio uses only the Canva **view-only** link; the collaboration/edit URL is not exposed
+- `Qyntro Daily` is the core brand name and `Coffee` is the descriptor
+
+Portfolio scope:
+
+- primary logo, icon-only mark, and monochrome application
+- warm coffee-inspired visual identity and color palette
+- typography system
+- three packaging variants: Dark Roast, House Blend, and Smooth Blend
+- takeaway cups, signage, retail bag, and membership-card applications
+- social media campaign concepts and CTA directions
+- promotional material and lifestyle/workspace mockups
+- transparent Personal Project / AI-assisted and template-supported workflow disclosure
+
+Staging route:
+
+`/multimedia/qyntro-daily.html`
+
+Canva view-only presentation:
+
+`https://www.canva.com/d/kuS8O6vPKjTqtMl`
+
 ## Knowledge Lab review set
 
 The prepared Draft pack contains three starter entries:
@@ -110,7 +142,7 @@ It:
 - reads the latest Draft/Live state,
 - writes **Draft only**,
 - preserves unrelated state and the existing Gatchalian data,
-- upserts Exponify, Seedlandia, and the three Knowledge Lab starters by title,
+- upserts Exponify, Seedlandia, Qyntro Daily, and the three Knowledge Lab starters by title,
 - enables Multimedia + Knowledge Lab in Draft for Preview,
 - is idempotent,
 - never writes Live.
@@ -123,11 +155,13 @@ It:
 
 ### Backend health
 
-At the QA checkpoint:
+At the prior QA checkpoint:
 
 - open error events: **0**
 - error events in the previous 7 days: **0**
 - audit failures in the previous 7 days: **0**
+
+These are checkpoint values, not a claim that no later errors can occur; re-check before final publication.
 
 ### Security advisor status
 
@@ -151,12 +185,12 @@ Unused-index notices remain informational in this low-traffic portfolio. Do not 
 
 ### Repository secret sanity
 
-Repository searches found no `service_role`, `SUPABASE_SERVICE_ROLE`, or `ghp_` token strings. The browser Supabase key is a publishable key by design; authorization remains enforced through Auth/RLS.
+Prior repository searches found no `service_role`, `SUPABASE_SERVICE_ROLE`, or `ghp_` token strings. The browser Supabase key is a publishable key by design; authorization remains enforced through Auth/RLS.
 
 ### Search/indexing safety
 
 - `/admin/` is disallowed in `robots.txt`.
-- Gatchalian, Exponify, and Seedlandia staging pages use `noindex,nofollow`.
+- Gatchalian, Exponify, Seedlandia, and Qyntro Daily staging pages use `noindex,nofollow`.
 - Staging case pages are not in `sitemap.xml`.
 
 ## Final visual review checklist
@@ -164,10 +198,11 @@ Repository searches found no `service_role`, `SUPABASE_SERVICE_ROLE`, or `ghp_` 
 ### Homepage — Draft Preview
 
 - Multimedia navigation appears only when Draft Multimedia is ON.
-- Gatchalian, Exponify, and Seedlandia cards render with readable thumbnails/titles/labels.
+- Gatchalian, Exponify, Seedlandia, and Qyntro Daily cards render with readable thumbnails/titles/labels.
 - Labels are truthful: Client Work / Spec Work / Personal Project.
-- Category filters work.
+- Category filters work, including Brand Identity for Qyntro Daily.
 - Multimedia search works.
+- All known cards route to their internal case studies while preserving the Draft Preview nonce.
 - Knowledge Lab appears in Draft Preview.
 - Knowledge filters/search work.
 - HTML/CSS safe preview works without allowing scripts/network access.
@@ -189,6 +224,8 @@ Repository searches found no `service_role`, `SUPABASE_SERVICE_ROLE`, or `ghp_` 
 
 - corporate/tech visual language is clearly different from Gatchalian
 - title and Spec Work label are visible
+- uploaded MP4 is playable
+- hero background, video poster, and Featured Campaign image use the intended campaign image source
 - cover is readable on desktop/mobile
 - flow reads Problem → Tension → Solution → Features → Proof → CTA
 - no claim implies verified client status or unverified business performance
@@ -200,6 +237,18 @@ Repository searches found no `service_role`, `SUPABASE_SERVICE_ROLE`, or `ghp_` 
 - zone cards stack correctly
 - concept-vs-implemented disclaimer is visible
 - no claim says the concept art is a final Roblox screenshot
+
+### Qyntro Daily
+
+- Personal Project label is visible
+- `Qyntro Daily` reads as the brand and `Coffee` as the descriptor
+- Q-led coffee/steam identity direction is recognizable without claiming trademark registration
+- Dark Roast, House Blend, and Smooth Blend are legible and visually distinct
+- palette/type and brand-application sections remain readable on desktop/mobile
+- the Canva button opens the view-only presentation and never exposes the edit/collaboration URL
+- no copy implies a real client, operating coffee business, sales result, or trademark clearance
+- AI-assisted ideation / template-supported workflow disclosure is visible
+- final Canva copy is reviewed for obvious typos before public publication
 
 ### Core portfolio
 
@@ -213,19 +262,20 @@ Repository searches found no `service_role`, `SUPABASE_SERVICE_ROLE`, or `ghp_` 
 
 ## Final publication sequence — only after owner approval
 
-1. Owner reviews **Preview Draft** and staging case pages.
-2. Resolve any visual/content corrections in Draft/code.
-3. Owner explicitly approves the release.
-4. Owner performs the final **Publish live** action through Admin/AAL2.
-5. After Live state is verified, remove `noindex,nofollow` only from approved public case pages.
-6. Add approved public case pages to `sitemap.xml`.
-7. Verify the corresponding GitHub Pages deployment.
-8. Verify public Live state and navigation.
-9. Create final production baseline/changelog marker.
+1. Owner runs **Prepare review set** from Creative Admin with AAL2 so the latest four-project candidate set is in Draft.
+2. Owner reviews **Preview Draft** and all staging case pages.
+3. Resolve any visual/content corrections in Draft/code/Canva.
+4. Owner explicitly approves the release.
+5. Owner performs the final **Publish live** action through Admin/AAL2.
+6. After Live state is verified, remove `noindex,nofollow` only from approved public case pages.
+7. Add approved public case pages to `sitemap.xml`.
+8. Verify the corresponding GitHub Pages deployment.
+9. Verify public Live state and navigation.
+10. Create final production baseline/changelog marker.
 
 ## Items intentionally not fabricated
 
-The long-term Multimedia goal remains 5–7 strong works, but the release candidate does **not** invent missing projects simply to reach a number. Brand identity, photo-manipulation, motion-logo, and 3D learning pieces should be added only when genuine source/final work exists and can be labeled truthfully.
+The long-term Multimedia goal remains 5–7 strong works, but the release candidate does **not** invent missing projects simply to reach a number. Qyntro Daily now provides a verified Brand Identity & Packaging personal project. Future photo-manipulation, motion-logo, and standalone 3D learning pieces should be added only when genuine source/final work exists and can be labeled truthfully.
 
 ## Rollback anchors
 
@@ -233,6 +283,7 @@ The long-term Multimedia goal remains 5–7 strong works, but the release candid
 - Pre-final-gallery/auth baseline: `a3b1cd15dafb2de17ba3b00672a3ab2cbd03922f`
 - Gatchalian accepted card-containment runtime: `18711cdd51f49827b21014ed0a4673d39877013f`
 - Prepublication staging started from `73d1911eabb992ae0d344b25303f503665f2c23d`
+- Qyntro Daily case-study introduction: `baca707c34dfa968e5024fc45f228fcb03b1e080`
 
 ## Risk summary
 
@@ -243,10 +294,11 @@ Primary risks:
 - publishing before review,
 - stale Draft state,
 - wrong project classification,
-- broken media URLs,
+- broken media or Canva links,
 - old campaign pricing shown as current,
 - responsive regressions,
 - accidentally exposing staging pages to indexing,
+- accidentally publishing an editable Canva collaboration link,
 - weakening AAL2/RLS for convenience.
 
 Safeguards:
@@ -256,6 +308,7 @@ Safeguards:
 - explicit project labels,
 - noindex staging pages,
 - historical-price labels,
+- Canva view-only link for Qyntro Daily,
 - fail-closed modules,
 - non-destructive QA first,
 - user-owned final Publish action.
