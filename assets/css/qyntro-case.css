@@ -1,0 +1,315 @@
+/* QYNTRO DAILY — PERSONAL BRAND CASE
+ * PAGE-SPECIFIC /multimedia/qyntro-daily.html
+ * Warm coffee identity layered over the shared creative case-study layout.
+ */
+:root{
+  --qy-charcoal:#1e1a17;
+  --qy-brown:#3a2417;
+  --qy-copper:#c66a2e;
+  --qy-cream:#ead9c6;
+  --qy-beige:#f6f1e9;
+}
+
+body{
+  background:
+    radial-gradient(circle at 82% 7%,rgba(198,106,46,.18),transparent 28rem),
+    radial-gradient(circle at 10% 72%,rgba(234,217,198,.07),transparent 30rem),
+    #0e0d0c;
+}
+
+.qyntro-case-theme .creative-case-brand-mark,
+.qyntro-case-theme .showcase-kicker,
+.qyntro-case-theme .section-kicker,
+.qyntro-case-theme .case-back,
+.qyntro-case-theme .case-disclosure a{
+  color:#e78a4d;
+}
+
+.qyntro-case-theme .creative-case-brand-mark{
+  border-color:rgba(231,138,77,.48);
+  background:rgba(198,106,46,.12);
+}
+
+.qyntro-case-theme .showcase-hero{
+  background:
+    linear-gradient(115deg,rgba(20,16,13,.98),rgba(46,27,18,.94)),
+    radial-gradient(circle at 76% 20%,rgba(198,106,46,.26),transparent 38%);
+}
+
+.qyntro-case-theme .showcase-copy h1 span,
+.qyntro-case-theme .showcase-copy h2{
+  color:var(--qy-copper);
+}
+
+.qyntro-case-theme .showcase-lead,
+.qyntro-case-theme .showcase-fact strong,
+.qyntro-case-theme .overview-card p,
+.qyntro-case-theme .process-card p,
+.qyntro-case-theme .showcase-section-head p,
+.qyntro-case-theme .case-disclosure{
+  color:#d8c6b7;
+}
+
+.qyntro-case-theme .chip{
+  border-color:rgba(198,106,46,.34);
+  background:rgba(198,106,46,.10);
+  color:#f0d0ba;
+}
+
+.qyntro-case-theme .showcase-fact{
+  border-color:rgba(234,217,198,.12);
+}
+
+.qyntro-hero-visual{
+  min-height:560px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  border-radius:30px;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  border:1px solid rgba(234,217,198,.12);
+  box-shadow:0 32px 80px rgba(0,0,0,.35);
+}
+
+.qyntro-hero-visual img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:22px;
+}
+
+.qyntro-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:24px;
+}
+
+.qyntro-action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:44px;
+  padding:0 18px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:.01em;
+  border:1px solid rgba(234,217,198,.16);
+  color:#fff8ef;
+  background:rgba(255,255,255,.04);
+  transition:transform .18s ease,border-color .18s ease,background .18s ease;
+}
+
+.qyntro-action.primary{
+  color:#1d130e;
+  background:linear-gradient(135deg,#e48a50,#c66a2e);
+  border-color:transparent;
+}
+
+.qyntro-action:hover,
+.qyntro-action:focus-visible{
+  transform:translateY(-2px);
+  border-color:rgba(231,138,77,.52);
+}
+
+.qyntro-system-grid,
+.qyntro-variant-grid,
+.qyntro-application-grid{
+  display:grid;
+  gap:18px;
+}
+
+.qyntro-system-grid{grid-template-columns:1.1fr .9fr}
+.qyntro-variant-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.qyntro-application-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.qyntro-panel,
+.qyntro-variant,
+.qyntro-application{
+  position:relative;
+  overflow:hidden;
+  min-height:220px;
+  padding:26px;
+  border:1px solid rgba(234,217,198,.10);
+  border-radius:24px;
+  background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+}
+
+.qyntro-panel h3,
+.qyntro-variant h3,
+.qyntro-application h3{
+  margin:0 0 8px;
+  color:#fff8ef;
+}
+
+.qyntro-panel p,
+.qyntro-variant p,
+.qyntro-application p{
+  margin:0;
+  color:#cdb9a7;
+  line-height:1.72;
+}
+
+.qyntro-logo-demo{
+  min-height:280px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(198,106,46,.22),transparent 46%),
+    #171310;
+}
+
+.qyntro-mark{
+  width:118px;
+  height:118px;
+  border:18px solid var(--qy-copper);
+  border-right-color:transparent;
+  border-radius:50%;
+  transform:rotate(-18deg);
+  margin:0 auto 18px;
+  position:relative;
+}
+
+.qyntro-mark::after{
+  content:"";
+  position:absolute;
+  right:-20px;
+  bottom:2px;
+  width:50px;
+  height:18px;
+  border-radius:999px;
+  background:var(--qy-cream);
+  transform:rotate(28deg);
+}
+
+.qyntro-wordmark{
+  font-weight:950;
+  font-size:clamp(1.7rem,4vw,3.2rem);
+  letter-spacing:.06em;
+  color:#fff8ef;
+}
+
+.qyntro-descriptor{
+  margin-top:4px;
+  font-size:.9rem;
+  letter-spacing:.45em;
+  color:var(--qy-cream);
+}
+
+.qyntro-swatches{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  margin-top:24px;
+}
+
+.qyntro-swatch{
+  min-height:108px;
+  padding:12px;
+  border-radius:18px;
+  display:flex;
+  align-items:flex-end;
+  font-size:.74rem;
+  font-weight:800;
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.qyntro-swatch:nth-child(1){background:#1e1a17;color:#fff}
+.qyntro-swatch:nth-child(2){background:#3a2417;color:#fff}
+.qyntro-swatch:nth-child(3){background:#c66a2e;color:#fff}
+.qyntro-swatch:nth-child(4){background:#ead9c6;color:#35251d}
+.qyntro-swatch:nth-child(5){background:#f6f1e9;color:#35251d}
+
+.qyntro-variant{
+  min-height:285px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  isolation:isolate;
+}
+
+.qyntro-variant::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+}
+
+.qyntro-variant::after{
+  content:"QYNTRO DAILY\A COFFEE";
+  white-space:pre;
+  position:absolute;
+  top:26px;
+  left:26px;
+  z-index:-1;
+  font-weight:950;
+  letter-spacing:.06em;
+  color:rgba(255,255,255,.92);
+  line-height:1.35;
+}
+
+.qyntro-variant.dark::before{background:linear-gradient(145deg,#151311,#26211c)}
+.qyntro-variant.house::before{background:linear-gradient(145deg,#65341f,#9d552f)}
+.qyntro-variant.smooth::before{background:linear-gradient(145deg,#d8bea4,#f1e5d7)}
+.qyntro-variant.smooth::after{color:#2b1b14}
+.qyntro-variant.smooth h3{color:#2b1b14}
+.qyntro-variant.smooth p{color:#664634}
+
+.qyntro-flavors{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+
+.qyntro-flavors span{
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:.75rem;
+  font-weight:750;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.qyntro-variant.smooth .qyntro-flavors span{
+  color:#583724;
+  background:rgba(255,255,255,.42);
+  border-color:rgba(61,37,25,.12);
+}
+
+.qyntro-application strong{
+  display:block;
+  margin:8px 0 12px;
+  color:#e48a50;
+  font-size:.82rem;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+
+.qyntro-note{
+  margin-top:20px;
+  padding:18px 20px;
+  border-left:3px solid var(--qy-copper);
+  border-radius:0 16px 16px 0;
+  color:#ccb9a8;
+  background:rgba(198,106,46,.08);
+  line-height:1.7;
+}
+
+@media (max-width:980px){
+  .qyntro-system-grid{grid-template-columns:1fr}
+  .qyntro-variant-grid,
+  .qyntro-application-grid{grid-template-columns:1fr}
+  .qyntro-hero-visual{min-height:auto}
+}
+
+@media (max-width:640px){
+  .qyntro-swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .qyntro-swatch:last-child{grid-column:1/-1}
+  .qyntro-action{width:100%}
+}
