@@ -5,6 +5,8 @@
  * Purpose:
  * - Uses the same hero-video behavior as the approved Gatchalian case study.
  * - Resolves Exponify from Draft Preview / Live state when available.
+ * - Uses one campaign-cover source for the hero background, video poster, and
+ *   Featured Campaign artwork so an Admin image replacement stays consistent.
  * - Falls back to the latest verified uploaded Exponify MP4 so the already-uploaded
  *   asset is visible even when the Draft item mediaUrl was not persisted.
  * - Preserves an active local Draft Preview when navigating into/out of the case.
@@ -77,6 +79,12 @@
     const videoUrl = safeHttpUrl(item.videoUrl || item.mediaUrl) || APPROVED_VIDEO_URL;
 
     document.documentElement.style.setProperty('--campaign-cover', `url("${coverUrl.replace(/"/g,'%22')}")`);
+
+    const featuredImage = document.querySelector('[data-ex-feature-image]');
+    if (featuredImage) {
+      featuredImage.src = coverUrl;
+      if (String(item.imageAlt || '').trim()) featuredImage.alt = String(item.imageAlt).trim();
+    }
 
     const video = document.querySelector('[data-ex-video]');
     const fallback = document.querySelector('[data-ex-video-fallback]');
