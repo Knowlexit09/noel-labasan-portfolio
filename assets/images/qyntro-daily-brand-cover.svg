@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Qyntro Daily brand identity and packaging cover</title>
+  <desc id="desc">Warm coffee brand presentation with Qyntro Daily identity, three packaging variants, and a coffee-inspired neutral palette.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171411"/>
+      <stop offset="0.55" stop-color="#2b1a12"/>
+      <stop offset="1" stop-color="#56301d"/>
+    </linearGradient>
+    <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2a26e"/>
+      <stop offset="1" stop-color="#b65725"/>
+    </linearGradient>
+    <linearGradient id="creamBag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6ede1"/>
+      <stop offset="1" stop-color="#ddc5a9"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#000" flood-opacity=".36"/>
+    </filter>
+    <pattern id="grain" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="8" r="1.1" fill="#fff" opacity=".05"/>
+      <circle cx="20" cy="18" r=".8" fill="#fff" opacity=".04"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#grain)"/>
+  <circle cx="1430" cy="115" r="250" fill="#c66a2e" opacity=".10"/>
+  <circle cx="120" cy="920" r="320" fill="#ead9c6" opacity=".05"/>
+
+  <g transform="translate(105 95)">
+    <text x="0" y="0" fill="#d88a54" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" letter-spacing="7">PERSONAL PROJECT · BRAND IDENTITY &amp; PACKAGING</text>
+    <text x="0" y="116" fill="#fff8ef" font-family="Arial Black,Arial,Helvetica,sans-serif" font-size="108" font-weight="900" letter-spacing="3">QYNTRO DAILY</text>
+    <text x="5" y="183" fill="#ead9c6" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="700" letter-spacing="14">COFFEE</text>
+    <text x="5" y="246" fill="#d88a54" font-family="Georgia,serif" font-size="34" font-style="italic">Fuel your everyday.</text>
+    <line x1="0" y1="291" x2="575" y2="291" stroke="#c66a2e" stroke-width="3" opacity=".72"/>
+    <text x="0" y="342" fill="#d9c8b6" font-family="Arial,Helvetica,sans-serif" font-size="24">Warm identity · flexible packaging · lifestyle applications</text>
+  </g>
+
+  <g transform="translate(990 86)">
+    <circle cx="108" cy="105" r="86" fill="none" stroke="url(#copper)" stroke-width="22" stroke-linecap="round" stroke-dasharray="440 120" transform="rotate(-24 108 105)"/>
+    <path d="M69 108c24-28 55-35 84-20 2 34-23 63-59 62-24 0-42-15-43-35 0-3 7-6 18-7z" fill="none" stroke="#fff3e7" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M95 76c-19-25 12-31 0-56M126 76c-20-27 15-35 5-62" fill="none" stroke="#e7854f" stroke-width="13" stroke-linecap="round"/>
+    <path d="M157 102c24-3 35 10 27 29-6 16-23 22-42 16" fill="none" stroke="#fff3e7" stroke-width="13" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <g transform="translate(680 355)">
+      <path d="M0 54Q0 0 54 0h260q54 0 54 54v490q0 50-50 50H50Q0 594 0 544z" fill="#12110f" stroke="#63341e" stroke-width="3"/>
+      <rect x="25" y="35" width="318" height="12" rx="6" fill="#2c2823"/>
+      <path d="M278 62c34 29 55 70 58 116M302 71c-14 22-27 48-33 78M307 102c-31-2-55 7-76 25" fill="none" stroke="#bf632f" stroke-width="4" opacity=".75"/>
+      <circle cx="184" cy="176" r="58" fill="none" stroke="#c66a2e" stroke-width="15" stroke-dasharray="280 85" transform="rotate(-28 184 176)"/>
+      <path d="M155 179c15-18 37-22 57-12 1 23-15 42-39 42-17 0-30-10-30-23 0-2 5-5 12-7z" fill="none" stroke="#f8eadc" stroke-width="9"/>
+      <path d="M174 155c-11-15 7-21 0-35M194 155c-12-16 9-23 3-39" fill="none" stroke="#e7854f" stroke-width="8" stroke-linecap="round"/>
+      <text x="184" y="279" text-anchor="middle" fill="#fff8ef" font-family="Arial Black,Arial" font-size="34" font-weight="900">QYNTRO DAILY</text>
+      <text x="184" y="318" text-anchor="middle" fill="#ead9c6" font-family="Arial" font-size="18" font-weight="700" letter-spacing="8">COFFEE</text>
+      <text x="184" y="367" text-anchor="middle" fill="#d98953" font-family="Georgia" font-style="italic" font-size="18">Fuel your everyday.</text>
+      <rect x="45" y="407" width="278" height="108" rx="12" fill="#1a1815" stroke="#c66a2e" stroke-width="2"/>
+      <text x="184" y="450" text-anchor="middle" fill="#fff8ef" font-family="Arial" font-size="26" font-weight="800">DARK ROAST</text>
+      <text x="184" y="484" text-anchor="middle" fill="#d9c8b6" font-family="Arial" font-size="17">Bold &amp; Rich</text>
+      <text x="184" y="557" text-anchor="middle" fill="#ead9c6" font-family="Arial" font-size="16">250g · 100% Arabica Beans</text>
+    </g>
+
+    <g transform="translate(1065 408)">
+      <path d="M0 48Q0 0 48 0h230q48 0 48 48v438q0 44-44 44H44Q0 530 0 486z" fill="#8b4626" stroke="#b86738" stroke-width="3"/>
+      <rect x="22" y="31" width="282" height="11" rx="6" fill="#6d361f"/>
+      <circle cx="163" cy="152" r="51" fill="none" stroke="#f0a173" stroke-width="13" stroke-dasharray="246 74" transform="rotate(-28 163 152)"/>
+      <path d="M138 154c14-15 33-19 50-10 1 20-13 37-34 37-15 0-26-9-26-20 0-2 4-4 10-7z" fill="none" stroke="#fff2e5" stroke-width="8"/>
+      <text x="163" y="238" text-anchor="middle" fill="#fff6ed" font-family="Arial Black,Arial" font-size="28" font-weight="900">QYNTRO DAILY</text>
+      <text x="163" y="270" text-anchor="middle" fill="#ffe4d1" font-family="Arial" font-size="15" font-weight="700" letter-spacing="7">COFFEE</text>
+      <text x="163" y="351" text-anchor="middle" fill="#fff8ef" font-family="Arial" font-size="22" font-weight="800">HOUSE BLEND</text>
+      <text x="163" y="381" text-anchor="middle" fill="#f4d4c0" font-family="Arial" font-size="15">Balanced &amp; Smooth</text>
+      <text x="163" y="496" text-anchor="middle" fill="#ffe5d3" font-family="Arial" font-size="14">250g</text>
+    </g>
+
+    <g transform="translate(1380 438)">
+      <path d="M0 43Q0 0 43 0h185q43 0 43 43v393q0 40-40 40H40Q0 476 0 436z" fill="url(#creamBag)" stroke="#c59d7d" stroke-width="3"/>
+      <rect x="20" y="28" width="231" height="10" rx="5" fill="#d0b397"/>
+      <circle cx="135" cy="132" r="45" fill="none" stroke="#a94920" stroke-width="12" stroke-dasharray="218 66" transform="rotate(-28 135 132)"/>
+      <path d="M113 134c12-14 29-17 44-9 1 18-11 33-30 33-13 0-23-8-23-18 0-2 4-4 9-6z" fill="none" stroke="#62301d" stroke-width="7"/>
+      <text x="135" y="208" text-anchor="middle" fill="#2a1b14" font-family="Arial Black,Arial" font-size="23" font-weight="900">QYNTRO DAILY</text>
+      <text x="135" y="236" text-anchor="middle" fill="#6d402d" font-family="Arial" font-size="13" font-weight="700" letter-spacing="6">COFFEE</text>
+      <text x="135" y="310" text-anchor="middle" fill="#5a2c19" font-family="Arial" font-size="19" font-weight="800">SMOOTH BLEND</text>
+      <text x="135" y="338" text-anchor="middle" fill="#7e543e" font-family="Arial" font-size="14">Mild &amp; Clean</text>
+      <text x="135" y="447" text-anchor="middle" fill="#6b432f" font-family="Arial" font-size="13">250g</text>
+    </g>
+  </g>
+
+  <g transform="translate(110 740)">
+    <text x="0" y="0" fill="#d88a54" font-family="Arial" font-size="20" font-weight="700" letter-spacing="4">VISUAL SYSTEM</text>
+    <g transform="translate(0 38)">
+      <rect width="88" height="88" rx="18" fill="#1e1a17" stroke="#ffffff" stroke-opacity=".12"/>
+      <rect x="108" width="88" height="88" rx="18" fill="#3a2417" stroke="#ffffff" stroke-opacity=".12"/>
+      <rect x="216" width="88" height="88" rx="18" fill="#c66a2e" stroke="#ffffff" stroke-opacity=".12"/>
+      <rect x="324" width="88" height="88" rx="18" fill="#ead9c6" stroke="#ffffff" stroke-opacity=".12"/>
+      <rect x="432" width="88" height="88" rx="18" fill="#f6f1e9" stroke="#ffffff" stroke-opacity=".12"/>
+    </g>
+    <text x="0" y="158" fill="#bda997" font-family="Arial" font-size="18">Charcoal · Coffee Brown · Copper · Cream · Light Beige</text>
+  </g>
+
+  <text x="1492" y="944" text-anchor="end" fill="#c4ad99" font-family="Arial" font-size="18">Brand guide · Packaging · Social · Applications</text>
+</svg>
