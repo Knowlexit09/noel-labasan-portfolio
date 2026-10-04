@@ -5,7 +5,7 @@
  *
  * Purpose:
  * - Gives the owner one idempotent action to merge the prepared release-candidate
- *   Exponify, Seedlandia, and Knowledge Lab entries into SERVER DRAFT.
+ *   Exponify, Seedlandia, Qyntro Daily, and Knowledge Lab entries into SERVER DRAFT.
  * - Enables Multimedia + Knowledge Lab in Draft so Preview Draft shows the exact
  *   candidate content before the owner performs the final Publish Live action.
  *
@@ -75,6 +75,28 @@
       imageAlt:'Seedlandia game world visual development cover',
       detailsUrl:'multimedia/seedlandia.html',
       mediaUrl:'multimedia/seedlandia.html'
+    },
+    {
+      published:true,
+      title:'Qyntro Daily — Brand Identity & Packaging',
+      category:'Brand Identity',
+      label:'Personal Project',
+      projectType:'Personal Project',
+      mediaType:'image',
+      objective:'Create a warm, premium coffee identity with a flexible visual system that can extend across packaging, social media, and everyday brand touchpoints.',
+      audience:'Modern everyday coffee drinkers looking for a polished but approachable lifestyle brand.',
+      role:'Brand concept, visual direction, logo application, packaging system, social media design, mockup presentation, copy review, and final refinement.',
+      description:'A 10-page personal coffee brand system built in Canva around Qyntro Daily as the core name and Coffee as the descriptor, covering logo variations, a warm earthy visual identity, three packaging variants, brand applications, social media concepts, promotional materials, and lifestyle mockups.',
+      disclosure:'Created as a personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, and presentation were manually refined.',
+      tools:['Canva'],
+      tags:['Brand Identity','Packaging Design','Coffee Branding','Social Media','Mockup Presentation','Canva'],
+      thumbnailUrl:`${publicRoot}assets/images/qyntro-daily-brand-cover.svg`,
+      imageAlt:'Qyntro Daily coffee brand identity and packaging presentation',
+      detailsUrl:'multimedia/qyntro-daily.html',
+      mediaUrl:'multimedia/qyntro-daily.html',
+      canvaViewUrl:'https://www.canva.com/d/kuS8O6vPKjTqtMl',
+      sourceCanvaDesignId:'DAHXE6rHNGs',
+      assetStatus:'Verified 10-page Canva brand guide reviewed and staged for Draft Preview.'
     }
   ];
 
@@ -159,7 +181,7 @@
     box.id='prepublishStagingPack';
     box.className='glass-panel';
     box.style.cssText='grid-column:1/-1;margin-top:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap';
-    box.innerHTML='<div><p class="eyebrow" style="margin:0 0 4px">PREPUBLICATION REVIEW SET</p><b style="font-size:11px">Gatchalian + Exponify video + Seedlandia + 3 Knowledge Lab starters</b><p style="margin:4px 0 0;color:#71899e;font-size:8px;line-height:1.5">Draft only. Idempotent. Preserves unrelated state. Live is never changed here.</p></div><button id="prepareReviewSetButton" class="secondary-action" type="button">Prepare review set</button>';
+    box.innerHTML='<div><p class="eyebrow" style="margin:0 0 4px">PREPUBLICATION REVIEW SET</p><b style="font-size:11px">Gatchalian + Exponify + Seedlandia + Qyntro Daily + 3 Knowledge Lab starters</b><p style="margin:4px 0 0;color:#71899e;font-size:8px;line-height:1.5">Draft only. Idempotent. Preserves unrelated state. Live is never changed here.</p></div><button id="prepareReviewSetButton" class="secondary-action" type="button">Prepare review set</button>';
     host.insertAdjacentElement('afterend',box);
     $('#prepareReviewSetButton')?.addEventListener('click',async event=>{
       const button=event.currentTarget;
