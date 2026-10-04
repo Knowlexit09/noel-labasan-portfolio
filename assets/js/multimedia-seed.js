@@ -101,6 +101,28 @@
         imageAlt:'Seedlandia game world visual development cover',
         detailsUrl:'multimedia/seedlandia.html',
         mediaUrl:'multimedia/seedlandia.html'
+      },
+      {
+        published:false,
+        title:'Qyntro Daily — Brand Identity & Packaging',
+        category:'Brand Identity',
+        label:'Personal Project',
+        projectType:'Personal Project',
+        mediaType:'image',
+        objective:'Create a warm, premium coffee identity with a flexible visual system that can extend across packaging, social media, and everyday brand touchpoints.',
+        audience:'Modern everyday coffee drinkers looking for a polished but approachable lifestyle brand.',
+        role:'Brand concept, visual direction, logo application, packaging system, social media design, mockup presentation, copy review, and final refinement.',
+        description:'A 10-page personal coffee brand system built in Canva around Qyntro Daily as the core name and Coffee as the descriptor, covering logo variations, a warm earthy visual identity, three packaging variants, brand applications, social media concepts, promotional materials, and lifestyle mockups.',
+        disclosure:'Created as a personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, and presentation were manually refined.',
+        tools:['Canva'],
+        tags:['Brand Identity','Packaging Design','Coffee Branding','Social Media','Mockup Presentation','Canva'],
+        thumbnailUrl:'assets/images/qyntro-daily-brand-cover.svg',
+        imageAlt:'Qyntro Daily coffee brand identity and packaging presentation',
+        detailsUrl:'multimedia/qyntro-daily.html',
+        mediaUrl:'multimedia/qyntro-daily.html',
+        canvaViewUrl:'https://www.canva.com/d/kuS8O6vPKjTqtMl',
+        sourceCanvaDesignId:'DAHXE6rHNGs',
+        assetStatus:'Verified 10-page Canva brand guide reviewed and staged for Draft Preview.'
       }
     ];
   }
