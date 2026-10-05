@@ -82,21 +82,24 @@
       category:'Brand Identity',
       label:'Personal Project',
       projectType:'Personal Project',
-      mediaType:'image',
+      mediaType:'video',
       objective:'Create a warm, premium coffee identity with a flexible visual system that can extend across packaging, social media, and everyday brand touchpoints.',
       audience:'Modern everyday coffee drinkers looking for a polished but approachable lifestyle brand.',
-      role:'Brand concept, visual direction, logo application, packaging system, social media design, mockup presentation, copy review, and final refinement.',
-      description:'A 10-page personal coffee brand system built in Canva around Qyntro Daily as the core name and Coffee as the descriptor, covering logo variations, a warm earthy visual identity, three packaging variants, brand applications, social media concepts, promotional materials, and lifestyle mockups.',
-      disclosure:'Created as a personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, and presentation were manually refined.',
+      role:'Brand concept, visual direction, logo application, packaging system, social media design, mockup presentation, copy review, video presentation, and final refinement.',
+      description:'A 10-page personal coffee brand system built in Canva around Qyntro Daily as the core name and Coffee as the descriptor, covering logo variations, a warm earthy visual identity, three packaging variants, brand applications, social media concepts, promotional materials, lifestyle mockups, and a 51.7-second presentation video.',
+      disclosure:'Created as a personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, video assembly, and presentation were manually refined.',
       tools:['Canva'],
-      tags:['Brand Identity','Packaging Design','Coffee Branding','Social Media','Mockup Presentation','Canva'],
-      thumbnailUrl:`${publicRoot}assets/images/qyntro/qyntro-cover.webp`,
+      tags:['Brand Identity','Packaging Design','Coffee Branding','Social Media','Video Presentation','Mockup Presentation','Canva'],
+      thumbnailUrl:`${publicRoot}assets/images/qyntro-daily-brand-cover.svg`,
       imageAlt:'Qyntro Daily coffee brand identity and packaging presentation',
       detailsUrl:'multimedia/qyntro-daily.html',
-      mediaUrl:'multimedia/qyntro-daily.html',
-      canvaViewUrl:'https://www.canva.com/d/kuS8O6vPKjTqtMl',
+      mediaUrl:'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/qyntro-daily-brand-identity-packaging/1791179203173-video.mp4',
+      canvaViewUrl:'https://www.canva.com/d/nNv0BDZKhkB3yuf',
       sourceCanvaDesignId:'DAHXE6rHNGs',
-      assetStatus:'Verified 10-page Canva brand guide and optimized final cover artwork staged for Draft Preview; final web-optimized video upload pending owner review.'
+      canonicalVideoFile:'Qyntro_Daily_Web_Optimized_HQ.mp4',
+      sourceVideoFile:'Qyntro Daily with background music.mp4',
+      videoSpecs:'1914x1080 · 30 fps · 51.7 sec · H.264/AAC',
+      assetStatus:'Verified 10-page Canva brand guide and owner-uploaded web-optimized MP4 are staged for Draft Preview.'
     }
   ];
 
