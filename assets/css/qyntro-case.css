@@ -60,25 +60,67 @@ body{
   border-color:rgba(234,217,198,.12);
 }
 
-.qyntro-hero-visual{
-  min-height:560px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  border-radius:30px;
+/* HERO VIDEO — landscape project presentation, independent of the 9:16 ad cases. */
+.qyntro-video-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  align-self:center;
   overflow:hidden;
-  background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
-  border:1px solid rgba(234,217,198,.12);
-  box-shadow:0 32px 80px rgba(0,0,0,.35);
+  border-radius:28px;
+  border:1px solid rgba(234,217,198,.14);
+  background:#120f0d;
+  box-shadow:0 32px 80px rgba(0,0,0,.38);
 }
 
-.qyntro-hero-visual img{
+.qyntro-video-wrap video{
   display:block;
   width:100%;
-  height:auto;
-  border-radius:22px;
+  height:100%;
+  object-fit:contain;
+  background:#0b0908;
 }
+
+.qyntro-video-fallback{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:#17120f;
+}
+
+.qyntro-video-fallback[hidden]{display:none!important}
+
+.qyntro-video-fallback img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.92;
+}
+
+.qyntro-video-fallback::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(8,6,5,.82),rgba(8,6,5,.04) 58%);
+  pointer-events:none;
+}
+
+.qyntro-video-fallback-copy{
+  position:absolute;
+  z-index:2;
+  left:24px;
+  right:24px;
+  bottom:22px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  color:#fff8ef;
+}
+
+.qyntro-video-fallback-copy strong{font-size:1rem}
+.qyntro-video-fallback-copy span{font-size:.8rem;color:#d7c2b0;line-height:1.45}
 
 .qyntro-actions{
   display:flex;
@@ -114,6 +156,56 @@ body{
 .qyntro-action:focus-visible{
   transform:translateY(-2px);
   border-color:rgba(231,138,77,.52);
+}
+
+/* ACTUAL 10-PAGE CANVA GUIDE — lets the portfolio show the user's real design boards. */
+.qyntro-guide-section{
+  background:
+    radial-gradient(circle at 92% 10%,rgba(198,106,46,.12),transparent 30rem),
+    transparent;
+}
+
+.qyntro-canva-figure{
+  margin:0;
+  border:1px solid rgba(234,217,198,.12);
+  border-radius:26px;
+  overflow:hidden;
+  background:#15110e;
+  box-shadow:0 26px 70px rgba(0,0,0,.30);
+}
+
+.qyntro-canva-frame-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  min-height:360px;
+  background:linear-gradient(135deg,#17120f,#2b1a12);
+}
+
+.qyntro-canva-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#17120f;
+}
+
+.qyntro-canva-figure figcaption{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:16px 20px;
+  color:#cdb9a7;
+  font-size:.82rem;
+  border-top:1px solid rgba(234,217,198,.10);
+}
+
+.qyntro-canva-figure figcaption a{
+  color:#ef9a60;
+  font-weight:800;
+  text-decoration:none;
 }
 
 .qyntro-system-grid,
@@ -305,11 +397,14 @@ body{
   .qyntro-system-grid{grid-template-columns:1fr}
   .qyntro-variant-grid,
   .qyntro-application-grid{grid-template-columns:1fr}
-  .qyntro-hero-visual{min-height:auto}
+  .qyntro-video-wrap{margin-top:10px}
 }
 
 @media (max-width:640px){
   .qyntro-swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
   .qyntro-swatch:last-child{grid-column:1/-1}
   .qyntro-action{width:100%}
+  .qyntro-canva-frame-wrap{min-height:240px}
+  .qyntro-canva-figure figcaption{align-items:flex-start;flex-direction:column}
+  .qyntro-video-fallback-copy{left:16px;right:16px;bottom:14px}
 }
