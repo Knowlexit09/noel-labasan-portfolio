@@ -7,6 +7,8 @@
  * - Keeps heavy video in mediaUrl for playback/case-study use.
  * - Routes known featured Multimedia cards to richer internal case-study pages.
  * - Preserves the Draft Preview nonce when opening an internal case study.
+ * - Normalizes the Qyntro card's video badge while older Draft metadata still
+ *   reports mediaType=image even though its verified MP4 is already stored.
  * - Does not alter filters, publication state, or remote content.
  */
 (function multimediaCaseLinks(){
@@ -23,6 +25,11 @@
     ['qyntro daily - brand identity & packaging', 'multimedia/qyntro-daily.html']
   ]);
 
+  const qyntroTitles = new Set([
+    'qyntro daily — brand identity & packaging',
+    'qyntro daily - brand identity & packaging'
+  ]);
+
   function normalize(value) {
     return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
   }
@@ -34,11 +41,24 @@
     return `${baseHref}${separator}draftPreview=${encodeURIComponent(nonce)}`;
   }
 
+  function ensureQyntroVideoBadge(card,title) {
+    if (!qyntroTitles.has(title)) return;
+    const visual = card.querySelector('.multimedia-visual');
+    if (!visual || visual.querySelector('.media-play-badge')) return;
+    const badge = document.createElement('span');
+    badge.className = 'media-play-badge';
+    badge.textContent = '▶ Video';
+    const typeBadge = visual.querySelector('.media-type-badge');
+    if (typeBadge) visual.insertBefore(badge,typeBadge);
+    else visual.appendChild(badge);
+  }
+
   function apply() {
     document.querySelectorAll('.multimedia-card').forEach(card => {
       const title = normalize(card.querySelector('h3')?.textContent);
       const href = caseLinks.get(title);
       if (!href) return;
+      ensureQyntroVideoBadge(card,title);
       const link = card.querySelector('.project-link');
       if (!link) return;
       link.href = caseHref(href);
