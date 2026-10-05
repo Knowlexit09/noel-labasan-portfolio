@@ -4,19 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Qyntro Daily personal brand identity and packaging case study by Noel Labasan — logo application, packaging system, social media design, brand applications, and Canva presentation.">
+  <meta name="description" content="Qyntro Daily personal brand identity and packaging case study by Noel Labasan — logo application, packaging system, social media design, brand applications, video presentation, and Canva brand guide.">
   <title>Qyntro Daily Brand Identity &amp; Packaging | Noel Labasan</title>
 
-  <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20260915-4">
+  <link rel="stylesheet" href="../assets/css/components.css?v=20260915-4">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=20260915-4">
   <link rel="stylesheet" href="../assets/css/accessibility-performance.css?v=20260916-1">
   <link rel="stylesheet" href="../assets/css/multimedia-case.css?v=20261003-6">
-  <link rel="stylesheet" href="../assets/css/qyntro-case.css?v=20261005-1">
+  <link rel="stylesheet" href="../assets/css/qyntro-case.css?v=20261005-2">
+
+  <!-- Shared state lets the case read the owner's saved Draft/Live media URL without bypassing Admin/RLS. -->
+  <script defer src="../assets/js/config.js?v=20260915-4"></script>
+  <script defer src="../assets/js/multimedia-seed.js?v=20261005-2"></script>
+  <script defer src="../assets/js/backend-config.js?v=20261004-4"></script>
+  <script defer src="../assets/js/backend-loader.js?v=20260915-4"></script>
+  <script defer src="../assets/js/qyntro-case-runtime.js?v=20261005-1"></script>
   <script defer src="../assets/js/accessibility-performance.js?v=20260916-1"></script>
 </head>
-<body>
-  <main class="case-main qyntro-case-theme">
+<body class="qyntro-case-theme">
+  <main class="case-main">
     <nav class="creative-case-nav" aria-label="Creative portfolio navigation">
       <a class="creative-case-brand" href="../index.html">
         <span class="creative-case-brand-mark">NL</span>
@@ -30,7 +37,7 @@
       </div>
     </nav>
 
-    <section class="showcase-hero" aria-labelledby="qyntroTitle">
+    <section class="showcase-hero qyntro-hero" aria-labelledby="qyntroTitle">
       <div class="showcase-hero-inner">
         <div class="showcase-copy">
           <a class="case-back" href="../index.html#multimedia">← Back to Multimedia</a>
@@ -43,26 +50,60 @@
             <span class="chip">Canva</span>
             <span class="chip">Brand Identity</span>
             <span class="chip">Packaging Design</span>
-            <span class="chip">Social Media</span>
+            <span class="chip">Video Presentation</span>
           </div>
 
           <div class="showcase-facts" aria-label="Project facts">
             <div class="showcase-fact"><span>Year</span><strong>2026</strong></div>
             <div class="showcase-fact"><span>Role</span><strong>Brand Concept<br>Visual Direction &amp; Layout</strong></div>
             <div class="showcase-fact"><span>Project</span><strong>Personal Portfolio Project</strong></div>
-            <div class="showcase-fact"><span>Goal</span><strong>Create a cohesive daily-coffee brand system</strong></div>
+            <div class="showcase-fact"><span>Deliverable</span><strong>10-page guide + 51.7s video</strong></div>
           </div>
 
           <div class="qyntro-actions">
-            <a class="qyntro-action primary" href="https://www.canva.com/d/kuS8O6vPKjTqtMl" target="_blank" rel="noopener noreferrer">View 10-page Canva brand guide ↗</a>
-            <a class="qyntro-action" href="#brand-system">Explore the case ↓</a>
+            <a class="qyntro-action primary" href="#brand-guide">View brand guide ↓</a>
+            <a class="qyntro-action" href="https://www.canva.com/d/nNv0BDZKhkB3yuf" target="_blank" rel="noopener noreferrer">Open in Canva ↗</a>
           </div>
         </div>
 
-        <figure class="qyntro-hero-visual">
-          <img src="../assets/images/qyntro/qyntro-cover.webp" alt="Qyntro Daily coffee brand identity with Dark Roast, House Blend, and Smooth Blend packaging concepts">
-        </figure>
+        <div class="qyntro-video-wrap" aria-label="Qyntro Daily brand presentation video">
+          <video data-qy-video hidden controls playsinline preload="metadata" poster="../assets/images/qyntro-daily-brand-cover.svg" aria-label="Qyntro Daily brand identity and packaging presentation video"></video>
+          <div class="qyntro-video-fallback" data-qy-video-fallback>
+            <img data-qy-cover src="../assets/images/qyntro-daily-brand-cover.svg" alt="Qyntro Daily coffee brand identity and packaging presentation">
+            <div class="qyntro-video-fallback-copy">
+              <strong>Qyntro Daily presentation</strong>
+              <span>The saved Draft MP4 will appear here automatically when its media URL is available.</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section class="showcase-section qyntro-guide-section" id="brand-guide" aria-labelledby="brandGuideTitle">
+      <div class="showcase-section-head">
+        <div>
+          <div class="section-kicker">Actual Design Boards</div>
+          <h2 id="brandGuideTitle">Full 10-page Qyntro Daily brand guide.</h2>
+          <p>This embedded Canva presentation shows the actual project boards: cover, logo variations, visual identity, packaging system, coffee variants, brand applications, social campaign, promotional materials, lifestyle applications, and project summary.</p>
+        </div>
+      </div>
+
+      <figure class="qyntro-canva-figure">
+        <div class="qyntro-canva-frame-wrap">
+          <iframe
+            class="qyntro-canva-frame"
+            src="https://www.canva.com/design/DAHXE6rHNGs/view?embed"
+            title="Qyntro Daily 10-page Canva brand guide"
+            loading="lazy"
+            allowfullscreen="allowfullscreen"
+            allow="fullscreen">
+          </iframe>
+        </div>
+        <figcaption>
+          <span>10 design boards · Canva</span>
+          <a href="https://www.canva.com/d/nNv0BDZKhkB3yuf" target="_blank" rel="noopener noreferrer">Open full-screen brand guide ↗</a>
+        </figcaption>
+      </figure>
     </section>
 
     <section class="showcase-section" id="brand-system" aria-labelledby="brandSystemTitle">
@@ -139,7 +180,7 @@
       <div class="qyntro-application-grid">
         <article class="qyntro-application"><strong>Physical brand</strong><h3>Takeaway cups &amp; signage</h3><p>The icon and wordmark are applied at different scales to test visibility, recognition, and a premium everyday-coffee feel.</p></article>
         <article class="qyntro-application"><strong>Retail extension</strong><h3>Shopping bag &amp; membership card</h3><p>Warm neutrals, pattern details, and consistent hierarchy extend the visual language into simple promotional materials and loyalty touchpoints.</p></article>
-        <article class="qyntro-application"><strong>Digital campaign</strong><h3>Social media system</h3><p>Product awareness and lifestyle messages use the same brand voice, including campaign directions such as “Good Coffee. Bigger Days.” and “Fuel Your Everyday.”</p></article>
+        <article class="qyntro-application"><strong>Digital campaign</strong><h3>Social media system</h3><p>Product awareness and lifestyle messages use the same brand voice, including “Good Coffee. Bigger Days.”, “Fuel Your Everyday.”, and “Same Great Taste Every Day.”</p></article>
       </div>
     </section>
 
@@ -153,8 +194,8 @@
       <div class="overview-grid">
         <article class="overview-card"><div class="overview-icon">◎</div><span>Objective</span><strong>Build a warm, premium coffee identity.</strong><p>Create a consistent brand that can stretch from product packaging to everyday customer touchpoints.</p></article>
         <article class="overview-card"><div class="overview-icon">◉</div><span>Audience</span><strong>Modern everyday coffee drinkers.</strong><p>People who want a polished but approachable coffee brand that fits work, home, and daily routines.</p></article>
-        <article class="overview-card"><div class="overview-icon">▧</div><span>Deliverables</span><strong>Identity, packaging, social, and mockups.</strong><p>Logo applications, visual system, three pouch variants, brand applications, social media, and presentation boards.</p></article>
-        <article class="overview-card"><div class="overview-icon">▯</div><span>Source</span><strong>10-page editable Canva brand guide.</strong><p>The portfolio case links to the view-only Canva presentation instead of exposing the editable collaboration link.</p></article>
+        <article class="overview-card"><div class="overview-icon">▧</div><span>Deliverables</span><strong>Identity, packaging, social, video, and mockups.</strong><p>Logo applications, visual system, three pouch variants, applications, social media, presentation boards, and a music-backed project video.</p></article>
+        <article class="overview-card"><div class="overview-icon">▯</div><span>Source</span><strong>Editable Canva brand guide.</strong><p>The portfolio embeds the view-only presentation and keeps the editable collaboration link private.</p></article>
       </div>
     </section>
 
@@ -163,13 +204,13 @@
       <div class="process-grid">
         <article class="process-card"><div class="process-icon">◌</div><span>01 · Concept</span><strong>Define the brand role.</strong><p>Position Qyntro Daily as a modern coffee identity centered on everyday rituals, warmth, and premium presentation.</p></article>
         <article class="process-card"><div class="process-icon">◇</div><span>02 · Identity</span><strong>Shape the visual language.</strong><p>Develop the Q-led mark direction, earthy palette, typography hierarchy, and supporting botanical details.</p></article>
-        <article class="process-card"><div class="process-icon">▧</div><span>03 · System</span><strong>Apply it across formats.</strong><p>Test packaging variants, cups, bags, signage, promotional materials, social posts, and lifestyle mockups.</p></article>
+        <article class="process-card"><div class="process-icon">▧</div><span>03 · System</span><strong>Apply it across formats.</strong><p>Test packaging variants, cups, bags, signage, promotional materials, social posts, lifestyle mockups, and the video presentation.</p></article>
         <article class="process-card"><div class="process-icon">✓</div><span>04 · Refine</span><strong>Review consistency and presentation.</strong><p>Polish copy, hierarchy, color use, spacing, and the final Canva brand guide before portfolio staging.</p></article>
       </div>
     </section>
 
     <footer class="case-disclosure">
-      <div>Personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, and presentation were manually refined.</div>
+      <div>Personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, video assembly, and presentation were manually refined.</div>
       <a href="../index.html#multimedia">Back to Multimedia ↑</a>
     </footer>
   </main>
