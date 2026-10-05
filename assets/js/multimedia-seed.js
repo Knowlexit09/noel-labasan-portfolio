@@ -116,13 +116,13 @@
         disclosure:'Created as a personal project for portfolio development. AI-assisted ideation and template-supported workflow were used during concept development; final branding decisions, layout direction, copy review, and presentation were manually refined.',
         tools:['Canva'],
         tags:['Brand Identity','Packaging Design','Coffee Branding','Social Media','Mockup Presentation','Canva'],
-        thumbnailUrl:'assets/images/qyntro-daily-brand-cover.svg',
+        thumbnailUrl:'assets/images/qyntro/qyntro-cover.webp',
         imageAlt:'Qyntro Daily coffee brand identity and packaging presentation',
         detailsUrl:'multimedia/qyntro-daily.html',
         mediaUrl:'multimedia/qyntro-daily.html',
         canvaViewUrl:'https://www.canva.com/d/kuS8O6vPKjTqtMl',
         sourceCanvaDesignId:'DAHXE6rHNGs',
-        assetStatus:'Verified 10-page Canva brand guide reviewed and staged for Draft Preview.'
+        assetStatus:'Verified 10-page Canva brand guide and optimized final cover artwork staged for Draft Preview; final web-optimized video upload pending owner review.'
       }
     ];
   }
