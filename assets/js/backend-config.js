@@ -27,7 +27,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   if (/\/admin\/?$/i.test(location.pathname) || /\/multimedia\//i.test(location.pathname)) return;
   const script = document.createElement('script');
   script.defer = true;
-  script.src = 'assets/js/multimedia-case-links.js?v=20261004-4';
+  script.src = 'assets/js/multimedia-case-links.js?v=20261006-1';
   document.head.appendChild(script);
 })();
 
