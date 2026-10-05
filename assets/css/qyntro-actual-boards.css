@@ -1,0 +1,88 @@
+/* QYNTRO DAILY — actual Canva board presentation
+ * Uses view-only single-page Canva copies so the portfolio displays the owner's
+ * real approved logo/identity/packaging boards instead of recreated CSS artwork.
+ */
+.qyntro-board-list{
+  display:grid;
+  gap:34px;
+}
+
+.qyntro-board{
+  margin:0;
+  display:grid;
+  grid-template-columns:minmax(250px,.72fr) minmax(0,1.65fr);
+  gap:24px;
+  align-items:center;
+  padding:22px;
+  border:1px solid rgba(234,217,198,.12);
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.018));
+  box-shadow:0 24px 64px rgba(0,0,0,.24);
+}
+
+.qyntro-board-copy{
+  padding:8px 6px 8px 8px;
+}
+
+.qyntro-board-copy span{
+  display:block;
+  margin-bottom:10px;
+  color:#e78a4d;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.qyntro-board-copy h3{
+  margin:0 0 10px;
+  color:#fff8ef;
+  font-size:clamp(1.28rem,2.4vw,2rem);
+  line-height:1.18;
+}
+
+.qyntro-board-copy p{
+  margin:0;
+  color:#cdb9a7;
+  line-height:1.7;
+}
+
+.qyntro-board-frame-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(234,217,198,.12);
+  background:#120f0d;
+}
+
+.qyntro-board-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#120f0d;
+}
+
+.qyntro-full-guide-action{
+  display:flex;
+  justify-content:center;
+  margin-top:30px;
+}
+
+@media (max-width:900px){
+  .qyntro-board{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .qyntro-board-copy{padding:4px 2px 0}
+}
+
+@media (max-width:640px){
+  .qyntro-board-list{gap:22px}
+  .qyntro-board{padding:14px;border-radius:20px}
+  .qyntro-board-frame-wrap{border-radius:14px}
+  .qyntro-full-guide-action .qyntro-action{width:100%}
+}
