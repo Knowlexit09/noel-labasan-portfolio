@@ -4,9 +4,10 @@
  *
  * Purpose:
  * - Resolves the saved Qyntro Daily MP4 from active Draft Preview / Live state.
+ * - Falls back to the latest verified owner-uploaded Qyntro MP4 so the case remains
+ *   reviewable even if local Draft Preview state is unavailable.
  * - Keeps the case-study page read-only and preserves Draft Preview navigation.
- * - Uses the stable repository SVG as the poster/fallback while the owner's
- *   uploaded MP4 remains stored in Supabase through the normal Admin workflow.
+ * - Uses the stable repository SVG as the poster/fallback.
  *
  * Safety:
  * - Read-only. Never mutates Draft, Live, or Storage.
@@ -19,6 +20,7 @@
   const TARGET_TITLE = 'Qyntro Daily — Brand Identity & Packaging';
   const PREVIEW_KEY = 'nl-portfolio-draft-preview';
   const FALLBACK_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/qyntro-daily-brand-cover.svg';
+  const VERIFIED_VIDEO_URL = 'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/qyntro-daily-brand-identity-packaging/1791179203173-video.mp4';
   const KNOWN_BROKEN_COVER_PATH = '/assets/images/qyntro/qyntro-cover.webp';
 
   const safeHttpUrl = value => {
@@ -82,7 +84,7 @@
     let coverUrl = safeHttpUrl(item.thumbnailUrl || item.imageUrl);
     if (!coverUrl || coverUrl.includes(KNOWN_BROKEN_COVER_PATH)) coverUrl = FALLBACK_COVER_URL;
 
-    const videoUrl = safeVideoUrl(item.videoUrl || item.mediaUrl);
+    const videoUrl = safeVideoUrl(item.videoUrl || item.mediaUrl) || VERIFIED_VIDEO_URL;
     const video = document.querySelector('[data-qy-video]');
     const fallback = document.querySelector('[data-qy-video-fallback]');
     const fallbackImage = document.querySelector('[data-qy-cover]');
@@ -138,7 +140,7 @@
       }
       render(config || window.PORTFOLIO_CONFIG || {});
     } catch (error) {
-      console.info('[Qyntro case] State unavailable; showing stable cover and Canva guide.');
+      console.info('[Qyntro case] State unavailable; using verified uploaded video fallback.');
       render({content:{multimedia:[]}});
     }
   }
