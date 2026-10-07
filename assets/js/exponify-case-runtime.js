@@ -23,7 +23,7 @@
   const TARGET_TITLES = new Set(['Exponify — Business Operations Campaign','Exponify PH — Client Acquisition Campaign']);
   const PREVIEW_KEY = 'nl-portfolio-draft-preview';
 
-  const APPROVED_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/exponify-campaign-cover.svg';
+  const APPROVED_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/exponify-ph-client-acquisition-cover.svg';
   const APPROVED_VIDEO_URL = 'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/exponify-business-operations-campaign/1791057046598-video.mp4';
 
   const safeHttpUrl = value => {
@@ -75,7 +75,7 @@
 
   function render(config) {
     const item = findProject(config) || {};
-    const coverUrl = safeHttpUrl(item.thumbnailUrl || item.imageUrl) || APPROVED_COVER_URL;
+    const coverUrl = APPROVED_COVER_URL; // Owner-approved proposal cover intentionally overrides stale Draft/Live thumbnails.
     const videoUrl = safeHttpUrl(item.videoUrl || item.mediaUrl) || APPROVED_VIDEO_URL;
 
     document.documentElement.style.setProperty('--campaign-cover', `url("${coverUrl.replace(/"/g,'%22')}")`);
