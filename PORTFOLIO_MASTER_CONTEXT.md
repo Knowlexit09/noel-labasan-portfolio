@@ -5,8 +5,8 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-07 (Asia/Manila) — Qyntro live + Seedlandia planning showcase update**  
-> Latest verified deployment immediately before this context-only update: **GitHub Pages Run #252 — success**, head `9772dcc48076a31d2a3135685ebd1dd3858e44e8`.
+> Last consolidated: **2026-10-07 (Asia/Manila) — Exponify partner-collaboration + Seedlandia planning update**  
+> Latest verified deployment immediately before this context-only update: **GitHub Pages Run #268 — success**, head `55b323ccabc339bde22b70d8a09ab136e6a62e9f`.
 >
 > **New chats must read this file first, then verify actual `main` and the latest Pages deployment before editing. Do not restart completed work.**
 
@@ -261,31 +261,37 @@ The owner previously clicked Publish Live for Gatchalian before changing the wor
 
 ---
 
-# 9. Exponify — Multimedia Project #2 STAGED
+# 9. Exponify — Multimedia Project #2
 
-Current classification: **Spec Work / Campaign Concept**.
+Current classification: **Partner Collaboration / Business Development Campaign**.
 
-This is deliberately conservative because current evidence does not verify that Exponify is Noel's company/client work or that there is explicit public-display permission. If the user later confirms ownership/client status and permission, the label may be updated.
+The user explicitly clarified that Exponify PH is a business partner/collaboration, not a paying client. The portfolio must not label this as Client Work. The work is presented as advertising and client-acquisition material created to help the partnership attract prospective clients.
 
-Staging case:
+Case:
 
 - `multimedia/exponify.html`
 - `assets/css/exponify-case.css`
-- `assets/images/exponify-campaign-cover.svg`
-- `noindex,nofollow`
+- `assets/js/exponify-case-runtime.js`
+- remains `noindex,nofollow` until a separate indexing approval/pass
+- approved proposal cover/design: Canva `DAHXThERlt8`
+- current Canva view URL: `https://www.canva.com/d/s1WqbUAYLo4TXrM`
+- verified uploaded MP4 remains bound as the campaign video
 
-Creative direction:
+Approved campaign/proposal direction includes:
 
-- corporate/tech style clearly different from Gatchalian,
-- problem-first 9:16 ad logic,
-- scattered/manual work + missed follow-ups,
-- solution reveal,
-- grouped Sales / CRM / Inventory / Reports,
-- real/verified product UI only if actual screenshots are added,
-- CTA: personalized demo,
-- tagline direction: **Your Business. One Intelligent System.**
+- Free Business Growth Audit,
+- Stop Losing Leads / follow-up campaign,
+- Inquiry → Lead → Follow-up → Sales → Reports funnel,
+- 30-Day Growth Starter,
+- Ads + CRM + Follow-up + reporting integration,
+- industry-specific campaign concepts,
+- before/after workflow messaging,
+- partner/referral program,
+- growth/consultation CTAs.
 
-Verified Library reference exists: `Exponify: Simplify Your Business Operations.png`, a storyboard-style business-software ad composition. No final rough-cut MP4 is currently verified in the Library, so do not claim a final Exponify video is wired.
+Portfolio role: **Campaign Concept · Ad Creative · Visual Direction · Client-Acquisition Materials · Video Editing**.
+
+Truthfulness rule: do not use fake client status, fabricated testimonials, or unverified metrics/results. Concept messaging may describe intended benefits, but performance claims must be verified before presenting them as actual outcomes.
 
 ---
 
@@ -473,7 +479,7 @@ Verified Library does contain some product flyer/template assets and Gatchalian 
 - Gatchalian real-client case, stored cover/video, final visual layout, two historical More Work pieces, and visual QA pass,
 - auth-expiry refresh hardening,
 - Admin scroll-restoration guard,
-- Exponify staging case,
+- Exponify Partner Collaboration / Business Development Campaign case with approved client-acquisition proposal cover and verified video,
 - Seedlandia Personal Project / Game Development Planning case with an approved embedded 10-board Canva planning set,
 - 3 Knowledge Lab starter drafts in prepared release pack,
 - AAL2 Draft-only Prepare review set tool,
@@ -485,7 +491,7 @@ Verified Library does contain some product flyer/template assets and Gatchalian 
 1. Review the deployed Seedlandia card and case page across desktop/mobile.
 2. If desired, owner runs **Prepare review set** so Draft/backend metadata matches the new Seedlandia title and planning-board scope, then verifies Preview Draft and personally Publish Live again.
 3. Apply any final visual/content corrections found in review.
-4. Confirm whether Exponify should remain **Spec Work** or can truthfully be reclassified.
+4. Keep Exponify classified as **Partner Collaboration / Business Development Campaign** unless the real relationship changes; do not relabel as Client Work without new verified facts.
 5. Remove approved case-page noindex directives and update sitemap only in a separate explicit indexing pass.
 6. Perform final public smoke check and create production baseline/changelog marker.
 7. Continue toward 5–7 strong creative works later only with verified genuine assets.
