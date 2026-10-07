@@ -16,7 +16,7 @@
 
   const QYNTRO_COVER_EMBED = 'https://www.canva.com/design/DAHXKSqMpDs/view?embed';
   const SEEDLANDIA_COVER_EMBED = 'https://www.canva.com/design/DAHXTcAQrGU/view?embed';
-  const EXPONIFY_COVER_EMBED = 'https://www.canva.com/design/DAHXThERlt8/view?embed';
+  const EXPONIFY_COVER_URL = 'assets/images/exponify-ph-client-acquisition-cover.svg';
 
   const caseLinks = new Map([
     ['gatchalian meatshop — social media campaign', 'multimedia/gatchalian-meatshop.html'],
@@ -117,23 +117,20 @@
       style.id = 'exponifyCardCoverStyles';
       style.textContent = `
         .multimedia-visual.exponify-partner-cover{position:relative;background:#061326;overflow:hidden}
-        .multimedia-visual.exponify-partner-cover > img{opacity:0!important;visibility:hidden!important}
-        .exponify-card-cover-frame{position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#061326;pointer-events:none}
+        .multimedia-visual.exponify-partner-cover > img:not(.exponify-card-cover-image){opacity:0!important;visibility:hidden!important}
+        .exponify-card-cover-image{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;background:#061326;pointer-events:none}
         .multimedia-visual.exponify-partner-cover .media-play-badge,
         .multimedia-visual.exponify-partner-cover .media-type-badge{position:absolute;z-index:3}
       `;
       document.head.appendChild(style);
     }
-    if (!visual.querySelector('.exponify-card-cover-frame')) {
-      const frame = document.createElement('iframe');
-      frame.className = 'exponify-card-cover-frame';
-      frame.src = EXPONIFY_COVER_EMBED;
-      frame.title = 'Exponify PH client acquisition campaign cover';
-      frame.tabIndex = -1;
-      frame.setAttribute('aria-hidden','true');
-      frame.setAttribute('loading','eager');
-      frame.setAttribute('allow','fullscreen');
-      visual.insertBefore(frame,visual.firstChild);
+    if (!visual.querySelector('.exponify-card-cover-image')) {
+      const image = document.createElement('img');
+      image.className = 'exponify-card-cover-image';
+      image.src = EXPONIFY_COVER_URL;
+      image.alt = 'Exponify PH client acquisition and growth campaign cover';
+      image.loading = 'eager';
+      visual.insertBefore(image,visual.firstChild);
     }
   }
 
