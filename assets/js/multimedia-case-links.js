@@ -116,7 +116,7 @@
       style.id = 'seedlandiaCardCoverStyles';
       style.textContent = `
         .multimedia-visual.seedlandia-actual-cover{position:relative;background:#071b26;overflow:hidden}
-        .multimedia-visual.seedlandia-actual-cover > img{opacity:0!important}
+        .multimedia-visual.seedlandia-actual-cover > img{opacity:0!important;visibility:hidden!important}
         .seedlandia-card-cover-frame{position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#071b26;pointer-events:none}
         .multimedia-visual.seedlandia-actual-cover .media-type-badge{position:absolute;z-index:3}
       `;
@@ -138,16 +138,24 @@
   function normalizeSeedlandiaCard(card,title) {
     if (!seedlandiaTitles.has(title)) return;
     const heading = card.querySelector('h3');
-    if (heading) heading.textContent = 'Seedlandia — Game Development Planning';
+    const expectedTitle = 'Seedlandia — Game Development Planning';
+    if (heading && heading.textContent !== expectedTitle) heading.textContent = expectedTitle;
     const meta = card.querySelector('.multimedia-meta');
-    if (meta) meta.textContent = 'Game Development Planning';
+    if (meta && meta.textContent !== 'Game Development Planning') meta.textContent = 'Game Development Planning';
     const typeBadge = card.querySelector('.media-type-badge');
-    if (typeBadge) typeBadge.textContent = 'Personal Project';
+    if (typeBadge && typeBadge.textContent !== 'Personal Project') typeBadge.textContent = 'Personal Project';
     const description = card.querySelector('.multimedia-body > p');
-    if (description) description.textContent = 'A personal Roblox game-development planning project covering world/map proposals, HUD and UX, pets, progression, bosses, community and economy, gear, wings, and future expansion systems.';
+    const expectedDescription = 'A personal Roblox game-development planning project covering world/map proposals, HUD and UX, pets, progression, bosses, community and economy, gear, wings, and future expansion systems.';
+    if (description && description.textContent !== expectedDescription) description.textContent = expectedDescription;
     const chips = card.querySelector('.chips');
-    if (chips) chips.innerHTML = ['Roblox Studio','Game Development Planning','World Design','Game UI / UX','Systems Planning','Concept Boards'].map(label => '<span class="chip">'+label+'</span>').join('');
-    card.dataset.mmCategory = 'Game Development Planning';
+    if (chips && chips.dataset.seedlandiaChipsReady !== 'true') {
+      chips.innerHTML = ['Roblox Studio','Game Development Planning','World Design','Game UI / UX','Systems Planning','Concept Boards'].map(label => '<span class="chip">'+label+'</span>').join('');
+      chips.dataset.seedlandiaChipsReady = 'true';
+    }
+    if (card.dataset.mmCategory !== 'Game Development Planning') card.dataset.mmCategory = 'Game Development Planning';
+    if (!String(card.dataset.searchable || '').toLowerCase().includes('gear')) {
+      card.dataset.searchable = (card.dataset.searchable || '') + ' gear wings pets bosses progression world design game development planning';
+    }
   }
 
   function ensureQyntroVideoBadge(card,title) {
@@ -174,10 +182,11 @@
       ensureQyntroVideoBadge(card,title);
       const link = card.querySelector('.project-link');
       if (!link) return;
-      link.href = caseHref(href);
-      link.removeAttribute('target');
-      link.removeAttribute('rel');
-      link.textContent = 'View case study →';
+      const target = caseHref(href);
+      if (link.getAttribute('href') !== target) link.setAttribute('href', target);
+      if (link.hasAttribute('target')) link.removeAttribute('target');
+      if (link.hasAttribute('rel')) link.removeAttribute('rel');
+      if (link.textContent !== 'View case study →') link.textContent = 'View case study →';
     });
   }
 
