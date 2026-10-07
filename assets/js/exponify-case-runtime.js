@@ -20,7 +20,7 @@
 (function exponifyCaseRuntime(){
   'use strict';
 
-  const TARGET_TITLE = 'Exponify — Business Operations Campaign';
+  const TARGET_TITLES = new Set(['Exponify — Business Operations Campaign','Exponify PH — Client Acquisition Campaign']);
   const PREVIEW_KEY = 'nl-portfolio-draft-preview';
 
   const APPROVED_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/exponify-campaign-cover.svg';
@@ -37,7 +37,7 @@
 
   function findProject(config) {
     const works = Array.isArray(config?.content?.multimedia) ? config.content.multimedia : [];
-    return works.find(item => String(item?.title || '').trim() === TARGET_TITLE) || null;
+    return works.find(item => TARGET_TITLES.has(String(item?.title || '').trim())) || null;
   }
 
   function readActiveLocalPreview() {
