@@ -16,18 +16,28 @@
 
   const QYNTRO_COVER_EMBED = 'https://www.canva.com/design/DAHXKSqMpDs/view?embed';
   const SEEDLANDIA_COVER_EMBED = 'https://www.canva.com/design/DAHXTcAQrGU/view?embed';
+  const EXPONIFY_COVER_EMBED = 'https://www.canva.com/design/DAHXThERlt8/view?embed';
 
   const caseLinks = new Map([
     ['gatchalian meatshop — social media campaign', 'multimedia/gatchalian-meatshop.html'],
     ['gatchalian meatshop - social media campaign', 'multimedia/gatchalian-meatshop.html'],
     ['exponify — business operations campaign', 'multimedia/exponify.html'],
     ['exponify - business operations campaign', 'multimedia/exponify.html'],
+    ['exponify ph — client acquisition campaign', 'multimedia/exponify.html'],
+    ['exponify ph - client acquisition campaign', 'multimedia/exponify.html'],
     ['seedlandia — game visual development', 'multimedia/seedlandia.html'],
     ['seedlandia - game visual development', 'multimedia/seedlandia.html'],
     ['seedlandia — game development planning', 'multimedia/seedlandia.html'],
     ['seedlandia - game development planning', 'multimedia/seedlandia.html'],
     ['qyntro daily — brand identity & packaging', 'multimedia/qyntro-daily.html'],
     ['qyntro daily - brand identity & packaging', 'multimedia/qyntro-daily.html']
+  ]);
+
+  const exponifyTitles = new Set([
+    'exponify — business operations campaign',
+    'exponify - business operations campaign',
+    'exponify ph — client acquisition campaign',
+    'exponify ph - client acquisition campaign'
   ]);
 
   const seedlandiaTitles = new Set([
@@ -95,6 +105,58 @@
     frame.setAttribute('loading','eager');
     frame.setAttribute('allow','fullscreen');
     visual.insertBefore(frame,visual.firstChild);
+  }
+
+  function ensureExponifyCover(card,title) {
+    if (!exponifyTitles.has(title)) return;
+    const visual = card.querySelector('.multimedia-visual');
+    if (!visual) return;
+    visual.classList.add('exponify-partner-cover');
+    if (!document.querySelector('#exponifyCardCoverStyles')) {
+      const style = document.createElement('style');
+      style.id = 'exponifyCardCoverStyles';
+      style.textContent = `
+        .multimedia-visual.exponify-partner-cover{position:relative;background:#061326;overflow:hidden}
+        .multimedia-visual.exponify-partner-cover > img{opacity:0!important;visibility:hidden!important}
+        .exponify-card-cover-frame{position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#061326;pointer-events:none}
+        .multimedia-visual.exponify-partner-cover .media-play-badge,
+        .multimedia-visual.exponify-partner-cover .media-type-badge{position:absolute;z-index:3}
+      `;
+      document.head.appendChild(style);
+    }
+    if (!visual.querySelector('.exponify-card-cover-frame')) {
+      const frame = document.createElement('iframe');
+      frame.className = 'exponify-card-cover-frame';
+      frame.src = EXPONIFY_COVER_EMBED;
+      frame.title = 'Exponify PH client acquisition campaign cover';
+      frame.tabIndex = -1;
+      frame.setAttribute('aria-hidden','true');
+      frame.setAttribute('loading','eager');
+      frame.setAttribute('allow','fullscreen');
+      visual.insertBefore(frame,visual.firstChild);
+    }
+  }
+
+  function normalizeExponifyCard(card,title) {
+    if (!exponifyTitles.has(title)) return;
+    const heading = card.querySelector('h3');
+    const expectedTitle = 'Exponify PH — Client Acquisition Campaign';
+    if (heading && heading.textContent !== expectedTitle) heading.textContent = expectedTitle;
+    const meta = card.querySelector('.multimedia-meta');
+    if (meta && meta.textContent !== 'Business Development Campaign') meta.textContent = 'Business Development Campaign';
+    const typeBadge = card.querySelector('.media-type-badge');
+    if (typeBadge && typeBadge.textContent !== 'Partner Collaboration') typeBadge.textContent = 'Partner Collaboration';
+    const description = card.querySelector('.multimedia-body > p');
+    const expectedDescription = 'A partner-collaboration campaign combining a vertical Meta ad with proposals for growth audits, lead generation, CRM/follow-up, industry campaigns, referral partnerships, and consultation CTAs.';
+    if (description && description.textContent !== expectedDescription) description.textContent = expectedDescription;
+    const chips = card.querySelector('.chips');
+    if (chips && chips.dataset.exponifyChipsReady !== 'true') {
+      chips.innerHTML = ['Canva','Photoshop','CapCut','Client Acquisition','Meta Ads','Campaign Strategy'].map(label => '<span class="chip">'+label+'</span>').join('');
+      chips.dataset.exponifyChipsReady = 'true';
+    }
+    if (!String(card.dataset.searchable || '').toLowerCase().includes('partner collaboration')) {
+      card.dataset.searchable = (card.dataset.searchable || '') + ' partner collaboration business development client acquisition lead generation campaign strategy';
+    }
   }
 
   function normalizeSeedlandiaFilter() {
@@ -176,6 +238,8 @@
       const title = normalize(card.querySelector('h3')?.textContent);
       const href = caseLinks.get(title);
       if (!href) return;
+      normalizeExponifyCard(card,title);
+      ensureExponifyCover(card,title);
       normalizeSeedlandiaCard(card,title);
       ensureSeedlandiaCover(card,title);
       ensureQyntroCover(card,title);
