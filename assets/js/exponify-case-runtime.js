@@ -23,7 +23,7 @@
   const TARGET_TITLES = new Set(['Exponify — Business Operations Campaign','Exponify PH — Client Acquisition Campaign']);
   const PREVIEW_KEY = 'nl-portfolio-draft-preview';
 
-  const APPROVED_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/exponify-ph-client-acquisition-cover.svg';
+  const APPROVED_COVER_URL = 'https://knowlexit09.github.io/noel-labasan-portfolio/assets/images/exponify-ph-client-acquisition-cover.png';
   const APPROVED_VIDEO_URL = 'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/exponify-business-operations-campaign/1791057046598-video.mp4';
 
   const safeHttpUrl = value => {

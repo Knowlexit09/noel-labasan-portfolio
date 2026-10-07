@@ -16,7 +16,7 @@
 
   const QYNTRO_COVER_EMBED = 'https://www.canva.com/design/DAHXKSqMpDs/view?embed';
   const SEEDLANDIA_COVER_EMBED = 'https://www.canva.com/design/DAHXTcAQrGU/view?embed';
-  const EXPONIFY_COVER_URL = 'assets/images/exponify-ph-client-acquisition-cover.svg';
+  const EXPONIFY_COVER_URL = 'assets/images/exponify-ph-client-acquisition-cover.png';
 
   const caseLinks = new Map([
     ['gatchalian meatshop — social media campaign', 'multimedia/gatchalian-meatshop.html'],

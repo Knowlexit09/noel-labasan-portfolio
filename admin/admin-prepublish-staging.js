@@ -49,7 +49,7 @@
       disclosure:'Exponify PH is presented as a business partner/collaboration, not as a paying client. No unverified performance metrics or customer testimonials are presented as verified results.',
       tools:['Canva','Photoshop','CapCut'],
       tags:['Partner Collaboration','Business Development','Client Acquisition','Meta Ads','Lead Generation','Campaign Strategy'],
-      thumbnailUrl:`${publicRoot}assets/images/exponify-ph-client-acquisition-cover.svg`,
+      thumbnailUrl:`${publicRoot}assets/images/exponify-ph-client-acquisition-cover.png`,
       imageAlt:'Exponify PH client acquisition and business development campaign cover',
       detailsUrl:'multimedia/exponify.html',
       mediaUrl:'https://isoiolgajmpldkrvqbkp.supabase.co/storage/v1/object/public/portfolio-media/multimedia/exponify-business-operations-campaign/1791057046598-video.mp4',

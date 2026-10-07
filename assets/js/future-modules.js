@@ -140,7 +140,7 @@
         const coverMarkup = isSeedlandia
           ? '<iframe class="seedlandia-card-cover-frame" src="https://www.canva.com/design/DAHXTcAQrGU/view?embed" title="Seedlandia approved world-layout concept cover" tabindex="-1" aria-hidden="true" loading="eager" style="position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#092234;pointer-events:none" allow="fullscreen"></iframe>'
           : isExponify
-            ? '<img src="assets/images/exponify-ph-client-acquisition-cover.svg" alt="Exponify PH client acquisition and growth campaign cover" loading="eager">'
+            ? '<img src="assets/images/exponify-ph-client-acquisition-cover.png" alt="Exponify PH client acquisition and growth campaign cover" loading="eager">'
             : thumbnail
               ? `<img src="${esc(thumbnail)}" alt="${esc(item.imageAlt || item.title || 'Multimedia work')}" loading="lazy">`
               : '<div class="multimedia-placeholder">✦</div>';
