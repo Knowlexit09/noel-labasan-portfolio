@@ -133,13 +133,17 @@
 
       host.innerHTML = works.map((item, index) => {
         const thumbnail = safeUrl(item.thumbnailUrl || item.imageUrl);
-        const isSeedlandia = /^seedlandia\s*[—-]\s*game (?:visual development|development planning)$/i.test(String(item.title || '').trim());
-        // Seedlandia uses the approved map board directly; stale remote thumbnail URLs must not surface as a flash of old artwork.
+        const itemTitle = String(item.title || '').trim();
+        const isSeedlandia = /^seedlandia\s*[—-]\s*game (?:visual development|development planning)$/i.test(itemTitle);
+        const isExponify = /^exponify(?: ph)?\s*[—-]\s*(?:business operations campaign|client acquisition campaign)$/i.test(itemTitle);
+        // Approved Canva boards override stale remote thumbnails for Seedlandia and Exponify.
         const coverMarkup = isSeedlandia
           ? '<iframe class="seedlandia-card-cover-frame" src="https://www.canva.com/design/DAHXTcAQrGU/view?embed" title="Seedlandia approved world-layout concept cover" tabindex="-1" aria-hidden="true" loading="eager" style="position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#092234;pointer-events:none" allow="fullscreen"></iframe>'
-          : thumbnail
-            ? `<img src="${esc(thumbnail)}" alt="${esc(item.imageAlt || item.title || 'Multimedia work')}" loading="lazy">`
-            : '<div class="multimedia-placeholder">✦</div>';
+          : isExponify
+            ? '<iframe class="exponify-card-cover-frame" src="https://www.canva.com/design/DAHXThERlt8/view?embed" title="Exponify PH client acquisition campaign cover" tabindex="-1" aria-hidden="true" loading="eager" style="position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#061326;pointer-events:none" allow="fullscreen"></iframe>'
+            : thumbnail
+              ? `<img src="${esc(thumbnail)}" alt="${esc(item.imageAlt || item.title || 'Multimedia work')}" loading="lazy">`
+              : '<div class="multimedia-placeholder">✦</div>';
         const media = safeHref(item.mediaUrl || item.url || item.detailsUrl);
         const tags = Array.isArray(item.tags) ? item.tags : [];
         const usedTools = Array.isArray(item.tools) ? item.tools : [];
