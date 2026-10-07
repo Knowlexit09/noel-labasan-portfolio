@@ -7,6 +7,7 @@
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
 > Last consolidated: **2026-10-07 (Asia/Manila) — exact Exponify cover/poster asset update + partner-collaboration continuity**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
+> Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 >
 > **New chats must read this file first, then verify actual `main` and the latest Pages deployment before editing. Do not restart completed work.**
 
