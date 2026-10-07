@@ -15,6 +15,7 @@
   'use strict';
 
   const QYNTRO_COVER_EMBED = 'https://www.canva.com/design/DAHXKSqMpDs/view?embed';
+  const SEEDLANDIA_COVER_EMBED = 'https://www.canva.com/design/DAHXTcAQrGU/view?embed';
 
   const caseLinks = new Map([
     ['gatchalian meatshop — social media campaign', 'multimedia/gatchalian-meatshop.html'],
@@ -105,6 +106,35 @@
     });
   }
 
+  function ensureSeedlandiaCover(card,title) {
+    if (!seedlandiaTitles.has(title)) return;
+    const visual = card.querySelector('.multimedia-visual');
+    if (!visual) return;
+    visual.classList.add('seedlandia-actual-cover');
+    if (!document.querySelector('#seedlandiaCardCoverStyles')) {
+      const style = document.createElement('style');
+      style.id = 'seedlandiaCardCoverStyles';
+      style.textContent = `
+        .multimedia-visual.seedlandia-actual-cover{position:relative;background:#071b26;overflow:hidden}
+        .multimedia-visual.seedlandia-actual-cover > img{opacity:0!important}
+        .seedlandia-card-cover-frame{position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;background:#071b26;pointer-events:none}
+        .multimedia-visual.seedlandia-actual-cover .media-type-badge{position:absolute;z-index:3}
+      `;
+      document.head.appendChild(style);
+    }
+    if (!visual.querySelector('.seedlandia-card-cover-frame')) {
+      const frame = document.createElement('iframe');
+      frame.className = 'seedlandia-card-cover-frame';
+      frame.src = SEEDLANDIA_COVER_EMBED;
+      frame.title = 'Seedlandia game development planning cover';
+      frame.tabIndex = -1;
+      frame.setAttribute('aria-hidden','true');
+      frame.setAttribute('loading','eager');
+      frame.setAttribute('allow','fullscreen');
+      visual.insertBefore(frame,visual.firstChild);
+    }
+  }
+
   function normalizeSeedlandiaCard(card,title) {
     if (!seedlandiaTitles.has(title)) return;
     const heading = card.querySelector('h3');
@@ -113,6 +143,10 @@
     if (meta) meta.textContent = 'Game Development Planning';
     const typeBadge = card.querySelector('.media-type-badge');
     if (typeBadge) typeBadge.textContent = 'Personal Project';
+    const description = card.querySelector('.multimedia-body > p');
+    if (description) description.textContent = 'A personal Roblox game-development planning project covering world/map proposals, HUD and UX, pets, progression, bosses, community and economy, gear, wings, and future expansion systems.';
+    const chips = card.querySelector('.chips');
+    if (chips) chips.innerHTML = ['Roblox Studio','Game Development Planning','World Design','Game UI / UX','Systems Planning','Concept Boards'].map(label => '<span class="chip">'+label+'</span>').join('');
     card.dataset.mmCategory = 'Game Development Planning';
   }
 
@@ -135,6 +169,7 @@
       const href = caseLinks.get(title);
       if (!href) return;
       normalizeSeedlandiaCard(card,title);
+      ensureSeedlandiaCover(card,title);
       ensureQyntroCover(card,title);
       ensureQyntroVideoBadge(card,title);
       const link = card.querySelector('.project-link');
