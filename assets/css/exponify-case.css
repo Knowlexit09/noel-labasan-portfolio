@@ -86,6 +86,14 @@
   background:#06111c;
 }
 
+.exponify-proposal-board iframe {
+  display:block;
+  width:100%;
+  aspect-ratio:3/2;
+  border:0;
+  background:#06111c;
+}
+
 .exponify-feature-board figcaption {
   min-height:76px;
   padding:15px 18px 16px;
