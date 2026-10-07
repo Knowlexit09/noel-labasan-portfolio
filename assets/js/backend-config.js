@@ -27,7 +27,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
   if (/\/admin\/?$/i.test(location.pathname) || /\/multimedia\//i.test(location.pathname)) return;
   const script = document.createElement('script');
   script.defer = true;
-  script.src = 'assets/js/multimedia-case-links.js?v=20261007-4';
+  script.src = 'assets/js/multimedia-case-links.js?v=20261007-5';
   document.head.appendChild(script);
 })();
 
@@ -236,7 +236,7 @@ window.PORTFOLIO_BACKEND_CONFIG = Object.freeze({
  */
 (function loadAdminEnhancements(){
   if (!/\/admin\/?$/i.test(location.pathname)) return;
-  const version = '20261007-1';
+  const version = '20261007-2';
   ['admin-enhancements.css','admin-resume-manager.css','admin-inbox.css','admin-security.css','admin-mfa.css','admin-recovery.css','admin-emergency-recovery.css','admin-analytics.css','admin-operations.css','admin-modal-viewport-fix.css'].forEach(file => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
