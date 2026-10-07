@@ -23,7 +23,7 @@
 }
 
 .exponify-case-theme .showcase-hero::before {
-  background-image:var(--campaign-cover,url('../images/exponify-campaign-cover.svg'));
+  background-image:var(--campaign-cover,url('../images/exponify-ph-client-acquisition-cover.svg'));
   opacity:.46;
   filter:blur(26px) saturate(.95);
 }
