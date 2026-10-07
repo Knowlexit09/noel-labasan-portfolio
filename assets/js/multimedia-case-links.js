@@ -96,6 +96,15 @@
     visual.insertBefore(frame,visual.firstChild);
   }
 
+  function normalizeSeedlandiaFilter() {
+    document.querySelectorAll('[data-mm-filter]').forEach(button => {
+      if (button.dataset.mmFilter === 'Game Visuals') {
+        button.dataset.mmFilter = 'Game Development Planning';
+        button.textContent = 'Game Development Planning';
+      }
+    });
+  }
+
   function normalizeSeedlandiaCard(card,title) {
     if (!seedlandiaTitles.has(title)) return;
     const heading = card.querySelector('h3');
@@ -120,6 +129,7 @@
   }
 
   function apply() {
+    normalizeSeedlandiaFilter();
     document.querySelectorAll('.multimedia-card').forEach(card => {
       const title = normalize(card.querySelector('h3')?.textContent);
       const href = caseLinks.get(title);
