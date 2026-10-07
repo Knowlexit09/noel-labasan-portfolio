@@ -93,14 +93,17 @@
         objective:'Plan a clear, scalable farming, discovery, collection, progression, pet, economy, and future-combat Roblox game before treating roadmap systems as finished.',
         audience:'Roblox players, including younger players who benefit from clear navigation and progression cues.',
         role:'Game-development planning, world-map planning, HUD and UX direction, progression and systems planning, visual direction, and iterative prototyping.',
-        description:'A personal Roblox game-development planning project covering the world structure, four starter player plots, Mother Tree Village, progression zones, compact mobile HUD direction, farming and discovery systems, pets, economy considerations, security questions, and future combat/expansion planning.',
+        description:'A personal Roblox game-development planning project covering world and map proposals, HUD/UX, pets, farming and discovery progression, boss encounters, community/economy systems, gear, wings, security considerations, and future expansion planning.',
         disclosure:'Seedlandia is presented as an ongoing Personal Project focused on game development planning, prototypes, visual direction, and system decisions. Concept visuals are not presented as final in-game screenshots, and roadmap features are not claimed as already implemented.',
         tools:['Roblox Studio','Blender','Canva'],
-        tags:['Game Development Planning','Game UI / UX','World Design','Systems Planning','Roblox'],
+        tags:['Game Development Planning','Game UI / UX','World Design','Systems Planning','Roblox Studio','Concept Boards'],
         thumbnailUrl:'assets/images/seedlandia-game-visuals-cover.svg',
         imageAlt:'Seedlandia personal game development planning cover',
         detailsUrl:'multimedia/seedlandia.html',
-        mediaUrl:'multimedia/seedlandia.html'
+        mediaUrl:'multimedia/seedlandia.html',
+        canvaViewUrl:'https://www.canva.com/d/trT2gPP7EBNI_tP',
+        sourceCanvaDesignId:'DAHXTb6It3w',
+        assetStatus:'Approved 10-board planning set is embedded in the case study, covering maps, HUD, pets, progression, bosses, community/economy, gear and wings.'
       },
       {
         published:false,
