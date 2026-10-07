@@ -5,8 +5,8 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-04 (Asia/Manila) — prepublication release-candidate staging**  
-> Latest verified staging deployment immediately before this context-only update: **GitHub Pages Run #197 — success**, head `23ae1a750091d5d49e5b5cbe95fa20e20058abd5`.
+> Last consolidated: **2026-10-07 (Asia/Manila) — Qyntro live + Seedlandia planning showcase update**  
+> Latest verified deployment immediately before this context-only update: **GitHub Pages Run #252 — success**, head `9772dcc48076a31d2a3135685ebd1dd3858e44e8`.
 >
 > **New chats must read this file first, then verify actual `main` and the latest Pages deployment before editing. Do not restart completed work.**
 
@@ -26,7 +26,9 @@ Therefore:
 - use Draft/Preview for final review,
 - preserve the owner's final control over publication.
 
-There was one earlier intentional Gatchalian Publish Live action before this directive changed. As a result, backend Live currently contains the approved Gatchalian Multimedia item. The Gatchalian case page was subsequently returned to `noindex,nofollow` for prepublication staging. Do not silently rewrite Live through management SQL; use the authenticated Admin workflow for future Live changes.
+There was one earlier intentional Gatchalian Publish Live action before this directive changed. As a result, backend Live contained the approved Gatchalian Multimedia item at that checkpoint. The Gatchalian case page was subsequently returned to `noindex,nofollow` for prepublication staging. Do not silently rewrite Live through management SQL; use the authenticated Admin workflow for future Live changes.
+
+**2026-10-07 owner update:** the user explicitly confirmed that they clicked **Publish Live** after the Qyntro work. Treat that as an owner-authorized publication event, but do not assume the exact current Live payload without a fresh read-only verification. Continue to leave future publication actions to the owner unless they explicitly request otherwise.
 
 ---
 
@@ -287,18 +289,20 @@ Verified Library reference exists: `Exponify: Simplify Your Business Operations.
 
 ---
 
-# 10. Seedlandia — Multimedia Project #3 STAGED
+# 10. Seedlandia — Multimedia Project #3
 
-Classification: **Personal Project / Game Visual Development**.
+Classification: **Personal Project / Game Development Planning**.
 
-Staging case:
+Case:
 
 - `multimedia/seedlandia.html`
 - `assets/css/seedlandia-case.css`
-- `assets/images/seedlandia-game-visuals-cover.svg`
-- `noindex,nofollow`
+- remains `noindex,nofollow` until a separate indexing approval/pass
+- hero/card now use the approved world-layout proposal through a one-page Canva embed (`DAHXTcAQrGU`)
+- full approved 10-board set is embedded from Canva design `DAHXTb6It3w`
+- current Canva view URL: `https://www.canva.com/d/H-8a-K479ugaQwY`
 
-Verified Library project materials include `Seedlandia: World Map Layout.png` and multiple game/HUD/character visuals.
+Approved planning boards cover: world-layout proposal, Rootstep Valley map proposal, Crescentwild Isle map proposal, HUD/game-interface proposal, Lumi/Pebblekin/Sprig pet direction, progression/discovery/growth systems, boss encounters and raid features, community/economy/world features, gear/equipment/upgrade systems, and wings/flight/gliding systems.
 
 Case-study scope includes:
 
@@ -313,7 +317,7 @@ Case-study scope includes:
 - compact/mobile-friendly HUD direction,
 - farming/discovery/collection/progression thinking.
 
-Truthfulness rule: concept images are not presented as final in-game screenshots, and roadmap systems are not claimed as already implemented.
+Truthfulness rule: Seedlandia is shown as an ongoing personal game-development planning project. Map/HUD/pet/feature boards are concepts/planning proposals, not final in-game screenshots, and roadmap systems are not claimed as already implemented.
 
 ---
 
@@ -394,9 +398,11 @@ Full release-candidate checklist: `docs/PREPUBLICATION_RELEASE_CANDIDATE.md`.
 
 ---
 
-# 15. Current remote state BEFORE the owner runs Prepare review set
+# 15. Remote-state note — historical checkpoint; re-verify before current Live claims
 
-Read-only verification on 2026-10-04 showed:
+The read-only verification below is the **2026-10-04 historical checkpoint**. It is no longer authoritative for current Live because the owner later confirmed a Publish Live action after Qyntro. Run a fresh read-only check before stating current server Draft/Live counts.
+
+Historical 2026-10-04 state:
 
 Draft:
 
@@ -416,32 +422,16 @@ The Exponify/Seedlandia/Knowledge Lab release-candidate content is currently sta
 
 ---
 
-# 16. Final review workflow from here
+# 16. Review workflow from here
 
-The next user-side action is **not Publish Live**.
+The owner has already confirmed a Publish Live action after Qyntro. For new Seedlandia metadata changes, keep the same owner-controlled workflow:
 
-1. Let the latest Pages staging deployment complete.
-2. Open Admin → Creative.
-3. Ensure AAL2/authenticator is verified.
-4. Click **Prepare review set** once.
-5. After reload, confirm Creative shows:
-   - Gatchalian,
-   - Exponify,
-   - Seedlandia,
-   - 3 Knowledge Lab entries.
-6. Click **Preview draft**.
-7. Perform the visual review in `docs/PREPUBLICATION_RELEASE_CANDIDATE.md`.
-8. Report corrections if any.
-9. Only after explicit final approval should publication/indexing work continue.
-
-Final publication sequence after approval:
-
-1. Owner clicks **Publish live** through Admin/AAL2.
-2. Verify Live state matches approved Draft.
-3. Remove `noindex,nofollow` only from approved case pages.
-4. Add approved case pages to `sitemap.xml`.
-5. Verify Pages deployment/public navigation.
-6. Create final production baseline/changelog marker.
+1. Review the deployed Seedlandia public card/case page on desktop and mobile.
+2. If backend metadata should match the new Seedlandia title/description, open Admin → Creative and verify AAL2.
+3. Run **Prepare review set** once; it now upgrades the legacy Seedlandia title idempotently rather than creating a duplicate.
+4. Click **Preview draft** and verify Seedlandia is **Personal Project / Game Development Planning** with the updated description/tags.
+5. Only the owner should click **Publish live** again when satisfied.
+6. Remove `noindex,nofollow` and update sitemap only in a separate explicit indexing pass.
 
 The user owns the final Publish Live action.
 
@@ -484,7 +474,7 @@ Verified Library does contain some product flyer/template assets and Gatchalian 
 - auth-expiry refresh hardening,
 - Admin scroll-restoration guard,
 - Exponify staging case,
-- Seedlandia staging case,
+- Seedlandia Personal Project / Game Development Planning case with an approved embedded 10-board Canva planning set,
 - 3 Knowledge Lab starter drafts in prepared release pack,
 - AAL2 Draft-only Prepare review set tool,
 - non-destructive backend/security/performance/repository sanity pass,
@@ -492,14 +482,13 @@ Verified Library does contain some product flyer/template assets and Gatchalian 
 
 ## PENDING / next work
 
-1. Owner runs **Prepare review set** in Admin (Draft only).
-2. Owner reviews actual **Preview Draft** across desktop/mobile.
-3. Apply any final visual/content corrections found in that review.
+1. Review the deployed Seedlandia card and case page across desktop/mobile.
+2. If desired, owner runs **Prepare review set** so Draft/backend metadata matches the new Seedlandia title and planning-board scope, then verifies Preview Draft and personally Publish Live again.
+3. Apply any final visual/content corrections found in review.
 4. Confirm whether Exponify should remain **Spec Work** or can truthfully be reclassified.
-5. Owner gives final approval and personally clicks **Publish live**.
-6. After verified Live publication, remove approved case-page noindex directives and update sitemap.
-7. Perform final public smoke check and create production baseline/changelog marker.
-8. Continue toward 5–7 strong creative works later only with verified genuine assets.
+5. Remove approved case-page noindex directives and update sitemap only in a separate explicit indexing pass.
+6. Perform final public smoke check and create production baseline/changelog marker.
+7. Continue toward 5–7 strong creative works later only with verified genuine assets.
 
 ---
 
