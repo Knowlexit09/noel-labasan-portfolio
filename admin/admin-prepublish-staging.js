@@ -59,20 +59,21 @@
     },
     {
       published:true,
-      title:'Seedlandia — Game Visual Development',
-      category:'Game Visuals',
+      title:'Seedlandia — Game Development Planning',
+      legacyTitles:['Seedlandia — Game Visual Development'],
+      category:'Game Development Planning',
       label:'Personal Project',
       projectType:'Personal Project',
       mediaType:'image',
-      objective:'Develop a readable visual language for a farming, discovery, collection, progression, pet, and future-combat Roblox world.',
+      objective:'Plan a clear, scalable farming, discovery, collection, progression, pet, economy, and future-combat Roblox game before treating roadmap systems as finished.',
       audience:'Roblox players, including younger players who benefit from clear navigation and progression cues.',
-      role:'World-map planning, HUD direction, progression UX, visual systems, and game-development iteration.',
-      description:'A personal Roblox game project covering the visual direction for four starter player plots, Mother Tree Village, Green Meadows, Whispering Forest, Crystal Cavern, Duel Arena, future biomes, and a compact mobile-friendly HUD.',
-      disclosure:'The case presents visual/system planning and ongoing personal game-development work. Concept visuals are not presented as final in-game screenshots, and roadmap features are not claimed as already implemented.',
+      role:'Game-development planning, world-map planning, HUD and UX direction, progression and systems planning, visual direction, and iterative prototyping.',
+      description:'A personal Roblox game-development planning project covering the world structure, four starter player plots, Mother Tree Village, progression zones, compact mobile HUD direction, farming and discovery systems, pets, economy considerations, security questions, and future combat/expansion planning.',
+      disclosure:'Seedlandia is presented as an ongoing Personal Project focused on game development planning, prototypes, visual direction, and system decisions. Concept visuals are not presented as final in-game screenshots, and roadmap features are not claimed as already implemented.',
       tools:['Roblox Studio','Blender','Canva'],
-      tags:['Game UI','World Map','Farming Game','Roblox','Visual Direction'],
+      tags:['Game Development Planning','Game UI / UX','World Design','Systems Planning','Roblox'],
       thumbnailUrl:`${publicRoot}assets/images/seedlandia-game-visuals-cover.svg`,
-      imageAlt:'Seedlandia game world visual development cover',
+      imageAlt:'Seedlandia personal game development planning cover',
       detailsUrl:'multimedia/seedlandia.html',
       mediaUrl:'multimedia/seedlandia.html'
     },
@@ -145,9 +146,12 @@
   function upsertByTitle(existing,prepared){
     const output=Array.isArray(existing)?clone(existing):[];
     prepared.forEach(item=>{
-      const index=output.findIndex(current=>norm(current?.title)===norm(item.title));
-      if(index>=0) output[index]={...output[index],...clone(item)};
-      else output.push(clone(item));
+      const aliases=[item.title,...(Array.isArray(item.legacyTitles)?item.legacyTitles:[])].map(norm);
+      const cleanItem=clone(item);
+      delete cleanItem.legacyTitles;
+      const index=output.findIndex(current=>aliases.includes(norm(current?.title)));
+      if(index>=0) output[index]={...output[index],...cleanItem};
+      else output.push(cleanItem);
     });
     return output;
   }
