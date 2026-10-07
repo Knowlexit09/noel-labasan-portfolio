@@ -23,8 +23,17 @@
     ['exponify - business operations campaign', 'multimedia/exponify.html'],
     ['seedlandia — game visual development', 'multimedia/seedlandia.html'],
     ['seedlandia - game visual development', 'multimedia/seedlandia.html'],
+    ['seedlandia — game development planning', 'multimedia/seedlandia.html'],
+    ['seedlandia - game development planning', 'multimedia/seedlandia.html'],
     ['qyntro daily — brand identity & packaging', 'multimedia/qyntro-daily.html'],
     ['qyntro daily - brand identity & packaging', 'multimedia/qyntro-daily.html']
+  ]);
+
+  const seedlandiaTitles = new Set([
+    'seedlandia — game visual development',
+    'seedlandia - game visual development',
+    'seedlandia — game development planning',
+    'seedlandia - game development planning'
   ]);
 
   const qyntroTitles = new Set([
@@ -87,6 +96,17 @@
     visual.insertBefore(frame,visual.firstChild);
   }
 
+  function normalizeSeedlandiaCard(card,title) {
+    if (!seedlandiaTitles.has(title)) return;
+    const heading = card.querySelector('h3');
+    if (heading) heading.textContent = 'Seedlandia — Game Development Planning';
+    const meta = card.querySelector('.multimedia-meta');
+    if (meta) meta.textContent = 'Game Development Planning';
+    const typeBadge = card.querySelector('.media-type-badge');
+    if (typeBadge) typeBadge.textContent = 'Personal Project';
+    card.dataset.mmCategory = 'Game Development Planning';
+  }
+
   function ensureQyntroVideoBadge(card,title) {
     if (!qyntroTitles.has(title)) return;
     const visual = card.querySelector('.multimedia-visual');
@@ -104,6 +124,7 @@
       const title = normalize(card.querySelector('h3')?.textContent);
       const href = caseLinks.get(title);
       if (!href) return;
+      normalizeSeedlandiaCard(card,title);
       ensureQyntroCover(card,title);
       ensureQyntroVideoBadge(card,title);
       const link = card.querySelector('.project-link');
