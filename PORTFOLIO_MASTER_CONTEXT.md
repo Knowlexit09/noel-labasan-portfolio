@@ -6,7 +6,7 @@
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
 > Last consolidated: **2026-10-07 (Asia/Manila) — Exponify partner-collaboration + Seedlandia planning update**  
-> Latest verified deployment immediately before this context-only update: **GitHub Pages Run #268 — success**, head `55b323ccabc339bde22b70d8a09ab136e6a62e9f`.
+> Latest verified deployment immediately before this context-only update: **GitHub Pages Run #281 — success**, head `68039b883b54990ca28e20ceebbf4479319e6c7e`.
 >
 > **New chats must read this file first, then verify actual `main` and the latest Pages deployment before editing. Do not restart completed work.**
 
@@ -275,6 +275,8 @@ Case:
 - remains `noindex,nofollow` until a separate indexing approval/pass
 - approved proposal cover/design: Canva `DAHXThERlt8`
 - current Canva view URL: `https://www.canva.com/d/s1WqbUAYLo4TXrM`
+- approved static portfolio cover/poster: `assets/images/exponify-ph-client-acquisition-cover.svg`, derived from the user's selected Exponify PH Digital Growth Blueprint image
+- the same approved cover is forced on the Multimedia card and video poster so stale Draft/Live thumbnails cannot reappear
 - verified uploaded MP4 remains bound as the campaign video
 
 Approved campaign/proposal direction includes:
