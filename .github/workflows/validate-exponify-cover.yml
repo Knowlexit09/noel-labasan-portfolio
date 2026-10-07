@@ -1,0 +1,38 @@
+name: Validate Exponify cover integration
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/validate-exponify-cover.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax checks
+        run: |
+          set -euo pipefail
+          node --check assets/js/exponify-case-runtime.js
+          node --check assets/js/multimedia-seed.js
+          node --check assets/js/multimedia-case-links.js
+          node --check assets/js/future-modules.js
+          node --check assets/js/backend-config.js
+          node --check admin/admin-prepublish-staging.js
+      - name: Exponify cover and video assertions
+        run: |
+          set -euo pipefail
+          test "$(sha256sum assets/images/exponify-ph-client-acquisition-cover.png | awk '{print $1}')" = "aca4f00204dc1c52f6d3103b2cfbb516fcaae47e35a4804f76275ab322cb92d1"
+          test "$(stat -c%s assets/images/exponify-ph-client-acquisition-cover.png)" = "3448541"
+          grep -q 'poster="../assets/images/exponify-ph-client-acquisition-cover.png"' multimedia/exponify.html
+          grep -q 'data-ex-featured-image src="../assets/images/exponify-ph-client-acquisition-cover.png"' multimedia/exponify.html
+          ! grep -q 'DAHXThERlt8/view?embed' multimedia/exponify.html
+          ! grep -R -q 'exponify-ph-client-acquisition-cover.svg' multimedia assets/js admin index.html
+          ! grep -R -q 'Simplify Your Business Operations' multimedia assets/js admin index.html
+          grep -q '1791057046598-video.mp4' assets/js/exponify-case-runtime.js
+          grep -q '1791057046598-video.mp4' assets/js/multimedia-seed.js
+          grep -q '1791057046598-video.mp4' admin/admin-prepublish-staging.js
