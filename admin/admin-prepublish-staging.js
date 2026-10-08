@@ -6,7 +6,7 @@
  * Purpose:
  * - Gives the owner one idempotent action to merge the prepared release-candidate
  *   Exponify, Seedlandia, Qyntro Daily, and Knowledge Lab entries into SERVER DRAFT.
- * - Enables Multimedia + Knowledge Lab in Draft so Preview Draft shows the exact
+ * - Enables Multimedia in Draft but keeps Knowledge Lab OFF by default until owner review,
  *   candidate content before the owner performs the final Publish Live action.
  *
  * Safety / ownership:
@@ -174,7 +174,7 @@
     if(!source?.state) throw new Error('Could not load the latest portfolio Draft/Live state.');
 
     const state=clone(source.state);
-    state.modules={...(state.modules||{}),multimedia:true,knowledgeLab:true};
+    state.modules={...(state.modules||{}),multimedia:true,knowledgeLab:false};
     state.content={...(state.content||{})};
     state.content.multimedia=upsertByTitle(state.content.multimedia,preparedMultimedia);
     state.content.knowledgeLab=upsertByTitle(state.content.knowledgeLab,preparedKnowledge);
@@ -194,7 +194,7 @@
     box.id='prepublishStagingPack';
     box.className='glass-panel';
     box.style.cssText='grid-column:1/-1;margin-top:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap';
-    box.innerHTML='<div><p class="eyebrow" style="margin:0 0 4px">PREPUBLICATION REVIEW SET</p><b style="font-size:11px">Gatchalian + Exponify + Seedlandia + Qyntro Daily + 3 Knowledge Lab starters</b><p style="margin:4px 0 0;color:#71899e;font-size:8px;line-height:1.5">Draft only. Idempotent. Preserves unrelated state. Live is never changed here.</p></div><button id="prepareReviewSetButton" class="secondary-action" type="button">Prepare review set</button>';
+    box.innerHTML='<div><p class="eyebrow" style="margin:0 0 4px">PREPUBLICATION REVIEW SET</p><b style="font-size:11px">Gatchalian + Exponify + Seedlandia + Qyntro Daily + 3 Knowledge Lab starters</b><p style="margin:4px 0 0;color:#71899e;font-size:8px;line-height:1.5">Draft only. Idempotent. Preserves unrelated state. Knowledge Lab stays OFF until you explicitly enable it. Live is never changed here.</p></div><button id="prepareReviewSetButton" class="secondary-action" type="button">Prepare review set</button>';
     host.insertAdjacentElement('afterend',box);
     $('#prepareReviewSetButton')?.addEventListener('click',async event=>{
       const button=event.currentTarget;
