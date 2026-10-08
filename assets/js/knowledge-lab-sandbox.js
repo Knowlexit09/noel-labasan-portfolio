@@ -3,7 +3,6 @@
 
   let activeChannel = '';
   let activeSequence = 0;
-  let activeBlobUrl = '';
 
   function safe(value) {
     if (typeof value === 'string') return value;
@@ -29,7 +28,10 @@
 
   function installConsoleBridge() {
     ['log', 'info', 'debug', 'warn', 'error', 'table'].forEach((type) => {
-      const original = typeof console[type] === 'function' ? console[type].bind(console) : console.log.bind(console);
+      const original = typeof console[type] === 'function'
+        ? console[type].bind(console)
+        : console.log.bind(console);
+
       console[type] = (...args) => {
         send(type === 'table' ? 'log' : type, args);
         original(...args);
@@ -46,10 +48,8 @@
   }
 
   function clearCurrentRun() {
-    if (activeBlobUrl) {
-      URL.revokeObjectURL(activeBlobUrl);
-      activeBlobUrl = '';
-    }
+    const oldStyle = document.querySelector('[data-user-style]');
+    if (oldStyle) oldStyle.remove();
 
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
@@ -60,6 +60,7 @@
     clearCurrentRun();
 
     const style = document.createElement('style');
+    style.dataset.userStyle = 'true';
     style.textContent = String(editors.css || '');
     document.head.appendChild(style);
 
@@ -74,29 +75,23 @@
       return;
     }
 
-    const blob = new Blob([userCode + '\n//# sourceURL=knowledge-lab-user-code.js'], { type: 'text/javascript' });
-    activeBlobUrl = URL.createObjectURL(blob);
-
-    const script = document.createElement('script');
-    script.src = activeBlobUrl;
-    script.onload = () => {
+    try {
+      const execute = new Function(
+        userCode + '\n//# sourceURL=knowledge-lab-user-code.js'
+      );
+      execute();
       send('ready', []);
-      URL.revokeObjectURL(activeBlobUrl);
-      activeBlobUrl = '';
-    };
-    script.onerror = () => {
-      send('error', ['JavaScript failed to load or contains a syntax error.']);
+    } catch (error) {
+      send('error', [error]);
       send('ready', []);
-      if (activeBlobUrl) URL.revokeObjectURL(activeBlobUrl);
-      activeBlobUrl = '';
-    };
-    document.body.appendChild(script);
+    }
   }
 
   installConsoleBridge();
 
   window.addEventListener('message', (event) => {
     if (event.source !== parent) return;
+
     const payload = event.data;
     if (!payload || payload.source !== 'knowledge-lab-parent') return;
     if (!payload.channel || !Number.isFinite(payload.sequence) || !payload.editors) return;
@@ -112,5 +107,8 @@
     }
   });
 
-  parent.postMessage({ source:'knowledge-lab-runner-boot', ready:true }, '*');
+  parent.postMessage({
+    source: 'knowledge-lab-runner-boot',
+    ready: true
+  }, '*');
 })();
