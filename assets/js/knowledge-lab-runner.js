@@ -110,7 +110,7 @@
   }
 
   function reloadRunner(sequence, suffix) {
-    frame.src = './runner.html?v=20261009-4#' + encodeURIComponent(suffix || ('run-' + sequence));
+    frame.src = './runner.html?v=20261009-5#' + encodeURIComponent(suffix || ('run-' + sequence));
   }
 
   function runCode() {
