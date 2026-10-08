@@ -84,7 +84,7 @@
     techLab: ['Tech Lab','Experiments and technical patterns'],
     activity: ['Build Activity','Meaningful development milestones'],
     multimedia: ['Multimedia','Graphic design, video, branding, ads, motion, and creative work'],
-    knowledgeLab: ['Knowledge Lab','Tutorials, practical tips, code recipes, and the staged browser IDE']
+    knowledgeLab: ['Knowledge Lab','Dedicated /knowledge/ learning site with tested code and proof-backed creative tutorials']
   };
 
   function readSession() {
