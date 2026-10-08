@@ -48,14 +48,12 @@
     });
   }
 
-  function verifyInlineExecution() {
+  function verifyEvalExecution() {
     try {
-      const probe = document.createElement('script');
-      probe.textContent = 'window.__knowledgeLabInlineProbe = 7341;';
-      document.head.appendChild(probe);
-      probe.remove();
-      const ok = window.__knowledgeLabInlineProbe === 7341;
-      delete window.__knowledgeLabInlineProbe;
+      window.__knowledgeLabEvalProbe = 0;
+      window.eval('window.__knowledgeLabEvalProbe = 7341;');
+      const ok = window.__knowledgeLabEvalProbe === 7341;
+      delete window.__knowledgeLabEvalProbe;
       return ok;
     } catch (_error) {
       return false;
@@ -63,7 +61,8 @@
   }
 
   function clearCurrentRun() {
-    document.querySelectorAll('[data-user-style],[data-user-script]').forEach((node) => node.remove());
+    const oldStyle = document.querySelector('[data-user-style]');
+    if (oldStyle) oldStyle.remove();
     while (document.body.firstChild) document.body.removeChild(document.body.firstChild);
   }
 
@@ -86,15 +85,12 @@
       return;
     }
 
-    const script = document.createElement('script');
-    script.dataset.userScript = 'true';
-    script.textContent = userCode + '\n//# sourceURL=knowledge-lab-user-code.js';
-    document.body.appendChild(script);
+    window.eval(userCode + '\n//# sourceURL=knowledge-lab-user-code.js');
     send('ready', []);
   }
 
   installConsoleBridge();
-  executionReady = verifyInlineExecution();
+  executionReady = verifyEvalExecution();
 
   window.addEventListener('message', (event) => {
     if (event.source !== parent) return;
