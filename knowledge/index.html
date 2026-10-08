@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Noel Labasan Knowledge Lab — practical, tested HTML, CSS, and JavaScript lessons with a browser-based Try It Yourself IDE.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'none'; media-src 'self' data: blob:; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data:; form-action 'self'">
+  <title>Knowledge Lab — Noel Labasan</title>
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261009-1">
+</head>
+<body>
+  <header class="kl-topbar">
+    <a class="kl-brand" href="../index.html" aria-label="Back to Noel Labasan portfolio">
+      <span class="kl-brand-mark" aria-hidden="true">NL</span>
+      <span><strong>Knowledge Lab</strong><small>Tested tutorials · tips · playground</small></span>
+    </a>
+    <div class="kl-top-actions">
+      <button class="kl-mobile-menu" type="button" data-sidebar-toggle aria-controls="knowledgeSidebar" aria-expanded="false">Topics</button>
+      <a class="kl-portfolio-link" href="../index.html">Portfolio ↗</a>
+    </div>
+  </header>
+
+  <div class="kl-shell">
+    <aside class="kl-sidebar" id="knowledgeSidebar" data-sidebar>
+      <div class="kl-sidebar-sticky">
+        <label class="kl-search-label" for="knowledgeSearch">Search tutorials</label>
+        <div class="kl-search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="knowledgeSearch" type="search" placeholder="Try: grid, counter, form…" autocomplete="off" data-search>
+        </div>
+        <nav class="kl-topic-nav" aria-label="Knowledge Lab topics" data-topic-nav></nav>
+        <div class="kl-sidebar-note">
+          <strong>V1 runner</strong>
+          <p>HTML, CSS, and JavaScript execute inside a sandboxed preview. Network access is blocked.</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="kl-main" id="mainContent">
+      <section class="kl-lesson-head" aria-labelledby="lessonTitle">
+        <div class="kl-breadcrumb" data-breadcrumb>Knowledge Lab</div>
+        <div class="kl-meta-row">
+          <span class="kl-category" data-category>HTML</span>
+          <span class="kl-level" data-level>Beginner</span>
+          <span class="kl-tested">✓ Runnable example</span>
+        </div>
+        <h1 id="lessonTitle" data-title>Loading lesson…</h1>
+        <p class="kl-summary" data-summary></p>
+        <div class="kl-objective" data-objective></div>
+      </section>
+
+      <section class="kl-content-grid">
+        <article class="kl-explainer">
+          <div class="kl-section-kicker">Why it matters</div>
+          <div class="kl-explanation" data-explanation></div>
+        </article>
+
+        <aside class="kl-quick-panel" aria-label="Lesson quick notes">
+          <div class="kl-quick-block kl-tip-block">
+            <span>TIP</span>
+            <p data-tip></p>
+          </div>
+          <div class="kl-quick-block kl-hack-block">
+            <span>USEFUL HACK</span>
+            <p data-hack></p>
+          </div>
+          <div class="kl-quick-block kl-warning-block">
+            <span>COMMON MISTAKE</span>
+            <p data-mistake></p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="kl-ide" id="knowledgeIde" data-ide aria-labelledby="ideTitle">
+        <div class="kl-ide-head">
+          <div>
+            <span class="kl-section-kicker">Try it yourself</span>
+            <h2 id="ideTitle">Browser IDE</h2>
+            <p>Edit the example, then run the real code. Use <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Enter</kbd> to run.</p>
+          </div>
+          <div class="kl-ide-actions">
+            <button type="button" class="kl-btn kl-btn-muted" data-reset>Reset</button>
+            <button type="button" class="kl-btn kl-btn-muted" data-copy>Copy</button>
+            <button type="button" class="kl-btn kl-btn-muted" data-fullscreen>Full screen</button>
+            <button type="button" class="kl-btn kl-btn-stop" data-stop>Stop</button>
+            <button type="button" class="kl-btn kl-btn-run" data-run>Run ▶</button>
+          </div>
+        </div>
+
+        <div class="kl-ide-workspace">
+          <div class="kl-editor-pane">
+            <div class="kl-editor-tabs" role="tablist" aria-label="Code editors">
+              <button type="button" role="tab" aria-selected="true" data-editor-tab="html">HTML</button>
+              <button type="button" role="tab" aria-selected="false" data-editor-tab="css">CSS</button>
+              <button type="button" role="tab" aria-selected="false" data-editor-tab="js">JavaScript</button>
+              <span class="kl-save-state" data-save-state>Original example</span>
+            </div>
+            <div class="kl-editor-stack">
+              <textarea class="kl-code-editor is-active" data-editor="html" spellcheck="false" aria-label="HTML editor"></textarea>
+              <textarea class="kl-code-editor" data-editor="css" spellcheck="false" aria-label="CSS editor" hidden></textarea>
+              <textarea class="kl-code-editor" data-editor="js" spellcheck="false" aria-label="JavaScript editor" hidden></textarea>
+            </div>
+          </div>
+
+          <div class="kl-output-pane">
+            <div class="kl-output-tabs" role="tablist" aria-label="IDE output">
+              <button type="button" role="tab" aria-selected="true" data-output-tab="result">Result</button>
+              <button type="button" role="tab" aria-selected="false" data-output-tab="console">Console <span data-console-count>0</span></button>
+              <span class="kl-run-status" data-run-status>Ready</span>
+            </div>
+            <div class="kl-result-wrap" data-output-panel="result">
+              <iframe title="Sandboxed code result" sandbox="allow-scripts" referrerpolicy="no-referrer" data-result-frame></iframe>
+            </div>
+            <div class="kl-console" data-output-panel="console" hidden aria-live="polite">
+              <div class="kl-console-empty" data-console-empty>Console output will appear here.</div>
+              <ol data-console-lines></ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="kl-safety-row">
+          <span>Sandbox:</span>
+          <strong>No host-page access</strong>
+          <strong>No network requests</strong>
+          <strong>No form submission</strong>
+          <strong>No popups</strong>
+        </div>
+      </section>
+
+      <section class="kl-after-ide">
+        <article>
+          <span class="kl-section-kicker">Expected result</span>
+          <p data-expected></p>
+        </article>
+        <article>
+          <span class="kl-section-kicker">Use it in real work</span>
+          <p data-real-use></p>
+        </article>
+      </section>
+
+      <nav class="kl-prev-next" aria-label="Lesson navigation">
+        <button type="button" data-prev>← Previous</button>
+        <button type="button" data-next>Next →</button>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../assets/js/knowledge-lab-data.js?v=20261009-1"></script>
+  <script src="../assets/js/knowledge-lab-runner.js?v=20261009-1"></script>
+</body>
+</html>
