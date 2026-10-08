@@ -9,7 +9,7 @@ on:
       - "assets/js/knowledge-lab-*.js"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   ide-e2e:
@@ -28,72 +28,58 @@ jobs:
         run: |
           python3 -m http.server 4173 >/tmp/knowledge-lab-http.log 2>&1 &
           sleep 2
-      - name: Diagnose IDE interaction
+      - name: Run browser interaction tests
         run: |
           node <<'NODE'
-          const fs = require('fs');
           const { chromium } = require('playwright');
 
           (async () => {
-            const result = {
-              passed: false,
-              runnerStatusBeforeClick: null,
-              runnerStatusAfterClick: null,
-              jsLength: 0,
-              jsPreview: '',
-              resultMessage: null,
-              parentConsoleCount: null,
-              parentConsoleText: [],
-              browserMessages: [],
-              iframeUrl: null,
-              iframeHtml: null
-            };
-
             const browser = await chromium.launch({ headless: true });
             const page = await browser.newPage();
-            page.on('console', msg => result.browserMessages.push(msg.type() + ': ' + msg.text()));
-            page.on('pageerror', err => result.browserMessages.push('pageerror: ' + err.message));
+            const browserMessages = [];
+            page.on('console', msg => browserMessages.push(msg.type() + ': ' + msg.text()));
+            page.on('pageerror', err => browserMessages.push('pageerror: ' + err.message));
 
-            try {
-              await page.goto('http://127.0.0.1:4173/knowledge/#html-accessible-form', { waitUntil: 'networkidle' });
-              await page.waitForSelector('[data-result-frame]');
-              const frameHandle = await page.$('[data-result-frame]');
-              const frame = await frameHandle.contentFrame();
-              await frame.waitForSelector('#helloForm');
+            await page.goto('http://127.0.0.1:4173/knowledge/#html-accessible-form', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let frame = await (await page.$('[data-result-frame]')).contentFrame();
+            await frame.waitForSelector('#helloForm');
 
-              result.runnerStatusBeforeClick = await page.textContent('[data-run-status]');
-              const jsEditor = await page.inputValue('[data-editor="js"]');
-              result.jsLength = jsEditor.length;
-              result.jsPreview = jsEditor.slice(0, 500);
-              result.iframeUrl = frame.url();
-              result.iframeHtml = (await frame.content()).slice(0, 3000);
-
-              await frame.fill('#name', 'Juan Dela Cruz');
-              await frame.click('button[type="submit"]');
-              await page.waitForTimeout(300);
-              result.resultMessage = await frame.textContent('#message');
-              result.runnerStatusAfterClick = await page.textContent('[data-run-status]');
-              result.parentConsoleCount = await page.textContent('[data-console-count]');
-              result.parentConsoleText = await page.locator('[data-console-lines] li').allTextContents();
-
-              result.passed = result.resultMessage === 'Hello, Juan Dela Cruz!';
-            } catch (error) {
-              result.error = String(error && error.stack || error);
-            } finally {
-              await browser.close();
+            const jsEditor = await page.inputValue('[data-editor="js"]');
+            if (!jsEditor.includes('addEventListener("submit"')) {
+              throw new Error('Expected submit handler is missing from the JavaScript editor.');
             }
 
-            fs.writeFileSync('knowledge-lab-e2e-result.json', JSON.stringify(result, null, 2));
-            console.log(JSON.stringify(result, null, 2));
-          })();
+            await frame.fill('#name', 'Juan Dela Cruz');
+            await frame.click('button[type="submit"]');
+            await page.waitForTimeout(250);
+
+            const message = await frame.textContent('#message');
+            console.log('FORM_RESULT=' + message);
+            if (message !== 'Hello, Juan Dela Cruz!') {
+              throw new Error('Form interaction failed. Actual result: ' + message);
+            }
+
+            await page.click('[data-lesson-id="js-dom-counter"]');
+            await page.waitForTimeout(350);
+            frame = await (await page.$('[data-result-frame]')).contentFrame();
+            await frame.waitForSelector('#add');
+            await frame.click('#add');
+            await page.waitForTimeout(150);
+
+            const count = await frame.textContent('#count');
+            console.log('COUNTER_RESULT=' + count);
+            if (count !== '1') {
+              throw new Error('Counter interaction failed. Actual count: ' + count);
+            }
+
+            const status = await page.textContent('[data-run-status]');
+            console.log('RUN_STATUS=' + status);
+            console.log('BROWSER_MESSAGES=' + JSON.stringify(browserMessages));
+
+            await browser.close();
+          })().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
           NODE
-      - name: Commit diagnostic result
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add knowledge-lab-e2e-result.json
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-          git commit -m "Record Knowledge Lab IDE browser diagnostic"
-          git push origin HEAD:main
