@@ -1,0 +1,84 @@
+name: Validate Knowledge Lab IDE
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/validate-knowledge-lab-ide.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  ide-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local portfolio server
+        run: |
+          python3 -m http.server 4173 >/tmp/knowledge-lab-http.log 2>&1 &
+          echo $! >/tmp/knowledge-lab-http.pid
+          sleep 2
+      - name: Run IDE interaction tests
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            const consoleMessages = [];
+            page.on('console', msg => consoleMessages.push(msg.type() + ': ' + msg.text()));
+            page.on('pageerror', err => consoleMessages.push('pageerror: ' + err.message));
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#html-accessible-form', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            const frameHandle = await page.$('[data-result-frame]');
+            const frame = await frameHandle.contentFrame();
+            await frame.waitForSelector('#helloForm');
+
+            const runnerStatus = await page.textContent('[data-run-status]');
+            const jsEditor = await page.inputValue('[data-editor="js"]');
+
+            await frame.fill('#name', 'Juan Dela Cruz');
+            await frame.click('button[type="submit"]');
+            await page.waitForTimeout(250);
+            const message = await frame.textContent('#message');
+
+            console.log('RUN_STATUS=' + runnerStatus);
+            console.log('JS_LENGTH=' + jsEditor.length);
+            console.log('RESULT_MESSAGE=' + message);
+            console.log('PARENT_CONSOLE_COUNT=' + await page.textContent('[data-console-count]'));
+            console.log('BROWSER_MESSAGES=' + JSON.stringify(consoleMessages));
+
+            if (!jsEditor.includes('addEventListener("submit"')) {
+              throw new Error('Expected form submit handler is not present in the JS editor.');
+            }
+            if (message !== 'Hello, Juan Dela Cruz!') {
+              throw new Error('Form interaction failed. Actual message: ' + message);
+            }
+
+            await page.click('[data-lesson-id="js-dom-counter"]');
+            await page.waitForTimeout(300);
+            const counterFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await counterFrame.waitForSelector('#add');
+            await counterFrame.click('#add');
+            await page.waitForTimeout(100);
+            const count = await counterFrame.textContent('#count');
+            console.log('COUNTER_AFTER_CLICK=' + count);
+            if (count !== '1') throw new Error('Counter interaction failed. Actual count: ' + count);
+
+            await browser.close();
+          })().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
