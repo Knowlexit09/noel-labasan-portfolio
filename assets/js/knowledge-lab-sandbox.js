@@ -3,6 +3,7 @@
 
   let activeChannel = '';
   let activeSequence = 0;
+  let executionReady = false;
 
   function safe(value) {
     if (typeof value === 'string') return value;
@@ -47,13 +48,23 @@
     });
   }
 
-  function clearCurrentRun() {
-    const oldStyle = document.querySelector('[data-user-style]');
-    if (oldStyle) oldStyle.remove();
-
-    while (document.body.firstChild) {
-      document.body.removeChild(document.body.firstChild);
+  function verifyInlineExecution() {
+    try {
+      const probe = document.createElement('script');
+      probe.textContent = 'window.__knowledgeLabInlineProbe = 7341;';
+      document.head.appendChild(probe);
+      probe.remove();
+      const ok = window.__knowledgeLabInlineProbe === 7341;
+      delete window.__knowledgeLabInlineProbe;
+      return ok;
+    } catch (_error) {
+      return false;
     }
+  }
+
+  function clearCurrentRun() {
+    document.querySelectorAll('[data-user-style],[data-user-script]').forEach((node) => node.remove());
+    while (document.body.firstChild) document.body.removeChild(document.body.firstChild);
   }
 
   function applyRun(editors) {
@@ -75,19 +86,15 @@
       return;
     }
 
-    try {
-      const execute = new Function(
-        userCode + '\n//# sourceURL=knowledge-lab-user-code.js'
-      );
-      execute();
-      send('ready', []);
-    } catch (error) {
-      send('error', [error]);
-      send('ready', []);
-    }
+    const script = document.createElement('script');
+    script.dataset.userScript = 'true';
+    script.textContent = userCode + '\n//# sourceURL=knowledge-lab-user-code.js';
+    document.body.appendChild(script);
+    send('ready', []);
   }
 
   installConsoleBridge();
+  executionReady = verifyInlineExecution();
 
   window.addEventListener('message', (event) => {
     if (event.source !== parent) return;
@@ -99,6 +106,12 @@
     activeChannel = String(payload.channel);
     activeSequence = Number(payload.sequence);
 
+    if (!executionReady) {
+      send('error', ['Sandbox JavaScript execution is unavailable in this browser.']);
+      send('ready', []);
+      return;
+    }
+
     try {
       applyRun(payload.editors);
     } catch (error) {
@@ -109,6 +122,7 @@
 
   parent.postMessage({
     source: 'knowledge-lab-runner-boot',
-    ready: true
+    ready: true,
+    executionReady
   }, '*');
 })();
