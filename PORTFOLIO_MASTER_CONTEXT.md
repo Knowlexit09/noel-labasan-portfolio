@@ -347,7 +347,7 @@ Dedicated staging app:
 V1 browser IDE capabilities:
 
 - real HTML + CSS + JavaScript execution in a `sandbox="allow-scripts"` iframe,
-- 2026-10-09 runner fix: replaced `srcdoc` inline execution with a dedicated `knowledge/runner.html` + external sandbox bridge because the parent CSP correctly blocked the earlier inline scripts; form/button JavaScript now runs through a blob-script inside the isolated runner document,
+- 2026-10-09 runner fixes: replaced `srcdoc` inline execution with a dedicated `knowledge/runner.html` + external sandbox bridge because the parent CSP correctly blocked the earlier inline scripts; a follow-up bug showed blob-script execution was still blocked in the opaque sandbox origin, so V1 now uses `new Function()` inside that isolated iframe with runner-only `unsafe-eval`. The parent page remains without `allow-same-origin`, network is still blocked (`connect-src 'none'`), and form submission remains blocked (`form-action 'none'`). Form/button JavaScript now executes and future runtime errors automatically switch to the Console tab,
 - no `allow-same-origin`, so runner code cannot directly access the host portfolio DOM/storage,
 - runner CSP blocks network connections, form submission, objects, external resources, and host-page access paths,
 - HTML/CSS/JavaScript tabs,
