@@ -17,10 +17,7 @@
   let consoleCount = 0;
   let runSequence = 0;
   let saveTimer = 0;
-
-  function escapeClosingTag(value, tagName) {
-    return String(value || '').replace(new RegExp('</' + tagName, 'gi'), '<\\/' + tagName);
-  }
+  let pendingRun = null;
 
   function storageKey(id) {
     return storagePrefix + id;
@@ -71,53 +68,10 @@
     }, 250);
   }
 
-  function resetEditors() {
-    if (!currentLesson) return;
-    try { localStorage.removeItem(storageKey(currentLesson.id)); } catch (_error) {}
-    applyEditors(getOriginalEditors(currentLesson));
-    $('[data-save-state]').textContent = 'Original example';
-    stopRun('Reset');
-    runCode();
-  }
-
   function applyEditors(values) {
     ['html', 'css', 'js'].forEach((name) => {
       $('[data-editor="' + name + '"]').value = String(values[name] || '');
     });
-  }
-
-  function buildRunnerDocument(editors, sequence) {
-    const csp = "default-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; font-src data:; connect-src 'none'; media-src data: blob:; object-src 'none'; base-uri 'none'; form-action 'none'";
-    const bootstrap = `
-      (() => {
-        const CHANNEL = ${JSON.stringify(channel)};
-        const SEQUENCE = ${JSON.stringify(sequence)};
-        const safe = (value) => {
-          if (typeof value === 'string') return value;
-          if (value === undefined) return 'undefined';
-          if (value instanceof Error) return value.name + ': ' + value.message;
-          try { return JSON.stringify(value); } catch (_) { try { return String(value); } catch (_) { return '[Unserializable value]'; } }
-        };
-        const send = (type, values) => parent.postMessage({ source:'knowledge-lab-runner', channel:CHANNEL, sequence:SEQUENCE, type, values:(values || []).map(safe) }, '*');
-        ['log','warn','error'].forEach((type) => {
-          const original = console[type].bind(console);
-          console[type] = (...args) => { send(type, args); original(...args); };
-        });
-        window.addEventListener('error', (event) => send('error', [event.message + (event.lineno ? ' (line ' + event.lineno + ')' : '')]));
-        window.addEventListener('unhandledrejection', (event) => send('error', ['Unhandled promise rejection:', event.reason]));
-        window.__knowledgeLabDone = () => send('ready', []);
-      })();`;
-
-    return '<!doctype html>' +
-      '<html><head><meta charset="utf-8">' +
-      '<meta http-equiv="Content-Security-Policy" content="' + csp + '">' +
-      '<meta name="referrer" content="no-referrer">' +
-      '<style>html{color-scheme:light}*{box-sizing:border-box}</style>' +
-      '<script>' + escapeClosingTag(bootstrap, 'script') + '<\/script>' +
-      '<style>' + escapeClosingTag(editors.css, 'style') + '</style>' +
-      '</head><body>' + String(editors.html || '') +
-      '<script>' + escapeClosingTag(editors.js, 'script') + '\n;window.__knowledgeLabDone();<\/script>' +
-      '</body></html>';
   }
 
   function clearConsole() {
@@ -131,10 +85,13 @@
     if (consoleCount >= 100) return;
     consoleCount += 1;
     $('[data-console-empty]').hidden = true;
+
     const li = document.createElement('li');
     const kind = document.createElement('span');
     const text = document.createElement('span');
-    kind.className = 'type-' + type;
+    const visualType = type === 'warn' ? 'warn' : type === 'error' ? 'error' : 'log';
+
+    kind.className = 'type-' + visualType;
     kind.textContent = type.toUpperCase();
     text.textContent = (values || []).join(' ');
     li.append(kind, text);
@@ -142,25 +99,55 @@
     $('[data-console-count]').textContent = String(consoleCount);
   }
 
-  function stopRun(label = 'Stopped') {
-    runSequence += 1;
-    frame.srcdoc = '<!doctype html><html><body style="font-family:system-ui,sans-serif;padding:24px;color:#52677a">Preview ' + label.toLowerCase() + '.</body></html>';
-    $('[data-run-status]').textContent = label;
+  function postPendingRun() {
+    if (!pendingRun || !frame.contentWindow) return;
+    frame.contentWindow.postMessage({
+      source: 'knowledge-lab-parent',
+      channel,
+      sequence: pendingRun.sequence,
+      editors: pendingRun.editors
+    }, '*');
+  }
+
+  function reloadRunner(sequence, suffix) {
+    frame.src = './runner.html?v=20261009-2#' + encodeURIComponent(suffix || ('run-' + sequence));
   }
 
   function runCode() {
     if (!currentLesson) return;
+
     runSequence += 1;
     const sequence = runSequence;
+    pendingRun = { sequence, editors: currentEditors() };
     clearConsole();
-    $('[data-run-status]').textContent = 'Running…';
-    frame.srcdoc = buildRunnerDocument(currentEditors(), sequence);
+    $('[data-run-status]').textContent = 'Starting sandbox…';
+    reloadRunner(sequence);
+  }
+
+  function stopRun(label = 'Stopped') {
+    runSequence += 1;
+    pendingRun = null;
+    reloadRunner(runSequence, 'stopped-' + runSequence);
+    $('[data-run-status]').textContent = label;
+  }
+
+  function resetEditors() {
+    if (!currentLesson) return;
+    try { localStorage.removeItem(storageKey(currentLesson.id)); } catch (_error) {}
+    applyEditors(getOriginalEditors(currentLesson));
+    $('[data-save-state]').textContent = 'Original example';
+    stopRun('Reset');
+    runCode();
   }
 
   function switchEditor(name) {
     if (!['html', 'css', 'js'].includes(name)) return;
     activeEditor = name;
-    $$('[data-editor-tab]').forEach((button) => button.setAttribute('aria-selected', String(button.dataset.editorTab === name)));
+
+    $$('[data-editor-tab]').forEach((button) => {
+      button.setAttribute('aria-selected', String(button.dataset.editorTab === name));
+    });
+
     $$('[data-editor]').forEach((editor) => {
       const active = editor.dataset.editor === name;
       editor.hidden = !active;
@@ -170,13 +157,20 @@
 
   function switchOutput(name) {
     if (!['result', 'console'].includes(name)) return;
-    $$('[data-output-tab]').forEach((button) => button.setAttribute('aria-selected', String(button.dataset.outputTab === name)));
-    $$('[data-output-panel]').forEach((panel) => { panel.hidden = panel.dataset.outputPanel !== name; });
+
+    $$('[data-output-tab]').forEach((button) => {
+      button.setAttribute('aria-selected', String(button.dataset.outputTab === name));
+    });
+
+    $$('[data-output-panel]').forEach((panel) => {
+      panel.hidden = panel.dataset.outputPanel !== name;
+    });
   }
 
   async function copyActiveEditor() {
     const editor = $('[data-editor="' + activeEditor + '"]');
     const button = $('[data-copy]');
+
     try {
       await navigator.clipboard.writeText(editor.value);
       button.textContent = activeEditor.toUpperCase() + ' copied ✓';
@@ -191,7 +185,12 @@
   }
 
   function escapeHtml(value) {
-    return String(value || '').replace(/[&<>"]/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[char]));
+    return String(value || '').replace(/[&<>"]/g, (char) => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;'
+    }[char]));
   }
 
   function renderNavigation(query = '') {
@@ -254,8 +253,12 @@
     $('[data-mistake]').textContent = lesson.mistake;
     $('[data-expected]').textContent = lesson.expected;
     $('[data-real-use]').textContent = lesson.realUse;
+
     applyEditors(saved);
-    $('[data-save-state]').textContent = JSON.stringify(saved) === JSON.stringify(getOriginalEditors(lesson)) ? 'Original example' : 'Saved locally';
+    $('[data-save-state]').textContent =
+      JSON.stringify(saved) === JSON.stringify(getOriginalEditors(lesson))
+        ? 'Original example'
+        : 'Saved locally';
 
     $('[data-prev]').disabled = currentIndex === 0;
     $('[data-next]').disabled = currentIndex === lessons.length - 1;
@@ -266,12 +269,14 @@
     switchEditor(activeEditor);
     switchOutput('result');
     clearConsole();
+
     if (shouldRun) runCode();
   }
 
   function selectLesson(id) {
     const lesson = byId.get(id);
     if (!lesson) return;
+
     history.replaceState(null, '', '#' + lesson.id);
     renderLesson(lesson.id, true);
 
@@ -286,17 +291,36 @@
     });
   }
 
+  frame.addEventListener('load', () => {
+    window.setTimeout(postPendingRun, 0);
+  });
+
   window.addEventListener('message', (event) => {
     if (event.source !== frame.contentWindow) return;
     const payload = event.data;
-    if (!payload || payload.source !== 'knowledge-lab-runner' || payload.channel !== channel || payload.sequence !== runSequence) return;
+    if (!payload || typeof payload !== 'object') return;
 
-    if (payload.type === 'ready') {
-      $('[data-run-status]').textContent = consoleCount ? 'Finished · console ' + consoleCount : 'Finished ✓';
+    if (payload.source === 'knowledge-lab-runner-boot') {
+      postPendingRun();
       return;
     }
 
-    if (['log', 'warn', 'error'].includes(payload.type)) appendConsole(payload.type, payload.values || []);
+    if (
+      payload.source !== 'knowledge-lab-runner' ||
+      payload.channel !== channel ||
+      payload.sequence !== runSequence
+    ) return;
+
+    if (payload.type === 'ready') {
+      pendingRun = null;
+      $('[data-run-status]').textContent =
+        consoleCount ? 'Finished · console ' + consoleCount : 'Finished ✓';
+      return;
+    }
+
+    if (['log', 'info', 'debug', 'warn', 'error'].includes(payload.type)) {
+      appendConsole(payload.type, payload.values || []);
+    }
   });
 
   $('[data-topic-nav]').addEventListener('click', (event) => {
@@ -304,9 +328,17 @@
     if (button) selectLesson(button.dataset.lessonId);
   });
 
-  $('[data-search]').addEventListener('input', (event) => renderNavigation(event.target.value));
-  $$('[data-editor-tab]').forEach((button) => button.addEventListener('click', () => switchEditor(button.dataset.editorTab)));
-  $$('[data-output-tab]').forEach((button) => button.addEventListener('click', () => switchOutput(button.dataset.outputTab)));
+  $('[data-search]').addEventListener('input', (event) => {
+    renderNavigation(event.target.value);
+  });
+
+  $$('[data-editor-tab]').forEach((button) => {
+    button.addEventListener('click', () => switchEditor(button.dataset.editorTab));
+  });
+
+  $$('[data-output-tab]').forEach((button) => {
+    button.addEventListener('click', () => switchOutput(button.dataset.outputTab));
+  });
 
   $$('[data-editor]').forEach((editor) => {
     editor.addEventListener('input', saveEditorsSoon);
@@ -330,6 +362,7 @@
   $('[data-stop]').addEventListener('click', () => stopRun('Stopped'));
   $('[data-reset]').addEventListener('click', resetEditors);
   $('[data-copy]').addEventListener('click', copyActiveEditor);
+
   $('[data-fullscreen]').addEventListener('click', async () => {
     const ide = $('[data-ide]');
     try {
@@ -339,12 +372,15 @@
       ide.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
+
   $('[data-prev]').addEventListener('click', () => {
     if (currentIndex > 0) selectLesson(lessons[currentIndex - 1].id);
   });
+
   $('[data-next]').addEventListener('click', () => {
     if (currentIndex < lessons.length - 1) selectLesson(lessons[currentIndex + 1].id);
   });
+
   $('[data-sidebar-toggle]').addEventListener('click', () => {
     const sidebar = $('[data-sidebar]');
     const isOpen = sidebar.classList.toggle('is-open');
@@ -357,6 +393,7 @@
     const toggle = $('[data-sidebar-toggle]');
     if (!sidebar.classList.contains('is-open')) return;
     if (sidebar.contains(event.target) || toggle.contains(event.target)) return;
+
     sidebar.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
   });
