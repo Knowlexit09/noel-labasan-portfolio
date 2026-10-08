@@ -82,7 +82,9 @@
     testimonials: ['Testimonials','Permissioned references and feedback'],
     blog: ['Technical Notes','Articles and technical write-ups'],
     techLab: ['Tech Lab','Experiments and technical patterns'],
-    activity: ['Build Activity','Meaningful development milestones']
+    activity: ['Build Activity','Meaningful development milestones'],
+    multimedia: ['Multimedia','Graphic design, video, branding, ads, motion, and creative work'],
+    knowledgeLab: ['Knowledge Lab','Tutorials, practical tips, code recipes, and the staged browser IDE']
   };
 
   function readSession() {
@@ -329,7 +331,7 @@
   function goPage(page) {
     $$('.admin-page').forEach(el => el.classList.toggle('active', el.dataset.page === page));
     $$('#adminNav [data-page-target]').forEach(btn => btn.classList.toggle('active', btn.dataset.pageTarget === page));
-    $('#pageTitle').textContent = ({overview:'Overview',modules:'Modules',media:'Media',content:'Content',testimonials:'Testimonials',system:'System'})[page] || 'Maintenance';
+    $('#pageTitle').textContent = ({overview:'Overview',modules:'Modules',media:'Media',content:'Content',testimonials:'Testimonials',creative:'Creative',system:'System'})[page] || 'Maintenance';
     if (page === 'media') renderMedia();
     window.scrollTo({top:0,behavior:'smooth'});
   }
