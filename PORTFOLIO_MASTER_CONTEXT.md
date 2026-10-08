@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-09 (Asia/Manila) — Knowledge Lab V1 browser IDE staging**  
+> Last consolidated: **2026-10-09 (Asia/Manila) — Knowledge Lab runner + Admin visibility-control fix**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -347,7 +347,7 @@ Dedicated staging app:
 V1 browser IDE capabilities:
 
 - real HTML + CSS + JavaScript execution in a `sandbox="allow-scripts"` iframe,
-- 2026-10-09 runner fixes: replaced `srcdoc` inline execution with a dedicated `knowledge/runner.html` + external sandbox bridge because the parent CSP correctly blocked the earlier inline scripts; a follow-up bug showed blob-script execution was still blocked in the opaque sandbox origin, so V1 now uses `new Function()` inside that isolated iframe with runner-only `unsafe-eval`. The parent page remains without `allow-same-origin`, network is still blocked (`connect-src 'none'`), and form submission remains blocked (`form-action 'none'`). Form/button JavaScript now executes and future runtime errors automatically switch to the Console tab,
+- 2026-10-09 runner fixes: replaced `srcdoc` inline execution with a dedicated `knowledge/runner.html` + external sandbox bridge because the parent CSP correctly blocked the earlier inline scripts. A second browser issue showed the previous blob/eval approach was still not reliable in the opaque sandbox. V1 now uses a dedicated isolated runner document with runner-only `unsafe-inline`, inserts user JavaScript as a script element inside that sandbox, and runs an explicit inline-execution self-test before accepting a lesson run. The parent iframe still has no `allow-same-origin`; network remains blocked (`connect-src 'none'`) and form submission remains blocked (`form-action 'none'`). If the self-test or lesson code fails, the runner fails closed and exposes the error in Console instead of pretending the example worked,
 - no `allow-same-origin`, so runner code cannot directly access the host portfolio DOM/storage,
 - runner CSP blocks network connections, form submission, objects, external resources, and host-page access paths,
 - HTML/CSS/JavaScript tabs,
@@ -377,6 +377,15 @@ Security caveat: a sandboxed browser iframe meaningfully limits origin/network/f
 Java, Apps Script, SQL, Python, and other runtimes are NOT yet exposed as fake runners. Add them only when a real, isolated execution path exists. Java in particular requires a disposable backend sandbox with CPU/RAM/time/output/process limits and no credentials/network by default.
 
 The older homepage Knowledge Lab card/dialog runtime and Draft manager still exist. Do not silently Publish Live or replace the owner-controlled Draft → Preview → Publish Live flow.
+
+Current visibility finding (2026-10-09 read-only backend check):
+
+- server Draft has `modules.knowledgeLab = true` with 3 Knowledge Lab entries,
+- server Live also has `modules.knowledgeLab = true` with the same 3 entries,
+- this is why the legacy Knowledge Lab section is already visible on the public portfolio; the new dedicated `/knowledge/` staging page did not itself publish that module,
+- the generic Admin → Modules page previously omitted the `Multimedia` and `Knowledge Lab` toggles even though the Creative page had them. This omission is fixed: both toggles now appear in the main Modules page,
+- the Prepare review set now keeps `knowledgeLab:false` in Draft by default so future staging does not silently re-enable it,
+- do not change Live state directly on the user's behalf; the owner should switch Knowledge Lab OFF in Draft, Preview, then personally Publish Live if they want the public legacy module hidden.
 
 ---
 
