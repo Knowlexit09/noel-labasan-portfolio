@@ -7,6 +7,10 @@ on:
       - ".github/workflows/validate-knowledge-lab-ide.yml"
       - "knowledge/**"
       - "assets/js/knowledge-lab-*.js"
+      - "assets/css/knowledge-lab.css"
+      - "assets/js/future-modules.js"
+      - "admin/admin.js"
+      - "admin/admin-creative-manager.js"
 
 permissions:
   contents: read
@@ -14,20 +18,85 @@ permissions:
 jobs:
   ide-e2e:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Static syntax and structure checks
+        run: |
+          node --check assets/js/knowledge-lab-data.js
+          node --check assets/js/knowledge-lab-runner.js
+          node --check assets/js/knowledge-lab-sandbox.js
+          node --check assets/js/future-modules.js
+          node --check admin/admin.js
+          node --check admin/admin-creative-manager.js
+          grep -q "link.href = 'knowledge/'" assets/js/future-modules.js
+          ! grep -q 'section class="section knowledge-section"' assets/js/future-modules.js
+          grep -q 'data-view="home"' knowledge/index.html
+          grep -q 'data-proof-lab' knowledge/index.html
+          grep -q 'data-reference-lab' knowledge/index.html
+
+      - name: Validate lesson source and Java references
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const cp = require('child_process');
+          global.window = {};
+          require('./assets/js/knowledge-lab-data.js');
+          const data = global.window.KNOWLEDGE_LAB_V2;
+          if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
+            throw new Error('Knowledge Lab V2 data is missing.');
+          }
+
+          const requiredCategories = ['html','css','javascript','java','photoshop','canva','capcut','blender'];
+          for (const id of requiredCategories) {
+            if (!data.categories.some(c => c.id === id)) throw new Error('Missing category: ' + id);
+          }
+
+          for (const lesson of data.lessons.filter(x => x.mode === 'code')) {
+            new Function(lesson.js || '');
+          }
+
+          const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
+          if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
+
+          for (const lesson of javaLessons) {
+            fs.mkdirSync('/tmp/kl-java', { recursive: true });
+            fs.writeFileSync('/tmp/kl-java/Main.java', lesson.code);
+            cp.execFileSync('javac', ['Main.java'], { cwd: '/tmp/kl-java', stdio: 'inherit' });
+            const output = cp.execFileSync('java', ['Main'], { cwd: '/tmp/kl-java', encoding: 'utf8' }).trim();
+            const expected = String(lesson.expectedOutput || '').trim();
+            console.log(lesson.id + ': ' + JSON.stringify(output));
+            if (output !== expected) {
+              throw new Error(lesson.id + ' output mismatch. Expected ' + JSON.stringify(expected) + ', got ' + JSON.stringify(output));
+            }
+            for (const file of fs.readdirSync('/tmp/kl-java')) fs.rmSync('/tmp/kl-java/' + file, { force: true });
+          }
+
+          const proofLessons = data.lessons.filter(x => x.mode === 'proof');
+          if (proofLessons.length < 3) throw new Error('Expected at least three proof-backed creative lessons.');
+          for (const lesson of proofLessons) {
+            if (!lesson.proof?.src || !lesson.proof?.caseUrl) throw new Error('Incomplete proof lesson: ' + lesson.id);
+          }
+          NODE
+
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+
       - name: Start local portfolio server
         run: |
           python3 -m http.server 4173 >/tmp/knowledge-lab-http.log 2>&1 &
           sleep 2
+
       - name: Run browser interaction tests
         run: |
           node <<'NODE'
@@ -40,43 +109,61 @@ jobs:
             page.on('console', msg => browserMessages.push(msg.type() + ': ' + msg.text()));
             page.on('pageerror', err => browserMessages.push('pageerror: ' + err.message));
 
-            await page.goto('http://127.0.0.1:4173/knowledge/#html-accessible-form', { waitUntil: 'networkidle' });
+            await page.goto('http://127.0.0.1:4173/knowledge/', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-view="home"]:not([hidden])');
+            if (await page.locator('[data-code-lab]:visible').count()) {
+              throw new Error('IDE should not open automatically on Knowledge Lab home.');
+            }
+
+            const categoryText = await page.locator('[data-category-groups]').innerText();
+            for (const label of ['HTML','CSS','JavaScript','Java','Photoshop','Canva','CapCut','Blender']) {
+              if (!categoryText.includes(label)) throw new Error('Missing category card: ' + label);
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/html-accessible-form', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-result-frame]');
             let frame = await (await page.$('[data-result-frame]')).contentFrame();
             await frame.waitForSelector('#helloForm');
 
             const jsEditor = await page.inputValue('[data-editor="js"]');
             if (!jsEditor.includes('addEventListener("submit"')) {
-              throw new Error('Expected submit handler is missing from the JavaScript editor.');
+              throw new Error('Expected submit handler is missing from JavaScript editor.');
             }
 
             await frame.fill('#name', 'Juan Dela Cruz');
             await frame.click('button[type="submit"]');
             await page.waitForTimeout(250);
-
             const message = await frame.textContent('#message');
             console.log('FORM_RESULT=' + message);
             if (message !== 'Hello, Juan Dela Cruz!') {
               throw new Error('Form interaction failed. Actual result: ' + message);
             }
 
-            await page.click('[data-lesson-id="js-dom-counter"]');
-            await page.waitForTimeout(350);
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-dom-counter', { waitUntil: 'networkidle' });
             frame = await (await page.$('[data-result-frame]')).contentFrame();
             await frame.waitForSelector('#add');
             await frame.click('#add');
             await page.waitForTimeout(150);
-
             const count = await frame.textContent('#count');
             console.log('COUNTER_RESULT=' + count);
-            if (count !== '1') {
-              throw new Error('Counter interaction failed. Actual count: ' + count);
+            if (count !== '1') throw new Error('Counter interaction failed. Actual count: ' + count);
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-bigdecimal-money', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            if (await page.locator('[data-code-lab]:visible').count()) {
+              throw new Error('Java reference must not show a fake browser Run IDE.');
+            }
+            const javaOutput = await page.textContent('[data-reference-output]');
+            if (javaOutput.trim() !== '436.50') throw new Error('Unexpected Java reference output.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/canva-brand-system-qyntro', { waitUntil: 'domcontentloaded' });
+            await page.waitForSelector('[data-proof-lab]:not([hidden])');
+            const videoSrc = await page.getAttribute('[data-proof-media] video', 'src');
+            if (!videoSrc || !videoSrc.includes('qyntro-daily-brand-identity-packaging')) {
+              throw new Error('Qyntro proof video is not wired.');
             }
 
-            const status = await page.textContent('[data-run-status]');
-            console.log('RUN_STATUS=' + status);
             console.log('BROWSER_MESSAGES=' + JSON.stringify(browserMessages));
-
             await browser.close();
           })().catch(error => {
             console.error(error);
