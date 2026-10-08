@@ -110,7 +110,7 @@
   }
 
   function reloadRunner(sequence, suffix) {
-    frame.src = './runner.html?v=20261009-3#' + encodeURIComponent(suffix || ('run-' + sequence));
+    frame.src = './runner.html?v=20261009-4#' + encodeURIComponent(suffix || ('run-' + sequence));
   }
 
   function runCode() {
@@ -301,6 +301,13 @@
     if (!payload || typeof payload !== 'object') return;
 
     if (payload.source === 'knowledge-lab-runner-boot') {
+      if (payload.executionReady === false) {
+        pendingRun = null;
+        $('[data-run-status]').textContent = 'Runner unavailable';
+        appendConsole('error', ['Sandbox JavaScript execution is blocked in this browser.']);
+        switchOutput('console');
+        return;
+      }
       postPendingRun();
       return;
     }
