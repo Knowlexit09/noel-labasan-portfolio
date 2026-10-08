@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-09 (Asia/Manila) — Knowledge Lab runner + Admin visibility-control fix**  
+> Last consolidated: **2026-10-09 (Asia/Manila) — Knowledge Lab V2 dedicated category site + proof-backed creative lessons**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -331,69 +331,65 @@ Truthfulness rule: Seedlandia is shown as an ongoing personal game-development p
 
 ---
 
-# 11. Knowledge Lab — V1 IDE STAGED
+# 11. Knowledge Lab — V2 DEDICATED SITE
 
-The user explicitly upgraded the Knowledge Lab requirement on 2026-10-09: it should feel like a W3Schools-style learning experience with a real in-site IDE, practical tips/hacks, and only working/reproducible code examples.
+User directive refined on 2026-10-09:
 
-Dedicated staging app:
+- Knowledge Lab content should live only at `/knowledge/`, not as inline cards/dialogs on the portfolio homepage.
+- Organize the learning site by category (HTML, CSS, JavaScript, Java, Photoshop, Canva, CapCut, Blender, Git/GitHub, Google Apps Script, Roblox Studio, etc.).
+- Coding lessons must be working/tested; no fake Run buttons.
+- Non-coding/creative lessons should show real proof, project artifacts, or video when available.
+- Empty roadmap categories are allowed, but do not invent lessons just to fill them.
 
-- `knowledge/index.html`
-- `assets/css/knowledge-lab.css`
-- `assets/js/knowledge-lab-data.js`
-- `assets/js/knowledge-lab-runner.js`
-- staging remains `noindex,nofollow` and `/knowledge/` is disallowed in `robots.txt` until owner approval,
-- it is intentionally not added to the sitemap or main public navigation yet.
+Current V2 behavior:
 
-V1 browser IDE capabilities:
+- portfolio homepage no longer renders the legacy Knowledge Lab section/dialog,
+- the sidebar Knowledge Lab module link now routes directly to `knowledge/`,
+- the existing `knowledgeLab` module switch controls whether that dedicated link is visible,
+- legacy server `content.knowledgeLab` rows are preserved but no longer drive homepage rendering,
+- Creative Admin no longer offers the legacy Knowledge Lab entry editor; it links to the dedicated site instead.
 
-- real HTML + CSS + JavaScript execution in a `sandbox="allow-scripts"` iframe,
-- 2026-10-09 runner fixes: replaced `srcdoc` inline execution with a dedicated `knowledge/runner.html` + external sandbox bridge because the parent CSP correctly blocked the earlier inline scripts. A second browser issue showed the previous blob/eval approach was still not reliable in the opaque sandbox. V1 now uses a dedicated isolated runner document with runner-only `unsafe-inline`, inserts user JavaScript as a script element inside that sandbox, and runs an explicit inline-execution self-test before accepting a lesson run. The parent iframe still has no `allow-same-origin`; network remains blocked (`connect-src 'none'`) and form submission remains blocked (`form-action 'none'`). If the self-test or lesson code fails, the runner fails closed and exposes the error in Console instead of pretending the example worked,
-- no `allow-same-origin`, so runner code cannot directly access the host portfolio DOM/storage,
-- runner CSP blocks network connections, form submission, objects, external resources, and host-page access paths,
-- HTML/CSS/JavaScript tabs,
-- Run / Stop / Reset / Copy / Full screen,
-- Ctrl/Cmd + Enter shortcut,
-- Result + Console views,
-- console.log/warn/error bridge back to the parent UI,
-- local autosave per lesson,
-- searchable topic sidebar,
-- Previous / Next lesson navigation,
-- desktop and mobile layouts,
-- Tip / Useful Hack / Common Mistake / Expected Result / Real Work sections.
+Dedicated Knowledge Lab V2:
 
-Initial V1 lesson set contains six browser-runnable examples only:
+- root `/knowledge/` opens a category dashboard rather than automatically opening the IDE,
+- categories are grouped into Code & Development and Creative & Multimedia,
+- current categories include HTML, CSS, JavaScript, Java, Git & GitHub, Google Apps Script, Photoshop, Canva, CapCut, Blender, and Roblox Studio,
+- categories may remain visible with zero lessons when evidence/testing is not ready,
+- HTML/CSS/JavaScript lessons use the real browser IDE,
+- Java lessons are reference-only in the browser and compile-tested with Java 21 in CI,
+- creative lessons use a proof view with real images/videos and links to actual portfolio case studies.
 
-1. HTML — clean document/content structure.
-2. HTML — accessible form handling with no outbound submission.
-3. CSS — Flexbox centering.
-4. CSS — responsive `auto-fit/minmax` card grid.
-5. JavaScript — DOM counter / event-state-render loop.
-6. JavaScript — `filter()` vs `find()`.
+Current proof-backed creative lessons:
 
-Quality rule: if a lesson shows **Run**, real code must execute. The initial six JavaScript examples were syntax-checked and behavior-smoke-tested before repository staging. Do not add fake expected-output runners.
+- Photoshop — Smart Object / non-destructive product-layout workflow, backed by the actual Gatchalian Meatshop campaign result,
+- Canva — reusable brand-system workflow, backed by the actual 51.7s Qyntro Daily portfolio video,
+- CapCut — vertical-ad story/pacing workflow, backed by the actual 36.48s Exponify PH campaign video,
+- Blender / Roblox Studio remain organized roadmap categories but intentionally have no published tutorial yet because a direct proof/walkthrough has not been attached.
 
-Security caveat: a sandboxed browser iframe meaningfully limits origin/network/form/popup access, but arbitrary JavaScript can still consume browser CPU (for example, an infinite loop). Keep the runner owner-reviewed and do not claim it is a hardened untrusted-code compute sandbox.
+Runner / security:
 
-Java, Apps Script, SQL, Python, and other runtimes are NOT yet exposed as fake runners. Add them only when a real, isolated execution path exists. Java in particular requires a disposable backend sandbox with CPU/RAM/time/output/process limits and no credentials/network by default.
+- iframe uses `sandbox="allow-scripts allow-forms"`,
+- `allow-forms` is required so form submit events can reach lesson handlers,
+- outbound form submission still remains blocked by runner CSP `form-action 'none'`,
+- iframe still has no `allow-same-origin`,
+- network remains blocked via `connect-src 'none'`,
+- JavaScript executes only inside the isolated runner document,
+- runtime failures surface in Console rather than pretending the lesson worked.
 
-The older homepage Knowledge Lab card/dialog runtime and Draft manager still exist. Do not silently Publish Live or replace the owner-controlled Draft → Preview → Publish Live flow.
+Regression / quality gates:
 
-Knowledge Lab IDE browser verification (2026-10-09):
+- Playwright verifies Knowledge Lab home does not auto-open the IDE,
+- required category cards are present,
+- accessible-form lesson produces `Hello, Juan Dela Cruz!`,
+- JavaScript counter increments to `1`,
+- Java reference lessons do not expose a fake browser runner,
+- Java 21 examples are compiled/executed in CI and expected output is compared,
+- proof-backed lessons are validated for real media + case-study links,
+- latest V2 validation Run #9: SUCCESS,
+- latest V2 GitHub Pages deployment Run #330: SUCCESS at head `66cdedacd848ab88cfd348bc4e7661abd0a0e6d8`.
 
-- Root cause of the non-working Submit button was the iframe sandbox itself: the runner used `sandbox="allow-scripts"` without `allow-forms`. Chromium therefore blocked form submission before the lesson's `submit` listener could handle it, even though the JavaScript code was present.
-- Fix: the iframe now uses `sandbox="allow-scripts allow-forms"`. Actual outbound form submission remains blocked by the runner CSP `form-action 'none'`, while normal form submit events are allowed for interactive lessons.
-- A Playwright browser regression test now verifies both the accessible-form lesson (`Hello, Juan Dela Cruz!`) and the JavaScript counter lesson (count increments to `1`). This test is kept as a CI gate for future Knowledge Lab runner changes.
+Do not Publish Live backend metadata on the user's behalf. The user remains the owner of Draft → Preview → Publish Live.
 
-Current visibility finding (2026-10-09 read-only backend check):
-
-- server Draft has `modules.knowledgeLab = true` with 3 Knowledge Lab entries,
-- server Live also has `modules.knowledgeLab = true` with the same 3 entries,
-- this is why the legacy Knowledge Lab section is already visible on the public portfolio; the new dedicated `/knowledge/` staging page did not itself publish that module,
-- the generic Admin → Modules page previously omitted the `Multimedia` and `Knowledge Lab` toggles even though the Creative page had them. This omission is fixed: both toggles now appear in the main Modules page,
-- the Prepare review set now keeps `knowledgeLab:false` in Draft by default so future staging does not silently re-enable it,
-- do not change Live state directly on the user's behalf; the owner should switch Knowledge Lab OFF in Draft, Preview, then personally Publish Live if they want the public legacy module hidden.
-
----
 
 # 12. Prepublication Draft staging tool
 
