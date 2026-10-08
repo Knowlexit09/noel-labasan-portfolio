@@ -378,6 +378,12 @@ Java, Apps Script, SQL, Python, and other runtimes are NOT yet exposed as fake r
 
 The older homepage Knowledge Lab card/dialog runtime and Draft manager still exist. Do not silently Publish Live or replace the owner-controlled Draft → Preview → Publish Live flow.
 
+Knowledge Lab IDE browser verification (2026-10-09):
+
+- Root cause of the non-working Submit button was the iframe sandbox itself: the runner used `sandbox="allow-scripts"` without `allow-forms`. Chromium therefore blocked form submission before the lesson's `submit` listener could handle it, even though the JavaScript code was present.
+- Fix: the iframe now uses `sandbox="allow-scripts allow-forms"`. Actual outbound form submission remains blocked by the runner CSP `form-action 'none'`, while normal form submit events are allowed for interactive lessons.
+- A Playwright browser regression test now verifies both the accessible-form lesson (`Hello, Juan Dela Cruz!`) and the JavaScript counter lesson (count increments to `1`). This test is kept as a CI gate for future Knowledge Lab runner changes.
+
 Current visibility finding (2026-10-09 read-only backend check):
 
 - server Draft has `modules.knowledgeLab = true` with 3 Knowledge Lab entries,
