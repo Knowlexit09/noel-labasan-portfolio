@@ -5,6 +5,8 @@ on:
     branches: ["main"]
     paths:
       - ".github/workflows/validate-knowledge-lab-ide.yml"
+      - "knowledge/**"
+      - "assets/js/knowledge-lab-*.js"
 
 permissions:
   contents: write
