@@ -70,26 +70,6 @@
           </section>`);
       }
 
-      const skills = document.querySelector('#skills');
-      if (skills && !document.querySelector('#knowledge-lab')) {
-        skills.insertAdjacentHTML('afterend', `
-          <section class="section knowledge-section" data-module="knowledgeLab" id="knowledge-lab">
-            <div class="section-heading">
-              <div>
-                <div class="section-kicker">Share what I learn</div>
-                <h2 class="section-title">Knowledge Lab</h2>
-                <p class="section-subtitle">Shortcuts, practical tips, reusable code recipes, and learning notes from creative tools and development work.</p>
-              </div>
-            </div>
-            <div class="knowledge-toolbar">
-              <div class="creative-filters" data-knowledge-filters></div>
-              <label class="creative-search"><span>⌕</span><input type="search" data-knowledge-search placeholder="Search tips, tools, or code…" aria-label="Search Knowledge Lab"></label>
-            </div>
-            <div class="knowledge-grid" data-knowledge-list></div>
-            <div class="empty-state panel" data-knowledge-empty hidden>No Knowledge Lab entries are published yet.</div>
-          </section>`);
-      }
-
       const nav = document.querySelector('.sidebar-nav');
       if (nav && !nav.querySelector('[data-module-link="multimedia"]')) {
         const link = document.createElement('a');
@@ -102,8 +82,8 @@
       if (nav && !nav.querySelector('[data-module-link="knowledgeLab"]')) {
         const link = document.createElement('a');
         link.dataset.moduleLink = 'knowledgeLab';
-        link.href = '#knowledge-lab';
-        link.innerHTML = '<span class="nav-icon">⌘</span><span class="hide-collapsed">Knowledge Lab</span>';
+        link.href = 'knowledge/';
+        link.innerHTML = '<span class="nav-icon">⌘</span><span class="hide-collapsed">Knowledge Lab ↗</span>';
         const skillsLink = nav.querySelector('[data-module-link="skills"]');
         skillsLink?.insertAdjacentElement('afterend', link);
       }
