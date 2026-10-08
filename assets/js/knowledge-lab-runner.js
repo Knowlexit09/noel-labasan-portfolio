@@ -110,7 +110,7 @@
   }
 
   function reloadRunner(sequence, suffix) {
-    frame.src = './runner.html?v=20261009-2#' + encodeURIComponent(suffix || ('run-' + sequence));
+    frame.src = './runner.html?v=20261009-3#' + encodeURIComponent(suffix || ('run-' + sequence));
   }
 
   function runCode() {
@@ -320,6 +320,10 @@
 
     if (['log', 'info', 'debug', 'warn', 'error'].includes(payload.type)) {
       appendConsole(payload.type, payload.values || []);
+      if (payload.type === 'error') {
+        $('[data-run-status]').textContent = 'Error · open Console';
+        switchOutput('console');
+      }
     }
   });
 
