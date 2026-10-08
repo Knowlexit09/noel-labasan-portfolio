@@ -5,9 +5,10 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-07 (Asia/Manila) — exact Exponify cover/poster asset update + partner-collaboration continuity**  
+> Last consolidated: **2026-10-09 (Asia/Manila) — Knowledge Lab V1 browser IDE staging**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
+> Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
 >
 > **New chats must read this file first, then verify actual `main` and the latest Pages deployment before editing. Do not restart completed work.**
 
@@ -330,24 +331,51 @@ Truthfulness rule: Seedlandia is shown as an ongoing personal game-development p
 
 ---
 
-# 11. Knowledge Lab — STAGED
+# 11. Knowledge Lab — V1 IDE STAGED
 
-Public runtime already supports:
+The user explicitly upgraded the Knowledge Lab requirement on 2026-10-09: it should feel like a W3Schools-style learning experience with a real in-site IDE, practical tips/hacks, and only working/reproducible code examples.
 
-- category/search,
-- detail dialog,
-- copyable code,
-- sandboxed HTML/CSS preview,
-- CSP that prevents arbitrary scripts/network use,
-- Java and other runtimes as copy/explanation only.
+Dedicated staging app:
 
-Prepared Draft review set contains three starter entries:
+- `knowledge/index.html`
+- `assets/css/knowledge-lab.css`
+- `assets/js/knowledge-lab-data.js`
+- `assets/js/knowledge-lab-runner.js`
+- staging remains `noindex,nofollow` and `/knowledge/` is disallowed in `robots.txt` until owner approval,
+- it is intentionally not added to the sitemap or main public navigation yet.
 
-1. Photoshop — Smart Object / non-destructive transform workflow.
-2. HTML/CSS — responsive `repeat(auto-fit, minmax(...))` grid recipe; safe preview enabled.
-3. Java — defensive numeric input validation/parsing; copy-only.
+V1 browser IDE capabilities:
 
-Do not enable arbitrary browser JavaScript execution in v1.
+- real HTML + CSS + JavaScript execution in a `sandbox="allow-scripts"` iframe,
+- no `allow-same-origin`, so runner code cannot directly access the host portfolio DOM/storage,
+- runner CSP blocks network connections, form submission, objects, external resources, and host-page access paths,
+- HTML/CSS/JavaScript tabs,
+- Run / Stop / Reset / Copy / Full screen,
+- Ctrl/Cmd + Enter shortcut,
+- Result + Console views,
+- console.log/warn/error bridge back to the parent UI,
+- local autosave per lesson,
+- searchable topic sidebar,
+- Previous / Next lesson navigation,
+- desktop and mobile layouts,
+- Tip / Useful Hack / Common Mistake / Expected Result / Real Work sections.
+
+Initial V1 lesson set contains six browser-runnable examples only:
+
+1. HTML — clean document/content structure.
+2. HTML — accessible form handling with no outbound submission.
+3. CSS — Flexbox centering.
+4. CSS — responsive `auto-fit/minmax` card grid.
+5. JavaScript — DOM counter / event-state-render loop.
+6. JavaScript — `filter()` vs `find()`.
+
+Quality rule: if a lesson shows **Run**, real code must execute. The initial six JavaScript examples were syntax-checked and behavior-smoke-tested before repository staging. Do not add fake expected-output runners.
+
+Security caveat: a sandboxed browser iframe meaningfully limits origin/network/form/popup access, but arbitrary JavaScript can still consume browser CPU (for example, an infinite loop). Keep the runner owner-reviewed and do not claim it is a hardened untrusted-code compute sandbox.
+
+Java, Apps Script, SQL, Python, and other runtimes are NOT yet exposed as fake runners. Add them only when a real, isolated execution path exists. Java in particular requires a disposable backend sandbox with CPU/RAM/time/output/process limits and no credentials/network by default.
+
+The older homepage Knowledge Lab card/dialog runtime and Draft manager still exist. Do not silently Publish Live or replace the owner-controlled Draft → Preview → Publish Live flow.
 
 ---
 
