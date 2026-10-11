@@ -7736,6 +7736,2333 @@
       ]
     },
     {
+      "id": "css-attribute-selectors-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "Attribute selectors",
+      "summary": "Focused lesson: Attribute selectors. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Attribute selectors match elements by attribute presence or value, such as [disabled] or [data-state=\"open\"].",
+      "learn": [
+        "Attribute selectors",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Attribute selectors well enough to use it intentionally.",
+      "explanation": "They are useful when the attribute itself already represents meaningful state.",
+      "tip": "Use an attribute selector when the attribute is the real source of UI state.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Target incidental generated attribute values that can change unexpectedly.",
+      "expected": "The sample visibly demonstrates Attribute selectors.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "attribute",
+        "selectors"
+      ],
+      "html": "<main><div data-state=\"ready\">Ready state</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}[data-state=\"ready\"]{padding:16px;background:#e9f8f2;color:#176c51;border-radius:12px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which selector matches any element with disabled present?",
+          "options": [
+            "[disabled]",
+            ".disabled only",
+            "#disabled only",
+            "disabled()"
+          ],
+          "correctIndex": 0,
+          "explanation": "[disabled] is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Target incidental generated attribute values that can change unexpectedly.",
+            "Use an attribute selector when the attribute is the real source of UI state.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Target incidental generated attribute values that can change unexpectedly."
+        }
+      ]
+    },
+    {
+      "id": "css-not-is-where",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 50,
+      "level": "Intermediate",
+      "title": ":not(), :is(), and :where()",
+      "summary": "Focused lesson: :not(), :is(), and :where(). Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": ":not() excludes matches; :is() groups selector alternatives; :where() groups alternatives with zero specificity.",
+      "learn": [
+        ":not(), :is(), and :where()",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand :not(), :is(), and :where() well enough to use it intentionally.",
+      "explanation": "These selectors reduce repetition and make specificity easier to control.",
+      "tip": "Use :where() for defaults that should remain easy to override.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Turn a simple class selector into a puzzle of advanced selectors.",
+      "expected": "The sample visibly demonstrates :not(), :is(), and :where().",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "not",
+        "is",
+        "and",
+        "where"
+      ],
+      "html": "<main class=\"demo\"><h1>Grouped heading</h1><p>Strong paragraph</p><p class=\"muted\">Muted paragraph</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}:where(.demo p){color:#52697b}.demo p:not(.muted){font-weight:800}.demo :is(h1,h2){color:#0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which grouping selector contributes zero specificity?",
+          "options": [
+            ":where()",
+            ":is()",
+            ":not()",
+            "#id"
+          ],
+          "correctIndex": 0,
+          "explanation": ":where() is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Turn a simple class selector into a puzzle of advanced selectors.",
+            "Use :where() for defaults that should remain easy to override.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Turn a simple class selector into a puzzle of advanced selectors."
+        }
+      ]
+    },
+    {
+      "id": "css-nth-child-patterns",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 60,
+      "level": "Intermediate",
+      "title": ":nth-child() patterns",
+      "summary": "Focused lesson: :nth-child() patterns. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": ":nth-child() matches elements based on sibling position using numbers, keywords, or An+B patterns.",
+      "learn": [
+        ":nth-child() patterns",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand :nth-child() patterns well enough to use it intentionally.",
+      "explanation": "Common patterns include odd, even, 3n, and 3n+1. Position-based styling is useful when position itself has meaning.",
+      "tip": "Use nth-child for visual patterns tied to sibling position.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Encode business meaning into positions that can change when items are inserted.",
+      "expected": "The sample visibly demonstrates :nth-child() patterns.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "nth",
+        "child",
+        "patterns"
+      ],
+      "html": "<main class=\"demo\"><ol><li>One</li><li>Two</li><li>Three</li><li>Four</li></ol></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo li{padding:8px}.demo li:nth-child(odd){background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which keyword matches positions 1, 3, 5, ...?",
+          "options": [
+            "odd",
+            "even",
+            "all",
+            "first"
+          ],
+          "correctIndex": 0,
+          "explanation": "odd is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Encode business meaning into positions that can change when items are inserted.",
+            "Use nth-child for visual patterns tied to sibling position.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Encode business meaning into positions that can change when items are inserted."
+        }
+      ]
+    },
+    {
+      "id": "css-float-clear",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "float and clear",
+      "summary": "Focused lesson: float and clear. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "float moves a box to one side and lets inline content wrap around it; clear controls whether a box may sit next to earlier floats.",
+      "learn": [
+        "float and clear",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand float and clear well enough to use it intentionally.",
+      "explanation": "Float is now strongest for wrap-around media. Flexbox and Grid are better for general page/component layout.",
+      "tip": "Use float for actual text-wrapping around media.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Build a modern app layout entirely with floats.",
+      "expected": "The sample visibly demonstrates float and clear.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "float",
+        "and",
+        "clear"
+      ],
+      "html": "<main class=\"demo\"><div class=\"avatar\"></div><p>Text wraps around the floated box. This is the kind of problem float still expresses naturally.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.avatar{float:left;width:90px;aspect-ratio:1;margin:0 16px 8px 0;background:#0879b7;border-radius:12px}.demo{max-width:520px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is a strong modern use of float?",
+          "options": [
+            "Wrapping text around media",
+            "Building every app layout",
+            "Creating Grid tracks",
+            "Changing specificity"
+          ],
+          "correctIndex": 0,
+          "explanation": "Wrapping text around media is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Build a modern app layout entirely with floats.",
+            "Use float for actual text-wrapping around media.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Build a modern app layout entirely with floats."
+        }
+      ]
+    },
+    {
+      "id": "css-inline-block",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "inline-block",
+      "summary": "Focused lesson: inline-block. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "inline-block participates in inline flow while allowing box dimensions and padding more like a block.",
+      "learn": [
+        "inline-block",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand inline-block well enough to use it intentionally.",
+      "explanation": "It works well for small inline badges and compact boxes. Complex alignment is often easier with Flexbox.",
+      "tip": "Use inline-block for small inline boxes when a flex container would be unnecessary.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Fight complex alignment with inline-block when Flexbox fits the problem better.",
+      "expected": "The sample visibly demonstrates inline-block.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "inline",
+        "block"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{display:inline-block;padding:8px 12px;background:#eef8fd;border-radius:999px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is special about inline-block?",
+          "options": [
+            "It stays inline while behaving like a sizable box",
+            "It removes the element",
+            "It creates Grid",
+            "It fixes to the viewport"
+          ],
+          "correctIndex": 0,
+          "explanation": "It stays inline while behaving like a sizable box is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Fight complex alignment with inline-block when Flexbox fits the problem better.",
+            "Use inline-block for small inline boxes when a flex container would be unnecessary.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Fight complex alignment with inline-block when Flexbox fits the problem better."
+        }
+      ]
+    },
+    {
+      "id": "css-sticky-position",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 50,
+      "level": "Intermediate",
+      "title": "position: sticky",
+      "summary": "Focused lesson: position: sticky. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "A sticky element stays in normal flow until a scroll threshold is reached, then sticks within its scrolling container.",
+      "learn": [
+        "position: sticky",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand position: sticky well enough to use it intentionally.",
+      "explanation": "Sticky headers need a relevant inset such as top:0, and their behavior depends on the scrolling/overflow ancestors.",
+      "tip": "Use sticky when contextual content should remain visible while its section scrolls.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume sticky works without an inset or inside every overflow setup.",
+      "expected": "The sample visibly demonstrates position: sticky.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "position",
+        "sticky"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">Sticky header</div><div class=\"spacer\">Scroll this result area.</div></main>",
+      "css": "body{font-family:system-ui;margin:0}.demo{height:420px;overflow:auto}.sample{position:sticky;top:0;padding:14px;background:#0879b7;color:white}.spacer{height:700px;padding:20px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What commonly must accompany position: sticky?",
+          "options": [
+            "An inset such as top: 0",
+            "display:none",
+            "float:left",
+            "z-index:99999 always"
+          ],
+          "correctIndex": 0,
+          "explanation": "An inset such as top: 0 is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume sticky works without an inset or inside every overflow setup.",
+            "Use sticky when contextual content should remain visible while its section scrolls.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume sticky works without an inset or inside every overflow setup."
+        }
+      ]
+    },
+    {
+      "id": "css-stacking-context",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "Stacking contexts",
+      "summary": "Focused lesson: Stacking contexts. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "A stacking context is an isolated layering context that affects how descendant z-index values compare with outside content.",
+      "learn": [
+        "Stacking contexts",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Stacking contexts well enough to use it intentionally.",
+      "explanation": "Transforms, opacity, and positioned elements with z-index can create new contexts. That is why a huge z-index can still lose.",
+      "tip": "Inspect stacking contexts before increasing z-index numbers.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Solve every overlap bug with a bigger z-index.",
+      "expected": "The sample visibly demonstrates Stacking contexts.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "stacking",
+        "contexts"
+      ],
+      "html": "<main class=\"demo\"><div class=\"a\">Layer A</div><div class=\"b\">Layer B</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{position:relative;height:170px}.a,.b{position:absolute;width:180px;height:100px;padding:14px;color:white}.a{left:20px;top:20px;background:#0879b7;z-index:2}.b{left:110px;top:55px;background:#d94d72;z-index:1}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Why can a huge z-index still fail?",
+          "options": [
+            "The element may be inside another stacking context",
+            "z-index only works on images",
+            "Numbers above 10 are ignored",
+            "Grid disables z-index"
+          ],
+          "correctIndex": 0,
+          "explanation": "The element may be inside another stacking context is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Solve every overlap bug with a bigger z-index.",
+            "Inspect stacking contexts before increasing z-index numbers.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Solve every overlap bug with a bigger z-index."
+        }
+      ]
+    },
+    {
+      "id": "css-flex-direction-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Flexbox",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "flex-direction",
+      "summary": "Focused lesson: flex-direction. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "flex-direction sets the direction of the flex container's main axis.",
+      "learn": [
+        "flex-direction",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand flex-direction well enough to use it intentionally.",
+      "explanation": "row and column change the main axis, which also changes how justify-content behaves.",
+      "tip": "Think in main/cross axes instead of memorizing horizontal/vertical shortcuts.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume justify-content is always horizontal.",
+      "expected": "The sample visibly demonstrates flex-direction.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "flexbox",
+        "flex",
+        "direction"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">One</div><div class=\"sample\">Two</div><div class=\"sample\">Three</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flex;flex-direction:column;gap:8px}.sample{padding:12px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does flex-direction change?",
+          "options": [
+            "The flex main axis direction",
+            "Document language",
+            "Grid line numbers",
+            "Font family"
+          ],
+          "correctIndex": 0,
+          "explanation": "The flex main axis direction is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume justify-content is always horizontal.",
+            "Think in main/cross axes instead of memorizing horizontal/vertical shortcuts.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume justify-content is always horizontal."
+        }
+      ]
+    },
+    {
+      "id": "css-flex-wrap-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Flexbox",
+      "order": 50,
+      "level": "Intermediate",
+      "title": "flex-wrap",
+      "summary": "Focused lesson: flex-wrap. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "flex-wrap controls whether flex items stay on one line or move to additional lines.",
+      "learn": [
+        "flex-wrap",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand flex-wrap well enough to use it intentionally.",
+      "explanation": "Wrapping prevents items from shrinking beyond a useful width.",
+      "tip": "Allow wrapping when items have a practical minimum width.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Force one line even when controls become too cramped.",
+      "expected": "The sample visibly demonstrates flex-wrap.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "flexbox",
+        "flex",
+        "wrap"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">One</div><div class=\"sample\">Two</div><div class=\"sample\">Three</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flex;flex-wrap:wrap;gap:10px}.sample{flex:1 1 180px;padding:18px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which value allows extra flex lines?",
+          "options": [
+            "wrap",
+            "grid",
+            "block",
+            "none"
+          ],
+          "correctIndex": 0,
+          "explanation": "wrap is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Force one line even when controls become too cramped.",
+            "Allow wrapping when items have a practical minimum width.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Force one line even when controls become too cramped."
+        }
+      ]
+    },
+    {
+      "id": "css-justify-content-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Flexbox",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "justify-content",
+      "summary": "Focused lesson: justify-content. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "justify-content distributes free space along a flex container's main axis.",
+      "learn": [
+        "justify-content",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand justify-content well enough to use it intentionally.",
+      "explanation": "Values such as center and space-between operate on the main axis, whose direction depends on flex-direction and writing mode.",
+      "tip": "Use it for main-axis distribution after item sizing is understood.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use space-between to fake consistent item spacing when gap expresses it better.",
+      "expected": "The sample visibly demonstrates justify-content.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "flexbox",
+        "justify",
+        "content"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">Start</div><div class=\"sample\">Middle</div><div class=\"sample\">End</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flex;justify-content:space-between;gap:10px}.sample{padding:14px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which axis does justify-content use?",
+          "options": [
+            "The flex main axis",
+            "Always horizontal",
+            "Always vertical",
+            "The z-axis only"
+          ],
+          "correctIndex": 0,
+          "explanation": "The flex main axis is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use space-between to fake consistent item spacing when gap expresses it better.",
+            "Use it for main-axis distribution after item sizing is understood.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use space-between to fake consistent item spacing when gap expresses it better."
+        }
+      ]
+    },
+    {
+      "id": "css-align-items-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Flexbox",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "align-items",
+      "summary": "Focused lesson: align-items. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "align-items sets default cross-axis alignment of flex items within a flex line.",
+      "learn": [
+        "align-items",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand align-items well enough to use it intentionally.",
+      "explanation": "Values include stretch, center, start, end, and baseline.",
+      "tip": "Use baseline when text-heavy controls should align by their text baselines.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Add random margins before checking align-items.",
+      "expected": "The sample visibly demonstrates align-items.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "flexbox",
+        "align",
+        "items"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">Small</div><div class=\"sample\">Large</div><div class=\"sample\">Small</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flex;align-items:center;gap:12px;min-height:140px}.sample{padding:14px;background:#eef8fd}.sample:nth-child(2){font-size:32px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which axis does align-items use?",
+          "options": [
+            "The cross axis",
+            "The main axis only",
+            "The DOM tree",
+            "Source order"
+          ],
+          "correctIndex": 0,
+          "explanation": "The cross axis is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Add random margins before checking align-items.",
+            "Use baseline when text-heavy controls should align by their text baselines.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Add random margins before checking align-items."
+        }
+      ]
+    },
+    {
+      "id": "css-flex-order-align-self",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Flexbox",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "order and align-self",
+      "summary": "Focused lesson: order and align-self. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "order changes visual flex ordering; align-self overrides cross-axis alignment for one flex item.",
+      "learn": [
+        "order and align-self",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand order and align-self well enough to use it intentionally.",
+      "explanation": "Visual reordering does not change DOM or keyboard reading order, so it must be used carefully.",
+      "tip": "Keep source order logical and use order sparingly.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Create a visual order that conflicts with keyboard/reading order.",
+      "expected": "The sample visibly demonstrates order and align-self.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "flexbox",
+        "order",
+        "and",
+        "align",
+        "self"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">One</div><div class=\"sample special\">Visually first</div><div class=\"sample\">Three</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flex;align-items:start;gap:10px}.sample{padding:14px;background:#eef8fd}.special{order:-1;align-self:end;background:#dff8ef}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Does order change DOM/source order?",
+          "options": [
+            "No",
+            "Yes permanently",
+            "Only on mobile",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Create a visual order that conflicts with keyboard/reading order.",
+            "Keep source order logical and use order sparingly.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Create a visual order that conflicts with keyboard/reading order."
+        }
+      ]
+    },
+    {
+      "id": "css-grid-template-tracks",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Grid",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "grid-template columns and rows",
+      "summary": "Focused lesson: grid-template columns and rows. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Grid template properties define explicit column and row tracks.",
+      "learn": [
+        "grid-template columns and rows",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand grid-template columns and rows well enough to use it intentionally.",
+      "explanation": "Tracks can use fixed lengths, percentages, fr, minmax(), and repeat().",
+      "tip": "Define only the tracks the layout actually needs.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Create a complicated 12-column system for a layout that needs two columns.",
+      "expected": "The sample visibly demonstrates grid-template columns and rows.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "grid",
+        "grid",
+        "template",
+        "columns",
+        "and",
+        "rows"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">Sidebar</div><div class=\"sample\">Main</div><div class=\"sample\">Meta</div><div class=\"sample\">More</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;grid-template-columns:180px 1fr;grid-template-rows:auto auto;gap:10px}.sample{padding:16px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does 1fr represent?",
+          "options": [
+            "A flexible fraction of available grid space",
+            "One fixed pixel",
+            "One row only",
+            "One font unit"
+          ],
+          "correctIndex": 0,
+          "explanation": "A flexible fraction of available grid space is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Create a complicated 12-column system for a layout that needs two columns.",
+            "Define only the tracks the layout actually needs.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Create a complicated 12-column system for a layout that needs two columns."
+        }
+      ]
+    },
+    {
+      "id": "css-grid-implicit-auto",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Grid",
+      "order": 50,
+      "level": "Intermediate",
+      "title": "Explicit vs implicit Grid",
+      "summary": "Focused lesson: Explicit vs implicit Grid. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Explicit tracks are declared in grid-template; implicit tracks are created automatically when extra content needs space.",
+      "learn": [
+        "Explicit vs implicit Grid",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Explicit vs implicit Grid well enough to use it intentionally.",
+      "explanation": "grid-auto-rows and grid-auto-columns control implicit track sizing.",
+      "tip": "Define the main structure explicitly and give implicit tracks sensible sizes.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume extra items disappear outside the explicit grid.",
+      "expected": "The sample visibly demonstrates Explicit vs implicit Grid.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "grid",
+        "explicit",
+        "vs",
+        "implicit",
+        "grid"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">1</div><div class=\"sample\">2</div><div class=\"sample\">3 creates an implicit row</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(70px,auto);gap:10px}.sample{padding:14px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is created when content exceeds explicit tracks?",
+          "options": [
+            "Implicit tracks",
+            "A new HTML document",
+            "A flex container",
+            "Nothing"
+          ],
+          "correctIndex": 0,
+          "explanation": "Implicit tracks is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume extra items disappear outside the explicit grid.",
+            "Define the main structure explicitly and give implicit tracks sensible sizes.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume extra items disappear outside the explicit grid."
+        }
+      ]
+    },
+    {
+      "id": "css-grid-auto-placement",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Grid",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "Grid auto-placement",
+      "summary": "Focused lesson: Grid auto-placement. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Grid auto-placement decides where unpositioned grid items go.",
+      "learn": [
+        "Grid auto-placement",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Grid auto-placement well enough to use it intentionally.",
+      "explanation": "grid-auto-flow can place by row or column; dense packing may visually reorder later items into earlier holes.",
+      "tip": "Keep default placement when source order should map naturally to visuals.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use dense packing where visual reorder would confuse reading order.",
+      "expected": "The sample visibly demonstrates Grid auto-placement.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "grid",
+        "grid",
+        "auto",
+        "placement"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">1</div><div class=\"sample\">2</div><div class=\"sample\">3</div><div class=\"sample\">4</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:row;gap:10px}.sample{padding:20px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property controls auto-placement direction?",
+          "options": [
+            "grid-auto-flow",
+            "flex-direction",
+            "text-align",
+            "object-position"
+          ],
+          "correctIndex": 0,
+          "explanation": "grid-auto-flow is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use dense packing where visual reorder would confuse reading order.",
+            "Keep default placement when source order should map naturally to visuals.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use dense packing where visual reorder would confuse reading order."
+        }
+      ]
+    },
+    {
+      "id": "css-grid-lines-spanning",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Grid",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Grid lines and spanning",
+      "summary": "Focused lesson: Grid lines and spanning. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Grid items can start/end on numbered or named grid lines using grid-column and grid-row.",
+      "learn": [
+        "Grid lines and spanning",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Grid lines and spanning well enough to use it intentionally.",
+      "explanation": "grid-column:1/-1 is a common way to span across all explicit columns.",
+      "tip": "Use line placement for clear structural roles such as full-width headers.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Hard-code fragile line numbers when named areas would explain the layout better.",
+      "expected": "The sample visibly demonstrates Grid lines and spanning.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "grid",
+        "grid",
+        "lines",
+        "and",
+        "spanning"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample wide\">Spans all columns</div><div class=\"sample\">A</div><div class=\"sample\">B</div><div class=\"sample\">C</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sample{padding:16px;background:#eef8fd}.wide{grid-column:1/-1;background:#dff8ef}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does grid-column:1/-1 commonly do?",
+          "options": [
+            "Span the full explicit grid width",
+            "Hide the item",
+            "Create one pixel",
+            "Center text"
+          ],
+          "correctIndex": 0,
+          "explanation": "Span the full explicit grid width is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Hard-code fragile line numbers when named areas would explain the layout better.",
+            "Use line placement for clear structural roles such as full-width headers.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Hard-code fragile line numbers when named areas would explain the layout better."
+        }
+      ]
+    },
+    {
+      "id": "css-grid-alignment-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Grid",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "Grid alignment and place-items",
+      "summary": "Focused lesson: Grid alignment and place-items. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Grid has justify/align properties for items and content; place-items combines align-items and justify-items.",
+      "learn": [
+        "Grid alignment and place-items",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Grid alignment and place-items well enough to use it intentionally.",
+      "explanation": "First decide whether you are aligning items inside cells or distributing the whole grid inside its container.",
+      "tip": "Identify the alignment target before choosing the property.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Switch randomly between justify-content and justify-items.",
+      "expected": "The sample visibly demonstrates Grid alignment and place-items.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "grid",
+        "grid",
+        "alignment",
+        "and",
+        "place",
+        "items"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">A</div><div class=\"sample\">B</div><div class=\"sample\">C</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;grid-template-columns:repeat(3,1fr);place-items:center;min-height:160px;background:#f7fbfd}.sample{padding:14px;background:#0879b7;color:white}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does place-items combine?",
+          "options": [
+            "align-items and justify-items",
+            "margin and padding",
+            "width and height",
+            "top and left"
+          ],
+          "correctIndex": 0,
+          "explanation": "align-items and justify-items is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Switch randomly between justify-content and justify-items.",
+            "Identify the alignment target before choosing the property.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Switch randomly between justify-content and justify-items."
+        }
+      ]
+    },
+    {
+      "id": "css-auto-fill-fit",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Grid",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "auto-fill vs auto-fit",
+      "summary": "Focused lesson: auto-fill vs auto-fit. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "auto-fill and auto-fit create as many repeat() tracks as fit; auto-fit collapses unused flexible tracks.",
+      "learn": [
+        "auto-fill vs auto-fit",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand auto-fill vs auto-fit well enough to use it intentionally.",
+      "explanation": "Their difference is easiest to see when there is extra room and fewer items than possible columns.",
+      "tip": "Use auto-fit when existing items should stretch into unused flexible-track space.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Memorize the terms without testing empty-track behavior.",
+      "expected": "The sample visibly demonstrates auto-fill vs auto-fit.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "grid",
+        "auto",
+        "fill",
+        "vs",
+        "auto",
+        "fit"
+      ],
+      "html": "<main class=\"demo\"><div class=\"sample\">One</div><div class=\"sample\">Two</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.sample{padding:18px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which option collapses unused flexible tracks?",
+          "options": [
+            "auto-fit",
+            "auto-fill",
+            "nowrap",
+            "subgrid"
+          ],
+          "correctIndex": 0,
+          "explanation": "auto-fit is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Memorize the terms without testing empty-track behavior.",
+            "Use auto-fit when existing items should stretch into unused flexible-track space.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Memorize the terms without testing empty-track behavior."
+        }
+      ]
+    },
+    {
+      "id": "css-media-orientation",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Responsive Design",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "Orientation media queries",
+      "summary": "Focused lesson: Orientation media queries. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "The orientation media feature matches portrait or landscape viewport orientation.",
+      "learn": [
+        "Orientation media queries",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Orientation media queries well enough to use it intentionally.",
+      "explanation": "Orientation can be useful when shape matters, but actual available width/container space is often a better design signal.",
+      "tip": "Use orientation only when portrait vs landscape genuinely changes the design need.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use orientation as a substitute for testing real available space.",
+      "expected": "The sample visibly demonstrates Orientation media queries.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "responsive design",
+        "orientation",
+        "media",
+        "queries"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:20px;background:#eef8fd}@media (orientation:landscape){.sample{border-left:6px solid #0879b7}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which values does orientation use?",
+          "options": [
+            "portrait and landscape",
+            "mobile and desktop",
+            "small and large",
+            "left and right"
+          ],
+          "correctIndex": 0,
+          "explanation": "portrait and landscape is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use orientation as a substitute for testing real available space.",
+            "Use orientation only when portrait vs landscape genuinely changes the design need.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use orientation as a substitute for testing real available space."
+        }
+      ]
+    },
+    {
+      "id": "css-hover-pointer-media",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Responsive Design",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "hover and pointer media features",
+      "summary": "Focused lesson: hover and pointer media features. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "hover and pointer media features describe input capabilities such as hover support and pointer precision.",
+      "learn": [
+        "hover and pointer media features",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand hover and pointer media features well enough to use it intentionally.",
+      "explanation": "Touch-oriented interfaces may not have reliable hover. Essential controls should not depend on it.",
+      "tip": "Keep important actions available without hover, then enhance capable devices.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Hide essential controls until hover on touch devices.",
+      "expected": "The sample visibly demonstrates hover and pointer media features.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "responsive design",
+        "hover",
+        "and",
+        "pointer",
+        "media",
+        "features"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:20px;background:#eef8fd}@media (hover:hover) and (pointer:fine){.sample:hover{transform:translateY(-3px)}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does pointer:fine suggest?",
+          "options": [
+            "A relatively precise pointing device",
+            "A large screen",
+            "A fast network",
+            "A keyboard language"
+          ],
+          "correctIndex": 0,
+          "explanation": "A relatively precise pointing device is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Hide essential controls until hover on touch devices.",
+            "Keep important actions available without hover, then enhance capable devices.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Hide essential controls until hover on touch devices."
+        }
+      ]
+    },
+    {
+      "id": "css-prefers-color-scheme",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Responsive Design",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "prefers-color-scheme",
+      "summary": "Focused lesson: prefers-color-scheme. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "prefers-color-scheme detects a user/system preference for light or dark presentation.",
+      "learn": [
+        "prefers-color-scheme",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand prefers-color-scheme well enough to use it intentionally.",
+      "explanation": "It can set a useful default theme while an application may still offer an explicit user override.",
+      "tip": "Use the preference as a default and still keep theme contrast intentional.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Create dark mode by blindly inverting every color.",
+      "expected": "The sample visibly demonstrates prefers-color-scheme.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "responsive design",
+        "prefers",
+        "color",
+        "scheme"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": ":root{color-scheme:light dark}body{font-family:system-ui;padding:28px;background:#fff;color:#17344b}.sample{padding:20px;background:#eef8fd}@media (prefers-color-scheme:dark){body{background:#0d2235;color:#eef8fd}.sample{background:#17344b}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does prefers-color-scheme express?",
+          "options": [
+            "A light or dark preference",
+            "Viewport width",
+            "CPU speed",
+            "Pointer precision"
+          ],
+          "correctIndex": 0,
+          "explanation": "A light or dark preference is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Create dark mode by blindly inverting every color.",
+            "Use the preference as a default and still keep theme contrast intentional.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Create dark mode by blindly inverting every color."
+        }
+      ]
+    },
+    {
+      "id": "css-object-fit-position",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 10,
+      "level": "Intermediate",
+      "title": "object-fit and object-position",
+      "summary": "Focused lesson: object-fit and object-position. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "object-fit controls how replaced content such as images/videos fit their box; object-position controls alignment within it.",
+      "learn": [
+        "object-fit and object-position",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand object-fit and object-position well enough to use it intentionally.",
+      "explanation": "cover fills and crops; contain preserves the entire object. Position selects which part remains emphasized.",
+      "tip": "Use cover for crop-safe thumbnails and contain when the whole asset must remain visible.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Crop product labels, faces, or critical visual information unintentionally.",
+      "expected": "The sample visibly demonstrates object-fit and object-position.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "object",
+        "fit",
+        "and",
+        "object",
+        "position"
+      ],
+      "html": "<main><img class=\"sample\" src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='640' height='360' fill='%230879b7'/%3E%3Ccircle cx='500' cy='180' r='100' fill='%235bd6ff'/%3E%3C/svg%3E\" alt=\"Abstract blue example\"></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:320px;height:180px;object-fit:cover;object-position:center;border-radius:14px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which object-fit value fills the frame and may crop?",
+          "options": [
+            "cover",
+            "contain",
+            "none-only",
+            "center"
+          ],
+          "correctIndex": 0,
+          "explanation": "cover is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Crop product labels, faces, or critical visual information unintentionally.",
+            "Use cover for crop-safe thumbnails and contain when the whole asset must remain visible.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Crop product labels, faces, or critical visual information unintentionally."
+        }
+      ]
+    },
+    {
+      "id": "css-filter",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 20,
+      "level": "Intermediate",
+      "title": "filter",
+      "summary": "Focused lesson: filter. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "filter applies graphical effects such as blur, brightness, contrast, grayscale, hue rotation, or drop-shadow.",
+      "learn": [
+        "filter",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand filter well enough to use it intentionally.",
+      "explanation": "Filters are useful for media treatment and states, but heavy effects can reduce clarity and rendering performance.",
+      "tip": "Use filters for intentional effects while preserving readable content.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Blur or reduce contrast on important readable content.",
+      "expected": "The sample visibly demonstrates filter.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "filter"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:32px;background:#0879b7;color:white;filter:drop-shadow(0 12px 18px #17344b55) saturate(1.2)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which filter function removes color?",
+          "options": [
+            "grayscale()",
+            "gray()",
+            "monochrome()",
+            "filter-gray()"
+          ],
+          "correctIndex": 0,
+          "explanation": "grayscale() is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Blur or reduce contrast on important readable content.",
+            "Use filters for intentional effects while preserving readable content.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Blur or reduce contrast on important readable content."
+        }
+      ]
+    },
+    {
+      "id": "css-mix-blend-mode",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "mix-blend-mode",
+      "summary": "Focused lesson: mix-blend-mode. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "mix-blend-mode controls how an element's pixels blend with its backdrop.",
+      "learn": [
+        "mix-blend-mode",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand mix-blend-mode well enough to use it intentionally.",
+      "explanation": "Blend modes can create editorial effects but are sensitive to whatever background happens to be behind them.",
+      "tip": "Use blend modes for decoration rather than essential text or controls.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Depend on blending for critical contrast across unknown backgrounds.",
+      "expected": "The sample visibly demonstrates mix-blend-mode.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "mix",
+        "blend",
+        "mode"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px;background:linear-gradient(90deg,#0879b7,#d94d72)}.sample{font-size:48px;font-weight:900;color:white;mix-blend-mode:difference}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does mix-blend-mode depend on?",
+          "options": [
+            "The backdrop behind the element",
+            "Only font size",
+            "The database",
+            "Grid line numbers"
+          ],
+          "correctIndex": 0,
+          "explanation": "The backdrop behind the element is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Depend on blending for critical contrast across unknown backgrounds.",
+            "Use blend modes for decoration rather than essential text or controls.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Depend on blending for critical contrast across unknown backgrounds."
+        }
+      ]
+    },
+    {
+      "id": "css-clip-path",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "clip-path",
+      "summary": "Focused lesson: clip-path. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "clip-path defines a clipping region so only part of an element is visible.",
+      "learn": [
+        "clip-path",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand clip-path well enough to use it intentionally.",
+      "explanation": "Basic shapes such as circle(), inset(), and polygon() can create avatars and decorative shapes.",
+      "tip": "Use clipping for visual shape while preserving usable content and hit areas.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Clip away content users need to read or activate.",
+      "expected": "The sample visibly demonstrates clip-path.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "clip",
+        "path"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:220px;aspect-ratio:1;background:linear-gradient(135deg,#0879b7,#5bd6ff);clip-path:polygon(50% 0,100% 38%,82% 100%,18% 100%,0 38%)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does clip-path primarily control?",
+          "options": [
+            "Which part of an element is visible",
+            "HTML semantics",
+            "Network requests",
+            "Grid source order"
+          ],
+          "correctIndex": 0,
+          "explanation": "Which part of an element is visible is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Clip away content users need to read or activate.",
+            "Use clipping for visual shape while preserving usable content and hit areas.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Clip away content users need to read or activate."
+        }
+      ]
+    },
+    {
+      "id": "css-mask",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 50,
+      "level": "Advanced",
+      "title": "CSS masking",
+      "summary": "Focused lesson: CSS masking. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Masking uses an image or gradient to control which parts of an element are visible.",
+      "learn": [
+        "CSS masking",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand CSS masking well enough to use it intentionally.",
+      "explanation": "Masks can create fades/cutouts while preserving the element. Production support and fallbacks should be checked.",
+      "tip": "Use masks as progressive enhancement with a sensible unmasked fallback.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Make essential content readable only when masking succeeds.",
+      "expected": "The sample visibly demonstrates CSS masking.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "css",
+        "masking"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:320px;height:150px;background:linear-gradient(90deg,#0879b7,#5bd6ff);-webkit-mask-image:linear-gradient(90deg,#000,transparent);mask-image:linear-gradient(90deg,#000,transparent)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What can provide a CSS mask?",
+          "options": [
+            "A mask image or gradient",
+            "Heading rank",
+            "Form name",
+            "z-index only"
+          ],
+          "correctIndex": 0,
+          "explanation": "A mask image or gradient is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Make essential content readable only when masking succeeds.",
+            "Use masks as progressive enhancement with a sensible unmasked fallback.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Make essential content readable only when masking succeeds."
+        }
+      ]
+    },
+    {
+      "id": "css-transform-functions",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Transforms & Animation",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "translate(), scale(), and rotate()",
+      "summary": "Focused lesson: translate(), scale(), and rotate(). Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Transform functions visually move, resize, or rotate an element without changing normal layout flow.",
+      "learn": [
+        "translate(), scale(), and rotate()",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand translate(), scale(), and rotate() well enough to use it intentionally.",
+      "explanation": "Transforms are efficient for many micro-interactions because surrounding boxes do not need to reflow.",
+      "tip": "Use transforms for visual motion while keeping the logical layout stable.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use transform to permanently patch a layout problem.",
+      "expected": "The sample visibly demonstrates translate(), scale(), and rotate().",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "transforms & animation",
+        "translate",
+        "scale",
+        "and",
+        "rotate"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:60px}.sample{width:180px;padding:20px;background:#0879b7;color:white;transform:translateX(20px) rotate(-4deg) scale(1.05);border-radius:12px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Do transforms normally move surrounding layout boxes?",
+          "options": [
+            "No",
+            "Yes always",
+            "Only in Grid",
+            "Only on text"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use transform to permanently patch a layout problem.",
+            "Use transforms for visual motion while keeping the logical layout stable.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use transform to permanently patch a layout problem."
+        }
+      ]
+    },
+    {
+      "id": "css-transform-origin",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Transforms & Animation",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "transform-origin",
+      "summary": "Focused lesson: transform-origin. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "transform-origin sets the point around which transforms such as rotation and scale occur.",
+      "learn": [
+        "transform-origin",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand transform-origin well enough to use it intentionally.",
+      "explanation": "Changing the pivot can make an element rotate from an edge or scale from a corner.",
+      "tip": "Choose an origin matching the visual interaction.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Compensate for a wrong pivot with random translation values.",
+      "expected": "The sample visibly demonstrates transform-origin.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "transforms & animation",
+        "transform",
+        "origin"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:60px}.sample{width:180px;padding:20px;background:#0879b7;color:white;transform-origin:left center;transform:rotate(10deg);border-radius:12px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does transform-origin change?",
+          "options": [
+            "The transform pivot point",
+            "The DOM parent",
+            "Grid columns",
+            "Font loading"
+          ],
+          "correctIndex": 0,
+          "explanation": "The transform pivot point is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Compensate for a wrong pivot with random translation values.",
+            "Choose an origin matching the visual interaction.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Compensate for a wrong pivot with random translation values."
+        }
+      ]
+    },
+    {
+      "id": "css-3d-transforms",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Transforms & Animation",
+      "order": 50,
+      "level": "Advanced",
+      "title": "3D transforms and perspective",
+      "summary": "Focused lesson: 3D transforms and perspective. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "3D transforms use functions such as rotateX(), rotateY(), and translateZ(); perspective controls apparent depth.",
+      "learn": [
+        "3D transforms and perspective",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand 3D transforms and perspective well enough to use it intentionally.",
+      "explanation": "3D effects can add depth but also distract or cause motion discomfort.",
+      "tip": "Use subtle 3D effects for focused interactions and test reduced-motion behavior.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Make essential navigation depend on complex 3D motion.",
+      "expected": "The sample visibly demonstrates 3D transforms and perspective.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "transforms & animation",
+        "3d",
+        "transforms",
+        "and",
+        "perspective"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:60px;perspective:700px}.sample{width:200px;padding:28px;background:#0879b7;color:white;transform:rotateY(-28deg);border-radius:12px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What creates the sense of depth for 3D transforms?",
+          "options": [
+            "Perspective",
+            "Margin collapse",
+            "Text indent",
+            "Border spacing"
+          ],
+          "correctIndex": 0,
+          "explanation": "Perspective is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Make essential navigation depend on complex 3D motion.",
+            "Use subtle 3D effects for focused interactions and test reduced-motion behavior.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Make essential navigation depend on complex 3D motion."
+        }
+      ]
+    },
+    {
+      "id": "css-easing-functions",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Transforms & Animation",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "Easing functions",
+      "summary": "Focused lesson: Easing functions. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Timing functions control how animation/transition progress accelerates and decelerates.",
+      "learn": [
+        "Easing functions",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Easing functions well enough to use it intentionally.",
+      "explanation": "Keywords such as ease and linear plus cubic-bezier() and steps() shape motion over time.",
+      "tip": "Use easing that matches the interaction speed and purpose.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use long slow easing on every tiny UI action.",
+      "expected": "The sample visibly demonstrates Easing functions.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "transforms & animation",
+        "easing",
+        "functions"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:60px}.sample{width:160px;padding:18px;background:#0879b7;color:white;transition:transform .5s cubic-bezier(.2,.8,.2,1)}.sample:hover{transform:translateX(120px)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which function creates a custom bezier easing curve?",
+          "options": [
+            "cubic-bezier()",
+            "calc()",
+            "minmax()",
+            "url()"
+          ],
+          "correctIndex": 0,
+          "explanation": "cubic-bezier() is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use long slow easing on every tiny UI action.",
+            "Use easing that matches the interaction speed and purpose.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use long slow easing on every tiny UI action."
+        }
+      ]
+    },
+    {
+      "id": "css-animation-fill-direction",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Transforms & Animation",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Animation direction and fill mode",
+      "summary": "Focused lesson: Animation direction and fill mode. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "animation-direction controls playback direction; animation-fill-mode controls keyframe styling before/after active playback.",
+      "learn": [
+        "Animation direction and fill mode",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Animation direction and fill mode well enough to use it intentionally.",
+      "explanation": "These options matter when motion alternates, repeats, or should preserve a final visual state.",
+      "tip": "Keep the non-animated base state valid and usable.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Depend on an animation's final frame to provide essential state/content.",
+      "expected": "The sample visibly demonstrates Animation direction and fill mode.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "transforms & animation",
+        "animation",
+        "direction",
+        "and",
+        "fill",
+        "mode"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:60px}.sample{width:160px;padding:18px;background:#0879b7;color:white;animation:slide 1s ease-in-out 2 alternate both}@keyframes slide{to{transform:translateX(120px);background:#d94d72}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which direction alternates forward/backward playback?",
+          "options": [
+            "alternate",
+            "both",
+            "forwards",
+            "normal-only"
+          ],
+          "correctIndex": 0,
+          "explanation": "alternate is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Depend on an animation's final frame to provide essential state/content.",
+            "Keep the non-animated base state valid and usable.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Depend on an animation's final frame to provide essential state/content."
+        }
+      ]
+    },
+    {
+      "id": "css-accent-appearance",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "accent-color and appearance",
+      "summary": "Focused lesson: accent-color and appearance. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "accent-color changes the accent of supported native controls; appearance influences native platform styling.",
+      "learn": [
+        "accent-color and appearance",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand accent-color and appearance well enough to use it intentionally.",
+      "explanation": "Accent-color offers lightweight branding. Removing appearance creates more work because you must recreate interaction states yourself.",
+      "tip": "Prefer accent-color when native controls already satisfy the UX.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Strip native appearance and forget focus, checked, disabled, and platform states.",
+      "expected": "The sample visibly demonstrates accent-color and appearance.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "accent",
+        "color",
+        "and",
+        "appearance"
+      ],
+      "html": "<main class=\"demo\"><label><input type=\"checkbox\" checked> Notifications</label><label><input type=\"radio\" checked> Option A</label></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;gap:12px}.demo input{accent-color:#0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does accent-color affect?",
+          "options": [
+            "The accent of supported native controls",
+            "Only page background",
+            "Grid gaps",
+            "Font loading"
+          ],
+          "correctIndex": 0,
+          "explanation": "The accent of supported native controls is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Strip native appearance and forget focus, checked, disabled, and platform states.",
+            "Prefer accent-color when native controls already satisfy the UX.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Strip native appearance and forget focus, checked, disabled, and platform states."
+        }
+      ]
+    },
+    {
+      "id": "css-cursor-user-select",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "cursor and user-select",
+      "summary": "Focused lesson: cursor and user-select. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "cursor suggests a pointer appearance; user-select controls whether text can be selected.",
+      "learn": [
+        "cursor and user-select",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand cursor and user-select well enough to use it intentionally.",
+      "explanation": "Cursor should reinforce real interaction, not invent it. Normal reading text should remain selectable.",
+      "tip": "Use pointer on genuine clickable UI and leave normal text selectable.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Set user-select:none on large reading areas.",
+      "expected": "The sample visibly demonstrates cursor and user-select.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "cursor",
+        "and",
+        "user",
+        "select"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{display:inline-block;padding:14px;background:#0879b7;color:white;border-radius:10px;cursor:pointer;user-select:none}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Should normal article text usually stay selectable?",
+          "options": [
+            "Yes",
+            "No",
+            "Only on desktop",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yes is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Set user-select:none on large reading areas.",
+            "Use pointer on genuine clickable UI and leave normal text selectable.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Set user-select:none on large reading areas."
+        }
+      ]
+    },
+    {
+      "id": "css-scroll-behavior-offsets",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 50,
+      "level": "Intermediate",
+      "title": "scroll-behavior and scroll offsets",
+      "summary": "Focused lesson: scroll-behavior and scroll offsets. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "scroll-behavior controls smoothness; scroll-margin and scroll-padding reserve offset space when targets scroll into view.",
+      "learn": [
+        "scroll-behavior and scroll offsets",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand scroll-behavior and scroll offsets well enough to use it intentionally.",
+      "explanation": "Sticky headers can cover fragment targets. Scroll offsets keep targets visible.",
+      "tip": "Use scroll offsets when sticky UI would cover anchor targets.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Enable smooth scrolling without considering reduced-motion preferences.",
+      "expected": "The sample visibly demonstrates scroll-behavior and scroll offsets.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "scroll",
+        "behavior",
+        "and",
+        "scroll",
+        "offsets"
+      ],
+      "html": "<main><a href=\"#target\">Jump to target</a><section id=\"target\" class=\"target\"><h2>Target</h2></section></main>",
+      "css": "html{scroll-behavior:smooth}body{font-family:system-ui;padding:28px}.target{margin-top:240px;scroll-margin-top:40px;padding:20px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property gives a target extra scroll offset?",
+          "options": [
+            "scroll-margin-top",
+            "margin-collapse",
+            "object-position",
+            "font-variant"
+          ],
+          "correctIndex": 0,
+          "explanation": "scroll-margin-top is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Enable smooth scrolling without considering reduced-motion preferences.",
+            "Use scroll offsets when sticky UI would cover anchor targets.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Enable smooth scrolling without considering reduced-motion preferences."
+        }
+      ]
+    },
+    {
+      "id": "css-scroll-snap",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "Scroll snapping",
+      "summary": "Focused lesson: Scroll snapping. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Scroll snap properties let a scroll container settle on defined child alignment positions.",
+      "learn": [
+        "Scroll snapping",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Scroll snapping well enough to use it intentionally.",
+      "explanation": "It can improve horizontal galleries and step-based panels, but aggressive snapping can frustrate users.",
+      "tip": "Use snapping for clear item-by-item browsing and keep scrolling controllable.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Force strong snapping on long reading content.",
+      "expected": "The sample visibly demonstrates Scroll snapping.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "scroll",
+        "snapping"
+      ],
+      "html": "<main class=\"demo\"><section class=\"sample\">Slide 1</section><section class=\"sample\">Slide 2</section><section class=\"sample\">Slide 3</section></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory}.sample{min-width:80%;padding:40px;background:#eef8fd;scroll-snap-align:start}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which child property defines its snap position?",
+          "options": [
+            "scroll-snap-align",
+            "text-align",
+            "object-position",
+            "grid-area"
+          ],
+          "correctIndex": 0,
+          "explanation": "scroll-snap-align is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Force strong snapping on long reading content.",
+            "Use snapping for clear item-by-item browsing and keep scrolling controllable.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Force strong snapping on long reading content."
+        }
+      ]
+    },
+    {
+      "id": "css-at-property",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 60,
+      "level": "Advanced",
+      "title": "@property typed custom properties",
+      "summary": "Focused lesson: @property typed custom properties. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "@property registers a custom property with syntax, inheritance behavior, and an initial value.",
+      "learn": [
+        "@property typed custom properties",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand @property typed custom properties well enough to use it intentionally.",
+      "explanation": "Registered custom properties can interpolate more predictably in animation and provide type constraints.",
+      "tip": "Use @property when typing/interpolation solves a real need.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Register every custom property even when ordinary variables are enough.",
+      "expected": "The sample visibly demonstrates @property typed custom properties.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "modern css",
+        "property",
+        "typed",
+        "custom",
+        "properties"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "@property --progress{syntax:\"<percentage>\";inherits:false;initial-value:0%}body{font-family:system-ui;padding:28px}.sample{--progress:70%;width:320px;height:24px;border-radius:999px;background:linear-gradient(90deg,#0879b7 var(--progress),#dfeaf0 0)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What can @property define?",
+          "options": [
+            "Syntax, inheritance, and initial value",
+            "HTML tag names",
+            "Database indexes",
+            "Grid source order"
+          ],
+          "correctIndex": 0,
+          "explanation": "Syntax, inheritance, and initial value is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Register every custom property even when ordinary variables are enough.",
+            "Use @property when typing/interpolation solves a real need.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Register every custom property even when ordinary variables are enough."
+        }
+      ]
+    },
+    {
+      "id": "css-at-scope",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 70,
+      "level": "Advanced",
+      "title": "@scope",
+      "summary": "Focused lesson: @scope. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "@scope limits where a group of selectors applies within a document subtree.",
+      "learn": [
+        "@scope",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand @scope well enough to use it intentionally.",
+      "explanation": "Scoping can reduce style leakage in large pages. Production browser support should match your target baseline.",
+      "tip": "Use @scope where your support baseline permits it and it simplifies component boundaries.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume every new CSS at-rule is supported in every target browser.",
+      "expected": "The sample visibly demonstrates @scope.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "modern css",
+        "scope"
+      ],
+      "html": "<main><section class=\"card\"><h2>Scoped heading</h2><div class=\"sample\">Scoped content</div></section><h2>Outside scope</h2></main>",
+      "css": "body{font-family:system-ui;padding:28px}@scope (.card){h2{color:#0879b7}.sample{padding:16px;background:#eef8fd}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does @scope primarily limit?",
+          "options": [
+            "Where selectors apply",
+            "Network requests",
+            "HTML parsing",
+            "Font file size"
+          ],
+          "correctIndex": 0,
+          "explanation": "Where selectors apply is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume every new CSS at-rule is supported in every target browser.",
+            "Use @scope where your support baseline permits it and it simplifies component boundaries.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume every new CSS at-rule is supported in every target browser."
+        }
+      ]
+    },
+    {
+      "id": "css-color-scheme",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "color-scheme",
+      "summary": "Focused lesson: color-scheme. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "color-scheme tells the browser which light/dark schemes a page or component supports.",
+      "learn": [
+        "color-scheme",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand color-scheme well enough to use it intentionally.",
+      "explanation": "It can affect native form controls, scrollbars, and browser default canvas colors.",
+      "tip": "Declare only schemes the design actually supports with readable component colors.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Declare dark support while leaving light-only unreadable components.",
+      "expected": "The sample visibly demonstrates color-scheme.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "modern css",
+        "color",
+        "scheme"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": ":root{color-scheme:light dark}body{font-family:system-ui;padding:28px}.sample{padding:20px;border:1px solid CanvasText;background:Canvas;color:CanvasText}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What can color-scheme influence?",
+          "options": [
+            "Browser-provided UI and default colors",
+            "HTML source order",
+            "Database data",
+            "Image dimensions"
+          ],
+          "correctIndex": 0,
+          "explanation": "Browser-provided UI and default colors is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Declare dark support while leaving light-only unreadable components.",
+            "Declare only schemes the design actually supports with readable component colors.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Declare dark support while leaving light-only unreadable components."
+        }
+      ]
+    },
+    {
+      "id": "css-forced-colors",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Accessibility",
+      "order": 20,
+      "level": "Advanced",
+      "title": "forced-colors and high contrast",
+      "summary": "Focused lesson: forced-colors and high contrast. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "The forced-colors media feature detects environments where the user agent forces a limited color palette.",
+      "learn": [
+        "forced-colors and high contrast",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand forced-colors and high contrast well enough to use it intentionally.",
+      "explanation": "Custom colors may be replaced for readability. Important states must remain understandable without relying on custom colors alone.",
+      "tip": "Use semantic boundaries and system colors so states remain clear.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Disable forced-color adjustments globally just to preserve branding.",
+      "expected": "The sample visibly demonstrates forced-colors and high contrast.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "accessibility",
+        "forced",
+        "colors",
+        "and",
+        "high",
+        "contrast"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change one value, run again, and compare.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:18px;border:2px solid #0879b7}@media (forced-colors:active){.sample{border-color:CanvasText}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Why test forced-colors?",
+          "options": [
+            "Some users rely on a system high-contrast palette",
+            "It increases animation speed",
+            "It changes HTML validity",
+            "It controls Grid columns"
+          ],
+          "correctIndex": 0,
+          "explanation": "Some users rely on a system high-contrast palette is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Disable forced-color adjustments globally just to preserve branding.",
+            "Use semantic boundaries and system colors so states remain clear.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Disable forced-color adjustments globally just to preserve branding."
+        }
+      ]
+    },
+    {
+      "id": "css-visually-hidden",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Accessibility",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "Visually hidden content",
+      "summary": "Focused lesson: Visually hidden content. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "A visually-hidden utility hides content visually while keeping it available to assistive technology when intended.",
+      "learn": [
+        "Visually hidden content",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Visually hidden content well enough to use it intentionally.",
+      "explanation": "This differs from display:none, which generally removes content from accessibility interaction too.",
+      "tip": "Use visually hidden text only when it adds useful non-visual information.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Hide focusable controls off-screen where keyboard users can land on invisible UI.",
+      "expected": "The sample visibly demonstrates Visually hidden content.",
+      "realUse": "Useful in production UI when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "accessibility",
+        "visually",
+        "hidden",
+        "content"
+      ],
+      "html": "<main><button><span class=\"visually-hidden\">Close dialog</span>✕</button><p>The icon button still has a text label.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Is visually hidden content the same as display:none?",
+          "options": [
+            "No",
+            "Yes",
+            "Only on mobile",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Hide focusable controls off-screen where keyboard users can land on invisible UI.",
+            "Use visually hidden text only when it adds useful non-visual information.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Hide focusable controls off-screen where keyboard users can land on invisible UI."
+        }
+      ]
+    },
+    {
       "id": "js-dom-counter",
       "categoryId": "javascript",
       "mode": "code",
