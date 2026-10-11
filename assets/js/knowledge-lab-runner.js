@@ -81,17 +81,17 @@
     const strings = i18n.ui?.[activeLanguage] || i18n.ui?.en || {};
     document.documentElement.lang = i18n.languages?.[activeLanguage]?.htmlLang || (activeLanguage === 'tl' ? 'fil' : 'en');
 
-    $('[data-i18n]').forEach((node) => {
+    $$('[data-i18n]').forEach((node) => {
       const key = node.dataset.i18n;
       if (strings[key] !== undefined) node.textContent = strings[key];
     });
 
-    $('[data-i18n-html]').forEach((node) => {
+    $$('[data-i18n-html]').forEach((node) => {
       const key = node.dataset.i18nHtml;
       if (strings[key] !== undefined) node.innerHTML = strings[key];
     });
 
-    $('[data-i18n-placeholder]').forEach((node) => {
+    $$('[data-i18n-placeholder]').forEach((node) => {
       const key = node.dataset.i18nPlaceholder;
       if (strings[key] !== undefined) node.setAttribute('placeholder', strings[key]);
     });
@@ -99,7 +99,7 @@
     const buttonLabel = $('[data-language-button-label]');
     if (buttonLabel) buttonLabel.textContent = i18n.languages?.[activeLanguage]?.label || 'English';
 
-    $('[data-language-option]').forEach((button) => {
+    $$('[data-language-option]').forEach((button) => {
       const selected = button.dataset.languageOption === activeLanguage;
       button.setAttribute('aria-checked', String(selected));
       button.classList.toggle('is-active', selected);
@@ -430,7 +430,7 @@
       '</article>';
     }).join('');
 
-    $('[data-big-o-preset]').forEach((button) => {
+    $$('[data-big-o-preset]').forEach((button) => {
       button.classList.toggle('is-active', Number(button.dataset.bigOPreset) === n);
     });
   }
@@ -1030,7 +1030,7 @@
     languageToggle.setAttribute('aria-expanded', String(willOpen));
   });
 
-  $('[data-language-option]').forEach((button) => {
+  $$('[data-language-option]').forEach((button) => {
     button.addEventListener('click', () => setLanguage(button.dataset.languageOption));
   });
 
