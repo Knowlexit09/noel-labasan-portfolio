@@ -213,7 +213,7 @@ jobs:
             await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-view="category"]:not([hidden])');
             const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
-            for (const label of ['What is CSS?','Why is it called Cascading','Basic selectors','Flexbox','CSS Grid','Subgrid','Container queries','Native CSS nesting','Style forms','CSS accessibility','Final CSS challenge']) {
+            for (const label of ['Ano ang CSS?','Bakit “Cascading Style Sheets”','Basic selectors','Flexbox','CSS Grid','Subgrid','Container queries','Native CSS nesting','Style forms','CSS accessibility','Final CSS challenge']) {
               if (!cssCategoryText.includes(label)) throw new Error('CSS learning path missing visible lesson: ' + label);
             }
 
