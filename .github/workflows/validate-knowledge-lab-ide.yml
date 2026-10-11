@@ -96,6 +96,59 @@ jobs:
             throw new Error('Curated Filipino CSS definition is missing.');
           }
 
+          const htmlCategory = data.categories.find(x => x.id === 'html');
+          const htmlLessons = data.lessons.filter(x => x.categoryId === 'html');
+          if (!htmlCategory?.learningPath || htmlLessons.length < 45) {
+            throw new Error('Complete HTML learning path is missing.');
+          }
+          const requiredHtmlLessons = [
+            'html-what-is-html',
+            'html-document-anatomy',
+            'html-elements-tags-attributes',
+            'html-emmet-shortcuts',
+            'html-semantic-landmarks',
+            'html-images-alt',
+            'html-accessible-form',
+            'html-form-validation',
+            'html-accessible-tables',
+            'html-iframe-sandbox',
+            'html-native-before-aria',
+            'html-details-summary',
+            'html-dialog',
+            'html-title-description',
+            'html-script-defer-async',
+            'html-data-attributes',
+            'html-template',
+            'html-popover',
+            'html-security-basics',
+            'html-expert-practice-page'
+          ];
+          for (const id of requiredHtmlLessons) {
+            const lesson = data.lessons.find(x => x.id === id);
+            if (!lesson) throw new Error('Missing HTML lesson: ' + id);
+            if (!lesson.definition || !Array.isArray(lesson.learn) || lesson.learn.length < 3) {
+              throw new Error('HTML definition/learning goals missing: ' + id);
+            }
+            if (!Array.isArray(lesson.quiz) || lesson.quiz.length < 2) {
+              throw new Error('HTML quiz missing: ' + id);
+            }
+          }
+          const htmlIntro = data.lessons.find(x => x.id === 'html-what-is-html');
+          if (!htmlIntro?.definition?.includes('HyperText Markup Language')) {
+            throw new Error('HTML definition is missing HyperText Markup Language.');
+          }
+          const htmlEmmet = data.lessons.find(x => x.id === 'html-emmet-shortcuts');
+          if (!htmlEmmet?.shortcut?.shortCode?.includes('ul>li*3')) {
+            throw new Error('HTML Emmet shortcut lesson is missing.');
+          }
+          const curatedHtmlTl = Object.keys(i18n.lessons?.tl || {}).filter(id => id.startsWith('html-'));
+          if (curatedHtmlTl.length < 20) {
+            throw new Error('Expected at least 20 manually curated Filipino HTML lessons.');
+          }
+          if (!i18n.lessons.tl['html-what-is-html']?.definition?.includes('HyperText Markup Language')) {
+            throw new Error('Curated Filipino HTML definition is missing.');
+          }
+
           const cssCategory = data.categories.find(x => x.id === 'css');
           const cssLessons = data.lessons.filter(x => x.categoryId === 'css');
           if (!cssCategory?.learningPath || cssLessons.length < 45) {
@@ -208,6 +261,37 @@ jobs:
             const languageLabel = await page.textContent('[data-language-button-label]');
             if (languageLabel.trim() !== 'Filipino / Taglish') {
               throw new Error('Language switch did not select curated Filipino.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#category/html', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-view="category"]:not([hidden])');
+            const htmlCategoryTextTl = await page.locator('[data-category-lessons]').innerText();
+            for (const label of ['Ano ang HTML?','Emmet shortcuts','Gumawa ng usable form','Native HTML first, ARIA second','Final HTML challenge']) {
+              if (!htmlCategoryTextTl.includes(label)) throw new Error('HTML learning path missing visible lesson: ' + label);
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/html-what-is-html', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-definition-lab]:not([hidden])');
+            const htmlTitleTl = (await page.textContent('[data-title]')).trim();
+            const htmlDefinitionTl = await page.textContent('[data-definition]');
+            if (htmlTitleTl !== 'Ano ang HTML?') throw new Error('Curated Filipino HTML title did not render.');
+            if (!htmlDefinitionTl.includes('HyperText Markup Language') || !htmlDefinitionTl.includes('Ang HTML ay ibig sabihin')) {
+              throw new Error('Curated Filipino HTML definition did not render.');
+            }
+            if (!(await page.textContent('[data-language-status]')).includes('hindi auto-translate')) {
+              throw new Error('Curated Filipino HTML status is missing.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/html-emmet-shortcuts', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-shortcut-lab]:not([hidden])');
+            if (!(await page.textContent('[data-shortcut-short]')).includes('ul>li*3')) {
+              throw new Error('HTML Emmet shortcut did not render.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/html-form-validation', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-language-status]:not([hidden])');
+            if (!(await page.textContent('[data-language-status]')).includes('English source')) {
+              throw new Error('Unreviewed Filipino HTML lesson must safely fall back to English.');
             }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
