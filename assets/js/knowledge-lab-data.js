@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v7",
+  "version": "2026-10-12-v8",
   "categories": [
     {
       "id": "html",
@@ -10684,6 +10684,66 @@
       ]
     },
     {
+      "id": "css-color-codes-explorer",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 25,
+      "level": "Beginner",
+      "title": "CSS Colors: names, HEX, RGB, and complete color codes",
+      "summary": "You do not need to memorize every CSS color. Learn the formats, then use a searchable explorer for all 148 standardized opaque named colors.",
+      "definition": "CSS colors can be written as named color keywords, HEX values, rgb() values, hsl() values, and newer color functions. CSS also defines 148 opaque named colors such as `tomato`, `royalblue`, and `rebeccapurple`; `transparent` and `currentColor` are special color keywords.",
+      "learn": [
+        "How named CSS colors work",
+        "How HEX and RGB can represent the same sRGB color",
+        "How to search all 148 standardized opaque named colors",
+        "Why `transparent` and `currentColor` are special keywords"
+      ],
+      "objective": "Stop guessing color codes: understand common CSS color formats and use a complete searchable named-color list when you need an exact code.",
+      "explanation": "Hindi kailangang kabisaduhin ang lahat ng color names o codes. Mas mahalaga na alam mo kung paano basahin ang format at saan mabilis maghanap.\n\nFor example, `tomato`, `#FF6347`, and `rgb(255 99 71)` describe the same sRGB color. Named colors are convenient and readable, while HEX/RGB are often easier to match with a design system.",
+      "tip": "For reusable brand colors, store the chosen value in a custom property such as `--brand: #0879B7;` instead of repeating the code everywhere.",
+      "hack": "Kapag color name ang naaalala mo pero hindi ang HEX, i-search lang dito. Puwede rin baliktad: i-search ang HEX o RGB para makita ang matching CSS name.",
+      "mistake": "Do not assume a color name is visually obvious from its name. Several CSS names are historical aliases or have unintuitive brightness relationships, so always check the swatch.",
+      "expected": "A searchable grid displays all 148 opaque named CSS colors with each CSS name, HEX code, and RGB value.",
+      "realUse": "Useful for prototypes, design handoff, debugging unknown color names, learning CSS, and choosing starter colors before moving them into design tokens.",
+      "tags": [
+        "css",
+        "colors",
+        "named colors",
+        "hex",
+        "rgb",
+        "color codes",
+        "reference"
+      ],
+      "html": "<main class=\"color-lab\">\n  <header class=\"color-head\">\n    <div>\n      <p class=\"eyebrow\">CSS NAMED COLORS</p>\n      <h1>Color Codes Explorer</h1>\n      <p>Search by CSS color name, HEX, or RGB. This list includes all 148 opaque standardized named colors.</p>\n    </div>\n    <div class=\"special\"><code>transparent</code><code>currentColor</code></div>\n  </header>\n  <label class=\"search-label\" for=\"colorSearch\">Search colors</label>\n  <input id=\"colorSearch\" class=\"color-search\" type=\"search\" placeholder=\"Try: blue, #FF6347, 255 99 71\" autocomplete=\"off\">\n  <p id=\"colorCount\" class=\"count\" aria-live=\"polite\"></p>\n  <section id=\"colorGrid\" class=\"color-grid\" aria-label=\"CSS named colors\"></section>\n</main>",
+      "css": "*{box-sizing:border-box}\nbody{margin:0;padding:24px;font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#f3f7fa;color:#17344b}\n.color-lab{max-width:1100px;margin:auto}.color-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:18px}\n.eyebrow{margin:0;color:#0879b7;font-size:.75rem;font-weight:900;letter-spacing:.12em}h1{margin:.2rem 0 .35rem;font-size:clamp(1.8rem,5vw,3rem)}\n.color-head p{max-width:68ch}.special{display:flex;flex-wrap:wrap;gap:8px}.special code{padding:7px 9px;border-radius:8px;background:#e8f3f8}\n.search-label{display:block;font-weight:800;margin-bottom:6px}.color-search{width:100%;padding:12px 14px;border:1px solid #bfd0dc;border-radius:10px;font:inherit;background:white}\n.color-search:focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}.count{margin:10px 0 14px;color:#607086}\n.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px}.color-card{overflow:hidden;border:1px solid #d5e1e8;border-radius:12px;background:white}\n.swatch{min-height:86px;display:grid;place-items:center;padding:12px;font-weight:900;text-align:center;border-bottom:1px solid #d5e1e8}\n.meta{display:grid;gap:4px;padding:10px 12px}.meta strong{overflow-wrap:anywhere}.meta code{font-size:.78rem;color:#52697b}\n@media(max-width:620px){body{padding:14px}.color-head{display:grid;align-items:start}.color-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:390px){.color-grid{grid-template-columns:1fr}}",
+      "js": "const raw=\"aliceblue:#F0F8FF;antiquewhite:#FAEBD7;aqua:#00FFFF;aquamarine:#7FFFD4;azure:#F0FFFF;beige:#F5F5DC;bisque:#FFE4C4;black:#000000;blanchedalmond:#FFEBCD;blue:#0000FF;blueviolet:#8A2BE2;brown:#A52A2A;burlywood:#DEB887;cadetblue:#5F9EA0;chartreuse:#7FFF00;chocolate:#D2691E;coral:#FF7F50;cornflowerblue:#6495ED;cornsilk:#FFF8DC;crimson:#DC143C;cyan:#00FFFF;darkblue:#00008B;darkcyan:#008B8B;darkgoldenrod:#B8860B;darkgray:#A9A9A9;darkgreen:#006400;darkgrey:#A9A9A9;darkkhaki:#BDB76B;darkmagenta:#8B008B;darkolivegreen:#556B2F;darkorange:#FF8C00;darkorchid:#9932CC;darkred:#8B0000;darksalmon:#E9967A;darkseagreen:#8FBC8F;darkslateblue:#483D8B;darkslategray:#2F4F4F;darkslategrey:#2F4F4F;darkturquoise:#00CED1;darkviolet:#9400D3;deeppink:#FF1493;deepskyblue:#00BFFF;dimgray:#696969;dimgrey:#696969;dodgerblue:#1E90FF;firebrick:#B22222;floralwhite:#FFFAF0;forestgreen:#228B22;fuchsia:#FF00FF;gainsboro:#DCDCDC;ghostwhite:#F8F8FF;gold:#FFD700;goldenrod:#DAA520;gray:#808080;green:#008000;greenyellow:#ADFF2F;grey:#808080;honeydew:#F0FFF0;hotpink:#FF69B4;indianred:#CD5C5C;indigo:#4B0082;ivory:#FFFFF0;khaki:#F0E68C;lavender:#E6E6FA;lavenderblush:#FFF0F5;lawngreen:#7CFC00;lemonchiffon:#FFFACD;lightblue:#ADD8E6;lightcoral:#F08080;lightcyan:#E0FFFF;lightgoldenrodyellow:#FAFAD2;lightgray:#D3D3D3;lightgreen:#90EE90;lightgrey:#D3D3D3;lightpink:#FFB6C1;lightsalmon:#FFA07A;lightseagreen:#20B2AA;lightskyblue:#87CEFA;lightslategray:#778899;lightslategrey:#778899;lightsteelblue:#B0C4DE;lightyellow:#FFFFE0;lime:#00FF00;limegreen:#32CD32;linen:#FAF0E6;magenta:#FF00FF;maroon:#800000;mediumaquamarine:#66CDAA;mediumblue:#0000CD;mediumorchid:#BA55D3;mediumpurple:#9370DB;mediumseagreen:#3CB371;mediumslateblue:#7B68EE;mediumspringgreen:#00FA9A;mediumturquoise:#48D1CC;mediumvioletred:#C71585;midnightblue:#191970;mintcream:#F5FFFA;mistyrose:#FFE4E1;moccasin:#FFE4B5;navajowhite:#FFDEAD;navy:#000080;oldlace:#FDF5E6;olive:#808000;olivedrab:#6B8E23;orange:#FFA500;orangered:#FF4500;orchid:#DA70D6;palegoldenrod:#EEE8AA;palegreen:#98FB98;paleturquoise:#AFEEEE;palevioletred:#DB7093;papayawhip:#FFEFD5;peachpuff:#FFDAB9;peru:#CD853F;pink:#FFC0CB;plum:#DDA0DD;powderblue:#B0E0E6;purple:#800080;rebeccapurple:#663399;red:#FF0000;rosybrown:#BC8F8F;royalblue:#4169E1;saddlebrown:#8B4513;salmon:#FA8072;sandybrown:#F4A460;seagreen:#2E8B57;seashell:#FFF5EE;sienna:#A0522D;silver:#C0C0C0;skyblue:#87CEEB;slateblue:#6A5ACD;slategray:#708090;slategrey:#708090;snow:#FFFAFA;springgreen:#00FF7F;steelblue:#4682B4;tan:#D2B48C;teal:#008080;thistle:#D8BFD8;tomato:#FF6347;turquoise:#40E0D0;violet:#EE82EE;wheat:#F5DEB3;white:#FFFFFF;whitesmoke:#F5F5F5;yellow:#FFFF00;yellowgreen:#9ACD32\";\nconst colors=raw.split(\";\").map(entry=>{const [name,hex]=entry.split(\":\");return {name,hex};});\nconst search=document.querySelector(\"#colorSearch\");\nconst grid=document.querySelector(\"#colorGrid\");\nconst count=document.querySelector(\"#colorCount\");\nfunction rgbFromHex(hex){const n=parseInt(hex.slice(1),16);return [(n>>16)&255,(n>>8)&255,n&255];}\nfunction readableText(hex){\n  const c=rgbFromHex(hex).map(v=>v/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));\n  const luminance=.2126*c[0]+.7152*c[1]+.0722*c[2];\n  return luminance>.45?\"#0d2235\":\"#ffffff\";\n}\nfunction render(){\n  const q=search.value.trim().toLowerCase();\n  const shown=colors.filter(item=>{\n    const rgb=rgbFromHex(item.hex);\n    return [item.name,item.hex.toLowerCase(),rgb.join(\" \"),rgb.join(\",\")].join(\" \").includes(q);\n  });\n  grid.replaceChildren();\n  for(const item of shown){\n    const rgb=rgbFromHex(item.hex);\n    const card=document.createElement(\"article\");card.className=\"color-card\";\n    const swatch=document.createElement(\"div\");swatch.className=\"swatch\";swatch.style.background=item.hex;swatch.style.color=readableText(item.hex);swatch.textContent=item.name;\n    const meta=document.createElement(\"div\");meta.className=\"meta\";\n    const name=document.createElement(\"strong\");name.textContent=item.name;\n    const hex=document.createElement(\"code\");hex.textContent=item.hex;\n    const rgbText=document.createElement(\"code\");rgbText.textContent=\"rgb(\"+rgb.join(\" \")+\")\";\n    meta.append(name,hex,rgbText);card.append(swatch,meta);grid.append(card);\n  }\n  count.textContent=shown.length+\" of \"+colors.length+\" named colors\";\n}\nsearch.addEventListener(\"input\",render);render();",
+      "quiz": [
+        {
+          "question": "Do you need to memorize all CSS named color codes?",
+          "options": [
+            "No—understand the formats and use a reliable reference",
+            "Yes, all 148",
+            "Only dark colors",
+            "Only HEX values"
+          ],
+          "correctIndex": 0,
+          "explanation": "The goal is understanding and fast lookup, not memorizing every keyword."
+        },
+        {
+          "question": "Which three values below represent the same color?",
+          "options": [
+            "tomato, #FF6347, and rgb(255 99 71)",
+            "blue, #FF0000, and rgb(0 255 0)",
+            "white, #000000, and rgb(255 0 255)",
+            "navy, #FFFF00, and rgb(255 255 255)"
+          ],
+          "correctIndex": 0,
+          "explanation": "`tomato` is #FF6347, which is RGB 255 99 71."
+        }
+      ]
+    },
+    {
       "id": "css-ref-selectors",
       "categoryId": "css-reference",
       "mode": "code",
@@ -10855,31 +10915,31 @@
       "stage": "Typography & Color",
       "order": 10,
       "level": "Reference",
-      "title": "Color reference",
-      "summary": "Quick lookup: Color reference.",
-      "definition": "CSS supports keywords, HEX, rgb(), hsl(), alpha, and newer color functions.",
+      "title": "CSS Color Codes Reference — all named colors",
+      "summary": "Quick lookup for all 148 standardized opaque CSS named colors, with HEX and RGB codes.",
+      "definition": "CSS supports standardized named colors in sRGB. This reference shows all 148 opaque named colors with their CSS keyword, HEX value, and RGB value. `transparent` and `currentColor` are special color keywords and are shown separately.",
       "learn": [
-        "What it does",
-        "Core syntax",
-        "Common values",
-        "Runnable example"
+        "All 148 opaque named colors",
+        "CSS keyword → HEX mapping",
+        "CSS keyword → RGB mapping",
+        "Search by name, HEX, or RGB"
       ],
-      "objective": "Use this page as a quick CSS lookup while building.",
-      "explanation": "CSS supports keywords, HEX, rgb(), hsl(), alpha, and newer color functions.\n\nEdit the runnable example to verify behavior instead of memorizing every value.",
-      "tip": "Use the reference to confirm syntax, then return to the course lesson when you need the deeper concept.",
-      "hack": "Use Knowledge Lab search to jump directly to the property or concept you need.",
-      "mistake": "Do not copy CSS into production without understanding its layout, accessibility, or browser-support effects.",
-      "expected": "The runnable example demonstrates the referenced CSS feature.",
-      "realUse": "Designed as a fast lookup while working on real components and pages.",
+      "objective": "Find a CSS color code quickly without memorizing the whole list.",
+      "explanation": "Use the search field in the Result panel to find a color by keyword, HEX, or RGB. Some names are aliases with the same value, such as `aqua`/`cyan`, `fuchsia`/`magenta`, and several `gray`/`grey` spellings.",
+      "tip": "Use named colors for quick readable examples; use design tokens for a real brand palette.",
+      "hack": "Search a partial word such as `blue`, `light`, `dark`, or `green` to compare related CSS color names side-by-side.",
+      "mistake": "Do not assume similar-sounding color names are ordered consistently by brightness.",
+      "expected": "The result shows a searchable 148-color swatch grid with CSS name, HEX, and RGB code.",
+      "realUse": "Fast lookup while coding, reviewing a design, or converting a remembered CSS name into a numeric color code.",
       "tags": [
         "css",
         "reference",
         "color reference"
       ],
-      "html": "<div class=\"box\">Color</div>",
-      "css": "body{font-family:system-ui;padding:28px}.box{padding:20px;color:#0879b7;background:rgb(8 121 183/.12)}",
-      "js": "",
-      "referenceSyntax": "color: #0879b7; background: rgb(8 121 183 / .15);"
+      "html": "<main class=\"color-lab\">\n  <header class=\"color-head\">\n    <div>\n      <p class=\"eyebrow\">CSS NAMED COLORS</p>\n      <h1>Color Codes Explorer</h1>\n      <p>Search by CSS color name, HEX, or RGB. This list includes all 148 opaque standardized named colors.</p>\n    </div>\n    <div class=\"special\"><code>transparent</code><code>currentColor</code></div>\n  </header>\n  <label class=\"search-label\" for=\"colorSearch\">Search colors</label>\n  <input id=\"colorSearch\" class=\"color-search\" type=\"search\" placeholder=\"Try: blue, #FF6347, 255 99 71\" autocomplete=\"off\">\n  <p id=\"colorCount\" class=\"count\" aria-live=\"polite\"></p>\n  <section id=\"colorGrid\" class=\"color-grid\" aria-label=\"CSS named colors\"></section>\n</main>",
+      "css": "*{box-sizing:border-box}\nbody{margin:0;padding:24px;font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#f3f7fa;color:#17344b}\n.color-lab{max-width:1100px;margin:auto}.color-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:18px}\n.eyebrow{margin:0;color:#0879b7;font-size:.75rem;font-weight:900;letter-spacing:.12em}h1{margin:.2rem 0 .35rem;font-size:clamp(1.8rem,5vw,3rem)}\n.color-head p{max-width:68ch}.special{display:flex;flex-wrap:wrap;gap:8px}.special code{padding:7px 9px;border-radius:8px;background:#e8f3f8}\n.search-label{display:block;font-weight:800;margin-bottom:6px}.color-search{width:100%;padding:12px 14px;border:1px solid #bfd0dc;border-radius:10px;font:inherit;background:white}\n.color-search:focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}.count{margin:10px 0 14px;color:#607086}\n.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px}.color-card{overflow:hidden;border:1px solid #d5e1e8;border-radius:12px;background:white}\n.swatch{min-height:86px;display:grid;place-items:center;padding:12px;font-weight:900;text-align:center;border-bottom:1px solid #d5e1e8}\n.meta{display:grid;gap:4px;padding:10px 12px}.meta strong{overflow-wrap:anywhere}.meta code{font-size:.78rem;color:#52697b}\n@media(max-width:620px){body{padding:14px}.color-head{display:grid;align-items:start}.color-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:390px){.color-grid{grid-template-columns:1fr}}",
+      "js": "const raw=\"aliceblue:#F0F8FF;antiquewhite:#FAEBD7;aqua:#00FFFF;aquamarine:#7FFFD4;azure:#F0FFFF;beige:#F5F5DC;bisque:#FFE4C4;black:#000000;blanchedalmond:#FFEBCD;blue:#0000FF;blueviolet:#8A2BE2;brown:#A52A2A;burlywood:#DEB887;cadetblue:#5F9EA0;chartreuse:#7FFF00;chocolate:#D2691E;coral:#FF7F50;cornflowerblue:#6495ED;cornsilk:#FFF8DC;crimson:#DC143C;cyan:#00FFFF;darkblue:#00008B;darkcyan:#008B8B;darkgoldenrod:#B8860B;darkgray:#A9A9A9;darkgreen:#006400;darkgrey:#A9A9A9;darkkhaki:#BDB76B;darkmagenta:#8B008B;darkolivegreen:#556B2F;darkorange:#FF8C00;darkorchid:#9932CC;darkred:#8B0000;darksalmon:#E9967A;darkseagreen:#8FBC8F;darkslateblue:#483D8B;darkslategray:#2F4F4F;darkslategrey:#2F4F4F;darkturquoise:#00CED1;darkviolet:#9400D3;deeppink:#FF1493;deepskyblue:#00BFFF;dimgray:#696969;dimgrey:#696969;dodgerblue:#1E90FF;firebrick:#B22222;floralwhite:#FFFAF0;forestgreen:#228B22;fuchsia:#FF00FF;gainsboro:#DCDCDC;ghostwhite:#F8F8FF;gold:#FFD700;goldenrod:#DAA520;gray:#808080;green:#008000;greenyellow:#ADFF2F;grey:#808080;honeydew:#F0FFF0;hotpink:#FF69B4;indianred:#CD5C5C;indigo:#4B0082;ivory:#FFFFF0;khaki:#F0E68C;lavender:#E6E6FA;lavenderblush:#FFF0F5;lawngreen:#7CFC00;lemonchiffon:#FFFACD;lightblue:#ADD8E6;lightcoral:#F08080;lightcyan:#E0FFFF;lightgoldenrodyellow:#FAFAD2;lightgray:#D3D3D3;lightgreen:#90EE90;lightgrey:#D3D3D3;lightpink:#FFB6C1;lightsalmon:#FFA07A;lightseagreen:#20B2AA;lightskyblue:#87CEFA;lightslategray:#778899;lightslategrey:#778899;lightsteelblue:#B0C4DE;lightyellow:#FFFFE0;lime:#00FF00;limegreen:#32CD32;linen:#FAF0E6;magenta:#FF00FF;maroon:#800000;mediumaquamarine:#66CDAA;mediumblue:#0000CD;mediumorchid:#BA55D3;mediumpurple:#9370DB;mediumseagreen:#3CB371;mediumslateblue:#7B68EE;mediumspringgreen:#00FA9A;mediumturquoise:#48D1CC;mediumvioletred:#C71585;midnightblue:#191970;mintcream:#F5FFFA;mistyrose:#FFE4E1;moccasin:#FFE4B5;navajowhite:#FFDEAD;navy:#000080;oldlace:#FDF5E6;olive:#808000;olivedrab:#6B8E23;orange:#FFA500;orangered:#FF4500;orchid:#DA70D6;palegoldenrod:#EEE8AA;palegreen:#98FB98;paleturquoise:#AFEEEE;palevioletred:#DB7093;papayawhip:#FFEFD5;peachpuff:#FFDAB9;peru:#CD853F;pink:#FFC0CB;plum:#DDA0DD;powderblue:#B0E0E6;purple:#800080;rebeccapurple:#663399;red:#FF0000;rosybrown:#BC8F8F;royalblue:#4169E1;saddlebrown:#8B4513;salmon:#FA8072;sandybrown:#F4A460;seagreen:#2E8B57;seashell:#FFF5EE;sienna:#A0522D;silver:#C0C0C0;skyblue:#87CEEB;slateblue:#6A5ACD;slategray:#708090;slategrey:#708090;snow:#FFFAFA;springgreen:#00FF7F;steelblue:#4682B4;tan:#D2B48C;teal:#008080;thistle:#D8BFD8;tomato:#FF6347;turquoise:#40E0D0;violet:#EE82EE;wheat:#F5DEB3;white:#FFFFFF;whitesmoke:#F5F5F5;yellow:#FFFF00;yellowgreen:#9ACD32\";\nconst colors=raw.split(\";\").map(entry=>{const [name,hex]=entry.split(\":\");return {name,hex};});\nconst search=document.querySelector(\"#colorSearch\");\nconst grid=document.querySelector(\"#colorGrid\");\nconst count=document.querySelector(\"#colorCount\");\nfunction rgbFromHex(hex){const n=parseInt(hex.slice(1),16);return [(n>>16)&255,(n>>8)&255,n&255];}\nfunction readableText(hex){\n  const c=rgbFromHex(hex).map(v=>v/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));\n  const luminance=.2126*c[0]+.7152*c[1]+.0722*c[2];\n  return luminance>.45?\"#0d2235\":\"#ffffff\";\n}\nfunction render(){\n  const q=search.value.trim().toLowerCase();\n  const shown=colors.filter(item=>{\n    const rgb=rgbFromHex(item.hex);\n    return [item.name,item.hex.toLowerCase(),rgb.join(\" \"),rgb.join(\",\")].join(\" \").includes(q);\n  });\n  grid.replaceChildren();\n  for(const item of shown){\n    const rgb=rgbFromHex(item.hex);\n    const card=document.createElement(\"article\");card.className=\"color-card\";\n    const swatch=document.createElement(\"div\");swatch.className=\"swatch\";swatch.style.background=item.hex;swatch.style.color=readableText(item.hex);swatch.textContent=item.name;\n    const meta=document.createElement(\"div\");meta.className=\"meta\";\n    const name=document.createElement(\"strong\");name.textContent=item.name;\n    const hex=document.createElement(\"code\");hex.textContent=item.hex;\n    const rgbText=document.createElement(\"code\");rgbText.textContent=\"rgb(\"+rgb.join(\" \")+\")\";\n    meta.append(name,hex,rgbText);card.append(swatch,meta);grid.append(card);\n  }\n  count.textContent=shown.length+\" of \"+colors.length+\" named colors\";\n}\nsearch.addEventListener(\"input\",render);render();",
+      "referenceSyntax": "named-color | #RRGGBB | rgb(R G B) | hsl(H S L) | transparent | currentColor"
     },
     {
       "id": "css-ref-font",
