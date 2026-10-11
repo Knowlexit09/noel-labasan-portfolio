@@ -345,6 +345,11 @@ Core user goal:
 Current category structure:
 
 - Code & Development: HTML, CSS, JavaScript, Java, Git & GitHub, Google Apps Script.
+- CSS now has a complete 28-lesson learning path: Foundation → Core Styling → Box Model & Sizing → Selectors & Cascade → Layout → Responsive Design → Modern CSS → Animation & Interaction → Architecture & Debugging → Expert Practice.
+- CSS starts from “What is CSS?” and progresses through syntax, stylesheet methods, colors, units, typography, display, box model, selectors, specificity, Flexbox, Grid, positioning, media queries, auto-fit/minmax responsive Grid, clamp/min/max fluid sizing, custom properties, :is/:where/:has, container queries, transforms/transitions, keyframes + reduced motion, cascade layers, component architecture, DevTools debugging, and a final integrated responsive component challenge.
+- Every CSS lesson has a simple explanation, working browser example, Tip, Useful Hack, Common Mistake, Expected Result, real-work use, and quiz. Selected lessons also show Long Form vs shorthand (background, margin/padding, flex, transition).
+- The CSS CI/browser gate validates that at least 25 CSS lessons exist, required milestone lessons are present with quizzes, the CSS category renders key lessons, and the “What is CSS?” browser example applies real CSS.
+
 - Creative & Multimedia: Photoshop, Canva, CapCut, Blender, Roblox Studio.
 - Java now has an explicit learning path: Foundation → OOP Foundations → Problem Solving → Applied Java.
 - Category pages show lesson counts, quiz progress, stages, and per-lesson quiz status saved locally in the browser.
@@ -432,8 +437,8 @@ Regression / quality gate status:
 - Big O interactive preset update is checked,
 - quiz option selection / correct-answer feedback / question advance is checked,
 - proof-backed lessons are validated for real media + case-study links,
-- latest V3 validation: **Validate Knowledge Lab IDE Run #18 — SUCCESS** at `c06c978e649ce564549aba524e0cbe25cf5e4efa`,
-- matching Pages deployment: **Run #341 — SUCCESS**.
+- latest Knowledge Lab validation: **Validate Knowledge Lab IDE Run #22 — SUCCESS** at `92796c04e27d3d5ae68da04d28b268512522d2d6`,
+- matching Pages deployment: **Run #346 — SUCCESS**.
 
 Do not Publish Live backend metadata on the user's behalf. The user remains the owner of Draft → Preview → Publish Live.
 
