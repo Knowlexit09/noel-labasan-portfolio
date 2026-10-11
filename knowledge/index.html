@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data:; form-action 'self'">
   <title>Knowledge Lab — Noel Labasan</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261009-2">
+  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-1">
 </head>
 <body>
   <header class="kl-topbar">
@@ -87,6 +87,13 @@
             <div class="kl-category-status-row">
               <span data-category-status></span>
               <span data-category-count></span>
+            </div>
+            <div class="kl-category-progress" data-category-progress hidden>
+              <div class="kl-progress-copy">
+                <strong data-category-progress-label>Progress</strong>
+                <span data-category-progress-text>0 / 0 quizzes passed</span>
+              </div>
+              <div class="kl-progress-track" aria-hidden="true"><i data-category-progress-bar></i></div>
             </div>
           </div>
         </div>
@@ -224,6 +231,43 @@
           </div>
         </section>
 
+        <section class="kl-shortcut" data-shortcut-lab hidden>
+          <div class="kl-shortcut-head">
+            <div>
+              <span class="kl-section-kicker">CLEANER / SHORTER WAY</span>
+              <h2 data-shortcut-label>Shortcut</h2>
+            </div>
+            <span class="kl-shortcut-rule">Shorter is only better when it stays readable.</span>
+          </div>
+          <div class="kl-shortcut-grid">
+            <article>
+              <span data-shortcut-long-label>Long form</span>
+              <pre><code data-shortcut-long></code></pre>
+            </article>
+            <article>
+              <span data-shortcut-short-label>Short form</span>
+              <pre><code data-shortcut-short></code></pre>
+            </article>
+          </div>
+          <div class="kl-shortcut-notes">
+            <p><strong>Why use it:</strong> <span data-shortcut-note></span></p>
+            <p><strong>Do not force it:</strong> <span data-shortcut-caution></span></p>
+          </div>
+        </section>
+
+        <section class="kl-interactive" data-interactive-lab hidden>
+          <div class="kl-interactive-head">
+            <div>
+              <span class="kl-section-kicker">SEE IT GROW</span>
+              <h2>Big O scaling simulator</h2>
+              <p>Change the input size and compare rough work units. This is for intuition, not exact CPU time.</p>
+            </div>
+            <div class="kl-big-o-presets" data-big-o-presets></div>
+          </div>
+          <div class="kl-big-o-value">Input size: <strong data-big-o-n>10</strong></div>
+          <div class="kl-big-o-grid" data-big-o-grid></div>
+        </section>
+
         <section class="kl-after-ide">
           <article>
             <span class="kl-section-kicker">Expected result</span>
@@ -235,6 +279,32 @@
           </article>
         </section>
 
+        <section class="kl-quiz" data-quiz-lab hidden>
+          <div class="kl-quiz-head">
+            <div>
+              <span class="kl-section-kicker">KNOWLEDGE CHECK</span>
+              <h2>Practice before you move on</h2>
+              <p>Answer one question at a time. Every answer explains why it is correct or incorrect.</p>
+            </div>
+            <div class="kl-quiz-score" data-quiz-score>0 / 0</div>
+          </div>
+          <div class="kl-quiz-progress"><i data-quiz-progress></i></div>
+          <div class="kl-quiz-body">
+            <div class="kl-quiz-count" data-quiz-count>Question 1</div>
+            <h3 data-quiz-question></h3>
+            <div class="kl-quiz-options" data-quiz-options></div>
+            <div class="kl-quiz-feedback" data-quiz-feedback hidden></div>
+          </div>
+          <div class="kl-quiz-actions">
+            <button type="button" class="kl-btn kl-btn-muted" data-quiz-restart hidden>Retake quiz</button>
+            <button type="button" class="kl-btn kl-btn-run" data-quiz-next disabled>Check answer</button>
+          </div>
+          <div class="kl-quiz-result" data-quiz-result hidden>
+            <strong data-quiz-result-title>Quiz complete</strong>
+            <p data-quiz-result-copy></p>
+          </div>
+        </section>
+
         <nav class="kl-prev-next" aria-label="Lesson navigation">
           <button type="button" data-prev>← Previous</button>
           <button type="button" data-next>Next →</button>
@@ -243,7 +313,7 @@
     </main>
   </div>
 
-  <script src="../assets/js/knowledge-lab-data.js?v=20261009-2"></script>
-  <script src="../assets/js/knowledge-lab-runner.js?v=20261009-6"></script>
+  <script src="../assets/js/knowledge-lab-data.js?v=20261012-1"></script>
+  <script src="../assets/js/knowledge-lab-runner.js?v=20261012-1"></script>
 </body>
 </html>
