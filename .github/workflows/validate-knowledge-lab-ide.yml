@@ -82,6 +82,31 @@ jobs:
             }
           }
 
+          const cssCategory = data.categories.find(x => x.id === 'css');
+          const cssLessons = data.lessons.filter(x => x.categoryId === 'css');
+          if (!cssCategory?.learningPath || cssLessons.length < 25) {
+            throw new Error('Complete CSS learning path is missing.');
+          }
+          const requiredCssLessons = [
+            'css-what-is-css',
+            'css-box-model',
+            'css-flexbox-basics',
+            'css-grid-basics',
+            'css-media-queries',
+            'css-custom-properties',
+            'css-container-queries',
+            'css-keyframes-reduced-motion',
+            'css-cascade-layers',
+            'css-expert-practice-card-system'
+          ];
+          for (const id of requiredCssLessons) {
+            const lesson = data.lessons.find(x => x.id === id);
+            if (!lesson) throw new Error('Missing CSS lesson: ' + id);
+            if (!Array.isArray(lesson.quiz) || lesson.quiz.length < 2) {
+              throw new Error('CSS quiz missing: ' + id);
+            }
+          }
+
           const bigO = data.lessons.find(x => x.id === 'java-big-o-made-simple');
           if (!bigO?.interactive || bigO.interactive.type !== 'big-o-simulator') {
             throw new Error('Big O interactive lesson is missing.');
@@ -147,6 +172,22 @@ jobs:
             for (const label of ['HTML','CSS','JavaScript','Java','Photoshop','Canva','CapCut','Blender']) {
               if (!categoryText.includes(label)) throw new Error('Missing category card: ' + label);
             }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-view="category"]:not([hidden])');
+            const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
+            for (const label of ['What is CSS?','Flexbox','CSS Grid','Container queries','Final CSS challenge']) {
+              if (!cssCategoryText.includes(label)) throw new Error('CSS learning path missing visible lesson: ' + label);
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-what-is-css', { waitUntil: 'networkidle' });
+            let cssFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await cssFrame.waitForSelector('.lesson-card');
+            const headingColor = await cssFrame.$eval('h1', el => getComputedStyle(el).color);
+            if (!headingColor || headingColor === 'rgb(0, 0, 0)') {
+              throw new Error('CSS fundamentals lesson styles did not apply.');
+            }
+            await page.waitForSelector('[data-quiz-lab]:not([hidden])');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/html-accessible-form', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-result-frame]');
