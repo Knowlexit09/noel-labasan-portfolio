@@ -53,6 +53,10 @@
     return i18n.groups?.[activeLanguage]?.[group] || group;
   }
 
+  function localizeStage(categoryId, stage) {
+    return i18n.stages?.[activeLanguage]?.[categoryId]?.[stage] || stage;
+  }
+
   function localizeCategory(category) {
     if (!category) return category;
     const patch = i18n.categories?.[activeLanguage]?.[category.id];
@@ -736,7 +740,7 @@
         if (!stageItems.length) return '';
 
         return '<section class="kl-learning-stage">' +
-          '<div class="kl-learning-stage-head"><span>' + escapeHtml(stage) + '</span><b>' +
+          '<div class="kl-learning-stage-head"><span>' + escapeHtml(localizeStage(rawCategory.id, stage)) + '</span><b>' +
             stageItems.length + ' lesson' + (stageItems.length === 1 ? '' : 's') +
           '</b></div>' +
           '<div class="kl-learning-stage-grid">' +
