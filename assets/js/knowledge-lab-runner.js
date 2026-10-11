@@ -1021,6 +1021,29 @@
     }
   });
 
+  const languageToggle = $('[data-language-toggle]');
+  const languageMenu = $('[data-language-menu]');
+
+  languageToggle?.addEventListener('click', () => {
+    const willOpen = languageMenu?.hidden !== false;
+    if (languageMenu) languageMenu.hidden = !willOpen;
+    languageToggle.setAttribute('aria-expanded', String(willOpen));
+  });
+
+  $('[data-language-option]').forEach((button) => {
+    button.addEventListener('click', () => setLanguage(button.dataset.languageOption));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!languageMenu || languageMenu.hidden) return;
+    if (event.target.closest('[data-language-control]') || event.target.closest('.kl-language-control')) return;
+    closeLanguageMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeLanguageMenu();
+  });
+
   $('[data-search]').addEventListener('input', (event) => {
     renderSidebar(event.target.value);
   });
@@ -1113,5 +1136,6 @@
   });
 
   window.addEventListener('popstate', routeFromLocation);
+  applyStaticUiLanguage();
   routeFromLocation();
 })();
