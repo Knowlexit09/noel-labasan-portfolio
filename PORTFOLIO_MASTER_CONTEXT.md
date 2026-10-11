@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab curated English/Filipino language system**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab complete HTML course + curated Filipino/Taglish foundation**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -352,6 +352,18 @@ Current category structure:
 - CSS starts from “What is CSS?” and progresses through syntax, stylesheet methods, colors, units, typography, display, box model, selectors, specificity, Flexbox, Grid, positioning, media queries, auto-fit/minmax responsive Grid, clamp/min/max fluid sizing, custom properties, :is/:where/:has, container queries, transforms/transitions, keyframes + reduced motion, cascade layers, component architecture, DevTools debugging, and a final integrated responsive component challenge.
 - Every CSS lesson has a simple explanation, working browser example, Tip, Useful Hack, Common Mistake, Expected Result, real-work use, and quiz. Selected lessons also show Long Form vs shorthand (background, margin/padding, flex, transition).
 - The CSS CI/browser gate validates the expanded CSS curriculum, required milestone lessons/quizzes, the visible “CSS = Cascading Style Sheets” definition, and the working browser example.
+- HTML now has a **52-lesson** course: HTML Fundamentals → Text & Semantic Content → Links & Images → Forms & User Input → Tables & Structured Data → Media & Embeds → Accessibility by Default → Head, Metadata & SEO → Modern HTML & Performance → Architecture & Expert Practice.
+- HTML begins with a visible **“What is HTML?”** definition that explicitly teaches **HTML = HyperText Markup Language**, then covers document anatomy, elements/tags/attributes, nesting, comments/entities, DOM parsing, headings, text semantics, lists, semantic landmarks, links/paths, images/alt text, responsive images, forms, validation, fieldset/legend, tables, media, captions, sandboxed iframes, native HTML vs ARIA, buttons vs links, hidden/inert, details/summary, dialog, metadata/SEO, script loading, lazy loading, resource hints, data-* attributes, template, popover, progressive enhancement, security, content models, and final expert practice.
+- HTML includes an **Emmet shortcut lesson** and explicitly teaches that Emmet is editor tooling, not HTML syntax; current example compares expanded list markup with `ul>li*3`.
+- All HTML lessons include definition, learning goals, simple explanation, Tip, Practical Hack, Common Mistake, Expected Result, real-work use, runnable example, and quiz.
+- The existing accessible-form regression remains preserved: entering **Juan Dela Cruz** and submitting must produce exactly **Hello, Juan Dela Cruz!** in the sandboxed browser runner.
+- Filipino/Taglish currently has **20 manually authored HTML lessons**, covering the foundations, text/semantic content, links/images, responsive-image basics, and the first accessible-form lesson. These are separate reviewed lesson versions, not machine translations.
+- HTML learning-stage labels also localize in the Filipino/Taglish view.
+- If Filipino is selected on an HTML lesson that has not been manually reviewed, the site visibly falls back to the original English source instead of auto-translating it.
+- HTML regression checks enforce at least 45 published HTML lessons, required milestone lessons, visible HyperText Markup Language definition, Emmet shortcut content, quizzes, 20+ curated Filipino HTML lessons, the Filipino **“Ano ang HTML?”** version, safe English fallback, and the original accessible-form interaction.
+- Latest combined HTML/language/IDE regression: **Validate Knowledge Lab IDE Run #44 — SUCCESS** at `1b7d0da190889cbb2b37c07d57713aff7b55fc83`.
+- Matching Pages deployment: **Run #371 — SUCCESS**.
+
 - Language UX rule (2026-10-12): do **not** use automatic/literal translation for learning content. Filipino must be an authored/curated lesson version, written naturally for comprehension while preserving real technical terms (CSS, selector, property, cascade, Flexbox, Grid, etc.) in English when that is clearer and industry-standard.
 - Knowledge Lab now has a persistent top-bar language switch: **English** ↔ **Filipino / Taglish**.
 - Language preference is stored locally in the visitor browser.
