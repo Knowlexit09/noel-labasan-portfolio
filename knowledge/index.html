@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data:; form-action 'self'">
   <title>Knowledge Lab — Noel Labasan</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-2">
+  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-3">
 </head>
 <body>
   <header class="kl-topbar">
@@ -17,8 +17,23 @@
       <span><strong>Knowledge Lab</strong><small>Tested code · real proof · practical workflows</small></span>
     </a>
     <div class="kl-top-actions">
-      <button class="kl-mobile-menu" type="button" data-sidebar-toggle aria-controls="knowledgeSidebar" aria-expanded="false">Topics</button>
-      <a class="kl-portfolio-link" href="../index.html">Portfolio ↗</a>
+      <div class="kl-language-control">
+        <button class="kl-language-button" type="button" data-language-toggle aria-haspopup="menu" aria-expanded="false">
+          <span aria-hidden="true">🌐</span>
+          <span data-language-button-label>English</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <div class="kl-language-menu" role="menu" data-language-menu hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" data-language-option="en">
+            <strong>English</strong><small>Default portfolio language</small>
+          </button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-language-option="tl">
+            <strong>Simple Taglish</strong><small>Mas madaling paliwanag; technical terms stay in English</small>
+          </button>
+        </div>
+      </div>
+      <button class="kl-mobile-menu" type="button" data-sidebar-toggle aria-controls="knowledgeSidebar" aria-expanded="false" data-i18n="topics">Topics</button>
+      <a class="kl-portfolio-link" href="../index.html" data-i18n="portfolio">Portfolio ↗</a>
     </div>
   </header>
 
@@ -27,20 +42,20 @@
       <div class="kl-sidebar-sticky">
         <button class="kl-home-link" type="button" data-home-button>
           <span aria-hidden="true">⌂</span>
-          <span>Knowledge Home</span>
+          <span data-i18n="knowledgeHome">Knowledge Home</span>
         </button>
 
-        <label class="kl-search-label" for="knowledgeSearch">Search lessons</label>
+        <label class="kl-search-label" for="knowledgeSearch" data-i18n="searchLessons">Search lessons</label>
         <div class="kl-search-wrap">
           <span aria-hidden="true">⌕</span>
-          <input id="knowledgeSearch" type="search" placeholder="Try: Java, Photoshop, Grid…" autocomplete="off" data-search>
+          <input id="knowledgeSearch" type="search" placeholder="Try: Java, Photoshop, Grid…" data-i18n-placeholder="searchPlaceholder" autocomplete="off" data-search>
         </div>
 
         <nav class="kl-topic-nav" aria-label="Knowledge Lab categories" data-topic-nav></nav>
 
         <div class="kl-sidebar-note">
-          <strong>Publishing rule</strong>
-          <p>Code must be runnable or CI-tested. Creative lessons need a real project artifact, proof image, or video before they are published.</p>
+          <strong data-i18n="publishingRule">Publishing rule</strong>
+          <p data-i18n="publishingRuleBody">Code must be runnable or CI-tested. Creative lessons need a real project artifact, proof image, or video before they are published.</p>
         </div>
       </div>
     </aside>
@@ -50,14 +65,14 @@
         <div class="kl-home-hero">
           <div>
             <span class="kl-section-kicker">KNOWLEDGE LAB</span>
-            <h1>Learn by category.<br>Test the code. See the proof.</h1>
-            <p>Practical tutorials from development and creative work. Runnable browser examples stay interactive; non-coding lessons attach real portfolio evidence whenever available.</p>
+            <h1 data-i18n-html="homeTitle">Learn by category.<br>Test the code. See the proof.</h1>
+            <p data-i18n="homeIntro">Practical tutorials from development and creative work. Runnable browser examples stay interactive; non-coding lessons attach real portfolio evidence whenever available.</p>
           </div>
           <div class="kl-home-badges" aria-label="Knowledge Lab quality rules">
-            <span>✓ Runnable browser code</span>
-            <span>✓ CI-tested Java</span>
-            <span>✓ Real project proof</span>
-            <span>✓ Tips + common mistakes</span>
+            <span data-i18n="badgeRunnable">✓ Runnable browser code</span>
+            <span data-i18n="badgeJava">✓ CI-tested Java</span>
+            <span data-i18n="badgeProof">✓ Real project proof</span>
+            <span data-i18n="badgeTips">✓ Tips + common mistakes</span>
           </div>
         </div>
 
@@ -66,7 +81,7 @@
         <section class="kl-quality-panel">
           <div>
             <span class="kl-section-kicker">QUALITY GATE</span>
-            <h2>No fake demos.</h2>
+            <h2 data-i18n="noFakeDemos">No fake demos.</h2>
           </div>
           <div class="kl-quality-grid">
             <article><strong>Code</strong><p>If a lesson has Run, the code executes in the site. Java references are compile-tested in CI until a secure Java backend runner exists.</p></article>
@@ -77,7 +92,7 @@
       </section>
 
       <section data-view="category" hidden>
-        <button class="kl-back-link" type="button" data-category-back>← All categories</button>
+        <button class="kl-back-link" type="button" data-category-back data-i18n="allCategories">← All categories</button>
         <div class="kl-category-head">
           <div class="kl-category-icon" data-category-icon>JS</div>
           <div>
@@ -105,7 +120,7 @@
       </section>
 
       <section data-view="lesson" hidden>
-        <button class="kl-back-link" type="button" data-lesson-back>← Back to category</button>
+        <button class="kl-back-link" type="button" data-lesson-back data-i18n="backToCategory">← Back to category</button>
 
         <section class="kl-lesson-head" aria-labelledby="lessonTitle">
           <div class="kl-breadcrumb" data-breadcrumb>Knowledge Lab</div>
@@ -121,32 +136,32 @@
 
         <section class="kl-definition-panel" data-definition-lab hidden>
           <article>
-            <span class="kl-section-kicker">DEFINITION</span>
+            <span class="kl-section-kicker" data-i18n="definitionLabel">DEFINITION</span>
             <p data-definition></p>
           </article>
           <article data-learn-block hidden>
-            <span class="kl-section-kicker">YOU WILL LEARN</span>
+            <span class="kl-section-kicker" data-i18n="youWillLearn">YOU WILL LEARN</span>
             <ul data-learn-list></ul>
           </article>
         </section>
 
         <section class="kl-content-grid">
           <article class="kl-explainer">
-            <div class="kl-section-kicker">Why it matters</div>
+            <div class="kl-section-kicker" data-i18n="whyItMatters">Why it matters</div>
             <div class="kl-explanation" data-explanation></div>
           </article>
 
           <aside class="kl-quick-panel" aria-label="Lesson quick notes">
             <div class="kl-quick-block kl-tip-block">
-              <span>TIP</span>
+              <span data-i18n="tipLabel">TIP</span>
               <p data-tip></p>
             </div>
             <div class="kl-quick-block kl-hack-block">
-              <span>USEFUL HACK</span>
+              <span data-i18n="hackLabel">USEFUL HACK</span>
               <p data-hack></p>
             </div>
             <div class="kl-quick-block kl-warning-block">
-              <span>COMMON MISTAKE</span>
+              <span data-i18n="mistakeLabel">COMMON MISTAKE</span>
               <p data-mistake></p>
             </div>
           </aside>
@@ -155,16 +170,16 @@
         <section class="kl-ide" id="knowledgeIde" data-code-lab aria-labelledby="ideTitle" hidden>
           <div class="kl-ide-head">
             <div>
-              <span class="kl-section-kicker">Try it yourself</span>
-              <h2 id="ideTitle">Browser IDE</h2>
-              <p>Edit the example, then run the real code. Use <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Enter</kbd> to run.</p>
+              <span class="kl-section-kicker" data-i18n="tryItYourself">Try it yourself</span>
+              <h2 id="ideTitle" data-i18n="browserIde">Browser IDE</h2>
+              <p><span data-i18n="ideHelp">Edit the example, then run the real code. Use Ctrl/⌘ + Enter to run.</span></p>
             </div>
             <div class="kl-ide-actions">
-              <button type="button" class="kl-btn kl-btn-muted" data-reset>Reset</button>
-              <button type="button" class="kl-btn kl-btn-muted" data-copy>Copy</button>
-              <button type="button" class="kl-btn kl-btn-muted" data-fullscreen>Full screen</button>
-              <button type="button" class="kl-btn kl-btn-stop" data-stop>Stop</button>
-              <button type="button" class="kl-btn kl-btn-run" data-run>Run ▶</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-reset data-i18n="reset">Reset</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-copy data-i18n="copy">Copy</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-fullscreen data-i18n="fullScreen">Full screen</button>
+              <button type="button" class="kl-btn kl-btn-stop" data-stop data-i18n="stop">Stop</button>
+              <button type="button" class="kl-btn kl-btn-run" data-run><span data-i18n="run">Run</span> ▶</button>
             </div>
           </div>
 
@@ -281,11 +296,11 @@
 
         <section class="kl-after-ide">
           <article>
-            <span class="kl-section-kicker">Expected result</span>
+            <span class="kl-section-kicker" data-i18n="expectedResult">Expected result</span>
             <p data-expected></p>
           </article>
           <article>
-            <span class="kl-section-kicker">Use it in real work</span>
+            <span class="kl-section-kicker" data-i18n="realWorkUse">Use it in real work</span>
             <p data-real-use></p>
           </article>
         </section>
@@ -293,9 +308,9 @@
         <section class="kl-quiz" data-quiz-lab hidden>
           <div class="kl-quiz-head">
             <div>
-              <span class="kl-section-kicker">KNOWLEDGE CHECK</span>
-              <h2>Practice before you move on</h2>
-              <p>Answer one question at a time. Every answer explains why it is correct or incorrect.</p>
+              <span class="kl-section-kicker" data-i18n="knowledgeCheck">KNOWLEDGE CHECK</span>
+              <h2 data-i18n="practiceBeforeMove">Practice before you move on</h2>
+              <p data-i18n="quizIntro">Answer one question at a time. Every answer explains why it is correct or incorrect.</p>
             </div>
             <div class="kl-quiz-score" data-quiz-score>0 / 0</div>
           </div>
@@ -307,7 +322,7 @@
             <div class="kl-quiz-feedback" data-quiz-feedback hidden></div>
           </div>
           <div class="kl-quiz-actions">
-            <button type="button" class="kl-btn kl-btn-muted" data-quiz-restart hidden>Retake quiz</button>
+            <button type="button" class="kl-btn kl-btn-muted" data-quiz-restart hidden data-i18n="retakeQuiz">Retake quiz</button>
             <button type="button" class="kl-btn kl-btn-run" data-quiz-next disabled>Check answer</button>
           </div>
           <div class="kl-quiz-result" data-quiz-result hidden>
@@ -325,6 +340,7 @@
   </div>
 
   <script src="../assets/js/knowledge-lab-data.js?v=20261012-3"></script>
-  <script src="../assets/js/knowledge-lab-runner.js?v=20261012-2"></script>
+  <script src="../assets/js/knowledge-lab-i18n.js?v=20261012-1"></script>
+  <script src="../assets/js/knowledge-lab-runner.js?v=20261012-3"></script>
 </body>
 </html>
