@@ -151,8 +151,8 @@ jobs:
 
           const cssCategory = data.categories.find(x => x.id === 'css');
           const cssLessons = data.lessons.filter(x => x.categoryId === 'css');
-          if (!cssCategory?.learningPath || cssLessons.length !== 127) {
-            throw new Error('Expected exactly 127 focused CSS course lessons, got ' + cssLessons.length);
+          if (!cssCategory?.learningPath || cssLessons.length !== 128) {
+            throw new Error('Expected exactly 128 focused CSS course lessons, got ' + cssLessons.length);
           }
           for (const lesson of cssLessons) {
             if (!lesson.definition || !Array.isArray(lesson.learn) || lesson.learn.length < 3) {
@@ -197,6 +197,7 @@ jobs:
             'css-focus-contrast-accessibility',
             'css-contain-content-visibility',
             'css-print-styles',
+            'css-color-codes-explorer',
             'css-color-keywords',
             'css-rgb-alpha',
             'css-margin-collapse',
@@ -329,6 +330,26 @@ jobs:
             const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
             for (const label of ['Ano ang CSS?','Bakit “Cascading Style Sheets”','Named colors','Margin collapsing','Stacking contexts','Flexbox','CSS Grid','Subgrid','Container queries','Scroll snapping','Final CSS Project']) {
               if (!cssCategoryText.includes(label)) throw new Error('CSS learning path missing visible lesson: ' + label);
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-color-codes-explorer', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let colorFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await colorFrame.waitForSelector('#colorGrid .color-card');
+            const allColorCards = await colorFrame.locator('#colorGrid .color-card').count();
+            if (allColorCards !== 148) throw new Error('Expected 148 CSS named colors, got ' + allColorCards);
+            if ((await page.textContent('[data-title]')).trim() !== 'CSS Colors: names, HEX, RGB, at complete color codes') {
+              throw new Error('Curated Filipino CSS color explorer title did not render.');
+            }
+            if (!(await page.textContent('[data-language-status]')).includes('hindi auto-translate')) {
+              throw new Error('Curated Filipino CSS color explorer status is missing.');
+            }
+            await colorFrame.fill('#colorSearch', 'tomato');
+            const tomatoCards = await colorFrame.locator('#colorGrid .color-card').count();
+            if (tomatoCards !== 1) throw new Error('CSS color explorer search did not narrow to tomato.');
+            const tomatoText = await colorFrame.locator('#colorGrid .color-card').innerText();
+            if (!tomatoText.includes('#FF6347') || !tomatoText.includes('rgb(255 99 71)')) {
+              throw new Error('Tomato color codes are incorrect or missing.');
             }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-project-product-grid', { waitUntil: 'networkidle' });
