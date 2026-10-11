@@ -342,3 +342,24 @@ a{color:inherit}
 @media(max-width:760px){
   .kl-definition-panel{grid-template-columns:1fr}
 }
+
+
+/* Knowledge Lab V5 — curated language switch */
+.kl-language-control{position:relative}
+.kl-language-button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:8px 10px;border:1px solid #d3e0e8;border-radius:10px;background:#fff;color:#29495f;font:inherit;font-size:10px;font-weight:850;cursor:pointer}
+.kl-language-button:hover,.kl-language-button[aria-expanded="true"]{border-color:#84d3f2;background:#f3fbff}
+.kl-language-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:80;width:min(330px,calc(100vw - 24px));padding:7px;border:1px solid #cfdee7;border-radius:14px;background:#fff;box-shadow:0 20px 48px rgba(10,34,52,.18)}
+.kl-language-menu button{display:grid;width:100%;gap:2px;border:1px solid transparent;border-radius:10px;background:transparent;padding:10px 11px;text-align:left;color:#29495f;cursor:pointer}
+.kl-language-menu button:hover{background:#f3f8fb}
+.kl-language-menu button.is-active{border-color:#95daf3;background:#edf9ff}
+.kl-language-menu strong{font-size:11px}
+.kl-language-menu small{font-size:9px;line-height:1.4;color:#718494}
+.kl-language-status{display:inline-flex;align-items:center;border-radius:999px;padding:5px 8px;font-size:8px;font-weight:850;letter-spacing:.02em}
+.kl-language-status.is-curated{background:#e9f8f2;color:#176c51;border:1px solid #bde6d5}
+.kl-language-status.is-fallback{background:#fff7e8;color:#87601d;border:1px solid #ead7ad}
+@media(max-width:760px){
+  .kl-top-actions{gap:6px}
+  .kl-language-button{padding-inline:8px}
+  .kl-language-button [data-language-button-label]{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .kl-language-menu{right:-4px}
+}
