@@ -375,6 +375,12 @@
         '<b>' + escapeHtml(option) + '</b>' +
       '</button>'
     ).join('');
+
+    $('[data-quiz-option]').forEach((button) => {
+      button.addEventListener('click', () => {
+        chooseQuizOption(button.dataset.quizOption);
+      });
+    });
   }
 
   function renderQuiz(lesson) {
