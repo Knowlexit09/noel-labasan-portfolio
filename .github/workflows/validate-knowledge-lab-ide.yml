@@ -151,8 +151,24 @@ jobs:
 
           const cssCategory = data.categories.find(x => x.id === 'css');
           const cssLessons = data.lessons.filter(x => x.categoryId === 'css');
-          if (!cssCategory?.learningPath || cssLessons.length < 45) {
-            throw new Error('Complete CSS learning path is missing.');
+          if (!cssCategory?.learningPath || cssLessons.length !== 127) {
+            throw new Error('Expected exactly 127 focused CSS course lessons, got ' + cssLessons.length);
+          }
+          for (const lesson of cssLessons) {
+            if (!lesson.definition || !Array.isArray(lesson.learn) || lesson.learn.length < 3) {
+              throw new Error('CSS definition/learning goals missing: ' + lesson.id);
+            }
+            if (!lesson.explanation || !lesson.tip || !lesson.hack || !lesson.mistake || !lesson.expected || !lesson.realUse) {
+              throw new Error('CSS teaching fields missing: ' + lesson.id);
+            }
+            if (!Array.isArray(lesson.quiz) || lesson.quiz.length < 2) {
+              throw new Error('CSS quiz missing: ' + lesson.id);
+            }
+          }
+          const cssReferenceCategory = data.categories.find(x => x.id === 'css-reference');
+          const cssReferences = data.lessons.filter(x => x.categoryId === 'css-reference');
+          if (!cssReferenceCategory?.learningPath || cssReferences.length !== 20) {
+            throw new Error('Expected 20 CSS reference pages, got ' + cssReferences.length);
           }
           const requiredCssLessons = [
             'css-what-is-css',
@@ -180,7 +196,21 @@ jobs:
             'css-tables',
             'css-focus-contrast-accessibility',
             'css-contain-content-visibility',
-            'css-print-styles'
+            'css-print-styles',
+            'css-color-keywords',
+            'css-rgb-alpha',
+            'css-margin-collapse',
+            'css-stacking-context',
+            'css-auto-fill-fit',
+            'css-object-fit-position',
+            'css-3d-transforms',
+            'css-scroll-snap',
+            'css-at-property',
+            'css-forced-colors',
+            'css-project-profile-card',
+            'css-project-product-grid',
+            'css-project-dashboard',
+            'css-project-final-design-system'
           ];
           for (const id of requiredCssLessons) {
             const lesson = data.lessons.find(x => x.id === id);
@@ -297,9 +327,31 @@ jobs:
             await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-view="category"]:not([hidden])');
             const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
-            for (const label of ['Ano ang CSS?','Bakit “Cascading Style Sheets”','Basic selectors','Flexbox','CSS Grid','Subgrid','Container queries','Native CSS nesting','Style forms','CSS accessibility','Final CSS challenge']) {
+            for (const label of ['Ano ang CSS?','Bakit “Cascading Style Sheets”','Named colors','Margin collapsing','Stacking contexts','Flexbox','CSS Grid','Subgrid','Container queries','Scroll snapping','Final CSS Project']) {
               if (!cssCategoryText.includes(label)) throw new Error('CSS learning path missing visible lesson: ' + label);
             }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-project-product-grid', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let projectFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await projectFrame.waitForSelector('.products');
+            const projectCards = await projectFrame.locator('.products article').count();
+            if (projectCards !== 3) throw new Error('CSS product-grid project did not render three cards.');
+            if (!(await page.textContent('[data-language-status]')).includes('English source')) {
+              throw new Error('New unreviewed CSS project must safely use English source in Filipino mode.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#category/css-reference', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-view="category"]:not([hidden])');
+            const referenceText = await page.locator('[data-category-lessons]').innerText();
+            for (const label of ['Selector reference','Flexbox property reference','Grid property reference','At-rule reference']) {
+              if (!referenceText.includes(label)) throw new Error('CSS reference missing: ' + label);
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-ref-flexbox', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let refFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await refFrame.waitForSelector('.row');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-what-is-css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-definition-lab]:not([hidden])');
