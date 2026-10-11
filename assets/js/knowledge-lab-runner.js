@@ -833,6 +833,12 @@
   });
 
   document.addEventListener('click', (event) => {
+    const quizOption = event.target.closest('[data-quiz-option]');
+    if (quizOption) {
+      chooseQuizOption(quizOption.dataset.quizOption);
+      return;
+    }
+
     const categoryButton = event.target.closest('[data-category-id]');
     if (categoryButton) {
       navigateCategory(categoryButton.dataset.categoryId);
