@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab expanded CSS course + searchable CSS reference**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab CSS complete named-color explorer**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -364,7 +364,15 @@ Current category structure:
 - Latest combined HTML/language/IDE regression: **Validate Knowledge Lab IDE Run #44 — SUCCESS** at `1b7d0da190889cbb2b37c07d57713aff7b55fc83`.
 - Matching Pages deployment: **Run #371 — SUCCESS**.
 
-- CSS course expanded from 49 to **127 focused learning lessons**, plus a separate **20-page CSS Reference** category for quick lookup.
+- CSS course expanded from 49 to **128 focused learning lessons**, plus a separate **20-page CSS Reference** category for quick lookup.
+- Added **CSS Colors: names, HEX, RGB, and complete color codes** under Colors & Backgrounds. It teaches color formats and includes an interactive searchable explorer with **all 148 opaque standardized CSS named colors**.
+- The color explorer shows each CSS keyword, HEX code, and RGB value, supports search by name/HEX/RGB, and separately calls out `transparent` and `currentColor` as special color keywords.
+- The existing CSS Reference color page was upgraded to the same complete searchable color-code explorer instead of creating a duplicate reference category.
+- A manually authored Filipino/Taglish version of the CSS color lesson is included; it is not auto-translated.
+- Color-explorer regression verifies exactly 148 color cards and checks `tomato` → `#FF6347` → `rgb(255 99 71)`.
+- Latest color-explorer validation: **Validate Knowledge Lab IDE Run #56 — SUCCESS** at `5a7587a4cabf7ac276f1f7fad1e947ed5600063e`.
+- Matching Pages deployment: **Run #385 — SUCCESS**.
+
 - CSS learning path now uses finer-grained stages: CSS Fundamentals → Colors & Backgrounds → Typography & Text → Box Model & Sizing → Selectors & Cascade → Display & Positioning → Flexbox → Grid → Responsive Design → Images & Visual Effects → Transforms & Animation → Forms, Tables & UI → Modern CSS → Accessibility → Architecture & Performance → Projects & Expert Practice.
 - Newly split/focused CSS topics include named/HEX/RGB/HSL colors, currentColor, opacity, background layers/repeat/position/size/attachment, multiple backgrounds, linear/radial/conic gradients, font stacks, font weight/style, text alignment/decoration/transform/spacing/indent/white-space/ellipsis/shadow, margin + margin collapse, padding, border/outline, aspect-ratio, calc(), attribute selectors, :not/:is/:where, :nth-child patterns, float/clear, inline-block, sticky positioning, stacking contexts, focused Flexbox axis/wrap/alignment lessons, explicit/implicit Grid, auto-placement, spanning, Grid alignment, auto-fill vs auto-fit, orientation/hover/pointer/color-scheme media features, object-fit/object-position, filters, blend modes, clip-path, masking, 2D/3D transforms, transform-origin, easing, animation direction/fill, accent-color/appearance, cursor/user-select, scroll offsets/snap, @property, @scope, color-scheme, forced-colors, and visually-hidden patterns.
 - CSS course now includes **8 practical projects**: Profile Card, Responsive Navbar, Responsive Product Grid, Pricing Cards, Dashboard Layout, Modal Styling, Responsive Landing Hero, and a Final Mini Design System project. The prior resilient-card expert challenge remains as an additional advanced practice lesson.
