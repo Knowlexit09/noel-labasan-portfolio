@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab complete HTML course + curated Filipino/Taglish foundation**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab expanded CSS course + searchable CSS reference**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -363,6 +363,16 @@ Current category structure:
 - HTML regression checks enforce at least 45 published HTML lessons, required milestone lessons, visible HyperText Markup Language definition, Emmet shortcut content, quizzes, 20+ curated Filipino HTML lessons, the Filipino **“Ano ang HTML?”** version, safe English fallback, and the original accessible-form interaction.
 - Latest combined HTML/language/IDE regression: **Validate Knowledge Lab IDE Run #44 — SUCCESS** at `1b7d0da190889cbb2b37c07d57713aff7b55fc83`.
 - Matching Pages deployment: **Run #371 — SUCCESS**.
+
+- CSS course expanded from 49 to **127 focused learning lessons**, plus a separate **20-page CSS Reference** category for quick lookup.
+- CSS learning path now uses finer-grained stages: CSS Fundamentals → Colors & Backgrounds → Typography & Text → Box Model & Sizing → Selectors & Cascade → Display & Positioning → Flexbox → Grid → Responsive Design → Images & Visual Effects → Transforms & Animation → Forms, Tables & UI → Modern CSS → Accessibility → Architecture & Performance → Projects & Expert Practice.
+- Newly split/focused CSS topics include named/HEX/RGB/HSL colors, currentColor, opacity, background layers/repeat/position/size/attachment, multiple backgrounds, linear/radial/conic gradients, font stacks, font weight/style, text alignment/decoration/transform/spacing/indent/white-space/ellipsis/shadow, margin + margin collapse, padding, border/outline, aspect-ratio, calc(), attribute selectors, :not/:is/:where, :nth-child patterns, float/clear, inline-block, sticky positioning, stacking contexts, focused Flexbox axis/wrap/alignment lessons, explicit/implicit Grid, auto-placement, spanning, Grid alignment, auto-fill vs auto-fit, orientation/hover/pointer/color-scheme media features, object-fit/object-position, filters, blend modes, clip-path, masking, 2D/3D transforms, transform-origin, easing, animation direction/fill, accent-color/appearance, cursor/user-select, scroll offsets/snap, @property, @scope, color-scheme, forced-colors, and visually-hidden patterns.
+- CSS course now includes **8 practical projects**: Profile Card, Responsive Navbar, Responsive Product Grid, Pricing Cards, Dashboard Layout, Modal Styling, Responsive Landing Hero, and a Final Mini Design System project. The prior resilient-card expert challenge remains as an additional advanced practice lesson.
+- New CSS Reference category is intentionally separate from the learning path and currently includes **20 runnable lookup pages** for selectors, specificity, units, spacing, borders/outlines, colors, typography, display, positioning, Flexbox, Grid, media queries, container queries, transforms, transitions, animation, custom properties, functions, pseudo selectors, and at-rules.
+- CSS quality gate now enforces exactly 127 course lessons, complete definition/learning-goal/teaching/quiz fields for every course lesson, exactly 20 reference pages, required milestone topics/projects, browser rendering of the Responsive Product Grid project, CSS Reference category visibility, and a runnable Flexbox reference example.
+- Latest CSS expansion regression: **Validate Knowledge Lab IDE Run #52 — SUCCESS** at `4f26e1d65b0527bc891b0cac5feca67db69c3e14`.
+- Matching Pages deployment at that code state: **Run #380 — SUCCESS**.
+- New CSS lessons remain English source until each Filipino/Taglish version is manually reviewed. The existing curated Filipino CSS lessons remain intact; no automatic translation is introduced.
 
 - Language UX rule (2026-10-12): do **not** use automatic/literal translation for learning content. Filipino must be an authored/curated lesson version, written naturally for comprehension while preserving real technical terms (CSS, selector, property, cascade, Flexbox, Grid, etc.) in English when that is clearer and industry-standard.
 - Knowledge Lab now has a persistent top-bar language switch: **English** ↔ **Filipino / Taglish**.
