@@ -21,6 +21,8 @@
   let runSequence = 0;
   let saveTimer = 0;
   let pendingRun = null;
+  let quizState = { lessonId: '', index: 0, selected: null, correct: 0, answered: false };
+  const progressKey = 'noelKnowledgeLab.progress.v1';
 
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"]/g, (char) => ({
@@ -32,7 +34,55 @@
   }
 
   function categoryLessons(id) {
-    return lessons.filter((lesson) => lesson.categoryId === id);
+    const category = byCategory.get(id);
+    const stageOrder = Array.isArray(category?.learningPath) ? category.learningPath : [];
+    return lessons
+      .filter((lesson) => lesson.categoryId === id)
+      .sort((a, b) => {
+        const aStage = Math.max(0, stageOrder.indexOf(a.stage));
+        const bStage = Math.max(0, stageOrder.indexOf(b.stage));
+        const aRank = stageOrder.includes(a.stage) ? aStage : 999;
+        const bRank = stageOrder.includes(b.stage) ? bStage : 999;
+        if (aRank !== bRank) return aRank - bRank;
+        return Number(a.order || 999) - Number(b.order || 999) || String(a.title).localeCompare(String(b.title));
+      });
+  }
+
+  function readProgress() {
+    try {
+      const value = JSON.parse(localStorage.getItem(progressKey) || '{}');
+      return value && typeof value === 'object' ? value : {};
+    } catch (_error) {
+      return {};
+    }
+  }
+
+  function writeProgress(progress) {
+    try {
+      localStorage.setItem(progressKey, JSON.stringify(progress || {}));
+    } catch (_error) {}
+  }
+
+  function saveQuizProgress(lesson, score, total) {
+    if (!lesson || !total) return;
+    const progress = readProgress();
+    const previous = progress[lesson.id] || {};
+    const percent = Math.round((score / total) * 100);
+    progress[lesson.id] = {
+      bestScore: Math.max(Number(previous.bestScore || 0), score),
+      total,
+      bestPercent: Math.max(Number(previous.bestPercent || 0), percent),
+      passed: Boolean(previous.passed) || percent >= 70,
+      updatedAt: new Date().toISOString()
+    };
+    writeProgress(progress);
+  }
+
+  function categoryProgress(id) {
+    const quizzable = categoryLessons(id).filter((lesson) => Array.isArray(lesson.quiz) && lesson.quiz.length);
+    const progress = readProgress();
+    const passed = quizzable.filter((lesson) => progress[lesson.id]?.passed).length;
+    return { passed, total: quizzable.length };
   }
 
   function storageKey(id) {
@@ -230,6 +280,193 @@
     return 'REFERENCE';
   }
 
+  function lessonProgressLabel(lesson) {
+    if (!Array.isArray(lesson.quiz) || !lesson.quiz.length) return '';
+    const item = readProgress()[lesson.id];
+    if (!item) return 'Quiz ready';
+    if (item.passed) return '✓ Quiz passed · ' + item.bestPercent + '%';
+    return 'Best quiz · ' + Number(item.bestPercent || 0) + '%';
+  }
+
+  function renderShortcut(lesson) {
+    const panel = $('[data-shortcut-lab]');
+    const shortcut = lesson.shortcut;
+    panel.hidden = !shortcut;
+    if (!shortcut) return;
+
+    $('[data-shortcut-label]').textContent = shortcut.label || 'Cleaner / shorter way';
+    $('[data-shortcut-long-label]').textContent = shortcut.longLabel || 'Long form';
+    $('[data-shortcut-short-label]').textContent = shortcut.shortLabel || 'Short form';
+    $('[data-shortcut-long]').textContent = shortcut.longCode || '';
+    $('[data-shortcut-short]').textContent = shortcut.shortCode || '';
+    $('[data-shortcut-note]').textContent = shortcut.note || '';
+    $('[data-shortcut-caution]').textContent = shortcut.caution || '';
+  }
+
+  function formatWork(value) {
+    if (!Number.isFinite(value)) return 'Very large';
+    return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value);
+  }
+
+  function updateBigOSimulator(n) {
+    $('[data-big-o-n]').textContent = formatWork(n);
+    const metrics = [
+      { label: 'O(1)', name: 'Constant', work: 1 },
+      { label: 'O(log n)', name: 'Logarithmic', work: Math.max(1, Math.ceil(Math.log2(n))) },
+      { label: 'O(n)', name: 'Linear', work: n },
+      { label: 'O(n log n)', name: 'Linearithmic', work: Math.ceil(n * Math.log2(n)) },
+      { label: 'O(n²)', name: 'Quadratic', work: n * n }
+    ];
+    const maxLog = Math.log10(metrics[metrics.length - 1].work + 1);
+
+    $('[data-big-o-grid]').innerHTML = metrics.map((item) => {
+      const width = Math.max(3, Math.min(100, (Math.log10(item.work + 1) / maxLog) * 100));
+      return '<article class="kl-big-o-row">' +
+        '<div><strong>' + escapeHtml(item.label) + '</strong><span>' + escapeHtml(item.name) + '</span></div>' +
+        '<div class="kl-big-o-bar"><i style="width:' + width.toFixed(2) + '%"></i></div>' +
+        '<b>~' + escapeHtml(formatWork(item.work)) + ' work units</b>' +
+      '</article>';
+    }).join('');
+
+    $('[data-big-o-preset]').forEach((button) => {
+      button.classList.toggle('is-active', Number(button.dataset.bigOPreset) === n);
+    });
+  }
+
+  function renderInteractive(lesson) {
+    const panel = $('[data-interactive-lab]');
+    const interactive = lesson.interactive;
+    panel.hidden = !interactive;
+    if (!interactive) return;
+
+    if (interactive.type === 'big-o-simulator') {
+      const presets = Array.isArray(interactive.presets) && interactive.presets.length
+        ? interactive.presets
+        : [10, 100, 1000, 1000000];
+      $('[data-big-o-presets]').innerHTML = presets
+        .map((n) => '<button type="button" data-big-o-preset="' + Number(n) + '">' + escapeHtml(formatWork(Number(n))) + '</button>')
+        .join('');
+      updateBigOSimulator(Number(presets[0]));
+    }
+  }
+
+  function renderQuizQuestion() {
+    const lesson = currentLesson;
+    const quiz = lesson?.quiz;
+    if (!Array.isArray(quiz) || !quiz.length) return;
+
+    const question = quiz[quizState.index];
+    const count = quiz.length;
+    $('[data-quiz-count]').textContent = 'Question ' + (quizState.index + 1) + ' of ' + count;
+    $('[data-quiz-question]').textContent = question.question;
+    $('[data-quiz-score]').textContent = quizState.correct + ' / ' + count;
+    $('[data-quiz-progress]').style.width = ((quizState.index / count) * 100) + '%';
+    $('[data-quiz-feedback]').hidden = true;
+    $('[data-quiz-feedback]').className = 'kl-quiz-feedback';
+    $('[data-quiz-feedback]').textContent = '';
+    $('[data-quiz-result]').hidden = true;
+    $('[data-quiz-next]').disabled = true;
+    $('[data-quiz-next]').textContent = 'Check answer';
+    $('[data-quiz-restart]').hidden = true;
+
+    $('[data-quiz-options]').innerHTML = question.options.map((option, index) =>
+      '<button type="button" data-quiz-option="' + index + '">' +
+        '<span>' + String.fromCharCode(65 + index) + '</span>' +
+        '<b>' + escapeHtml(option) + '</b>' +
+      '</button>'
+    ).join('');
+  }
+
+  function renderQuiz(lesson) {
+    const panel = $('[data-quiz-lab]');
+    const quiz = lesson.quiz;
+    panel.hidden = !Array.isArray(quiz) || !quiz.length;
+    if (panel.hidden) return;
+
+    quizState = { lessonId: lesson.id, index: 0, selected: null, correct: 0, answered: false };
+    renderQuizQuestion();
+  }
+
+  function chooseQuizOption(index) {
+    if (!currentLesson?.quiz || quizState.answered) return;
+    quizState.selected = Number(index);
+    $('[data-quiz-option]').forEach((button) => {
+      button.classList.toggle('is-selected', Number(button.dataset.quizOption) === quizState.selected);
+    });
+    $('[data-quiz-next]').disabled = false;
+  }
+
+  function checkOrAdvanceQuiz() {
+    const quiz = currentLesson?.quiz;
+    if (!Array.isArray(quiz) || !quiz.length) return;
+
+    if (!quizState.answered) {
+      if (quizState.selected === null) return;
+      const question = quiz[quizState.index];
+      const correct = quizState.selected === Number(question.correctIndex);
+      if (correct) quizState.correct += 1;
+      quizState.answered = true;
+
+      $('[data-quiz-option]').forEach((button) => {
+        const value = Number(button.dataset.quizOption);
+        button.disabled = true;
+        if (value === Number(question.correctIndex)) button.classList.add('is-correct');
+        if (value === quizState.selected && !correct) button.classList.add('is-wrong');
+      });
+
+      const feedback = $('[data-quiz-feedback]');
+      feedback.hidden = false;
+      feedback.classList.add(correct ? 'is-correct' : 'is-wrong');
+      feedback.textContent = (correct ? 'Correct. ' : 'Not quite. ') + question.explanation;
+      $('[data-quiz-score]').textContent = quizState.correct + ' / ' + quiz.length;
+      $('[data-quiz-next]').textContent = quizState.index === quiz.length - 1 ? 'Finish quiz' : 'Next question →';
+      return;
+    }
+
+    if (quizState.index < quiz.length - 1) {
+      quizState.index += 1;
+      quizState.selected = null;
+      quizState.answered = false;
+      renderQuizQuestion();
+      return;
+    }
+
+    finishQuiz();
+  }
+
+  function finishQuiz() {
+    const quiz = currentLesson?.quiz || [];
+    const total = quiz.length;
+    const percent = total ? Math.round((quizState.correct / total) * 100) : 0;
+    const passed = percent >= 70;
+    saveQuizProgress(currentLesson, quizState.correct, total);
+
+    $('[data-quiz-progress]').style.width = '100%';
+    $('[data-quiz-next]').disabled = true;
+    $('[data-quiz-next]').textContent = 'Completed';
+    $('[data-quiz-restart]').hidden = false;
+
+    const result = $('[data-quiz-result]');
+    result.hidden = false;
+    $('[data-quiz-result-title]').textContent = passed ? 'Passed ✓' : 'Review and try again';
+    $('[data-quiz-result-copy]').textContent =
+      'Score: ' + quizState.correct + ' / ' + total + ' (' + percent + '%). ' +
+      (passed ? 'Nice work. Your best result is saved on this device.' : '70% is the current pass mark. Review the explanations, then retake the quiz.');
+
+    if (currentCategory) renderCategoryProgress(currentCategory.id);
+  }
+
+  function renderCategoryProgress(id) {
+    const panel = $('[data-category-progress]');
+    const progress = categoryProgress(id);
+    panel.hidden = progress.total === 0;
+    if (panel.hidden) return;
+    const percent = Math.round((progress.passed / progress.total) * 100);
+    $('[data-category-progress-label]').textContent = percent + '% quiz progress';
+    $('[data-category-progress-text]').textContent = progress.passed + ' / ' + progress.total + ' lesson quizzes passed';
+    $('[data-category-progress-bar]').style.width = percent + '%';
+  }
+
   function renderSidebar(query = '') {
     const host = $('[data-topic-nav]');
     const normalized = String(query || '').trim().toLowerCase();
@@ -338,7 +575,10 @@
           '<span class="kl-category-card-icon">' + escapeHtml(category.icon) + '</span>' +
           '<span class="kl-category-card-copy"><strong>' + escapeHtml(category.label) + '</strong>' +
           '<small>' + escapeHtml(category.description) + '</small></span>' +
-          '<span class="kl-category-card-meta"><em>' + escapeHtml(category.status) + '</em><b>' + count + ' lesson' + (count === 1 ? '' : 's') + '</b></span>';
+          '<span class="kl-category-card-meta"><em>' + escapeHtml(category.status) + '</em><b>' +
+            count + ' lesson' + (count === 1 ? '' : 's') +
+            (categoryProgress(category.id).total ? ' · ' + categoryProgress(category.id).passed + '/' + categoryProgress(category.id).total + ' quizzes' : '') +
+          '</b></span>';
         grid.appendChild(card);
       });
 
@@ -366,16 +606,39 @@
 
     const items = categoryLessons(category.id);
     $('[data-category-count]').textContent = items.length + ' published lesson' + (items.length === 1 ? '' : 's');
+    renderCategoryProgress(category.id);
 
     const host = $('[data-category-lessons]');
-    host.innerHTML = items.map((lesson) =>
-      '<article class="kl-lesson-card">' +
-        '<div><span class="kl-lesson-mode">' + escapeHtml(lessonBadge(lesson)) + '</span><span class="kl-lesson-level">' + escapeHtml(lesson.level || '') + '</span></div>' +
-        '<h2>' + escapeHtml(lesson.title) + '</h2>' +
-        '<p>' + escapeHtml(lesson.summary) + '</p>' +
-        '<button type="button" data-lesson-id="' + escapeHtml(lesson.id) + '">Open lesson →</button>' +
-      '</article>'
-    ).join('');
+    if (Array.isArray(category.learningPath) && category.learningPath.length) {
+      host.innerHTML = category.learningPath.map((stage) => {
+        const stageItems = items.filter((lesson) => lesson.stage === stage);
+        if (!stageItems.length) return '';
+        return '<section class="kl-learning-stage">' +
+          '<div class="kl-learning-stage-head"><span>' + escapeHtml(stage) + '</span><b>' + stageItems.length + ' lesson' + (stageItems.length === 1 ? '' : 's') + '</b></div>' +
+          '<div class="kl-learning-stage-grid">' +
+            stageItems.map((lesson) =>
+              '<article class="kl-lesson-card">' +
+                '<div><span class="kl-lesson-mode">' + escapeHtml(lessonBadge(lesson)) + '</span><span class="kl-lesson-level">' + escapeHtml(lesson.level || '') + '</span></div>' +
+                '<h2>' + escapeHtml(lesson.title) + '</h2>' +
+                '<p>' + escapeHtml(lesson.summary) + '</p>' +
+                (lessonProgressLabel(lesson) ? '<small class="kl-lesson-progress">' + escapeHtml(lessonProgressLabel(lesson)) + '</small>' : '') +
+                '<button type="button" data-lesson-id="' + escapeHtml(lesson.id) + '">Open lesson →</button>' +
+              '</article>'
+            ).join('') +
+          '</div>' +
+        '</section>';
+      }).join('');
+    } else {
+      host.innerHTML = items.map((lesson) =>
+        '<article class="kl-lesson-card">' +
+          '<div><span class="kl-lesson-mode">' + escapeHtml(lessonBadge(lesson)) + '</span><span class="kl-lesson-level">' + escapeHtml(lesson.level || '') + '</span></div>' +
+          '<h2>' + escapeHtml(lesson.title) + '</h2>' +
+          '<p>' + escapeHtml(lesson.summary) + '</p>' +
+          (lessonProgressLabel(lesson) ? '<small class="kl-lesson-progress">' + escapeHtml(lessonProgressLabel(lesson)) + '</small>' : '') +
+          '<button type="button" data-lesson-id="' + escapeHtml(lesson.id) + '">Open lesson →</button>' +
+        '</article>'
+      ).join('');
+    }
 
     $('[data-category-empty]').hidden = items.length !== 0;
     document.title = category.label + ' — Knowledge Lab';
@@ -455,6 +718,9 @@
     codeLab.hidden = lesson.mode !== 'code';
     referenceLab.hidden = lesson.mode !== 'reference';
     proofLab.hidden = lesson.mode !== 'proof';
+    renderShortcut(lesson);
+    renderInteractive(lesson);
+    renderQuiz(lesson);
 
     if (lesson.mode === 'code') {
       const saved = readSavedEditors(lesson);
@@ -632,6 +898,22 @@
 
   $('[data-reference-copy]').addEventListener('click', () => {
     copyText(currentLesson?.code || '', $('[data-reference-copy]'));
+  });
+
+  $('[data-quiz-options]').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-quiz-option]');
+    if (button) chooseQuizOption(button.dataset.quizOption);
+  });
+
+  $('[data-quiz-next]').addEventListener('click', checkOrAdvanceQuiz);
+
+  $('[data-quiz-restart]').addEventListener('click', () => {
+    if (currentLesson) renderQuiz(currentLesson);
+  });
+
+  $('[data-big-o-presets]').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-big-o-preset]');
+    if (button) updateBigOSimulator(Number(button.dataset.bigOPreset));
   });
 
   $('[data-fullscreen]').addEventListener('click', async () => {
