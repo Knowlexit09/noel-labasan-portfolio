@@ -711,6 +711,16 @@
     $('[data-title]').textContent = lesson.title;
     $('[data-summary]').textContent = lesson.summary;
     $('[data-objective]').innerHTML = '<strong>Lesson goal</strong>' + escapeHtml(lesson.objective);
+
+    const definitionPanel = $('[data-definition-lab]');
+    const definitionText = String(lesson.definition || '').trim();
+    const learnItems = Array.isArray(lesson.learn) ? lesson.learn.filter(Boolean) : [];
+    definitionPanel.hidden = !definitionText && learnItems.length === 0;
+    $('[data-definition]').textContent = definitionText;
+    $('[data-definition]').closest('article').hidden = !definitionText;
+    $('[data-learn-block]').hidden = learnItems.length === 0;
+    $('[data-learn-list]').innerHTML = learnItems.map((item) => '<li>' + escapeHtml(item) + '</li>').join('');
+
     $('[data-explanation]').textContent = lesson.explanation;
     $('[data-tip]').textContent = lesson.tip;
     $('[data-hack]').textContent = lesson.hack;
