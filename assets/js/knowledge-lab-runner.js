@@ -376,7 +376,7 @@
       '</button>'
     ).join('');
 
-    $('[data-quiz-option]').forEach((button) => {
+    $$('[data-quiz-option]').forEach((button) => {
       button.addEventListener('click', () => {
         chooseQuizOption(button.dataset.quizOption);
       });
@@ -396,7 +396,7 @@
   function chooseQuizOption(index) {
     if (!currentLesson?.quiz || quizState.answered) return;
     quizState.selected = Number(index);
-    $('[data-quiz-option]').forEach((button) => {
+    $$('[data-quiz-option]').forEach((button) => {
       button.classList.toggle('is-selected', Number(button.dataset.quizOption) === quizState.selected);
     });
     $('[data-quiz-next]').disabled = false;
@@ -413,7 +413,7 @@
       if (correct) quizState.correct += 1;
       quizState.answered = true;
 
-      $('[data-quiz-option]').forEach((button) => {
+      $$('[data-quiz-option]').forEach((button) => {
         const value = Number(button.dataset.quizOption);
         button.disabled = true;
         if (value === Number(question.correctIndex)) button.classList.add('is-correct');
