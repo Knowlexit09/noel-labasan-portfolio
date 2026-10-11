@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v4",
+  "version": "2026-10-12-v5",
   "categories": [
     {
       "id": "html",
@@ -14,19 +14,21 @@
       "label": "CSS",
       "group": "Code & Development",
       "icon": "#",
-      "status": "Foundation → Expert practice",
-      "description": "A complete CSS path from “What is CSS?” to responsive systems, modern selectors, container queries, animation, architecture, debugging, and expert practice.",
+      "status": "Complete fundamentals → expert practice",
+      "description": "A structured CSS course that starts with the meaning of Cascading Style Sheets, then builds through styling, layout, responsive design, modern CSS, accessibility, architecture, and expert practice.",
       "learningPath": [
-        "Foundation",
-        "Core Styling",
-        "Box Model & Sizing",
+        "CSS Fundamentals",
+        "Visual Styling",
+        "Sizing & Box Model",
         "Selectors & Cascade",
-        "Layout",
+        "Layout Foundations",
+        "Flexbox",
+        "Grid",
         "Responsive Design",
         "Modern CSS",
-        "Animation & Interaction",
-        "Architecture & Debugging",
-        "Expert Practice"
+        "UI & Media",
+        "Animation & Accessibility",
+        "Architecture & Expert Practice"
       ]
     },
     {
@@ -226,13 +228,13 @@
       "id": "css-what-is-css",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Foundation",
+      "stage": "CSS Fundamentals",
       "order": 10,
       "level": "Beginner",
       "title": "What is CSS?",
       "summary": "Start with the simplest idea: HTML gives a page structure; CSS controls how that structure looks.",
       "objective": "Understand what CSS is, what it changes, and why websites normally separate structure from presentation.",
-      "explanation": "Think of HTML as the skeleton of a page and CSS as the clothes, spacing, colors, and visual rules placed on that skeleton.\n\nCSS stands for Cascading Style Sheets. A CSS rule selects an element and tells the browser how that element should look. CSS can control color, size, spacing, layout, animation, and much more.",
+      "explanation": "CSS stands for Cascading Style Sheets.\n\nThink of HTML as the structure of a house: rooms, doors, labels, and content. CSS is the visual system: paint, spacing, size, alignment, and how the house adapts to available space.\n\nA CSS rule normally selects HTML and applies one or more visual declarations. Example: `h1 { color: blue; }` means “select every h1 and make its text blue.”\n\nCSS is called “cascading” because more than one style rule can apply to the same element. The browser follows cascade rules to decide which declaration wins. You will learn that clearly in the next lesson.",
       "tip": "Before memorizing properties, keep one mental model: select something → change how it looks.",
       "hack": "Open DevTools and temporarily change a CSS property. It is one of the fastest ways to learn what a rule actually does.",
       "mistake": "Do not confuse HTML and CSS. HTML describes content and structure; CSS styles that structure.",
@@ -271,13 +273,20 @@
           "correctIndex": 0,
           "explanation": "CSS first selects the element or elements that a rule should affect."
         }
+      ],
+      "definition": "CSS means Cascading Style Sheets. It is the language browsers use to control the presentation of HTML: colors, fonts, spacing, sizes, layout, responsive behavior, and visual effects.",
+      "learn": [
+        "What CSS stands for and what problem it solves",
+        "How CSS works together with HTML",
+        "What a selector, property, and value do",
+        "Why the word “Cascading” matters later in the course"
       ]
     },
     {
       "id": "css-rule-syntax",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Foundation",
+      "stage": "CSS Fundamentals",
       "order": 20,
       "level": "Beginner",
       "title": "Understand a CSS rule: selector, property, value",
@@ -324,13 +333,79 @@
           "correctIndex": 2,
           "explanation": "`red` is the value assigned to the color property."
         }
+      ],
+      "definition": "A CSS rule combines a selector with a declaration block. Each declaration is a property/value pair such as `color: blue`.",
+      "learn": [
+        "Selector",
+        "Declaration block",
+        "Property",
+        "Value"
+      ]
+    },
+    {
+      "id": "css-why-cascading",
+      "stage": "CSS Fundamentals",
+      "order": 20,
+      "level": "Beginner",
+      "title": "Why is it called Cascading Style Sheets?",
+      "summary": "See what “cascading” actually means instead of memorizing the name CSS.",
+      "definition": "The CSS cascade is the browser's decision system for choosing which style declaration wins when multiple declarations affect the same element.",
+      "learn": [
+        "Why multiple rules can target one element",
+        "Why a later rule can sometimes win",
+        "Where specificity and inheritance fit into the bigger picture"
+      ],
+      "objective": "Build the right mental model for the C in CSS before learning specificity in detail.",
+      "explanation": "Imagine two people giving instructions for the same heading. One rule says the heading is blue. Another rule says it is red. The browser needs a consistent way to decide what to use.\n\nThat decision process is the cascade. It considers things such as importance/origin, cascade layers, selector specificity, scope/proximity in relevant cases, and source order. As a beginner, start with the simplest idea: multiple rules can apply, and CSS has rules for deciding the winner.",
+      "tip": "When a style seems ignored, do not immediately add `!important`. Inspect which declaration won and why.",
+      "hack": "In DevTools, crossed-out CSS declarations are a fast visual clue that another declaration won the cascade.",
+      "mistake": "Do not define the cascade as “the last rule always wins.” Source order only decides some ties; specificity and other cascade factors matter too.",
+      "expected": "The paragraph is red because the later rule has the same selector strength and appears later.",
+      "realUse": "Understanding the cascade prevents endless specificity fights in real projects.",
+      "html": "<p class=\"message\">Which color wins?</p>",
+      "css": ".message { color: blue; font: 700 28px system-ui, sans-serif; }\n.message { color: red; }",
+      "quiz": [
+        {
+          "question": "What is the cascade mainly for?",
+          "options": [
+            "Choosing which CSS declaration wins",
+            "Creating HTML tags",
+            "Running Java",
+            "Compressing images"
+          ],
+          "correctIndex": 0,
+          "explanation": "The cascade resolves competing declarations that apply to the same element."
+        },
+        {
+          "question": "If two rules have equal cascade weight and specificity, what can decide the winner?",
+          "options": [
+            "Source order",
+            "Random choice",
+            "Screen brightness",
+            "File name length"
+          ],
+          "correctIndex": 0,
+          "explanation": "When other factors tie, later source order can win."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "css fundamentals",
+        "why",
+        "is",
+        "it",
+        "called",
+        "cascading"
       ]
     },
     {
       "id": "css-ways-to-add-css",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Foundation",
+      "stage": "CSS Fundamentals",
       "order": 30,
       "level": "Beginner",
       "title": "Inline, internal, and external CSS",
@@ -377,13 +452,139 @@
           "correctIndex": 1,
           "explanation": "Inline CSS is written directly on an HTML element through its style attribute."
         }
+      ],
+      "definition": "CSS can be applied inline, inside a page with `<style>`, or from an external stylesheet linked with `<link>`.",
+      "learn": [
+        "Inline CSS",
+        "Internal CSS",
+        "External CSS",
+        "Why external CSS is usually best for reusable projects"
+      ]
+    },
+    {
+      "id": "css-comments-whitespace",
+      "stage": "CSS Fundamentals",
+      "order": 35,
+      "level": "Beginner",
+      "title": "CSS comments and readable formatting",
+      "summary": "Write CSS that humans can maintain, not just CSS the browser can parse.",
+      "definition": "A CSS comment starts with `/*` and ends with `*/`. The browser ignores the commented text.",
+      "learn": [
+        "How to write CSS comments",
+        "Why indentation and spacing matter to humans",
+        "What whitespace CSS usually ignores"
+      ],
+      "objective": "Use comments and formatting to make stylesheets easier to understand.",
+      "explanation": "Browsers ignore most extra whitespace in CSS, so you can format rules for readability. Comments are useful for explaining intent, grouping sections, or leaving maintenance notes.\n\nGood comments explain why a rule exists. Avoid comments that only repeat what the code already says.",
+      "tip": "Comment the reason behind a workaround, browser constraint, or unusual value.",
+      "hack": "Organize large stylesheets into predictable sections such as tokens, base, layout, components, utilities, and responsive overrides.",
+      "mistake": "Do not leave large blocks of dead CSS commented forever. Version control is a better place to recover old code.",
+      "expected": "The card is styled normally; comments do not appear in the page.",
+      "realUse": "Readable formatting makes team reviews, debugging, and future edits much faster.",
+      "html": "<article class=\"note\"><h2>Readable CSS</h2><p>Comments help maintainers understand intent.</p></article>",
+      "css": "/* Component: learning note */\n.note {\n  max-width: 520px;\n  margin: 32px auto;\n  padding: 24px;\n  border-radius: 14px;\n  background: #eef8fd;\n  font-family: system-ui, sans-serif;\n}\n\n/* Keep the heading visually connected to the body copy. */\n.note h2 { margin-top: 0; }",
+      "quiz": [
+        {
+          "question": "How do CSS comments start and end?",
+          "options": [
+            "// and //",
+            "/* and */",
+            "<!-- and -->",
+            "# and #"
+          ],
+          "correctIndex": 1,
+          "explanation": "CSS uses `/* ... */` comments."
+        },
+        {
+          "question": "What makes a useful maintenance comment?",
+          "options": [
+            "Explaining why a non-obvious rule exists",
+            "Repeating `color: red` as “make red”",
+            "Hiding all old code",
+            "Replacing class names"
+          ],
+          "correctIndex": 0,
+          "explanation": "Comments are most valuable when they explain intent or constraints."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "css fundamentals",
+        "css",
+        "comments",
+        "and",
+        "readable",
+        "formatting"
+      ]
+    },
+    {
+      "id": "css-basic-selectors",
+      "stage": "CSS Fundamentals",
+      "order": 40,
+      "level": "Beginner",
+      "title": "Basic selectors: element, class, ID, and universal",
+      "summary": "Learn how CSS finds the HTML you want to style.",
+      "definition": "A CSS selector is the pattern used to choose which HTML elements a CSS rule should affect.",
+      "learn": [
+        "Element selectors such as `p`",
+        "Class selectors such as `.card`",
+        "ID selectors such as `#hero`",
+        "The universal selector `*`"
+      ],
+      "objective": "Choose a simple selector without making it more specific than necessary.",
+      "explanation": "An element selector targets tags such as `p` or `button`. A class selector starts with a dot and is the normal reusable choice for components. An ID selector starts with `#` and targets an element with that ID. `*` is the universal selector.\n\nFor reusable styling, classes are usually the best starting point.",
+      "tip": "Use classes for reusable visual components. Keep IDs mainly for unique document targets, labels, anchors, and JavaScript hooks when appropriate.",
+      "hack": "A simple class like `.product-card` is often easier to maintain than a long selector describing the entire page structure.",
+      "mistake": "Do not use IDs everywhere just because they are powerful. High specificity makes later overrides harder.",
+      "expected": "Only the paragraph with class `important` receives the accent style.",
+      "realUse": "Selectors are the entry point for every CSS component and state.",
+      "html": "<main><h1 id=\"page-title\">Selectors</h1><p>Normal paragraph</p><p class=\"important\">Important paragraph</p></main>",
+      "css": "body { font-family: system-ui, sans-serif; padding: 32px; }\np { color: #607086; }\n.important { color: #c43f62; font-weight: 800; }\n#page-title { color: #0879b7; }\n* { box-sizing: border-box; }",
+      "quiz": [
+        {
+          "question": "Which selector targets a class named card?",
+          "options": [
+            "#card",
+            ".card",
+            "card()",
+            "@card"
+          ],
+          "correctIndex": 1,
+          "explanation": "Class selectors begin with a dot."
+        },
+        {
+          "question": "Which selector targets an element with id=\"hero\"?",
+          "options": [
+            ".hero",
+            "#hero",
+            "hero#",
+            "*hero"
+          ],
+          "correctIndex": 1,
+          "explanation": "ID selectors begin with `#`."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "css fundamentals",
+        "basic",
+        "selectors",
+        "element",
+        "class",
+        "id"
       ]
     },
     {
       "id": "css-colors-backgrounds",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Foundation",
+      "stage": "CSS Fundamentals",
       "order": 40,
       "level": "Beginner",
       "title": "Colors, backgrounds, and contrast",
@@ -444,7 +645,7 @@
       "id": "css-units-sizing",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Foundation",
+      "stage": "CSS Fundamentals",
       "order": 50,
       "level": "Beginner",
       "title": "px, %, em, rem, vw, vh, and modern sizing",
@@ -497,7 +698,7 @@
       "id": "css-typography",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Core Styling",
+      "stage": "Visual Styling",
       "order": 10,
       "level": "Beginner",
       "title": "Typography: font, size, line-height, and readable text",
@@ -547,10 +748,69 @@
       ]
     },
     {
+      "id": "css-backgrounds-gradients",
+      "stage": "Visual Styling",
+      "order": 15,
+      "level": "Beginner",
+      "title": "Backgrounds, images, and gradients",
+      "summary": "Go beyond a flat color without losing readability.",
+      "definition": "CSS background properties control the paint layer behind an element, including colors, images, gradients, repeat behavior, position, and size.",
+      "learn": [
+        "Background color and image",
+        "Linear gradients",
+        "background-size and background-position",
+        "Why backgrounds should not carry essential text"
+      ],
+      "objective": "Create a readable visual surface using layered backgrounds.",
+      "explanation": "A background can be a solid color, image, gradient, or several layered backgrounds. Gradients are generated by CSS and do not require an image file.\n\nFor photographic backgrounds, `background-size: cover` is common, but parts of the image may be cropped. Keep essential information in real HTML, not inside a decorative background.",
+      "tip": "Add a dark/light overlay gradient when text sits on an image and needs consistent contrast.",
+      "hack": "You can layer multiple backgrounds by separating them with commas.",
+      "mistake": "Do not use a background image as the only place where important text exists. That harms accessibility and adaptability.",
+      "expected": "The panel shows a blue gradient background with readable white text.",
+      "realUse": "Hero sections, campaign covers, cards, banners, and decorative surfaces use these techniques.",
+      "html": "<section class=\"hero\"><span>CSS</span><h1>Layered background</h1><p>Readable text stays in HTML.</p></section>",
+      "css": ".hero { max-width: 680px; margin: 30px auto; padding: 48px 30px; border-radius: 20px; background: linear-gradient(135deg, #08243a, #0b8cc7); color: white; font-family: system-ui, sans-serif; }\n.hero span { color: #8be4ff; font-weight: 900; letter-spacing: .12em; }\n.hero h1 { margin: 8px 0; }",
+      "quiz": [
+        {
+          "question": "What does `background-size: cover` generally do?",
+          "options": [
+            "Scales a background image to cover the box, possibly cropping it",
+            "Repeats the image forever",
+            "Turns it into text",
+            "Disables responsiveness"
+          ],
+          "correctIndex": 0,
+          "explanation": "`cover` fills the box while preserving aspect ratio, which can crop edges."
+        },
+        {
+          "question": "Are CSS gradients image files?",
+          "options": [
+            "No, the browser generates them",
+            "Yes, always PNG",
+            "Only in Safari",
+            "Only when using JavaScript"
+          ],
+          "correctIndex": 0,
+          "explanation": "CSS gradients are generated visual values."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "visual styling",
+        "backgrounds",
+        "images",
+        "and",
+        "gradients"
+      ]
+    },
+    {
       "id": "css-borders-radius-shadows",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Core Styling",
+      "stage": "Visual Styling",
       "order": 20,
       "level": "Beginner",
       "title": "Borders, radius, and shadows",
@@ -599,10 +859,68 @@
       ]
     },
     {
+      "id": "css-text-formatting",
+      "stage": "Visual Styling",
+      "order": 25,
+      "level": "Beginner",
+      "title": "Text alignment, decoration, spacing, and wrapping",
+      "summary": "Control how text behaves beyond font family and size.",
+      "definition": "Text-formatting properties control alignment, decoration, casing, spacing, wrapping, and overflow behavior of text.",
+      "learn": [
+        "text-align and text-decoration",
+        "letter-spacing and word spacing",
+        "white-space and overflow-wrap",
+        "Safe use of text-transform"
+      ],
+      "objective": "Make labels, links, headings, and body text readable across different widths.",
+      "explanation": "CSS can align text, underline or remove decoration, transform casing, adjust spacing, and decide how long words wrap.\n\nThese are powerful details, but readability comes first. Large letter spacing on body paragraphs or forced uppercase everywhere can make content harder to read.",
+      "tip": "Use `overflow-wrap: anywhere` for user-generated strings that may otherwise overflow narrow cards.",
+      "hack": "Use `text-decoration-thickness` and `text-underline-offset` to improve custom link underlines without removing the underline completely.",
+      "mistake": "Do not remove link underlines unless another clear visual cue still communicates that the text is interactive.",
+      "expected": "The link has a cleaner underline and the long text can wrap safely.",
+      "realUse": "Navigation, buttons, labels, tables, documentation, and content-heavy pages depend on text formatting.",
+      "html": "<article class=\"text-demo\"><h2>Text formatting</h2><p>SupercalifragilisticexpialidociousCanStillWrapInANarrowCard</p><a href=\"#\">Accessible-looking link</a></article>",
+      "css": ".text-demo { max-width: 340px; margin: 30px auto; padding: 20px; font-family: system-ui, sans-serif; }\n.text-demo p { overflow-wrap: anywhere; color: #52697b; line-height: 1.6; }\n.text-demo a { color: #0879b7; text-decoration-thickness: 2px; text-underline-offset: 3px; }",
+      "quiz": [
+        {
+          "question": "Which property helps a very long unbroken string wrap?",
+          "options": [
+            "overflow-wrap",
+            "z-index",
+            "grid-area",
+            "opacity only"
+          ],
+          "correctIndex": 0,
+          "explanation": "`overflow-wrap` can prevent long strings from overflowing."
+        },
+        {
+          "question": "Is removing every link underline automatically good design?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Links still need a clear visual affordance."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "visual styling",
+        "text",
+        "alignment",
+        "decoration",
+        "spacing",
+        "and"
+      ]
+    },
+    {
       "id": "css-display-visibility",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Core Styling",
+      "stage": "Visual Styling",
       "order": 30,
       "level": "Beginner",
       "title": "Display, visibility, and normal document flow",
@@ -652,10 +970,128 @@
       ]
     },
     {
+      "id": "css-links-lists",
+      "stage": "Visual Styling",
+      "order": 35,
+      "level": "Beginner",
+      "title": "Style links and lists without breaking meaning",
+      "summary": "Make navigation and lists attractive while keeping their semantics.",
+      "definition": "CSS can change how links and list markers look without changing their underlying HTML meaning.",
+      "learn": [
+        "Link states",
+        "list-style basics",
+        "Custom markers",
+        "Why semantic lists still matter"
+      ],
+      "objective": "Style navigation/list content while preserving usable HTML.",
+      "explanation": "Links have interactive states such as `:hover`, `:focus-visible`, and `:visited`. Lists can use default markers, custom marker styles, or remove markers when the visual pattern no longer needs bullets.\n\nKeep `<ul>` or `<ol>` when the content is actually a list, even if you redesign the markers.",
+      "tip": "Style `:focus-visible`, not just `:hover`, so keyboard users get equivalent feedback.",
+      "hack": "Use `::marker` to style list bullets or numbers without replacing them with extra markup.",
+      "mistake": "Do not turn plain text into something that looks clickable without using a real link or button.",
+      "expected": "The list has colored markers and the link has clear hover/focus behavior.",
+      "realUse": "Menus, feature lists, instructions, sidebars, and documentation use these patterns.",
+      "html": "<nav><a href=\"#\">Knowledge Lab</a></nav><ul class=\"topics\"><li>Selectors</li><li>Layout</li><li>Responsive CSS</li></ul>",
+      "css": "body { font-family: system-ui, sans-serif; padding: 32px; }\na { color: #0879b7; text-underline-offset: 3px; }\na:hover, a:focus-visible { color: #c53e65; }\n.topics li { margin: 8px 0; }\n.topics li::marker { color: #0c8bc7; }",
+      "quiz": [
+        {
+          "question": "Which pseudo-class is useful for visible keyboard focus?",
+          "options": [
+            ":focus-visible",
+            ":empty",
+            ":last-child",
+            ":visited only"
+          ],
+          "correctIndex": 0,
+          "explanation": "`:focus-visible` is designed for focus indication when appropriate."
+        },
+        {
+          "question": "Can you restyle list markers without removing semantic list HTML?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "correctIndex": 0,
+          "explanation": "CSS can style markers while the list remains semantic."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "visual styling",
+        "style",
+        "links",
+        "and",
+        "lists",
+        "without"
+      ]
+    },
+    {
+      "id": "css-width-height-min-max",
+      "stage": "Sizing & Box Model",
+      "order": 5,
+      "level": "Beginner",
+      "title": "width, height, min/max, and intrinsic sizing",
+      "summary": "Control size without forcing components to break when content changes.",
+      "definition": "Sizing properties define preferred, minimum, and maximum dimensions of an element.",
+      "learn": [
+        "width and height",
+        "min-width / max-width",
+        "min-height / max-height",
+        "Why fixed heights often break content"
+      ],
+      "objective": "Choose constraints that let components adapt to real content.",
+      "explanation": "A fixed `width` or `height` can be useful, but content and screens vary. `min-*` and `max-*` let you define safe boundaries.\n\nA very common pattern is `width: min(100%, 700px)` or `max-width: 700px` so content can shrink on small screens but not become uncomfortably wide.",
+      "tip": "Avoid fixed heights for text-heavy cards unless overflow behavior is intentional.",
+      "hack": "Use `min-height` when you need a minimum visual size but still want the component to grow for extra content.",
+      "mistake": "Do not solve mobile overflow by shrinking text until it fits a fixed-width component.",
+      "expected": "The card fills available width up to a readable maximum.",
+      "realUse": "Forms, dialogs, article columns, cards, images, and page shells all need size constraints.",
+      "html": "<article class=\"sized\"><h2>Controlled width</h2><p>This can shrink, but it will not grow forever.</p></article>",
+      "css": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.sized { width: min(100%, 650px); min-height: 140px; margin: auto; padding: 24px; background: #eef8fd; border-radius: 14px; }",
+      "quiz": [
+        {
+          "question": "Why use max-width on long reading content?",
+          "options": [
+            "To keep lines from becoming excessively wide",
+            "To make it invisible",
+            "To force horizontal scroll",
+            "To change specificity"
+          ],
+          "correctIndex": 0,
+          "explanation": "A maximum width can preserve readable line lengths."
+        },
+        {
+          "question": "Why can fixed height be risky for text content?",
+          "options": [
+            "Content can grow or wrap differently",
+            "CSS does not support height",
+            "It changes HTML semantics",
+            "It always creates Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "Text length and wrapping vary, so fixed heights can clip or overflow content."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "sizing & box model",
+        "width",
+        "height",
+        "min",
+        "max",
+        "and"
+      ]
+    },
+    {
       "id": "css-box-model",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Box Model & Sizing",
+      "stage": "Sizing & Box Model",
       "order": 10,
       "level": "Beginner",
       "title": "The box model: content, padding, border, margin",
@@ -711,13 +1147,20 @@
         "shortCode": "margin: 12px 20px;",
         "note": "Two values mean vertical first, horizontal second.",
         "caution": "Shorthand is great when the pattern is obvious. Use individual sides when only one side should change."
-      }
+      },
+      "definition": "The CSS box model describes an element as content surrounded by padding, border, and margin.",
+      "learn": [
+        "Content box",
+        "Padding",
+        "Border",
+        "Margin"
+      ]
     },
     {
       "id": "css-box-sizing-overflow",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Box Model & Sizing",
+      "stage": "Sizing & Box Model",
       "order": 20,
       "level": "Beginner",
       "title": "box-sizing and overflow",
@@ -920,13 +1363,73 @@
           "correctIndex": 0,
           "explanation": "Text color commonly inherits from a parent."
         }
+      ],
+      "definition": "Specificity ranks selectors within the cascade, while inheritance passes certain computed values from ancestors to descendants.",
+      "learn": [
+        "Specificity",
+        "Source order",
+        "Inheritance",
+        "Why `!important` is not a normal debugging strategy"
+      ]
+    },
+    {
+      "id": "css-position-zindex",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Layout Foundations",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "Positioning, sticky UI, and z-index",
+      "summary": "Learn when elements should stay in flow and when they need special positioning.",
+      "objective": "Use relative, absolute, fixed, sticky, inset properties, and stacking order responsibly.",
+      "explanation": "`position: relative` keeps an element in normal flow while creating a positioning context. `absolute` removes an element from normal flow and positions it against a containing block. `fixed` anchors to the viewport. `sticky` behaves normally until a scroll threshold is reached.\n\n`z-index` only helps inside stacking rules; a huge number does not magically escape every stacking context.",
+      "tip": "Use absolute positioning for overlays/badges, not for basic page layout.",
+      "hack": "`inset` can replace top/right/bottom/left when you want to set multiple offsets together.",
+      "mistake": "Do not build a whole responsive page with absolute coordinates. It will usually break when content changes.",
+      "expected": "The badge is absolutely positioned inside a relatively positioned card.",
+      "realUse": "Useful for badges, sticky headers, menus, overlays, modals, floating controls, and layered UI.",
+      "tags": [
+        "css",
+        "layout",
+        "positioning",
+        "sticky",
+        "ui",
+        "and",
+        "z"
+      ],
+      "html": "<article class=\"position-card\"><span class=\"badge\">NEW</span><h2>Positioning context</h2><p>The badge is anchored to this card.</p></article>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.position-card { position: relative; max-width: 500px; margin: auto; padding: 28px; border: 1px solid #d8e2ea; border-radius: 16px; }\n.badge { position: absolute; top: 12px; right: 12px; padding: 5px 8px; border-radius: 999px; background: #d93e68; color: white; font-size: 11px; font-weight: 900; }",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Why give the card `position: relative` here?",
+          "options": [
+            "To create the containing context for its absolute badge",
+            "To hide it",
+            "To turn it into Grid",
+            "To load Java"
+          ],
+          "correctIndex": 0,
+          "explanation": "The absolute child can use the card as its positioning reference."
+        },
+        {
+          "question": "Which positioning mode can stick after crossing a scroll threshold?",
+          "options": [
+            "sticky",
+            "static only",
+            "inline",
+            "grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "`position: sticky` participates in flow until its sticky threshold takes effect."
+        }
       ]
     },
     {
       "id": "css-flexbox-basics",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Layout",
+      "stage": "Flexbox",
       "order": 10,
       "level": "Intermediate",
       "title": "Flexbox: one-dimensional layout made simple",
@@ -982,13 +1485,149 @@
         "shortCode": "flex: 1 1 220px;",
         "note": "`flex` combines grow, shrink, and basis.",
         "caution": "Use explicit long form when teammates need to understand one behavior independently."
-      }
+      },
+      "definition": "Flexbox is a one-dimensional layout system organized around a main axis and cross axis.",
+      "learn": [
+        "Flex container",
+        "Flex items",
+        "Main/cross axis",
+        "gap and flexible sizing"
+      ]
+    },
+    {
+      "id": "css-flex-alignment",
+      "stage": "Flexbox",
+      "order": 20,
+      "level": "Intermediate",
+      "title": "Flexbox alignment: main axis vs cross axis",
+      "summary": "Stop memorizing “horizontal vs vertical” and understand the two flex axes.",
+      "definition": "Flexbox alignment is based on a main axis and a cross axis. `justify-content` works along the main axis; `align-items` works across it.",
+      "learn": [
+        "Main and cross axes",
+        "justify-content",
+        "align-items",
+        "How flex-direction changes the axes"
+      ],
+      "objective": "Predict flex alignment even when the direction changes.",
+      "explanation": "With `flex-direction: row`, the main axis is horizontal in a normal left-to-right writing mode. With `column`, the main axis becomes vertical. That is why `justify-content` is not simply “horizontal alignment.”\n\nUnderstand the axes and the properties become much easier.",
+      "tip": "When alignment feels confusing, check `flex-direction` first.",
+      "hack": "`margin-inline-start: auto` on one flex item can push it away from earlier siblings, useful in nav bars.",
+      "mistake": "Do not memorize justify-content = horizontal and align-items = vertical. That breaks as soon as the flex direction changes.",
+      "expected": "The toolbar aligns items vertically and pushes the account button to the far edge.",
+      "realUse": "Navigation bars, headers, toolbars, forms, and button rows constantly use flex alignment.",
+      "html": "<nav class=\"toolbar\"><strong>Logo</strong><a href=\"#\">Learn</a><button>Account</button></nav>",
+      "css": ".toolbar { display: flex; align-items: center; gap: 14px; padding: 16px; font-family: system-ui, sans-serif; background: #0d2235; color: white; }\n.toolbar a { color: #9bdfff; }\n.toolbar button { margin-inline-start: auto; padding: 8px 11px; }",
+      "quiz": [
+        {
+          "question": "Which property aligns flex items along the main axis?",
+          "options": [
+            "justify-content",
+            "align-items",
+            "z-index",
+            "overflow"
+          ],
+          "correctIndex": 0,
+          "explanation": "`justify-content` distributes items along the main axis."
+        },
+        {
+          "question": "What changes the main-axis direction?",
+          "options": [
+            "flex-direction",
+            "border-radius",
+            "font-size",
+            "opacity"
+          ],
+          "correctIndex": 0,
+          "explanation": "`flex-direction` controls the direction of the flex main axis."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "flexbox",
+        "flexbox",
+        "alignment",
+        "main",
+        "axis",
+        "vs"
+      ]
+    },
+    {
+      "id": "css-flex-sizing-wrapping",
+      "stage": "Flexbox",
+      "order": 30,
+      "level": "Intermediate",
+      "title": "Flex grow, shrink, basis, and wrapping",
+      "summary": "Understand why flex items stretch, shrink, or move onto another line.",
+      "definition": "`flex-grow`, `flex-shrink`, and `flex-basis` control how flex items share available space; `flex-wrap` allows additional flex lines.",
+      "learn": [
+        "flex-basis as the starting size",
+        "grow and shrink behavior",
+        "flex-wrap",
+        "The `flex` shorthand"
+      ],
+      "objective": "Build flexible rows that respond well to changing width.",
+      "explanation": "`flex-basis` is the item's starting main-size for flex calculations. `flex-grow` says how it may take extra space. `flex-shrink` says how it may reduce when space is tight.\n\nWith `flex-wrap: wrap`, items can move to a new line instead of shrinking forever.",
+      "tip": "A pattern like `flex: 1 1 220px` is useful for flexible card rows.",
+      "hack": "If one item should stay fixed while another grows, give the growing item `flex: 1` and the fixed item an appropriate basis/size.",
+      "mistake": "Do not use `flex: 1` blindly when every item has different content needs.",
+      "expected": "Cards wrap to new lines and share extra space.",
+      "realUse": "Tag groups, responsive cards, toolbars, and form controls use these flex sizing rules.",
+      "html": "<section class=\"flex-cards\"><article>Short</article><article>Medium content</article><article>Another card</article></section>",
+      "css": ".flex-cards { display: flex; flex-wrap: wrap; gap: 12px; font-family: system-ui, sans-serif; }\n.flex-cards article { flex: 1 1 200px; padding: 20px; background: #f0f7fb; border-radius: 12px; }",
+      "quiz": [
+        {
+          "question": "What does flex-basis represent?",
+          "options": [
+            "The starting main-size for flex calculations",
+            "Only the font size",
+            "The z-index",
+            "The number of rows"
+          ],
+          "correctIndex": 0,
+          "explanation": "`flex-basis` is the starting size used by Flexbox before grow/shrink adjustments."
+        },
+        {
+          "question": "What allows flex items to move onto additional lines?",
+          "options": [
+            "flex-wrap: wrap",
+            "display: block",
+            "position: fixed",
+            "opacity: 0"
+          ],
+          "correctIndex": 0,
+          "explanation": "Wrapping creates multiple flex lines when needed."
+        }
+      ],
+      "shortcut": {
+        "label": "⚡ SHORTHAND — flex",
+        "longLabel": "Long form",
+        "longCode": "flex-grow: 1;\nflex-shrink: 1;\nflex-basis: 220px;",
+        "shortLabel": "Short form",
+        "shortCode": "flex: 1 1 220px;",
+        "note": "The shorthand combines grow, shrink, and basis.",
+        "caution": "Use explicit properties when you are debugging one flex behavior at a time."
+      },
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "flexbox",
+        "flex",
+        "grow",
+        "shrink",
+        "basis",
+        "and"
+      ]
     },
     {
       "id": "css-grid-basics",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Layout",
+      "stage": "Grid",
       "order": 20,
       "level": "Intermediate",
       "title": "CSS Grid: two-dimensional layout",
@@ -1035,59 +1674,185 @@
           "correctIndex": 0,
           "explanation": "Grid is designed for two-dimensional track layouts."
         }
+      ],
+      "definition": "CSS Grid is a two-dimensional layout system for arranging content in rows and columns.",
+      "learn": [
+        "Grid container",
+        "Tracks",
+        "fr units",
+        "gap"
       ]
     },
     {
-      "id": "css-position-zindex",
-      "categoryId": "css",
-      "mode": "code",
-      "stage": "Layout",
-      "order": 30,
+      "id": "css-grid-placement-areas",
+      "stage": "Grid",
+      "order": 20,
       "level": "Intermediate",
-      "title": "Positioning, sticky UI, and z-index",
-      "summary": "Learn when elements should stay in flow and when they need special positioning.",
-      "objective": "Use relative, absolute, fixed, sticky, inset properties, and stacking order responsibly.",
-      "explanation": "`position: relative` keeps an element in normal flow while creating a positioning context. `absolute` removes an element from normal flow and positions it against a containing block. `fixed` anchors to the viewport. `sticky` behaves normally until a scroll threshold is reached.\n\n`z-index` only helps inside stacking rules; a huge number does not magically escape every stacking context.",
-      "tip": "Use absolute positioning for overlays/badges, not for basic page layout.",
-      "hack": "`inset` can replace top/right/bottom/left when you want to set multiple offsets together.",
-      "mistake": "Do not build a whole responsive page with absolute coordinates. It will usually break when content changes.",
-      "expected": "The badge is absolutely positioned inside a relatively positioned card.",
-      "realUse": "Useful for badges, sticky headers, menus, overlays, modals, floating controls, and layered UI.",
-      "tags": [
-        "css",
-        "layout",
-        "positioning",
-        "sticky",
-        "ui",
-        "and",
-        "z"
+      "title": "Grid placement and named areas",
+      "summary": "Place content intentionally without depending on source-order hacks.",
+      "definition": "Grid placement assigns items to grid lines, tracks, or named template areas.",
+      "learn": [
+        "grid-column and grid-row",
+        "Named grid areas",
+        "Why source order still matters for accessibility"
       ],
-      "html": "<article class=\"position-card\"><span class=\"badge\">NEW</span><h2>Positioning context</h2><p>The badge is anchored to this card.</p></article>",
-      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.position-card { position: relative; max-width: 500px; margin: auto; padding: 28px; border: 1px solid #d8e2ea; border-radius: 16px; }\n.badge { position: absolute; top: 12px; right: 12px; padding: 5px 8px; border-radius: 999px; background: #d93e68; color: white; font-size: 11px; font-weight: 900; }",
-      "js": "",
+      "objective": "Build a readable page shell with explicit grid areas.",
+      "explanation": "Grid items can span lines using `grid-column`/`grid-row`, or you can name areas with `grid-template-areas`.\n\nNamed areas make some page layouts easier to visualize. But keep HTML source order logical because CSS placement changes visuals, not reading order.",
+      "tip": "Name grid areas by role: header, sidebar, main, footer—not by color or position.",
+      "hack": "Use DevTools Grid overlays to see line numbers and named areas while debugging.",
+      "mistake": "Do not visually rearrange content into an order that conflicts with keyboard/screen-reader reading order.",
+      "expected": "Header spans both columns, with sidebar and main below.",
+      "realUse": "Dashboards, admin shells, documentation layouts, and complex page structures use Grid placement.",
+      "html": "<div class=\"shell\"><header>Header</header><aside>Sidebar</aside><main>Main content</main></div>",
+      "css": ".shell { display: grid; grid-template-columns: 180px 1fr; grid-template-areas: \"header header\" \"sidebar main\"; gap: 10px; font-family: system-ui, sans-serif; }\n.shell > * { padding: 18px; border-radius: 10px; background: #eef5f9; }\nheader { grid-area: header; }\naside { grid-area: sidebar; }\nmain { grid-area: main; }",
       "quiz": [
         {
-          "question": "Why give the card `position: relative` here?",
+          "question": "What does `grid-area` do when used with named template areas?",
           "options": [
-            "To create the containing context for its absolute badge",
-            "To hide it",
-            "To turn it into Grid",
-            "To load Java"
+            "Assigns an item to a named area",
+            "Changes font color",
+            "Creates JavaScript",
+            "Sets opacity"
           ],
           "correctIndex": 0,
-          "explanation": "The absolute child can use the card as its positioning reference."
+          "explanation": "`grid-area` can connect an item to a named area."
         },
         {
-          "question": "Which positioning mode can stick after crossing a scroll threshold?",
+          "question": "Should CSS visual placement replace logical HTML source order?",
           "options": [
-            "sticky",
-            "static only",
-            "inline",
-            "grid"
+            "No",
+            "Yes, always"
           ],
           "correctIndex": 0,
-          "explanation": "`position: sticky` participates in flow until its sticky threshold takes effect."
+          "explanation": "Visual rearrangement should not create a confusing reading/tab order."
         }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "grid",
+        "grid",
+        "placement",
+        "and",
+        "named",
+        "areas"
+      ]
+    },
+    {
+      "id": "css-subgrid",
+      "stage": "Grid",
+      "order": 30,
+      "level": "Advanced",
+      "title": "Subgrid: align nested content to a parent grid",
+      "summary": "Let a nested grid reuse track sizing from its parent.",
+      "definition": "`subgrid` lets a nested grid participate in the track sizing of its parent grid along a chosen axis.",
+      "learn": [
+        "Why nested cards sometimes fail to align",
+        "How subgrid shares parent tracks",
+        "When normal nested Grid is enough"
+      ],
+      "objective": "Recognize when subgrid solves cross-component alignment cleanly.",
+      "explanation": "Without subgrid, every nested grid calculates its own tracks. With `subgrid`, selected nested tracks can align with the parent grid.\n\nThis is useful for repeated cards where titles, descriptions, and actions should align across cards even when content lengths differ.",
+      "tip": "Use subgrid for real alignment problems, not just because it is an advanced feature.",
+      "hack": "A parent card grid can define row structure while child cards use `grid-template-rows: subgrid` to inherit that rhythm.",
+      "mistake": "Do not add subgrid if each component should size itself independently.",
+      "expected": "The nested card content follows the parent row structure.",
+      "realUse": "Comparison cards, product grids, pricing tables, and repeated structured content can benefit from subgrid.",
+      "html": "<section class=\"cards\"><article><h2>Short title</h2><p>Longer supporting copy that wraps.</p><button>Open</button></article><article><h2>A much longer title</h2><p>Short copy.</p><button>Open</button></article></section>",
+      "css": ".cards { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: auto 1fr auto; gap: 14px; font-family: system-ui, sans-serif; }\n.cards article { display: grid; grid-row: span 3; grid-template-rows: subgrid; gap: 8px; padding: 18px; background: #f5f7ff; border-radius: 12px; }\n.cards h2, .cards p { margin: 0; }",
+      "quiz": [
+        {
+          "question": "What problem can subgrid solve?",
+          "options": [
+            "Aligning nested content to parent tracks",
+            "Running Java",
+            "Replacing HTML",
+            "Changing image formats"
+          ],
+          "correctIndex": 0,
+          "explanation": "Subgrid shares track sizing from a parent grid."
+        },
+        {
+          "question": "Should every nested grid use subgrid?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Use it only when shared track alignment is useful."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "grid",
+        "subgrid",
+        "align",
+        "nested",
+        "content",
+        "to"
+      ]
+    },
+    {
+      "id": "css-mobile-first",
+      "stage": "Responsive Design",
+      "order": 5,
+      "level": "Intermediate",
+      "title": "Mobile-first CSS",
+      "summary": "Start with a simple narrow layout, then add enhancements when more space is available.",
+      "definition": "Mobile-first CSS usually writes the base experience for narrow/simpler layouts first, then uses `min-width` media queries to enhance larger layouts.",
+      "learn": [
+        "Base styles first",
+        "min-width media queries",
+        "Progressive layout enhancement",
+        "Why mobile-first is a strategy, not a law"
+      ],
+      "objective": "Build responsive CSS with fewer overrides and clear progressive enhancement.",
+      "explanation": "A mobile-first approach starts with the essential layout that works in limited space. Larger-screen rules are then added with `@media (min-width: ...)`.\n\nThis often reduces the amount of CSS you need to undo. But it is a strategy, not a moral rule—use the approach that makes the component easiest to maintain.",
+      "tip": "Design the smallest layout around content priority, not just by stacking every desktop block.",
+      "hack": "Keep breakpoint overrides close to the component when that improves maintainability.",
+      "mistake": "Do not interpret mobile-first as “desktop does not matter.” Every target size still needs deliberate testing.",
+      "expected": "Cards are stacked by default and become two columns on wider screens.",
+      "realUse": "Most responsive websites and web apps benefit from a clear base layout plus progressive enhancement.",
+      "html": "<section class=\"mobile-first\"><article>One</article><article>Two</article></section>",
+      "css": ".mobile-first { display: grid; gap: 12px; font-family: system-ui, sans-serif; }\n.mobile-first article { padding: 24px; background: #eef8fd; border-radius: 12px; }\n@media (min-width: 700px) { .mobile-first { grid-template-columns: 1fr 1fr; } }",
+      "quiz": [
+        {
+          "question": "What does mobile-first usually start with?",
+          "options": [
+            "A narrow/base layout",
+            "A 4K-only layout",
+            "JavaScript",
+            "Print CSS"
+          ],
+          "correctIndex": 0,
+          "explanation": "The base CSS handles the smaller/simpler layout first."
+        },
+        {
+          "question": "Which media query direction is common in mobile-first CSS?",
+          "options": [
+            "min-width",
+            "max-color",
+            "z-index",
+            "font-weight"
+          ],
+          "correctIndex": 0,
+          "explanation": "`min-width` commonly adds enhancements as more width becomes available."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "responsive design",
+        "mobile",
+        "first",
+        "css"
       ]
     },
     {
@@ -1141,6 +1906,12 @@
           "correctIndex": 0,
           "explanation": "CSS media queries use `@media`."
         }
+      ],
+      "definition": "A media query conditionally applies CSS based on the output environment, such as viewport width or user preferences.",
+      "learn": [
+        "Media conditions",
+        "Content-driven breakpoints",
+        "Responsive overrides"
       ]
     },
     {
@@ -1248,6 +2019,65 @@
       ]
     },
     {
+      "id": "css-responsive-media",
+      "stage": "Responsive Design",
+      "order": 40,
+      "level": "Intermediate",
+      "title": "Responsive images and media",
+      "summary": "Make images and video fit their containers without distortion.",
+      "definition": "Responsive media styling lets images/video scale with their containers while preserving appropriate aspect ratio and crop behavior.",
+      "learn": [
+        "max-width: 100%",
+        "height: auto",
+        "object-fit",
+        "aspect-ratio"
+      ],
+      "objective": "Prevent media from overflowing or stretching incorrectly.",
+      "explanation": "For content images, `max-width: 100%; height: auto;` is a classic responsive baseline. For fixed visual frames, `object-fit: cover` or `contain` controls how media fits inside the box.\n\nThe `aspect-ratio` property lets the layout reserve a predictable shape even before content fully loads.",
+      "tip": "Use `object-fit: cover` when cropping is acceptable; use `contain` when the whole asset must remain visible.",
+      "hack": "Set `aspect-ratio` on thumbnail wrappers to prevent uneven card heights.",
+      "mistake": "Do not force both width and height on an image without considering aspect ratio; it may stretch.",
+      "expected": "The media frame keeps a 16:9 shape and the image-like block fills it.",
+      "realUse": "Portfolio thumbnails, product images, video posters, avatars, and galleries use these rules.",
+      "html": "<figure class=\"media-frame\"><div class=\"fake-image\">MEDIA</div></figure>",
+      "css": ".media-frame { width: min(100%, 620px); aspect-ratio: 16 / 9; margin: 30px auto; overflow: hidden; border-radius: 16px; background: #0d2235; }\n.fake-image { width: 100%; height: 100%; display: grid; place-items: center; color: #5bd6ff; font: 900 42px system-ui, sans-serif; }",
+      "quiz": [
+        {
+          "question": "What does `aspect-ratio: 16 / 9` describe?",
+          "options": [
+            "The preferred width-to-height ratio",
+            "The font weight",
+            "Grid specificity",
+            "A database key"
+          ],
+          "correctIndex": 0,
+          "explanation": "`aspect-ratio` describes the preferred proportional shape."
+        },
+        {
+          "question": "When is `object-fit: contain` useful?",
+          "options": [
+            "When the full media should stay visible",
+            "When cropping is required",
+            "To set z-index",
+            "To create text"
+          ],
+          "correctIndex": 0,
+          "explanation": "`contain` preserves the full object inside the available box."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "responsive design",
+        "responsive",
+        "images",
+        "and",
+        "media"
+      ]
+    },
+    {
       "id": "css-custom-properties",
       "categoryId": "css",
       "mode": "code",
@@ -1297,6 +2127,13 @@
           "correctIndex": 0,
           "explanation": "The `var()` function reads a custom property value."
         }
+      ],
+      "definition": "CSS custom properties are reusable values whose names begin with `--` and are read using `var()`.",
+      "learn": [
+        "Define tokens",
+        "Use `var()`",
+        "Scope/override variables",
+        "Add fallbacks"
       ]
     },
     {
@@ -1403,13 +2240,368 @@
           "correctIndex": 0,
           "explanation": "`container-type: inline-size` establishes a query container for inline-size conditions."
         }
+      ],
+      "definition": "Container queries let a component respond to the size or style of an ancestor container instead of only the viewport.",
+      "learn": [
+        "Query containers",
+        "@container",
+        "Component-level responsiveness"
+      ]
+    },
+    {
+      "id": "css-nesting",
+      "stage": "Modern CSS",
+      "order": 35,
+      "level": "Advanced",
+      "title": "Native CSS nesting",
+      "summary": "Group related component selectors without turning your stylesheet into a deeply nested maze.",
+      "definition": "CSS nesting lets style rules be nested inside other style rules, reducing repetition for closely related selectors.",
+      "learn": [
+        "Basic native nesting",
+        "The `&` nesting selector",
+        "When nesting improves locality",
+        "Why deep nesting is still risky"
+      ],
+      "objective": "Use native nesting for small component relationships while keeping selectors understandable.",
+      "explanation": "Native CSS supports nested rules for related selectors. `&` refers to the current selector and is useful for states such as `&:hover`.\n\nNesting can improve locality, but deeply nested selectors can still create strong coupling and specificity problems.",
+      "tip": "Keep nesting shallow—usually one or two meaningful levels.",
+      "hack": "Use `&` for component states/modifiers, not to recreate the entire DOM tree in CSS.",
+      "mistake": "Do not nest every descendant just because the syntax allows it.",
+      "expected": "The button's hover rule is defined inside the button rule.",
+      "realUse": "Component styles can be easier to read when states and closely related child rules sit together.",
+      "html": "<button class=\"nested-button\">Hover me</button>",
+      "css": ".nested-button {\n  border: 0;\n  border-radius: 10px;\n  padding: 11px 16px;\n  background: #0d2235;\n  color: white;\n\n  &:hover {\n    background: #0879b7;\n  }\n}",
+      "quiz": [
+        {
+          "question": "What does `&` represent inside a nested rule?",
+          "options": [
+            "The current selector",
+            "Every element",
+            "Only body",
+            "A JavaScript variable"
+          ],
+          "correctIndex": 0,
+          "explanation": "`&` references the selector being nested within."
+        },
+        {
+          "question": "Is deeply nesting CSS selectors automatically good architecture?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Deep nesting can tightly couple CSS to markup and increase complexity."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "modern css",
+        "native",
+        "css",
+        "nesting"
+      ]
+    },
+    {
+      "id": "css-logical-properties",
+      "stage": "Modern CSS",
+      "order": 40,
+      "level": "Advanced",
+      "title": "Logical properties for adaptable layouts",
+      "summary": "Style start/end and block/inline directions instead of assuming left/right forever.",
+      "definition": "Logical properties such as `margin-inline`, `padding-block`, and `inset-inline-start` follow writing direction and writing mode.",
+      "learn": [
+        "Inline vs block axes",
+        "margin-inline and padding-block",
+        "Why logical properties help international layouts"
+      ],
+      "objective": "Write directional spacing that adapts better to different writing systems.",
+      "explanation": "Traditional properties such as `margin-left` assume a physical direction. Logical properties describe meaning: inline start/end and block start/end.\n\nIn left-to-right English, inline start is usually left. In right-to-left text, it flips automatically.",
+      "tip": "Use logical spacing in reusable components when left/right direction is not semantically important.",
+      "hack": "`margin-inline: auto` is a concise way to center a block with a constrained width.",
+      "mistake": "Do not mechanically replace every physical property. Sometimes a physical direction is intentional, such as a visual effect anchored to the actual top-left corner.",
+      "expected": "The card uses inline/block spacing rather than hard-coded left/right spacing.",
+      "realUse": "Internationalized sites, reusable components, and design systems benefit from logical properties.",
+      "html": "<article class=\"logical\"><h2>Logical spacing</h2><p>This component uses inline/block directions.</p></article>",
+      "css": ".logical { max-width: 520px; margin-inline: auto; margin-block: 30px; padding-inline: 24px; padding-block: 20px; border-inline-start: 5px solid #0879b7; font-family: system-ui, sans-serif; background: #f2f8fc; }",
+      "quiz": [
+        {
+          "question": "What does `margin-inline` relate to?",
+          "options": [
+            "The inline writing axis",
+            "Only vertical height",
+            "JavaScript scope",
+            "Image compression"
+          ],
+          "correctIndex": 0,
+          "explanation": "Logical inline properties follow the inline writing direction."
+        },
+        {
+          "question": "Why are logical properties useful?",
+          "options": [
+            "They adapt better to writing direction/mode",
+            "They make all CSS shorter",
+            "They replace HTML",
+            "They create animations automatically"
+          ],
+          "correctIndex": 0,
+          "explanation": "Logical directions are more adaptable across writing systems."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "modern css",
+        "logical",
+        "properties",
+        "for",
+        "adaptable",
+        "layouts"
+      ]
+    },
+    {
+      "id": "css-supports-feature-queries",
+      "stage": "Modern CSS",
+      "order": 50,
+      "level": "Advanced",
+      "title": "Feature queries with @supports",
+      "summary": "Apply enhanced CSS only when the browser supports the feature you need.",
+      "definition": "`@supports` is a CSS feature query that conditionally applies styles when a property/value combination is supported.",
+      "learn": [
+        "Basic @supports syntax",
+        "Progressive enhancement",
+        "Fallback-first thinking"
+      ],
+      "objective": "Add modern enhancements without making the base experience depend on them.",
+      "explanation": "`@supports` lets you ask the browser whether it understands a CSS feature. You can write a reliable fallback first, then enhance when support exists.\n\nThis is progressive enhancement: essential content and layout still work, while capable browsers receive the improved version.",
+      "tip": "Use feature queries for meaningful compatibility boundaries, not around every modern property.",
+      "hack": "Write the fallback immediately before the enhanced rule so future maintainers see both paths together.",
+      "mistake": "Do not assume feature queries replace testing. A supported property can still behave differently in edge cases.",
+      "expected": "The card uses a basic background, then receives a gradient when supported.",
+      "realUse": "Useful when adopting newer CSS in products that still support a broader browser range.",
+      "html": "<article class=\"feature-card\"><h2>Progressive CSS</h2></article>",
+      "css": ".feature-card { max-width: 500px; margin: 30px auto; padding: 30px; background: #eaf5fb; font-family: system-ui, sans-serif; border-radius: 14px; }\n@supports (background: linear-gradient(red, blue)) {\n  .feature-card { background: linear-gradient(135deg, #eaf5fb, #dff8ef); }\n}",
+      "quiz": [
+        {
+          "question": "What does @supports check?",
+          "options": [
+            "Whether a CSS feature/property value is supported",
+            "The user's password",
+            "Database health",
+            "HTML validity only"
+          ],
+          "correctIndex": 0,
+          "explanation": "Feature queries test CSS support conditions."
+        },
+        {
+          "question": "What strategy works well with @supports?",
+          "options": [
+            "Fallback first, enhancement second",
+            "No fallback ever",
+            "Inline styles only",
+            "Use !important everywhere"
+          ],
+          "correctIndex": 0,
+          "explanation": "Progressive enhancement keeps the core experience reliable."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "modern css",
+        "feature",
+        "queries",
+        "with",
+        "supports"
+      ]
+    },
+    {
+      "id": "css-form-controls",
+      "stage": "UI & Media",
+      "order": 10,
+      "level": "Intermediate",
+      "title": "Style forms without harming usability",
+      "summary": "Make inputs, selects, and buttons feel consistent while keeping labels, focus, and native behavior usable.",
+      "definition": "Form styling changes the visual presentation of interactive controls while preserving their semantic and keyboard behavior.",
+      "learn": [
+        "Inheriting fonts into controls",
+        "Labels and spacing",
+        "Focus-visible states",
+        "accent-color and appearance considerations"
+      ],
+      "objective": "Build form controls that look intentional and remain easy to use.",
+      "explanation": "Browsers give form controls native styles. You can customize them, but do not remove useful states and behavior accidentally.\n\nUse real labels, comfortable target sizes, visible focus, and consistent typography. `font: inherit` is often helpful because controls may not inherit the page font automatically in the way you expect.",
+      "tip": "Test forms with keyboard only. If you cannot see where focus is, the styling is incomplete.",
+      "hack": "`accent-color` can quickly align checkboxes/radios with a brand color while retaining native control behavior.",
+      "mistake": "Do not remove native appearance and rebuild every detail unless you actually need that complexity.",
+      "expected": "The form has readable labels, consistent font, comfortable spacing, and a visible focus ring.",
+      "realUse": "Contact forms, checkout, admin screens, search, login, and settings pages need strong form CSS.",
+      "html": "<form class=\"demo-form\"><label for=\"email\">Email</label><input id=\"email\" type=\"email\" placeholder=\"name@example.com\"><label class=\"check\"><input type=\"checkbox\" checked> Subscribe</label><button>Save</button></form>",
+      "css": ".demo-form { display: grid; gap: 10px; max-width: 380px; margin: 30px auto; font-family: system-ui, sans-serif; }\n.demo-form input, .demo-form button { font: inherit; }\n.demo-form input[type=\"email\"] { padding: 11px 12px; border: 1px solid #b9c9d5; border-radius: 9px; }\n.demo-form input:focus-visible { outline: 3px solid #8cddff; outline-offset: 2px; }\n.demo-form input[type=\"checkbox\"] { accent-color: #0879b7; }\n.demo-form button { padding: 10px 14px; border: 0; border-radius: 9px; background: #0879b7; color: white; }",
+      "quiz": [
+        {
+          "question": "Why use `font: inherit` on many form controls?",
+          "options": [
+            "To make them follow the surrounding typography",
+            "To disable inputs",
+            "To add Grid",
+            "To store values"
+          ],
+          "correctIndex": 0,
+          "explanation": "It helps controls match the page's font system."
+        },
+        {
+          "question": "What should remain visible for keyboard users?",
+          "options": [
+            "Focus state",
+            "Only hover state",
+            "The CSS file name",
+            "Margin collapse"
+          ],
+          "correctIndex": 0,
+          "explanation": "Keyboard interaction needs a clear focus indicator."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "ui & media",
+        "style",
+        "forms",
+        "without",
+        "harming",
+        "usability"
+      ]
+    },
+    {
+      "id": "css-tables",
+      "stage": "UI & Media",
+      "order": 20,
+      "level": "Intermediate",
+      "title": "Readable tables and horizontal overflow",
+      "summary": "Keep tabular data usable on narrow screens without destroying the table structure.",
+      "definition": "Table CSS styles tabular data while preserving row/column relationships defined by semantic table HTML.",
+      "learn": [
+        "border-collapse",
+        "Cell padding and alignment",
+        "Header styling",
+        "Safe horizontal scrolling"
+      ],
+      "objective": "Style data tables for readability and mobile constraints.",
+      "explanation": "Tables are appropriate when data has real row/column relationships. CSS can improve spacing and hierarchy, but narrow screens may not have enough width.\n\nA practical solution is to wrap the table in an overflow container so users can scroll horizontally instead of shrinking text into unreadable columns.",
+      "tip": "Right-align numeric columns when that improves scanning and comparison.",
+      "hack": "Use `font-variant-numeric: tabular-nums` for numbers that should align more consistently.",
+      "mistake": "Do not replace a real data table with unrelated divs just to make styling easier.",
+      "expected": "The table has clean cell spacing and can scroll horizontally inside its wrapper if needed.",
+      "realUse": "Reports, inventory, finance, pricing, analytics, and admin systems rely on table CSS.",
+      "html": "<div class=\"table-wrap\"><table><thead><tr><th>Product</th><th>Stock</th><th>Price</th></tr></thead><tbody><tr><td>Liempo</td><td>12</td><td>₱145.00</td></tr><tr><td>Chicken</td><td>8</td><td>₱120.00</td></tr></tbody></table></div>",
+      "css": ".table-wrap { overflow-x: auto; font-family: system-ui, sans-serif; }\ntable { width: 100%; min-width: 520px; border-collapse: collapse; }\nth, td { padding: 12px 14px; border-bottom: 1px solid #dce5ec; text-align: left; }\nth { background: #eef6fb; color: #29495f; }\ntd:nth-child(2), td:nth-child(3) { text-align: right; font-variant-numeric: tabular-nums; }",
+      "quiz": [
+        {
+          "question": "Why wrap a wide table in `overflow-x: auto`?",
+          "options": [
+            "To preserve readable columns on narrow screens",
+            "To hide all data",
+            "To make text tiny",
+            "To remove semantics"
+          ],
+          "correctIndex": 0,
+          "explanation": "Horizontal scrolling can preserve the data structure and readable sizing."
+        },
+        {
+          "question": "Which property merges adjacent table borders into a cleaner model?",
+          "options": [
+            "border-collapse",
+            "grid-auto-flow",
+            "object-fit",
+            "position"
+          ],
+          "correctIndex": 0,
+          "explanation": "`border-collapse` controls the table border model."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "ui & media",
+        "readable",
+        "tables",
+        "and",
+        "horizontal",
+        "overflow"
+      ]
+    },
+    {
+      "id": "css-focus-contrast-accessibility",
+      "stage": "Animation & Accessibility",
+      "order": 5,
+      "level": "Advanced",
+      "title": "CSS accessibility: focus, contrast, targets, and hidden content",
+      "summary": "Learn the styling choices that can make a technically working UI difficult—or easy—to use.",
+      "definition": "Accessible CSS supports perceivable content and operable interaction through readable contrast, visible focus, appropriate sizing, and careful hiding techniques.",
+      "learn": [
+        "Visible focus indicators",
+        "Color contrast mindset",
+        "Comfortable target sizing",
+        "Difference between visually hidden and display:none"
+      ],
+      "objective": "Treat accessibility as part of visual quality, not a final patch.",
+      "explanation": "CSS affects whether users can see text, find keyboard focus, tap controls comfortably, and access hidden content.\n\n`display: none` removes content from layout and generally from the accessibility tree. A visually-hidden utility can hide content visually while keeping it available to assistive technology when that is the intended behavior.",
+      "tip": "Never use color alone to communicate an error/success state. Add text, iconography, or another cue.",
+      "hack": "Test keyboard focus before polishing hover effects. If focus works first, interaction styling stays more inclusive.",
+      "mistake": "Do not set `outline: none` without providing an equally clear focus indicator.",
+      "expected": "The button has a strong focus-visible ring and comfortable padding.",
+      "realUse": "Every interactive product benefits from CSS accessibility checks.",
+      "html": "<button class=\"accessible-action\">Keyboard-focus me</button>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.accessible-action { min-height: 44px; padding: 10px 16px; border: 0; border-radius: 10px; background: #0d2235; color: white; font-weight: 800; }\n.accessible-action:hover { background: #0879b7; }\n.accessible-action:focus-visible { outline: 4px solid #58d5ff; outline-offset: 3px; }",
+      "quiz": [
+        {
+          "question": "Is `outline: none` safe with no replacement?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Removing the only focus indicator can make keyboard navigation unusable."
+        },
+        {
+          "question": "Should color be the only signal for an error state?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Use additional text/icon/state cues so the meaning is not color-dependent."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "animation & accessibility",
+        "css",
+        "accessibility",
+        "focus",
+        "contrast",
+        "targets"
       ]
     },
     {
       "id": "css-transforms-transitions",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Animation & Interaction",
+      "stage": "Animation & Accessibility",
       "order": 10,
       "level": "Advanced",
       "title": "Transforms and transitions",
@@ -1469,7 +2661,7 @@
       "id": "css-keyframes-reduced-motion",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Animation & Interaction",
+      "stage": "Animation & Accessibility",
       "order": 20,
       "level": "Advanced",
       "title": "Keyframe animation with reduced-motion support",
@@ -1522,7 +2714,7 @@
       "id": "css-cascade-layers",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Architecture & Debugging",
+      "stage": "Architecture & Expert Practice",
       "order": 10,
       "level": "Advanced",
       "title": "Cascade layers: control CSS priority by architecture",
@@ -1567,118 +2759,19 @@
           "correctIndex": 0,
           "explanation": "Use architectural tools when they reduce real complexity, not for ceremony."
         }
-      ]
-    },
-    {
-      "id": "css-component-architecture",
-      "categoryId": "css",
-      "mode": "code",
-      "stage": "Architecture & Debugging",
-      "order": 20,
-      "level": "Advanced",
-      "title": "Write maintainable component CSS",
-      "summary": "Make styles reusable without coupling them to one exact page.",
-      "objective": "Structure component selectors, states, variants, and tokens so future changes stay local.",
-      "explanation": "Maintainable CSS tends to have clear ownership: a card styles itself, a button has explicit variants, and layout wrappers control layout. Naming conventions such as BEM can help, but the deeper principle is predictable scope.\n\nAvoid selectors that depend on a long ancestry chain like `.page main section .panel ul li a`.",
-      "tip": "Use component classes for reusable UI and state attributes/classes for intentional variants.",
-      "hack": "Keep layout rules in layout containers and visual component rules in the component. Separation reduces accidental side effects.",
-      "mistake": "Do not create one giant global stylesheet where every selector can affect every page unpredictably.",
-      "expected": "Two buttons share the same base class while a modifier changes only the intended visual variant.",
-      "realUse": "Useful for design systems, reusable UI libraries, dashboards, admin tools, and multi-page sites.",
-      "tags": [
-        "css",
-        "architecture & debugging",
-        "write",
-        "maintainable",
-        "component",
-        "css"
       ],
-      "html": "<div class=\"actions\"><button class=\"btn btn--primary\">Save</button><button class=\"btn btn--secondary\">Cancel</button></div>",
-      "css": ":root { --brand: #0879b7; }\nbody { padding: 40px; font-family: system-ui, sans-serif; }\n.actions { display: flex; gap: 10px; }\n.btn { border-radius: 9px; padding: 10px 14px; font: inherit; font-weight: 800; }\n.btn--primary { border: 1px solid var(--brand); background: var(--brand); color: white; }\n.btn--secondary { border: 1px solid #b8c8d4; background: white; color: #29495f; }",
-      "js": "",
-      "quiz": [
-        {
-          "question": "What makes component CSS easier to maintain?",
-          "options": [
-            "Predictable scope and clear variants",
-            "Long ancestry selectors",
-            "Many !important rules",
-            "Inline style everywhere"
-          ],
-          "correctIndex": 0,
-          "explanation": "Clear component ownership limits accidental side effects."
-        },
-        {
-          "question": "What is the deeper goal behind naming systems like BEM?",
-          "options": [
-            "Predictable reusable structure",
-            "Making class names long",
-            "Removing CSS",
-            "Replacing Grid"
-          ],
-          "correctIndex": 0,
-          "explanation": "Naming conventions are useful when they make component relationships and scope easier to understand."
-        }
-      ]
-    },
-    {
-      "id": "css-debugging-performance",
-      "categoryId": "css",
-      "mode": "code",
-      "stage": "Architecture & Debugging",
-      "order": 30,
-      "level": "Advanced",
-      "title": "Debug CSS before rewriting it",
-      "summary": "Use DevTools and a repeatable checklist to find the actual cause of a visual bug.",
-      "objective": "Diagnose cascade, box model, overflow, stacking, layout, and animation issues systematically.",
-      "explanation": "When CSS “doesn't work,” first ask: did the selector match? Did another declaration win? Is the element in the layout mode you think it is? Is overflow clipping it? Is a stacking context involved?\n\nBrowser DevTools show matched rules, crossed-out declarations, computed values, box model, Grid/Flex overlays, and more. That is faster than guessing.",
-      "tip": "Change one variable at a time while debugging. If you change five rules together, you may fix the symptom without learning the cause.",
-      "hack": "Use temporary outlines such as `outline: 1px solid red` to see invisible box boundaries without changing layout size.",
-      "mistake": "Do not add `!important` before checking why the expected rule lost.",
-      "expected": "The demo intentionally uses an outline utility so you can see the element boundary clearly.",
-      "realUse": "Useful whenever styles conflict, overflow appears, stacking behaves strangely, or a layout breaks across devices.",
-      "tags": [
-        "css",
-        "architecture & debugging",
-        "debug",
-        "css",
-        "before",
-        "rewriting",
-        "it"
-      ],
-      "html": "<div class=\"debug-box\"><strong>Inspect my box</strong><p>Use DevTools to inspect computed styles and box model.</p></div>",
-      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.debug-box { max-width: 480px; margin: auto; padding: 24px; background: #f7fbfd; outline: 2px dashed #e15d73; outline-offset: 4px; }",
-      "js": "",
-      "quiz": [
-        {
-          "question": "What should you check first when a CSS rule seems ignored?",
-          "options": [
-            "Whether the selector matched and whether another rule won",
-            "Add !important immediately",
-            "Delete all CSS",
-            "Restart the database"
-          ],
-          "correctIndex": 0,
-          "explanation": "Matched rules and the cascade usually reveal why a declaration did not apply."
-        },
-        {
-          "question": "Why is `outline` useful for debugging boxes?",
-          "options": [
-            "It shows the boundary without affecting layout size like a border can",
-            "It changes Java",
-            "It adds Grid tracks",
-            "It stores state"
-          ],
-          "correctIndex": 0,
-          "explanation": "Outline is useful for visual debugging because it does not take up layout space."
-        }
+      "definition": "Cascade layers group CSS into an explicit priority order, helping larger stylesheets avoid specificity escalation.",
+      "learn": [
+        "Declare layer order",
+        "Separate base/components/utilities",
+        "Control priority before selector specificity"
       ]
     },
     {
       "id": "css-expert-practice-card-system",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Expert Practice",
+      "stage": "Architecture & Expert Practice",
       "order": 10,
       "level": "Expert practice",
       "title": "Final CSS challenge: build a resilient card system",
@@ -1736,6 +2829,231 @@
           "correctIndex": 0,
           "explanation": "Strong CSS solves the product problem while staying maintainable."
         }
+      ]
+    },
+    {
+      "id": "css-component-architecture",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Architecture & Expert Practice",
+      "order": 20,
+      "level": "Advanced",
+      "title": "Write maintainable component CSS",
+      "summary": "Make styles reusable without coupling them to one exact page.",
+      "objective": "Structure component selectors, states, variants, and tokens so future changes stay local.",
+      "explanation": "Maintainable CSS tends to have clear ownership: a card styles itself, a button has explicit variants, and layout wrappers control layout. Naming conventions such as BEM can help, but the deeper principle is predictable scope.\n\nAvoid selectors that depend on a long ancestry chain like `.page main section .panel ul li a`.",
+      "tip": "Use component classes for reusable UI and state attributes/classes for intentional variants.",
+      "hack": "Keep layout rules in layout containers and visual component rules in the component. Separation reduces accidental side effects.",
+      "mistake": "Do not create one giant global stylesheet where every selector can affect every page unpredictably.",
+      "expected": "Two buttons share the same base class while a modifier changes only the intended visual variant.",
+      "realUse": "Useful for design systems, reusable UI libraries, dashboards, admin tools, and multi-page sites.",
+      "tags": [
+        "css",
+        "architecture & debugging",
+        "write",
+        "maintainable",
+        "component",
+        "css"
+      ],
+      "html": "<div class=\"actions\"><button class=\"btn btn--primary\">Save</button><button class=\"btn btn--secondary\">Cancel</button></div>",
+      "css": ":root { --brand: #0879b7; }\nbody { padding: 40px; font-family: system-ui, sans-serif; }\n.actions { display: flex; gap: 10px; }\n.btn { border-radius: 9px; padding: 10px 14px; font: inherit; font-weight: 800; }\n.btn--primary { border: 1px solid var(--brand); background: var(--brand); color: white; }\n.btn--secondary { border: 1px solid #b8c8d4; background: white; color: #29495f; }",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What makes component CSS easier to maintain?",
+          "options": [
+            "Predictable scope and clear variants",
+            "Long ancestry selectors",
+            "Many !important rules",
+            "Inline style everywhere"
+          ],
+          "correctIndex": 0,
+          "explanation": "Clear component ownership limits accidental side effects."
+        },
+        {
+          "question": "What is the deeper goal behind naming systems like BEM?",
+          "options": [
+            "Predictable reusable structure",
+            "Making class names long",
+            "Removing CSS",
+            "Replacing Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "Naming conventions are useful when they make component relationships and scope easier to understand."
+        }
+      ]
+    },
+    {
+      "id": "css-debugging-performance",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Architecture & Expert Practice",
+      "order": 30,
+      "level": "Advanced",
+      "title": "Debug CSS before rewriting it",
+      "summary": "Use DevTools and a repeatable checklist to find the actual cause of a visual bug.",
+      "objective": "Diagnose cascade, box model, overflow, stacking, layout, and animation issues systematically.",
+      "explanation": "When CSS “doesn't work,” first ask: did the selector match? Did another declaration win? Is the element in the layout mode you think it is? Is overflow clipping it? Is a stacking context involved?\n\nBrowser DevTools show matched rules, crossed-out declarations, computed values, box model, Grid/Flex overlays, and more. That is faster than guessing.",
+      "tip": "Change one variable at a time while debugging. If you change five rules together, you may fix the symptom without learning the cause.",
+      "hack": "Use temporary outlines such as `outline: 1px solid red` to see invisible box boundaries without changing layout size.",
+      "mistake": "Do not add `!important` before checking why the expected rule lost.",
+      "expected": "The demo intentionally uses an outline utility so you can see the element boundary clearly.",
+      "realUse": "Useful whenever styles conflict, overflow appears, stacking behaves strangely, or a layout breaks across devices.",
+      "tags": [
+        "css",
+        "architecture & debugging",
+        "debug",
+        "css",
+        "before",
+        "rewriting",
+        "it"
+      ],
+      "html": "<div class=\"debug-box\"><strong>Inspect my box</strong><p>Use DevTools to inspect computed styles and box model.</p></div>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.debug-box { max-width: 480px; margin: auto; padding: 24px; background: #f7fbfd; outline: 2px dashed #e15d73; outline-offset: 4px; }",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What should you check first when a CSS rule seems ignored?",
+          "options": [
+            "Whether the selector matched and whether another rule won",
+            "Add !important immediately",
+            "Delete all CSS",
+            "Restart the database"
+          ],
+          "correctIndex": 0,
+          "explanation": "Matched rules and the cascade usually reveal why a declaration did not apply."
+        },
+        {
+          "question": "Why is `outline` useful for debugging boxes?",
+          "options": [
+            "It shows the boundary without affecting layout size like a border can",
+            "It changes Java",
+            "It adds Grid tracks",
+            "It stores state"
+          ],
+          "correctIndex": 0,
+          "explanation": "Outline is useful for visual debugging because it does not take up layout space."
+        }
+      ]
+    },
+    {
+      "id": "css-contain-content-visibility",
+      "stage": "Architecture & Expert Practice",
+      "order": 35,
+      "level": "Advanced",
+      "title": "Rendering containment and content-visibility",
+      "summary": "Use advanced rendering controls only when a real performance problem justifies them.",
+      "definition": "Containment properties let authors limit how layout/paint/style effects escape a subtree; `content-visibility` can allow browsers to skip rendering off-screen content.",
+      "learn": [
+        "What containment is for",
+        "content-visibility: auto",
+        "Why intrinsic size hints matter",
+        "Why measurement comes before optimization"
+      ],
+      "objective": "Recognize CSS rendering tools that can help very large interfaces without cargo-cult optimization.",
+      "explanation": "Large pages can contain sections far below the viewport. `content-visibility: auto` lets the browser skip some rendering work for off-screen content until it becomes relevant.\n\n`contain` can isolate layout, paint, size, or style effects. These are advanced tools with behavior tradeoffs, so measure before and after instead of applying them everywhere.",
+      "tip": "Use performance tools before optimizing. A property is not a performance win just because it sounds advanced.",
+      "hack": "When using `content-visibility: auto`, `contain-intrinsic-size` can provide an estimated placeholder size to reduce scroll jumps.",
+      "mistake": "Do not add containment blindly to components that depend on sizing or painting relationships outside their subtree.",
+      "expected": "The sections render normally; the CSS demonstrates where off-screen rendering optimization can be applied.",
+      "realUse": "Very long feeds, documentation pages, dashboards, and large component lists may benefit after measurement.",
+      "html": "<main class=\"long-page\"><section>Section A</section><section>Section B</section><section>Section C</section></main>",
+      "css": ".long-page { display: grid; gap: 20px; font-family: system-ui, sans-serif; }\n.long-page section { min-height: 220px; padding: 24px; background: #eef6fb; border-radius: 14px; content-visibility: auto; contain-intrinsic-size: 220px; }",
+      "quiz": [
+        {
+          "question": "When should you use advanced containment for performance?",
+          "options": [
+            "After identifying a real rendering problem and testing the tradeoff",
+            "On every div by default",
+            "Only to change colors",
+            "Instead of semantic HTML"
+          ],
+          "correctIndex": 0,
+          "explanation": "Measure first; containment changes rendering behavior and should solve a real problem."
+        },
+        {
+          "question": "What can `content-visibility: auto` help the browser skip?",
+          "options": [
+            "Some off-screen rendering work",
+            "All network requests",
+            "Java compilation",
+            "HTML parsing entirely"
+          ],
+          "correctIndex": 0,
+          "explanation": "It can defer rendering work for content that is not currently relevant to the viewport."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "architecture & expert practice",
+        "rendering",
+        "containment",
+        "and",
+        "content",
+        "visibility"
+      ]
+    },
+    {
+      "id": "css-print-styles",
+      "stage": "Architecture & Expert Practice",
+      "order": 45,
+      "level": "Advanced",
+      "title": "Print styles: CSS beyond the screen",
+      "summary": "Adapt a page for printing or PDF output instead of printing navigation, dark backgrounds, and controls exactly as-is.",
+      "definition": "Print CSS uses the print media context—commonly `@media print`—to adjust a document for paper/PDF output.",
+      "learn": [
+        "@media print",
+        "Hiding non-print controls",
+        "Improving contrast for paper",
+        "Why URLs/content may need print-specific treatment"
+      ],
+      "objective": "Recognize that responsive design includes different output media, not only screen widths.",
+      "explanation": "A screen interface may have navigation, dark surfaces, sticky controls, and interactive buttons that do not make sense on paper.\n\nInside `@media print`, you can simplify colors, hide irrelevant controls, remove shadows, and make content easier to print or export as PDF.",
+      "tip": "Use the browser's print preview during testing. It reveals issues that normal responsive DevTools may not show.",
+      "hack": "For articles, you can optionally expose link URLs in print using pseudo-elements when that helps the printed document.",
+      "mistake": "Do not hide essential content just because it is interactive on screen.",
+      "expected": "On screen the demo looks normal; the print media rule shows how it would simplify for printing.",
+      "realUse": "Reports, invoices, resumes, documentation, receipts, and printable summaries benefit from print CSS.",
+      "html": "<article class=\"print-demo\"><nav>Screen navigation</nav><h1>Printable report</h1><p>Important content should remain.</p><button>Screen action</button></article>",
+      "css": ".print-demo { max-width: 640px; margin: 30px auto; padding: 24px; font-family: system-ui, sans-serif; background: #f2f7fb; }\n@media print {\n  .print-demo { max-width: none; margin: 0; padding: 0; background: white; color: black; }\n  .print-demo nav, .print-demo button { display: none; }\n}",
+      "quiz": [
+        {
+          "question": "Which at-rule commonly holds print-specific CSS?",
+          "options": [
+            "@media print",
+            "@keyframes print",
+            "@database print",
+            "@grid print"
+          ],
+          "correctIndex": 0,
+          "explanation": "Print-specific rules commonly use `@media print`."
+        },
+        {
+          "question": "What is a good print-style goal?",
+          "options": [
+            "Keep essential content while removing irrelevant screen-only controls",
+            "Hide the whole page",
+            "Force animations",
+            "Use dark backgrounds everywhere"
+          ],
+          "correctIndex": 0,
+          "explanation": "Print CSS should preserve useful content and simplify screen-only UI."
+        }
+      ],
+      "categoryId": "css",
+      "mode": "code",
+      "js": "",
+      "tags": [
+        "css",
+        "architecture & expert practice",
+        "print",
+        "styles",
+        "css",
+        "beyond",
+        "the"
       ]
     },
     {
