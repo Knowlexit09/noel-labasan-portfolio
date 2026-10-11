@@ -33,6 +33,7 @@ jobs:
       - name: Static syntax and structure checks
         run: |
           node --check assets/js/knowledge-lab-data.js
+          node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
           node --check assets/js/knowledge-lab-sandbox.js
           node --check assets/js/future-modules.js
@@ -54,7 +55,9 @@ jobs:
           const cp = require('child_process');
           global.window = {};
           require('./assets/js/knowledge-lab-data.js');
+          require('./assets/js/knowledge-lab-i18n.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
+          const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
             throw new Error('Knowledge Lab V2 data is missing.');
           }
@@ -80,6 +83,17 @@ jobs:
               }
               if (!question.explanation) throw new Error('Quiz explanation missing: ' + lesson.id);
             }
+          }
+
+          if (!i18n?.languages?.tl || !i18n?.ui?.tl) {
+            throw new Error('Curated Filipino language pack is missing.');
+          }
+          const curatedCssTl = Object.keys(i18n.lessons?.tl || {}).filter(id => id.startsWith('css-'));
+          if (curatedCssTl.length < 15) {
+            throw new Error('Expected at least 15 manually curated Filipino CSS lessons.');
+          }
+          if (!i18n.lessons.tl['css-what-is-css']?.definition?.includes('Cascading Style Sheets')) {
+            throw new Error('Curated Filipino CSS definition is missing.');
           }
 
           const cssCategory = data.categories.find(x => x.id === 'css');
@@ -189,6 +203,13 @@ jobs:
               if (!categoryText.includes(label)) throw new Error('Missing category card: ' + label);
             }
 
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            const languageLabel = await page.textContent('[data-language-button-label]');
+            if (languageLabel.trim() !== 'Filipino / Taglish') {
+              throw new Error('Language switch did not select curated Filipino.');
+            }
+
             await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-view="category"]:not([hidden])');
             const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
@@ -199,8 +220,16 @@ jobs:
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-what-is-css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-definition-lab]:not([hidden])');
             const cssDefinition = await page.textContent('[data-definition]');
-            if (!cssDefinition.includes('Cascading Style Sheets')) {
-              throw new Error('CSS definition is not visibly rendered.');
+            const cssTitleTl = await page.textContent('[data-title]');
+            if (cssTitleTl.trim() !== 'Ano ang CSS?') {
+              throw new Error('Curated Filipino CSS title did not render.');
+            }
+            if (!cssDefinition.includes('Cascading Style Sheets') || !cssDefinition.includes('Ang CSS ay ibig sabihin')) {
+              throw new Error('Curated Filipino CSS definition is not visibly rendered.');
+            }
+            const curatedStatus = await page.textContent('[data-language-status]');
+            if (!curatedStatus.includes('hindi auto-translate')) {
+              throw new Error('Curated-language status is missing.');
             }
             const learnList = await page.locator('[data-learn-list] li').count();
             if (learnList < 3) throw new Error('CSS fundamentals learning goals are missing.');
@@ -211,6 +240,19 @@ jobs:
               throw new Error('CSS fundamentals lesson styles did not apply.');
             }
             await page.waitForSelector('[data-quiz-lab]:not([hidden])');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-container-queries', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-language-status]:not([hidden])');
+            const fallbackStatus = await page.textContent('[data-language-status]');
+            if (!fallbackStatus.includes('English source')) {
+              throw new Error('Unreviewed Filipino lesson must fail safely to the English source.');
+            }
+
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
+            if ((await page.textContent('[data-language-button-label]')).trim() !== 'English') {
+              throw new Error('Language switch did not return to English.');
+            }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/html-accessible-form', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-result-frame]');
