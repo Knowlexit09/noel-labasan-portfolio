@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_I18N={
-  "version": "2026-10-12-curated-tl-v1",
+  "version": "2026-10-12-curated-tl-v2",
   "defaultLanguage": "en",
   "languages": {
     "en": {
@@ -149,6 +149,10 @@
     "tl": {
       "css": {
         "description": "Step-by-step CSS course mula sa “Ano ang CSS?” hanggang responsive layouts, modern CSS, accessibility, architecture, at expert practice.",
+        "status": "Fundamentals → expert practice"
+      },
+      "html": {
+        "description": "Step-by-step HTML course mula sa “Ano ang HTML?” hanggang semantic structure, forms, accessibility, metadata, modern HTML, performance, at production-ready page structure.",
         "status": "Fundamentals → expert practice"
       }
     }
@@ -870,6 +874,850 @@
             "explanation": "Horizontal scrolling can preserve the full content without widening the whole page."
           }
         ]
+      },
+      "html-what-is-html": {
+        "title": "Ano ang HTML?",
+        "summary": "Magsimula sa pinaka-basic: HTML ang nagbibigay ng structure at meaning sa laman ng web page.",
+        "definition": "Ang HTML ay ibig sabihin ay HyperText Markup Language. Ito ang markup language na ginagamit ng browser para ilarawan kung ano ang bawat bahagi ng isang web page—heading, paragraph, link, image, form, table, at iba pa.",
+        "learn": [
+          "Ano ang ibig sabihin ng HTML",
+          "Bakit markup language ang tawag dito",
+          "Paano nagtutulungan ang HTML, CSS, at JavaScript",
+          "Ano ang ginagawa ng browser sa HTML"
+        ],
+        "objective": "Maunawaan muna kung ano talaga ang HTML bago mag-memorize ng tags.",
+        "explanation": "Isipin ang isang web page bilang document muna. Ang HTML ang nagsasabi: “heading ito,” “paragraph ito,” “navigation ito,” “form ito.”\n\nAng CSS naman ang bahala sa itsura, at JavaScript ang puwedeng magdagdag ng behavior. Kaya ang unang tanong sa HTML ay hindi “paano ko ito papagandahin?” kundi “ano ba talaga ang content na ito?”",
+        "tip": "Bago pumili ng tag, tanungin muna: “Ano ang role ng content na ito?”",
+        "hack": "I-disable pansamantala ang CSS sa DevTools. Kapag maayos pa ring basahin ang page, magandang sign iyon na okay ang HTML structure.",
+        "mistake": "Huwag pumili ng tag dahil lang gusto mo ang default na itsura nito.",
+        "expected": "Makikita ang heading, paragraph, at list na malinaw ang structure.",
+        "realUse": "Ito ang base ng portfolio pages, dashboards, forms, documentation, at halos lahat ng websites.",
+        "quiz": [
+          {
+            "question": "Ano ang ibig sabihin ng HTML?",
+            "options": [
+              "HyperText Markup Language",
+              "High Transfer Machine Language",
+              "Hyperlink Text Mode Layout",
+              "Home Tool Markup Logic"
+            ],
+            "correctIndex": 0,
+            "explanation": "HTML ay HyperText Markup Language."
+          },
+          {
+            "question": "Ano ang pangunahing trabaho ng HTML?",
+            "options": [
+              "Ilarawan ang structure at meaning ng content",
+              "Pumili ng database index",
+              "Mag-compile ng Java",
+              "Palitan ang CSS"
+            ],
+            "correctIndex": 0,
+            "explanation": "HTML ang naglalarawan kung ano ang content at paano ito naka-structure."
+          }
+        ]
+      },
+      "html-document-anatomy": {
+        "title": "Anatomy ng complete HTML document",
+        "summary": "Alamin kung para saan ang doctype, html, head, at body.",
+        "definition": "Ang normal na HTML document ay may doctype, isang html root element, head para sa metadata, at body para sa content na nakikita at ginagamit ng visitor.",
+        "learn": [
+          "DOCTYPE",
+          "html root",
+          "head metadata",
+          "body content"
+        ],
+        "objective": "Makilala ang minimum structure ng totoong HTML page.",
+        "explanation": "Ang doctype ang nagsasabi sa browser na gumamit ng modern standards mode. Ang html ang root ng document. Sa head inilalagay ang metadata gaya ng title at charset. Sa body naman ang actual content na binabasa at ginagamit ng user.",
+        "tip": "Ilagay agad ang tamang lang attribute sa html element.",
+        "hack": "Okay gumamit ng editor snippet para gumawa ng boilerplate, pero dapat alam mo pa rin kung ano ang role ng bawat line.",
+        "mistake": "Huwag maglagay ng visible heading o paragraph sa loob ng head.",
+        "expected": "Body content lang ang makikita sa page; nasa background lang ang metadata.",
+        "realUse": "Lahat ng production HTML pages nagsisimula sa document shell na ito.",
+        "quiz": [
+          {
+            "question": "Saan karaniwang nilalagay ang visible page content?",
+            "options": [
+              "body",
+              "head",
+              "doctype",
+              "meta"
+            ],
+            "correctIndex": 0,
+            "explanation": "Sa body nilalagay ang visible content."
+          },
+          {
+            "question": "Para saan ang doctype?",
+            "options": [
+              "Para gumamit ng modern standards mode",
+              "Para gumawa ng heading",
+              "Para mag-load ng CSS lang",
+              "Para mag-submit ng form"
+            ],
+            "correctIndex": 0,
+            "explanation": "Ang doctype ang nagse-set ng modern standards behavior."
+          }
+        ]
+      },
+      "html-elements-tags-attributes": {
+        "title": "Elements, tags, at attributes",
+        "summary": "Ihiwalay natin ang tatlong terms na madalas napagpapalit ng beginners.",
+        "definition": "Ang element ang buong HTML unit. Ang tags ang opening/closing markup nito, habang ang attributes ang nagbibigay ng dagdag na information o configuration.",
+        "learn": [
+          "Element",
+          "Opening at closing tags",
+          "Attributes",
+          "Void elements"
+        ],
+        "objective": "Makabasa ng HTML syntax nang malinaw ang role ng bawat parte.",
+        "explanation": "Sa `<a href=\"#about\">About</a>`, ang buong anchor ang element. Ang `<a ...>` at `</a>` ang tags. Ang `href` ay attribute na nagsasabi kung saan pupunta ang link.\n\nMay void elements din gaya ng `img` at `input` na walang closing tag.",
+        "tip": "Tukuyin muna kung anong element ang tinitingnan mo bago isa-isahin ang attributes.",
+        "hack": "Boolean attributes gaya ng `disabled` ay active kapag present sila.",
+        "mistake": "Huwag gumawa ng closing tag para sa void elements gaya ng img, input, br, o meta.",
+        "expected": "Gagana ang About link at disabled ang button.",
+        "realUse": "Ito ang basic vocabulary na kailangan sa pagbabasa ng kahit anong HTML.",
+        "quiz": [
+          {
+            "question": "Sa anchor tag, ano ang href?",
+            "options": [
+              "Attribute",
+              "Element name",
+              "Closing tag",
+              "Comment"
+            ],
+            "correctIndex": 0,
+            "explanation": "href ay attribute."
+          },
+          {
+            "question": "Alin dito ang void element?",
+            "options": [
+              "img",
+              "section",
+              "p",
+              "button"
+            ],
+            "correctIndex": 0,
+            "explanation": "img ay void element."
+          }
+        ]
+      },
+      "html-nesting-parent-child": {
+        "title": "Nesting, parent, child, at sibling elements",
+        "summary": "Intindihin ang tree structure ng HTML para hindi magulo ang nesting.",
+        "definition": "Kapag may element sa loob ng ibang element, nagkakaroon ng parent, child, descendant, at sibling relationships.",
+        "learn": [
+          "Proper nesting",
+          "Parent at child",
+          "Siblings",
+          "Tamang closing order"
+        ],
+        "objective": "Makagawa ng valid nested HTML at maintindihan ang relasyon ng elements.",
+        "explanation": "Kung may section na may h2 at p sa loob, parent ang section. Siblings naman ang h2 at p dahil pareho silang child ng section.\n\nKapag nested ang tags, karaniwang nagsasara muna ang pinakaloob bago ang nasa labas.",
+        "tip": "Mag-indent nang consistent para madaling makita kung may maling nesting.",
+        "hack": "Kapag magulo ang file, tingnan muna ang structure one level at a time.",
+        "mistake": "Huwag mag-overlap ng tags. Isara muna ang inner element bago ang outer.",
+        "expected": "Makikita ang heading at paragraph bilang magkapatid na elements sa loob ng article.",
+        "realUse": "Mahalaga ang tamang nesting sa CSS selectors, JavaScript, accessibility, at browser parsing.",
+        "quiz": [
+          {
+            "question": "Ano ang tawag sa dalawang elements na pareho ang parent?",
+            "options": [
+              "Siblings",
+              "Attributes",
+              "Doctypes",
+              "Metadata"
+            ],
+            "correctIndex": 0,
+            "explanation": "Siblings sila."
+          },
+          {
+            "question": "Paano karaniwang nagsasara ang nested tags?",
+            "options": [
+              "Inner bago outer",
+              "Outer bago inner",
+              "Random",
+              "Hindi nagsasara"
+            ],
+            "correctIndex": 0,
+            "explanation": "Inside-out ang tamang closing order."
+          }
+        ]
+      },
+      "html-comments-whitespace-entities": {
+        "title": "Comments, whitespace, at HTML entities",
+        "summary": "Alamin kung ano ang hindi ipinapakita, kino-collapse, o kailangang i-encode ng browser.",
+        "definition": "Ang HTML comment ay `<!-- ... -->`. Sa normal text, kino-collapse ng browser ang karamihan ng repeated whitespace. Ang character references gaya ng `&lt;` ay ginagamit para ipakita ang characters na puwedeng mapagkamalang markup.",
+        "learn": [
+          "HTML comments",
+          "Whitespace collapsing",
+          "Character references",
+          "Kailan gamitin ang pre"
+        ],
+        "objective": "Magsulat ng readable source nang hindi nalilito ang text at markup.",
+        "explanation": "Hindi nakikita sa rendered page ang comments, pero makikita pa rin sila sa page source. Sa normal text, maraming spaces ay kadalasang nagiging isang space lang. Kung gusto mong ipakita ang literal na `<section>`, kailangan mong i-encode ang angle brackets.",
+        "tip": "Comments ay para sa intent o notes sa code, hindi para sa secrets.",
+        "hack": "Kung mahalaga mismo ang line breaks at spacing, tingnan kung mas tamang gumamit ng pre.",
+        "mistake": "Huwag maglagay ng password, API key, o private note sa HTML comment.",
+        "expected": "Makikita ang literal na `<section>` text habang hidden sa page ang comment.",
+        "realUse": "Useful ito sa documentation, code examples, at pag-maintain ng HTML source.",
+        "quiz": [
+          {
+            "question": "Private ba ang HTML comments?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Nakatago sila sa rendered page pero visible sa source."
+          },
+          {
+            "question": "Ano ang ginagamit para ipakita ang literal na `<`?",
+            "options": [
+              "&lt;",
+              "&gt;",
+              "&amp;",
+              "&copy;"
+            ],
+            "correctIndex": 0,
+            "explanation": "&lt; ang less-than character reference."
+          }
+        ]
+      },
+      "html-browser-dom": {
+        "title": "Mula HTML source papunta sa DOM",
+        "summary": "Tingnan kung ano ang binubuo ng browser mula sa HTML file.",
+        "definition": "Pina-parse ng browser ang HTML source at ginagawa itong tree ng document nodes na tinatawag na DOM o Document Object Model.",
+        "learn": [
+          "HTML parsing",
+          "DOM tree",
+          "Browser error recovery",
+          "Source vs Inspector"
+        ],
+        "objective": "Maunawaan kung bakit puwedeng magkaiba ang typed source at actual browser structure kapag may malformed HTML.",
+        "explanation": "Text lang ang HTML file mo. Binabasa iyon ng browser at ginagawa nitong document tree na puwedeng gamitin ng CSS at JavaScript.\n\nMinsan nire-repair ng browser ang invalid HTML para maipakita pa rin ang page. Kaya hindi ibig sabihin na “gumagana sa browser” ay valid na agad ang source.",
+        "tip": "Kapag kakaiba ang structure, ikumpara ang View Source at Elements/Inspector.",
+        "hack": "Sa DevTools makikita mo ang actual parent/child structure na ginawa ng browser.",
+        "mistake": "Huwag gawing validation test ang simpleng “lumabas naman sa screen.”",
+        "expected": "Normal na makikita ang nested content na ginawa ng browser bilang DOM tree.",
+        "realUse": "Mahalaga ito kapag nagde-debug ng CSS, JavaScript, at malformed templates.",
+        "quiz": [
+          {
+            "question": "Ano ang binubuo ng browser pagkatapos i-parse ang HTML?",
+            "options": [
+              "DOM/document tree",
+              "Java class",
+              "Database",
+              "CSS file"
+            ],
+            "correctIndex": 0,
+            "explanation": "DOM ang parsed document tree."
+          },
+          {
+            "question": "Kaya bang mag-repair ng browser ng ilang invalid HTML?",
+            "options": [
+              "Oo",
+              "Hindi"
+            ],
+            "correctIndex": 0,
+            "explanation": "May error-recovery behavior ang browsers."
+          }
+        ]
+      },
+      "html-emmet-shortcuts": {
+        "title": "Emmet shortcuts: mas mabilis mag-type, parehong HTML pa rin",
+        "summary": "Gamitin ang editor abbreviations nang malinaw na hindi sila bahagi ng HTML language.",
+        "definition": "Ang Emmet ay editor productivity feature na nag-e-expand ng abbreviations gaya ng `ul>li*3` papunta sa normal HTML. Hindi ito HTML syntax.",
+        "learn": [
+          "Ano ang Emmet",
+          "Common abbreviations",
+          "Expanded HTML",
+          "Kailan mas importante ang readability kaysa speed"
+        ],
+        "objective": "Mapabilis ang repetitive HTML typing nang naiintindihan pa rin ang generated markup.",
+        "explanation": "Sa halip na mano-manong mag-type ng tatlong li, puwedeng i-expand ng supported editor ang `ul>li*3`. Hindi naiintindihan ng browser ang abbreviation na iyon; editor muna ang nagko-convert nito sa normal HTML.",
+        "tip": "Aralin muna ang tunay na HTML bago umasa sa shortcuts.",
+        "hack": "Useful examples: `!` para sa document shell, `a[href=\"#\"]`, at `ul>li*3`.",
+        "mistake": "Huwag i-paste ang Emmet abbreviation sa production HTML at asahang browser ang mag-e-expand.",
+        "expected": "Normal HTML pa rin ang tatanggapin at ire-render ng browser.",
+        "realUse": "Malaking time-saver ito kapag repetitive ang markup sa editors na may Emmet support.",
+        "quiz": [
+          {
+            "question": "Bahagi ba ng HTML language ang Emmet?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Editor tooling ang Emmet."
+          },
+          {
+            "question": "Ano ang nangyayari bago makita ng browser ang Emmet abbreviation?",
+            "options": [
+              "Ini-expand muna ng editor bilang normal HTML",
+              "Kinocompile ng browser",
+              "CSS ang nagko-convert",
+              "Database ang nagse-save"
+            ],
+            "correctIndex": 0,
+            "explanation": "Editor ang nag-e-expand nito."
+          }
+        ],
+        "shortcut": {
+          "label": "⚡ EMMET — editor shortcut",
+          "longLabel": "Expanded HTML",
+          "shortLabel": "Emmet abbreviation",
+          "note": "Useful sa repetitive markup kapag supported ng editor.",
+          "caution": "Hindi ito HTML syntax. I-review pa rin ang expanded markup."
+        }
+      },
+      "html-headings-paragraphs": {
+        "title": "Headings at paragraphs",
+        "summary": "Gumawa ng malinaw na hierarchy sa text imbis na puro malaking font lang.",
+        "definition": "Ang h1 hanggang h6 ay headings; ang p ay paragraph ng prose.",
+        "learn": [
+          "Heading hierarchy",
+          "Paragraphs",
+          "Semantic rank vs visual size",
+          "Clear section titles"
+        ],
+        "objective": "I-structure ang written content para madaling maintindihan ng tao at assistive technology.",
+        "explanation": "Ang heading ay hindi lang malaking text. May meaning ang rank nito sa document hierarchy. Kung gusto mong mas maliit o mas malaki ang itsura, CSS ang dapat mag-adjust.\n\nAng paragraph naman ay para sa prose o tuloy-tuloy na text.",
+        "tip": "Gawing summary ng section ang heading text.",
+        "hack": "Huwag mag-skip ng heading level dahil lang gusto mo ng mas maliit na font.",
+        "mistake": "Huwag gamitin ang p bilang generic wrapper para sa unrelated controls.",
+        "expected": "May malinaw na main heading, subsection heading, at paragraphs.",
+        "realUse": "Mahalaga ito sa articles, documentation, landing pages, at dashboard sections.",
+        "quiz": [
+          {
+            "question": "Ano ang role ng h2?",
+            "options": [
+              "Section heading",
+              "Blue font",
+              "Database field",
+              "Line break"
+            ],
+            "correctIndex": 0,
+            "explanation": "Heading ang h2, hindi visual style."
+          },
+          {
+            "question": "Dapat bang visual size lang ang basehan ng heading rank?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Hierarchy muna, styling sa CSS."
+          }
+        ]
+      },
+      "html-emphasis-meaning": {
+        "title": "Strong, emphasis, mark, small, at line breaks",
+        "summary": "Gamitin ang text-level elements para sa meaning, hindi lang decoration.",
+        "definition": "strong ay strong importance, em ay stress emphasis, mark ay highlighted relevance, small ay side comments/fine print, at br ay meaningful line break.",
+        "learn": [
+          "strong",
+          "em",
+          "mark",
+          "small",
+          "Tamang gamit ng br"
+        ],
+        "objective": "Piliin ang tamang text-level element base sa meaning.",
+        "explanation": "Puwedeng bold o italic ang default appearance ng ilang elements, pero hindi iyon ang pinaka-purpose nila. Ang strong at em ay may semantic meaning.\n\nAng br naman ay para sa content na talagang kailangan ng line break, hindi pang-spacing ng layout.",
+        "tip": "Basahin ang sentence kahit walang styling. Dapat meaningful pa rin ang emphasis.",
+        "hack": "Kung visual bold/italic lang talaga ang gusto mo, puwedeng CSS ang mas tamang tool.",
+        "mistake": "Huwag gumamit ng sunod-sunod na br para gumawa ng vertical spacing.",
+        "expected": "Malinaw ang importance, emphasis, highlight, at fine print sa markup.",
+        "realUse": "Useful sa warnings, instructions, articles, at readable UI copy.",
+        "quiz": [
+          {
+            "question": "Ano ang ipinapahiwatig ng strong?",
+            "options": [
+              "Strong importance",
+              "Bold styling lang",
+              "Link",
+              "Heading"
+            ],
+            "correctIndex": 0,
+            "explanation": "Semantic importance ang strong."
+          },
+          {
+            "question": "Tamang pang-layout spacing ba ang maraming br?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "CSS spacing ang gamitin."
+          }
+        ]
+      },
+      "html-lists": {
+        "title": "Ordered, unordered, at description lists",
+        "summary": "Piliin ang list type base sa relasyon ng items.",
+        "definition": "ul ay unordered list, ol ay ordered sequence, at dl ay term-description list gamit ang dt at dd.",
+        "learn": [
+          "ul",
+          "ol",
+          "dl",
+          "Nested lists"
+        ],
+        "objective": "I-represent nang tama ang list relationships.",
+        "explanation": "Gamitin ang ul kapag hindi mahalaga ang order. ol kapag may sequence o ranking. dl kapag term at description ang relationship.\n\nKahit baguhin pa ng CSS ang bullets o numbers, useful pa rin ang list semantics.",
+        "tip": "Maraming navigation menus ay natural na listahan ng related links.",
+        "hack": "May start at reversed attributes ang ordered lists kung mahalaga ang numbering.",
+        "mistake": "Huwag gumamit ng list para lang mag-indent ng random text.",
+        "expected": "May numbered steps at term-description pairs.",
+        "realUse": "Ginagamit sa menus, instructions, feature lists, steps, at glossaries.",
+        "quiz": [
+          {
+            "question": "Aling list ang tama kapag mahalaga ang sequence?",
+            "options": [
+              "ol",
+              "ul",
+              "dl",
+              "div"
+            ],
+            "correctIndex": 0,
+            "explanation": "Ordered list ang ol."
+          },
+          {
+            "question": "Anong elements ang ginagamit sa description list?",
+            "options": [
+              "dt at dd",
+              "li lang",
+              "th at td",
+              "option lang"
+            ],
+            "correctIndex": 0,
+            "explanation": "dt/dd ang term at description."
+          }
+        ]
+      },
+      "html-quotes-code-pre": {
+        "title": "Quotes, code, at preformatted text",
+        "summary": "Gamitin ang tamang elements para sa quoted at code-like content.",
+        "definition": "blockquote ay block quotation, q ay inline quote, code ay code fragment, at pre ay nagpe-preserve ng whitespace.",
+        "learn": [
+          "blockquote",
+          "q",
+          "code",
+          "pre"
+        ],
+        "objective": "I-markup nang tama ang quotations at code examples.",
+        "explanation": "Para sa inline code, sapat ang code element. Kapag mahalaga ang line breaks at indentation, karaniwang ginagamit ang pre kasama ng code.\n\nPara sa mahahabang quote na sariling block, gamitin ang blockquote.",
+        "tip": "I-escape ang literal angle brackets sa code examples.",
+        "hack": "Use pre only when whitespace itself matters.",
+        "mistake": "Huwag gamitin ang pre bilang general layout tool.",
+        "expected": "Mananatili ang line breaks sa code block at hiwalay nang semantic ang quotation.",
+        "realUse": "Useful sa developer docs, tutorials, changelogs, at technical articles.",
+        "quiz": [
+          {
+            "question": "Aling element ang nagpe-preserve ng whitespace?",
+            "options": [
+              "pre",
+              "p",
+              "span",
+              "mark"
+            ],
+            "correctIndex": 0,
+            "explanation": "pre ang para sa preformatted content."
+          },
+          {
+            "question": "Aling element ang para sa code fragment?",
+            "options": [
+              "code",
+              "q",
+              "small",
+              "aside"
+            ],
+            "correctIndex": 0,
+            "explanation": "code ang tamang semantic element."
+          }
+        ]
+      },
+      "html-div-span": {
+        "title": "div at span: useful, pero hindi laging first choice",
+        "summary": "Alamin kung kailan okay ang generic containers at kailan mas magandang semantic element.",
+        "definition": "Ang div ay generic block container at ang span ay generic inline container. Wala silang special semantic meaning by default.",
+        "learn": [
+          "div",
+          "span",
+          "Semantic alternatives",
+          "Neutral wrappers"
+        ],
+        "objective": "Gamitin ang generic containers nang intentional.",
+        "explanation": "Kung navigation ang content, mas malinaw ang nav. Kung self-contained article, article. Pero kung purely wrapper lang at walang semantic role, okay ang div.\n\nAng span naman ay useful para sa maliit na inline hook sa loob ng text.",
+        "tip": "Subukang pangalanan ang role ng content. Kung may matching HTML element, doon muna magsimula.",
+        "hack": "Span ay magandang inline hook para sa styling o JavaScript kapag walang ibang semantic role.",
+        "mistake": "Huwag gawing puro nested divs ang buong page kung may mas malinaw na semantic elements.",
+        "expected": "Semantic ang main content, habang span lang ang ginamit sa maliit na status text.",
+        "realUse": "Common ito sa component wrappers at inline status/value hooks.",
+        "quiz": [
+          {
+            "question": "May special semantic meaning ba ang div by itself?",
+            "options": [
+              "Wala",
+              "Navigation",
+              "Article",
+              "Heading"
+            ],
+            "correctIndex": 0,
+            "explanation": "Generic container ang div."
+          },
+          {
+            "question": "Kailan useful ang span?",
+            "options": [
+              "Neutral inline grouping",
+              "Tables lang",
+              "Palit sa body",
+              "Metadata"
+            ],
+            "correctIndex": 0,
+            "explanation": "Inline neutral wrapper ang span."
+          }
+        ]
+      },
+      "html-section-article-aside": {
+        "title": "section, article, at aside",
+        "summary": "Piliin ang container base sa ibig sabihin ng content.",
+        "definition": "section ay thematic group, article ay self-contained content, at aside ay complementary content.",
+        "learn": [
+          "section",
+          "article",
+          "aside",
+          "Kailan div pa rin ang tama"
+        ],
+        "objective": "Maiba ang common semantic sectioning elements.",
+        "explanation": "Ang section ay karaniwang may sariling topic at heading. Ang article ay content na puwedeng tumayo nang mag-isa. Ang aside ay related pero secondary/complementary.\n\nHindi ibig sabihin na lahat ng wrapper ay dapat section.",
+        "tip": "Kung hindi mo maipaliwanag kung tungkol saan ang section, baka styling wrapper lang iyon.",
+        "hack": "Puwedeng may sections sa article at articles sa section—meaning ang basehan, hindi rigid template.",
+        "mistake": "Huwag palitan lahat ng div ng section.",
+        "expected": "May article na may main section at related aside.",
+        "realUse": "Common sa blog posts, docs, news cards, product content, at side notes.",
+        "quiz": [
+          {
+            "question": "Aling element ang best fit sa self-contained content?",
+            "options": [
+              "article",
+              "span",
+              "br",
+              "meta"
+            ],
+            "correctIndex": 0,
+            "explanation": "Self-contained ang article."
+          },
+          {
+            "question": "Dapat bang bawat visual wrapper ay section?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Thematic grouping ang section."
+          }
+        ]
+      },
+      "html-semantic-landmarks": {
+        "title": "header, nav, main, at footer landmarks",
+        "summary": "Bigyan ng malinaw na role ang major regions ng page.",
+        "definition": "header, nav, main, at footer ay semantic elements para sa major document o section regions.",
+        "learn": [
+          "header",
+          "nav",
+          "main",
+          "footer",
+          "Landmarks"
+        ],
+        "objective": "Gumawa ng page shell na madaling maintindihan ang major regions.",
+        "explanation": "Nakakatulong ang landmarks sa pag-navigate at pag-intindi ng page structure. Karaniwang may isang primary main region ang document. Ang nav naman ay para sa major navigation blocks, hindi sa bawat group ng links.",
+        "tip": "Native landmarks muna bago magdagdag ng equivalent ARIA roles.",
+        "hack": "Kapag maraming nav, lagyan ng accessible label para madaling makilala ang bawat isa.",
+        "mistake": "Huwag ilagay sa main ang site-wide header/footer na hindi bahagi ng primary page content.",
+        "expected": "May malinaw na header, primary navigation, main content, at footer.",
+        "realUse": "Ito ang base structure ng portfolios, landing pages, dashboards, at docs.",
+        "quiz": [
+          {
+            "question": "Aling element ang primary content ng document?",
+            "options": [
+              "main",
+              "footer",
+              "span",
+              "small"
+            ],
+            "correctIndex": 0,
+            "explanation": "main ang primary content landmark."
+          },
+          {
+            "question": "Lahat ba ng group ng links dapat nav?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Major navigation blocks lang ang nav."
+          }
+        ]
+      },
+      "html-links": {
+        "title": "Links, fragments, at malinaw na link text",
+        "summary": "Gumawa ng links na naiintindihan agad kung saan pupunta.",
+        "definition": "Ang a element ay hyperlink; ang href puwedeng tumuro sa ibang URL, file, o fragment ID sa parehong document.",
+        "learn": [
+          "href",
+          "Fragment links",
+          "Descriptive link text",
+          "target/rel basics"
+        ],
+        "objective": "Gumawa ng understandable navigation links.",
+        "explanation": "Ang `#details` ay tumuturo sa element na may id=\"details\". Mas malinaw ang “Read the HTML forms guide” kaysa generic na “click here.”\n\nDapat alam ng user kung saan siya pupunta bago pa niya i-activate ang link.",
+        "tip": "Basahin ang link text nang hiwalay sa surrounding sentence. Dapat may sense pa rin.",
+        "hack": "Useful ang fragment links sa long pages, tables of contents, at skip links.",
+        "mistake": "Huwag gumamit ng href=\"#\" para sa action na button naman talaga.",
+        "expected": "Dadala ang fragment link sa details section.",
+        "realUse": "Navigation, docs, portfolios, product pages, at in-page menus lahat gumagamit nito.",
+        "quiz": [
+          {
+            "question": "Ano ang target ng href=\"#details\"?",
+            "options": [
+              "Element na may id=\"details\"",
+              "CSS class",
+              "Database row",
+              "File"
+            ],
+            "correctIndex": 0,
+            "explanation": "Fragment links target IDs."
+          },
+          {
+            "question": "Alin ang mas malinaw na link text?",
+            "options": [
+              "Read the HTML forms guide",
+              "Click here"
+            ],
+            "correctIndex": 0,
+            "explanation": "Descriptive links are easier to understand."
+          }
+        ]
+      },
+      "html-relative-absolute-paths": {
+        "title": "Relative at absolute paths",
+        "summary": "Intindihin kung bakit gumagana ang asset locally pero nasisira pagkatapos i-deploy.",
+        "definition": "Ang absolute URL ay kumpletong location. Ang relative URL ay nire-resolve base sa current document o site path.",
+        "learn": [
+          "Relative paths",
+          "Parent paths",
+          "Root-relative paths",
+          "Absolute URLs"
+        ],
+        "objective": "Pumili ng path na tama sa actual folder structure ng deployment.",
+        "explanation": "`images/photo.jpg` ay relative sa current folder. `../` ay umaakyat ng isang directory. `/assets/logo.svg` ay root-relative. Full `https://...` URL naman ay absolute.",
+        "tip": "I-drawing muna ang folder tree bago manghula ng ilang `../` ang kailangan.",
+        "hack": "Sa DevTools makikita mo ang final resolved URL kapag may 404.",
+        "mistake": "Huwag gumamit ng local Windows path sa deployed website.",
+        "expected": "Makikita ang examples ng iba-ibang path types.",
+        "realUse": "Critical ito sa images, CSS, JS, navigation, at static-site deployment.",
+        "quiz": [
+          {
+            "question": "Ano ang ibig sabihin ng ../ sa relative path?",
+            "options": [
+              "Umakyat ng isang directory",
+              "Open new tab",
+              "Use HTTPS",
+              "Create ID"
+            ],
+            "correctIndex": 0,
+            "explanation": "Parent directory ang ../."
+          },
+          {
+            "question": "Portable web URL ba ang C:\\\\images\\\\photo.jpg?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Local filesystem path iyon, hindi deployed web URL."
+          }
+        ]
+      },
+      "html-images-alt": {
+        "title": "Images, alt text, width, at height",
+        "summary": "Maglagay ng images nang maayos ang accessibility at layout stability.",
+        "definition": "Ang img ay nag-eembed ng image; src ang resource, alt ang text alternative, at width/height ang intrinsic dimensions.",
+        "learn": [
+          "src",
+          "alt text",
+          "Decorative images",
+          "Intrinsic dimensions"
+        ],
+        "objective": "Gumawa ng image markup na useful kahit hindi makita ang image.",
+        "explanation": "Ang alt text ay dapat magpaliwanag ng purpose ng image sa context, hindi lang maglista ng pixels. Kapag purely decorative ang image, puwedeng `alt=\"\"`.\n\nAng width at height attributes naman tumutulong sa browser mag-reserve ng tamang space bago pa matapos mag-load ang image.",
+        "tip": "Tanungin: “Kung hindi lumabas ang image, ano ang kailangan kong sabihin sa user?”",
+        "hack": "Kung sapat na ang nearby caption, huwag ulitin word-for-word sa alt.",
+        "mistake": "Huwag gawing alt text ang filename gaya ng IMG_4832.jpg.",
+        "expected": "Responsive ang image at may meaningful alt at dimensions.",
+        "realUse": "Product cards, portfolio thumbnails, articles, hero images, at galleries lahat kailangan nito.",
+        "quiz": [
+          {
+            "question": "Ano ang usual alt ng purely decorative image?",
+            "options": [
+              "alt=\"\"",
+              "Filename",
+              "Walang src",
+              "role=button"
+            ],
+            "correctIndex": 0,
+            "explanation": "Empty alt para ma-ignore ang decorative image."
+          },
+          {
+            "question": "Bakit useful ang width at height attributes?",
+            "options": [
+              "Para mag-reserve ng layout space",
+              "Para palitan ang alt",
+              "Para gumawa ng link",
+              "Para baguhin ang format"
+            ],
+            "correctIndex": 0,
+            "explanation": "Nakakatulong ito sa layout stability."
+          }
+        ]
+      },
+      "html-figure-figcaption": {
+        "title": "figure at figcaption",
+        "summary": "I-group ang self-contained visual at ang visible caption nito.",
+        "definition": "Ang figure ay wrapper para sa self-contained content; ang figcaption ang visible caption ng figure.",
+        "learn": [
+          "figure",
+          "figcaption",
+          "Caption vs alt",
+          "Kailan bagay ang figure"
+        ],
+        "objective": "I-connect nang tama ang media o example sa caption nito.",
+        "explanation": "Puwedeng image, chart, o code sample ang laman ng figure. Ang figcaption ay visible context para sa buong figure.\n\nMagkaiba ang purpose ng alt text at caption: alt ay text alternative ng image; caption ay visible supporting information.",
+        "tip": "Gamitin ang figure kapag meaningful na unit ang content at caption.",
+        "hack": "Puwedeng first o last child ng figure ang figcaption.",
+        "mistake": "Huwag i-wrap lahat ng images sa figure kung wala namang caption/unit relationship.",
+        "expected": "Grouped bilang isang figure ang image at visible caption.",
+        "realUse": "Common sa tutorials, reports, portfolios, articles, at diagrams.",
+        "quiz": [
+          {
+            "question": "Ano ang role ng figcaption?",
+            "options": [
+              "Visible caption ng figure",
+              "Image source",
+              "CSS class",
+              "Form label"
+            ],
+            "correctIndex": 0,
+            "explanation": "Caption ng figure ang figcaption."
+          },
+          {
+            "question": "Automatic bang kapalit ng alt text ang figcaption?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Magkaiba ang role nila."
+          }
+        ]
+      },
+      "html-picture-responsive": {
+        "title": "picture, srcset, at responsive images",
+        "summary": "Hayaan ang browser pumili ng image source na mas bagay sa context.",
+        "definition": "Ang picture ay puwedeng magbigay ng alternative image sources; ang srcset at sizes ay tumutulong sa browser pumili ng tamang resource.",
+        "learn": [
+          "picture",
+          "source",
+          "srcset",
+          "sizes",
+          "Art direction"
+        ],
+        "objective": "Maunawaan ang responsive-image markup.",
+        "explanation": "May dalawang common problem: resolution switching at art direction. Sa resolution switching, different file sizes ang choices. Sa art direction, puwedeng ibang crop/composition.\n\nSa loob ng picture, kailangan pa rin ng real img bilang fallback at content image.",
+        "tip": "Huwag kalimutan ang img at alt sa loob ng picture.",
+        "hack": "Gumawa talaga ng optimized image variants; hindi kayang gumawa ng markup ng missing image files.",
+        "mistake": "Huwag gumawa ng komplikadong srcset kung pareho lang ang oversized file sa lahat ng candidates.",
+        "expected": "Safe na ire-render ang img fallback sa loob ng picture.",
+        "realUse": "Useful sa hero images, product imagery, editorial layouts, at performance-sensitive sites.",
+        "quiz": [
+          {
+            "question": "Anong element ang fallback sa loob ng picture?",
+            "options": [
+              "img",
+              "source",
+              "link",
+              "meta"
+            ],
+            "correctIndex": 0,
+            "explanation": "img pa rin ang content/fallback."
+          },
+          {
+            "question": "Ano ang art direction?",
+            "options": [
+              "Different composition/crop depende sa condition",
+              "Pagpalit ng alt gamit CSS",
+              "HTML compression",
+              "Database"
+            ],
+            "correctIndex": 0,
+            "explanation": "Ibang visual composition ang art direction."
+          }
+        ]
+      },
+      "html-accessible-form": {
+        "title": "Gumawa ng usable form",
+        "summary": "I-pair ang totoong label sa input at subukan ang submit behavior sa browser IDE.",
+        "definition": "Ang form ay naggugroup ng input controls. Ang label ang nagsasabi kung ano ang field, at karaniwang kino-connect ito gamit ang for na tumutugma sa id ng input.",
+        "learn": [
+          "form",
+          "label + input",
+          "button type",
+          "Basic submit behavior"
+        ],
+        "objective": "Gumawa ng maliit na form na malinaw at keyboard-friendly.",
+        "explanation": "Hindi sapat na may input box lang. Kailangan alam ng user kung ano ang ilalagay doon. Ang visible label ang nagbibigay ng pangalan sa field at tumutulong din sa assistive technology.\n\nSa lesson na ito, pinipigilan lang ng JavaScript ang normal navigation para maipakita natin agad ang result sa loob ng IDE.",
+        "tip": "I-click ang label text. Dapat mapunta ang focus sa corresponding input.",
+        "hack": "Native form controls muna bago gumawa ng custom controls.",
+        "mistake": "Huwag gawing placeholder lang ang tanging label ng field.",
+        "expected": "Kapag nilagay ang Juan Dela Cruz at nag-submit, lalabas ang `Hello, Juan Dela Cruz!`.",
+        "realUse": "Same pattern ang ginagamit sa contact forms, login, checkout, search, at admin screens.",
+        "quiz": [
+          {
+            "question": "Bakit kino-connect ang label at input?",
+            "options": [
+              "Para malinaw kung ano ang field",
+              "Para mag-load ang CSS",
+              "Para gumawa ng database",
+              "Para itago ang input"
+            ],
+            "correctIndex": 0,
+            "explanation": "Label ang nagbibigay ng clear accessible name."
+          },
+          {
+            "question": "Sapat na bang replacement ng label ang placeholder?",
+            "options": [
+              "Hindi",
+              "Oo"
+            ],
+            "correctIndex": 0,
+            "explanation": "Hindi reliable na kapalit ng label ang placeholder."
+          }
+        ]
+      }
+    }
+  },
+  "stages": {
+    "tl": {
+      "html": {
+        "HTML Fundamentals": "HTML Fundamentals",
+        "Text & Semantic Content": "Text at Semantic Content",
+        "Links & Images": "Links at Images",
+        "Forms & User Input": "Forms at User Input",
+        "Tables & Structured Data": "Tables at Structured Data",
+        "Media & Embeds": "Media at Embeds",
+        "Accessibility by Default": "Accessibility by Default",
+        "Head, Metadata & SEO": "Head, Metadata at SEO",
+        "Modern HTML & Performance": "Modern HTML at Performance",
+        "Architecture & Expert Practice": "Architecture at Expert Practice"
       }
     }
   }
