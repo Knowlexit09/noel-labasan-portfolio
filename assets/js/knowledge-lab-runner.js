@@ -581,14 +581,19 @@
     host.innerHTML = '';
 
     if (normalized) {
-      const matches = lessons.filter((lesson) => {
-        const category = byCategory.get(lesson.categoryId);
+      const matches = lessons.filter((rawLesson) => {
+        const lesson = localizeLesson(rawLesson);
+        const category = localizeCategory(byCategory.get(rawLesson.categoryId));
         const haystack = [
+          rawLesson.title,
+          rawLesson.summary,
           lesson.title,
           lesson.summary,
+          lesson.definition,
+          lesson.explanation,
           lesson.level,
           category?.label,
-          ...(lesson.tags || [])
+          ...(rawLesson.tags || [])
         ].join(' ').toLowerCase();
         return haystack.includes(normalized);
       });
@@ -596,21 +601,23 @@
       const section = document.createElement('section');
       section.className = 'kl-topic-group';
       const heading = document.createElement('h2');
-      heading.textContent = 'Search results';
+      heading.textContent = tr('searchResults');
       section.appendChild(heading);
 
       if (!matches.length) {
         const empty = document.createElement('div');
         empty.className = 'kl-no-results';
-        empty.textContent = 'No lesson matches that search.';
+        empty.textContent = tr('noSearchResults');
         section.appendChild(empty);
       } else {
-        matches.forEach((lesson) => {
+        matches.forEach((rawLesson) => {
+          const lesson = localizeLesson(rawLesson);
+          const category = localizeCategory(byCategory.get(rawLesson.categoryId));
           const button = document.createElement('button');
           button.type = 'button';
-          button.dataset.lessonId = lesson.id;
-          button.className = currentLesson?.id === lesson.id ? 'is-active' : '';
-          button.innerHTML = '<b>' + escapeHtml(lesson.title) + '</b><span>' + escapeHtml(byCategory.get(lesson.categoryId)?.label || '') + '</span>';
+          button.dataset.lessonId = rawLesson.id;
+          button.className = currentLesson?.id === rawLesson.id ? 'is-active' : '';
+          button.innerHTML = '<b>' + escapeHtml(lesson.title) + '</b><span>' + escapeHtml(category?.label || '') + '</span>';
           section.appendChild(button);
         });
       }
@@ -629,15 +636,16 @@
       const section = document.createElement('section');
       section.className = 'kl-topic-group';
       const heading = document.createElement('h2');
-      heading.textContent = group;
+      heading.textContent = localizeGroup(group);
       section.appendChild(heading);
 
-      items.forEach((category) => {
-        const count = categoryLessons(category.id).length;
+      items.forEach((rawCategory) => {
+        const category = localizeCategory(rawCategory);
+        const count = categoryLessons(rawCategory.id).length;
         const button = document.createElement('button');
         button.type = 'button';
-        button.dataset.categoryId = category.id;
-        button.className = currentCategory?.id === category.id && !currentLesson ? 'is-active' : '';
+        button.dataset.categoryId = rawCategory.id;
+        button.className = currentCategory?.id === rawCategory.id && !currentLesson ? 'is-active' : '';
         button.innerHTML = '<b>' + escapeHtml(category.label) + '</b><span>' + count + '</span>';
         section.appendChild(button);
       });
@@ -665,27 +673,30 @@
       const section = document.createElement('section');
       section.className = 'kl-category-group';
 
+      const localizedGroup = localizeGroup(group);
       const head = document.createElement('div');
       head.className = 'kl-category-group-head';
-      head.innerHTML = '<span class="kl-section-kicker">' + escapeHtml(group) + '</span><h2>' + escapeHtml(group) + '</h2>';
+      head.innerHTML = '<span class="kl-section-kicker">' + escapeHtml(localizedGroup) + '</span><h2>' + escapeHtml(localizedGroup) + '</h2>';
       section.appendChild(head);
 
       const grid = document.createElement('div');
       grid.className = 'kl-category-grid';
 
-      items.forEach((category) => {
-        const count = categoryLessons(category.id).length;
+      items.forEach((rawCategory) => {
+        const category = localizeCategory(rawCategory);
+        const count = categoryLessons(rawCategory.id).length;
+        const progress = categoryProgress(rawCategory.id);
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'kl-category-card';
-        card.dataset.categoryId = category.id;
+        card.dataset.categoryId = rawCategory.id;
         card.innerHTML =
           '<span class="kl-category-card-icon">' + escapeHtml(category.icon) + '</span>' +
           '<span class="kl-category-card-copy"><strong>' + escapeHtml(category.label) + '</strong>' +
           '<small>' + escapeHtml(category.description) + '</small></span>' +
           '<span class="kl-category-card-meta"><em>' + escapeHtml(category.status) + '</em><b>' +
             count + ' lesson' + (count === 1 ? '' : 's') +
-            (categoryProgress(category.id).total ? ' · ' + categoryProgress(category.id).passed + '/' + categoryProgress(category.id).total + ' quizzes' : '') +
+            (progress.total ? ' · ' + progress.passed + '/' + progress.total + ' quizzes' : '') +
           '</b></span>';
         grid.appendChild(card);
       });
@@ -698,9 +709,10 @@
   }
 
   function renderCategory(id) {
-    const category = byCategory.get(id);
-    if (!category) return renderHome();
+    const rawCategory = byCategory.get(id);
+    if (!rawCategory) return renderHome();
 
+    const category = localizeCategory(rawCategory);
     currentCategory = category;
     currentLesson = null;
     setView('category');
@@ -712,40 +724,46 @@
     $('[data-category-description]').textContent = category.description;
     $('[data-category-status]').textContent = category.status;
 
-    const items = categoryLessons(category.id);
-    $('[data-category-count]').textContent = items.length + ' published lesson' + (items.length === 1 ? '' : 's');
-    renderCategoryProgress(category.id);
+    const items = categoryLessons(rawCategory.id);
+    $('[data-category-count]').textContent =
+      items.length + ' ' + (items.length === 1 ? tr('publishedLesson') : tr('publishedLessons'));
+    renderCategoryProgress(rawCategory.id);
 
     const host = $('[data-category-lessons]');
-    if (Array.isArray(category.learningPath) && category.learningPath.length) {
-      host.innerHTML = category.learningPath.map((stage) => {
+    if (Array.isArray(rawCategory.learningPath) && rawCategory.learningPath.length) {
+      host.innerHTML = rawCategory.learningPath.map((stage) => {
         const stageItems = items.filter((lesson) => lesson.stage === stage);
         if (!stageItems.length) return '';
+
         return '<section class="kl-learning-stage">' +
-          '<div class="kl-learning-stage-head"><span>' + escapeHtml(stage) + '</span><b>' + stageItems.length + ' lesson' + (stageItems.length === 1 ? '' : 's') + '</b></div>' +
+          '<div class="kl-learning-stage-head"><span>' + escapeHtml(stage) + '</span><b>' +
+            stageItems.length + ' lesson' + (stageItems.length === 1 ? '' : 's') +
+          '</b></div>' +
           '<div class="kl-learning-stage-grid">' +
-            stageItems.map((lesson) =>
-              '<article class="kl-lesson-card">' +
+            stageItems.map((rawLesson) => {
+              const lesson = localizeLesson(rawLesson);
+              return '<article class="kl-lesson-card">' +
                 '<div><span class="kl-lesson-mode">' + escapeHtml(lessonBadge(lesson)) + '</span><span class="kl-lesson-level">' + escapeHtml(lesson.level || '') + '</span></div>' +
                 '<h2>' + escapeHtml(lesson.title) + '</h2>' +
                 '<p>' + escapeHtml(lesson.summary) + '</p>' +
                 (lessonProgressLabel(lesson) ? '<small class="kl-lesson-progress">' + escapeHtml(lessonProgressLabel(lesson)) + '</small>' : '') +
-                '<button type="button" data-lesson-id="' + escapeHtml(lesson.id) + '">Open lesson →</button>' +
-              '</article>'
-            ).join('') +
+                '<button type="button" data-lesson-id="' + escapeHtml(rawLesson.id) + '">' + escapeHtml(tr('openLesson')) + '</button>' +
+              '</article>';
+            }).join('') +
           '</div>' +
         '</section>';
       }).join('');
     } else {
-      host.innerHTML = items.map((lesson) =>
-        '<article class="kl-lesson-card">' +
+      host.innerHTML = items.map((rawLesson) => {
+        const lesson = localizeLesson(rawLesson);
+        return '<article class="kl-lesson-card">' +
           '<div><span class="kl-lesson-mode">' + escapeHtml(lessonBadge(lesson)) + '</span><span class="kl-lesson-level">' + escapeHtml(lesson.level || '') + '</span></div>' +
           '<h2>' + escapeHtml(lesson.title) + '</h2>' +
           '<p>' + escapeHtml(lesson.summary) + '</p>' +
           (lessonProgressLabel(lesson) ? '<small class="kl-lesson-progress">' + escapeHtml(lessonProgressLabel(lesson)) + '</small>' : '') +
-          '<button type="button" data-lesson-id="' + escapeHtml(lesson.id) + '">Open lesson →</button>' +
-        '</article>'
-      ).join('');
+          '<button type="button" data-lesson-id="' + escapeHtml(rawLesson.id) + '">' + escapeHtml(tr('openLesson')) + '</button>' +
+        '</article>';
+      }).join('');
     }
 
     $('[data-category-empty]').hidden = items.length !== 0;
