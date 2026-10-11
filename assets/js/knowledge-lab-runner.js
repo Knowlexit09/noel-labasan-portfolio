@@ -811,10 +811,12 @@
   }
 
   function renderLesson(id, shouldRun = true) {
-    const lesson = byLesson.get(id);
-    if (!lesson) return renderHome();
+    const rawLesson = byLesson.get(id);
+    if (!rawLesson) return renderHome();
 
-    const category = byCategory.get(lesson.categoryId);
+    const lesson = localizeLesson(rawLesson);
+    const rawCategory = byCategory.get(rawLesson.categoryId);
+    const category = localizeCategory(rawCategory);
     currentLesson = lesson;
     currentCategory = category || null;
     setView('lesson');
@@ -828,9 +830,23 @@
       lesson.mode === 'reference' && lesson.verified ? '✓ Compile-tested in CI' :
       lesson.mode === 'proof' ? '✓ Real portfolio proof' : 'Reference';
 
+    const languageStatus = $('[data-language-status]');
+    if (languageStatus) {
+      if (activeLanguage === 'en') {
+        languageStatus.hidden = true;
+        languageStatus.classList.remove('is-curated', 'is-fallback');
+      } else {
+        const curated = Boolean(lessonTranslation(rawLesson.id));
+        languageStatus.hidden = false;
+        languageStatus.textContent = curated ? tr('curatedLanguage') : tr('englishFallback');
+        languageStatus.classList.toggle('is-curated', curated);
+        languageStatus.classList.toggle('is-fallback', !curated);
+      }
+    }
+
     $('[data-title]').textContent = lesson.title;
     $('[data-summary]').textContent = lesson.summary;
-    $('[data-objective]').innerHTML = '<strong>Lesson goal</strong>' + escapeHtml(lesson.objective);
+    $('[data-objective]').innerHTML = '<strong>' + escapeHtml(tr('lessonGoal')) + '</strong>' + escapeHtml(lesson.objective);
 
     const definitionPanel = $('[data-definition-lab]');
     const definitionText = String(lesson.definition || '').trim();
@@ -877,15 +893,17 @@
       renderProof(lesson);
     }
 
-    const peers = categoryLessons(lesson.categoryId);
-    const index = peers.findIndex((item) => item.id === lesson.id);
+    const peers = categoryLessons(rawLesson.categoryId);
+    const index = peers.findIndex((item) => item.id === rawLesson.id);
     const prev = peers[index - 1];
     const next = peers[index + 1];
+    const prevLesson = prev ? localizeLesson(prev) : null;
+    const nextLesson = next ? localizeLesson(next) : null;
 
     $('[data-prev]').disabled = !prev;
     $('[data-next]').disabled = !next;
-    $('[data-prev]').textContent = prev ? '← ' + prev.title : '← Previous';
-    $('[data-next]').textContent = next ? next.title + ' →' : 'Next →';
+    $('[data-prev]').textContent = prevLesson ? '← ' + prevLesson.title : '← Previous';
+    $('[data-next]').textContent = nextLesson ? nextLesson.title + ' →' : 'Next →';
     $('[data-prev]').dataset.targetLesson = prev?.id || '';
     $('[data-next]').dataset.targetLesson = next?.id || '';
 
