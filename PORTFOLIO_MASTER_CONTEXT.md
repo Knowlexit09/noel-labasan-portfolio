@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-09 (Asia/Manila) — Knowledge Lab V2 dedicated category site + proof-backed creative lessons**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab V3 learning paths + quizzes + shorthand + Big O interactive practice**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -331,62 +331,109 @@ Truthfulness rule: Seedlandia is shown as an ongoing personal game-development p
 
 ---
 
-# 11. Knowledge Lab — V2 DEDICATED SITE
+# 11. Knowledge Lab — V3 DEDICATED LEARNING SITE
 
-User directive refined on 2026-10-09:
+Core user goal:
 
-- Knowledge Lab content should live only at `/knowledge/`, not as inline cards/dialogs on the portfolio homepage.
-- Organize the learning site by category (HTML, CSS, JavaScript, Java, Photoshop, Canva, CapCut, Blender, Git/GitHub, Google Apps Script, Roblox Studio, etc.).
+- Knowledge Lab content lives only at `/knowledge/`, not as inline tutorial cards on the portfolio homepage.
+- The experience should be easier to understand than a typical documentation site: simple explanations first, then examples, practice, quizzes, tips/hacks, and real-world use.
+- Coding content should progress from Foundation → Applied / Intermediate → Advanced; do not claim a generic “Expert” track until the curriculum really supports it.
 - Coding lessons must be working/tested; no fake Run buttons.
-- Non-coding/creative lessons should show real proof, project artifacts, or video when available.
-- Empty roadmap categories are allowed, but do not invent lessons just to fill them.
+- Creative/non-coding lessons should show real proof, project artifacts, or video when available.
+- Empty roadmap categories are allowed internally/publicly if clearly marked, but do not invent lessons to fill space.
 
-Current V2 behavior:
+Current category structure:
 
-- portfolio homepage no longer renders the legacy Knowledge Lab section/dialog,
-- the sidebar Knowledge Lab module link now routes directly to `knowledge/`,
-- the existing `knowledgeLab` module switch controls whether that dedicated link is visible,
+- Code & Development: HTML, CSS, JavaScript, Java, Git & GitHub, Google Apps Script.
+- Creative & Multimedia: Photoshop, Canva, CapCut, Blender, Roblox Studio.
+- Java now has an explicit learning path: Foundation → OOP Foundations → Problem Solving → Applied Java.
+- Category pages show lesson counts, quiz progress, stages, and per-lesson quiz status saved locally in the browser.
+
+Teaching / lesson pattern:
+
+- simple explanation / analogy before formal terminology,
+- runnable browser code for HTML/CSS/JavaScript,
+- Java reference examples compile-tested and executed with Java 21 in CI,
+- Tip,
+- Useful Hack,
+- Common Mistake,
+- Expected Result,
+- Real Work use case,
+- optional Cleaner / Shorter Way (shorthand) section,
+- optional interactive explainer,
+- Knowledge Check quiz with answer explanations,
+- quiz progress saved via localStorage; current pass mark is 70%.
+
+Current shorthand rule:
+
+- shorter code is presented only when it is still readable,
+- lesson format compares Long Form vs Short Form,
+- explicitly includes when to use it and when not to force it,
+- current Java example: if/else vs ternary operator.
+
+Current Java learning examples:
+
+- defensive numeric input validation,
+- BigDecimal for exact money calculations,
+- ternary / cleaner conditional code,
+- OOP made simple: Class vs Object using a Car blueprint/object analogy,
+- Big O without scary math using the “find Juan in a student list” analogy.
+
+Big O lesson:
+
+- explains O(1), O(log n), O(n), O(n log n), and O(n²) as growth/scaling behavior,
+- does not claim Big O is exact runtime,
+- includes an interactive input-size simulator with rough work units for intuition,
+- Java example compares a linear scan with a HashMap ID lookup,
+- quiz checks scaling concepts and explicitly teaches that O(n) does not automatically mean “slow”.
+
+Quiz / growth system:
+
+- quizzes render one question at a time,
+- selected answers receive Correct / Not quite feedback plus explanation,
+- best score and pass status are saved locally on the visitor device,
+- category progress shows passed lesson quizzes,
+- current browser regression gate verifies quiz selection/advance behavior.
+
+Creative proof-backed lessons remain:
+
+- Photoshop — Smart Object / non-destructive product-layout workflow backed by the actual Gatchalian Meatshop campaign result,
+- Canva — reusable brand-system workflow backed by the actual Qyntro Daily portfolio video,
+- CapCut — vertical-ad story/pacing workflow backed by the actual Exponify PH campaign video,
+- Blender / Roblox Studio stay evidence-gated; do not publish invented workflow tutorials before real proof/walkthrough material is attached.
+
+Homepage / Admin behavior:
+
+- portfolio homepage does not render the legacy Knowledge Lab card/dialog section,
+- the `knowledgeLab` module switch controls the dedicated sidebar link,
+- sidebar Knowledge Lab link routes directly to `knowledge/`,
 - legacy server `content.knowledgeLab` rows are preserved but no longer drive homepage rendering,
-- Creative Admin no longer offers the legacy Knowledge Lab entry editor; it links to the dedicated site instead.
-
-Dedicated Knowledge Lab V2:
-
-- root `/knowledge/` opens a category dashboard rather than automatically opening the IDE,
-- categories are grouped into Code & Development and Creative & Multimedia,
-- current categories include HTML, CSS, JavaScript, Java, Git & GitHub, Google Apps Script, Photoshop, Canva, CapCut, Blender, and Roblox Studio,
-- categories may remain visible with zero lessons when evidence/testing is not ready,
-- HTML/CSS/JavaScript lessons use the real browser IDE,
-- Java lessons are reference-only in the browser and compile-tested with Java 21 in CI,
-- creative lessons use a proof view with real images/videos and links to actual portfolio case studies.
-
-Current proof-backed creative lessons:
-
-- Photoshop — Smart Object / non-destructive product-layout workflow, backed by the actual Gatchalian Meatshop campaign result,
-- Canva — reusable brand-system workflow, backed by the actual 51.7s Qyntro Daily portfolio video,
-- CapCut — vertical-ad story/pacing workflow, backed by the actual 36.48s Exponify PH campaign video,
-- Blender / Roblox Studio remain organized roadmap categories but intentionally have no published tutorial yet because a direct proof/walkthrough has not been attached.
+- Creative Admin links to the dedicated Knowledge Lab rather than exposing the retired legacy entry editor.
 
 Runner / security:
 
 - iframe uses `sandbox="allow-scripts allow-forms"`,
 - `allow-forms` is required so form submit events can reach lesson handlers,
-- outbound form submission still remains blocked by runner CSP `form-action 'none'`,
-- iframe still has no `allow-same-origin`,
+- outbound form submission remains blocked by runner CSP `form-action 'none'`,
+- iframe has no `allow-same-origin`,
 - network remains blocked via `connect-src 'none'`,
 - JavaScript executes only inside the isolated runner document,
-- runtime failures surface in Console rather than pretending the lesson worked.
+- runtime failures surface in Console instead of pretending the lesson worked.
 
-Regression / quality gates:
+Regression / quality gate status:
 
 - Playwright verifies Knowledge Lab home does not auto-open the IDE,
 - required category cards are present,
 - accessible-form lesson produces `Hello, Juan Dela Cruz!`,
 - JavaScript counter increments to `1`,
-- Java reference lessons do not expose a fake browser runner,
-- Java 21 examples are compiled/executed in CI and expected output is compared,
+- Java reference lessons do not expose a fake browser Run IDE,
+- all verified Java reference lessons are compiled/executed with Java 21 and expected output is compared,
+- shorthand panel rendering is checked,
+- Big O interactive preset update is checked,
+- quiz option selection / correct-answer feedback / question advance is checked,
 - proof-backed lessons are validated for real media + case-study links,
-- latest V2 validation Run #9: SUCCESS,
-- latest V2 GitHub Pages deployment Run #330: SUCCESS at head `66cdedacd848ab88cfd348bc4e7661abd0a0e6d8`.
+- latest V3 validation: **Validate Knowledge Lab IDE Run #18 — SUCCESS** at `c06c978e649ce564549aba524e0cbe25cf5e4efa`,
+- matching Pages deployment: **Run #341 — SUCCESS**.
 
 Do not Publish Live backend metadata on the user's behalf. The user remains the owner of Draft → Preview → Publish Live.
 
