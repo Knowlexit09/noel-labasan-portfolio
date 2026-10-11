@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_I18N={
-  "version": "2026-10-12-curated-tl-v2",
+  "version": "2026-10-12-curated-tl-v3",
   "defaultLanguage": "en",
   "languages": {
     "en": {
@@ -148,12 +148,16 @@
   "categories": {
     "tl": {
       "css": {
-        "description": "Step-by-step CSS course mula sa “Ano ang CSS?” hanggang responsive layouts, modern CSS, accessibility, architecture, at expert practice.",
-        "status": "Fundamentals → expert practice"
+        "description": "Comprehensive CSS course na hinati sa focused lessons mula fundamentals hanggang advanced/expert practice, may runnable examples, quizzes, shortcuts, at mini projects.",
+        "status": "127 focused lessons + projects"
       },
       "html": {
         "description": "Step-by-step HTML course mula sa “Ano ang HTML?” hanggang semantic structure, forms, accessibility, metadata, modern HTML, performance, at production-ready page structure.",
         "status": "Fundamentals → expert practice"
+      },
+      "css-reference": {
+        "description": "Searchable CSS lookup para sa selectors, properties, functions, units, at-rules, layout systems, at modern CSS.",
+        "status": "Quick reference"
       }
     }
   },
@@ -1718,6 +1722,34 @@
         "Head, Metadata & SEO": "Head, Metadata at SEO",
         "Modern HTML & Performance": "Modern HTML at Performance",
         "Architecture & Expert Practice": "Architecture at Expert Practice"
+      },
+      "css": {
+        "CSS Fundamentals": "CSS Fundamentals",
+        "Colors & Backgrounds": "Colors at Backgrounds",
+        "Typography & Text": "Typography at Text",
+        "Box Model & Sizing": "Box Model at Sizing",
+        "Selectors & Cascade": "Selectors at Cascade",
+        "Display & Positioning": "Display at Positioning",
+        "Flexbox": "Flexbox",
+        "Grid": "Grid",
+        "Responsive Design": "Responsive Design",
+        "Images & Visual Effects": "Images at Visual Effects",
+        "Transforms & Animation": "Transforms at Animation",
+        "Forms, Tables & UI": "Forms, Tables at UI",
+        "Modern CSS": "Modern CSS",
+        "Accessibility": "Accessibility",
+        "Architecture & Performance": "Architecture at Performance",
+        "Projects & Expert Practice": "Projects at Expert Practice"
+      },
+      "css-reference": {
+        "Core Syntax": "Core Syntax",
+        "Selectors": "Selectors",
+        "Sizing & Box Model": "Sizing at Box Model",
+        "Typography & Color": "Typography at Color",
+        "Layout": "Layout",
+        "Responsive & Media": "Responsive at Media",
+        "Transforms & Motion": "Transforms at Motion",
+        "Modern CSS": "Modern CSS"
       }
     }
   }
