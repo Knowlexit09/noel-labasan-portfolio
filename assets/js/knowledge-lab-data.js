@@ -10063,6 +10063,490 @@
       ]
     },
     {
+      "id": "css-project-profile-card",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 10,
+      "level": "Project",
+      "title": "Mini Project: Profile Card",
+      "summary": "Combine box model, typography, image treatment, and button states.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Card spacing",
+        "Avatar sizing",
+        "Typography hierarchy",
+        "Interactive states"
+      ],
+      "objective": "Build a compact reusable profile card.",
+      "explanation": "Start with semantic content, then create spacing and hierarchy. Keep the avatar responsive and buttons keyboard-visible.",
+      "tip": "Build the static card before adding hover motion.",
+      "hack": "Use gap on the card layout rather than child margins everywhere.",
+      "mistake": "Do not make hover the only way to reveal important actions.",
+      "expected": "A clean responsive profile card with readable hierarchy.",
+      "realUse": "Portfolio profiles, team cards, and account panels.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "profile",
+        "card"
+      ],
+      "html": "<article class=\"profile\"><div class=\"avatar\">NL</div><h1>Noel Labasan</h1><p>Multimedia + Development</p><div class=\"actions\"><a href=\"#\">Portfolio</a><button>Follow</button></div></article>",
+      "css": "body{font-family:system-ui;padding:28px;background:#eef4f8}.profile{max-width:360px;margin:auto;display:grid;gap:12px;padding:24px;background:white;border:1px solid #d7e3eb;border-radius:18px}.avatar{width:76px;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0d2235;color:#5bd6ff;font-weight:900}.profile h1,.profile p{margin:0}.actions{display:flex;gap:8px}.actions a,.actions button{padding:10px 13px;border-radius:9px;border:1px solid #0879b7;font:inherit;text-decoration:none}.actions button{background:#0879b7;color:white}.actions :focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property is best for consistent space between action controls?",
+          "options": [
+            "gap",
+            "z-index",
+            "opacity",
+            "float"
+          ],
+          "correctIndex": 0,
+          "explanation": "Gap expresses spacing between flex/grid items."
+        },
+        {
+          "question": "What should remain visible for keyboard users?",
+          "options": [
+            "Focus indication",
+            "Only hover",
+            "Only shadows",
+            "Only animation"
+          ],
+          "correctIndex": 0,
+          "explanation": "Keyboard users need visible focus."
+        }
+      ]
+    },
+    {
+      "id": "css-project-navbar",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 20,
+      "level": "Project",
+      "title": "Mini Project: Responsive Navbar",
+      "summary": "Combine Flexbox, wrapping, focus states, and mobile-friendly spacing.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Flex alignment",
+        "Flexible spacing",
+        "Navigation links",
+        "Focus states"
+      ],
+      "objective": "Build a simple responsive navigation bar.",
+      "explanation": "Keep source order logical and use Flexbox for alignment. Navigation remains usable before any advanced menu JavaScript.",
+      "tip": "Start with a simple wrap-capable layout.",
+      "hack": "Use margin-inline-start:auto to push one action to the far edge.",
+      "mistake": "Do not hide all navigation behind hover on touch devices.",
+      "expected": "A navigation bar that wraps gracefully and preserves keyboard focus.",
+      "realUse": "Portfolio headers, admin apps, and storefronts.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "responsive",
+        "navbar"
+      ],
+      "html": "<nav class=\"nav\" aria-label=\"Primary\"><strong>LOGO</strong><a href=\"#\">Home</a><a href=\"#\">Learn</a><a href=\"#\">Projects</a><a class=\"cta\" href=\"#\">Contact</a></nav>",
+      "css": "body{margin:0;font-family:system-ui;padding:20px}.nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 16px;background:#0d2235;border-radius:14px}.nav strong{color:#5bd6ff}.nav a{color:white;text-decoration:none}.nav .cta{margin-inline-start:auto;padding:8px 11px;border:1px solid #5bd6ff;border-radius:9px}.nav a:focus-visible{outline:3px solid #5bd6ff;outline-offset:3px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which layout system fits a one-row navigation bar well?",
+          "options": [
+            "Flexbox",
+            "Table layout",
+            "Float-only layout",
+            "Absolute positioning"
+          ],
+          "correctIndex": 0,
+          "explanation": "Flexbox is designed for one-dimensional alignment."
+        },
+        {
+          "question": "Why allow wrapping?",
+          "options": [
+            "To avoid unusably cramped links on narrow widths",
+            "To increase specificity",
+            "To hide links",
+            "To remove keyboard focus"
+          ],
+          "correctIndex": 0,
+          "explanation": "Wrapping preserves usable controls."
+        }
+      ]
+    },
+    {
+      "id": "css-project-product-grid",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 30,
+      "level": "Project",
+      "title": "Mini Project: Responsive Product Grid",
+      "summary": "Use auto-fit/minmax, cards, and fluid sizing for a real product layout.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Responsive Grid",
+        "minmax",
+        "Card structure",
+        "Fluid sizing"
+      ],
+      "objective": "Build a product grid that changes column count automatically.",
+      "explanation": "Instead of hard-coding many column counts, let Grid fit as many practical card widths as the container allows.",
+      "tip": "Choose minimum card width from actual content.",
+      "hack": "Use min(100%, 220px) inside minmax for very narrow containers.",
+      "mistake": "Do not set a minimum card width wider than small screens.",
+      "expected": "Cards automatically reflow from multiple columns to fewer columns.",
+      "realUse": "E-commerce, portfolios, search results, and catalogs.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "responsive",
+        "product",
+        "grid"
+      ],
+      "html": "<section class=\"products\"><article><div class=\"pic\">A</div><h2>Chicken</h2><p>₱120</p></article><article><div class=\"pic\">B</div><h2>Liempo</h2><p>₱145</p></article><article><div class=\"pic\">C</div><h2>Fish</h2><p>₱125</p></article></section>",
+      "css": "body{font-family:system-ui;padding:24px;background:#f3f6f9}.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}.products article{padding:16px;background:white;border:1px solid #d7e3eb;border-radius:14px}.pic{aspect-ratio:4/3;display:grid;place-items:center;background:#0d2235;color:#5bd6ff;border-radius:10px;font-size:34px}.products h2{margin-bottom:4px}.products p{margin:0;color:#0879b7;font-weight:800}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which Grid pattern lets column count adapt automatically?",
+          "options": [
+            "repeat(auto-fit, minmax(...))",
+            "position:fixed",
+            "float:left",
+            "display:inline"
+          ],
+          "correctIndex": 0,
+          "explanation": "Auto-fit/minmax creates responsive tracks."
+        },
+        {
+          "question": "What should determine the minimum card width?",
+          "options": [
+            "The real content and usability needs",
+            "A random phone model",
+            "The highest z-index",
+            "The font filename"
+          ],
+          "correctIndex": 0,
+          "explanation": "Content-driven sizing is more robust."
+        }
+      ]
+    },
+    {
+      "id": "css-project-pricing-cards",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 40,
+      "level": "Project",
+      "title": "Mini Project: Pricing Cards",
+      "summary": "Practice Grid alignment, highlighted states, buttons, and responsive hierarchy.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Grid cards",
+        "Visual priority",
+        "Buttons",
+        "Consistent spacing"
+      ],
+      "objective": "Build a pricing comparison that stays readable.",
+      "explanation": "Pricing cards need aligned structure and one clearly highlighted option without making other plans unreadable.",
+      "tip": "Use one visual emphasis signal for the featured plan.",
+      "hack": "Grid can align cards while each card uses Flexbox internally.",
+      "mistake": "Do not make the recommended plan understandable by color alone.",
+      "expected": "Three responsive pricing cards with one clearly featured option.",
+      "realUse": "SaaS pricing, memberships, and service packages.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "pricing",
+        "cards"
+      ],
+      "html": "<section class=\"pricing\"><article><h2>Starter</h2><strong>₱0</strong><p>Basic practice</p><button>Choose</button></article><article class=\"featured\"><span>Recommended</span><h2>Plus</h2><strong>₱499</strong><p>More projects</p><button>Choose</button></article><article><h2>Pro</h2><strong>₱999</strong><p>Advanced tools</p><button>Choose</button></article></section>",
+      "css": "body{font-family:system-ui;padding:24px;background:#f3f6f9}.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.pricing article{display:flex;flex-direction:column;gap:10px;padding:20px;background:white;border:1px solid #d7e3eb;border-radius:16px}.pricing strong{font-size:28px}.pricing button{margin-top:auto;padding:10px}.featured{border:3px solid #0879b7!important}.featured span{font-size:12px;font-weight:900;color:#0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Why use a text label like Recommended?",
+          "options": [
+            "So emphasis is not communicated by color alone",
+            "To increase specificity",
+            "To make Grid work",
+            "To load fonts"
+          ],
+          "correctIndex": 0,
+          "explanation": "Text provides another accessible cue."
+        },
+        {
+          "question": "Why use margin-top:auto on a button in a flex card?",
+          "options": [
+            "To push the action toward a consistent bottom position",
+            "To hide the button",
+            "To change source order",
+            "To create a table"
+          ],
+          "correctIndex": 0,
+          "explanation": "Auto margin can absorb remaining flex space."
+        }
+      ]
+    },
+    {
+      "id": "css-project-dashboard",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 50,
+      "level": "Project",
+      "title": "Mini Project: Dashboard Layout",
+      "summary": "Combine Grid page structure, cards, responsive collapse, and table overflow.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Dashboard Grid",
+        "Responsive columns",
+        "Cards",
+        "Overflow strategy"
+      ],
+      "objective": "Build a compact admin-style dashboard shell.",
+      "explanation": "Dashboards mix page layout, metrics, and data. Use Grid for structure and safe horizontal scrolling for wide tables.",
+      "tip": "Keep layout rules in parent containers and component visuals inside components.",
+      "hack": "Use repeat(auto-fit,minmax()) for metric cards.",
+      "mistake": "Do not absolutely position dashboard panels just to make them line up.",
+      "expected": "Metrics reflow responsively and the data table remains usable.",
+      "realUse": "Admin panels, analytics, POS dashboards.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "dashboard",
+        "layout"
+      ],
+      "html": "<main class=\"dash\"><section class=\"stats\"><article><b>Sales</b><strong>₱24,500</strong></article><article><b>Orders</b><strong>128</strong></article><article><b>Stock</b><strong>92%</strong></article></section><section class=\"table-wrap\"><table><tr><th>Item</th><th>Status</th><th>Value</th></tr><tr><td>Chicken</td><td>Good</td><td>₱12,300</td></tr></table></section></main>",
+      "css": "body{font-family:system-ui;padding:24px;background:#eef4f8}.dash{display:grid;gap:16px}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.stats article{display:grid;gap:6px;padding:18px;background:white;border-radius:14px}.stats strong{font-size:26px;color:#0879b7}.table-wrap{overflow-x:auto;background:white;border-radius:14px}table{width:100%;min-width:520px;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid #d8e3ea;text-align:left}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property keeps a wide table usable on narrow screens?",
+          "options": [
+            "overflow-x: auto",
+            "opacity:0",
+            "display:none",
+            "position:fixed"
+          ],
+          "correctIndex": 0,
+          "explanation": "Horizontal scrolling preserves readable data."
+        },
+        {
+          "question": "Which system fits dashboard page structure well?",
+          "options": [
+            "CSS Grid",
+            "Repeated br tags",
+            "Float-only layout",
+            "Text-indent"
+          ],
+          "correctIndex": 0,
+          "explanation": "Grid handles two-dimensional structure."
+        }
+      ]
+    },
+    {
+      "id": "css-project-modal",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 60,
+      "level": "Project",
+      "title": "Mini Project: Modal Styling",
+      "summary": "Style a native dialog with focus, backdrop, sizing, and restrained polish.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Dialog surface",
+        "Backdrop",
+        "Focus",
+        "Responsive sizing"
+      ],
+      "objective": "Create a usable modal visual system around native dialog markup.",
+      "explanation": "HTML dialog provides the semantic foundation. CSS controls readable width, spacing, backdrop, and focus.",
+      "tip": "Keep modal width constrained and content scrollable when needed.",
+      "hack": "Style dialog::backdrop instead of building a separate overlay element.",
+      "mistake": "Do not remove focus indicators or make the modal wider than small screens.",
+      "expected": "A centered dialog opens with a dim backdrop and clear close action.",
+      "realUse": "Confirmations, settings, and short workflows.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "modal",
+        "styling"
+      ],
+      "html": "<button id=\"open\" type=\"button\">Open settings</button><dialog id=\"modal\"><h2>Settings</h2><p>Native dialog, CSS polished.</p><form method=\"dialog\"><button>Close</button></form></dialog>",
+      "css": "body{font-family:system-ui;padding:30px}button{padding:10px 14px}dialog{width:min(90vw,480px);border:0;border-radius:16px;padding:24px;box-shadow:0 30px 80px #0005}dialog::backdrop{background:#0d2235aa}dialog button:focus-visible{outline:3px solid #5bd6ff;outline-offset:3px}",
+      "js": "document.querySelector(\"#open\").addEventListener(\"click\",()=>document.querySelector(\"#modal\").showModal());",
+      "quiz": [
+        {
+          "question": "What pseudo-element styles a dialog backdrop?",
+          "options": [
+            "dialog::backdrop",
+            "dialog::before only",
+            "body::overlay",
+            "@backdrop"
+          ],
+          "correctIndex": 0,
+          "explanation": "The native backdrop has its own pseudo-element."
+        },
+        {
+          "question": "What sizing pattern helps dialogs fit small screens?",
+          "options": [
+            "width: min(90vw, 480px)",
+            "width:1200px",
+            "fixed pixel positioning",
+            "white-space:nowrap"
+          ],
+          "correctIndex": 0,
+          "explanation": "It stays fluid with a maximum."
+        }
+      ]
+    },
+    {
+      "id": "css-project-landing-hero",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 70,
+      "level": "Project",
+      "title": "Mini Project: Responsive Landing Hero",
+      "summary": "Combine fluid type, responsive layout, gradients, buttons, and readable content width.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Fluid typography",
+        "Responsive Grid",
+        "Gradient surface",
+        "CTA states"
+      ],
+      "objective": "Build a polished landing-page hero.",
+      "explanation": "A hero needs hierarchy more than visual noise. Use fluid type within limits and a layout that stacks gracefully.",
+      "tip": "Keep the main message readable before decorative effects.",
+      "hack": "Use clamp() for controlled heading scaling.",
+      "mistake": "Do not place critical text inside a background image.",
+      "expected": "A two-column hero becomes a single-column layout on narrow screens.",
+      "realUse": "Portfolio homepages, product launches, and campaign pages.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "mini",
+        "project",
+        "responsive",
+        "landing",
+        "hero"
+      ],
+      "html": "<section class=\"hero\"><div><span>KNOWLEDGE LAB</span><h1>Learn by building.</h1><p>Simple lessons, real code, real practice.</p><div class=\"actions\"><a href=\"#\">Start learning</a><a href=\"#\">View projects</a></div></div><div class=\"art\">CSS</div></section>",
+      "css": "body{margin:0;padding:24px;font-family:system-ui;background:#071724;color:white}.hero{max-width:1000px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:clamp(24px,6vw,64px);background:linear-gradient(135deg,#0d2235,#0879b7);border-radius:24px}.hero span{color:#8be4ff;font-weight:900}.hero h1{font-size:clamp(2.5rem,7vw,5.5rem);line-height:.95;margin:.2em 0}.hero p{max-width:50ch;color:#d7e7ef}.actions{display:flex;flex-wrap:wrap;gap:10px}.actions a{padding:11px 14px;border-radius:10px;background:white;color:#0d2235;text-decoration:none}.art{aspect-ratio:1;display:grid;place-items:center;border-radius:22px;background:#0d2235;color:#5bd6ff;font-size:clamp(3rem,10vw,7rem);font-weight:950}@media(max-width:700px){.hero{grid-template-columns:1fr}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What makes the heading fluid but bounded?",
+          "options": [
+            "clamp()",
+            "z-index",
+            "float",
+            "text-indent"
+          ],
+          "correctIndex": 0,
+          "explanation": "Clamp provides minimum, preferred, and maximum sizes."
+        },
+        {
+          "question": "Why keep hero text as real HTML?",
+          "options": [
+            "It remains readable, selectable, and accessible",
+            "To increase image quality",
+            "To make gradients load",
+            "To avoid CSS"
+          ],
+          "correctIndex": 0,
+          "explanation": "Critical text belongs in document content."
+        }
+      ]
+    },
+    {
+      "id": "css-project-final-design-system",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 80,
+      "level": "Project",
+      "title": "Final CSS Project: Mini Design System",
+      "summary": "Combine tokens, components, responsive rules, accessibility, and maintainable architecture.",
+      "definition": "A guided CSS project that combines multiple earlier lessons into one practical build.",
+      "learn": [
+        "Design tokens",
+        "Reusable buttons/cards",
+        "Responsive layout",
+        "Focus and reduced motion",
+        "Maintainable CSS"
+      ],
+      "objective": "Build a small reusable CSS system rather than one isolated page.",
+      "explanation": "Expert CSS is about systems: predictable tokens, reusable component rules, controlled specificity, responsive behavior, and accessible states.",
+      "tip": "Define a small token set first, then build components from those decisions.",
+      "hack": "Use custom properties for repeated design decisions and low-specificity component selectors.",
+      "mistake": "Do not create dozens of tokens and utilities before real components need them.",
+      "expected": "Buttons, cards, and layout share consistent tokens and responsive behavior.",
+      "realUse": "Design systems, multi-page portfolios, dashboards, and product interfaces.",
+      "tags": [
+        "css",
+        "project",
+        "practice",
+        "final",
+        "css",
+        "project",
+        "mini",
+        "design"
+      ],
+      "html": "<main class=\"shell\"><header><span class=\"eyebrow\">SYSTEM</span><h1>Mini design system</h1></header><section class=\"grid\"><article class=\"card\"><h2>Card A</h2><p>Reusable surface.</p><button class=\"btn btn-primary\">Primary</button></article><article class=\"card\"><h2>Card B</h2><p>Same tokens, same rhythm.</p><button class=\"btn\">Secondary</button></article></section></main>",
+      "css": ":root{--brand:#0879b7;--ink:#17344b;--muted:#607086;--surface:#fff;--page:#eef4f8;--radius:16px;--space:clamp(14px,2vw,22px)}*,*::before,*::after{box-sizing:border-box}body{margin:0;padding:24px;font-family:system-ui;background:var(--page);color:var(--ink)}.shell{max-width:900px;margin:auto}.eyebrow{color:var(--brand);font-size:.75rem;font-weight:900;letter-spacing:.1em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space)}.card{display:grid;gap:12px;padding:var(--space);background:var(--surface);border:1px solid #d7e3eb;border-radius:var(--radius)}.card h2,.card p{margin:0}.card p{color:var(--muted)}.btn{justify-self:start;padding:10px 13px;border:1px solid var(--brand);border-radius:9px;background:white;color:var(--brand);font:inherit}.btn-primary{background:var(--brand);color:white}.btn:focus-visible{outline:3px solid #5bd6ff;outline-offset:3px}@media(prefers-reduced-motion:no-preference){.btn{transition:transform 140ms ease}.btn:hover{transform:translateY(-2px)}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What should design tokens represent?",
+          "options": [
+            "Reusable design decisions",
+            "Random one-off numbers",
+            "Only animation names",
+            "Only HTML tags"
+          ],
+          "correctIndex": 0,
+          "explanation": "Tokens encode recurring design choices."
+        },
+        {
+          "question": "What is a strong sign of expert CSS?",
+          "options": [
+            "Readable, reusable, accessible rules that are easy to change",
+            "Highest specificity possible",
+            "Most properties per selector",
+            "Most animations"
+          ],
+          "correctIndex": 0,
+          "explanation": "Maintainability and usability matter more than cleverness."
+        }
+      ]
+    },
+    {
       "id": "js-dom-counter",
       "categoryId": "javascript",
       "mode": "code",
