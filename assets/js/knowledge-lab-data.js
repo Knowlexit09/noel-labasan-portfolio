@@ -3615,7 +3615,14 @@
         "shortCode": "background: #0c1d2c linear-gradient(...) no-repeat;",
         "note": "The `background` shorthand can combine several background settings.",
         "caution": "Use the long form when you want clarity or need to avoid accidentally resetting another background sub-property."
-      }
+      },
+      "definition": "CSS color and background properties control text color, surface color, and the visual paint layers behind content.",
+      "learn": [
+        "Text color vs background color",
+        "Common CSS color formats",
+        "Contrast and readability",
+        "When to use reusable color tokens"
+      ]
     },
     {
       "id": "css-units-sizing",
@@ -3668,6 +3675,13 @@
           "correctIndex": 1,
           "explanation": "`min()` chooses the smaller result, so the element can shrink while keeping a maximum practical width."
         }
+      ],
+      "definition": "CSS units describe how numeric values are measured—fixed, relative to fonts, relative to containers, or relative to the viewport.",
+      "learn": [
+        "px and percentages",
+        "em and rem",
+        "vw and vh",
+        "How to choose a unit based on the behavior you want"
       ]
     },
     {
@@ -3721,6 +3735,13 @@
           "correctIndex": 1,
           "explanation": "A small, consistent hierarchy makes content easier to scan."
         }
+      ],
+      "definition": "CSS typography is the system of font family, size, weight, line height, spacing, and hierarchy used to make text readable and scannable.",
+      "learn": [
+        "Font family and fallbacks",
+        "Font size and weight",
+        "Line height",
+        "Readable hierarchy"
       ]
     },
     {
@@ -3832,6 +3853,13 @@
           "correctIndex": 1,
           "explanation": "Subtle separation helps hierarchy without making every element compete for attention."
         }
+      ],
+      "definition": "Borders define box edges, border-radius rounds corners, and box-shadow creates visual depth or separation without changing document meaning.",
+      "learn": [
+        "Border width/style/color",
+        "Rounded corners",
+        "Box shadows",
+        "How to avoid over-styling surfaces"
       ]
     },
     {
@@ -3943,6 +3971,13 @@
           "correctIndex": 0,
           "explanation": "`inline-block` keeps inline placement while behaving more like a box."
         }
+      ],
+      "definition": "The display property controls an element's layout box behavior, while visibility-related rules control whether it is shown and whether it still occupies space.",
+      "learn": [
+        "Block and inline flow",
+        "inline-block",
+        "display:none",
+        "visibility:hidden"
       ]
     },
     {
@@ -4182,6 +4217,13 @@
           "correctIndex": 0,
           "explanation": "Horizontal scrolling preserves the content without forcing the entire page wider."
         }
+      ],
+      "definition": "box-sizing controls what declared width/height include; overflow controls what happens when content does not fit inside its box.",
+      "learn": [
+        "content-box vs border-box",
+        "Predictable sizing",
+        "Horizontal and vertical overflow",
+        "When scrolling is safer than clipping"
       ]
     },
     {
@@ -4233,6 +4275,13 @@
           "correctIndex": 0,
           "explanation": "Attribute selectors match elements based on attribute presence or value."
         }
+      ],
+      "definition": "Selectors choose elements to style, while combinators describe relationships such as descendant, direct child, or sibling.",
+      "learn": [
+        "Type/class/attribute selectors",
+        "Descendant selector",
+        "Direct-child selector",
+        "Sibling combinators"
       ]
     },
     {
@@ -4286,6 +4335,13 @@
           "correctIndex": 1,
           "explanation": "Keyboard users need a visible focus indicator."
         }
+      ],
+      "definition": "Pseudo-classes represent states or relationships such as :hover or :focus-visible; pseudo-elements target conceptual subparts such as ::before or ::marker.",
+      "learn": [
+        "Interactive pseudo-classes",
+        "Structural pseudo-classes",
+        "Pseudo-elements",
+        "Accessible focus styling"
       ]
     },
     {
@@ -4399,6 +4455,13 @@
           "correctIndex": 0,
           "explanation": "`position: sticky` participates in flow until its sticky threshold takes effect."
         }
+      ],
+      "definition": "CSS positioning changes how an element participates in normal flow or is placed relative to a containing block; z-index controls stacking within stacking rules.",
+      "learn": [
+        "relative and absolute positioning",
+        "fixed and sticky positioning",
+        "Inset offsets",
+        "z-index and stacking behavior"
       ]
     },
     {
@@ -4941,6 +5004,13 @@
           "correctIndex": 0,
           "explanation": "`minmax()` gives a lower bound while still allowing the track to grow."
         }
+      ],
+      "definition": "A responsive Grid can use repeat(), auto-fit/auto-fill, and minmax() so column count changes automatically as available space changes.",
+      "learn": [
+        "repeat()",
+        "auto-fit and minmax()",
+        "Content-driven minimum widths",
+        "Responsive cards without many breakpoints"
       ]
     },
     {
@@ -4992,6 +5062,13 @@
           "correctIndex": 0,
           "explanation": "For smoothly scaling values, functions like `clamp()` can replace some breakpoint-only changes."
         }
+      ],
+      "definition": "CSS math functions such as min(), max(), and clamp() create values that respond to available space while staying inside useful limits.",
+      "learn": [
+        "min()",
+        "max()",
+        "clamp()",
+        "Fluid type and spacing without excessive media queries"
       ]
     },
     {
@@ -5163,6 +5240,13 @@
           "correctIndex": 0,
           "explanation": "`:where()` is intentionally zero-specificity, which makes defaults easier to override."
         }
+      ],
+      "definition": "Modern selectors such as :is(), :where(), and :has() reduce repetition and allow more expressive relationships while giving different specificity behavior.",
+      "learn": [
+        ":is() grouping",
+        ":where() zero specificity",
+        ":has() relational matching",
+        "When advanced selectors improve—not complicate—CSS"
       ]
     },
     {
@@ -5631,7 +5715,14 @@
         "shortCode": "transition: transform 180ms ease;",
         "note": "The shorthand keeps a simple single-property transition compact.",
         "caution": "For many unrelated properties or complex timing, explicit rules may be easier to review."
-      }
+      },
+      "definition": "Transforms visually move, rotate, or scale elements; transitions animate a property change between states over time.",
+      "learn": [
+        "translate/scale/rotate",
+        "Transition properties",
+        "Duration and easing",
+        "Purposeful motion for interaction feedback"
+      ]
     },
     {
       "id": "css-keyframes-reduced-motion",
@@ -5684,6 +5775,13 @@
           "correctIndex": 0,
           "explanation": "It lets sites reduce non-essential motion for users who request it."
         }
+      ],
+      "definition": "@keyframes defines multi-step animation, while prefers-reduced-motion lets CSS reduce or remove non-essential movement for users who request it.",
+      "learn": [
+        "@keyframes",
+        "Animation shorthand",
+        "Iteration and timing",
+        "Reduced-motion accessibility"
       ]
     },
     {
@@ -5805,6 +5903,13 @@
           "correctIndex": 0,
           "explanation": "Strong CSS solves the product problem while staying maintainable."
         }
+      ],
+      "definition": "This expert-practice lesson combines tokens, responsive layout, container queries, focus states, fluid sizing, and reduced-motion support in one resilient component.",
+      "learn": [
+        "Integrating multiple CSS systems",
+        "Container-aware layout",
+        "Accessible focus and motion",
+        "Maintainable production component design"
       ]
     },
     {
@@ -5857,6 +5962,13 @@
           "correctIndex": 0,
           "explanation": "Naming conventions are useful when they make component relationships and scope easier to understand."
         }
+      ],
+      "definition": "Component CSS organizes styles around reusable UI parts with predictable scope, variants, states, and shared design tokens.",
+      "learn": [
+        "Component boundaries",
+        "Variants and state classes",
+        "Low-specificity selectors",
+        "Separating layout rules from component visuals"
       ]
     },
     {
@@ -5910,6 +6022,13 @@
           "correctIndex": 0,
           "explanation": "Outline is useful for visual debugging because it does not take up layout space."
         }
+      ],
+      "definition": "CSS debugging is the process of checking matched selectors, the cascade, computed values, box model, layout mode, overflow, and stacking before rewriting code.",
+      "learn": [
+        "Matched and crossed-out rules",
+        "Computed styles",
+        "Flex/Grid overlays",
+        "Change-one-variable-at-a-time debugging"
       ]
     },
     {
