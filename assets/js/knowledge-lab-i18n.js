@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_I18N={
-  "version": "2026-10-12-curated-tl-v3",
+  "version": "2026-10-12-curated-tl-v4",
   "defaultLanguage": "en",
   "languages": {
     "en": {
@@ -1704,6 +1704,48 @@
             ],
             "correctIndex": 0,
             "explanation": "Hindi reliable na kapalit ng label ang placeholder."
+          }
+        ]
+      },
+      "css-color-codes-explorer": {
+        "title": "CSS Colors: names, HEX, RGB, at complete color codes",
+        "summary": "Hindi kailangang kabisaduhin ang lahat ng CSS colors. Intindihin ang formats, tapos gamitin ang searchable explorer para sa lahat ng 148 standardized opaque named colors.",
+        "definition": "Puwedeng isulat ang CSS colors bilang named color keywords, HEX values, rgb() values, hsl() values, at iba pang modern color functions. May 148 standardized opaque named colors ang CSS gaya ng `tomato`, `royalblue`, at `rebeccapurple`. Special color keywords naman ang `transparent` at `currentColor`.",
+        "learn": [
+          "Paano gumagana ang named CSS colors",
+          "Paano nagre-represent ng parehong sRGB color ang HEX at RGB",
+          "Paano hanapin ang lahat ng 148 standardized opaque named colors",
+          "Bakit special keywords ang `transparent` at `currentColor`"
+        ],
+        "objective": "Hindi manghula ng color code: maintindihan ang common CSS color formats at mabilis mahanap ang exact code kapag kailangan.",
+        "explanation": "Hindi practical na kabisaduhin ang 148 color names at lahat ng HEX/RGB codes nila. Mas mahalaga na marunong kang bumasa ng format at may mabilis kang reference.\n\nHalimbawa, pare-parehong kulay ang `tomato`, `#FF6347`, at `rgb(255 99 71)`. Maganda ang named colors para madaling basahin ang code; mas convenient naman ang HEX/RGB kapag tumutugma ka sa brand palette o design handoff.",
+        "tip": "Kapag reusable brand color, ilagay ito sa custom property gaya ng `--brand: #0879B7;` para isang source lang ang babaguhin.",
+        "hack": "Kung pangalan lang ng kulay ang naaalala mo, i-search mo ang name. Kung HEX o RGB naman ang hawak mo, puwede mo rin iyong i-search para makita ang matching CSS named color.",
+        "mistake": "Huwag umasa sa pangalan lang para hulaan ang actual shade. May historical aliases at may ilang color names na hindi intuitive ang brightness relationship.",
+        "expected": "Makikita ang searchable grid ng lahat ng 148 opaque named CSS colors, kasama ang CSS name, HEX code, at RGB value.",
+        "realUse": "Useful sa mabilisang prototyping, design handoff, pag-debug ng unknown color name, CSS learning, at pagpili ng starter colors bago gawing design tokens.",
+        "quiz": [
+          {
+            "question": "Kailangan bang kabisaduhin ang lahat ng CSS named color codes?",
+            "options": [
+              "Hindi—intindihin ang formats at gumamit ng reliable reference",
+              "Oo, lahat ng 148",
+              "Dark colors lang",
+              "HEX values lang"
+            ],
+            "correctIndex": 0,
+            "explanation": "Mas mahalaga ang understanding at mabilis na lookup kaysa memorization."
+          },
+          {
+            "question": "Alin ang tatlong values na pareho ang kulay?",
+            "options": [
+              "tomato, #FF6347, at rgb(255 99 71)",
+              "blue, #FF0000, at rgb(0 255 0)",
+              "white, #000000, at rgb(255 0 255)",
+              "navy, #FFFF00, at rgb(255 255 255)"
+            ],
+            "correctIndex": 0,
+            "explanation": "Ang `tomato` ay #FF6347, katumbas ng RGB 255 99 71."
           }
         ]
       }
