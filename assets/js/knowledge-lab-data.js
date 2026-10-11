@@ -1,13 +1,25 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v5",
+  "version": "2026-10-12-v6",
   "categories": [
     {
       "id": "html",
       "label": "HTML",
       "group": "Code & Development",
       "icon": "<>",
-      "status": "Live runner",
-      "description": "Semantic structure, forms, accessibility, and practical page patterns."
+      "status": "Complete fundamentals → expert practice",
+      "description": "A complete HTML course from “What is HTML?” through semantic structure, forms, accessibility, metadata, modern HTML, performance, and production-ready document patterns.",
+      "learningPath": [
+        "HTML Fundamentals",
+        "Text & Semantic Content",
+        "Links & Images",
+        "Forms & User Input",
+        "Tables & Structured Data",
+        "Media & Embeds",
+        "Accessibility by Default",
+        "Head, Metadata & SEO",
+        "Modern HTML & Performance",
+        "Architecture & Expert Practice"
+      ]
     },
     {
       "id": "css",
@@ -112,115 +124,3057 @@
   ],
   "lessons": [
     {
-      "id": "html-clean-document",
       "categoryId": "html",
       "mode": "code",
       "level": "Beginner",
-      "title": "Build a clean semantic page section",
-      "summary": "Use semantic HTML for a small content card, then verify the button behavior in the live browser runner.",
-      "objective": "Practice meaningful elements and a simple interaction without relying on generic div-only markup.",
-      "explanation": "Semantic elements describe what content means, not just how it looks. A clear heading, supporting copy, and an explicit button make the structure easier to understand and maintain.\n\nThe browser runner renders the actual HTML, CSS, and JavaScript shown in the editors.",
-      "tip": "Use semantic elements when the content has a recognizable purpose. Keep class names for styling, not for replacing document meaning.",
-      "hack": "Use Ctrl/⌘ + Enter to rerun the lesson after editing the code.",
-      "mistake": "Do not put visible content inside <head>. Visible page content belongs inside <body>.",
-      "expected": "The card appears and the button text changes to “It works ✓” when clicked.",
-      "realUse": "The same pattern is useful for portfolio cards, callouts, documentation panels, and small dashboard modules.",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
       "tags": [
         "html",
-        "semantic",
-        "button",
-        "structure",
-        "browser"
+        "html fundamentals",
+        "what",
+        "is",
+        "html"
       ],
-      "html": "<main class=\"intro-card\">\n  <p class=\"eyebrow\">KNOWLEDGE LAB</p>\n  <h1>Semantic HTML that still looks good.</h1>\n  <p>Structure first. Styling second. Behavior last.</p>\n  <button type=\"button\">Test interaction</button>\n</main>",
-      "css": "body {\n  margin: 0;\n  min-height: 100vh;\n  display: grid;\n  place-items: center;\n  font-family: system-ui, sans-serif;\n  background: #eef6fb;\n}\n.intro-card {\n  width: min(440px, 88vw);\n  padding: 28px;\n  border-radius: 20px;\n  background: white;\n  box-shadow: 0 18px 45px #16324a22;\n}\n.eyebrow { color: #0879b7; font-weight: 800; font-size: 12px; letter-spacing: .08em; }\nbutton { padding: 10px 14px; border: 0; border-radius: 10px; background: #0c8bc7; color: white; font-weight: 800; }",
-      "js": "const button = document.querySelector(\"button\");\nbutton.addEventListener(\"click\", () => {\n  button.textContent = \"It works ✓\";\n});",
-      "stage": "Foundation",
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-what-is-html",
+      "stage": "HTML Fundamentals",
       "order": 10,
+      "title": "What is HTML?",
+      "summary": "Start with the real role of HTML: it gives meaning and structure to web content.",
+      "definition": "HTML means HyperText Markup Language. It is the markup language browsers use to describe the structure and meaning of content on a web page.",
+      "learn": [
+        "What HTML stands for",
+        "Why HTML is called markup",
+        "How HTML works with CSS and JavaScript",
+        "What the browser does with HTML"
+      ],
+      "objective": "Understand HTML before memorizing tags.",
+      "explanation": "Think of a web page as a document first. HTML labels the parts: this is a heading, paragraph, navigation area, image, table, or form. CSS controls presentation, while JavaScript can add behavior.\n\nHTML is not mainly for making things look pretty. Its first job is to describe what the content is.",
+      "tip": "Ask “What is this content?” before asking “How should it look?”",
+      "hack": "Temporarily disable CSS in DevTools. Well-structured HTML should still make sense in reading order.",
+      "mistake": "Do not choose tags only because of their default appearance. Choose them for meaning.",
+      "expected": "The browser shows a heading, paragraph, and list with meaningful structure.",
+      "html": "<main><h1>Hello, HTML</h1><p>HTML gives this page structure and meaning.</p><ul><li>Heading</li><li>Paragraph</li><li>List</li></ul></main>",
       "quiz": [
         {
-          "question": "Where should visible page content normally go?",
+          "question": "What does HTML stand for?",
           "options": [
-            "Inside <head>",
-            "Inside <body>",
-            "Inside <title>",
-            "Inside <meta>"
+            "HyperText Markup Language",
+            "High Transfer Machine Language",
+            "Hyperlink Text Mode Layout",
+            "Home Tool Markup Logic"
           ],
-          "correctIndex": 1,
-          "explanation": "Visible document content belongs in <body>. <head> is for metadata and linked resources."
+          "correctIndex": 0,
+          "explanation": "HTML stands for HyperText Markup Language."
         },
         {
-          "question": "Why use semantic elements?",
+          "question": "What is HTML's main job?",
           "options": [
-            "They always make pages faster",
-            "They describe the purpose of content",
-            "They replace CSS",
-            "They remove the need for JavaScript"
+            "Describe structure and meaning",
+            "Choose database indexes",
+            "Compile Java",
+            "Replace CSS"
           ],
-          "correctIndex": 1,
-          "explanation": "Semantic elements communicate meaning and structure, which helps maintainability and accessibility."
+          "correctIndex": 0,
+          "explanation": "HTML describes the structure and semantics of web content."
         }
       ]
     },
     {
-      "id": "html-accessible-form",
       "categoryId": "html",
       "mode": "code",
       "level": "Beginner",
-      "title": "Make a usable form",
-      "summary": "Build a labeled input and handle submission without sending data anywhere.",
-      "objective": "Practice label/input pairing, button types, and safe client-side form handling.",
-      "explanation": "A usable form needs more than an input box. A label tells users and assistive technology what the field is for. A submit button gives the form one clear action.\n\nThis demo prevents the default submission and writes the entered name into the page, so no request leaves the sandbox.",
-      "tip": "Connect <label for=\"name\"> to <input id=\"name\">. Clicking the label focuses the input too.",
-      "hack": "Use FormData when a form has several fields so you do not manually read each field one by one.",
-      "mistake": "Do not use placeholder text as the only label. Placeholders disappear while typing and are weaker for accessibility.",
-      "expected": "Type a name, choose Submit, and the greeting updates below the form without a page reload.",
-      "realUse": "The same pattern appears in search forms, contact forms, sign-in screens, and admin tools.",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
       "tags": [
         "html",
-        "form",
-        "accessibility",
-        "label",
-        "submit"
+        "html fundamentals",
+        "anatomy",
+        "of",
+        "a",
+        "complete",
+        "html",
+        "document"
       ],
-      "html": "<form id=\"helloForm\">\n  <label for=\"name\">Your name</label>\n  <input id=\"name\" name=\"name\" autocomplete=\"name\" required>\n  <button type=\"submit\">Submit</button>\n</form>\n<p id=\"message\" role=\"status\">Waiting for a name…</p>",
-      "css": "body { font-family: system-ui, sans-serif; padding: 32px; background: #f6f8fb; color: #142235; }\nform { display: grid; gap: 10px; max-width: 360px; }\nlabel { font-weight: 700; }\ninput { padding: 11px 12px; border: 1px solid #b9c7d4; border-radius: 9px; }\nbutton { width: max-content; padding: 9px 13px; border: 0; border-radius: 9px; background: #0879b7; color: white; font-weight: 700; }\n#message { margin-top: 18px; color: #31526b; }",
-      "js": "const form = document.querySelector(\"#helloForm\");\nconst message = document.querySelector(\"#message\");\n\nform.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  const data = new FormData(form);\n  const name = String(data.get(\"name\") || \"\").trim();\n  message.textContent = name ? `Hello, ${name}!` : \"Please enter a name.\";\n});",
-      "stage": "Foundation",
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-document-anatomy",
+      "stage": "HTML Fundamentals",
       "order": 20,
+      "title": "Anatomy of a complete HTML document",
+      "summary": "Learn what belongs in doctype, html, head, and body.",
+      "definition": "A standard HTML document begins with `<!doctype html>`, then contains an `<html>` root with a `<head>` for metadata and a `<body>` for visible page content.",
+      "learn": [
+        "DOCTYPE",
+        "html root",
+        "head metadata",
+        "body content"
+      ],
+      "objective": "Recognize the minimum structure of a real HTML page.",
+      "explanation": "The doctype selects modern standards mode. The html element wraps the document. The head holds metadata such as charset and title. The body contains the content users read and interact with.",
+      "tip": "Add the document language on the html element early.",
+      "hack": "Editor snippets can generate the shell, but you should still understand every generated line.",
+      "mistake": "Do not place visible headings or paragraphs inside the head.",
+      "expected": "Only body content appears in the result; head metadata stays behind the scenes.",
+      "html": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Document anatomy</title></head><body><main><h1>My page</h1><p>This content belongs in the body.</p></main></body></html>",
       "quiz": [
         {
-          "question": "What connects a label to an input?",
+          "question": "Where does visible page content normally belong?",
           "options": [
-            "Matching class names",
-            "The label's for value and the input's id",
-            "The placeholder",
-            "The input's name only"
+            "body",
+            "head",
+            "doctype",
+            "meta"
           ],
-          "correctIndex": 1,
-          "explanation": "A label's for attribute should match the input's id."
+          "correctIndex": 0,
+          "explanation": "Visible content belongs in the body."
         },
         {
-          "question": "Why call event.preventDefault() in this demo?",
+          "question": "What is the doctype for?",
           "options": [
-            "To remove the button",
-            "To stop the normal page submission/reload",
-            "To validate CSS",
-            "To clear the input"
+            "Modern standards mode",
+            "Creating headings",
+            "Loading CSS only",
+            "Submitting forms"
           ],
-          "correctIndex": 1,
-          "explanation": "The lesson handles the form in JavaScript, so the default submission is prevented."
+          "correctIndex": 0,
+          "explanation": "The HTML doctype selects modern standards behavior."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "html fundamentals",
+        "elements",
+        "tags",
+        "and",
+        "attributes"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-elements-tags-attributes",
+      "stage": "HTML Fundamentals",
+      "order": 30,
+      "title": "Elements, tags, and attributes",
+      "summary": "Separate three terms that beginners often mix together.",
+      "definition": "An HTML element is the complete unit. Tags mark the element, while attributes add information or configuration inside a start tag.",
+      "learn": [
+        "Element",
+        "Start/end tags",
+        "Attributes",
+        "Void elements"
+      ],
+      "objective": "Read HTML syntax precisely without making it feel complicated.",
+      "explanation": "In `<a href=\"#about\">About</a>`, the anchor element includes the opening tag, content, and closing tag. `href` is an attribute. Some elements such as img and input are void elements and do not have closing tags.",
+      "tip": "Identify the element first, then inspect the attributes that change its behavior.",
+      "hack": "Boolean attributes such as `disabled` are true by being present.",
+      "mistake": "Do not invent closing tags for void elements such as img, input, br, or meta.",
+      "expected": "The link jumps to the About section and the disabled button cannot be activated.",
+      "html": "<main><a href=\"#about\">Go to About</a> <button disabled>Unavailable</button><section id=\"about\"><h2>About</h2><p>Attributes configure elements.</p></section></main>",
+      "quiz": [
+        {
+          "question": "In an anchor tag, what is href?",
+          "options": [
+            "Attribute",
+            "Element name",
+            "Closing tag",
+            "Comment"
+          ],
+          "correctIndex": 0,
+          "explanation": "href is an attribute."
         },
         {
-          "question": "Is placeholder text a good replacement for a label?",
+          "question": "Which is a void element?",
           "options": [
-            "Yes, always",
-            "Only on desktop",
-            "No—use a real label",
-            "Only for required fields"
+            "img",
+            "section",
+            "p",
+            "button"
           ],
-          "correctIndex": 2,
-          "explanation": "A real label stays available while the user types and is better for accessibility."
+          "correctIndex": 0,
+          "explanation": "img is a void element."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "html fundamentals",
+        "nesting",
+        "parent",
+        "child",
+        "and",
+        "sibling",
+        "elements"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-nesting-parent-child",
+      "stage": "HTML Fundamentals",
+      "order": 40,
+      "title": "Nesting, parent, child, and sibling elements",
+      "summary": "Understand the tree structure that makes HTML predictable.",
+      "definition": "HTML elements can contain other elements, creating parent, child, descendant, and sibling relationships.",
+      "learn": [
+        "Proper nesting",
+        "Parent/child",
+        "Siblings",
+        "Closing order"
+      ],
+      "objective": "Build valid nested markup and understand its structure.",
+      "explanation": "If a section contains an h2 and p, the section is their parent and the h2 and p are siblings. Nested elements normally close in reverse order of how they opened.",
+      "tip": "Indent nested HTML consistently so structural mistakes are easy to see.",
+      "hack": "Collapse sections in your editor and inspect the tree one level at a time.",
+      "mistake": "Do not overlap tags. Close the inner element before the outer one.",
+      "expected": "The article contains a heading and paragraph as sibling children.",
+      "html": "<article><h2>Parent and children</h2><p>This paragraph is a sibling of the heading.</p></article>",
+      "quiz": [
+        {
+          "question": "Two elements with the same parent are called what?",
+          "options": [
+            "Siblings",
+            "Attributes",
+            "Doctypes",
+            "Metadata"
+          ],
+          "correctIndex": 0,
+          "explanation": "They are siblings."
+        },
+        {
+          "question": "How should nested tags normally close?",
+          "options": [
+            "Inner before outer",
+            "Outer before inner",
+            "Random order",
+            "They never close"
+          ],
+          "correctIndex": 0,
+          "explanation": "Properly nested elements close inside-out."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "html fundamentals",
+        "comments",
+        "whitespace",
+        "and",
+        "html",
+        "entities"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-comments-whitespace-entities",
+      "stage": "HTML Fundamentals",
+      "order": 50,
+      "title": "Comments, whitespace, and HTML entities",
+      "summary": "Learn what the browser ignores, collapses, or needs encoded.",
+      "definition": "HTML comments use `<!-- ... -->`; normal text collapses most repeated whitespace; character references such as `&lt;` represent characters that would otherwise be parsed as markup.",
+      "learn": [
+        "Comments",
+        "Whitespace collapsing",
+        "Character references",
+        "When to use pre"
+      ],
+      "objective": "Write readable source without confusing text with markup.",
+      "explanation": "Comments are not visible in the rendered page but are still visible in source. Normal runs of spaces usually collapse. If you need to show literal angle brackets in text, use character references.",
+      "tip": "Comments should explain intent, not hide secrets.",
+      "hack": "Use preformatted content when whitespace itself matters instead of adding many non-breaking spaces.",
+      "mistake": "Never put passwords, API keys, or private notes in HTML comments.",
+      "expected": "The page shows literal `<section>` text while the comment stays visually hidden.",
+      "html": "<main><!-- Visible in source, not on page --><p>Write &lt;section&gt; ... &lt;/section&gt;.</p><p>Fish &amp; Chips</p></main>",
+      "quiz": [
+        {
+          "question": "Are HTML comments private?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "They remain visible in source."
+        },
+        {
+          "question": "Which reference displays a literal less-than sign?",
+          "options": [
+            "&lt;",
+            "&gt;",
+            "&amp;",
+            "&copy;"
+          ],
+          "correctIndex": 0,
+          "explanation": "&lt; represents `<`."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "html fundamentals",
+        "from",
+        "html",
+        "source",
+        "to",
+        "the",
+        "dom"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-browser-dom",
+      "stage": "HTML Fundamentals",
+      "order": 60,
+      "title": "From HTML source to the DOM",
+      "summary": "See what the browser builds from your markup.",
+      "definition": "The browser parses HTML source into a tree of document nodes exposed through the DOM (Document Object Model).",
+      "learn": [
+        "HTML parsing",
+        "DOM tree",
+        "Browser error recovery",
+        "Source vs Inspector"
+      ],
+      "objective": "Understand why browser structure can differ from malformed source.",
+      "explanation": "Your file is text. The browser parses it into nodes that CSS and JavaScript can work with. Browsers repair some invalid HTML, so a page may appear okay even when the source is wrong.",
+      "tip": "Compare View Source with the Elements/Inspector panel when parser behavior is confusing.",
+      "hack": "Use DevTools to inspect the actual parent/child structure the browser created.",
+      "mistake": "Do not treat “it rendered” as proof that the markup is valid.",
+      "expected": "The nested document appears normally as a DOM tree.",
+      "html": "<main><article><h1>DOM tree idea</h1><p>The browser turns source into document nodes.</p></article></main>",
+      "quiz": [
+        {
+          "question": "What does the browser build after parsing HTML?",
+          "options": [
+            "A document tree / DOM",
+            "A Java class",
+            "A database",
+            "A CSS file"
+          ],
+          "correctIndex": 0,
+          "explanation": "The parser builds the DOM."
+        },
+        {
+          "question": "Can browsers repair some invalid HTML?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "correctIndex": 0,
+          "explanation": "Browsers perform error recovery."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "html fundamentals",
+        "emmet",
+        "shortcuts",
+        "faster",
+        "typing",
+        "same",
+        "html"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-emmet-shortcuts",
+      "stage": "HTML Fundamentals",
+      "order": 70,
+      "title": "Emmet shortcuts: faster typing, same HTML",
+      "summary": "Use editor abbreviations without confusing them with real HTML syntax.",
+      "definition": "Emmet is an editor productivity feature that expands abbreviations such as `ul>li*3` into normal HTML. Emmet itself is not part of the HTML language.",
+      "learn": [
+        "What Emmet is",
+        "Common abbreviations",
+        "Expanded output",
+        "When readability matters more than speed"
+      ],
+      "objective": "Type repetitive HTML faster while still understanding the generated markup.",
+      "explanation": "Instead of typing three list items by hand, many editors can expand `ul>li*3`. The browser never receives that abbreviation; your editor expands it into ordinary HTML first.",
+      "tip": "Learn the HTML first, then use Emmet to reduce typing.",
+      "hack": "Useful examples: `!` for a document shell, `a[href=\"#\"]`, and `ul>li*3`.",
+      "mistake": "Do not paste Emmet abbreviations into production HTML and expect the browser to expand them.",
+      "expected": "The browser receives and renders normal HTML, not the abbreviation.",
+      "html": "<ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>",
+      "quiz": [
+        {
+          "question": "Is Emmet part of the HTML language?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Emmet is editor tooling."
+        },
+        {
+          "question": "What happens to an Emmet abbreviation before the browser sees it?",
+          "options": [
+            "The editor expands it to HTML",
+            "The browser compiles it",
+            "CSS converts it",
+            "A database stores it"
+          ],
+          "correctIndex": 0,
+          "explanation": "The editor expands it."
+        }
+      ],
+      "shortcut": {
+        "label": "⚡ EMMET — editor shortcut",
+        "longLabel": "Expanded HTML",
+        "longCode": "<ul>\\n  <li></li>\\n  <li></li>\\n  <li></li>\\n</ul>",
+        "shortLabel": "Emmet abbreviation",
+        "shortCode": "ul>li*3",
+        "note": "Useful for repetitive markup in editors that support Emmet.",
+        "caution": "It is not HTML syntax. Understand and review the expanded markup."
+      }
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "headings",
+        "and",
+        "paragraphs"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-headings-paragraphs",
+      "stage": "Text & Semantic Content",
+      "order": 10,
+      "title": "Headings and paragraphs",
+      "summary": "Give written content a clear hierarchy instead of using large text everywhere.",
+      "definition": "Heading elements h1–h6 represent section headings; p represents a paragraph of prose.",
+      "learn": [
+        "Heading hierarchy",
+        "Paragraphs",
+        "Semantic rank vs visual size",
+        "Clear section titles"
+      ],
+      "objective": "Structure written content so people and assistive technology can understand it.",
+      "explanation": "A heading is not just big text. Its rank communicates hierarchy. CSS can change size separately. Paragraphs are for blocks of prose.",
+      "tip": "Write headings that summarize the section below them.",
+      "hack": "Use CSS for appearance instead of skipping heading levels just to get a smaller default size.",
+      "mistake": "Do not use p as a generic layout wrapper for unrelated controls.",
+      "expected": "The page shows one main heading and a clear subsection heading.",
+      "html": "<main><h1>HTML learning guide</h1><p>Start with structure.</p><section><h2>Why headings matter</h2><p>They create content hierarchy.</p></section></main>",
+      "quiz": [
+        {
+          "question": "What does h2 represent?",
+          "options": [
+            "A section heading",
+            "A blue font",
+            "A database field",
+            "A line break"
+          ],
+          "correctIndex": 0,
+          "explanation": "h2 represents a heading."
+        },
+        {
+          "question": "Should heading rank be chosen only for visual size?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Choose semantic rank and style it with CSS."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "strong",
+        "emphasis",
+        "mark",
+        "small",
+        "and",
+        "line"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-emphasis-meaning",
+      "stage": "Text & Semantic Content",
+      "order": 20,
+      "title": "Strong, emphasis, mark, small, and line breaks",
+      "summary": "Use text-level elements for meaning, not decoration.",
+      "definition": "strong marks strong importance, em marks stress emphasis, mark highlights relevance, small represents side comments/fine print, and br creates a meaningful line break.",
+      "learn": [
+        "strong",
+        "em",
+        "mark",
+        "small",
+        "Appropriate br"
+      ],
+      "objective": "Choose text-level semantics based on meaning.",
+      "explanation": "These elements may have familiar default styling, but their purpose is meaning. Use br where a line break is part of the content, not as a spacing tool.",
+      "tip": "Read the sentence without styling and ask whether the emphasis still matters.",
+      "hack": "If you only need visual bold/italic styling, CSS may be more appropriate than semantic emphasis.",
+      "mistake": "Do not stack multiple br tags to create vertical layout spacing.",
+      "expected": "Importance, emphasis, highlighting, and fine print have meaningful markup.",
+      "html": "<main><p><strong>Important:</strong> Save your work.</p><p>I <em>really</em> mean it.</p><p>Result: <mark>semantic HTML</mark></p><small>Example only.</small></main>",
+      "quiz": [
+        {
+          "question": "What does strong represent?",
+          "options": [
+            "Strong importance",
+            "Only bold styling",
+            "A link",
+            "A heading"
+          ],
+          "correctIndex": 0,
+          "explanation": "Strong conveys importance."
+        },
+        {
+          "question": "Should repeated br tags be used for layout spacing?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Use CSS spacing for layout."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "ordered",
+        "unordered",
+        "and",
+        "description",
+        "lists"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-lists",
+      "stage": "Text & Semantic Content",
+      "order": 30,
+      "title": "Ordered, unordered, and description lists",
+      "summary": "Use the list element that matches the relationship between items.",
+      "definition": "ul is an unordered list, ol is an ordered sequence, and dl groups terms with descriptions using dt and dd.",
+      "learn": [
+        "ul",
+        "ol",
+        "dl",
+        "Nested lists"
+      ],
+      "objective": "Represent list relationships correctly.",
+      "explanation": "Use ul when order does not change meaning, ol when sequence/ranking matters, and dl for term-description or name-value groups.",
+      "tip": "Navigation menus are often lists of related destinations.",
+      "hack": "Ordered lists support attributes such as start and reversed when numbering itself matters.",
+      "mistake": "Do not use lists only to indent arbitrary text.",
+      "expected": "The result shows a numbered learning sequence and term/description pairs.",
+      "html": "<main><ol><li>Read</li><li>Practice</li><li>Quiz</li></ol><dl><dt>HTML</dt><dd>Structure</dd><dt>CSS</dt><dd>Presentation</dd></dl></main>",
+      "quiz": [
+        {
+          "question": "Which list fits a sequence?",
+          "options": [
+            "ol",
+            "ul",
+            "dl",
+            "div"
+          ],
+          "correctIndex": 0,
+          "explanation": "ol is ordered."
+        },
+        {
+          "question": "Which elements belong to a description list?",
+          "options": [
+            "dt and dd",
+            "li only",
+            "th and td",
+            "option only"
+          ],
+          "correctIndex": 0,
+          "explanation": "dt/dd define terms and descriptions."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}pre{padding:16px;background:#0d2235;color:#e8f5fb;border-radius:12px;overflow:auto}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "quotes",
+        "code",
+        "and",
+        "preformatted",
+        "text"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-quotes-code-pre",
+      "stage": "Text & Semantic Content",
+      "order": 40,
+      "title": "Quotes, code, and preformatted text",
+      "summary": "Represent quoted and code-like content with the right elements.",
+      "definition": "blockquote represents a block quotation, q an inline quotation, code a code fragment, and pre preserves whitespace.",
+      "learn": [
+        "blockquote",
+        "q",
+        "code",
+        "pre"
+      ],
+      "objective": "Use semantic elements for quoted or preformatted content.",
+      "explanation": "Inline code can use code. For code blocks where line breaks and indentation matter, combine pre and code. Blockquote is for longer quotations that stand as their own block.",
+      "tip": "Escape literal angle brackets inside code examples.",
+      "hack": "Use pre only when preserving whitespace is part of the content.",
+      "mistake": "Do not use pre as a general page-layout tool.",
+      "expected": "The code block keeps its line breaks and the quotation is separated semantically.",
+      "html": "<main><p>Inline: <code>&lt;main&gt;</code></p><pre><code>&lt;h1&gt;Hello&lt;/h1&gt;\\n&lt;p&gt;Structured content&lt;/p&gt;</code></pre><blockquote>Structure first, styling second.</blockquote></main>",
+      "quiz": [
+        {
+          "question": "Which element preserves whitespace?",
+          "options": [
+            "pre",
+            "p",
+            "span",
+            "mark"
+          ],
+          "correctIndex": 0,
+          "explanation": "pre preserves whitespace."
+        },
+        {
+          "question": "Which element represents code?",
+          "options": [
+            "code",
+            "q",
+            "small",
+            "aside"
+          ],
+          "correctIndex": 0,
+          "explanation": "code represents code fragments."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}.card{padding:20px;background:white;border-radius:12px}.status{font-weight:800;color:#0a8a66}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "div",
+        "and",
+        "span",
+        "useful",
+        "but",
+        "not"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-div-span",
+      "stage": "Text & Semantic Content",
+      "order": 50,
+      "title": "div and span: useful, but not your first answer",
+      "summary": "Understand neutral containers and when semantic elements are better.",
+      "definition": "div is a generic block container and span is a generic inline container; neither adds special semantic meaning by itself.",
+      "learn": [
+        "div",
+        "span",
+        "Semantic alternatives",
+        "Neutral wrappers"
+      ],
+      "objective": "Use generic containers intentionally.",
+      "explanation": "Use div/span when no more meaningful element fits. If the content is navigation, use nav. If it is a self-contained article, use article. Semantics reduce guesswork.",
+      "tip": "Try to name the content's role. If HTML has an element for that role, start there.",
+      "hack": "Span is useful as a small inline styling or scripting hook.",
+      "mistake": "Do not build an entire page from nested divs when semantic elements exist.",
+      "expected": "The status text uses span while the surrounding content uses semantic elements.",
+      "html": "<main><article class=\"card\"><h1>Semantic first</h1><p>Status: <span class=\"status\">Ready</span></p></article></main>",
+      "quiz": [
+        {
+          "question": "What meaning does div have by itself?",
+          "options": [
+            "No special semantics",
+            "Navigation",
+            "Article",
+            "Heading"
+          ],
+          "correctIndex": 0,
+          "explanation": "div is generic."
+        },
+        {
+          "question": "When is span useful?",
+          "options": [
+            "Neutral inline grouping",
+            "Creating tables only",
+            "Replacing body",
+            "Defining metadata"
+          ],
+          "correctIndex": 0,
+          "explanation": "span is a neutral inline container."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "section",
+        "article",
+        "and",
+        "aside"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-section-article-aside",
+      "stage": "Text & Semantic Content",
+      "order": 60,
+      "title": "section, article, and aside",
+      "summary": "Choose containers based on what the content means.",
+      "definition": "section groups a thematic section, article represents self-contained content, and aside contains complementary content.",
+      "learn": [
+        "section",
+        "article",
+        "aside",
+        "When div is still better"
+      ],
+      "objective": "Differentiate common semantic sectioning elements.",
+      "explanation": "A section typically has a heading and groups related content. An article can stand on its own. Aside is complementary content. Not every wrapper needs a semantic sectioning tag.",
+      "tip": "If you cannot explain what a section is about, it may only be a styling wrapper.",
+      "hack": "Articles can contain sections and sections can contain articles; use meaning, not rigid recipes.",
+      "mistake": "Do not replace every div with section.",
+      "expected": "The article contains a main section and related aside.",
+      "html": "<main><article><h1>Learning note</h1><section><h2>Main idea</h2><p>Use elements for meaning.</p></section><aside><h2>Related tip</h2><p>Check the structure.</p></aside></article></main>",
+      "quiz": [
+        {
+          "question": "Which element best represents self-contained content?",
+          "options": [
+            "article",
+            "span",
+            "br",
+            "meta"
+          ],
+          "correctIndex": 0,
+          "explanation": "article represents self-contained content."
+        },
+        {
+          "question": "Should every visual wrapper be section?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Section is for thematic content."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}header,nav,footer{max-width:700px;margin:0 auto 12px}",
+      "js": "",
+      "tags": [
+        "html",
+        "text & semantic content",
+        "header",
+        "nav",
+        "main",
+        "and",
+        "footer",
+        "landmarks"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-semantic-landmarks",
+      "stage": "Text & Semantic Content",
+      "order": 70,
+      "title": "header, nav, main, and footer landmarks",
+      "summary": "Give large regions of a page recognizable roles.",
+      "definition": "header, nav, main, and footer are semantic elements that identify major document or section regions.",
+      "learn": [
+        "header",
+        "nav",
+        "main",
+        "footer",
+        "Landmarks"
+      ],
+      "objective": "Build a page shell that communicates its major regions.",
+      "explanation": "Landmarks help users and tools understand page regions. A document normally has one primary main region. nav should wrap major navigation, not every link group.",
+      "tip": "Use native landmark elements before adding equivalent ARIA roles.",
+      "hack": "Label multiple nav regions so users can distinguish them.",
+      "mistake": "Do not put site-wide header/footer content inside main.",
+      "expected": "The page exposes a header, primary navigation, main content, and footer.",
+      "html": "<header><strong>Knowledge Lab</strong></header><nav aria-label=\"Primary\"><a href=\"#lesson\">Lesson</a></nav><main id=\"lesson\"><h1>Landmarks</h1><p>Main content.</p></main><footer>Demo footer</footer>",
+      "quiz": [
+        {
+          "question": "Which element identifies primary document content?",
+          "options": [
+            "main",
+            "footer",
+            "span",
+            "small"
+          ],
+          "correctIndex": 0,
+          "explanation": "main identifies primary content."
+        },
+        {
+          "question": "Should every link group use nav?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "nav is for major navigation areas."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "links & images",
+        "links",
+        "fragments",
+        "and",
+        "useful",
+        "link",
+        "text"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-links",
+      "stage": "Links & Images",
+      "order": 10,
+      "title": "Links, fragments, and useful link text",
+      "summary": "Build links that explain where they go.",
+      "definition": "The a element creates hyperlinks; href can point to another URL, file, or fragment ID.",
+      "learn": [
+        "href",
+        "Fragment links",
+        "Descriptive link text",
+        "target/rel basics"
+      ],
+      "objective": "Create understandable navigation links.",
+      "explanation": "A fragment such as #details targets an element with id=\"details\". Link text should describe the destination; “Read the forms guide” is clearer than “click here.”",
+      "tip": "Test links with keyboard navigation and read the text out of context.",
+      "hack": "Use internal fragment links for long documents and skip links.",
+      "mistake": "Do not use href=\"#\" as a fake button for non-navigation actions.",
+      "expected": "The link jumps to the details section.",
+      "html": "<main><a href=\"#details\">Read lesson details</a><section id=\"details\"><h1>Lesson details</h1><p>The fragment link points here.</p></section></main>",
+      "quiz": [
+        {
+          "question": "What does href=\"#details\" target?",
+          "options": [
+            "An element with id=details",
+            "A CSS class",
+            "A database row",
+            "A file"
+          ],
+          "correctIndex": 0,
+          "explanation": "Fragments target IDs."
+        },
+        {
+          "question": "Which link text is clearer?",
+          "options": [
+            "Read the HTML forms guide",
+            "Click here"
+          ],
+          "correctIndex": 0,
+          "explanation": "Descriptive text is clearer."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "links & images",
+        "relative",
+        "and",
+        "absolute",
+        "paths"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-relative-absolute-paths",
+      "stage": "Links & Images",
+      "order": 20,
+      "title": "Relative and absolute paths",
+      "summary": "Understand why a file works locally but breaks after deployment.",
+      "definition": "Absolute URLs include a complete location; relative URLs resolve from the current document or site path.",
+      "learn": [
+        "Relative paths",
+        "Parent paths",
+        "Root-relative paths",
+        "Absolute URLs"
+      ],
+      "objective": "Choose paths that match the deployed folder structure.",
+      "explanation": "images/photo.jpg is relative to the current document. ../ moves up a directory. /assets/logo.svg is root-relative to the site origin. Full https URLs are absolute.",
+      "tip": "Sketch the folder tree before guessing path segments.",
+      "hack": "Inspect the resolved URL in DevTools when an asset 404s.",
+      "mistake": "Do not use local Windows paths in deployed HTML.",
+      "expected": "The example lists path types without making a network request.",
+      "html": "<main><ul><li><code>images/photo.jpg</code> — relative</li><li><code>../images/photo.jpg</code> — parent-relative</li><li><code>/assets/logo.svg</code> — root-relative</li></ul></main>",
+      "quiz": [
+        {
+          "question": "What does ../ usually mean?",
+          "options": [
+            "Move up one directory",
+            "Open new tab",
+            "Use HTTPS",
+            "Create ID"
+          ],
+          "correctIndex": 0,
+          "explanation": "../ resolves from the parent directory."
+        },
+        {
+          "question": "Is C:\\\\images\\\\photo.jpg a portable website URL?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Local filesystem paths are not deployed web URLs."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}img{display:block;max-width:100%;height:auto;border-radius:14px}",
+      "js": "",
+      "tags": [
+        "html",
+        "links & images",
+        "images",
+        "alt",
+        "text",
+        "width",
+        "and",
+        "height"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-images-alt",
+      "stage": "Links & Images",
+      "order": 30,
+      "title": "Images, alt text, width, and height",
+      "summary": "Add images without treating alt text as an afterthought.",
+      "definition": "img embeds an image; src provides the resource, alt provides a text alternative, and width/height can provide intrinsic dimensions.",
+      "learn": [
+        "src",
+        "alt",
+        "Decorative images",
+        "Intrinsic dimensions"
+      ],
+      "objective": "Write image markup that remains useful when the image cannot be seen.",
+      "explanation": "Alt text should communicate the image's purpose in context. Decorative images can use alt=\"\". Width and height help the browser reserve space and reduce layout movement.",
+      "tip": "Ask what you would say if the image failed to load.",
+      "hack": "Avoid repeating a nearby caption word-for-word in alt text.",
+      "mistake": "Do not use filenames such as IMG_4832.jpg as alt text.",
+      "expected": "A responsive image appears with meaningful alternative text and dimensions.",
+      "html": "<main><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\" alt=\"Blue HTML lesson example graphic\" width=\"640\" height=\"360\"><p>Meaningful image markup.</p></main>",
+      "quiz": [
+        {
+          "question": "What should a decorative image usually use?",
+          "options": [
+            "alt=\"\"",
+            "Filename as alt",
+            "No src",
+            "role=button"
+          ],
+          "correctIndex": 0,
+          "explanation": "Empty alt hides purely decorative images from assistive tech."
+        },
+        {
+          "question": "Why include width and height?",
+          "options": [
+            "Reserve layout space",
+            "Replace alt",
+            "Create links",
+            "Change format"
+          ],
+          "correctIndex": 0,
+          "explanation": "Dimensions help layout stability."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}figure{padding:16px;background:white;border-radius:14px}img{width:100%;height:auto;border-radius:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "links & images",
+        "figure",
+        "and",
+        "figcaption"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-figure-figcaption",
+      "stage": "Links & Images",
+      "order": 40,
+      "title": "figure and figcaption",
+      "summary": "Connect self-contained visual content with a visible caption.",
+      "definition": "figure wraps self-contained content and figcaption provides its caption.",
+      "learn": [
+        "figure",
+        "figcaption",
+        "Caption vs alt",
+        "When figure fits"
+      ],
+      "objective": "Pair media/examples with captions correctly.",
+      "explanation": "A figure can contain an image, chart, or code sample. Its caption is visible supporting context. Alt text remains the image's text alternative; the two roles are different.",
+      "tip": "Use figure when content and caption form a meaningful unit.",
+      "hack": "Figcaption can be the first or last child of figure.",
+      "mistake": "Do not wrap every image in figure automatically.",
+      "expected": "The image and caption are grouped as one figure.",
+      "html": "<figure><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\" alt=\"Blue HTML example graphic\" width=\"640\" height=\"360\"><figcaption>Figure 1. HTML lesson placeholder visual.</figcaption></figure>",
+      "quiz": [
+        {
+          "question": "What does figcaption provide?",
+          "options": [
+            "Visible figure caption",
+            "Image source",
+            "CSS class",
+            "Form label"
+          ],
+          "correctIndex": 0,
+          "explanation": "figcaption captions the figure."
+        },
+        {
+          "question": "Does figcaption always replace alt text?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Caption and alt have different roles."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}picture,img{display:block;max-width:100%;height:auto;margin:auto}",
+      "js": "",
+      "tags": [
+        "html",
+        "links & images",
+        "picture",
+        "srcset",
+        "and",
+        "responsive",
+        "images"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-picture-responsive",
+      "stage": "Links & Images",
+      "order": 50,
+      "title": "picture, srcset, and responsive images",
+      "summary": "Let the browser choose an image source that fits the context.",
+      "definition": "picture can provide alternative sources, while srcset/sizes help browsers choose appropriate image resources.",
+      "learn": [
+        "picture",
+        "source",
+        "srcset",
+        "sizes",
+        "Art direction"
+      ],
+      "objective": "Understand responsive image markup.",
+      "explanation": "Resolution switching helps choose an appropriate file size; art direction offers different crops/compositions. A real img remains the fallback/content element inside picture.",
+      "tip": "Always keep a real img with alt text inside picture.",
+      "hack": "Generate real image variants; markup cannot invent missing optimized files.",
+      "mistake": "Do not create a complex srcset where every candidate is the same oversized file.",
+      "expected": "The picture element renders its img fallback safely in the sandbox.",
+      "html": "<picture><source media=\"(max-width:520px)\" srcset=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\" alt=\"Responsive HTML example\" width=\"640\" height=\"360\"></picture>",
+      "quiz": [
+        {
+          "question": "Which element remains the fallback inside picture?",
+          "options": [
+            "img",
+            "source",
+            "link",
+            "meta"
+          ],
+          "correctIndex": 0,
+          "explanation": "img remains required."
+        },
+        {
+          "question": "What is art direction?",
+          "options": [
+            "Different composition/crop by condition",
+            "Changing alt with CSS",
+            "Compressing HTML",
+            "Adding a database"
+          ],
+          "correctIndex": 0,
+          "explanation": "Art direction changes visual composition."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}form{display:grid;gap:10px;max-width:360px}input,button{padding:10px 12px;border:1px solid #b9c9d5;border-radius:9px}button{background:#0879b7;color:white}",
+      "js": "document.querySelector(\"#helloForm\").addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  const name = document.querySelector(\"#name\").value.trim();\n  document.querySelector(\"#message\").textContent = name ? \"Hello, \" + name + \"!\" : \"Please enter your name.\";\n});",
+      "tags": [
+        "html",
+        "forms & user input",
+        "make",
+        "a",
+        "usable",
+        "form"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-accessible-form",
+      "stage": "Forms & User Input",
+      "order": 10,
+      "title": "Make a usable form",
+      "summary": "Pair a real label with an input and submit safely inside the lesson.",
+      "definition": "form groups controls for collecting input; label identifies a control, commonly through for matching the control id.",
+      "learn": [
+        "form",
+        "label + input",
+        "button type",
+        "Submission behavior"
+      ],
+      "objective": "Build a small keyboard-friendly form.",
+      "explanation": "A visible label tells users what the field means and gives assistive technology an accessible name. This lesson prevents navigation only so the browser IDE can display the submitted value.",
+      "tip": "Click the label text: its input should receive focus.",
+      "hack": "Use native form controls first; they bring built-in keyboard behavior.",
+      "mistake": "Do not rely on placeholder text as the only label.",
+      "expected": "Entering Juan Dela Cruz and submitting shows `Hello, Juan Dela Cruz!`.",
+      "html": "<form id=\"helloForm\"><label for=\"name\">Your name</label><input id=\"name\" name=\"name\" autocomplete=\"name\" required><button type=\"submit\">Submit</button></form><p id=\"message\" aria-live=\"polite\"></p>",
+      "quiz": [
+        {
+          "question": "Why connect a label to an input?",
+          "options": [
+            "Identify the control clearly",
+            "Load CSS",
+            "Create DB",
+            "Hide input"
+          ],
+          "correctIndex": 0,
+          "explanation": "Labels provide an accessible name."
+        },
+        {
+          "question": "Is placeholder a complete replacement for a label?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Placeholders are not robust labels."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}form{display:grid;gap:8px;max-width:360px}input{padding:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "label",
+        "name",
+        "value",
+        "and",
+        "form",
+        "data"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-label-name-value",
+      "stage": "Forms & User Input",
+      "order": 20,
+      "title": "label, name, value, and form data",
+      "summary": "Know which attributes identify fields to people and to submitted data.",
+      "definition": "label provides the human-facing name; name identifies a field in form data; value is the associated submitted value.",
+      "learn": [
+        "for/id",
+        "name",
+        "value",
+        "id vs name"
+      ],
+      "objective": "Understand why a visible input can still be missing from submitted data.",
+      "explanation": "id connects labels and references. name becomes the key in form data. They often use the same text but do different jobs.",
+      "tip": "Inspect FormData when debugging which controls are included.",
+      "hack": "Use semantic names such as email or quantity, not visual names such as leftBox.",
+      "mistake": "Do not assume id automatically becomes the submitted name.",
+      "expected": "The email field has both a label relationship and a form-data key.",
+      "html": "<form><label for=\"email\">Email</label><input id=\"email\" name=\"email\" value=\"name@example.com\"></form>",
+      "quiz": [
+        {
+          "question": "Which attribute becomes a form-data key?",
+          "options": [
+            "name",
+            "id",
+            "class",
+            "title"
+          ],
+          "correctIndex": 0,
+          "explanation": "name identifies the field in form data."
+        },
+        {
+          "question": "What commonly connects a label to an input?",
+          "options": [
+            "for + id",
+            "class + style",
+            "name + placeholder",
+            "method + action"
+          ],
+          "correctIndex": 0,
+          "explanation": "for matches id."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}form{display:grid;gap:12px;max-width:360px}label{display:grid;gap:6px}input{padding:8px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "choose",
+        "useful",
+        "input",
+        "types"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-input-types",
+      "stage": "Forms & User Input",
+      "order": 30,
+      "title": "Choose useful input types",
+      "summary": "Let the browser understand whether a field is email, number, date, password, checkbox, and more.",
+      "definition": "The input type attribute changes the semantics and built-in behavior of an input control.",
+      "learn": [
+        "Common input types",
+        "Checkbox vs radio",
+        "Email/date/number",
+        "When text is better"
+      ],
+      "objective": "Choose a control type that matches the data.",
+      "explanation": "Input types can provide validation and better virtual keyboards. But number is for numeric quantities—not phone numbers, postal codes, or IDs that merely contain digits.",
+      "tip": "Ask whether arithmetic makes sense on the value. If not, number may be wrong.",
+      "hack": "Pair type=email with autocomplete=email for real email fields.",
+      "mistake": "Do not use number for phone numbers or identifiers with leading zeros.",
+      "expected": "The form uses email, quantity, and checkbox controls with appropriate types.",
+      "html": "<form><label>Email <input type=\"email\" name=\"email\"></label><label>Quantity <input type=\"number\" name=\"qty\" min=\"1\" step=\"1\"></label><label><input type=\"checkbox\" name=\"updates\"> Send updates</label></form>",
+      "quiz": [
+        {
+          "question": "Which type fits an email address?",
+          "options": [
+            "email",
+            "number",
+            "range",
+            "color"
+          ],
+          "correctIndex": 0,
+          "explanation": "email communicates email semantics."
+        },
+        {
+          "question": "Should phone numbers normally use number?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Phone numbers are identifiers/text."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}form{display:grid;gap:10px;max-width:420px}input,button{padding:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "built",
+        "in",
+        "form",
+        "validation",
+        "attributes"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-form-validation",
+      "stage": "Forms & User Input",
+      "order": 40,
+      "title": "Built-in form validation attributes",
+      "summary": "Use required, minlength, maxlength, min, max, and pattern appropriately.",
+      "definition": "HTML constraint-validation attributes let browsers check common input requirements before normal submission.",
+      "learn": [
+        "required",
+        "minlength/maxlength",
+        "min/max",
+        "pattern",
+        "Server validation still required"
+      ],
+      "objective": "Use native constraints for basic rules.",
+      "explanation": "Native validation improves UX but cannot be trusted as the only security or data-integrity layer. Backends must validate again.",
+      "tip": "Give users a visible instruction before enforcing a strict pattern.",
+      "hack": "Use native validation first for simple cases before writing custom JavaScript.",
+      "mistake": "Do not rely on HTML validation alone for backend security.",
+      "expected": "The browser blocks invalid product codes on normal submission.",
+      "html": "<form><label for=\"code\">Product code (3–8 uppercase letters/numbers)</label><input id=\"code\" name=\"code\" required minlength=\"3\" maxlength=\"8\" pattern=\"[A-Z0-9]+\"><button>Validate</button></form>",
+      "quiz": [
+        {
+          "question": "Is client-side validation enough for backend security?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Server validation is still required."
+        },
+        {
+          "question": "Which attribute makes a field mandatory?",
+          "options": [
+            "required",
+            "checked",
+            "selected",
+            "multiple"
+          ],
+          "correctIndex": 0,
+          "explanation": "required participates in validation."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}fieldset{display:grid;gap:8px;border:1px solid #cbdbe5;border-radius:12px;padding:16px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "group",
+        "controls",
+        "with",
+        "fieldset",
+        "and",
+        "legend"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-fieldset-legend",
+      "stage": "Forms & User Input",
+      "order": 50,
+      "title": "Group controls with fieldset and legend",
+      "summary": "Give radio and checkbox groups a clear shared question.",
+      "definition": "fieldset groups related form controls; legend provides the group's caption or question.",
+      "learn": [
+        "fieldset",
+        "legend",
+        "Radio groups",
+        "Grouped choices"
+      ],
+      "objective": "Make groups of choices understandable as one unit.",
+      "explanation": "Individual radio labels name each choice, while legend names the shared question. Radios belong to one exclusive group when they share a name.",
+      "tip": "Write the legend like the question users are answering.",
+      "hack": "Use fieldset for genuine related groups, not decoration.",
+      "mistake": "Do not use fieldset only to get a border around unrelated controls.",
+      "expected": "Two radio options belong to one clearly labeled contact-method group.",
+      "html": "<form><fieldset><legend>Preferred contact method</legend><label><input type=\"radio\" name=\"contact\" value=\"email\" checked> Email</label><label><input type=\"radio\" name=\"contact\" value=\"phone\"> Phone</label></fieldset></form>",
+      "quiz": [
+        {
+          "question": "What labels a fieldset?",
+          "options": [
+            "legend",
+            "caption",
+            "summary",
+            "title only"
+          ],
+          "correctIndex": 0,
+          "explanation": "legend captions a fieldset."
+        },
+        {
+          "question": "How do radio buttons form one group?",
+          "options": [
+            "Share the same name",
+            "Share a class",
+            "Use same id",
+            "Use br"
+          ],
+          "correctIndex": 0,
+          "explanation": "Same-name radios form a group."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}form{display:grid;gap:8px;max-width:400px}select,textarea,button{padding:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "select",
+        "textarea",
+        "and",
+        "button"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-select-textarea-button",
+      "stage": "Forms & User Input",
+      "order": 60,
+      "title": "select, textarea, and button",
+      "summary": "Use native controls instead of recreating them from divs.",
+      "definition": "select provides a fixed choice list, textarea accepts multiline text, and button triggers form or interface actions.",
+      "learn": [
+        "select/option",
+        "textarea",
+        "button types",
+        "Default submit behavior"
+      ],
+      "objective": "Choose native controls that match the interaction.",
+      "explanation": "A button inside a form defaults to submit. Use type=button for non-submit actions. Textarea is for multiline free text; select is for a known set of options.",
+      "tip": "Always set button type in reusable components.",
+      "hack": "Use optgroup when long option lists benefit from meaningful groups.",
+      "mistake": "Do not use a clickable div instead of a real button.",
+      "expected": "The form shows a select, multiline notes field, and non-submit preview button.",
+      "html": "<form><label for=\"topic\">Topic</label><select id=\"topic\" name=\"topic\"><option>HTML</option><option>CSS</option></select><label for=\"notes\">Notes</label><textarea id=\"notes\" name=\"notes\" rows=\"4\"></textarea><button type=\"button\">Preview only</button></form>",
+      "quiz": [
+        {
+          "question": "What is a button's default type inside a form?",
+          "options": [
+            "submit",
+            "button",
+            "reset only",
+            "link"
+          ],
+          "correctIndex": 0,
+          "explanation": "Button defaults to submit."
+        },
+        {
+          "question": "Which control accepts multiline free text?",
+          "options": [
+            "textarea",
+            "select",
+            "option",
+            "meter"
+          ],
+          "correctIndex": 0,
+          "explanation": "textarea is multiline."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}form{display:grid;gap:8px;max-width:360px}input{padding:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "autocomplete",
+        "and",
+        "inputmode"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-autocomplete-inputmode",
+      "stage": "Forms & User Input",
+      "order": 70,
+      "title": "autocomplete and inputmode",
+      "summary": "Help browsers and mobile keyboards understand what users are entering.",
+      "definition": "autocomplete describes a field's purpose to autofill systems; inputmode hints which virtual keyboard layout is useful.",
+      "learn": [
+        "Autocomplete tokens",
+        "inputmode",
+        "Type vs keyboard hint",
+        "Mobile UX"
+      ],
+      "objective": "Improve form speed without changing data semantics incorrectly.",
+      "explanation": "inputmode can request a numeric keyboard without turning an identifier into a number field. autocomplete tokens help browsers fill known information such as email or postal code.",
+      "tip": "Use correct autocomplete tokens instead of disabling autofill globally.",
+      "hack": "one-time-code can improve OTP entry on supported platforms.",
+      "mistake": "Do not use autocomplete=off everywhere by habit.",
+      "expected": "The fields expose appropriate autofill and keyboard hints.",
+      "html": "<form><label for=\"postal\">Postal code</label><input id=\"postal\" name=\"postal\" inputmode=\"numeric\" autocomplete=\"postal-code\"><label for=\"mail\">Email</label><input id=\"mail\" type=\"email\" autocomplete=\"email\"></form>",
+      "quiz": [
+        {
+          "question": "What does inputmode mainly influence?",
+          "options": [
+            "Virtual keyboard hint",
+            "Submitted name",
+            "CSS specificity",
+            "Heading level"
+          ],
+          "correctIndex": 0,
+          "explanation": "inputmode hints keyboard layout."
+        },
+        {
+          "question": "What does autocomplete describe?",
+          "options": [
+            "Field purpose to autofill systems",
+            "Animation speed",
+            "Table header",
+            "Path"
+          ],
+          "correctIndex": 0,
+          "explanation": "Autocomplete tokens identify field purpose."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}label{display:block;margin-bottom:8px}input{padding:10px;min-width:280px}",
+      "js": "",
+      "tags": [
+        "html",
+        "forms & user input",
+        "datalist",
+        "suggestions"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-datalist",
+      "stage": "Forms & User Input",
+      "order": 80,
+      "title": "datalist suggestions",
+      "summary": "Offer suggestions while still allowing free text.",
+      "definition": "datalist provides suggested values to a compatible input through the input's list attribute.",
+      "learn": [
+        "datalist",
+        "list",
+        "Suggestion vs restriction",
+        "When select is better"
+      ],
+      "objective": "Choose between free text with suggestions and a fixed select.",
+      "explanation": "Datalist lets users type something not listed. Select is better when only predefined choices are valid.",
+      "tip": "Use datalist for short suggestion lists; rich search may need a proper combobox pattern.",
+      "hack": "Keep option values meaningful because users may see them directly.",
+      "mistake": "Do not use datalist when values must be restricted to the list.",
+      "expected": "Typing in the browser field can reveal suggested browser names.",
+      "html": "<label for=\"browser\">Favorite browser</label><input id=\"browser\" list=\"browser-options\"><datalist id=\"browser-options\"><option value=\"Chrome\"><option value=\"Firefox\"><option value=\"Safari\"><option value=\"Edge\"></datalist>",
+      "quiz": [
+        {
+          "question": "Does datalist force users to choose listed values only?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Datalist suggestions are not a strict restriction."
+        },
+        {
+          "question": "Which control fits a fixed set of allowed choices?",
+          "options": [
+            "select",
+            "datalist always",
+            "pre",
+            "figure"
+          ],
+          "correctIndex": 0,
+          "explanation": "select constrains choices."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #d8e3ea;text-align:left}",
+      "js": "",
+      "tags": [
+        "html",
+        "tables & structured data",
+        "table",
+        "anatomy"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-table-basics",
+      "stage": "Tables & Structured Data",
+      "order": 10,
+      "title": "Table anatomy",
+      "summary": "Represent real row-and-column data with real table markup.",
+      "definition": "table represents tabular data; tr creates rows, th creates header cells, and td creates data cells.",
+      "learn": [
+        "table",
+        "tr",
+        "th/td",
+        "thead/tbody"
+      ],
+      "objective": "Build a basic data table without using tables for page layout.",
+      "explanation": "Tables are for data where row and column relationships matter: inventory, schedules, reports, prices. CSS Grid is better for visual page layout.",
+      "tip": "Read data by row and column. If both relationships matter, a table is likely appropriate.",
+      "hack": "Use thead/tbody to make large tables easier to style and reason about.",
+      "mistake": "Do not use tables to position unrelated page sections.",
+      "expected": "The table shows products, stock, and prices in aligned rows and columns.",
+      "html": "<table><thead><tr><th>Product</th><th>Stock</th><th>Price</th></tr></thead><tbody><tr><td>Liempo</td><td>12</td><td>₱145</td></tr><tr><td>Chicken</td><td>8</td><td>₱120</td></tr></tbody></table>",
+      "quiz": [
+        {
+          "question": "Which element is a header cell?",
+          "options": [
+            "th",
+            "td",
+            "tr",
+            "li"
+          ],
+          "correctIndex": 0,
+          "explanation": "th represents a header cell."
+        },
+        {
+          "question": "Should tables be used for general page layout?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Tables are for tabular data."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}table{width:100%;border-collapse:collapse}caption{font-weight:800;margin-bottom:8px}th,td{padding:10px;border:1px solid #d8e3ea}",
+      "js": "",
+      "tags": [
+        "html",
+        "tables & structured data",
+        "captions",
+        "and",
+        "header",
+        "scope"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-accessible-tables",
+      "stage": "Tables & Structured Data",
+      "order": 20,
+      "title": "Captions and header scope",
+      "summary": "Help users understand what a table is and which headers apply.",
+      "definition": "caption names a table; scope on simple th cells can explicitly identify row or column header relationships.",
+      "learn": [
+        "caption",
+        "scope=col",
+        "scope=row",
+        "Header relationships"
+      ],
+      "objective": "Improve table context and navigation.",
+      "explanation": "Caption tells users what the table represents. scope can clarify simple row/column header direction. Complex tables often benefit from simpler designs.",
+      "tip": "Place caption inside table as its first child.",
+      "hack": "Keep tables simple when possible; simpler relationships are easier for everyone.",
+      "mistake": "Do not style plain td cells bold and assume they become semantic headers.",
+      "expected": "The table has a caption and row/column headers.",
+      "html": "<table><caption>Current stock</caption><thead><tr><th scope=\"col\">Product</th><th scope=\"col\">Boxes</th></tr></thead><tbody><tr><th scope=\"row\">Chicken</th><td>8</td></tr><tr><th scope=\"row\">Pork</th><td>5</td></tr></tbody></table>",
+      "quiz": [
+        {
+          "question": "What does caption provide?",
+          "options": [
+            "Table title/context",
+            "CSS class",
+            "Submit button",
+            "File path"
+          ],
+          "correctIndex": 0,
+          "explanation": "caption describes the table."
+        },
+        {
+          "question": "What can scope=col communicate?",
+          "options": [
+            "Header applies to a column",
+            "Table is hidden",
+            "Row is clickable",
+            "Page language"
+          ],
+          "correctIndex": 0,
+          "explanation": "It identifies a column header."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}video{display:block;max-width:100%;margin:auto;border-radius:14px;background:#0d2235}",
+      "js": "",
+      "tags": [
+        "html",
+        "media & embeds",
+        "audio",
+        "and",
+        "video",
+        "elements"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-audio-video",
+      "stage": "Media & Embeds",
+      "order": 10,
+      "title": "Audio and video elements",
+      "summary": "Use native media controls and provide fallback information.",
+      "definition": "audio and video embed media; controls exposes native playback controls.",
+      "learn": [
+        "audio/video",
+        "controls",
+        "source",
+        "poster",
+        "Fallback text"
+      ],
+      "objective": "Understand native media markup before custom controls.",
+      "explanation": "Native media elements support controls, sources, preload hints, and video posters. This sandbox shows the video shell/poster but intentionally loads no external media file.",
+      "tip": "Start with native controls; custom controls require more accessibility work.",
+      "hack": "preload=metadata can request basic media metadata without eagerly loading the full file.",
+      "mistake": "Do not autoplay audible media unexpectedly.",
+      "expected": "A native video player shell appears with the lesson poster.",
+      "html": "<video controls preload=\"metadata\" poster=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\" width=\"640\"><p>Your browser does not support embedded video.</p></video>",
+      "quiz": [
+        {
+          "question": "Which attribute shows native media controls?",
+          "options": [
+            "controls",
+            "selected",
+            "required",
+            "scope"
+          ],
+          "correctIndex": 0,
+          "explanation": "controls exposes playback controls."
+        },
+        {
+          "question": "Should audible media autoplay by default?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Unexpected audible autoplay is disruptive."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}video{max-width:100%;border-radius:14px;background:#0d2235}",
+      "js": "",
+      "tags": [
+        "html",
+        "media & embeds",
+        "captions",
+        "with",
+        "track"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-track-captions",
+      "stage": "Media & Embeds",
+      "order": 20,
+      "title": "Captions with track",
+      "summary": "Plan text alternatives for spoken video content.",
+      "definition": "track connects timed text such as captions or subtitles to audio/video, commonly using WebVTT.",
+      "learn": [
+        "track",
+        "captions vs subtitles",
+        "kind",
+        "srclang"
+      ],
+      "objective": "Know where caption files connect to media markup.",
+      "explanation": "Captions include dialogue plus relevant sound information; subtitles generally translate dialogue. A production track needs a valid WebVTT file.",
+      "tip": "Treat captions as part of the content pipeline, not a last-minute patch.",
+      "hack": "Use language codes and labels when offering multiple tracks.",
+      "mistake": "Do not assume burned-in text replaces selectable captions in every context.",
+      "expected": "The source shows where a captions track belongs in a video element.",
+      "html": "<video controls poster=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\" width=\"640\"><track kind=\"captions\" srclang=\"en\" label=\"English captions\"><p>Video fallback text.</p></video>",
+      "quiz": [
+        {
+          "question": "Which track kind includes dialogue and sound cues?",
+          "options": [
+            "captions",
+            "poster",
+            "metadata only",
+            "image"
+          ],
+          "correctIndex": 0,
+          "explanation": "Captions include speech and meaningful audio cues."
+        },
+        {
+          "question": "What format is commonly used for HTML timed text?",
+          "options": [
+            "WebVTT",
+            "CSV",
+            "DOCX",
+            "SQL"
+          ],
+          "correctIndex": 0,
+          "explanation": "WebVTT is the common timed-text format."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}iframe{border:1px solid #cbdbe5;border-radius:12px;background:white}",
+      "js": "",
+      "tags": [
+        "html",
+        "media & embeds",
+        "iframes",
+        "title",
+        "and",
+        "sandbox"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-iframe-sandbox",
+      "stage": "Media & Embeds",
+      "order": 30,
+      "title": "iframes, title, and sandbox",
+      "summary": "Embed another document with an explicit security boundary.",
+      "definition": "iframe embeds another browsing context; title identifies its purpose and sandbox restricts its capabilities.",
+      "learn": [
+        "iframe",
+        "title",
+        "sandbox",
+        "Least privilege"
+      ],
+      "objective": "Embed content without granting unnecessary capabilities.",
+      "explanation": "An iframe contains another document. Give it a meaningful title and start with restrictive sandbox permissions. This example uses srcdoc so it stays local and network-free.",
+      "tip": "Start with the most restrictive sandbox, then add only required permissions.",
+      "hack": "Use loading=lazy for below-the-fold embeds when immediate loading is unnecessary.",
+      "mistake": "Do not grant broad iframe permissions casually.",
+      "expected": "A small sandboxed embedded document appears inside the lesson.",
+      "html": "<main><iframe title=\"Small embedded lesson preview\" sandbox srcdoc=\"<p style='font-family:sans-serif;padding:16px'>Hello from a sandboxed iframe.</p>\" width=\"100%\" height=\"120\"></iframe></main>",
+      "quiz": [
+        {
+          "question": "Why give an iframe a title?",
+          "options": [
+            "Identify its purpose",
+            "Increase z-index",
+            "Create CSS class",
+            "Submit form"
+          ],
+          "correctIndex": 0,
+          "explanation": "A title helps identify the frame."
+        },
+        {
+          "question": "What is a good sandbox principle?",
+          "options": [
+            "Grant only needed capabilities",
+            "Allow everything",
+            "Remove title",
+            "No restrictions"
+          ],
+          "correctIndex": 0,
+          "explanation": "Use least privilege."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}button{padding:10px 14px;border:0;border-radius:9px;background:#0879b7;color:white}",
+      "js": "",
+      "tags": [
+        "html",
+        "accessibility by default",
+        "native",
+        "html",
+        "first",
+        "aria",
+        "second"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-native-before-aria",
+      "stage": "Accessibility by Default",
+      "order": 10,
+      "title": "Native HTML first, ARIA second",
+      "summary": "Use the element that already has the behavior and semantics you need.",
+      "definition": "Native HTML carries built-in semantics and behavior. ARIA can add or clarify semantics, but it does not automatically add keyboard behavior.",
+      "learn": [
+        "Native semantics",
+        "ARIA's role",
+        "First rule of ARIA",
+        "Custom widget cost"
+      ],
+      "objective": "Prefer real buttons, links, inputs, and landmarks before recreating them.",
+      "explanation": "A button already supports keyboard activation, focus, and button semantics. A div with role=button still needs behavior and state handling. ARIA is useful when native HTML cannot express the needed semantics.",
+      "tip": "If a native element solves the problem, use it first.",
+      "hack": "Audit custom controls for keyboard behavior before adding more ARIA labels.",
+      "mistake": "Do not add role=button to a div and assume it behaves like a button.",
+      "expected": "The example uses a real native button.",
+      "html": "<main><button type=\"button\">Native action</button><p>Use built-in semantics first.</p></main>",
+      "quiz": [
+        {
+          "question": "What should usually come before ARIA for common controls?",
+          "options": [
+            "Native HTML",
+            "A div with role",
+            "CSS only",
+            "Canvas"
+          ],
+          "correctIndex": 0,
+          "explanation": "Native controls already provide semantics and behavior."
+        },
+        {
+          "question": "Does role=button automatically add keyboard activation?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "ARIA does not implement all behavior."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Beginner",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}.control{display:inline-block;margin:6px;padding:10px 14px;border-radius:9px;border:1px solid #0879b7;background:white;color:#0879b7;text-decoration:none}",
+      "js": "",
+      "tags": [
+        "html",
+        "accessibility by default",
+        "button",
+        "or",
+        "link",
+        "choose",
+        "by",
+        "intent"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-buttons-vs-links",
+      "stage": "Accessibility by Default",
+      "order": 20,
+      "title": "Button or link? Choose by intent",
+      "summary": "Navigation and actions are not the same interaction.",
+      "definition": "A link navigates to a resource/location; a button triggers an action in the current interface.",
+      "learn": [
+        "Navigation vs action",
+        "Anchor href",
+        "Button type",
+        "User expectations"
+      ],
+      "objective": "Choose controls based on what happens when activated.",
+      "explanation": "If activation changes location, use a link. If it saves, toggles, opens, or changes interface state, use a button. CSS can make either look similar.",
+      "tip": "Read the text as a verb: “Go to Pricing” suggests a link; “Save changes” suggests a button.",
+      "hack": "Style a link like a button when it is still navigation.",
+      "mistake": "Do not use href=javascript: to turn an anchor into an action control.",
+      "expected": "One control navigates; the other remains a button action.",
+      "html": "<main><a href=\"#pricing\" class=\"control\">Go to Pricing</a><button type=\"button\" class=\"control\">Save changes</button><section id=\"pricing\"><h2>Pricing</h2></section></main>",
+      "quiz": [
+        {
+          "question": "Which element fits “Save changes”?",
+          "options": [
+            "button",
+            "a",
+            "meta",
+            "figure"
+          ],
+          "correctIndex": 0,
+          "explanation": "Saving is an action."
+        },
+        {
+          "question": "Which element fits navigation?",
+          "options": [
+            "a",
+            "button always",
+            "div",
+            "span"
+          ],
+          "correctIndex": 0,
+          "explanation": "Links represent navigation."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}section{padding:14px;margin-bottom:12px;background:white;border-radius:12px}[inert]{opacity:.55}",
+      "js": "",
+      "tags": [
+        "html",
+        "accessibility by default",
+        "hidden",
+        "and",
+        "inert"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-hidden-inert",
+      "stage": "Accessibility by Default",
+      "order": 30,
+      "title": "hidden and inert",
+      "summary": "Hide content or temporarily disable interaction with the right tool.",
+      "definition": "hidden removes content from presentation; inert makes a subtree non-interactive and unavailable to normal focus/accessibility interaction while inert.",
+      "learn": [
+        "hidden",
+        "inert",
+        "Focus behavior",
+        "Modal background use"
+      ],
+      "objective": "Distinguish absent content from temporarily inactive content.",
+      "explanation": "Use hidden when content should not be presented. Use inert when content remains in the document but must temporarily stop interaction, such as background UI during a modal workflow.",
+      "tip": "Test Tab navigation after introducing hidden/inert states.",
+      "hack": "Prefer native hidden when content truly should be absent from interaction.",
+      "mistake": "Do not hide instructions while users still need them.",
+      "expected": "The second section appears dimmed and its button cannot receive normal interaction.",
+      "html": "<main><section><h1>Active content</h1><button>Focusable button</button></section><section inert><button>This area is inert</button></section></main>",
+      "quiz": [
+        {
+          "question": "What does inert do?",
+          "options": [
+            "Makes subtree non-interactive",
+            "Deletes source",
+            "Changes class",
+            "Submits form"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inert disables interaction/focus in the subtree."
+        },
+        {
+          "question": "When is hidden appropriate?",
+          "options": [
+            "When content should not currently be presented",
+            "For every disabled button",
+            "For tooltips only",
+            "For links"
+          ],
+          "correctIndex": 0,
+          "explanation": "hidden represents content not currently presented."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}details{padding:16px;background:white;border:1px solid #d7e3eb;border-radius:12px}summary{cursor:pointer;font-weight:800}",
+      "js": "",
+      "tags": [
+        "html",
+        "accessibility by default",
+        "details",
+        "and",
+        "summary"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-details-summary",
+      "stage": "Accessibility by Default",
+      "order": 40,
+      "title": "details and summary",
+      "summary": "Build expandable content without a custom accordion.",
+      "definition": "details creates a disclosure widget; summary provides its visible label/control.",
+      "learn": [
+        "details",
+        "summary",
+        "open",
+        "Native disclosure behavior"
+      ],
+      "objective": "Use native disclosure when it matches the interaction.",
+      "explanation": "Details/summary gives keyboard-operable disclosure behavior with little code. It works well for FAQs and optional explanations.",
+      "tip": "Write summary text that tells users what will be revealed.",
+      "hack": "Add open when a disclosure should start expanded.",
+      "mistake": "Do not hide essential always-needed information behind many disclosures.",
+      "expected": "Clicking the summary expands and collapses the explanation.",
+      "html": "<details><summary>Why use semantic HTML?</summary><p>It communicates meaning to browsers, tools, and people.</p></details>",
+      "quiz": [
+        {
+          "question": "Which element controls details?",
+          "options": [
+            "summary",
+            "caption",
+            "legend",
+            "label"
+          ],
+          "correctIndex": 0,
+          "explanation": "summary is the disclosure label."
+        },
+        {
+          "question": "Which attribute starts details expanded?",
+          "options": [
+            "open",
+            "checked",
+            "selected",
+            "required"
+          ],
+          "correctIndex": 0,
+          "explanation": "open expands it initially."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}button{padding:10px 14px}dialog{border:0;border-radius:14px;box-shadow:0 20px 60px #0004}",
+      "js": "document.querySelector(\"#openDialog\").addEventListener(\"click\",()=>document.querySelector(\"#demoDialog\").showModal());",
+      "tags": [
+        "html",
+        "accessibility by default",
+        "dialog",
+        "for",
+        "modal",
+        "tasks"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-dialog",
+      "stage": "Accessibility by Default",
+      "order": 50,
+      "title": "dialog for modal tasks",
+      "summary": "Use the native dialog element when a true dialog interaction is needed.",
+      "definition": "dialog represents a dialog box; JavaScript opens it with show() or showModal().",
+      "learn": [
+        "dialog",
+        "show/showModal",
+        "method=dialog",
+        "Close/focus considerations"
+      ],
+      "objective": "Recognize native dialog markup and its responsibilities.",
+      "explanation": "A modal dialog blocks interaction with the rest of the document while open. You still need clear labels, focus flow, and close controls.",
+      "tip": "Keep dialogs focused on one task.",
+      "hack": "A form with method=dialog can close a dialog without server submission.",
+      "mistake": "Do not open modals automatically without a strong user-centered reason.",
+      "expected": "The button opens a native modal dialog and Close dismisses it.",
+      "html": "<main><button id=\"openDialog\" type=\"button\">Open dialog</button><dialog id=\"demoDialog\" aria-labelledby=\"dialogTitle\"><h2 id=\"dialogTitle\">Confirm lesson</h2><p>This is a native dialog.</p><form method=\"dialog\"><button>Close</button></form></dialog></main>",
+      "quiz": [
+        {
+          "question": "Which method opens a modal dialog?",
+          "options": [
+            "showModal()",
+            "openModal()",
+            "display()",
+            "alertDialog()"
+          ],
+          "correctIndex": 0,
+          "explanation": "showModal opens it modally."
+        },
+        {
+          "question": "Can method=dialog close a dialog without normal form submission?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yes."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "head, metadata & seo",
+        "lang",
+        "charset",
+        "and",
+        "viewport"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-lang-charset-viewport",
+      "stage": "Head, Metadata & SEO",
+      "order": 10,
+      "title": "lang, charset, and viewport",
+      "summary": "Set three foundational document signals correctly.",
+      "definition": "lang declares document language, meta charset declares encoding, and viewport metadata helps responsive layouts use device width correctly.",
+      "learn": [
+        "lang",
+        "UTF-8",
+        "viewport",
+        "Why metadata matters"
+      ],
+      "objective": "Add foundational metadata real pages need.",
+      "explanation": "Language helps browsers and assistive tech; UTF-8 supports a broad character set; viewport metadata prevents mobile browsers from treating the page as a wide desktop canvas.",
+      "tip": "Use the correct primary language code for the page.",
+      "hack": "Inspect language in browser accessibility tools for multilingual testing.",
+      "mistake": "Do not omit viewport metadata and then compensate with odd CSS scaling.",
+      "expected": "The document includes language, charset, and responsive viewport metadata.",
+      "html": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Metadata basics</title></head><body><main><h1>Metadata basics</h1></main></body></html>",
+      "quiz": [
+        {
+          "question": "Which attribute declares document language?",
+          "options": [
+            "lang",
+            "name",
+            "scope",
+            "method"
+          ],
+          "correctIndex": 0,
+          "explanation": "lang declares language."
+        },
+        {
+          "question": "Which encoding is the common modern choice?",
+          "options": [
+            "UTF-8",
+            "ASCII only",
+            "UTF-16 required",
+            "Base64"
+          ],
+          "correctIndex": 0,
+          "explanation": "UTF-8 is standard."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "head, metadata & seo",
+        "page",
+        "title",
+        "and",
+        "meta",
+        "description"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-title-description",
+      "stage": "Head, Metadata & SEO",
+      "order": 20,
+      "title": "Page title and meta description",
+      "summary": "Write metadata for people first, not keyword stuffing.",
+      "definition": "title names the document in tabs/history and is important for search results; a meta description summarizes the page and may be used as a search snippet.",
+      "learn": [
+        "title",
+        "meta description",
+        "Unique page naming",
+        "Snippet expectations"
+      ],
+      "objective": "Write useful metadata for important pages.",
+      "explanation": "A useful title helps distinguish tabs and search results. A description summarizes the page, but search engines may choose different snippet text.",
+      "tip": "Lead with the specific page topic when that improves scanning.",
+      "hack": "Test the deployed URL in real search/social preview tools rather than assuming the exact snippet.",
+      "mistake": "Do not reuse one generic title everywhere.",
+      "expected": "The document has a specific title and concise description.",
+      "html": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>HTML Forms Guide — Knowledge Lab</title><meta name=\"description\" content=\"Learn labels, input types, validation, and accessible form structure.\"></head><body><main><h1>HTML Forms Guide</h1></main></body></html>",
+      "quiz": [
+        {
+          "question": "What should a page title do?",
+          "options": [
+            "Clearly identify the page",
+            "Repeat keywords",
+            "Replace h1",
+            "Load CSS"
+          ],
+          "correctIndex": 0,
+          "explanation": "Title should identify the page."
+        },
+        {
+          "question": "Is meta description guaranteed as the exact search snippet?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Search engines may choose other text."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "head, metadata & seo",
+        "favicon",
+        "and",
+        "canonical",
+        "url"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-favicon-canonical",
+      "stage": "Head, Metadata & SEO",
+      "order": 30,
+      "title": "Favicon and canonical URL",
+      "summary": "Use link relations for icons and preferred public URLs.",
+      "definition": "link in the head can declare relationships such as an icon or a canonical URL.",
+      "learn": [
+        "rel=icon",
+        "rel=canonical",
+        "Document relationships",
+        "Public URLs"
+      ],
+      "objective": "Recognize common link metadata.",
+      "explanation": "A favicon identifies the site in tabs/bookmarks. A canonical link can signal the preferred URL for duplicate or near-duplicate content.",
+      "tip": "Tie canonical URLs to the real routing/deployment system.",
+      "hack": "SVG favicons can work well when supported by your target environment.",
+      "mistake": "Do not add a fake canonical URL just to satisfy a checklist.",
+      "expected": "The source demonstrates icon and canonical link relations.",
+      "html": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Link metadata</title><link rel=\"icon\" href=\"../assets/images/favicon.svg\" type=\"image/svg+xml\"><link rel=\"canonical\" href=\"https://example.com/learn/html\"></head><body><main><h1>Metadata relationships</h1></main></body></html>",
+      "quiz": [
+        {
+          "question": "Which relation declares a site icon?",
+          "options": [
+            "icon",
+            "author",
+            "next",
+            "stylesheet only"
+          ],
+          "correctIndex": 0,
+          "explanation": "rel=icon identifies an icon."
+        },
+        {
+          "question": "What should canonical represent?",
+          "options": [
+            "Preferred public URL",
+            "Random URL",
+            "CSS file",
+            "Form action"
+          ],
+          "correctIndex": 0,
+          "explanation": "Canonical points to the preferred content URL."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "head, metadata & seo",
+        "social",
+        "sharing",
+        "metadata"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-social-metadata",
+      "stage": "Head, Metadata & SEO",
+      "order": 40,
+      "title": "Social sharing metadata",
+      "summary": "Understand where Open Graph-style metadata fits.",
+      "definition": "Social preview metadata commonly uses meta elements in the head with platform-defined properties such as Open Graph fields.",
+      "learn": [
+        "Meta properties",
+        "Share title/description",
+        "Preview images",
+        "Platform-specific behavior"
+      ],
+      "objective": "Add social-preview metadata without confusing it with visible semantics.",
+      "explanation": "Social platforms may use title, description, URL, and image metadata when generating previews. The exact fields and crawler behavior are platform-specific.",
+      "tip": "Use real public absolute image URLs when a platform requires them.",
+      "hack": "Test deployed URLs with the target platform's preview/debug tools.",
+      "mistake": "Do not invent marketing claims only for metadata.",
+      "expected": "The source contains a basic social title, description, and type.",
+      "html": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Social metadata demo</title><meta property=\"og:title\" content=\"Knowledge Lab HTML Course\"><meta property=\"og:description\" content=\"Practical HTML lessons with tested examples.\"><meta property=\"og:type\" content=\"website\"></head><body><main><h1>Knowledge Lab HTML Course</h1></main></body></html>",
+      "quiz": [
+        {
+          "question": "Where does social preview metadata normally live?",
+          "options": [
+            "head",
+            "tbody",
+            "footer only",
+            "form"
+          ],
+          "correctIndex": 0,
+          "explanation": "It belongs in the head."
+        },
+        {
+          "question": "Does social metadata replace good visible page content?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "It only supplements the page."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}pre{padding:14px;background:#0d2235;color:white;border-radius:10px;overflow:auto}",
+      "js": "",
+      "tags": [
+        "html",
+        "modern html & performance",
+        "script",
+        "loading",
+        "defer",
+        "async",
+        "and",
+        "module"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-script-defer-async",
+      "stage": "Modern HTML & Performance",
+      "order": 10,
+      "title": "Script loading: defer, async, and module",
+      "summary": "Load JavaScript without accidentally blocking or reordering your app.",
+      "definition": "defer downloads classic scripts without blocking parsing and preserves document order; async executes when ready; module scripts are deferred by default.",
+      "learn": [
+        "defer",
+        "async",
+        "module",
+        "Execution order"
+      ],
+      "objective": "Choose script loading behavior based on dependencies.",
+      "explanation": "If one script depends on another, async can be risky because execution order is not guaranteed. defer is often a safer classic-script default for document-dependent app code.",
+      "tip": "Use defer for classic scripts that depend on the parsed document and each other.",
+      "hack": "Modules have their own dependency graph and are deferred by default.",
+      "mistake": "Do not add async to every script as a generic performance trick.",
+      "expected": "The example explains loading patterns without fetching external scripts.",
+      "html": "<main><h1>Script loading concepts</h1><pre><code>&lt;script src=\"app.js\" defer&gt;&lt;/script&gt;\n&lt;script src=\"analytics.js\" async&gt;&lt;/script&gt;\n&lt;script type=\"module\" src=\"main.js\"&gt;&lt;/script&gt;</code></pre></main>",
+      "quiz": [
+        {
+          "question": "Which classic attribute preserves script order after parsing?",
+          "options": [
+            "defer",
+            "async",
+            "hidden",
+            "sandbox"
+          ],
+          "correctIndex": 0,
+          "explanation": "defer preserves order."
+        },
+        {
+          "question": "Does async guarantee script order?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Async executes when ready."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}img{max-width:100%;height:auto;border-radius:14px}",
+      "js": "",
+      "tags": [
+        "html",
+        "modern html & performance",
+        "lazy",
+        "loading",
+        "and",
+        "fetch",
+        "priority"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-loading-priority",
+      "stage": "Modern HTML & Performance",
+      "order": 20,
+      "title": "Lazy loading and fetch priority",
+      "summary": "Load below-the-fold resources later without delaying critical content.",
+      "definition": "loading=lazy can defer eligible images/iframes; fetchpriority can hint relative fetch importance.",
+      "learn": [
+        "loading=lazy",
+        "Critical eager content",
+        "fetchpriority",
+        "Hints are not commands"
+      ],
+      "objective": "Apply loading hints based on real page priority.",
+      "explanation": "Below-the-fold media can often load later. A visible hero image may need eager loading. fetchpriority is a hint, so measure instead of setting everything high.",
+      "tip": "Do not lazy-load the most important above-the-fold image by reflex.",
+      "hack": "Combine intrinsic image dimensions with sensible loading for better stability.",
+      "mistake": "Do not mark many resources fetchpriority=high.",
+      "expected": "The sample image uses lazy-loading syntax safely.",
+      "html": "<main><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230d2235'/%3E%3Ccircle cx='320' cy='150' r='72' fill='%230879b7'/%3E%3Ctext x='320' y='280' text-anchor='middle' font-family='Arial' font-size='30' fill='white'%3EHTML image example%3C/text%3E%3C/svg%3E\" alt=\"HTML performance example\" width=\"640\" height=\"360\" loading=\"lazy\"><p>Placement determines whether lazy loading is appropriate.</p></main>",
+      "quiz": [
+        {
+          "question": "Which resources are good lazy-load candidates?",
+          "options": [
+            "Below-the-fold media",
+            "Every hero image",
+            "Page title",
+            "Charset"
+          ],
+          "correctIndex": 0,
+          "explanation": "Noncritical offscreen media are good candidates."
+        },
+        {
+          "question": "Is fetchpriority an absolute browser command?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "It is a hint."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}pre{padding:14px;background:#0d2235;color:white;border-radius:10px;overflow:auto}",
+      "js": "",
+      "tags": [
+        "html",
+        "modern html & performance",
+        "resource",
+        "hints",
+        "preload",
+        "and",
+        "preconnect"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-resource-hints",
+      "stage": "Modern HTML & Performance",
+      "order": 30,
+      "title": "Resource hints: preload and preconnect",
+      "summary": "Use early-loading hints only when measurements justify them.",
+      "definition": "preload requests a specific resource early; preconnect can prepare an early connection to an important origin.",
+      "learn": [
+        "preload",
+        "preconnect",
+        "as/type correctness",
+        "Overuse cost"
+      ],
+      "objective": "Recognize performance hints and their tradeoffs.",
+      "explanation": "Every early request competes for bandwidth. Preload only resources genuinely needed soon, and use correct metadata. Unused preloads can waste work.",
+      "tip": "Profile first with real network/performance tools.",
+      "hack": "Document why a non-obvious preload exists.",
+      "mistake": "Do not preload every image, font, and script.",
+      "expected": "The code example shows common resource-hint syntax as text.",
+      "html": "<main><h1>Resource hints</h1><pre><code>&lt;link rel=\"preconnect\" href=\"https://cdn.example.com\"&gt;\n&lt;link rel=\"preload\" href=\"/hero.webp\" as=\"image\"&gt;</code></pre></main>",
+      "quiz": [
+        {
+          "question": "What does preconnect target?",
+          "options": [
+            "An origin connection",
+            "Heading",
+            "Form field",
+            "Table row"
+          ],
+          "correctIndex": 0,
+          "explanation": "It prepares a connection."
+        },
+        {
+          "question": "Should everything be preloaded?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Overuse can waste bandwidth."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Intermediate",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}button{padding:10px 14px;border:1px solid #0879b7;border-radius:9px;background:white;color:#0879b7}",
+      "js": "",
+      "tags": [
+        "html",
+        "modern html & performance",
+        "data",
+        "attributes"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-data-attributes",
+      "stage": "Modern HTML & Performance",
+      "order": 40,
+      "title": "data-* attributes",
+      "summary": "Attach small custom metadata without inventing nonstandard attributes.",
+      "definition": "data-* attributes store custom data on elements and are exposed to JavaScript through dataset.",
+      "learn": [
+        "data-* syntax",
+        "dataset",
+        "Good use cases",
+        "Not secret storage"
+      ],
+      "objective": "Use custom element metadata appropriately.",
+      "explanation": "A product card can carry data-product-id so JavaScript can connect UI to application state. These values are visible in source and are not secure storage.",
+      "tip": "Name data attributes by meaning, not visual position.",
+      "hack": "data-product-id maps to dataset.productId.",
+      "mistake": "Never store secrets in data attributes.",
+      "expected": "The button carries a product ID and stock state as custom data.",
+      "html": "<button type=\"button\" data-product-id=\"P-145\" data-stock-state=\"available\">View product P-145</button>",
+      "quiz": [
+        {
+          "question": "How is data-product-id commonly read in JS?",
+          "options": [
+            "dataset.productId",
+            "style.productId",
+            "href.productId",
+            "meta.productId"
+          ],
+          "correctIndex": 0,
+          "explanation": "dataset exposes data attributes."
+        },
+        {
+          "question": "Are data attributes secure secret storage?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "They are visible in the document."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}article{padding:18px;background:white;border-radius:12px}",
+      "js": "const tpl=document.querySelector(\"#cardTemplate\");document.querySelector(\"#host\").append(tpl.content.cloneNode(true));",
+      "tags": [
+        "html",
+        "modern html & performance",
+        "template",
+        "for",
+        "inert",
+        "reusable",
+        "markup"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-template",
+      "stage": "Modern HTML & Performance",
+      "order": 50,
+      "title": "template for inert reusable markup",
+      "summary": "Keep markup in the document without rendering it immediately.",
+      "definition": "template stores parsed but inert markup that is not rendered until code clones or inserts its content.",
+      "learn": [
+        "template",
+        "template.content",
+        "Inert markup",
+        "Reusable fragments"
+      ],
+      "objective": "Recognize the native template mechanism.",
+      "explanation": "Template content is parsed but inactive until inserted. It is useful for repeated rows/cards created by JavaScript, but it is not a complete component system by itself.",
+      "tip": "Keep templates small and purpose-specific.",
+      "hack": "Clone template.content instead of rebuilding large markup strings.",
+      "mistake": "Do not put essential content only in template if users need it before JavaScript runs.",
+      "expected": "JavaScript clones one card from the template into the page.",
+      "html": "<main><template id=\"cardTemplate\"><article><h2>Template card</h2><p>Cloned from inert HTML.</p></article></template><div id=\"host\"></div></main>",
+      "quiz": [
+        {
+          "question": "Is template content rendered immediately?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Template content is inert."
+        },
+        {
+          "question": "Where is its fragment exposed?",
+          "options": [
+            "template.content",
+            "template.value",
+            "template.href",
+            "template.style"
+          ],
+          "correctIndex": 0,
+          "explanation": "content exposes the fragment."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}button{padding:10px 14px}[popover]{border:0;border-radius:12px;padding:18px;box-shadow:0 20px 60px #0004}",
+      "js": "",
+      "tags": [
+        "html",
+        "modern html & performance",
+        "native",
+        "popover"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-popover",
+      "stage": "Modern HTML & Performance",
+      "order": 60,
+      "title": "Native popover",
+      "summary": "Create lightweight top-layer UI with HTML-driven behavior.",
+      "definition": "The Popover API uses attributes such as popover and popovertarget to create dismissible top-layer content.",
+      "learn": [
+        "popover",
+        "popovertarget",
+        "Top layer",
+        "Popover vs dialog"
+      ],
+      "objective": "Recognize when popover fits supplemental UI.",
+      "explanation": "Popover works well for help, menus, and small panels that do not represent a blocking task. It differs from a modal dialog.",
+      "tip": "Use meaningful trigger text and focused popover content.",
+      "hack": "Start with native popover behavior before adding custom JavaScript.",
+      "mistake": "Do not use popover for critical confirmation that should be modal.",
+      "expected": "The Show help button opens a native popover on supported browsers.",
+      "html": "<main><button popovertarget=\"help\">Show help</button><div id=\"help\" popover><strong>HTML tip</strong><p>Choose elements by meaning first.</p></div></main>",
+      "quiz": [
+        {
+          "question": "Which attribute marks popover content?",
+          "options": [
+            "popover",
+            "dialog",
+            "target",
+            "controls"
+          ],
+          "correctIndex": 0,
+          "explanation": "popover identifies popover content."
+        },
+        {
+          "question": "Is popover automatically a modal blocking task?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Popover and modal dialog serve different purposes."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "architecture & expert practice",
+        "progressive",
+        "enhancement"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-progressive-enhancement",
+      "stage": "Architecture & Expert Practice",
+      "order": 10,
+      "title": "Progressive enhancement",
+      "summary": "Make the core content and action work before adding richer layers.",
+      "definition": "Progressive enhancement starts with a functional semantic baseline, then adds presentation and behavior where supported.",
+      "learn": [
+        "Semantic baseline",
+        "CSS enhancement",
+        "JavaScript enhancement",
+        "Failure-friendly design"
+      ],
+      "objective": "Build resilient interfaces.",
+      "explanation": "A real link should still navigate if enhancement code fails. Forms should still have labels and meaningful controls before custom styling. HTML is the foundation layer.",
+      "tip": "Test the page with JavaScript disabled when the product allows it.",
+      "hack": "Native features can reduce custom code and failure modes.",
+      "mistake": "Do not ship empty div shells for content that could be meaningful HTML initially.",
+      "expected": "The link and target section work without JavaScript.",
+      "html": "<main><h1>Progressive enhancement</h1><a href=\"#details\">Read details</a><section id=\"details\"><h2>Details</h2><p>Enhancements can be added later.</p></section></main>",
+      "quiz": [
+        {
+          "question": "What is the first layer in progressive enhancement?",
+          "options": [
+            "Meaningful baseline",
+            "Animations",
+            "Framework",
+            "Analytics"
+          ],
+          "correctIndex": 0,
+          "explanation": "Start with resilient content/behavior."
+        },
+        {
+          "question": "Does this mean every app must fully work without JS?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "It means an intentional resilient baseline."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}iframe{border:1px solid #ccdbe5;border-radius:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "architecture & expert practice",
+        "html",
+        "security",
+        "habits"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-security-basics",
+      "stage": "Architecture & Expert Practice",
+      "order": 20,
+      "title": "HTML security habits",
+      "summary": "Links, embeds, forms, and untrusted content can create security boundaries.",
+      "definition": "HTML security includes safe destinations, restricted iframe capabilities, and careful handling of untrusted content.",
+      "learn": [
+        "Untrusted HTML risk",
+        "Iframe sandbox",
+        "Trusted destinations",
+        "Least privilege"
+      ],
+      "objective": "Recognize security-sensitive HTML surfaces.",
+      "explanation": "If untrusted text is injected as HTML, it can become active markup depending on context and policy. Embeds should receive only needed permissions.",
+      "tip": "Treat user-provided rich HTML as a sanitization problem.",
+      "hack": "Use textContent for plain text insertion when markup is not needed.",
+      "mistake": "Do not paste untrusted HTML into production or grant broad iframe permissions blindly.",
+      "expected": "The example uses a restricted sandboxed iframe.",
+      "html": "<main><h1>Least privilege</h1><iframe title=\"Restricted example\" sandbox srcdoc=\"<p>Restricted frame</p>\" width=\"100%\" height=\"90\"></iframe></main>",
+      "quiz": [
+        {
+          "question": "Is untrusted HTML safe just because it came from a text field?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Untrusted markup can be active content."
+        },
+        {
+          "question": "What should sandbox permissions follow?",
+          "options": [
+            "Least privilege",
+            "Allow everything",
+            "Random choice",
+            "CSS specificity"
+          ],
+          "correctIndex": 0,
+          "explanation": "Grant only what is needed."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}",
+      "js": "",
+      "tags": [
+        "html",
+        "architecture & expert practice",
+        "content",
+        "models",
+        "and",
+        "valid",
+        "relationships"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-content-model",
+      "stage": "Architecture & Expert Practice",
+      "order": 30,
+      "title": "Content models and valid relationships",
+      "summary": "Move beyond memorizing tags into understanding which elements may contain which content.",
+      "definition": "HTML defines content categories and element-specific rules that determine where elements may appear and what they may contain.",
+      "learn": [
+        "Content categories",
+        "Interactive restrictions",
+        "Valid nesting",
+        "Why validators matter"
+      ],
+      "objective": "Reason about valid structures in complex components.",
+      "explanation": "Some invalid markup looks plausible. Interactive elements should not be nested in conflicting ways, such as a button inside another button. You do not need to memorize the whole specification; use documentation and validation.",
+      "tip": "Validate the final rendered HTML, not only a source template.",
+      "hack": "Be extra careful around links, buttons, labels, tables, lists, and forms.",
+      "mistake": "Do not nest interactive controls just to make a whole card clickable.",
+      "expected": "The sample keeps navigation and action controls separate.",
+      "html": "<main><article><h1>Valid interaction structure</h1><p><a href=\"#details\">Open details</a></p><button type=\"button\">Independent action</button></article><section id=\"details\"><h2>Details</h2></section></main>",
+      "quiz": [
+        {
+          "question": "Should a button contain another button?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Nested interactive controls conflict."
+        },
+        {
+          "question": "What should you do when unsure about an element relationship?",
+          "options": [
+            "Check docs + validator",
+            "Guess",
+            "Use CSS only",
+            "Check database"
+          ],
+          "correctIndex": 0,
+          "explanation": "Use authoritative rules and validation."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Advanced",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}article{padding:24px;background:white;border:1px solid #d9e4eb;border-radius:16px}",
+      "js": "",
+      "tags": [
+        "html",
+        "architecture & expert practice",
+        "build",
+        "a",
+        "clean",
+        "semantic",
+        "page",
+        "section"
+      ],
+      "realUse": "Used in real websites, web apps, portfolios, documentation, forms, and production UI.",
+      "id": "html-clean-document",
+      "stage": "Architecture & Expert Practice",
+      "order": 40,
+      "title": "Build a clean semantic page section",
+      "summary": "Combine headings, landmarks, article structure, links, and supporting content.",
+      "definition": "Clean semantic HTML uses meaningful elements, logical heading structure, valid nesting, and minimal generic wrappers.",
+      "learn": [
+        "Landmarks",
+        "Heading hierarchy",
+        "Article/section relationships",
+        "Meaningful links"
+      ],
+      "objective": "Combine core concepts into a production-style content block.",
+      "explanation": "The goal is not to maximize semantic tags. It is to make the document understandable with the smallest clear structure. The page should still read sensibly without CSS.",
+      "tip": "Read the source top-to-bottom and check whether the information order still makes sense.",
+      "hack": "Use a neutral div when a wrapper has no semantic role.",
+      "mistake": "Do not add headings just to style text or sections with no thematic purpose.",
+      "expected": "The article has a clear header, section, list, and footer link.",
+      "html": "<main><article><header><p>Knowledge Lab</p><h1>Semantic HTML checklist</h1></header><section aria-labelledby=\"why\"><h2 id=\"why\">Why this works</h2><ul><li>Clear main topic</li><li>Real heading</li><li>Useful list</li></ul></section><footer><a href=\"#why\">Review key points</a></footer></article></main>",
+      "quiz": [
+        {
+          "question": "What is the goal of semantic HTML?",
+          "options": [
+            "Clear meaning and structure",
+            "Use every semantic tag",
+            "Avoid CSS",
+            "Make markup longer"
+          ],
+          "correctIndex": 0,
+          "explanation": "Semantics communicate role clearly."
+        },
+        {
+          "question": "Is div acceptable when no semantic element fits?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "correctIndex": 0,
+          "explanation": "Generic containers are valid when appropriate."
+        }
+      ]
+    },
+    {
+      "categoryId": "html",
+      "mode": "code",
+      "level": "Expert practice",
+      "css": "body{font-family:system-ui,sans-serif;margin:0;padding:28px;color:#17344b;background:#f5f9fc}main,article,section,form,figure,.demo{max-width:700px;margin:0 auto}a{color:#0879b7}button,input,select,textarea{font:inherit}header,nav,footer,main{max-width:760px;margin:0 auto 14px}article{padding:22px;background:white;border-radius:16px}form{display:grid;gap:8px;max-width:380px}input,button{padding:10px}",
+      "js": "",
+      "tags": [
+        "html",
+        "architecture & expert practice",
+        "final",
+        "html",
+        "challenge",
+        "a",
+        "resilient",
+        "mini"
+      ],
+      "realUse": "Production landing pages, portfolios, documentation, dashboards, and app shells use these same structural decisions.",
+      "id": "html-expert-practice-page",
+      "stage": "Architecture & Expert Practice",
+      "order": 50,
+      "title": "Final HTML challenge: a resilient mini page",
+      "summary": "Combine metadata, landmarks, semantic content, a form, and native disclosure.",
+      "definition": "Expert HTML practice means consistently choosing robust semantics, relationships, metadata, and interaction foundations that remain understandable as a project grows.",
+      "learn": [
+        "Document shell",
+        "Landmarks",
+        "Semantic sections",
+        "Accessible form",
+        "Native disclosure",
+        "Validation mindset"
+      ],
+      "objective": "Build a small production-style page before visual polish.",
+      "explanation": "This challenge combines the course: metadata, navigation, main content, article sections, labeled form controls, and details/summary. Expertise is not about using the most tags; it is about using the simplest correct structure.",
+      "tip": "Remove the CSS and check whether the reading order and controls still make sense.",
+      "hack": "Validate the rendered document and test keyboard navigation before adding more complexity.",
+      "mistake": "Do not judge HTML quality by cleverness or shortest markup.",
+      "expected": "The mini page has clear hierarchy, navigation, article content, disclosure, and a usable form.",
+      "html": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>HTML Expert Practice</title><meta name=\"description\" content=\"A resilient semantic HTML mini page.\"></head><body><header><strong>Knowledge Lab</strong></header><nav aria-label=\"Primary\"><a href=\"#course\">Course</a> <a href=\"#practice\">Practice</a></nav><main><article id=\"course\"><header><h1>Build structure that lasts</h1><p>Meaning first.</p></header><section><h2>Core idea</h2><p>Use native semantics before custom behavior.</p></section><details><summary>Review checklist</summary><ul><li>Valid nesting</li><li>Clear headings</li><li>Accessible controls</li></ul></details><section id=\"practice\"><h2>Practice signup</h2><form><label for=\"practiceEmail\">Email</label><input id=\"practiceEmail\" name=\"email\" type=\"email\" autocomplete=\"email\" required><button type=\"button\">Preview signup</button></form></section></article></main><footer><small>Knowledge Lab practice document</small></footer></body></html>",
+      "quiz": [
+        {
+          "question": "What is the strongest sign of good HTML?",
+          "options": [
+            "Meaningful, valid, accessible, resilient structure",
+            "Most tags possible",
+            "Shortest file possible",
+            "No CSS allowed"
+          ],
+          "correctIndex": 0,
+          "explanation": "Quality comes from correct structure."
+        },
+        {
+          "question": "What should you test before more complexity?",
+          "options": [
+            "Validation and keyboard/read order",
+            "Only font color",
+            "Database speed",
+            "Image filters"
+          ],
+          "correctIndex": 0,
+          "explanation": "Validate structure and interaction foundations."
+        },
+        {
+          "question": "Should expert HTML depend on clever markup tricks?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Reliable understandable markup is the goal."
         }
       ]
     },
