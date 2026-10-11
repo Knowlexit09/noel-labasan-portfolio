@@ -613,7 +613,7 @@
       "hack": "Use `hidden` in HTML or `display: none` for UI states that should not occupy layout space.",
       "mistake": "Do not use `visibility: hidden` when you expect surrounding content to move into the hidden element's space.",
       "expected": "The badges sit inline while the block sections stay stacked.",
-      "realUse": "<div class=\"demo\"><span class=\"badge\">One</span><span class=\"badge\">Two</span><section>Block section A</section><section>Block section B</section></div>",
+      "realUse": "Useful for menus, dialogs, badges, tabs, conditional UI, and understanding why elements do or do not occupy layout space.",
       "tags": [
         "css",
         "core styling",
@@ -623,8 +623,10 @@
         "normal",
         "document"
       ],
-      "html": "body { font-family: system-ui, sans-serif; padding: 32px; }\n.badge { display: inline-block; margin-right: 6px; padding: 6px 9px; background: #e7f5fc; border-radius: 999px; }\nsection { margin-top: 12px; padding: 14px; background: #f1f4f7; }",
-      "css": [
+      "html": "<div class=\"demo\"><span class=\"badge\">One</span><span class=\"badge\">Two</span><section>Block section A</section><section>Block section B</section></div>",
+      "css": "body { font-family: system-ui, sans-serif; padding: 32px; }\n.badge { display: inline-block; margin-right: 6px; padding: 6px 9px; background: #e7f5fc; border-radius: 999px; }\nsection { margin-top: 12px; padding: 14px; background: #f1f4f7; }",
+      "js": "",
+      "quiz": [
         {
           "question": "What does `display: none` do?",
           "options": [
@@ -647,8 +649,7 @@
           "correctIndex": 0,
           "explanation": "`inline-block` keeps inline placement while behaving more like a box."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-box-model",
@@ -665,7 +666,7 @@
       "hack": "Instead of adding random margins everywhere, first decide whether the space belongs inside the component (padding) or between components (margin/gap).",
       "mistake": "Do not use margin when you really need internal breathing room. It can make component spacing harder to reason about.",
       "expected": "The card has visible padding inside and margin outside.",
-      "realUse": "<div class=\"box-demo\">Content area</div>",
+      "realUse": "Used constantly for cards, forms, buttons, panels, table cells, and spacing systems.",
       "tags": [
         "css",
         "box model & sizing",
@@ -675,8 +676,10 @@
         "content",
         "padding"
       ],
-      "html": "body { font-family: system-ui, sans-serif; background: #eef4f8; padding: 40px; }\n.box-demo { max-width: 420px; margin: 30px auto; padding: 24px; border: 4px solid #0c8bc7; background: white; }",
-      "css": [
+      "html": "<div class=\"box-demo\">Content area</div>",
+      "css": "body { font-family: system-ui, sans-serif; background: #eef4f8; padding: 40px; }\n.box-demo { max-width: 420px; margin: 30px auto; padding: 24px; border: 4px solid #0c8bc7; background: white; }",
+      "js": "",
+      "quiz": [
         {
           "question": "Which space is inside the border?",
           "options": [
@@ -700,17 +703,14 @@
           "explanation": "Margin is outside the border and is commonly used for external spacing."
         }
       ],
-      "js": "",
-      "quiz": {
-        "shortcut": {
-          "label": "⚡ SHORTHAND — margin and padding",
-          "longLabel": "Long form",
-          "longCode": "margin-top: 12px;\nmargin-right: 20px;\nmargin-bottom: 12px;\nmargin-left: 20px;",
-          "shortLabel": "Short form",
-          "shortCode": "margin: 12px 20px;",
-          "note": "Two values mean vertical first, horizontal second.",
-          "caution": "Shorthand is great when the pattern is obvious. Use individual sides when only one side should change."
-        }
+      "shortcut": {
+        "label": "⚡ SHORTHAND — margin and padding",
+        "longLabel": "Long form",
+        "longCode": "margin-top: 12px;\nmargin-right: 20px;\nmargin-bottom: 12px;\nmargin-left: 20px;",
+        "shortLabel": "Short form",
+        "shortCode": "margin: 12px 20px;",
+        "note": "Two values mean vertical first, horizontal second.",
+        "caution": "Shorthand is great when the pattern is obvious. Use individual sides when only one side should change."
       }
     },
     {
@@ -728,7 +728,7 @@
       "hack": "For long code blocks or tables, horizontal scrolling is often safer than clipping information.",
       "mistake": "Do not hide overflow just to make a layout look fixed if users still need the hidden content.",
       "expected": "The fixed-width card stays within its declared width even with padding and border.",
-      "realUse": "<div class=\"box\">This box is 320px wide including its padding and border.</div>",
+      "realUse": "Essential for predictable component sizing, code blocks, tables, media, and narrow mobile layouts.",
       "tags": [
         "css",
         "box model & sizing",
@@ -737,8 +737,10 @@
         "and",
         "overflow"
       ],
-      "html": "*, *::before, *::after { box-sizing: border-box; }\nbody { font-family: system-ui, sans-serif; padding: 32px; }\n.box { width: 320px; max-width: 100%; padding: 28px; border: 6px solid #7b3ff2; background: #f6f2ff; overflow-wrap: anywhere; }",
-      "css": [
+      "html": "<div class=\"box\">This box is 320px wide including its padding and border.</div>",
+      "css": "*, *::before, *::after { box-sizing: border-box; }\nbody { font-family: system-ui, sans-serif; padding: 32px; }\n.box { width: 320px; max-width: 100%; padding: 28px; border: 6px solid #7b3ff2; background: #f6f2ff; overflow-wrap: anywhere; }",
+      "js": "",
+      "quiz": [
         {
           "question": "With `border-box`, what does declared width include?",
           "options": [
@@ -761,8 +763,7 @@
           "correctIndex": 0,
           "explanation": "Horizontal scrolling preserves the content without forcing the entire page wider."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-selectors-combinators",
@@ -779,7 +780,7 @@
       "hack": "Attribute selectors are useful for UI state such as `[aria-expanded=\"true\"]` or `[data-state=\"open\"]`.",
       "mistake": "Do not build extremely long selectors tied to the exact HTML nesting. A small markup change can break them.",
       "expected": "Only direct list items receive the highlighted style while nested text keeps its own styling.",
-      "realUse": "<nav class=\"menu\"><a href=\"#\">Home</a><a class=\"active\" href=\"#\">Learn</a><div><a href=\"#\">Nested link</a></div></nav>",
+      "realUse": "Useful for reusable components, navigation, stateful controls, forms, and structured content.",
       "tags": [
         "css",
         "selectors & cascade",
@@ -787,8 +788,10 @@
         "and",
         "combinators"
       ],
-      "html": ".menu { display: grid; gap: 8px; max-width: 280px; font-family: system-ui, sans-serif; }\n.menu > a { padding: 10px 12px; border-radius: 9px; background: #eef4f8; color: #23465d; text-decoration: none; }\n.menu > a.active { background: #0c8bc7; color: white; }\n.menu div a { color: #6a7580; }",
-      "css": [
+      "html": "<nav class=\"menu\"><a href=\"#\">Home</a><a class=\"active\" href=\"#\">Learn</a><div><a href=\"#\">Nested link</a></div></nav>",
+      "css": ".menu { display: grid; gap: 8px; max-width: 280px; font-family: system-ui, sans-serif; }\n.menu > a { padding: 10px 12px; border-radius: 9px; background: #eef4f8; color: #23465d; text-decoration: none; }\n.menu > a.active { background: #0c8bc7; color: white; }\n.menu div a { color: #6a7580; }",
+      "js": "",
+      "quiz": [
         {
           "question": "What does `.menu > a` select?",
           "options": [
@@ -811,8 +814,7 @@
           "correctIndex": 0,
           "explanation": "Attribute selectors match elements based on attribute presence or value."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-pseudo-classes-elements",
@@ -829,7 +831,7 @@
       "hack": "`::before` and `::after` are useful for decorative accents that do not need to exist as real document content.",
       "mistake": "Do not hide focus outlines without providing a clear replacement. Keyboard users need to know where focus is.",
       "expected": "The button changes on hover and gets a strong focus-visible ring for keyboard navigation.",
-      "realUse": "<button class=\"action\">Try me</button>",
+      "realUse": "Used for hover/focus states, selected controls, decorative accents, and accessible interaction feedback.",
       "tags": [
         "css",
         "selectors & cascade",
@@ -839,8 +841,10 @@
         "pseudo",
         "elements"
       ],
-      "html": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.action { position: relative; border: 0; border-radius: 10px; padding: 12px 18px; background: #0d2235; color: white; font-weight: 800; }\n.action:hover { background: #0c8bc7; }\n.action:focus-visible { outline: 3px solid #62d8ff; outline-offset: 3px; }\n.action::after { content: \" →\"; }",
-      "css": [
+      "html": "<button class=\"action\">Try me</button>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.action { position: relative; border: 0; border-radius: 10px; padding: 12px 18px; background: #0d2235; color: white; font-weight: 800; }\n.action:hover { background: #0c8bc7; }\n.action:focus-visible { outline: 3px solid #62d8ff; outline-offset: 3px; }\n.action::after { content: \" →\"; }",
+      "js": "",
+      "quiz": [
         {
           "question": "Which is a pseudo-class?",
           "options": [
@@ -863,8 +867,7 @@
           "correctIndex": 1,
           "explanation": "Keyboard users need a visible focus indicator."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-cascade-specificity-inheritance",
@@ -881,7 +884,7 @@
       "hack": "Keep selectors reasonably low-specificity so components are easy to override intentionally.",
       "mistake": "Do not keep adding IDs and `!important` to win a styling fight. That creates a harder fight later.",
       "expected": "The highlighted paragraph uses the more specific class rule, while other text inherits the section color.",
-      "realUse": "<section class=\"theme\"><p>Inherited color</p><p class=\"highlight\">More specific rule</p></section>",
+      "realUse": "Essential when debugging real applications where multiple stylesheets and component rules overlap.",
       "tags": [
         "css",
         "selectors & cascade",
@@ -891,8 +894,10 @@
         "inheritance",
         "without"
       ],
-      "html": "section { color: #42596b; font-family: system-ui, sans-serif; padding: 24px; }\np { color: #61788a; }\n.theme .highlight { color: #d23f63; font-weight: 800; }",
-      "css": [
+      "html": "<section class=\"theme\"><p>Inherited color</p><p class=\"highlight\">More specific rule</p></section>",
+      "css": "section { color: #42596b; font-family: system-ui, sans-serif; padding: 24px; }\np { color: #61788a; }\n.theme .highlight { color: #d23f63; font-weight: 800; }",
+      "js": "",
+      "quiz": [
         {
           "question": "If two similar-strength rules target the same property, what can decide the winner?",
           "options": [
@@ -915,8 +920,7 @@
           "correctIndex": 0,
           "explanation": "Text color commonly inherits from a parent."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-flexbox-basics",
@@ -933,7 +937,7 @@
       "hack": "`flex: 1 1 220px` is a useful pattern when cards may grow, shrink, and wrap from a practical starting size.",
       "mistake": "Do not memorize `justify-content` as “horizontal.” If `flex-direction` changes to column, the main axis changes too.",
       "expected": "The cards wrap naturally and share available space.",
-      "realUse": "<section class=\"flex-demo\"><article>A</article><article>B</article><article>C</article></section>",
+      "realUse": "Useful for navigation bars, toolbars, button groups, aligned form rows, card rows, and centering.",
       "tags": [
         "css",
         "layout",
@@ -943,8 +947,10 @@
         "layout",
         "made"
       ],
-      "html": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.flex-demo { display: flex; flex-wrap: wrap; gap: 14px; }\n.flex-demo article { flex: 1 1 180px; padding: 28px; border-radius: 14px; background: #eaf7ff; border: 1px solid #bfe7f8; text-align: center; font-weight: 900; }",
-      "css": [
+      "html": "<section class=\"flex-demo\"><article>A</article><article>B</article><article>C</article></section>",
+      "css": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.flex-demo { display: flex; flex-wrap: wrap; gap: 14px; }\n.flex-demo article { flex: 1 1 180px; padding: 28px; border-radius: 14px; background: #eaf7ff; border: 1px solid #bfe7f8; text-align: center; font-weight: 900; }",
+      "js": "",
+      "quiz": [
         {
           "question": "Flexbox is especially useful for what kind of layout?",
           "options": [
@@ -968,17 +974,14 @@
           "explanation": "`gap` creates consistent spacing between flex/grid items."
         }
       ],
-      "js": "",
-      "quiz": {
-        "shortcut": {
-          "label": "⚡ SHORTHAND — flex",
-          "longLabel": "Long form",
-          "longCode": "flex-grow: 1;\nflex-shrink: 1;\nflex-basis: 220px;",
-          "shortLabel": "Short form",
-          "shortCode": "flex: 1 1 220px;",
-          "note": "`flex` combines grow, shrink, and basis.",
-          "caution": "Use explicit long form when teammates need to understand one behavior independently."
-        }
+      "shortcut": {
+        "label": "⚡ SHORTHAND — flex",
+        "longLabel": "Long form",
+        "longCode": "flex-grow: 1;\nflex-shrink: 1;\nflex-basis: 220px;",
+        "shortLabel": "Short form",
+        "shortCode": "flex: 1 1 220px;",
+        "note": "`flex` combines grow, shrink, and basis.",
+        "caution": "Use explicit long form when teammates need to understand one behavior independently."
       }
     },
     {
@@ -996,7 +999,7 @@
       "hack": "Start with the simplest template that works. You can make tracks more fluid later with `minmax()`.",
       "mistake": "Do not create a 12-column grid just because frameworks do. If your layout only needs three meaningful columns, define those.",
       "expected": "The demo creates three flexible columns that collapse naturally if the available width becomes smaller.",
-      "realUse": "<section class=\"grid-demo\"><article>1</article><article>2</article><article>3</article><article>4</article><article>5</article><article>6</article></section>",
+      "realUse": "Useful for dashboards, galleries, card collections, page shells, and aligned two-dimensional layouts.",
       "tags": [
         "css",
         "layout",
@@ -1006,8 +1009,10 @@
         "dimensional",
         "layout"
       ],
-      "html": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.grid-demo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }\n.grid-demo article { padding: 24px; background: #f1f3ff; border: 1px solid #d7dafa; border-radius: 12px; text-align: center; }\n@media (max-width: 600px) { .grid-demo { grid-template-columns: 1fr; } }",
-      "css": [
+      "html": "<section class=\"grid-demo\"><article>1</article><article>2</article><article>3</article><article>4</article><article>5</article><article>6</article></section>",
+      "css": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.grid-demo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }\n.grid-demo article { padding: 24px; background: #f1f3ff; border: 1px solid #d7dafa; border-radius: 12px; text-align: center; }\n@media (max-width: 600px) { .grid-demo { grid-template-columns: 1fr; } }",
+      "js": "",
+      "quiz": [
         {
           "question": "What does `1fr` mean in Grid?",
           "options": [
@@ -1030,8 +1035,7 @@
           "correctIndex": 0,
           "explanation": "Grid is designed for two-dimensional track layouts."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-position-zindex",
@@ -1048,7 +1052,7 @@
       "hack": "`inset` can replace top/right/bottom/left when you want to set multiple offsets together.",
       "mistake": "Do not build a whole responsive page with absolute coordinates. It will usually break when content changes.",
       "expected": "The badge is absolutely positioned inside a relatively positioned card.",
-      "realUse": "<article class=\"position-card\"><span class=\"badge\">NEW</span><h2>Positioning context</h2><p>The badge is anchored to this card.</p></article>",
+      "realUse": "Useful for badges, sticky headers, menus, overlays, modals, floating controls, and layered UI.",
       "tags": [
         "css",
         "layout",
@@ -1058,8 +1062,10 @@
         "and",
         "z"
       ],
-      "html": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.position-card { position: relative; max-width: 500px; margin: auto; padding: 28px; border: 1px solid #d8e2ea; border-radius: 16px; }\n.badge { position: absolute; top: 12px; right: 12px; padding: 5px 8px; border-radius: 999px; background: #d93e68; color: white; font-size: 11px; font-weight: 900; }",
-      "css": [
+      "html": "<article class=\"position-card\"><span class=\"badge\">NEW</span><h2>Positioning context</h2><p>The badge is anchored to this card.</p></article>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.position-card { position: relative; max-width: 500px; margin: auto; padding: 28px; border: 1px solid #d8e2ea; border-radius: 16px; }\n.badge { position: absolute; top: 12px; right: 12px; padding: 5px 8px; border-radius: 999px; background: #d93e68; color: white; font-size: 11px; font-weight: 900; }",
+      "js": "",
+      "quiz": [
         {
           "question": "Why give the card `position: relative` here?",
           "options": [
@@ -1082,8 +1088,7 @@
           "correctIndex": 0,
           "explanation": "`position: sticky` participates in flow until its sticky threshold takes effect."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-media-queries",
@@ -1100,7 +1105,7 @@
       "hack": "Prefer a small number of meaningful breakpoints over dozens of tiny device-specific ones.",
       "mistake": "Do not create a breakpoint for every known screen size. That becomes hard to maintain and still misses future devices.",
       "expected": "The two-column layout becomes one column below 640px.",
-      "realUse": "<section class=\"responsive-pair\"><article>Left</article><article>Right</article></section>",
+      "realUse": "Used when page or component layout needs a deliberate change at a content-driven breakpoint.",
       "tags": [
         "css",
         "responsive design",
@@ -1110,8 +1115,10 @@
         "layout",
         "when"
       ],
-      "html": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.responsive-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }\n.responsive-pair article { padding: 28px; background: #f0f7fb; border-radius: 14px; }\n@media (max-width: 640px) { .responsive-pair { grid-template-columns: 1fr; } }",
-      "css": [
+      "html": "<section class=\"responsive-pair\"><article>Left</article><article>Right</article></section>",
+      "css": "body { padding: 24px; font-family: system-ui, sans-serif; }\n.responsive-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }\n.responsive-pair article { padding: 28px; background: #f0f7fb; border-radius: 14px; }\n@media (max-width: 640px) { .responsive-pair { grid-template-columns: 1fr; } }",
+      "js": "",
+      "quiz": [
         {
           "question": "What should usually determine a breakpoint?",
           "options": [
@@ -1134,8 +1141,7 @@
           "correctIndex": 0,
           "explanation": "CSS media queries use `@media`."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-responsive-grid",
@@ -1205,7 +1211,7 @@
       "hack": "A common fluid heading pattern is `font-size: clamp(2rem, 6vw, 5rem)`.",
       "mistake": "Do not make everything fluid. Some touch targets, borders, and small controls need predictable minimum sizes.",
       "expected": "The heading grows with viewport width but stays between 2rem and 5rem.",
-      "realUse": "<section class=\"fluid-demo\"><h1>Fluid CSS</h1><p>Responsive does not always require a breakpoint.</p></section>",
+      "realUse": "Useful for fluid headings, responsive spacing, readable content widths, and reducing unnecessary breakpoints.",
       "tags": [
         "css",
         "responsive design",
@@ -1215,8 +1221,10 @@
         "min",
         "max"
       ],
-      "html": "body { padding: 28px; font-family: system-ui, sans-serif; }\n.fluid-demo { width: min(92%, 900px); margin: auto; }\nh1 { font-size: clamp(2rem, 6vw, 5rem); line-height: .95; letter-spacing: -.05em; margin-bottom: 18px; }\np { font-size: clamp(1rem, 2vw, 1.2rem); color: #617489; }",
-      "css": [
+      "html": "<section class=\"fluid-demo\"><h1>Fluid CSS</h1><p>Responsive does not always require a breakpoint.</p></section>",
+      "css": "body { padding: 28px; font-family: system-ui, sans-serif; }\n.fluid-demo { width: min(92%, 900px); margin: auto; }\nh1 { font-size: clamp(2rem, 6vw, 5rem); line-height: .95; letter-spacing: -.05em; margin-bottom: 18px; }\np { font-size: clamp(1rem, 2vw, 1.2rem); color: #617489; }",
+      "js": "",
+      "quiz": [
         {
           "question": "What does `clamp()` provide?",
           "options": [
@@ -1237,8 +1245,7 @@
           "correctIndex": 0,
           "explanation": "For smoothly scaling values, functions like `clamp()` can replace some breakpoint-only changes."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-custom-properties",
@@ -1255,7 +1262,7 @@
       "hack": "Custom properties can have fallbacks: `var(--card-gap, 16px)`.",
       "mistake": "Do not create hundreds of variables with no system. Variables help when they represent reusable decisions.",
       "expected": "The same brand custom property styles the heading, button, and border accent.",
-      "realUse": "<section class=\"token-card\"><h2>Reusable tokens</h2><p>One value can style several related pieces.</p><button>Action</button></section>",
+      "realUse": "Useful for themes, brand tokens, spacing systems, reusable component values, and light/dark modes.",
       "tags": [
         "css",
         "modern css",
@@ -1264,8 +1271,10 @@
         "properties",
         "variables"
       ],
-      "html": ":root { --brand: #0879b7; --surface: #f2f9fd; --radius: 16px; }\nbody { padding: 32px; font-family: system-ui, sans-serif; }\n.token-card { max-width: 520px; margin: auto; padding: 24px; background: var(--surface); border-left: 5px solid var(--brand); border-radius: var(--radius); }\nh2 { color: var(--brand); }\nbutton { border: 0; padding: 10px 14px; border-radius: 9px; background: var(--brand); color: white; }",
-      "css": [
+      "html": "<section class=\"token-card\"><h2>Reusable tokens</h2><p>One value can style several related pieces.</p><button>Action</button></section>",
+      "css": ":root { --brand: #0879b7; --surface: #f2f9fd; --radius: 16px; }\nbody { padding: 32px; font-family: system-ui, sans-serif; }\n.token-card { max-width: 520px; margin: auto; padding: 24px; background: var(--surface); border-left: 5px solid var(--brand); border-radius: var(--radius); }\nh2 { color: var(--brand); }\nbutton { border: 0; padding: 10px 14px; border-radius: 9px; background: var(--brand); color: white; }",
+      "js": "",
+      "quiz": [
         {
           "question": "How do you define a CSS custom property?",
           "options": [
@@ -1288,8 +1297,7 @@
           "correctIndex": 0,
           "explanation": "The `var()` function reads a custom property value."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-modern-selectors",
@@ -1306,7 +1314,7 @@
       "hack": "`:has()` can create parent-aware UI, such as highlighting a field group when it contains an invalid input.",
       "mistake": "Do not turn a simple class-based component into a puzzle of advanced selectors. Modern selectors are tools, not goals.",
       "expected": "The card changes its border because it `:has()` a checked checkbox.",
-      "realUse": "<label class=\"choice-card\"><input type=\"checkbox\"> <span>Enable advanced option</span></label>",
+      "realUse": "Useful for low-specificity defaults, grouped selectors, validation states, and parent-aware UI.",
       "tags": [
         "css",
         "modern css",
@@ -1316,8 +1324,10 @@
         "where",
         "and"
       ],
-      "html": "body { padding: 32px; font-family: system-ui, sans-serif; }\n.choice-card { display: flex; gap: 10px; align-items: center; max-width: 420px; padding: 18px; border: 2px solid #d3dfe8; border-radius: 14px; }\n.choice-card:has(input:checked) { border-color: #16a875; background: #edf9f4; }\n:where(.choice-card span) { color: #40596b; }",
-      "css": [
+      "html": "<label class=\"choice-card\"><input type=\"checkbox\"> <span>Enable advanced option</span></label>",
+      "css": "body { padding: 32px; font-family: system-ui, sans-serif; }\n.choice-card { display: flex; gap: 10px; align-items: center; max-width: 420px; padding: 18px; border: 2px solid #d3dfe8; border-radius: 14px; }\n.choice-card:has(input:checked) { border-color: #16a875; background: #edf9f4; }\n:where(.choice-card span) { color: #40596b; }",
+      "js": "",
+      "quiz": [
         {
           "question": "Which selector can style a parent based on matching content inside it?",
           "options": [
@@ -1340,8 +1350,7 @@
           "correctIndex": 0,
           "explanation": "`:where()` is intentionally zero-specificity, which makes defaults easier to override."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-container-queries",
@@ -1358,7 +1367,7 @@
       "hack": "Think component-first: “How much space does this card have?” rather than “What device is this?”",
       "mistake": "Do not add container queries everywhere. Use them when a component truly needs local responsiveness.",
       "expected": "The card switches from stacked to side-by-side when its own container is wide enough.",
-      "realUse": "<div class=\"demo-shell\"><article class=\"cq-card\"><div class=\"art\">CSS</div><div><h2>Container-aware card</h2><p>This component responds to its container.</p></div></article></div>",
+      "realUse": "Useful for reusable cards/widgets that may appear in sidebars, dashboards, modals, or wide pages.",
       "tags": [
         "css",
         "modern css",
@@ -1368,8 +1377,10 @@
         "components",
         "not"
       ],
-      "html": ".demo-shell { container-type: inline-size; max-width: 760px; margin: 30px auto; padding: 12px; border: 1px dashed #9fb6c6; }\n.cq-card { display: grid; gap: 14px; padding: 18px; background: #f5f9fc; border-radius: 14px; font-family: system-ui, sans-serif; }\n.art { display: grid; place-items: center; min-height: 100px; background: #0d2235; color: #5bd6ff; border-radius: 12px; font-weight: 900; }\n@container (min-width: 520px) { .cq-card { grid-template-columns: 180px 1fr; align-items: center; } }",
-      "css": [
+      "html": "<div class=\"demo-shell\"><article class=\"cq-card\"><div class=\"art\">CSS</div><div><h2>Container-aware card</h2><p>This component responds to its container.</p></div></article></div>",
+      "css": ".demo-shell { container-type: inline-size; max-width: 760px; margin: 30px auto; padding: 12px; border: 1px dashed #9fb6c6; }\n.cq-card { display: grid; gap: 14px; padding: 18px; background: #f5f9fc; border-radius: 14px; font-family: system-ui, sans-serif; }\n.art { display: grid; place-items: center; min-height: 100px; background: #0d2235; color: #5bd6ff; border-radius: 12px; font-weight: 900; }\n@container (min-width: 520px) { .cq-card { grid-template-columns: 180px 1fr; align-items: center; } }",
+      "js": "",
+      "quiz": [
         {
           "question": "What do container queries respond to?",
           "options": [
@@ -1392,8 +1403,7 @@
           "correctIndex": 0,
           "explanation": "`container-type: inline-size` establishes a query container for inline-size conditions."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-transforms-transitions",
@@ -1410,7 +1420,7 @@
       "hack": "Transition only the properties you intend instead of writing `transition: all` everywhere.",
       "mistake": "Do not animate large layout changes just because you can. Motion should support understanding and respect user preferences.",
       "expected": "The card lifts slightly and the button changes smoothly on hover/focus.",
-      "realUse": "<article class=\"motion-card\"><h2>Purposeful motion</h2><button>Hover or focus</button></article>",
+      "realUse": "Useful for hover feedback, menus, drawers, cards, buttons, and small state changes.",
       "tags": [
         "css",
         "animation & interaction",
@@ -1418,8 +1428,10 @@
         "and",
         "transitions"
       ],
-      "html": "body { padding: 40px; font-family: system-ui, sans-serif; background: #eef4f8; }\n.motion-card { max-width: 420px; margin: auto; padding: 26px; background: white; border-radius: 16px; transition: transform 180ms ease, box-shadow 180ms ease; }\n.motion-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px #17344d20; }\nbutton { padding: 10px 14px; border: 0; border-radius: 9px; background: #0c8bc7; color: white; transition: transform 120ms ease; }\nbutton:active { transform: scale(.97); }",
-      "css": [
+      "html": "<article class=\"motion-card\"><h2>Purposeful motion</h2><button>Hover or focus</button></article>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; background: #eef4f8; }\n.motion-card { max-width: 420px; margin: auto; padding: 26px; background: white; border-radius: 16px; transition: transform 180ms ease, box-shadow 180ms ease; }\n.motion-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px #17344d20; }\nbutton { padding: 10px 14px; border: 0; border-radius: 9px; background: #0c8bc7; color: white; transition: transform 120ms ease; }\nbutton:active { transform: scale(.97); }",
+      "js": "",
+      "quiz": [
         {
           "question": "What does `transform: translateY(-4px)` do?",
           "options": [
@@ -1443,17 +1455,14 @@
           "explanation": "Explicit transition properties make motion more predictable and easier to maintain."
         }
       ],
-      "js": "",
-      "quiz": {
-        "shortcut": {
-          "label": "⚡ SHORTHAND — transition",
-          "longLabel": "Separate transition properties",
-          "longCode": "transition-property: transform;\ntransition-duration: 180ms;\ntransition-timing-function: ease;",
-          "shortLabel": "Shorthand",
-          "shortCode": "transition: transform 180ms ease;",
-          "note": "The shorthand keeps a simple single-property transition compact.",
-          "caution": "For many unrelated properties or complex timing, explicit rules may be easier to review."
-        }
+      "shortcut": {
+        "label": "⚡ SHORTHAND — transition",
+        "longLabel": "Separate transition properties",
+        "longCode": "transition-property: transform;\ntransition-duration: 180ms;\ntransition-timing-function: ease;",
+        "shortLabel": "Shorthand",
+        "shortCode": "transition: transform 180ms ease;",
+        "note": "The shorthand keeps a simple single-property transition compact.",
+        "caution": "For many unrelated properties or complex timing, explicit rules may be easier to review."
       }
     },
     {
@@ -1471,7 +1480,7 @@
       "hack": "Keep decorative loops subtle and pause/remove them when reduced motion is requested.",
       "mistake": "Do not use large constant motion behind text or controls. It can distract users and cause discomfort.",
       "expected": "The status dot softly pulses unless reduced motion is requested.",
-      "realUse": "<div class=\"status\"><span class=\"dot\"></span><strong>System ready</strong></div>",
+      "realUse": "Useful for loaders, status indicators, onboarding cues, and motion that respects accessibility preferences.",
       "tags": [
         "css",
         "animation & interaction",
@@ -1481,8 +1490,10 @@
         "reduced",
         "motion"
       ],
-      "html": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.status { display: flex; gap: 10px; align-items: center; }\n.dot { width: 14px; height: 14px; border-radius: 50%; background: #16a875; animation: pulse 1.4s ease-in-out infinite; }\n@keyframes pulse { 50% { transform: scale(1.35); opacity: .55; } }\n@media (prefers-reduced-motion: reduce) { .dot { animation: none; } }",
-      "css": [
+      "html": "<div class=\"status\"><span class=\"dot\"></span><strong>System ready</strong></div>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.status { display: flex; gap: 10px; align-items: center; }\n.dot { width: 14px; height: 14px; border-radius: 50%; background: #16a875; animation: pulse 1.4s ease-in-out infinite; }\n@keyframes pulse { 50% { transform: scale(1.35); opacity: .55; } }\n@media (prefers-reduced-motion: reduce) { .dot { animation: none; } }",
+      "js": "",
+      "quiz": [
         {
           "question": "Where are multi-step CSS animations defined?",
           "options": [
@@ -1505,8 +1516,7 @@
           "correctIndex": 0,
           "explanation": "It lets sites reduce non-essential motion for users who request it."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-cascade-layers",
@@ -1523,7 +1533,7 @@
       "hack": "Put easy-to-override defaults in lower-priority layers and intentional utility overrides in a later layer.",
       "mistake": "Do not add layers to a tiny stylesheet just to look advanced. Architecture should solve a real maintenance problem.",
       "expected": "The utility layer intentionally overrides the component color without needing a more complex selector.",
-      "realUse": "<button class=\"button text-accent\">Layered button</button>",
+      "realUse": "Useful in larger applications, design systems, resets, utilities, and projects that combine third-party CSS.",
       "tags": [
         "css",
         "architecture & debugging",
@@ -1533,8 +1543,10 @@
         "css",
         "priority"
       ],
-      "html": "@layer base, components, utilities;\n@layer base { body { padding: 40px; font-family: system-ui, sans-serif; } }\n@layer components { .button { border: 0; border-radius: 10px; padding: 11px 16px; background: #0d2235; color: white; } }\n@layer utilities { .text-accent { color: #5bd6ff; } }",
-      "css": [
+      "html": "<button class=\"button text-accent\">Layered button</button>",
+      "css": "@layer base, components, utilities;\n@layer base { body { padding: 40px; font-family: system-ui, sans-serif; } }\n@layer components { .button { border: 0; border-radius: 10px; padding: 11px 16px; background: #0d2235; color: white; } }\n@layer utilities { .text-accent { color: #5bd6ff; } }",
+      "js": "",
+      "quiz": [
         {
           "question": "What is one main benefit of cascade layers?",
           "options": [
@@ -1555,8 +1567,7 @@
           "correctIndex": 0,
           "explanation": "Use architectural tools when they reduce real complexity, not for ceremony."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-component-architecture",
@@ -1573,7 +1584,7 @@
       "hack": "Keep layout rules in layout containers and visual component rules in the component. Separation reduces accidental side effects.",
       "mistake": "Do not create one giant global stylesheet where every selector can affect every page unpredictably.",
       "expected": "Two buttons share the same base class while a modifier changes only the intended visual variant.",
-      "realUse": "<div class=\"actions\"><button class=\"btn btn--primary\">Save</button><button class=\"btn btn--secondary\">Cancel</button></div>",
+      "realUse": "Useful for design systems, reusable UI libraries, dashboards, admin tools, and multi-page sites.",
       "tags": [
         "css",
         "architecture & debugging",
@@ -1582,8 +1593,10 @@
         "component",
         "css"
       ],
-      "html": ":root { --brand: #0879b7; }\nbody { padding: 40px; font-family: system-ui, sans-serif; }\n.actions { display: flex; gap: 10px; }\n.btn { border-radius: 9px; padding: 10px 14px; font: inherit; font-weight: 800; }\n.btn--primary { border: 1px solid var(--brand); background: var(--brand); color: white; }\n.btn--secondary { border: 1px solid #b8c8d4; background: white; color: #29495f; }",
-      "css": [
+      "html": "<div class=\"actions\"><button class=\"btn btn--primary\">Save</button><button class=\"btn btn--secondary\">Cancel</button></div>",
+      "css": ":root { --brand: #0879b7; }\nbody { padding: 40px; font-family: system-ui, sans-serif; }\n.actions { display: flex; gap: 10px; }\n.btn { border-radius: 9px; padding: 10px 14px; font: inherit; font-weight: 800; }\n.btn--primary { border: 1px solid var(--brand); background: var(--brand); color: white; }\n.btn--secondary { border: 1px solid #b8c8d4; background: white; color: #29495f; }",
+      "js": "",
+      "quiz": [
         {
           "question": "What makes component CSS easier to maintain?",
           "options": [
@@ -1606,8 +1619,7 @@
           "correctIndex": 0,
           "explanation": "Naming conventions are useful when they make component relationships and scope easier to understand."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-debugging-performance",
@@ -1624,7 +1636,7 @@
       "hack": "Use temporary outlines such as `outline: 1px solid red` to see invisible box boundaries without changing layout size.",
       "mistake": "Do not add `!important` before checking why the expected rule lost.",
       "expected": "The demo intentionally uses an outline utility so you can see the element boundary clearly.",
-      "realUse": "<div class=\"debug-box\"><strong>Inspect my box</strong><p>Use DevTools to inspect computed styles and box model.</p></div>",
+      "realUse": "Useful whenever styles conflict, overflow appears, stacking behaves strangely, or a layout breaks across devices.",
       "tags": [
         "css",
         "architecture & debugging",
@@ -1634,8 +1646,10 @@
         "rewriting",
         "it"
       ],
-      "html": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.debug-box { max-width: 480px; margin: auto; padding: 24px; background: #f7fbfd; outline: 2px dashed #e15d73; outline-offset: 4px; }",
-      "css": [
+      "html": "<div class=\"debug-box\"><strong>Inspect my box</strong><p>Use DevTools to inspect computed styles and box model.</p></div>",
+      "css": "body { padding: 40px; font-family: system-ui, sans-serif; }\n.debug-box { max-width: 480px; margin: auto; padding: 24px; background: #f7fbfd; outline: 2px dashed #e15d73; outline-offset: 4px; }",
+      "js": "",
+      "quiz": [
         {
           "question": "What should you check first when a CSS rule seems ignored?",
           "options": [
@@ -1658,8 +1672,7 @@
           "correctIndex": 0,
           "explanation": "Outline is useful for visual debugging because it does not take up layout space."
         }
-      ],
-      "js": ""
+      ]
     },
     {
       "id": "css-expert-practice-card-system",
