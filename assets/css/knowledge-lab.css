@@ -330,3 +330,15 @@ a{color:inherit}
   .kl-big-o-row{grid-template-columns:1fr}
   .kl-big-o-row>b{text-align:left}
 }
+
+
+/* Knowledge Lab V4 — explicit definitions and learning goals */
+.kl-definition-panel{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:16px;margin:22px 0 0}
+.kl-definition-panel article{padding:18px 20px;border:1px solid #cfe0eb;border-radius:14px;background:#f8fcff}
+.kl-definition-panel article:first-child{border-left:4px solid var(--cyan)}
+.kl-definition-panel p{margin:0;color:#294b61;font-size:13px;line-height:1.7}
+.kl-definition-panel ul{margin:0;padding-left:18px;display:grid;gap:7px}
+.kl-definition-panel li{color:#415d70;font-size:11px;line-height:1.5}
+@media(max-width:760px){
+  .kl-definition-panel{grid-template-columns:1fr}
+}
