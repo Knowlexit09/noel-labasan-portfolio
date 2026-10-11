@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab V3 learning paths + quizzes + shorthand + Big O interactive practice**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab CSS full-course expansion with explicit definitions**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -345,7 +345,10 @@ Core user goal:
 Current category structure:
 
 - Code & Development: HTML, CSS, JavaScript, Java, Git & GitHub, Google Apps Script.
-- CSS now has a complete 28-lesson learning path: Foundation → Core Styling → Box Model & Sizing → Selectors & Cascade → Layout → Responsive Design → Modern CSS → Animation & Interaction → Architecture & Debugging → Expert Practice.
+- CSS now has a **49-lesson** structured course: CSS Fundamentals → Visual Styling → Sizing & Box Model → Selectors & Cascade → Layout Foundations → Flexbox → Grid → Responsive Design → Modern CSS → UI & Media → Animation & Accessibility → Architecture & Expert Practice.
+- The first CSS lesson now visibly defines **CSS = Cascading Style Sheets** in a dedicated Definition panel, followed by explicit “You Will Learn” goals.
+- A dedicated “Why is it called Cascading Style Sheets?” lesson explains the cascade before later specificity/inheritance lessons.
+- Missing fundamentals were added, including CSS comments/formatting, basic element/class/ID/universal selectors, backgrounds/gradients, text formatting, links/lists, width/height/min/max sizing, Flexbox alignment and sizing, Grid placement/named areas, subgrid, mobile-first CSS, responsive media, native CSS nesting, logical properties, @supports feature queries, form styling, table styling, CSS accessibility, rendering containment/content-visibility, and print styles.
 - CSS starts from “What is CSS?” and progresses through syntax, stylesheet methods, colors, units, typography, display, box model, selectors, specificity, Flexbox, Grid, positioning, media queries, auto-fit/minmax responsive Grid, clamp/min/max fluid sizing, custom properties, :is/:where/:has, container queries, transforms/transitions, keyframes + reduced motion, cascade layers, component architecture, DevTools debugging, and a final integrated responsive component challenge.
 - Every CSS lesson has a simple explanation, working browser example, Tip, Useful Hack, Common Mistake, Expected Result, real-work use, and quiz. Selected lessons also show Long Form vs shorthand (background, margin/padding, flex, transition).
 - The CSS CI/browser gate validates that at least 25 CSS lessons exist, required milestone lessons are present with quizzes, the CSS category renders key lessons, and the “What is CSS?” browser example applies real CSS.
@@ -437,8 +440,8 @@ Regression / quality gate status:
 - Big O interactive preset update is checked,
 - quiz option selection / correct-answer feedback / question advance is checked,
 - proof-backed lessons are validated for real media + case-study links,
-- latest Knowledge Lab validation: **Validate Knowledge Lab IDE Run #22 — SUCCESS** at `92796c04e27d3d5ae68da04d28b268512522d2d6`,
-- matching Pages deployment: **Run #346 — SUCCESS**.
+- latest Knowledge Lab validation: **Validate Knowledge Lab IDE Run #27 — SUCCESS** at `f32fb2ccd70bb2ec4c6fcdacbad52bef607cf48c`,
+- matching Pages deployment: **Run #352 — SUCCESS**.
 
 Do not Publish Live backend metadata on the user's behalf. The user remains the owner of Draft → Preview → Publish Live.
 
