@@ -84,7 +84,7 @@ jobs:
 
           const cssCategory = data.categories.find(x => x.id === 'css');
           const cssLessons = data.lessons.filter(x => x.categoryId === 'css');
-          if (!cssCategory?.learningPath || cssLessons.length < 25) {
+          if (!cssCategory?.learningPath || cssLessons.length < 45) {
             throw new Error('Complete CSS learning path is missing.');
           }
           const requiredCssLessons = [
@@ -97,7 +97,23 @@ jobs:
             'css-container-queries',
             'css-keyframes-reduced-motion',
             'css-cascade-layers',
-            'css-expert-practice-card-system'
+            'css-expert-practice-card-system',
+            'css-why-cascading',
+            'css-basic-selectors',
+            'css-width-height-min-max',
+            'css-flex-alignment',
+            'css-grid-placement-areas',
+            'css-subgrid',
+            'css-mobile-first',
+            'css-responsive-media',
+            'css-nesting',
+            'css-logical-properties',
+            'css-supports-feature-queries',
+            'css-form-controls',
+            'css-tables',
+            'css-focus-contrast-accessibility',
+            'css-contain-content-visibility',
+            'css-print-styles'
           ];
           for (const id of requiredCssLessons) {
             const lesson = data.lessons.find(x => x.id === id);
@@ -176,11 +192,18 @@ jobs:
             await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-view="category"]:not([hidden])');
             const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
-            for (const label of ['What is CSS?','Flexbox','CSS Grid','Container queries','Final CSS challenge']) {
+            for (const label of ['What is CSS?','Why is it called Cascading','Basic selectors','Flexbox','CSS Grid','Subgrid','Container queries','Native CSS nesting','Style forms','CSS accessibility','Final CSS challenge']) {
               if (!cssCategoryText.includes(label)) throw new Error('CSS learning path missing visible lesson: ' + label);
             }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-what-is-css', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-definition-lab]:not([hidden])');
+            const cssDefinition = await page.textContent('[data-definition]');
+            if (!cssDefinition.includes('Cascading Style Sheets')) {
+              throw new Error('CSS definition is not visibly rendered.');
+            }
+            const learnList = await page.locator('[data-learn-list] li').count();
+            if (learnList < 3) throw new Error('CSS fundamentals learning goals are missing.');
             let cssFrame = await (await page.$('[data-result-frame]')).contentFrame();
             await cssFrame.waitForSelector('.lesson-card');
             const headingColor = await cssFrame.$eval('h1', el => getComputedStyle(el).color);
