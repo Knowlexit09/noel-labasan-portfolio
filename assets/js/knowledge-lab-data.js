@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v6",
+  "version": "2026-10-12-v7",
   "categories": [
     {
       "id": "html",
@@ -26,21 +26,25 @@
       "label": "CSS",
       "group": "Code & Development",
       "icon": "#",
-      "status": "Complete fundamentals → expert practice",
-      "description": "A structured CSS course that starts with the meaning of Cascading Style Sheets, then builds through styling, layout, responsive design, modern CSS, accessibility, architecture, and expert practice.",
+      "status": "Comprehensive course expansion",
+      "description": "A comprehensive CSS course from fundamentals to expert practice, split into focused lessons with runnable examples, quizzes, shortcuts, real-work guidance, and section projects.",
       "learningPath": [
         "CSS Fundamentals",
-        "Visual Styling",
-        "Sizing & Box Model",
+        "Colors & Backgrounds",
+        "Typography & Text",
+        "Box Model & Sizing",
         "Selectors & Cascade",
-        "Layout Foundations",
+        "Display & Positioning",
         "Flexbox",
         "Grid",
         "Responsive Design",
+        "Images & Visual Effects",
+        "Transforms & Animation",
+        "Forms, Tables & UI",
         "Modern CSS",
-        "UI & Media",
-        "Animation & Accessibility",
-        "Architecture & Expert Practice"
+        "Accessibility",
+        "Architecture & Performance",
+        "Projects & Expert Practice"
       ]
     },
     {
@@ -3538,7 +3542,7 @@
       "id": "css-colors-backgrounds",
       "categoryId": "css",
       "mode": "code",
-      "stage": "CSS Fundamentals",
+      "stage": "Colors & Backgrounds",
       "order": 40,
       "level": "Beginner",
       "title": "Colors, backgrounds, and contrast",
@@ -3599,7 +3603,7 @@
       "id": "css-units-sizing",
       "categoryId": "css",
       "mode": "code",
-      "stage": "CSS Fundamentals",
+      "stage": "Box Model & Sizing",
       "order": 50,
       "level": "Beginner",
       "title": "px, %, em, rem, vw, vh, and modern sizing",
@@ -3652,7 +3656,7 @@
       "id": "css-typography",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Visual Styling",
+      "stage": "Typography & Text",
       "order": 10,
       "level": "Beginner",
       "title": "Typography: font, size, line-height, and readable text",
@@ -3703,7 +3707,7 @@
     },
     {
       "id": "css-backgrounds-gradients",
-      "stage": "Visual Styling",
+      "stage": "Colors & Backgrounds",
       "order": 15,
       "level": "Beginner",
       "title": "Backgrounds, images, and gradients",
@@ -3764,7 +3768,7 @@
       "id": "css-borders-radius-shadows",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Visual Styling",
+      "stage": "Box Model & Sizing",
       "order": 20,
       "level": "Beginner",
       "title": "Borders, radius, and shadows",
@@ -3814,7 +3818,7 @@
     },
     {
       "id": "css-text-formatting",
-      "stage": "Visual Styling",
+      "stage": "Typography & Text",
       "order": 25,
       "level": "Beginner",
       "title": "Text alignment, decoration, spacing, and wrapping",
@@ -3874,7 +3878,7 @@
       "id": "css-display-visibility",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Visual Styling",
+      "stage": "Display & Positioning",
       "order": 30,
       "level": "Beginner",
       "title": "Display, visibility, and normal document flow",
@@ -3925,7 +3929,7 @@
     },
     {
       "id": "css-links-lists",
-      "stage": "Visual Styling",
+      "stage": "Typography & Text",
       "order": 35,
       "level": "Beginner",
       "title": "Style links and lists without breaking meaning",
@@ -3983,7 +3987,7 @@
     },
     {
       "id": "css-width-height-min-max",
-      "stage": "Sizing & Box Model",
+      "stage": "Box Model & Sizing",
       "order": 5,
       "level": "Beginner",
       "title": "width, height, min/max, and intrinsic sizing",
@@ -4045,7 +4049,7 @@
       "id": "css-box-model",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Sizing & Box Model",
+      "stage": "Box Model & Sizing",
       "order": 10,
       "level": "Beginner",
       "title": "The box model: content, padding, border, margin",
@@ -4114,7 +4118,7 @@
       "id": "css-box-sizing-overflow",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Sizing & Box Model",
+      "stage": "Box Model & Sizing",
       "order": 20,
       "level": "Beginner",
       "title": "box-sizing and overflow",
@@ -4330,7 +4334,7 @@
       "id": "css-position-zindex",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Layout Foundations",
+      "stage": "Display & Positioning",
       "order": 30,
       "level": "Intermediate",
       "title": "Positioning, sticky UI, and z-index",
@@ -5147,7 +5151,7 @@
       "id": "css-container-queries",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Modern CSS",
+      "stage": "Responsive Design",
       "order": 30,
       "level": "Advanced",
       "title": "Container queries: responsive components, not just responsive pages",
@@ -5377,7 +5381,7 @@
     },
     {
       "id": "css-form-controls",
-      "stage": "UI & Media",
+      "stage": "Forms, Tables & UI",
       "order": 10,
       "level": "Intermediate",
       "title": "Style forms without harming usability",
@@ -5437,7 +5441,7 @@
     },
     {
       "id": "css-tables",
-      "stage": "UI & Media",
+      "stage": "Forms, Tables & UI",
       "order": 20,
       "level": "Intermediate",
       "title": "Readable tables and horizontal overflow",
@@ -5497,7 +5501,7 @@
     },
     {
       "id": "css-focus-contrast-accessibility",
-      "stage": "Animation & Accessibility",
+      "stage": "Accessibility",
       "order": 5,
       "level": "Advanced",
       "title": "CSS accessibility: focus, contrast, targets, and hidden content",
@@ -5555,7 +5559,7 @@
       "id": "css-transforms-transitions",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Animation & Accessibility",
+      "stage": "Transforms & Animation",
       "order": 10,
       "level": "Advanced",
       "title": "Transforms and transitions",
@@ -5615,7 +5619,7 @@
       "id": "css-keyframes-reduced-motion",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Animation & Accessibility",
+      "stage": "Transforms & Animation",
       "order": 20,
       "level": "Advanced",
       "title": "Keyframe animation with reduced-motion support",
@@ -5668,7 +5672,7 @@
       "id": "css-cascade-layers",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Architecture & Expert Practice",
+      "stage": "Architecture & Performance",
       "order": 10,
       "level": "Advanced",
       "title": "Cascade layers: control CSS priority by architecture",
@@ -5725,8 +5729,8 @@
       "id": "css-expert-practice-card-system",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Architecture & Expert Practice",
-      "order": 10,
+      "stage": "Projects & Expert Practice",
+      "order": 90,
       "level": "Expert practice",
       "title": "Final CSS challenge: build a resilient card system",
       "summary": "Combine the course into one component: tokens, Grid, container queries, focus states, fluid type, and reduced motion.",
@@ -5789,7 +5793,7 @@
       "id": "css-component-architecture",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Architecture & Expert Practice",
+      "stage": "Architecture & Performance",
       "order": 20,
       "level": "Advanced",
       "title": "Write maintainable component CSS",
@@ -5841,7 +5845,7 @@
       "id": "css-debugging-performance",
       "categoryId": "css",
       "mode": "code",
-      "stage": "Architecture & Expert Practice",
+      "stage": "Architecture & Performance",
       "order": 30,
       "level": "Advanced",
       "title": "Debug CSS before rewriting it",
@@ -5892,7 +5896,7 @@
     },
     {
       "id": "css-contain-content-visibility",
-      "stage": "Architecture & Expert Practice",
+      "stage": "Architecture & Performance",
       "order": 35,
       "level": "Advanced",
       "title": "Rendering containment and content-visibility",
@@ -5952,7 +5956,7 @@
     },
     {
       "id": "css-print-styles",
-      "stage": "Architecture & Expert Practice",
+      "stage": "Architecture & Performance",
       "order": 45,
       "level": "Advanced",
       "title": "Print styles: CSS beyond the screen",
@@ -6008,6 +6012,1727 @@
         "css",
         "beyond",
         "the"
+      ]
+    },
+    {
+      "id": "css-color-keywords",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 20,
+      "level": "Beginner",
+      "title": "Named colors",
+      "summary": "Focused lesson: Named colors. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "CSS includes standardized color keywords such as red, navy, transparent, and many others.",
+      "learn": [
+        "Named colors",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Named colors well enough to use it intentionally.",
+      "explanation": "Named colors are readable and useful for learning. In larger products, repeated brand colors are usually easier to manage through design tokens.",
+      "tip": "Use named colors when the name is clear; use reusable tokens for product palettes.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Build a large brand palette from unrelated named colors.",
+      "expected": "The sample visibly demonstrates Named colors.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "named",
+        "colors"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:24px;background:navy;color:white;border-radius:14px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which is a valid CSS color keyword?",
+          "options": [
+            "navy",
+            "brandBlue",
+            "rgb-blue",
+            "color(blue)"
+          ],
+          "correctIndex": 0,
+          "explanation": "navy is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Build a large brand palette from unrelated named colors.",
+            "Use named colors when the name is clear; use reusable tokens for product palettes.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Build a large brand palette from unrelated named colors."
+        }
+      ]
+    },
+    {
+      "id": "css-hex-colors",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 30,
+      "level": "Beginner",
+      "title": "HEX colors",
+      "summary": "Focused lesson: HEX colors. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Hex colors encode red, green, and blue channels using hexadecimal digits, commonly in #RRGGBB form.",
+      "learn": [
+        "HEX colors",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand HEX colors well enough to use it intentionally.",
+      "explanation": "Six-digit HEX is common in design handoffs because it is compact and predictable. Short forms such as #fff are expanded versions when each pair repeats.",
+      "tip": "Use a consistent notation across a design system unless another format is clearer.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume every short HEX form means the same alpha behavior.",
+      "expected": "The sample visibly demonstrates HEX colors.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "hex",
+        "colors"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:24px;background:#0d2235;color:#5bd6ff;border:3px solid #0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does six-digit HEX mainly encode?",
+          "options": [
+            "Red, green, and blue channels",
+            "Font size",
+            "Grid columns",
+            "Viewport width"
+          ],
+          "correctIndex": 0,
+          "explanation": "Red, green, and blue channels is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume every short HEX form means the same alpha behavior.",
+            "Use a consistent notation across a design system unless another format is clearer.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume every short HEX form means the same alpha behavior."
+        }
+      ]
+    },
+    {
+      "id": "css-rgb-alpha",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 40,
+      "level": "Beginner",
+      "title": "rgb() and alpha",
+      "summary": "Focused lesson: rgb() and alpha. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "rgb() expresses red, green, and blue color channels and can include alpha transparency.",
+      "learn": [
+        "rgb() and alpha",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand rgb() and alpha well enough to use it intentionally.",
+      "explanation": "Alpha affects the color itself. This is different from element opacity, which fades the whole rendered element including its children.",
+      "tip": "Use alpha colors when only the color layer should be translucent.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use parent opacity when text must remain fully opaque.",
+      "expected": "The sample visibly demonstrates rgb() and alpha.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "rgb",
+        "and",
+        "alpha"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px;background:#eef5f9}.sample{padding:24px;background:rgb(8 121 183 / .18);color:rgb(13 34 53);border:1px solid rgb(8 121 183 / .45)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does alpha control in an RGB color?",
+          "options": [
+            "The color's transparency",
+            "Font weight",
+            "Element width",
+            "Specificity"
+          ],
+          "correctIndex": 0,
+          "explanation": "The color's transparency is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use parent opacity when text must remain fully opaque.",
+            "Use alpha colors when only the color layer should be translucent.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use parent opacity when text must remain fully opaque."
+        }
+      ]
+    },
+    {
+      "id": "css-hsl-colors",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 50,
+      "level": "Beginner",
+      "title": "hsl() colors",
+      "summary": "Focused lesson: hsl() colors. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "hsl() describes color using hue, saturation, and lightness, with optional alpha.",
+      "learn": [
+        "hsl() colors",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand hsl() colors well enough to use it intentionally.",
+      "explanation": "HSL can make related shades easier to reason about because you can keep hue while adjusting saturation or lightness.",
+      "tip": "Use HSL when shade relationships are easier to express through saturation/lightness.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume equal numeric lightness means equal perceived brightness for every hue.",
+      "expected": "The sample visibly demonstrates hsl() colors.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "hsl",
+        "colors"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:24px;background:hsl(198 92% 37%);color:white;border-radius:14px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does H mean in HSL?",
+          "options": [
+            "Hue",
+            "Height",
+            "Highlight",
+            "Hierarchy"
+          ],
+          "correctIndex": 0,
+          "explanation": "Hue is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume equal numeric lightness means equal perceived brightness for every hue.",
+            "Use HSL when shade relationships are easier to express through saturation/lightness.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume equal numeric lightness means equal perceived brightness for every hue."
+        }
+      ]
+    },
+    {
+      "id": "css-currentcolor",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "currentColor",
+      "summary": "Focused lesson: currentColor. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "currentColor reuses the element's computed color value anywhere a color value is accepted.",
+      "learn": [
+        "currentColor",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand currentColor well enough to use it intentionally.",
+      "explanation": "This keeps borders, icons, outlines, or SVG details synchronized with text color without repeating the same value.",
+      "tip": "Use currentColor when accents should intentionally follow text state.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use currentColor when the accent must stay independent from text changes.",
+      "expected": "The sample visibly demonstrates currentColor.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "currentcolor"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{color:#0879b7;padding:24px;border:3px solid currentColor;border-radius:14px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What value does currentColor reuse?",
+          "options": [
+            "The element's computed text color",
+            "Its background",
+            "The browser theme only",
+            "Its width"
+          ],
+          "correctIndex": 0,
+          "explanation": "The element's computed text color is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use currentColor when the accent must stay independent from text changes.",
+            "Use currentColor when accents should intentionally follow text state.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use currentColor when the accent must stay independent from text changes."
+        }
+      ]
+    },
+    {
+      "id": "css-opacity",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "opacity",
+      "summary": "Focused lesson: opacity. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "opacity controls the transparency of the entire rendered element, including descendants.",
+      "learn": [
+        "opacity",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand opacity well enough to use it intentionally.",
+      "explanation": "Opacity is useful for fading a whole component. If only the background should be translucent, an alpha color is usually better.",
+      "tip": "Use opacity when the entire component should fade together.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Lower parent opacity just to make one background translucent.",
+      "expected": "The sample visibly demonstrates opacity.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "opacity"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:24px;background:#0879b7;color:white;opacity:.55;border-radius:14px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does element opacity affect?",
+          "options": [
+            "The entire rendered element including descendants",
+            "Only background",
+            "Only text",
+            "Only border"
+          ],
+          "correctIndex": 0,
+          "explanation": "The entire rendered element including descendants is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Lower parent opacity just to make one background translucent.",
+            "Use opacity when the entire component should fade together.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Lower parent opacity just to make one background translucent."
+        }
+      ]
+    },
+    {
+      "id": "css-background-image",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "background-image",
+      "summary": "Focused lesson: background-image. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "background-image paints an image or generated gradient behind an element's content.",
+      "learn": [
+        "background-image",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand background-image well enough to use it intentionally.",
+      "explanation": "Background layers are presentation. Essential text and meaning should remain in HTML rather than inside decorative imagery.",
+      "tip": "Use background images for decoration, not as the only carrier of essential content.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Place critical readable text only inside a background image.",
+      "expected": "The sample visibly demonstrates background-image.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "background",
+        "image"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:50px 24px;color:white;background-image:linear-gradient(135deg,#0d2235,#0879b7);border-radius:16px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Where is a background image painted?",
+          "options": [
+            "Behind the element's content",
+            "As a new HTML element",
+            "Only outside the border",
+            "Inside the DOM as text"
+          ],
+          "correctIndex": 0,
+          "explanation": "Behind the element's content is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Place critical readable text only inside a background image.",
+            "Use background images for decoration, not as the only carrier of essential content.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Place critical readable text only inside a background image."
+        }
+      ]
+    },
+    {
+      "id": "css-background-repeat",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "background-repeat",
+      "summary": "Focused lesson: background-repeat. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "background-repeat controls whether and how a background image tiles.",
+      "learn": [
+        "background-repeat",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand background-repeat well enough to use it intentionally.",
+      "explanation": "The default repeats. no-repeat is common for hero/decorative images; repeat patterns are useful for intentional textures.",
+      "tip": "Choose repeat behavior deliberately based on the asset.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Rely on default repeating for a single hero image.",
+      "expected": "The sample visibly demonstrates background-repeat.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "background",
+        "repeat"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{min-height:150px;padding:20px;background-color:#eef8fd;background-image:radial-gradient(circle,#0879b7 2px,transparent 3px);background-size:24px 24px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which value stops a background from tiling?",
+          "options": [
+            "no-repeat",
+            "contain",
+            "center",
+            "fixed"
+          ],
+          "correctIndex": 0,
+          "explanation": "no-repeat is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Rely on default repeating for a single hero image.",
+            "Choose repeat behavior deliberately based on the asset.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Rely on default repeating for a single hero image."
+        }
+      ]
+    },
+    {
+      "id": "css-background-position-size",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 100,
+      "level": "Intermediate",
+      "title": "background-position and size",
+      "summary": "Focused lesson: background-position and size. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "background-position places a background image; background-size controls its rendered dimensions.",
+      "learn": [
+        "background-position and size",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand background-position and size well enough to use it intentionally.",
+      "explanation": "cover fills the frame and may crop; contain preserves the whole image and may leave empty space.",
+      "tip": "Choose cover only when cropping is acceptable.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use cover when important edge content must never be cropped.",
+      "expected": "The sample visibly demonstrates background-position and size.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "background",
+        "position",
+        "and",
+        "size"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{height:180px;padding:20px;color:white;background:linear-gradient(135deg,#0879b7,#5bd6ff);background-size:cover;background-position:center;border-radius:16px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What can background-size: cover do?",
+          "options": [
+            "Fill the box while cropping edges",
+            "Guarantee full image visibility",
+            "Disable backgrounds",
+            "Repeat the image"
+          ],
+          "correctIndex": 0,
+          "explanation": "Fill the box while cropping edges is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use cover when important edge content must never be cropped.",
+            "Choose cover only when cropping is acceptable.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use cover when important edge content must never be cropped."
+        }
+      ]
+    },
+    {
+      "id": "css-background-attachment",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 110,
+      "level": "Intermediate",
+      "title": "background-attachment",
+      "summary": "Focused lesson: background-attachment. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "background-attachment controls how a background is attached relative to scrolling.",
+      "learn": [
+        "background-attachment",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand background-attachment well enough to use it intentionally.",
+      "explanation": "fixed backgrounds can create visual effects, but behavior and performance can differ across mobile/browser environments.",
+      "tip": "Use attachment effects only after testing target devices.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Depend on fixed backgrounds for essential interaction.",
+      "expected": "The sample visibly demonstrates background-attachment.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "background",
+        "attachment"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px;min-height:700px}.sample{min-height:220px;padding:24px;color:white;background:linear-gradient(135deg,#0d2235,#0879b7);background-attachment:fixed;border-radius:16px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is the normal common scrolling behavior?",
+          "options": [
+            "scroll",
+            "fixed-only",
+            "absolute",
+            "sticky"
+          ],
+          "correctIndex": 0,
+          "explanation": "scroll is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Depend on fixed backgrounds for essential interaction.",
+            "Use attachment effects only after testing target devices.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Depend on fixed backgrounds for essential interaction."
+        }
+      ]
+    },
+    {
+      "id": "css-multiple-backgrounds",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 120,
+      "level": "Intermediate",
+      "title": "Multiple backgrounds",
+      "summary": "Focused lesson: Multiple backgrounds. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Multiple background layers are comma-separated; the first listed layer is painted closest to the viewer.",
+      "learn": [
+        "Multiple backgrounds",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Multiple backgrounds well enough to use it intentionally.",
+      "explanation": "Layered gradients/images can create overlays and textures without extra wrapper elements.",
+      "tip": "Keep layer order understandable and text contrast readable.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Stack many decorative layers when a simpler surface would work.",
+      "expected": "The sample visibly demonstrates Multiple backgrounds.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "multiple",
+        "backgrounds"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:60px 24px;color:white;background-image:linear-gradient(90deg,#0d2235dd,#0d223555),radial-gradient(circle at 80% 20%,#5bd6ff 0 18%,transparent 19%),linear-gradient(135deg,#0879b7,#17344b);border-radius:16px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which background layer is closest to the viewer?",
+          "options": [
+            "The first one listed",
+            "The last one only",
+            "A random layer",
+            "The widest one"
+          ],
+          "correctIndex": 0,
+          "explanation": "The first one listed is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Stack many decorative layers when a simpler surface would work.",
+            "Keep layer order understandable and text contrast readable.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Stack many decorative layers when a simpler surface would work."
+        }
+      ]
+    },
+    {
+      "id": "css-linear-gradients",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 130,
+      "level": "Intermediate",
+      "title": "Linear gradients",
+      "summary": "Focused lesson: Linear gradients. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "linear-gradient() generates a color transition along a line.",
+      "learn": [
+        "Linear gradients",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Linear gradients well enough to use it intentionally.",
+      "explanation": "You can set direction and multiple color stops. The browser generates the image value without a separate file.",
+      "tip": "Use a small number of intentional stops and check text contrast.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Put complex gradients behind long text without checking readability.",
+      "expected": "The sample visibly demonstrates Linear gradients.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "linear",
+        "gradients"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:48px 24px;color:white;background:linear-gradient(120deg,#0d2235 0 35%,#0879b7 35% 70%,#5bd6ff 70%);border-radius:16px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Is linear-gradient() an external image file?",
+          "options": [
+            "No, the browser generates it",
+            "Always PNG",
+            "Only SVG",
+            "Only with JavaScript"
+          ],
+          "correctIndex": 0,
+          "explanation": "No, the browser generates it is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Put complex gradients behind long text without checking readability.",
+            "Use a small number of intentional stops and check text contrast.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Put complex gradients behind long text without checking readability."
+        }
+      ]
+    },
+    {
+      "id": "css-radial-conic-gradients",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 140,
+      "level": "Intermediate",
+      "title": "Radial and conic gradients",
+      "summary": "Focused lesson: Radial and conic gradients. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "radial-gradient() expands from a center; conic-gradient() rotates color stops around a center.",
+      "learn": [
+        "Radial and conic gradients",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Radial and conic gradients well enough to use it intentionally.",
+      "explanation": "Radial gradients suit glows; conic gradients suit angular color sweeps. They are visuals, not semantic data charts by themselves.",
+      "tip": "Use them for purposeful visual effects with readable content.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Treat a conic gradient as an accessible data chart without labels.",
+      "expected": "The sample visibly demonstrates Radial and conic gradients.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "radial",
+        "and",
+        "conic",
+        "gradients"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:220px;aspect-ratio:1;margin:auto;border-radius:50%;background:conic-gradient(#0879b7 0 40%,#5bd6ff 40% 70%,#dfeef5 70%)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which gradient rotates stops around a center?",
+          "options": [
+            "conic-gradient()",
+            "linear-gradient()",
+            "url()",
+            "box-shadow"
+          ],
+          "correctIndex": 0,
+          "explanation": "conic-gradient() is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Treat a conic gradient as an accessible data chart without labels.",
+            "Use them for purposeful visual effects with readable content.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Treat a conic gradient as an accessible data chart without labels."
+        }
+      ]
+    },
+    {
+      "id": "css-font-stacks",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 80,
+      "level": "Beginner",
+      "title": "Font-family stacks",
+      "summary": "Focused lesson: Font-family stacks. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "A font stack lists preferred fonts in order, ending with a generic family such as sans-serif.",
+      "learn": [
+        "Font-family stacks",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Font-family stacks well enough to use it intentionally.",
+      "explanation": "The browser uses the first available font. Good fallbacks keep text readable if the preferred face is unavailable.",
+      "tip": "End custom stacks with an appropriate generic family.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "List one unavailable font with no fallback.",
+      "expected": "The sample visibly demonstrates Font-family stacks.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "font",
+        "family",
+        "stacks"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif;padding:28px}.sample{font-size:28px;font-weight:700}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Why list multiple fonts?",
+          "options": [
+            "To provide fallbacks",
+            "To render all fonts together",
+            "To increase specificity",
+            "To create a gradient"
+          ],
+          "correctIndex": 0,
+          "explanation": "To provide fallbacks is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "List one unavailable font with no fallback.",
+            "End custom stacks with an appropriate generic family.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: List one unavailable font with no fallback."
+        }
+      ]
+    },
+    {
+      "id": "css-font-weight-style",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 90,
+      "level": "Beginner",
+      "title": "font-weight and font-style",
+      "summary": "Focused lesson: font-weight and font-style. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "font-weight controls emphasis weight; font-style commonly selects normal, italic, or oblique styles.",
+      "learn": [
+        "font-weight and font-style",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand font-weight and font-style well enough to use it intentionally.",
+      "explanation": "Available weights depend on the actual font files/family. A requested 900 may be synthesized if no matching face exists.",
+      "tip": "Use weights actually supported by the font and keep hierarchy intentional.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Assume every font includes every numeric weight.",
+      "expected": "The sample visibly demonstrates font-weight and font-style.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "font",
+        "weight",
+        "and",
+        "font",
+        "style"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{font-size:30px;font-weight:800;font-style:italic}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Does every font guarantee every numeric weight?",
+          "options": [
+            "No",
+            "Yes",
+            "Only on mobile",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Assume every font includes every numeric weight.",
+            "Use weights actually supported by the font and keep hierarchy intentional.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Assume every font includes every numeric weight."
+        }
+      ]
+    },
+    {
+      "id": "css-text-align",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 100,
+      "level": "Beginner",
+      "title": "text-align",
+      "summary": "Focused lesson: text-align. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "text-align controls inline content alignment within a block.",
+      "learn": [
+        "text-align",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-align well enough to use it intentionally.",
+      "explanation": "Center can work for short headings; long centered paragraphs are often harder to scan.",
+      "tip": "Keep long-form body copy aligned for comfortable reading.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Center long body paragraphs by default.",
+      "expected": "The sample visibly demonstrates text-align.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "align"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{max-width:520px;padding:20px;background:#eef8fd;text-align:center}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does text-align affect?",
+          "options": [
+            "Inline content alignment inside a block",
+            "Grid track size",
+            "z-index",
+            "Image file size"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inline content alignment inside a block is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Center long body paragraphs by default.",
+            "Keep long-form body copy aligned for comfortable reading.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Center long body paragraphs by default."
+        }
+      ]
+    },
+    {
+      "id": "css-text-decoration",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 110,
+      "level": "Intermediate",
+      "title": "text-decoration",
+      "summary": "Focused lesson: text-decoration. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "text-decoration controls underlines, overlines, line-through, color, style, and thickness.",
+      "learn": [
+        "text-decoration",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-decoration well enough to use it intentionally.",
+      "explanation": "Links can keep a clear affordance while still getting a polished underline through offset and thickness controls.",
+      "tip": "Keep links visually recognizable and refine rather than simply removing decoration.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Remove all link cues when nothing else communicates clickability.",
+      "expected": "The sample visibly demonstrates text-decoration.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "decoration"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;color:#0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property can move an underline away from text?",
+          "options": [
+            "text-underline-offset",
+            "z-index",
+            "grid-gap",
+            "font-stretch"
+          ],
+          "correctIndex": 0,
+          "explanation": "text-underline-offset is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Remove all link cues when nothing else communicates clickability.",
+            "Keep links visually recognizable and refine rather than simply removing decoration.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Remove all link cues when nothing else communicates clickability."
+        }
+      ]
+    },
+    {
+      "id": "css-text-transform",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 120,
+      "level": "Intermediate",
+      "title": "text-transform",
+      "summary": "Focused lesson: text-transform. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "text-transform changes text presentation such as uppercase, lowercase, or capitalization without changing source text.",
+      "learn": [
+        "text-transform",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-transform well enough to use it intentionally.",
+      "explanation": "It works well for short labels. Long uppercase passages can reduce readability.",
+      "tip": "Use it for short labels where casing is purely presentation.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Expect it to change the stored text value.",
+      "expected": "The sample visibly demonstrates text-transform.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "transform"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{text-transform:uppercase;letter-spacing:.08em;font-weight:800}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Does text-transform change underlying HTML text?",
+          "options": [
+            "No",
+            "Yes permanently",
+            "Only in forms",
+            "Only in JavaScript"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Expect it to change the stored text value.",
+            "Use it for short labels where casing is purely presentation.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Expect it to change the stored text value."
+        }
+      ]
+    },
+    {
+      "id": "css-letter-word-spacing",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 130,
+      "level": "Intermediate",
+      "title": "letter-spacing and word-spacing",
+      "summary": "Focused lesson: letter-spacing and word-spacing. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "letter-spacing adjusts character spacing; word-spacing adjusts space between words.",
+      "learn": [
+        "letter-spacing and word-spacing",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand letter-spacing and word-spacing well enough to use it intentionally.",
+      "explanation": "Small spacing changes can help labels or display type. Large changes in body copy usually hurt readability.",
+      "tip": "Use subtle adjustments and test real words at the real size.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Apply large letter spacing to long body paragraphs.",
+      "expected": "The sample visibly demonstrates letter-spacing and word-spacing.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "letter",
+        "spacing",
+        "and",
+        "word",
+        "spacing"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{font-size:28px;letter-spacing:.06em;word-spacing:.18em}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property changes spacing between characters?",
+          "options": [
+            "letter-spacing",
+            "word-spacing",
+            "line-height",
+            "white-space"
+          ],
+          "correctIndex": 0,
+          "explanation": "letter-spacing is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Apply large letter spacing to long body paragraphs.",
+            "Use subtle adjustments and test real words at the real size.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Apply large letter spacing to long body paragraphs."
+        }
+      ]
+    },
+    {
+      "id": "css-text-indent",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 140,
+      "level": "Intermediate",
+      "title": "text-indent",
+      "summary": "Focused lesson: text-indent. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "text-indent changes the indentation of the first line of a text block.",
+      "learn": [
+        "text-indent",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-indent well enough to use it intentionally.",
+      "explanation": "It can support editorial paragraph styles, but UI layouts usually use padding/margin for positioning.",
+      "tip": "Use it when first-line indentation is an intentional text style.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use text-indent to position an entire component.",
+      "expected": "The sample visibly demonstrates text-indent.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "indent"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:Georgia,serif;padding:28px}.sample{max-width:520px;line-height:1.7;text-indent:2em}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which part does text-indent normally affect?",
+          "options": [
+            "The first line",
+            "Every line equally",
+            "Only the last word",
+            "The border"
+          ],
+          "correctIndex": 0,
+          "explanation": "The first line is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use text-indent to position an entire component.",
+            "Use it when first-line indentation is an intentional text style.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use text-indent to position an entire component."
+        }
+      ]
+    },
+    {
+      "id": "css-white-space",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 150,
+      "level": "Intermediate",
+      "title": "white-space",
+      "summary": "Focused lesson: white-space. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "white-space controls collapsing, preservation, and wrapping of spaces and line breaks.",
+      "learn": [
+        "white-space",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand white-space well enough to use it intentionally.",
+      "explanation": "normal, nowrap, pre, and pre-wrap solve different needs. Code/log content often needs preserved whitespace.",
+      "tip": "Choose based on whether source spacing is meaningful and whether wrapping is needed.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use nowrap on long content without a safe overflow plan.",
+      "expected": "The sample visibly demonstrates white-space.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "white",
+        "space"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{max-width:360px;white-space:pre-wrap;padding:16px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which value preserves whitespace while allowing wrapping?",
+          "options": [
+            "pre-wrap",
+            "nowrap",
+            "hidden",
+            "block"
+          ],
+          "correctIndex": 0,
+          "explanation": "pre-wrap is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use nowrap on long content without a safe overflow plan.",
+            "Choose based on whether source spacing is meaningful and whether wrapping is needed.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use nowrap on long content without a safe overflow plan."
+        }
+      ]
+    },
+    {
+      "id": "css-text-overflow",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 160,
+      "level": "Intermediate",
+      "title": "text-overflow and ellipsis",
+      "summary": "Focused lesson: text-overflow and ellipsis. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "text-overflow describes how clipped inline content is signaled, commonly using ellipsis.",
+      "learn": [
+        "text-overflow and ellipsis",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-overflow and ellipsis well enough to use it intentionally.",
+      "explanation": "Ellipsis hides some content visually, so important full values should remain available another way.",
+      "tip": "Use ellipsis for compact previews while preserving access to the full value.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Truncate critical identifiers with no way to reveal the full text.",
+      "expected": "The sample visibly demonstrates text-overflow and ellipsis.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "overflow",
+        "and",
+        "ellipsis"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:12px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What commonly accompanies text-overflow: ellipsis?",
+          "options": [
+            "overflow hidden plus nowrap",
+            "display:none",
+            "position:fixed",
+            "z-index:9999"
+          ],
+          "correctIndex": 0,
+          "explanation": "overflow hidden plus nowrap is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Truncate critical identifiers with no way to reveal the full text.",
+            "Use ellipsis for compact previews while preserving access to the full value.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Truncate critical identifiers with no way to reveal the full text."
+        }
+      ]
+    },
+    {
+      "id": "css-text-shadow",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 170,
+      "level": "Intermediate",
+      "title": "text-shadow",
+      "summary": "Focused lesson: text-shadow. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "text-shadow draws one or more shadows behind rendered text.",
+      "learn": [
+        "text-shadow",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-shadow well enough to use it intentionally.",
+      "explanation": "A subtle shadow can improve separation in a hero treatment, but heavy shadows reduce clarity.",
+      "tip": "Use it sparingly and verify contrast at real sizes.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Put large blurry shadows on body copy.",
+      "expected": "The sample visibly demonstrates text-shadow.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "shadow"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px;background:#0d2235}.sample{font-size:42px;color:white;text-shadow:0 3px 12px #0009}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does text-shadow apply to?",
+          "options": [
+            "Rendered text glyphs",
+            "The entire Grid",
+            "Only borders",
+            "Only image pixels"
+          ],
+          "correctIndex": 0,
+          "explanation": "Rendered text glyphs is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Put large blurry shadows on body copy.",
+            "Use it sparingly and verify contrast at real sizes.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Put large blurry shadows on body copy."
+        }
+      ]
+    },
+    {
+      "id": "css-margin",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 60,
+      "level": "Beginner",
+      "title": "Margins",
+      "summary": "Focused lesson: Margins. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Margin creates space outside an element's border.",
+      "learn": [
+        "Margins",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Margins well enough to use it intentionally.",
+      "explanation": "Margins separate boxes. Inside Flexbox/Grid, gap is often cleaner for repeated child spacing.",
+      "tip": "Use margin for external spacing and gap for repeated layout spacing.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Add random margins to every child when the parent can use gap.",
+      "expected": "The sample visibly demonstrates Margins.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "margins"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{margin:32px;padding:20px;border:2px solid #0879b7;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Where is margin located?",
+          "options": [
+            "Outside the border",
+            "Inside the content",
+            "Between characters",
+            "Inside padding"
+          ],
+          "correctIndex": 0,
+          "explanation": "Outside the border is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Add random margins to every child when the parent can use gap.",
+            "Use margin for external spacing and gap for repeated layout spacing.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Add random margins to every child when the parent can use gap."
+        }
+      ]
+    },
+    {
+      "id": "css-margin-collapse",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Margin collapsing",
+      "summary": "Focused lesson: Margin collapsing. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Certain vertical margins in normal block flow can collapse instead of simply adding together.",
+      "learn": [
+        "Margin collapsing",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Margin collapsing well enough to use it intentionally.",
+      "explanation": "This surprises beginners. Flex and Grid items do not collapse margins in the same way.",
+      "tip": "Use gap or padding when you need predictable component spacing.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Keep increasing vertical margins without checking collapse.",
+      "expected": "The sample visibly demonstrates Margin collapsing.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "margin",
+        "collapsing"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo p{margin-block:30px;padding:8px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Do vertical margins always add together?",
+          "options": [
+            "No",
+            "Yes always",
+            "Only in Grid",
+            "Only on buttons"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Keep increasing vertical margins without checking collapse.",
+            "Use gap or padding when you need predictable component spacing.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Keep increasing vertical margins without checking collapse."
+        }
+      ]
+    },
+    {
+      "id": "css-padding",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 80,
+      "level": "Beginner",
+      "title": "Padding",
+      "summary": "Focused lesson: Padding. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Padding creates space between content and border.",
+      "learn": [
+        "Padding",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Padding well enough to use it intentionally.",
+      "explanation": "Padding is internal breathing room and often increases the comfortable clickable surface of controls.",
+      "tip": "Use padding for internal component space and touch-target comfort.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use child margins as a substitute for the component's own padding.",
+      "expected": "The sample visibly demonstrates Padding.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "padding"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:32px;border:2px solid #0879b7;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Where is padding?",
+          "options": [
+            "Between content and border",
+            "Outside margin",
+            "Between Grid tracks only",
+            "Inside a font file"
+          ],
+          "correctIndex": 0,
+          "explanation": "Between content and border is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use child margins as a substitute for the component's own padding.",
+            "Use padding for internal component space and touch-target comfort.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use child margins as a substitute for the component's own padding."
+        }
+      ]
+    },
+    {
+      "id": "css-border-styles",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "Border width, style, and color",
+      "summary": "Focused lesson: Border width, style, and color. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "A visible border combines width, style, and color; the border shorthand can set all three.",
+      "learn": [
+        "Border width, style, and color",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Border width, style, and color well enough to use it intentionally.",
+      "explanation": "Borders define edges for cards, tables, focus-like treatments, and dense UI.",
+      "tip": "Use subtle borders when separation matters more than elevation.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Use border colors so low-contrast that boundaries disappear.",
+      "expected": "The sample visibly demonstrates Border width, style, and color.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "border",
+        "width",
+        "style",
+        "and",
+        "color"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:24px;border:3px dashed #0879b7;border-radius:12px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does border shorthand commonly combine?",
+          "options": [
+            "Width, style, and color",
+            "Margin, padding, gap",
+            "Font, line-height, color",
+            "Top, left, z-index"
+          ],
+          "correctIndex": 0,
+          "explanation": "Width, style, and color is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Use border colors so low-contrast that boundaries disappear.",
+            "Use subtle borders when separation matters more than elevation.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Use border colors so low-contrast that boundaries disappear."
+        }
+      ]
+    },
+    {
+      "id": "css-outline",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 100,
+      "level": "Intermediate",
+      "title": "outline",
+      "summary": "Focused lesson: outline. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "Outline draws around an element without taking layout space like a border.",
+      "learn": [
+        "outline",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand outline well enough to use it intentionally.",
+      "explanation": "Outlines are especially useful for focus indicators and temporary debugging boundaries.",
+      "tip": "Use clear outlines for keyboard focus and debugging.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Remove focus outlines without an equally visible replacement.",
+      "expected": "The sample visibly demonstrates outline.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "outline"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:24px;border:2px solid #c9d8e2;outline:4px solid #5bd6ff;outline-offset:4px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Does outline take layout space like a border?",
+          "options": [
+            "No",
+            "Yes",
+            "Only in Grid",
+            "Only on images"
+          ],
+          "correctIndex": 0,
+          "explanation": "No is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Remove focus outlines without an equally visible replacement.",
+            "Use clear outlines for keyboard focus and debugging.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Remove focus outlines without an equally visible replacement."
+        }
+      ]
+    },
+    {
+      "id": "css-aspect-ratio",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 110,
+      "level": "Intermediate",
+      "title": "aspect-ratio",
+      "summary": "Focused lesson: aspect-ratio. Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "aspect-ratio gives a box a preferred width-to-height ratio.",
+      "learn": [
+        "aspect-ratio",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand aspect-ratio well enough to use it intentionally.",
+      "explanation": "It helps reserve predictable shapes for media, cards, and placeholders while dimensions remain responsive.",
+      "tip": "Use it when a visual frame should keep a stable shape.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Force a ratio that distorts/crops important content with no fit strategy.",
+      "expected": "The sample visibly demonstrates aspect-ratio.",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "aspect",
+        "ratio"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:min(100%,420px);aspect-ratio:16/9;display:grid;place-items:center;background:#0d2235;color:white;border-radius:14px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does aspect-ratio: 16 / 9 describe?",
+          "options": [
+            "A preferred width-to-height ratio",
+            "16 columns and 9 rows",
+            "Font size",
+            "Opacity"
+          ],
+          "correctIndex": 0,
+          "explanation": "A preferred width-to-height ratio is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Force a ratio that distorts/crops important content with no fit strategy.",
+            "Use it when a visual frame should keep a stable shape.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Force a ratio that distorts/crops important content with no fit strategy."
+        }
+      ]
+    },
+    {
+      "id": "css-calc",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 120,
+      "level": "Intermediate",
+      "title": "calc()",
+      "summary": "Focused lesson: calc(). Learn one CSS concept, run it, change it, and verify the result.",
+      "definition": "calc() combines compatible numeric CSS values and units in an expression.",
+      "learn": [
+        "calc()",
+        "How it changes rendering",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand calc() well enough to use it intentionally.",
+      "explanation": "It is useful when a size depends on both relative and fixed components.",
+      "tip": "Use calc when the mathematical relationship is clearer than extra wrappers or magic numbers.",
+      "hack": "Change one value at a time in the browser IDE and compare the result.",
+      "mistake": "Build unreadable expressions when a simpler layout rule would work.",
+      "expected": "The sample visibly demonstrates calc().",
+      "realUse": "Useful in real interfaces when this CSS behavior directly matches the design requirement.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "calc"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Change the value, run the example again, and observe one concept at a time.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:calc(100% - 3rem);padding:18px;background:#eef8fd;border-left:4px solid #0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Can calc() combine percentages and rem values?",
+          "options": [
+            "Yes",
+            "No",
+            "Only in JavaScript",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yes is the correct answer for this lesson."
+        },
+        {
+          "question": "Which mistake should you avoid?",
+          "options": [
+            "Build unreadable expressions when a simpler layout rule would work.",
+            "Use calc when the mathematical relationship is clearer than extra wrappers or magic numbers.",
+            "Test one value at a time",
+            "Inspect the result in DevTools"
+          ],
+          "correctIndex": 0,
+          "explanation": "Avoid this: Build unreadable expressions when a simpler layout rule would work."
+        }
       ]
     },
     {
