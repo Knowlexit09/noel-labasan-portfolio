@@ -42,6 +42,9 @@ jobs:
           grep -q 'data-view="home"' knowledge/index.html
           grep -q 'data-proof-lab' knowledge/index.html
           grep -q 'data-reference-lab' knowledge/index.html
+          grep -q 'data-quiz-lab' knowledge/index.html
+          grep -q 'data-shortcut-lab' knowledge/index.html
+          grep -q 'data-interactive-lab' knowledge/index.html
 
       - name: Validate lesson source and Java references
         run: |
@@ -62,6 +65,30 @@ jobs:
 
           for (const lesson of data.lessons.filter(x => x.mode === 'code')) {
             new Function(lesson.js || '');
+          }
+
+          const quizLessons = data.lessons.filter(x => Array.isArray(x.quiz) && x.quiz.length);
+          if (quizLessons.length < 6) throw new Error('Expected multiple quiz-backed lessons.');
+          for (const lesson of quizLessons) {
+            for (const question of lesson.quiz) {
+              if (!Array.isArray(question.options) || question.options.length < 2) {
+                throw new Error('Quiz options missing: ' + lesson.id);
+              }
+              if (!Number.isInteger(question.correctIndex) || !question.options[question.correctIndex]) {
+                throw new Error('Invalid quiz correctIndex: ' + lesson.id);
+              }
+              if (!question.explanation) throw new Error('Quiz explanation missing: ' + lesson.id);
+            }
+          }
+
+          const bigO = data.lessons.find(x => x.id === 'java-big-o-made-simple');
+          if (!bigO?.interactive || bigO.interactive.type !== 'big-o-simulator') {
+            throw new Error('Big O interactive lesson is missing.');
+          }
+
+          const shorthand = data.lessons.find(x => x.id === 'java-ternary-cleaner-conditions');
+          if (!shorthand?.shortcut?.shortCode || !shorthand?.shortcut?.longCode) {
+            throw new Error('Java shorthand comparison is missing.');
           }
 
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
@@ -147,6 +174,33 @@ jobs:
             const count = await frame.textContent('#count');
             console.log('COUNTER_RESULT=' + count);
             if (count !== '1') throw new Error('Counter interaction failed. Actual count: ' + count);
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-ternary-cleaner-conditions', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-shortcut-lab]:not([hidden])');
+            const shortCode = await page.textContent('[data-shortcut-short]');
+            if (!shortCode.includes('? "Available" : "Out of stock"')) {
+              throw new Error('Java shorthand panel is not rendered.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-big-o-made-simple', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-interactive-lab]:not([hidden])');
+            const bigOTextBefore = await page.textContent('[data-big-o-grid]');
+            if (!bigOTextBefore.includes('Quadratic')) throw new Error('Big O simulator did not render.');
+            await page.click('[data-big-o-preset="1000"]');
+            const nValue = await page.textContent('[data-big-o-n]');
+            if (nValue.trim() !== '1,000') throw new Error('Big O preset did not update.');
+
+            await page.waitForSelector('[data-quiz-lab]:not([hidden])');
+            const optionButtons = page.locator('[data-quiz-option]');
+            if (await optionButtons.count() < 2) throw new Error('Quiz options did not render.');
+            await optionButtons.nth(2).click();
+            await page.click('[data-quiz-next]');
+            const feedback = await page.textContent('[data-quiz-feedback]');
+            if (!feedback.includes('Correct')) throw new Error('Quiz feedback did not mark the correct Big O answer.');
+            await page.click('[data-quiz-next]');
+            if (!(await page.textContent('[data-quiz-count]')).includes('Question 2')) {
+              throw new Error('Quiz did not advance.');
+            }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-bigdecimal-money', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
