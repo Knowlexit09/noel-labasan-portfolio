@@ -2,6 +2,7 @@
   'use strict';
 
   const data = window.KNOWLEDGE_LAB_V2;
+  const i18n = window.KNOWLEDGE_LAB_I18N || {};
   if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) return;
 
   const categories = data.categories;
@@ -13,6 +14,7 @@
   const frame = $('[data-result-frame]');
   const channel = 'kl-' + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2));
   const storagePrefix = 'noelKnowledgeLab.v2.';
+  const languageKey = 'noelKnowledgeLab.language.v1';
 
   let currentLesson = null;
   let currentCategory = null;
@@ -21,6 +23,7 @@
   let runSequence = 0;
   let saveTimer = 0;
   let pendingRun = null;
+  let activeLanguage = readLanguage();
   let quizState = { lessonId: '', index: 0, selected: null, correct: 0, answered: false };
   const progressKey = 'noelKnowledgeLab.progress.v1';
 
@@ -31,6 +34,105 @@
       '>': '&gt;',
       '"': '&quot;'
     }[char]));
+  }
+
+  function readLanguage() {
+    try {
+      const saved = localStorage.getItem(languageKey);
+      return saved && i18n.languages?.[saved] ? saved : (i18n.defaultLanguage || 'en');
+    } catch (_error) {
+      return i18n.defaultLanguage || 'en';
+    }
+  }
+
+  function tr(key) {
+    return i18n.ui?.[activeLanguage]?.[key] ?? i18n.ui?.en?.[key] ?? key;
+  }
+
+  function localizeGroup(group) {
+    return i18n.groups?.[activeLanguage]?.[group] || group;
+  }
+
+  function localizeCategory(category) {
+    if (!category) return category;
+    const patch = i18n.categories?.[activeLanguage]?.[category.id];
+    return patch ? { ...category, ...patch } : category;
+  }
+
+  function lessonTranslation(lessonId) {
+    return i18n.lessons?.[activeLanguage]?.[lessonId] || null;
+  }
+
+  function localizeLesson(lesson) {
+    if (!lesson) return lesson;
+    const patch = lessonTranslation(lesson.id);
+    if (!patch) return lesson;
+    return {
+      ...lesson,
+      ...patch,
+      quiz: Array.isArray(patch.quiz) ? patch.quiz : lesson.quiz,
+      learn: Array.isArray(patch.learn) ? patch.learn : lesson.learn,
+      shortcut: patch.shortcut ? { ...(lesson.shortcut || {}), ...patch.shortcut } : lesson.shortcut,
+      proof: patch.proof ? { ...(lesson.proof || {}), ...patch.proof } : lesson.proof
+    };
+  }
+
+  function applyStaticUiLanguage() {
+    const strings = i18n.ui?.[activeLanguage] || i18n.ui?.en || {};
+    document.documentElement.lang = i18n.languages?.[activeLanguage]?.htmlLang || (activeLanguage === 'tl' ? 'fil' : 'en');
+
+    $('[data-i18n]').forEach((node) => {
+      const key = node.dataset.i18n;
+      if (strings[key] !== undefined) node.textContent = strings[key];
+    });
+
+    $('[data-i18n-html]').forEach((node) => {
+      const key = node.dataset.i18nHtml;
+      if (strings[key] !== undefined) node.innerHTML = strings[key];
+    });
+
+    $('[data-i18n-placeholder]').forEach((node) => {
+      const key = node.dataset.i18nPlaceholder;
+      if (strings[key] !== undefined) node.setAttribute('placeholder', strings[key]);
+    });
+
+    const buttonLabel = $('[data-language-button-label]');
+    if (buttonLabel) buttonLabel.textContent = i18n.languages?.[activeLanguage]?.label || 'English';
+
+    $('[data-language-option]').forEach((button) => {
+      const selected = button.dataset.languageOption === activeLanguage;
+      button.setAttribute('aria-checked', String(selected));
+      button.classList.toggle('is-active', selected);
+    });
+  }
+
+  function closeLanguageMenu() {
+    const menu = $('[data-language-menu]');
+    const toggle = $('[data-language-toggle]');
+    if (menu) menu.hidden = true;
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function refreshLocalizedView() {
+    if (currentLesson?.id) {
+      renderLesson(currentLesson.id, false);
+    } else if (currentCategory?.id) {
+      renderCategory(currentCategory.id);
+    } else {
+      renderHome();
+    }
+  }
+
+  function setLanguage(language) {
+    if (!i18n.languages?.[language] || language === activeLanguage) {
+      closeLanguageMenu();
+      return;
+    }
+    activeLanguage = language;
+    try { localStorage.setItem(languageKey, language); } catch (_error) {}
+    applyStaticUiLanguage();
+    refreshLocalizedView();
+    closeLanguageMenu();
   }
 
   function categoryLessons(id) {
