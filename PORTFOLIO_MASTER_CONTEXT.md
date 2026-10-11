@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab CSS full-course expansion with explicit definitions**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab curated English/Filipino language system**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -351,7 +351,17 @@ Current category structure:
 - Missing fundamentals were added, including CSS comments/formatting, basic element/class/ID/universal selectors, backgrounds/gradients, text formatting, links/lists, width/height/min/max sizing, Flexbox alignment and sizing, Grid placement/named areas, subgrid, mobile-first CSS, responsive media, native CSS nesting, logical properties, @supports feature queries, form styling, table styling, CSS accessibility, rendering containment/content-visibility, and print styles.
 - CSS starts from “What is CSS?” and progresses through syntax, stylesheet methods, colors, units, typography, display, box model, selectors, specificity, Flexbox, Grid, positioning, media queries, auto-fit/minmax responsive Grid, clamp/min/max fluid sizing, custom properties, :is/:where/:has, container queries, transforms/transitions, keyframes + reduced motion, cascade layers, component architecture, DevTools debugging, and a final integrated responsive component challenge.
 - Every CSS lesson has a simple explanation, working browser example, Tip, Useful Hack, Common Mistake, Expected Result, real-work use, and quiz. Selected lessons also show Long Form vs shorthand (background, margin/padding, flex, transition).
-- The CSS CI/browser gate validates that at least 25 CSS lessons exist, required milestone lessons are present with quizzes, the CSS category renders key lessons, and the “What is CSS?” browser example applies real CSS.
+- The CSS CI/browser gate validates the expanded CSS curriculum, required milestone lessons/quizzes, the visible “CSS = Cascading Style Sheets” definition, and the working browser example.
+- Language UX rule (2026-10-12): do **not** use automatic/literal translation for learning content. Filipino must be an authored/curated lesson version, written naturally for comprehension while preserving real technical terms (CSS, selector, property, cascade, Flexbox, Grid, etc.) in English when that is clearer and industry-standard.
+- Knowledge Lab now has a persistent top-bar language switch: **English** ↔ **Filipino / Taglish**.
+- Language preference is stored locally in the visitor browser.
+- Static Knowledge Lab UI labels are localized.
+- CSS currently has **17 manually curated Filipino/Taglish lessons** covering the early course through Sizing & Box Model. Their titles, definitions, learning goals, explanations, tips/hacks, mistakes, expected results, real-work notes, and quizzes are separately authored rather than auto-translated.
+- When Filipino is selected and a lesson has a reviewed version, the lesson shows **“Curated Filipino / Taglish • hindi auto-translate.”**
+- Lessons that do not yet have manually reviewed Filipino copy fail safely to the original English source and visibly show **“English source • Filipino version is still under manual review.”** Never silently machine-translate those lessons just to increase coverage.
+- Localization regression checks verify language switching, the curated “Ano ang CSS?” lesson/definition, the curated-status badge, safe English fallback for an unreviewed lesson, and switching back to English.
+- Latest language regression: **Validate Knowledge Lab IDE Run #39 — SUCCESS** at `da29c6bdb43725c7902e0e05d5c9e1546ed79c06`.
+- Matching Pages deployment: **Run #365 — SUCCESS**.
 
 - Creative & Multimedia: Photoshop, Canva, CapCut, Blender, Roblox Studio.
 - Java now has an explicit learning path: Foundation → OOP Foundations → Problem Solving → Applied Java.
