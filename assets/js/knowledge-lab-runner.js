@@ -385,9 +385,9 @@
   function lessonProgressLabel(lesson) {
     if (!Array.isArray(lesson.quiz) || !lesson.quiz.length) return '';
     const item = readProgress()[lesson.id];
-    if (!item) return 'Quiz ready';
-    if (item.passed) return '✓ Quiz passed · ' + item.bestPercent + '%';
-    return 'Best quiz · ' + Number(item.bestPercent || 0) + '%';
+    if (!item) return tr('quizReady');
+    if (item.passed) return '✓ ' + tr('quizPassed') + ' · ' + item.bestPercent + '%';
+    return tr('bestQuiz') + ' · ' + Number(item.bestPercent || 0) + '%';
   }
 
   function renderShortcut(lesson) {
@@ -459,7 +459,7 @@
 
     const question = quiz[quizState.index];
     const count = quiz.length;
-    $('[data-quiz-count]').textContent = 'Question ' + (quizState.index + 1) + ' of ' + count;
+    $('[data-quiz-count]').textContent = tr('question') + ' ' + (quizState.index + 1) + ' ' + tr('of') + ' ' + count;
     $('[data-quiz-question]').textContent = question.question;
     $('[data-quiz-score]').textContent = quizState.correct + ' / ' + count;
     $('[data-quiz-progress]').style.width = ((quizState.index / count) * 100) + '%';
@@ -468,7 +468,7 @@
     $('[data-quiz-feedback]').textContent = '';
     $('[data-quiz-result]').hidden = true;
     $('[data-quiz-next]').disabled = true;
-    $('[data-quiz-next]').textContent = 'Check answer';
+    $('[data-quiz-next]').textContent = tr('checkAnswer');
     $('[data-quiz-restart]').hidden = true;
 
     $('[data-quiz-options]').innerHTML = question.options.map((option, index) =>
@@ -525,9 +525,9 @@
       const feedback = $('[data-quiz-feedback]');
       feedback.hidden = false;
       feedback.classList.add(correct ? 'is-correct' : 'is-wrong');
-      feedback.textContent = (correct ? 'Correct. ' : 'Not quite. ') + question.explanation;
+      feedback.textContent = (correct ? tr('correct') : tr('notQuite')) + question.explanation;
       $('[data-quiz-score]').textContent = quizState.correct + ' / ' + quiz.length;
-      $('[data-quiz-next]').textContent = quizState.index === quiz.length - 1 ? 'Finish quiz' : 'Next question →';
+      $('[data-quiz-next]').textContent = quizState.index === quiz.length - 1 ? tr('finishQuiz') : tr('nextQuestion');
       return;
     }
 
@@ -551,15 +551,15 @@
 
     $('[data-quiz-progress]').style.width = '100%';
     $('[data-quiz-next]').disabled = true;
-    $('[data-quiz-next]').textContent = 'Completed';
+    $('[data-quiz-next]').textContent = tr('completed');
     $('[data-quiz-restart]').hidden = false;
 
     const result = $('[data-quiz-result]');
     result.hidden = false;
-    $('[data-quiz-result-title]').textContent = passed ? 'Passed ✓' : 'Review and try again';
+    $('[data-quiz-result-title]').textContent = passed ? tr('passed') : tr('reviewTryAgain');
     $('[data-quiz-result-copy]').textContent =
       'Score: ' + quizState.correct + ' / ' + total + ' (' + percent + '%). ' +
-      (passed ? 'Nice work. Your best result is saved on this device.' : '70% is the current pass mark. Review the explanations, then retake the quiz.');
+      (passed ? tr('passCopy') : tr('reviewCopy'));
 
     if (currentCategory) renderCategoryProgress(currentCategory.id);
   }
@@ -570,8 +570,8 @@
     panel.hidden = progress.total === 0;
     if (panel.hidden) return;
     const percent = Math.round((progress.passed / progress.total) * 100);
-    $('[data-category-progress-label]').textContent = percent + '% quiz progress';
-    $('[data-category-progress-text]').textContent = progress.passed + ' / ' + progress.total + ' lesson quizzes passed';
+    $('[data-category-progress-label]').textContent = percent + '% ' + tr('progress');
+    $('[data-category-progress-text]').textContent = progress.passed + ' / ' + progress.total + ' ' + tr('quizzesPassed');
     $('[data-category-progress-bar]').style.width = percent + '%';
   }
 
