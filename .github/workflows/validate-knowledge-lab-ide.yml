@@ -59,6 +59,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-review-tl.js
           node --check assets/js/knowledge-lab-java-exam-reviewer-tl.js
           node --check assets/js/knowledge-lab-javascript-tl.js
+          node --check assets/js/knowledge-lab-js-quality-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
           node --check assets/js/knowledge-lab-java-ide.js
@@ -109,6 +110,7 @@ jobs:
           require('./assets/js/knowledge-lab-java-capstone-projects.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
+          require('./assets/js/knowledge-lab-js-quality-tl.js');
           require('./assets/js/knowledge-lab-java-review-tl.js');
           require('./assets/js/knowledge-lab-java-exam-reviewer-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -163,6 +165,15 @@ jobs:
           }
           if (!i18n.lessons.tl['js-first-steps'].definition.includes('Ang JavaScript ay')) {
             throw new Error('Curated Filipino JavaScript definition not rendered from source.');
+          }
+          for (const id of ['js-quality-unit-tests', 'js-async-debounced-filter']) {
+            const localized = i18n.lessons?.tl?.[id];
+            if (!localized?.title || !localized.definition || !localized.explanation ||
+                !localized.practice?.prompt || localized.learn?.length < 3 ||
+                !Array.isArray(localized.quiz) || localized.quiz.length < 2 ||
+                localized.quiz.some(q => !q.options?.[q.correctIndex] || !q.explanation)) {
+              throw new Error('Incomplete original Filipino JavaScript quality lesson: ' + id);
+            }
           }
           const quizLessons = data.lessons.filter(x => Array.isArray(x.quiz) && x.quiz.length);
           if (quizLessons.length < 6) throw new Error('Expected multiple quiz-backed lessons.');
@@ -713,6 +724,15 @@ jobs:
                 (await qualityFrame.locator('#tests li').allTextContents()).some(s => !s.startsWith('PASS'))) {
               throw new Error('Unit-testing lesson did not execute all six assertions successfully.');
             }
+
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (!(await page.textContent('[data-title]')).includes('Unit testing: subukan') ||
+                !(await page.textContent('[data-practice-prompt]')).includes('Magdagdag ng test')) {
+              throw new Error('Original Filipino unit testing lesson not displayed.');
+            }
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-async-debounced-filter', { waitUntil: 'networkidle' });
             qualityFrame = await (await page.$('[data-result-frame]')).contentFrame();
