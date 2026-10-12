@@ -12828,10 +12828,13 @@
         {
           "question": "Are sprites automatically the best modern icon strategy?",
           "options": [
-            "No"
+            "No",
+            "Yes, always",
+            "Only when the image is blue",
+            "Only when using HTML tables"
           ],
           "correctIndex": 0,
-          "explanation": "No"
+          "explanation": "Sprites are a legacy optimization technique and are not automatically the best modern icon strategy."
         }
       ]
     },
@@ -12885,10 +12888,13 @@
         {
           "question": "Does shape-outside change the clickable hit area?",
           "options": [
-            "No"
+            "No",
+            "Yes, always",
+            "Only on mobile",
+            "Only for SVG"
           ],
           "correctIndex": 0,
-          "explanation": "No"
+          "explanation": "shape-outside changes text wrapping, not the element's actual interaction hit area."
         }
       ]
     },
