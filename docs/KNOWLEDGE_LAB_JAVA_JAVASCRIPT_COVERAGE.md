@@ -1,3 +1,14 @@
+## Java Taglish definition coverage — 2026-10-12
+
+- **Definition-specific request completed in GitHub source:** all **91 Java lessons now have a separately authored Filipino/Taglish definition** in `Filipino / Taglish` language mode. **12** prior Java lessons have full manually curated translations including the reviewer; **79** more now have definition-only Taglish patches. Existing English source is preserved. This does **not** mean 91 fully localized lessons or beginner-to-expert course completion.
+- New `assets/js/knowledge-lab-java-definitions-tl.js` is loaded after full Java locale modules and before renderer. Existing full translations win; it fills only missing definition fields. Lesson IDs/Java code/expected output/quiz answer keys are untouched.
+- Language indicator explicitly distinguishes partial coverage (“Taglish na ang kahulugan • may English pa sa ibang bahagi”) from wholly curated translations, rather than mislabeling the entire lesson.
+- **Verified local source/runtime audit** using GitHub canonical modules: 91 original Java reference lessons, 91 localized definitions, 12 full curated + 79 definition-only, 0 duplicates/empty definitions, no runtime module errors. CI extended with count/coverage checks and browser bilingual-language regression including nonconsensual OneCompiler load guard. Remote CI/Pages must be confirmed against latest code commit separately.
+- **Next localization work:** full independent Taglish treatments of remaining English explanations, learn lists, objectives, practice checks and quizzes, prioritizing beginner foundations and advanced DAO/JDBC, exception concepts. No blind machine-translation or false completion badges.
+- **Risk Low–Medium** for wording/label/UI regression; safeguards separate language pack, unchanged base content/Java IDE, targeted CI coverage. Roll back with normal reverts of localization and indicator commits, not a general curriculum rollback.
+
+---
+
 ## Latest verified-in-source JavaScript quality additions — 2026-10-12
 
 **POST-FLIGHT VERIFIED (2026-10-12):** [CI run 38267495262](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38267495262) **SUCCESS** on code commit `cc98dea5`: syntax/structure, all 91 isolated Java 21 output checks, source inventory and actual Playwright browser interactions passed, including the new testing/debounce examples and Filipino UI; [Pages run 38267495178](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38267495178) also **SUCCESS** for the same application source. Do not conflate this with real external OneCompiler compilation or independent public browser accessibility testing, which remain unverified. Subsequent documentation commits may cause new Pages runs that must be checked separately.
