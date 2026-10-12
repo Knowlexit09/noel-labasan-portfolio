@@ -1,5 +1,19 @@
 # PORTFOLIO MASTER CONTEXT
 
+### JavaScript project + Java entry follow-up — 2026-10-12
+
+- Added 2 substantial runnable browser projects in `assets/js/knowledge-lab-js-projects.js`: a stock-aware cart (quantity capped by stock, state-derived total, status messages, no fake server inventory reservation) and keyboard-accessible tabs (roles, ARIA selected state, roving tabIndex, Arrow/Home/End focus navigation). Each has beginner-first explanations, real working HTML/CSS/JS, tasks, quiz and real-world guidance.
+- Added 2 explicit early Java 21 CI reference lessons in `assets/js/knowledge-lab-java-intro.js`: **What is Java?** and **JDK/JRE/JVM with javac/java setup**. No fake browser-run Java. Both examples compiled and produced expected output locally using Java 21.
+- New assembled source total: **319 unique records** = HTML 52, CSS 176, CSS Reference 20, JavaScript **37**, Java **31**, proof-backed creative **3**. Language-curated versions still **41** (HTML20, CSS18, JS3) with English fallback for the rest. Categories explicitly say `Curriculum expansion in progress`, never deceptively `complete`.
+- Updated `knowledge/index.html` to load both new modules; updated CI to require 37 JS and 31 Java records, Java exact-source compilation/output comparison, stock cart maximum/subtotal/remove, keyboard tabs and safe text-rendering browser smoke tests. Fixed Playwright API mistake: page.keyboard.press rather than nonexistent frame.keyboard.press. Existing accessibility, sandbox/CSP, and previous tests preserved.
+- Local quality checks: repository assembly confirmed 319 unique records, 285 browser-code snippets syntax-parsed, no missing required fields/stages, and both embedded CI scripts parsed. Twenty standalone JS output cases were executed and matched expectations; two interactive projects passed controlled click/keyboard DOM behavior tests. 22 newly authored Java examples compiled and ran locally on OpenJDK 21 with expected results (local source formatting may differ; canonical repository Java sources are compiled separately by CI).
+- New commits: JS projects `4c96630c00a50c6366a0fa59050ea47a35491be3`, Java intro `b6026dc4bc2edb135af796cca9b81957c5cd1ba4`, code integration `7d895774dd8fdb0416e9d96c3c3ec7e4cd4de28e0d968`, expanded CI `98f8c7eec59cd0f15afeb5e0127af3fe8a327bb4`, Playwright keyboard API fix `9d1e30c8c2ce5b1d5984351efc155961ede5130c`, roadmap update `765d590ab3c972e7214efa97ac5ebf31dbbc5cc5`.
+- **Remote workflow & GitHub Pages success still NOT verified** (commit-status connector returns no checks and commit-workflow-run lookup returns no runs). Do not claim a completed browser/CI/Pages release until authoritative run and deployed site pass.
+- Pending topics: remaining advanced JS/browser APIs/modules/architecture/testing, Java tests/dependency management/concurrency/performance/file I/O, meaningful capstones, independently written Filipino lessons, detailed teaching QA, and final browser/deployment verification. Comprehensive beginner-to-expert goal NOT YET ACHIEVED.
+- Risk Low–Medium: static course/CI regression risk; additive modules, output checks, and unchanged sandbox security. No server Draft/Publish Live, Supabase security, or POS data changes. Roll back with normal git revert; no force/history rewrite.
+
+
+
 ## Java + JavaScript comprehensive curriculum correction — 2026-10-12 (new phase)
 
 **User correction:** previous 15 JavaScript / 9 Java lessons did not genuinely cover beginner-to-expert. Do not label these tracks COMPLETE based merely on structural lesson completeness or W3Schools comparison. W3Schools is an independent coverage benchmark, NOT content to copy.
