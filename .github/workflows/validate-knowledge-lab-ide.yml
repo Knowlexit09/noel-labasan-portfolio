@@ -847,7 +847,7 @@ jobs:
             }));
             if (style.display !== 'grid' || !style.editor.includes('kl-editor-pane') ||
                 !style.output.includes('kl-output-pane') ||
-                style.columns.trim().split(/\\s+/).length !== 2) {
+                style.columns.trim().split(/\s+/).length !== 2) {
               throw new Error('Java workspace no longer matches original two-column editor/result layout.');
             }
             await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
@@ -876,7 +876,7 @@ jobs:
             await externalJavaFrame.locator('body[data-run="requested"]').waitFor({ timeout: 5000 });
             await page.click('[data-java-ide-reset]');
             await externalJavaFrame.locator('body[data-code*="Hello from Java"]').waitFor({ timeout: 5000 });
-            await page.click('[data-java-ide-output-tab="console"]');
+            await page.click('[data-java-output-tab="console"]');
             if (!(await page.textContent('[data-java-output-panel="console"]')).includes('inside the external compiler'))
               throw new Error('Java console lacks truthful provider-output disclosure.');
             await page.click('[data-java-output-tab="result"]');
