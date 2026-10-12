@@ -1,3 +1,12 @@
+## Current IDE clarification — first code IDE restored (2026-10-12)
+
+This newest decision **supersedes all reference-only Java rollback notes** in this file. The user's “unang version ng IDE” means the original browser IDE with **code editor + Run ▶**, visually shared across HTML/CSS/JavaScript/Java. Java again displays Main.java in the left editor, right Result/Console, toolbar Reset/Copy/Full Screen/Stop and responsive split layout. The old code example and **Expected Output** are available as supplemental lesson reference, but they do not pretend to be the result of editing/running Java.
+
+Unlike native HTML/CSS/JS, Java uses opt-in third-party OneCompiler for execution. Before the first source transfer the user must approve external execution from the Result pane. `Run ▶` then uses the provider's `populateCode`/`triggerRun` events; actual console output stays within the embedded provider. The primary editor does NOT change to OneCompiler's editor. No secrets should ever be entered. Third-party provider is not a first-party Java sandbox and live execution hasn't been independently confirmed.
+
+Preserved all 91 Java lessons and 59 JavaScript lessons, 33-question Filipino Java exam, four capstones, and existing coverage. Restored earlier IDE code/HTML/CSS/CI regression, confirmed local source/event checks, and retained the canonical Java 21 compile-output CI gate. Remote Actions/Pages/live OneCompiler remain unverified. Risk medium; standard Git revert available.
+
+
 
 ## CURRENT UI STANDARD — Java returned to original reference-only lessons (October 12, 2026)
 
