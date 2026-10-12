@@ -161,8 +161,8 @@ jobs:
 
           const cssCategory = data.categories.find(x => x.id === 'css');
           const cssLessons = data.lessons.filter(x => x.categoryId === 'css');
-          if (!cssCategory?.learningPath || cssLessons.length !== 128) {
-            throw new Error('Expected exactly 128 focused CSS course lessons, got ' + cssLessons.length);
+          if (!cssCategory?.learningPath || cssLessons.length !== 176) {
+            throw new Error('Expected exactly 176 focused CSS course lessons, got ' + cssLessons.length);
           }
           for (const lesson of cssLessons) {
             if (!lesson.definition || !Array.isArray(lesson.learn) || lesson.learn.length < 3) {
@@ -221,7 +221,51 @@ jobs:
             'css-project-profile-card',
             'css-project-product-grid',
             'css-project-dashboard',
-            'css-project-final-design-system'
+            'css-project-final-design-system',
+            'css-errors-parser-recovery',
+            'css-grouping-selector-lists',
+            'css-import-stylesheet-order',
+            'css-inheritance-keywords',
+            'css-important',
+            'css-background-origin-clip-shorthand',
+            'css-modern-color-spaces',
+            'css-color-mix-light-dark',
+            'css-box-shadow-focused',
+            'css-border-image',
+            'css-font-face',
+            'css-overflow-wrap-word-break-hyphens',
+            'css-writing-mode',
+            'css-text-wrap',
+            'css-line-clamp',
+            'css-list-style-marker',
+            'css-generated-content',
+            'css-focus-state-selectors',
+            'css-form-state-selectors',
+            'css-centering-patterns',
+            'css-flow-root',
+            'css-multicolumn',
+            'css-navbar-pattern',
+            'css-dropdown-pattern',
+            'css-tooltips',
+            'css-buttons-groups',
+            'css-pagination',
+            'css-counters',
+            'css-counter-style',
+            'css-image-gallery',
+            'css-image-sprites',
+            'css-shape-outside',
+            'css-resize-caret',
+            'css-dynamic-viewport-units',
+            'css-user-preference-media',
+            'css-starting-style',
+            'css-transition-behavior',
+            'css-scroll-driven-animation',
+            'css-view-transitions',
+            'css-anchor-positioning',
+            'css-field-sizing',
+            'css-reset-strategy',
+            'css-utility-architecture',
+            'css-website-layout-pattern'
           ];
           for (const id of requiredCssLessons) {
             const lesson = data.lessons.find(x => x.id === id);
@@ -338,7 +382,7 @@ jobs:
             await page.goto('http://127.0.0.1:4173/knowledge/#category/css', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-view="category"]:not([hidden])');
             const cssCategoryText = await page.locator('[data-category-lessons]').innerText();
-            for (const label of ['Ano ang CSS?','Bakit “Cascading Style Sheets”','Named colors','Margin collapsing','Stacking contexts','Flexbox','CSS Grid','Subgrid','Container queries','Scroll snapping','Final CSS Project']) {
+            for (const label of ['Ano ang CSS?','Bakit “Cascading Style Sheets”','Named colors','Margin collapsing','Stacking contexts','Flexbox','CSS Grid','Subgrid','Container queries','Scroll snapping','Multi-column layout','Navigation bar styling patterns','CSS counters','@font-face and custom web fonts','@starting-style for entry transitions','CSS anchor positioning','Final CSS Project']) {
               if (!cssCategoryText.includes(label)) throw new Error('CSS learning path missing visible lesson: ' + label);
             }
 
@@ -361,6 +405,26 @@ jobs:
             if (!tomatoText.includes('#FF6347') || !tomatoText.includes('rgb(255 99 71)')) {
               throw new Error('Tomato color codes are incorrect or missing.');
             }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-multicolumn', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let multicolFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await multicolFrame.waitForSelector('.sample');
+            const multicolStyle = await multicolFrame.locator('.sample').evaluate(el => getComputedStyle(el).columnWidth);
+            if (!multicolStyle || multicolStyle === 'auto') throw new Error('Multi-column CSS did not apply.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-navbar-pattern', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let navFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await navFrame.waitForSelector('nav.nav a[aria-current="page"]');
+            const navLinks = await navFrame.locator('nav.nav a').count();
+            if (navLinks !== 4) throw new Error('CSS navbar lesson did not render four navigation links.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-counters', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-result-frame]');
+            let counterFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await counterFrame.waitForSelector('.steps h2');
+            if (await counterFrame.locator('.steps h2').count() !== 3) throw new Error('CSS counters lesson did not render three steps.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/css-project-product-grid', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-result-frame]');
