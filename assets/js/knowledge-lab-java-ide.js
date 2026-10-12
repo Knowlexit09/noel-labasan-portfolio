@@ -79,7 +79,7 @@
       if (frame !== embedded) return;
       ready = true;
       sendSource();
-      announce('Java compiler ready. Use the Knowledge Lab Run ▶ button to execute your code.');
+      announce('External compiler frame loaded. Press Run ▶ to request compilation; confirm the result inside the provider.');
     });
     frame = embedded;
     ready = false;
