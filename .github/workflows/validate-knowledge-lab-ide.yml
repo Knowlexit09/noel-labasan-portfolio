@@ -850,6 +850,12 @@ jobs:
                 style.columns.trim().split(/\s+/).length !== 2) {
               throw new Error('Java workspace no longer matches original two-column editor/result layout.');
             }
+            await page.setViewportSize({ width: 800, height: 900 });
+            const narrowGrid = await page.locator('[data-java-ide] .kl-ide-workspace')
+              .evaluate(node => getComputedStyle(node).gridTemplateColumns.trim().split(/\s+/).length);
+            if (narrowGrid !== 1) throw new Error('Java IDE should stack editor and result on smaller viewports.');
+            await page.setViewportSize({ width: 1280, height: 720 });
+
             await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="tl"]');
