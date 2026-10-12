@@ -27,7 +27,7 @@
   ];
   Object.assign(i18n.categories.tl.photoshop, {
     status:'49 Photoshop lessons · Beginner hanggang Expert',
-    description:'Kumpletong staged Photoshop desktop learning path: fundamentals, layers, masks, retouching, layout, color, professional workflow at portfolio projects. May Windows/Mac shortcuts, actual exercises at quizzes. Guided lessons ay hindi pekeng Photoshop app run o project proof.'
+    description:'Kumpletong staged Photoshop desktop learning path: fundamentals, non-destructive layers, masks, retouching, layout, color, professional workflow at portfolio projects. May Windows/Mac shortcuts, actual exercises at quizzes. Guided lessons ay hindi pekeng Photoshop app run o project proof.'
   });
   i18n.stages.tl.photoshop = Object.fromEntries(category.learningPath.map((name,i)=>[name,names[i]]));
   const existing = data.lessons.find(x=>x.id === 'photoshop-smart-object-workflow');
