@@ -1,5 +1,16 @@
 # PORTFOLIO MASTER CONTEXT
 
+### Follow-up JavaScript foundation batch — 2026-10-12
+
+- Added **3 more runnable lessons** to the additive module: if/else conditions with stock boundaries, reusable functions/parameters/return, and for...of loops using safe DOM textContent.
+- JavaScript totals **7 lessons** including 2 original lessons + 5 new beginner foundations; all original records preserved.
+- New JavaScript examples parsed successfully with the JavaScript Function constructor in preparation; browser runtime and published Pages verification not established by this check.
+- Implementation commit: `5fe9c43c033c7c22ebb3496e61e282ed3e634a24`; expanded CI assertions commit: `32a1cb0383c78302b9c0c824b00e0216f1913418`.
+- Remaining: intermediate JavaScript (arrays, objects, forms, promises, fetch with real runner constraints), projects, Java, Git/GitHub, Apps Script, curated Filipino and broader lesson quality audits. No backend Live publishing performed.
+- Risk: Low–Medium UI/content regression; additive design and CI assertions retained. Rollback with normal git revert, not history rewrite.
+
+
+
 ## Knowledge Lab expansion checkpoint — 2026-10-12 (latest GitHub batch)
 
 - Audited the live lesson source: **258 records** before this batch = HTML 52, CSS 176, CSS Reference 20, JavaScript 2, Java 5, Photoshop/Canva/CapCut 1 each. Published records meet existing structural teaching-schema and 2-quiz minimum checks. **Structural completeness does not establish deep pedagogical quality or complete subject coverage.**
