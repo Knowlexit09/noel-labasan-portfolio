@@ -866,5 +866,31 @@ const additions=[
   }
 ];
 const exists=new Set(data.lessons.map(l=>l.id));for(const l of additions){if(!exists.has(l.id)){data.lessons.push(l);exists.add(l.id);}}
+const practicePatches={
+  "java-validate-numeric-input": {
+    "prompt": "Subukan ang valid number na '20', blank string, at mixed text na '20x'. Ipaliwanag kung bakit hindi sapat ang parseInt lamang.",
+    "check": "Valid numeric text becomes a number; empty and malformed values follow the existing validation/null behavior."
+  },
+  "java-bigdecimal-money": {
+    "prompt": "Palitan ang presyo at quantity gamit ang decimal strings at i-predict ang BigDecimal total. Subukang gumamit ng new BigDecimal(\"0.1\") sa hiwalay na experiment.",
+    "check": "The price total remains decimal-exact under the intended scale; float/double constructor pitfalls are understood."
+  },
+  "java-ternary-cleaner-conditions": {
+    "prompt": "Change the stock value from positive to zero, then rewrite the ternary using an if/else branch.",
+    "check": "The result changes between Available and Out of stock and both implementations agree."
+  },
+  "java-oop-class-object": {
+    "prompt": "Create a third car object with a different brand and color. Explain why it does not alter the other two objects.",
+    "check": "Three independent objects print the right per-instance values."
+  },
+  "java-big-o-made-simple": {
+    "prompt": "Increase the list to 100 or more entries; compare the linear scan with a HashMap lookup and use the Big O simulator.",
+    "check": "Linear search may inspect many entries in worst cases, while map lookup is generally expected O(1) average, not guaranteed constant cost."
+  }
+};
+for(const [id,practice] of Object.entries(practicePatches)) {
+  const lesson=data.lessons.find(x=>x.id===id);
+  if(lesson && !lesson.practice) lesson.practice=practice;
+}
 const java=data.categories.find(c=>c.id==='java');if(java){java.learningPath=["Foundation","Control Flow","Strings & Arrays","Collections","OOP Foundations","OOP Advanced","Design Principles","Exceptions & IO","Database & JDBC","Modern Java","Problem Solving","Applied Java","Concurrency & JVM","Testing & Delivery"];java.status='Curriculum expansion in progress';java.description='Java 21 foundations, OOP, SOLID, DAO, JDBC and professional practice, with verified reference outputs and optional real online Java IDE.';}
 })();
