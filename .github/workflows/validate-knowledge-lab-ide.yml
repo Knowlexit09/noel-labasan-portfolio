@@ -60,7 +60,6 @@ jobs:
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
-          node --check assets/js/knowledge-lab-java-ide.js
           node --check assets/js/knowledge-lab-sandbox.js
           node --check assets/js/future-modules.js
           node --check admin/admin.js
@@ -70,10 +69,9 @@ jobs:
           grep -q 'data-view="home"' knowledge/index.html
           grep -q 'data-proof-lab' knowledge/index.html
           grep -q 'data-reference-lab' knowledge/index.html
-          grep -q 'data-java-ide-open' knowledge/index.html
-          grep -q 'data-java-output-tab' knowledge/index.html
-          grep -q 'data-java-ide-copy' knowledge/index.html
-          grep -q 'frame-src .*https://onecompiler.com' knowledge/index.html
+          ! grep -q 'data-java-ide' knowledge/index.html
+          ! grep -q 'onecompiler.com' knowledge/index.html
+          grep -q "frame-src 'self' blob: data:;" knowledge/index.html
           grep -q 'data-quiz-lab' knowledge/index.html
           grep -q 'data-practice-lab' knowledge/index.html
           grep -q 'data-practice-prompt' knowledge/index.html
@@ -385,9 +383,8 @@ jobs:
               throw new Error('Curated Filipino Java reviewer is incomplete: ' + id);
             }
           }
-          if (!i18n.lessons.tl['java-review-exception-tree'].definition.includes('Throwable') ||
-              !i18n.ui.tl.javaIdeRun.includes('Java')) {
-            throw new Error('Java Filipino curriculum terminology or IDE labels are incorrect.');
+          if (!i18n.lessons.tl['java-review-exception-tree'].definition.includes('Throwable')) {
+            throw new Error('Filipino Java exception hierarchy terminology is incorrect.');
           }
 
           const javaCategory = data.categories.find(x => x.id === 'java');
@@ -781,124 +778,67 @@ jobs:
               throw new Error('Quiz did not advance.');
             }
 
-            // Mock only the external compiler's transport. No unapproved network
-            // requests are needed to test our consent, iframe, or code-sync contract.
-            await page.route('https://onecompiler.com/**', route => route.fulfill({
-              status: 200, contentType: 'text/html',
-              body: '<!doctype html><title>Offline Java IDE integration fixture</title><div id="ready">Ready</div><script>window.addEventListener("message", event => {if(event.data?.eventType==="populateCode"){document.body.dataset.event=event.data.eventType;document.body.dataset.language=event.data.language;document.body.dataset.code=event.data.files?.[0]?.content || "";}if(event.data?.eventType==="triggerRun"){document.body.dataset.run="requested";}});</script>'
-            }));
-
+            // Restored the original Java reference UI, with no external compiler.
+            // Preserve all lesson, practice, quiz and translation functionality.
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-inventory-cli', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
-            if (!(await page.textContent('[data-reference-output]')).includes('Rejected: insufficient stock')) throw new Error('Java inventory project output reference missing.');
-            if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java project exposed fake local browser Run IDE.');
+            if (!(await page.textContent('[data-reference-output]')).includes('Rejected: insufficient stock'))
+              throw new Error('Java inventory project reference output missing.');
+            if (await page.locator('[data-code-lab]:visible').count())
+              throw new Error('Java should not expose a fake browser execution IDE.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-dao-crud', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
-            if (!(await page.textContent('[data-reference-output]')).includes('Remaining: 0')) throw new Error('Java DAO capstone output missing.');
+            if (!(await page.textContent('[data-reference-output]')).includes('Remaining: 0'))
+              throw new Error('Java DAO capstone reference output missing.');
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-resource-close-order', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
-            if (!(await page.textContent('[data-reference-output]')).includes('Close connection')) throw new Error('Java resource cleanup output missing.');
+            if (!(await page.textContent('[data-reference-output]')).includes('Close connection'))
+              throw new Error('Java resource cleanup reference output missing.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-exam-reviewer-master-quiz', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-quiz-lab]:not([hidden])');
-            if (!(await page.textContent('[data-quiz-count]')).includes('33')) throw new Error('Java exam reviewer 33-question counter missing.');
-            if (!(await page.textContent('[data-reference-output]')).includes('Throwable: true')) throw new Error('Java reviewer reference output missing.');
+            if (!(await page.textContent('[data-quiz-count]')).includes('33'))
+              throw new Error('33-question Java exam reviewer missing.');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="tl"]');
-            if (!(await page.textContent('[data-title]')).includes('JAVA Exam Reviewer')) throw new Error('Filipino Java exam title missing.');
-            if (!(await page.textContent('[data-quiz-question]')).includes('class sa Java')) throw new Error('Curated Filipino exam questions not selected.');
+            if (!(await page.textContent('[data-title]')).includes('JAVA Exam Reviewer'))
+              throw new Error('Filipino Java exam title missing.');
+            if (!(await page.textContent('[data-quiz-question]')).includes('class sa Java'))
+              throw new Error('Filipino Java exam questions missing.');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="en"]');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-review-modern-interface', { waitUntil: 'networkidle' });
-            await page.waitForSelector('[data-java-ide]:not([hidden])');
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="tl"]');
-            if (!(await page.textContent('[data-title]')).includes('Java Interface')) throw new Error('Curated Filipino Java title missing.');
-            if (!(await page.textContent('[data-practice-prompt]')).includes('Palitan')) throw new Error('Curated Filipino Java challenge missing.');
-            if (!(await page.textContent('[data-java-ide-run]')).includes('I-run')) throw new Error('Shared Filipino Run label missing on Java IDE.');
+            if (!(await page.textContent('[data-title]')).includes('Java Interface'))
+              throw new Error('Curated Filipino Java title missing.');
+            if (!(await page.textContent('[data-practice-prompt]')).includes('Palitan'))
+              throw new Error('Curated Filipino Java practice missing.');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="en"]');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-jdbc-preparedstatement', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
-            if (!(await page.textContent('[data-definition]')).includes('PreparedStatement')) throw new Error('PreparedStatement lesson did not load.');
-            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Third-party Java IDE loaded without consent.');
+            if (!(await page.textContent('[data-definition]')).includes('PreparedStatement'))
+              throw new Error('PreparedStatement lesson failed to load.');
+            if (await page.locator('iframe[src*="onecompiler.com"]').count())
+              throw new Error('External Java compiler must never be loaded.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-what-is-java', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
-            if ((await page.textContent('[data-reference-output]')).trim() !== 'Hello from Java') throw new Error('Java entry lesson output missing.');
-            if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java intro exposed a fake runner.');
-            await page.waitForSelector('[data-java-ide]:not([hidden])');
-            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java IDE must be opt-in and not autoload.');
-            if (!(await page.inputValue('[data-java-ide-source]')).includes('public class Main')) throw new Error('Editable Java source missing.');
-            if (!(await page.locator('[data-java-ide-run]').isVisible())) throw new Error('Shared Java Run should be visible from first render.');
-            if (!(await page.locator('[data-java-ide-copy]').isVisible()) ||
-                !(await page.locator('[data-java-ide-reset]').isVisible()) ||
-                !(await page.locator('[data-java-ide-close]').isVisible())) {
-              throw new Error('Original IDE Reset/Copy/Stop controls missing from Java.');
-            }
-            const style = await page.locator('[data-java-ide] .kl-ide-workspace').evaluate(node => ({
-              display: getComputedStyle(node).display,
-              columns: getComputedStyle(node).gridTemplateColumns,
-              editor: node.children[0].className,
-              output: node.children[1].className
-            }));
-            if (style.display !== 'grid' || !style.editor.includes('kl-editor-pane') ||
-                !style.output.includes('kl-output-pane') ||
-                style.columns.trim().split(/\s+/).length !== 2) {
-              throw new Error('Java workspace no longer matches original two-column editor/result layout.');
-            }
-            await page.setViewportSize({ width: 800, height: 900 });
-            const narrowGrid = await page.locator('[data-java-ide] .kl-ide-workspace')
-              .evaluate(node => getComputedStyle(node).gridTemplateColumns.trim().split(/\s+/).length);
-            if (narrowGrid !== 1) throw new Error('Java IDE should stack editor and result on smaller viewports.');
-            await page.setViewportSize({ width: 1280, height: 720 });
-
-            await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
-            await page.click('[data-language-toggle]');
-            await page.click('[data-language-option="tl"]');
-            if (!(await page.inputValue('[data-java-ide-source]')).includes('Edited Java'))
-              throw new Error('Language switch erased the Java draft.');
-            if (await page.locator('[data-java-ide-frame] iframe').count())
-              throw new Error('Unexpected external iframe before consent.');
-            await page.click('[data-language-toggle]');
-            await page.click('[data-language-option="en"]');
-            await page.click('[data-java-ide-run]');
-            if (!(await page.locator('[data-java-ide-consent]').isVisible()))
-              throw new Error('Run must ask before first external Java code transfer.');
-            if (await page.locator('[data-java-ide-frame] iframe').count())
-              throw new Error('Consent request unexpectedly loaded Java compiler.');
-            await page.click('[data-java-ide-open]');
-            const externalJavaFrame = page.frameLocator('[data-java-ide-frame] iframe');
-            await externalJavaFrame.locator('#ready').waitFor();
-            await externalJavaFrame.locator('body[data-code*="Edited Java"]').waitFor({ timeout: 5000 });
-            if ((await externalJavaFrame.locator('body').getAttribute('data-language')) !== 'java')
-              throw new Error('External Java editor did not receive Java language.');
-            if (!(await page.locator('[data-java-ide-source]').isVisible()))
-              throw new Error('Java source editor disappeared when compiler opened.');
-            await page.click('[data-java-ide-run]');
-            await externalJavaFrame.locator('body[data-run="requested"]').waitFor({ timeout: 5000 });
-            await page.click('[data-java-ide-reset]');
-            await externalJavaFrame.locator('body[data-code*="Hello from Java"]').waitFor({ timeout: 5000 });
-            await page.click('[data-java-output-tab="console"]');
-            if (!(await page.textContent('[data-java-output-panel="console"]')).includes('inside the external compiler'))
-              throw new Error('Java console lacks truthful provider-output disclosure.');
-            await page.click('[data-java-output-tab="result"]');
-            await page.click('[data-language-toggle]');
-            await page.click('[data-language-option="tl"]');
-            if (await page.locator('[data-java-ide-frame] iframe').count() !== 1)
-              throw new Error('Translation closed the live Java compiler.');
-            if (!(await page.locator('[data-java-ide-run]').isVisible()))
-              throw new Error('Translation hid Java Run.');
-            await page.click('[data-language-toggle]');
-            await page.click('[data-language-option="en"]');
-            await page.click('[data-java-ide-close]');
-            if (await page.locator('[data-java-ide-frame] iframe').count())
-              throw new Error('Stop did not close the external compiler frame.');
-            if (!(await page.locator('[data-java-ide-run]').isVisible()))
-              throw new Error('Stop removed original Java IDE toolbar.');
+            if ((await page.textContent('[data-reference-output]')).trim() !== 'Hello from Java')
+              throw new Error('Java entry lesson expected output missing.');
+            if (!(await page.textContent('[data-reference-code]')).includes('public class Main'))
+              throw new Error('Original Java code reference missing.');
+            if (!(await page.locator('[data-reference-copy]').isVisible()))
+              throw new Error('Java copy-code button missing.');
+            if (await page.locator('[data-code-lab]:visible').count())
+              throw new Error('Java reference exposed a fake browser Run IDE.');
+            if (await page.locator('[data-java-ide]').count())
+              throw new Error('External Java IDE was not fully reverted.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-inheritance-polymorphism', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
