@@ -36,8 +36,10 @@ jobs:
           node --check assets/js/knowledge-lab-javascript-foundations.js
           node --check assets/js/knowledge-lab-javascript-intermediate.js
           node --check assets/js/knowledge-lab-js-core-expansion.js
+          node --check assets/js/knowledge-lab-js-collections-quality.js
           node --check assets/js/knowledge-lab-java-foundations.js
           node --check assets/js/knowledge-lab-java-core-expansion.js
+          node --check assets/js/knowledge-lab-java-modern-expansion.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -66,8 +68,10 @@ jobs:
           require('./assets/js/knowledge-lab-javascript-foundations.js');
           require('./assets/js/knowledge-lab-javascript-intermediate.js');
           require('./assets/js/knowledge-lab-js-core-expansion.js');
+          require('./assets/js/knowledge-lab-js-collections-quality.js');
           require('./assets/js/knowledge-lab-java-foundations.js');
           require('./assets/js/knowledge-lab-java-core-expansion.js');
+          require('./assets/js/knowledge-lab-java-modern-expansion.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -86,12 +90,15 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length !== 25) throw new Error('Expected 25 JavaScript lessons, got ' + jsFoundations.length);
+          if (jsFoundations.length !== 35) throw new Error('Expected 35 JavaScript lessons, got ' + jsFoundations.length);
           const requiredJavaScript = ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops',
             'js-arrays-foundation', 'js-objects-properties', 'js-map-reduce', 'js-form-input-validation',
             'js-event-delegation', 'js-promises-async-await', 'js-debugging-errors', 'js-project-live-product-search',
             'js-statements-comments','js-arithmetic-precedence','js-strict-equality','js-boolean-logic','js-switch-cases',
-            'js-nullish-defaults','js-while-loop','js-string-search-methods','js-number-input-conversion','js-lexical-closure'];
+            'js-nullish-defaults','js-while-loop','js-string-search-methods','js-number-input-conversion','js-lexical-closure',
+            'js-array-slice-splice','js-array-sort-safely','js-set-unique-values','js-map-keyed-lookup',
+            'js-object-destructuring','js-json-basics','js-classes-constructor','js-promise-all',
+            'js-try-catch','js-safe-text-rendering'];
           const requiredJavaScriptStages = ['Foundation', 'Operators & Decisions', 'Strings & Numbers', 'Functions & Scope', 'Arrays', 'Objects & Data', 'DOM & Forms', 'Asynchronous Thinking', 'Projects & Practice'];
           const jsCategory = data.categories.find(x => x.id === 'javascript');
           if (!jsCategory || requiredJavaScriptStages.some(stage => !jsCategory.learningPath?.includes(stage))) {
@@ -337,7 +344,10 @@ jobs:
           const requiredJavaIds = ['java-first-program','java-if-and-for','java-methods-and-contracts','java-arraylist-hashmap',
             'java-types-casting','java-string-immutability','java-array-basics','java-switch-expression',
             'java-constructors-encapsulation','java-inheritance-polymorphism','java-interfaces-abstraction',
-            'java-exceptions-cleanup','java-generics-list','java-stream-filter-map'];
+            'java-exceptions-cleanup','java-generics-list','java-stream-filter-map',
+            'java-method-overloading','java-recursion-base-case','java-stringbuilder','java-enum-states',
+            'java-comparator-sort','java-record-introduction','java-optional-values',
+            'java-bigdecimal-rounding','java-time-localdate','java-try-with-resources'];
           for (const id of requiredJavaIds) {
             const lesson = data.lessons.find(x => x.id === id);
             if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
@@ -345,7 +355,7 @@ jobs:
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 19) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 29) throw new Error('Missing Java 21 references.');
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
@@ -572,6 +582,16 @@ jobs:
             const count = await frame.textContent('#count');
             console.log('COUNTER_RESULT=' + count);
             if (count !== '1') throw new Error('Counter interaction failed. Actual count: ' + count);
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-safe-text-rendering', { waitUntil: 'networkidle' });
+            let safeFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await safeFrame.waitForSelector('#result');
+            if (!(await safeFrame.textContent('#result')).includes('<img src=x onerror=')) {
+              throw new Error('textContent safe-rendering example is not displaying source literally.');
+            }
+            if ((await safeFrame.locator('#result img').count()) !== 0) {
+              throw new Error('Unsafe HTML was parsed instead of displayed as text.');
+            }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-arithmetic-precedence', { waitUntil: 'networkidle' });
             let arithmeticFrame = await (await page.$('[data-result-frame]')).contentFrame();
