@@ -1,0 +1,54 @@
+# Knowledge Lab — JavaScript & Java Complete-Coverage Blueprint
+
+Updated 2026-10-12. **This is an honest coverage map, not a claim that every topic below is already taught.** W3Schools and modern language fundamentals are topic *benchmarks*, not source content. Author all explanations and quizzes independently.
+
+## Acceptance criteria for a course marked COMPLETE
+
+1. Each essential concept has a focused, sequenced lesson or explicitly labeled **Reference** entry (lookup entries are not counted as deep learning lessons).
+2. Beginner explanations precede formal definitions; learning goals, example, expected output, real-world use, shortcut when relevant, mistake, explained quiz, and editable practice/challenge are present.
+3. Browser JavaScript examples run inside existing sandboxed offline runner and pass representative browser checks; external APIs are not simulated as live. Java examples remain **reference-only** and must compile + match output on Java 21 in CI.
+4. Milestone projects must be genuinely reproducible and tested, not merely suggested. Filipino/Taglish is separately written and reviewed; unreviewed content retains visibly marked English fallback.
+5. Security, accessibility, responsive design, runner isolation, and existing regression tests remain intact. Final completion requires full GitHub CI and Pages browser verification.
+
+## Coverage roadmap — core lesson groups
+
+### JavaScript
+
+- [ ] **Orientation & Fundamentals** — What JavaScript is; where it runs; first output; statements; comments; script loading; const vs let; primitives; typeof; type conversion; strict equality. (Audit each concept individually before checking complete.)
+- [ ] **Operators & Logic** — Arithmetic; precedence; assignment; comparisons; boolean operators; if/else; switch; ternary; truthy/falsy; nullish coalescing. (Audit each concept individually before checking complete.)
+- [ ] **Loops & Strings** — for; while; break/continue; for...of; string interpolation; string methods; searching; number precision; safe conversion; Math; Date. (Audit each concept individually before checking complete.)
+- [ ] **Functions & Scope** — Declarations; expressions; arrows; default/rest parameters; return; callbacks; lexical scope; closures; hoisting; this; recursion. (Audit each concept individually before checking complete.)
+- [ ] **Arrays & Collections** — Array indexing; push/pop/splice/slice; iteration; map/filter/find; some/every; reduce; sorting and nonmutation; Set; Map; iterables. (Audit each concept individually before checking complete.)
+- [ ] **Objects & Data** — Object properties; computed keys; optional chaining; destructuring; spread/rest; JSON; structured data validation; prototypes; classes; inheritance. (Audit each concept individually before checking complete.)
+- [ ] **DOM & Forms** — DOM selection; textContent vs innerHTML; createElement; classList; events; bubbling and delegation; keyboard access; forms; input validation; focus management. (Audit each concept individually before checking complete.)
+- [ ] **Async & Browser APIs** — Promises; async/await; reject/catch/finally; Promise.all/allSettled; microtasks/event loop; Fetch conceptual (sandbox isolated); AbortController; storage constraints; URL. (Audit each concept individually before checking complete.)
+- [ ] **Architecture & Quality** — Modules import/export (no fake browser module execution); pure functions; error modeling; unit testing; XSS/CSP basics; performance; accessibility; maintainability. (Audit each concept individually before checking complete.)
+- [ ] **Project & Expert Practice** — Counter; validated order form; filterable catalog; cart totals; accessible tabs/modal; multi-feature mini app; review/repair/performance challenges. (Audit each concept individually before checking complete.)
+
+### Java
+
+- [ ] **Orientation & Fundamentals** — What Java is; JDK/JVM/JRE; installing JDK 21; javac/java; source structure; output; comments; variables/final; primitive vs reference types. (Audit each concept individually before checking complete.)
+- [ ] **Expressions & Decisions** — Type casting; arithmetic and precedence; comparisons; booleans; if/else; switch and switch expressions; for; while; do-while; break/continue. (Audit each concept individually before checking complete.)
+- [ ] **Strings, Arrays & Methods** — String immutability; String methods; StringBuilder; arrays; multidimensional arrays; parameters and returns; overloads; scope; recursion; var local inference. (Audit each concept individually before checking complete.)
+- [ ] **OOP Essentials** — Class/object; constructors; this; static vs instance; encapsulation; getters/setters; packages; access modifiers; composition. (Audit each concept individually before checking complete.)
+- [ ] **OOP Advanced** — Inheritance; super; overrides; polymorphism; abstraction; interfaces; default methods; enums; nested classes; records; sealed types overview. (Audit each concept individually before checking complete.)
+- [ ] **Collections & Generics** — ArrayList; List/Set/Map; HashMap; generics; interfaces; equals/hashCode; sorting/comparators; iteration; immutability. (Audit each concept individually before checking complete.)
+- [ ] **Exceptions, IO & Time** — Checked vs unchecked exceptions; throw/throws; try/catch/finally; try-with-resources; NIO Path/Files; Scanner; UTF-8; java.time; secure input handling. (Audit each concept individually before checking complete.)
+- [ ] **Functional & Modern Java** — Lambdas; method references; Streams; Optional; collectors; BigDecimal rounding; pattern matching; records; defensive programming. (Audit each concept individually before checking complete.)
+- [ ] **Concurrency & JVM** — Threads; ExecutorService; concurrent collections; synchronization; race conditions; CompletableFuture; memory management; GC concepts; profiling. (Audit each concept individually before checking complete.)
+- [ ] **Testing & Professional Delivery** — JUnit 5 basics; assertions; edge cases; Maven/Gradle; project structure; logging; dependency hygiene; Git/CI; code review; security. (Audit each concept individually before checking complete.)
+- [ ] **Projects & Expert Practice** — CLI inventory practice; test-driven validation; collections reporting; file import/export with review; service-layer design; concurrency-safe design; performance audit. (Audit each concept individually before checking complete.)
+
+## Ground truth at start of this phase
+
+- Live repository before expansion: JavaScript **15** lessons, Java **9** (Java 21 compile-tested references), HTML 52, CSS 176, CSS reference 20, 3 proof-backed creative lessons.
+- A structural completeness pass did **not** establish end-to-end curriculum completeness; this gap is formally acknowledged.
+- Do not mark a stage complete merely because it contains one or two examples. Maintain staged TODO gaps after every batch.
+
+## Batch order
+
+- Batch A: fill missing JavaScript operators/strings/functions/scope/arrays/core DOM with individually runnable lessons.
+- Batch B: fill Java values, methods/arrays, core OOP, exceptions, collections with Java 21 CI compilation and reproducible outputs.
+- Batch C: advanced JS and modern Java + projects and reference index where lookup is better than tutorial.
+- Batch D: pedagogy review per lesson, curated Taglish, browser and deployment verification, security/accessibility and regression audit.
+
