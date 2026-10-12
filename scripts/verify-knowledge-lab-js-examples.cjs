@@ -8,6 +8,7 @@ require('../assets/js/knowledge-lab-javascript-foundations.js');
 require('../assets/js/knowledge-lab-javascript-intermediate.js');
 require('../assets/js/knowledge-lab-js-core-expansion.js');
 require('../assets/js/knowledge-lab-js-collections-quality.js');
+require('../assets/js/knowledge-lab-javascript-deep-dive.js');
 const lessons = window.KNOWLEDGE_LAB_V2.lessons;
 const ids = [
   "js-statements-comments",
@@ -29,7 +30,21 @@ const ids = [
   "js-classes-constructor",
   "js-promise-all",
   "js-try-catch",
-  "js-safe-text-rendering"
+  "js-safe-text-rendering",
+  "js-callback-values",
+  "js-recursion-base-case",
+  "js-spread-immutable-update",
+  "js-some-every",
+  "js-regex-test",
+  "js-utc-date",
+  "js-bigint-integers",
+  "js-prototype-lookup",
+  "js-extends-super",
+  "js-generators-yield",
+  "js-allsettled",
+  "js-microtask-order",
+  "js-freeze-shallow",
+  "js-this-binding"
 ];
 (async () => {
  for (const id of ids) {
