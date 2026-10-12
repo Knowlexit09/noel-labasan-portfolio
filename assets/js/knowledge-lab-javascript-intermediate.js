@@ -446,6 +446,40 @@ const additions=[
 ];
 const existing=new Set(data.lessons.map(x=>x.id));
 for(const lesson of additions){if(!existing.has(lesson.id)){data.lessons.push(lesson);existing.add(lesson.id);}}
+const practicePatches={
+  "js-first-steps": {
+    "prompt": "Change the success message to a sentence of your choice. Press Run, click the button, and inspect the Console.",
+    "check": "The button updates the text to your sentence and the Console logs Button clicked."
+  },
+  "js-variables-types": {
+    "prompt": "Change quantity from 2 to 3. Predict the numeric total before pressing Run, then inspect typeof price.",
+    "check": "The total becomes 375, and typeof price should be number."
+  },
+  "js-conditions": {
+    "prompt": "Test requested = 4, requested = 0, and requested = 5. Predict the matching branch for each.",
+    "check": "4 is available; 0 asks for at least one item; 5 shows Not enough stock."
+  },
+  "js-functions": {
+    "prompt": "Add a third cart line using calculateTotal(50, 4), without copying the multiplication formula.",
+    "check": "A third line displays 200, and the function still handles the arithmetic in one place."
+  },
+  "js-loops": {
+    "prompt": "Add Fish Fillet to the products array without writing another li element manually.",
+    "check": "The new product appears automatically; the rendered count logged to Console increases."
+  },
+  "js-dom-counter": {
+    "prompt": "Change count += 1 to count += 2. Click the button three times and explain the visible number.",
+    "check": "The count becomes 6 after three clicks. The same render function still updates the DOM."
+  },
+  "js-filter-vs-find": {
+    "prompt": "Change the find() name to a product that is missing. Add a matching new item to the array and test both cases.",
+    "check": "A missing product shows No match found; adding the product makes find() return the first matching item."
+  }
+};
+for(const [id,practice] of Object.entries(practicePatches)){
+  const lesson=data.lessons.find(x=>x.id===id);
+  if(lesson && !lesson.practice)lesson.practice=practice;
+}
 const javascript=data.categories.find(x=>x.id==='javascript');
 if(javascript){
   javascript.status='Runnable lessons · expanding';
