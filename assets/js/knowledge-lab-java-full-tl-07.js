@@ -266,7 +266,7 @@
     ]
   },
   "java-principle-isp": {
-    "t": "ISP: Interface Segregation Principle",
+    "t": "ISP: Interface Segregation Principle para sa focused interfaces",
     "s": "Gumawa ng maliliit na interfaces ayon sa pangangailangan ng callers.",
     "l": [
       "Kilalanin ang bloated interface",
