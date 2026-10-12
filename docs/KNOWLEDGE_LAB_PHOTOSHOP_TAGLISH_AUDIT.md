@@ -1,56 +1,71 @@
-# Photoshop Knowledge Lab — Filipino / Taglish full-lesson audit
+# Photoshop Knowledge Lab — Beginner-to-Expert course, shortcuts and QA
 
 **Date:** October 13, 2026 (Asia/Manila)  
 **Repository:** `Knowlexit09/noel-labasan-portfolio`  
-**Source of truth:** Current `main` GitHub files, not an assumed Photoshop course count.
+**Scope:** Desktop Adobe Photoshop learning guides, not a browser-hosted Photoshop editor.
 
-## Actual current inventory
+## Published course inventory — 49 lessons
 
-**Exactly one Photoshop lesson is published in Knowledge Lab**. This is a proof-backed, portfolio-linked creative lesson:
+This replaces the previous source-of-truth statement that Photoshop had only one lesson. The course now includes **48 original English+Taglish guided lessons across eight stages**, plus **one existing proof-backed real portfolio lesson**. Guided exercises teach actual actions to practice in Photoshop desktop; they **do not** claim that Photoshop was executed in the browser or that student output has been inspected. The established real Gatchalian Meatshop campaign proof remains unchanged.
 
-| # | Lesson ID | Lesson topic | Filipino/Taglish coverage |
-| --- | --- | --- | --- |
-| 1 | `photoshop-smart-object-workflow` | Smart Objects and non-destructive product editing | Complete manual overlay |
+| Stage | Topic | Guided lessons |
+| --- | --- | ---: |
+| 01 · Beginner Foundations | Workspace, new documents, pixels/PPI, zoom, crop, PSD vs exports | 6 |
+| 02 · Essential Tools & Layers | Layers, Move, duplicates/groups, Free Transform, opacity, brush/eraser | 6 |
+| 03 · Selections, Masks & Retouching | Marquee, Lasso/Quick Select, Layer Masks, clipping masks, Spot Healing, Clone Stamp | 6 |
+| 04 · Typography & Design | Text, visual hierarchy, guides, editable shape badges, Pen Tool, Layer Styles | 6 |
+| 05 · Color & Delivery | Adjustment layers, histogram/Levels, Curves, Camera Raw, RGB/CMYK profiles, social exports | 6 |
+| 06 · Advanced Compositing | Smart Objects, Smart Filters, Select and Mask, perspective, lighting/shadows, ethical content-aware editing | 6 |
+| 07 · Expert Production | Brand consistency, Actions, mockups, legibility/QA, asset rights, source/project handoff | 6 |
+| 08 · Portfolio Projects | Six applied Photoshop projects from cutouts and price cards to complete client handoff | 6 |
+| 09 · Real Portfolio Evidence | Existing Smart Object workflow linked to actual Gatchalian Meatshop campaign | 1 |
 
-This is **not** a claim that Photoshop has a full beginner-to-expert syllabus, or that the site contains 91 Photoshop lessons (91 refers to **Java**, not Photoshop). Existing HTML, CSS, JavaScript, Java, Canva, CapCut and other topics were not added to or removed from the Photoshop inventory.
+## Every one of the 48 new guided lessons contains
 
-## Field-by-field scope
+- A specific topic title, accurate English definition/summary and individually written Filipino/Taglish definition/summary.
+- Concept-specific explanation in both languages with an example or real Photoshop workflow.
+- Learning objective and three learning points in each language.
+- Concrete, step-numbered **hands-on desktop exercise**, expected visible result and checking criteria in both languages.
+- Practical tip, keyboard workflow hint, common mistake and real-world application.
+- Two formative quizzes: one about the taught concept and one about a context-appropriate **default Photoshop desktop shortcut**, each with feedback. The second is a memory check, **not** a claim that Photoshop ran or checked the file.
+- A dedicated **Windows / macOS shortcut panel**. Keys were selected from Adobe desktop shortcut documentation: tool selection letters, file operations, Free Transform, Layer via Copy, brush size, selecting/deselecting and related controls.
+- A caution that keyboard mappings are customizable; Photoshop on the **web has different shortcuts**, particularly Free Transform. Users can inspect their installed app at **Edit > Keyboard Shortcuts**.
 
-The manual Filipino/Taglish overlay in `assets/js/knowledge-lab-photoshop-tl.js` covers all preexisting prose and quiz fields:
+The existing Smart Object proof lesson gains the same two-platform shortcut panel. Its unmodified finished campaign image and case-study links remain real portfolio proof; guided lessons do **not** fabricate images, screen recordings, live IDE execution, or verified client deliverables.
 
-- Lesson title, level, summary, definition, four learning points, objective.
-- Complete explanation with real Photoshop terminology and actionable guidance.
-- Tip, hack, common mistake, expected result and real-world use.
-- Portfolio proof label, accessible alt text, honest proof note, case-study link label, and **all four workflow steps**.
-- All two quiz questions, four options each and full correct-answer explanations; existing correct-answer indices remain unchanged.
-- Photoshop category status and description; the single-lesson limit is explicitly disclosed.
-- **Additional bilingual practical exercise** with prompt and concrete verification criteria. The English learning source receives a matching practice, not a Taglish-only instruction.
+## Implementation and architectural continuity
 
-## Technical correction
+- `assets/js/knowledge-lab-photoshop-course-core.js` — eight-stage curriculum, Windows/macOS desktop shortcut bank, bilingual lesson assembly, separate original proof, and strict unique-ID/field checks.
+- `assets/js/knowledge-lab-photoshop-course-01.js` through `-08.js` — six individually authored guided lessons per stage.
+- `assets/js/knowledge-lab-photoshop-tl.js` — retained fully authored bilingual Smart Object proof lesson and actual unchanged portfolio evidence.
+- `knowledge/index.html` — course loader after original Photoshop language overlay, before `knowledge-lab-runner.js`.
+- `assets/js/knowledge-lab-runner.js` — marks guides as **GUIDED PRACTICE**, never as REAL PROOF or a fake Java/browser compiler; renders shortcut section with truthful **Photoshop keyboard shortcuts**, Windows and macOS labels, cautions, and retains existing code-language shortcut UI for other categories.
+- `.github/workflows/validate-knowledge-lab-ide.yml` — requires 49 unique Photoshop lessons, exactly eight stages × six guides + separate proof, two languages with complete lessons, practice, quizzes and keyboard mappings, plus Chromium language/quiz/shortcut browsing and existing Java/html/css/js regressions.
 
-The original English tip could be misunderstood as suggesting ordinary duplication creates independent Smart Object **contents**. In Photoshop, normal duplicated Smart Object layers often share the same embedded contents; **Layer > Smart Objects > New Smart Object via Copy** is the separate-content command. Correct English and Filipino guidance now explains that difference. A Smart Object does **not** guarantee lossless enlargement beyond the source photo's resolution.
+All other course IDs, the **91 Java lessons**, their Java 21 compile/output checks, original Java Practice IDE and consent-gated external OneCompiler, HTML/CSS/JavaScript practice, Supabase/Auth/Admin Publish Live and portfolio media remain intact. Old quiz scores for existing lesson IDs are preserved by their unchanged localStorage keys.
 
-## Content/proof integrity and privacy
+## Key factual/editorial boundaries
 
-- Original finished Gatchalian Meatshop portfolio image URL, case-study link, image kind and proof asset remain unchanged. The proof is of a finished campaign and its documented tool workflow, **not** a recording of every Photoshop action.
-- All original English narration remains available, except for the intentional accuracy correction and additive hands-on practice.
-- No automatic Photoshop operation, Adobe app integration, image changes, uploads, fake editing runs, or claim of having executed Photoshop itself.
-- Existing Java historical inline Practice IDE, runnable HTML/CSS/JS IDE, test fixtures, Supabase/Auth/Admin Publish Live, CSP and security rules are unchanged.
-- A CI source gate checks the actual Photoshop inventory, required translated fields, four steps, source URL parity, both quiz answers, correct Adobe command and bilingual practice.
-- Playwright browser regression visits the actual Photoshop proof lesson, checks English->Taglish->English switching, four localized workflow steps, translated quiz, preserved image and proof link.
+- Desktop Photoshop default shortcut examples are **Ctrl + T / Cmd + T** Free Transform and **Ctrl + J / Cmd + J** layer via copy. Photoshop on the web is **not** the same: some browser-held shortcuts differ.
+- Tool-group letters (such as W, J, G or U) can cycle among tools and behave differently depending on keymap and focus.
+- Smart Objects preserve editable transformations but do **not** invent new detail when enlarging a low-resolution photo. Normal Smart Object duplicate contents are often shared; **New Smart Object via Copy** gives independent embedded contents.
+- The curriculum teaches PSD preservation, legal asset sourcing, color-profile-dependent print, truthful product editing, client handoff and appropriate mockup labeling; it does not claim client commissioning or generated images as actual proof.
+- The 48 guided practice outputs and six capstones have **not** been independently produced or reviewed with an installed copy of Adobe Photoshop. They are exercises and acceptance criteria, not tested Photoshop files.
 
-## Release evidence
+## Primary Adobe documentation
 
-**Verified remote application-code run:** [GitHub Actions #38282711361](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38282711361) completed **SUCCESS** against `64594d79a53bd74d15c6b7fe758ca784d0bfdd45`. It passed all steps, including field-level Photoshop localization, 91 Java 21 source/output checks and real Chromium UI interactions. A follow-on docs-only GitHub Pages run should be independently checked for matching final documentation HEAD; the application source was already committed and tested. Independent Adobe Photoshop program execution and human editorial review are not part of this CI.
+- https://helpx.adobe.com/photoshop/desktop/get-started/settings-and-preferences/view-keyboard-shortcuts.html — desktop shortcut dialog, Windows and macOS
+- https://helpx.adobe.com/content/dam/help/en/photoshop/using/default-keyboard-shortcuts/photoshop-keyboard-shortcuts.pdf — common desktop shortcuts for Free Transform, layer copy, brush size etc.
+- https://helpx.adobe.com/photoshop/desktop/create-manage-layers/get-started-layers/work-with-the-layers-panel.html — Layers panel reference
+- https://helpx.adobe.com/photoshop/desktop/get-started/learn-the-basics/hide-show-panels.html — Tab panel-visibility key
+- https://helpx.adobe.com/photoshop/desktop/create-manage-layers/smart-objects/duplicate-an-embedded-smart-object.html — independent Smart Object copies
 
-**Adobe official reference:** https://helpx.adobe.com/photoshop/desktop/create-manage-layers/smart-objects/duplicate-an-embedded-smart-object.html — regular Smart Object duplicates share content; New Smart Object Via Copy separates it.
+## Release verification
 
-Validate latest GitHub Actions **Validate Knowledge Lab IDE** and matching **Deploy portfolio to GitHub Pages** run for the exact code commit before calling release green. No independent manual Photoshop application session or professional editorial sign-off has been performed.
+Source-only and GitHub Actions checks must be recorded for the **exact current application-code SHA**. Passing CI verifies JavaScript load, static schema/source invariants and browser behavior; it is not a substitute for an installed Adobe Photoshop practical examination or native-speaker human copy-editing. Document the last confirmed successful GitHub Actions / Pages run separately.
 
-## Current gap and sensible next learning path
+## Risks, safeguards and rollback
 
-**Not yet published:** a genuine beginner-to-expert Photoshop course. High-value future topics include first workspace/documents; image resolution, PPI and export; layers and groups; selection and Layer Masks; adjustments and clipping masks; retouching; typography and hierarchy; Smart Objects, Smart Filters; product mockups; color management; accessibility and production handoff; multi-size social campaigns; and genuinely reviewed portfolio capstones. Any added creative lessons must follow the project's proof requirements; do not fabricate portfolio screenshots or mark unverified tool demonstrations as real proof.
+**Patch risk: Medium**, because a new curriculum + language packs + renderer + browser tests touch user-facing UX and grow the content count. Potential defects: wrong shortcut keys for a customized install, overly broad editorial wording, incorrect quiz translation, slow category list with 49 lessons, or localized shortcut headers spilling into other language tracks. **Integrity impact:** No changes to user account security, database, financial/inventory state, permission checks, or media rights.
 
-## Patch risk and rollback
-
-**Risk: Low–Medium** for inaccurate wording, locale merging, proof instructions, quiz UI, or category display. **Data/accounting/security impact:** no data mutation, no auth changes and no change to Java external compiler consent. Safeguards: untouched underlying proof URLs and original creative assets; English/source separation; automated static/content/browser checks; additive translation-only module loaded before runner. **Rollback:** ordinary targeted `git revert` of the new Photoshop translation file, the `knowledge/index.html` script-loader insertion and matching CI edits. Do not force-push or revert 91 Java language work.
+**Mitigations:** use Adobe documentation to validate desktop shortcut defaults; display custom-shortcut caveat; keep real portfolio proof separate; use strict module checks and targeted Playwright browser regression; preserve existing English and Filipino lessons and original code IDE behavior. **Rollback:** ordinary targeted Git revert of the eight content batch files, course core, `knowledge/index.html` loader, `knowledge-lab-runner.js` guide/shortcut UI and relevant CI adjustments; no force-push and no unrelated Java rollback.
