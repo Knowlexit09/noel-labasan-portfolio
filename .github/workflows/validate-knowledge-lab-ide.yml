@@ -40,6 +40,7 @@ jobs:
           node --check assets/js/knowledge-lab-js-collections-quality.js
           node --check assets/js/knowledge-lab-js-projects.js
           node --check assets/js/knowledge-lab-javascript-deep-dive.js
+          node --check assets/js/knowledge-lab-javascript-dom-practice.js
           node --check scripts/verify-knowledge-lab-js-examples.cjs
           node scripts/verify-knowledge-lab-js-examples.cjs
           node --check assets/js/knowledge-lab-java-foundations.js
@@ -81,6 +82,7 @@ jobs:
           require('./assets/js/knowledge-lab-js-collections-quality.js');
           require('./assets/js/knowledge-lab-js-projects.js');
           require('./assets/js/knowledge-lab-javascript-deep-dive.js');
+          require('./assets/js/knowledge-lab-javascript-dom-practice.js');
           require('./assets/js/knowledge-lab-java-foundations.js');
           require('./assets/js/knowledge-lab-java-core-expansion.js');
           require('./assets/js/knowledge-lab-java-modern-expansion.js');
@@ -104,7 +106,7 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length !== 51) throw new Error('Expected 51 JavaScript lessons, got ' + jsFoundations.length);
+          if (jsFoundations.length !== 59) throw new Error('Expected 59 JavaScript lessons, got ' + jsFoundations.length);
           const requiredJavaScript = ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops',
             'js-arrays-foundation', 'js-objects-properties', 'js-map-reduce', 'js-form-input-validation',
             'js-event-delegation', 'js-promises-async-await', 'js-debugging-errors', 'js-project-live-product-search',
@@ -113,7 +115,8 @@ jobs:
             'js-array-slice-splice','js-array-sort-safely','js-set-unique-values','js-map-keyed-lookup',
             'js-object-destructuring','js-json-basics','js-classes-constructor','js-promise-all',
             'js-try-catch','js-safe-text-rendering','js-project-stock-cart','js-project-accessible-tabs',
-            'js-callback-values','js-recursion-base-case','js-spread-immutable-update','js-some-every','js-regex-test','js-utc-date','js-bigint-integers','js-prototype-lookup','js-extends-super','js-generators-yield','js-allsettled','js-microtask-order','js-freeze-shallow','js-this-binding'];
+            'js-callback-values','js-recursion-base-case','js-spread-immutable-update','js-some-every','js-regex-test','js-utc-date','js-bigint-integers','js-prototype-lookup','js-extends-super','js-generators-yield','js-allsettled','js-microtask-order','js-freeze-shallow','js-this-binding',
+            'js-dom-selectors','js-classlist-pressed','js-createelement-list','js-event-bubbling','js-remove-event-listener','js-formdata-submit','js-escape-search-key','js-focus-management'];
           const requiredJavaScriptStages = ['Foundation', 'Operators & Decisions', 'Strings & Numbers', 'Functions & Scope', 'Arrays', 'Objects & Data', 'DOM & Forms', 'Asynchronous Thinking', 'Projects & Practice'];
           const jsCategory = data.categories.find(x => x.id === 'javascript');
           if (!jsCategory || requiredJavaScriptStages.some(stage => !jsCategory.learningPath?.includes(stage))) {
@@ -618,6 +621,26 @@ jobs:
             await tabsFrame.focus('#tab-details');
             await page.keyboard.press('ArrowLeft');
             if ((await tabsFrame.getAttribute('#tab-overview','aria-selected')) !== 'true') throw new Error('Keyboard tab navigation failed.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-dom-selectors', { waitUntil: 'networkidle' });
+            let domFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await domFrame.waitForSelector('#result');
+            if ((await domFrame.textContent('#result')).trim() !== '2 products: Liempo, Chicken') throw new Error('DOM selectors lesson result mismatch.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-classlist-pressed', { waitUntil: 'networkidle' });
+            domFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await domFrame.waitForSelector('#favorite');
+            await domFrame.click('#favorite');
+            if ((await domFrame.getAttribute('#favorite','aria-pressed')) !== 'true') throw new Error('Favorite toggle not accessible after click.');
+            await domFrame.click('#favorite');
+            if ((await domFrame.getAttribute('#favorite','aria-pressed')) !== 'false') throw new Error('Favorite toggle failed to reset.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-formdata-submit', { waitUntil: 'networkidle' });
+            domFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await domFrame.waitForSelector('#order');
+            await domFrame.fill('#product','Chicken');
+            await domFrame.click('#order button[type="submit"]');
+            if ((await domFrame.textContent('#result')) !== 'Product: Chicken') throw new Error('FormData submit lesson failed.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-safe-text-rendering', { waitUntil: 'networkidle' });
             let safeFrame = await (await page.$('[data-result-frame]')).contentFrame();
