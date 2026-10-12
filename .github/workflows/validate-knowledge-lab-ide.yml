@@ -42,6 +42,7 @@ jobs:
           node --check assets/js/knowledge-lab-js-projects.js
           node --check assets/js/knowledge-lab-javascript-deep-dive.js
           node --check assets/js/knowledge-lab-javascript-dom-practice.js
+          node --check assets/js/knowledge-lab-js-quality-practice.js
           node --check scripts/verify-knowledge-lab-js-examples.cjs
           node --check scripts/verify-knowledge-lab-java.cjs
           node scripts/verify-knowledge-lab-js-examples.cjs
@@ -95,6 +96,7 @@ jobs:
           require('./assets/js/knowledge-lab-js-projects.js');
           require('./assets/js/knowledge-lab-javascript-deep-dive.js');
           require('./assets/js/knowledge-lab-javascript-dom-practice.js');
+          require('./assets/js/knowledge-lab-js-quality-practice.js');
           require('./assets/js/knowledge-lab-java-foundations.js');
           require('./assets/js/knowledge-lab-java-core-expansion.js');
           require('./assets/js/knowledge-lab-java-modern-expansion.js');
@@ -125,7 +127,7 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length !== 59) throw new Error('Expected 59 JavaScript lessons, got ' + jsFoundations.length);
+          if (jsFoundations.length !== 61) throw new Error('Expected 61 JavaScript lessons, got ' + jsFoundations.length);
           const requiredJavaScript = ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops',
             'js-arrays-foundation', 'js-objects-properties', 'js-map-reduce', 'js-form-input-validation',
             'js-event-delegation', 'js-promises-async-await', 'js-debugging-errors', 'js-project-live-product-search',
@@ -135,7 +137,8 @@ jobs:
             'js-object-destructuring','js-json-basics','js-classes-constructor','js-promise-all',
             'js-try-catch','js-safe-text-rendering','js-project-stock-cart','js-project-accessible-tabs',
             'js-callback-values','js-recursion-base-case','js-spread-immutable-update','js-some-every','js-regex-test','js-utc-date','js-bigint-integers','js-prototype-lookup','js-extends-super','js-generators-yield','js-allsettled','js-microtask-order','js-freeze-shallow','js-this-binding',
-            'js-dom-selectors','js-classlist-pressed','js-createelement-list','js-event-bubbling','js-remove-event-listener','js-formdata-submit','js-escape-search-key','js-focus-management'];
+            'js-dom-selectors','js-classlist-pressed','js-createelement-list','js-event-bubbling','js-remove-event-listener','js-formdata-submit','js-escape-search-key','js-focus-management',
+            'js-quality-unit-tests','js-async-debounced-filter'];
           const requiredJavaScriptStages = ['Foundation', 'Operators & Decisions', 'Strings & Numbers', 'Functions & Scope', 'Arrays', 'Objects & Data', 'DOM & Forms', 'Asynchronous Thinking', 'Projects & Practice'];
           const jsCategory = data.categories.find(x => x.id === 'javascript');
           if (!jsCategory || requiredJavaScriptStages.some(stage => !jsCategory.learningPath?.includes(stage))) {
@@ -700,6 +703,30 @@ jobs:
             await domFrame.fill('#product','Chicken');
             await domFrame.click('#order button[type="submit"]');
             if ((await domFrame.textContent('#result')) !== 'Product: Chicken') throw new Error('FormData submit lesson failed.');
+
+            // New offline JavaScript architecture & async lessons: real assertions and timing.
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-quality-unit-tests', { waitUntil: 'networkidle' });
+            let qualityFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await qualityFrame.waitForSelector('#summary');
+            await qualityFrame.waitForFunction(() => document.querySelector('#summary')?.textContent === '6/6 tests passed');
+            if ((await qualityFrame.locator('#tests li').count()) !== 6 ||
+                (await qualityFrame.locator('#tests li').allTextContents()).some(s => !s.startsWith('PASS'))) {
+              throw new Error('Unit-testing lesson did not execute all six assertions successfully.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-async-debounced-filter', { waitUntil: 'networkidle' });
+            qualityFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await qualityFrame.waitForSelector('#search');
+            if ((await qualityFrame.locator('#results li').count()) !== 3) throw new Error('Debounced filter initial catalog missing.');
+            await qualityFrame.fill('#search', 'chi');
+            await qualityFrame.waitForFunction(() => document.querySelector('#status')?.textContent === '1 matching product(s)');
+            if ((await qualityFrame.locator('#results li').allTextContents()).join(',') !== 'Chicken')
+              throw new Error('Debounced search did not find Chicken.');
+            await qualityFrame.fill('#search', 'fi');
+            await qualityFrame.fill('#search', '');
+            await qualityFrame.waitForFunction(() => document.querySelector('#status')?.textContent === '3 matching product(s)');
+            if ((await qualityFrame.locator('#results li').count()) !== 3)
+              throw new Error('Clearing debounced search left stale results.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-safe-text-rendering', { waitUntil: 'networkidle' });
             let safeFrame = await (await page.$('[data-result-frame]')).contentFrame();
