@@ -73,7 +73,7 @@ jobs:
           grep -q 'data-proof-lab' knowledge/index.html
           grep -q 'data-reference-lab' knowledge/index.html
           grep -q 'data-java-ide-open' knowledge/index.html
-          grep -q 'data-java-output-tab' knowledge/index.html
+          grep -q 'data-java-ide-source' knowledge/index.html
           grep -q 'data-java-ide-sync' knowledge/index.html
           grep -q 'data-java-ide-reset' knowledge/index.html
           grep -q 'frame-src .*https://onecompiler.com' knowledge/index.html
