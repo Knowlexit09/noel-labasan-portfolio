@@ -141,6 +141,22 @@ const curated={
     ]
   }
 };
+if(i18n.categories?.tl && !i18n.categories.tl.javascript) {
+  i18n.categories.tl.javascript={
+    description:'Matuto ng JavaScript mula sa maliliit na runnable examples hanggang sa forms, array methods, async, debugging, at product-search mini project.',
+    status:'Runnable lessons · patuloy na dinadagdagan'
+  };
+}
+if(i18n.stages?.tl && !i18n.stages.tl.javascript) {
+  i18n.stages.tl.javascript={
+    'Foundation':'Panimula',
+    'Arrays':'Mga Array',
+    'Objects & Data':'Objects at Data',
+    'DOM & Forms':'DOM at Mga Form',
+    'Asynchronous Thinking':'Pag-unawa sa Async',
+    'Projects & Practice':'Projects at Practice'
+  };
+}
 for(const [id,version] of Object.entries(curated)){
   if(!i18n.lessons.tl[id])i18n.lessons.tl[id]=version;
 }
