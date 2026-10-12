@@ -1,5 +1,22 @@
 # PORTFOLIO MASTER CONTEXT
 
+## Knowledge Lab follow-up: 363 records and practical DOM/Java projects — 2026-10-12
+
+**Authoritative newer checkpoint; supersedes the earlier 347-record total in this file.**
+
+- User goal remains *truly comprehensive and beginner-to-expert*, not merely a W3Schools-comparable raw count. Both JavaScript and Java still show **Curriculum expansion in progress**.
+- Added `assets/js/knowledge-lab-javascript-dom-practice.js` with **8 beginner/intermediate browser lessons**: DOM selection, classList + aria-pressed, safe createElement/textContent, bubbling, removing event listeners, FormData handling, Escape key interaction, and explicit focus management. Each has unique learning goals, working code, explained quizzes, mistake/hack/tip and practice instructions. HTML now loads module before main runner.
+- Added `assets/js/knowledge-lab-java-applied.js` with **8 genuine Java 21 references**: composition, abstract methods, generic methods, immutable collections, regex, grouping reports, timezone conversion, and a guarded in-memory inventory mini project. JAVA remains Java 21 compile/output reference or opt-in external OneCompiler IDE; no fake local Java runner. The stock project is **not** a production POS or backend transaction system.
+- New source counts: **363 unique records** = HTML 52; CSS 176; CSS Reference 20; JavaScript **59**; Java **53**; Photoshop, Canva, CapCut proof records 1 each. Git/GitHub, Apps Script and proof-gated Blender/Roblox Studio remain empty roadmap categories. Manually curated Filipino/Taglish lesson versions remain **41** (HTML20/CSS18/JS3); existing visible English fallback preserved.
+- CI updated to require JS **59** and Java **53** lessons, lint new source files, compile all canonical Java 21 reference samples and check stdout, and use Playwright checks for DOM selection, aria-pressed toggle and FormData behavior. The existing Java third-party IDE opt-in/sandbox/CSP/mocked code-sync tests and prior tests remain in place, not weakened.
+- Local verification: assembled 363 unique records, no missing required teaching/quiz fields, no duplicate IDs, no invalid stage mapping; all **307** browser code examples JavaScript syntax-checked, both embedded CI Node programs parsed, and loaded script order verified. **34/34** standalone JavaScript output tests passed via controlled DOM (earlier batch); Java 21 representative compile/run tests passed for 8 new examples across the professional and applied batches (canonical full run still CI-dependent). New DOM behaviors are covered by added Playwright test code, but a complete actual browser run has not been confirmed.
+- **Remote workflow / latest successful GitHub Pages deployment / live OneCompiler compile-run are STILL UNVERIFIED** because GitHub connector exposes no current workflow checks and web access to Pages/Actions is blocked. Never report Live/Pages or CI PASS without authoritative run result.
+- Relevant new commits: JS DOM module `76b2314dcc87e58c7394861b8967722ff7487715`; HTML integration `b36f972d6f75ca36b3b21a1d0963f3a420bb23cf`; Java applied module `89c6f1cee09440fc47ee06ce8d7a0b89116fccf6`; Java HTML integration `275239efa55558b0cacd12844cd5146ecd4f2fdf`; CI updated `c69defc8466079a8ea9f3387315b8bb65cf7bc3e` (JS DOM) and `de4bafa2ae443c1662fd818cfdeff9f79ee86de6` (Java); roadmap `d4ab74fd094e2539e81b672bac047ed0daf8cf84`.
+- Next: verify latest GitHub Actions and deployed Pages, then close missing JS module/fetch/browser-api/testing gaps and Java JUnit/Maven/deep concurrency/projects; add meaningful authored Taglish. Do not use filler lessons, fake proof or fake Run buttons to raise counts.
+- Risk **Medium**, dominated by the external OneCompiler code-transfer privacy/trust boundary, possible provider outage, and CI/browser regressions. Protections: explicit click and disclosure before external iframe loads, exact-origin postMessage, iframe sandbox/restrictive CSP, no backend credentials, original JS runner isolation unchanged, CI gates and editable original reference code. No Draft/Publish Live, POS records, RLS/MFA, or backend security settings changed. Rollback by normal git revert of affected commits, not force push/history rewrite.
+
+
+
 ## Knowledge Lab Java IDE + curriculum expansion — 2026-10-12 latest continuation
 
 - Reconciled live repository before editing, starting from `62877ab563f4d764f62d9e8a198bffbefdbe13c0`; older stage/lesson counts were superseded by newer live source.
