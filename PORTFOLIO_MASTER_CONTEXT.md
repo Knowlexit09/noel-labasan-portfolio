@@ -1,5 +1,22 @@
 # PORTFOLIO MASTER CONTEXT
 
+## LATEST CHANGE — Taglish definitions for all 91 Java lessons (2026-10-12)
+
+**User report:** Some Java definitions remained English even when Filipino/Taglish was selected. Live `main` at the start of this patch: `8db584c0604a5483ab6b5edb647d6b5db476d5f3`. Source audit found **12 fully curated Java lessons** (11 focused Java lesson translations plus the 33-question Java exam reviewer) and **79 Java lessons with English-only definitions**.
+
+**Implemented:** `assets/js/knowledge-lab-java-definitions-tl.js` provides **79 independently written, concept-specific Taglish definitions** for the remaining Java lesson IDs. It runs after existing full Java language packs and only fills missing definitions. In `knowledge/index.html` it loads before the runner, so the language toggle displays Taglish on all **91/91 Java reference lessons**. The 12 existing fully curated translations are preserved unchanged, and all original English lessons remain unchanged. `knowledge-lab-i18n.js` adds an explicit partial-localization label; `knowledge-lab-runner.js` shows **“Taglish na ang kahulugan • may English pa sa ibang bahagi”** when only the definition is localized, never falsely asserting that the entire lesson is curated.
+
+**Verification:** Executed the actual canonical modules from GitHub in source load order with a controlled JavaScript window: **91 Java lessons**, **12 full curated + 79 definition-only**, **0 missing definitions**, **0 duplicate Java IDs**, **0 loader/runtime errors**. Added CI assertion for 91 distinct Taglish definitions, exactly 79 partial entries, full-translation preservation, browser English↔Taglish toggle on a JDBC transaction lesson, and no Java vendor iframe before opt-in. Remote GitHub Actions/Pages run for the latest code commit must be checked separately. This covers **definitions only**, not full translation of explanations, tips, learn/practice, and quizzes for those 79 lessons; do not add 79 to the fully curated lesson count. No change to total curriculum records (**403**, with 91 Java and 61 JavaScript).
+
+**Preservation:** The user-accepted original inline Java Practice IDE from the 59-JS/53-Java historical checkpoint remains unchanged: Java reference source+expected output, local Main.java, Open/Send/Reset/Close, consent-gated external OneCompiler with restrictive sandbox/target origin. Original HTML/CSS/JS IDE, 91 Java source examples/Java 21 checks, backend auth, admin Draft→Preview→owner Publish Live, and site CSP remain unchanged.
+
+**Risk: Low–Medium** (wording quality or lesson language indicator regression), Java external-source-transfer risk still Medium and only after user action. Safeguards: translations separated from canonical source code, 12 full lesson versions remain authoritative, explicit partial badge, automated 91/91 localization contract, original test gates. **Rollback:** normal targeted Git revert of Taglish module, loader, indicator, locale text and test commits (no force push); no database, sales, inventory, security or authentication changes.
+
+**Pending:** Review all 79 translated definitions for style/factual fidelity and continue manually authored full Taglish explanations/practice/quizzes. Confirm latest remote browser tests, Pages and separate real OneCompiler behavior before any further release claim.
+
+---
+
+
 ## LATEST CONTINUATION — Java IDE accepted; targeted JavaScript course-quality batch (2026-10-12)
 
 **POST-FLIGHT VERIFIED STATUS (2026-10-12):** GitHub Actions [Validate Knowledge Lab IDE run #38267495262](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38267495262) completed **SUCCESS** on application commit `cc98dea57b8a0a8d1e7657607e8b4d81df517190`: static syntax, all source/lesson references, full isolated Java 21 output verification, and Chromium browser interaction suite (including new JS/Filipino tests and original Java IDE controls) were all green. [Pages deployment run #38267495178](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38267495178) completed **SUCCESS** for that same application code. A subsequent docs-only commit creates a newer Pages run; its exact result and real public-browser/OneCompiler execution require separate verification. This verified CI status supersedes the earlier in-progress note below.
