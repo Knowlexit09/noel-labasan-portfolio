@@ -54,6 +54,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-exam-fundamentals.js
           node --check assets/js/knowledge-lab-java-design-jdbc.js
           node --check assets/js/knowledge-lab-java-exam-reviewer.js
+          node --check assets/js/knowledge-lab-java-capstone-projects.js
           node --check assets/js/knowledge-lab-java-review-tl.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
@@ -99,6 +100,7 @@ jobs:
           require('./assets/js/knowledge-lab-java-exam-fundamentals.js');
           require('./assets/js/knowledge-lab-java-design-jdbc.js');
           require('./assets/js/knowledge-lab-java-exam-reviewer.js');
+          require('./assets/js/knowledge-lab-java-capstone-projects.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           require('./assets/js/knowledge-lab-java-review-tl.js');
@@ -415,7 +417,7 @@ jobs:
             }
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 87) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 91) throw new Error('Missing Java 21 references.');
           for (const lesson of javaLessons) {
             if (!lesson.practice?.prompt || !lesson.practice?.check) {
               throw new Error('Java lesson lacks an actionable practice challenge: ' + lesson.id);
