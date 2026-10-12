@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v10",
+  "version": "2026-10-12-v11",
   "categories": [
     {
       "id": "html",
@@ -26,8 +26,8 @@
       "label": "CSS",
       "group": "Code & Development",
       "icon": "#",
-      "status": "Comprehensive course expansion",
-      "description": "A comprehensive CSS course from fundamentals to expert practice, split into focused lessons with runnable examples, quizzes, shortcuts, real-work guidance, and section projects.",
+      "status": "176 focused lessons + projects",
+      "description": "Comprehensive CSS learning path from fundamentals through modern CSS and expert practice, with runnable examples, quizzes, color/code explorers, real-world patterns, accessibility guidance, and projects.",
       "learningPath": [
         "CSS Fundamentals",
         "Colors & Backgrounds",
