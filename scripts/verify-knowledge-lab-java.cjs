@@ -47,7 +47,7 @@ for (const q of reviewer.quiz) {
 function execute(tool, args, cwd) {
   const result = cp.spawnSync(tool, args, {
     cwd, encoding: 'utf8', timeout: 20000, maxBuffer: 1024 * 1024,
-    env: { ...process.env, JAVA_TOOL_OPTIONS: '' }
+    env: process.env
   });
   if (result.error) throw new Error(tool + ' failed: ' + result.error.message);
   if (result.status !== 0) {
