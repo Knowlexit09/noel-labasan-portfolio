@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v8",
+  "version": "2026-10-12-v9",
   "categories": [
     {
       "id": "html",
@@ -10774,7 +10774,31 @@
       "html": "<main><p class=\"note\">Class selector example</p></main>",
       "css": "body{font-family:system-ui;padding:28px}.note{color:#0879b7;font-weight:800}",
       "js": "",
-      "referenceSyntax": "element | .class | #id | [attr] | :pseudo | ::pseudo"
+      "referenceSyntax": "element | .class | #id | [attr] | :pseudo | ::pseudo",
+      "quiz": [
+        {
+          "question": "Which selector targets every element with class=\"card\"?",
+          "options": [
+            ".card",
+            "#card",
+            "card()",
+            "[className=card]"
+          ],
+          "correctIndex": 0,
+          "explanation": "A class selector begins with a dot."
+        },
+        {
+          "question": "Which selector targets an element whose id is \"hero\"?",
+          "options": [
+            "#hero",
+            ".hero",
+            "hero",
+            "::hero"
+          ],
+          "correctIndex": 0,
+          "explanation": "An ID selector begins with #."
+        }
+      ]
     },
     {
       "id": "css-ref-specificity",
@@ -10807,7 +10831,29 @@
       "html": "<p class=\"note\" id=\"demo\">Specificity demo</p>",
       "css": "p{color:green}.note{color:blue}#demo{color:#d94d72}",
       "js": "",
-      "referenceSyntax": "inline > ID > class/attribute/pseudo-class > type/pseudo-element"
+      "referenceSyntax": "inline > ID > class/attribute/pseudo-class > type/pseudo-element",
+      "quiz": [
+        {
+          "question": "Which normally has higher specificity?",
+          "options": [
+            "An ID selector",
+            "A class selector",
+            "A type selector",
+            "The universal selector"
+          ],
+          "correctIndex": 0,
+          "explanation": "An ID selector has higher specificity than class or type selectors."
+        },
+        {
+          "question": "Should specificity be treated as the only rule in the cascade?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Origin, importance, cascade layers, specificity, and source order all participate in cascade decisions."
+        }
+      ]
     },
     {
       "id": "css-ref-units",
@@ -10840,7 +10886,31 @@
       "html": "<div class=\"box\">Responsive width</div>",
       "css": "body{font-family:system-ui;padding:28px}.box{width:min(90%,30rem);padding:1.5rem;background:#eef8fd}",
       "js": "",
-      "referenceSyntax": "px | % | em | rem | vw | vh | cqw | ch | ..."
+      "referenceSyntax": "px | % | em | rem | vw | vh | cqw | ch | ...",
+      "quiz": [
+        {
+          "question": "Which unit is relative to the root element's font size?",
+          "options": [
+            "rem",
+            "em",
+            "px",
+            "vw"
+          ],
+          "correctIndex": 0,
+          "explanation": "rem is relative to the root font size."
+        },
+        {
+          "question": "Which unit is based on viewport width?",
+          "options": [
+            "vw",
+            "ch",
+            "rem",
+            "px"
+          ],
+          "correctIndex": 0,
+          "explanation": "vw is a viewport-percentage length."
+        }
+      ]
     },
     {
       "id": "css-ref-margin-padding",
@@ -10873,7 +10943,31 @@
       "html": "<div class=\"box\">Box spacing</div>",
       "css": "body{font-family:system-ui;padding:28px}.box{margin:20px;padding:20px;border:2px solid #0879b7}",
       "js": "",
-      "referenceSyntax": "margin: 1rem; padding: .75rem 1rem;"
+      "referenceSyntax": "margin: 1rem; padding: .75rem 1rem;",
+      "quiz": [
+        {
+          "question": "Where is padding located?",
+          "options": [
+            "Between content and border",
+            "Outside the margin",
+            "Outside the border",
+            "Inside the font"
+          ],
+          "correctIndex": 0,
+          "explanation": "Padding is the inner spacing between content and border."
+        },
+        {
+          "question": "Where is margin located?",
+          "options": [
+            "Outside the border",
+            "Inside the content",
+            "Between glyphs",
+            "Inside padding"
+          ],
+          "correctIndex": 0,
+          "explanation": "Margin is outside the border."
+        }
+      ]
     },
     {
       "id": "css-ref-border-outline",
@@ -10906,7 +11000,29 @@
       "html": "<button class=\"box\">Focus-like ring</button>",
       "css": "body{font-family:system-ui;padding:40px}.box{padding:12px;border:2px solid #0879b7;outline:3px solid #5bd6ff;outline-offset:3px}",
       "js": "",
-      "referenceSyntax": "border: 1px solid; outline: 3px solid;"
+      "referenceSyntax": "border: 1px solid; outline: 3px solid;",
+      "quiz": [
+        {
+          "question": "Which usually participates in box dimensions?",
+          "options": [
+            "border",
+            "outline"
+          ],
+          "correctIndex": 0,
+          "explanation": "Borders are part of the CSS box; outlines normally do not take layout space."
+        },
+        {
+          "question": "What is a common accessibility use of outline?",
+          "options": [
+            "Visible keyboard focus indication",
+            "Loading a font",
+            "Creating a Grid column",
+            "Changing source order"
+          ],
+          "correctIndex": 0,
+          "explanation": "Outlines are commonly used for visible focus rings."
+        }
+      ]
     },
     {
       "id": "css-ref-color",
@@ -10939,7 +11055,29 @@
       "html": "<main class=\"color-lab\">\n  <header class=\"color-head\">\n    <div>\n      <p class=\"eyebrow\">CSS NAMED COLORS</p>\n      <h1>Color Codes Explorer</h1>\n      <p>Search by CSS color name, HEX, or RGB. This list includes all 148 opaque standardized named colors.</p>\n    </div>\n    <div class=\"special\"><code>transparent</code><code>currentColor</code></div>\n  </header>\n  <label class=\"search-label\" for=\"colorSearch\">Search colors</label>\n  <input id=\"colorSearch\" class=\"color-search\" type=\"search\" placeholder=\"Try: blue, #FF6347, 255 99 71\" autocomplete=\"off\">\n  <p id=\"colorCount\" class=\"count\" aria-live=\"polite\"></p>\n  <section id=\"colorGrid\" class=\"color-grid\" aria-label=\"CSS named colors\"></section>\n</main>",
       "css": "*{box-sizing:border-box}\nbody{margin:0;padding:24px;font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#f3f7fa;color:#17344b}\n.color-lab{max-width:1100px;margin:auto}.color-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:18px}\n.eyebrow{margin:0;color:#0879b7;font-size:.75rem;font-weight:900;letter-spacing:.12em}h1{margin:.2rem 0 .35rem;font-size:clamp(1.8rem,5vw,3rem)}\n.color-head p{max-width:68ch}.special{display:flex;flex-wrap:wrap;gap:8px}.special code{padding:7px 9px;border-radius:8px;background:#e8f3f8}\n.search-label{display:block;font-weight:800;margin-bottom:6px}.color-search{width:100%;padding:12px 14px;border:1px solid #bfd0dc;border-radius:10px;font:inherit;background:white}\n.color-search:focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}.count{margin:10px 0 14px;color:#607086}\n.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px}.color-card{overflow:hidden;border:1px solid #d5e1e8;border-radius:12px;background:white}\n.swatch{min-height:86px;display:grid;place-items:center;padding:12px;font-weight:900;text-align:center;border-bottom:1px solid #d5e1e8}\n.meta{display:grid;gap:4px;padding:10px 12px}.meta strong{overflow-wrap:anywhere}.meta code{font-size:.78rem;color:#52697b}\n@media(max-width:620px){body{padding:14px}.color-head{display:grid;align-items:start}.color-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:390px){.color-grid{grid-template-columns:1fr}}",
       "js": "const raw=\"aliceblue:#F0F8FF;antiquewhite:#FAEBD7;aqua:#00FFFF;aquamarine:#7FFFD4;azure:#F0FFFF;beige:#F5F5DC;bisque:#FFE4C4;black:#000000;blanchedalmond:#FFEBCD;blue:#0000FF;blueviolet:#8A2BE2;brown:#A52A2A;burlywood:#DEB887;cadetblue:#5F9EA0;chartreuse:#7FFF00;chocolate:#D2691E;coral:#FF7F50;cornflowerblue:#6495ED;cornsilk:#FFF8DC;crimson:#DC143C;cyan:#00FFFF;darkblue:#00008B;darkcyan:#008B8B;darkgoldenrod:#B8860B;darkgray:#A9A9A9;darkgreen:#006400;darkgrey:#A9A9A9;darkkhaki:#BDB76B;darkmagenta:#8B008B;darkolivegreen:#556B2F;darkorange:#FF8C00;darkorchid:#9932CC;darkred:#8B0000;darksalmon:#E9967A;darkseagreen:#8FBC8F;darkslateblue:#483D8B;darkslategray:#2F4F4F;darkslategrey:#2F4F4F;darkturquoise:#00CED1;darkviolet:#9400D3;deeppink:#FF1493;deepskyblue:#00BFFF;dimgray:#696969;dimgrey:#696969;dodgerblue:#1E90FF;firebrick:#B22222;floralwhite:#FFFAF0;forestgreen:#228B22;fuchsia:#FF00FF;gainsboro:#DCDCDC;ghostwhite:#F8F8FF;gold:#FFD700;goldenrod:#DAA520;gray:#808080;green:#008000;greenyellow:#ADFF2F;grey:#808080;honeydew:#F0FFF0;hotpink:#FF69B4;indianred:#CD5C5C;indigo:#4B0082;ivory:#FFFFF0;khaki:#F0E68C;lavender:#E6E6FA;lavenderblush:#FFF0F5;lawngreen:#7CFC00;lemonchiffon:#FFFACD;lightblue:#ADD8E6;lightcoral:#F08080;lightcyan:#E0FFFF;lightgoldenrodyellow:#FAFAD2;lightgray:#D3D3D3;lightgreen:#90EE90;lightgrey:#D3D3D3;lightpink:#FFB6C1;lightsalmon:#FFA07A;lightseagreen:#20B2AA;lightskyblue:#87CEFA;lightslategray:#778899;lightslategrey:#778899;lightsteelblue:#B0C4DE;lightyellow:#FFFFE0;lime:#00FF00;limegreen:#32CD32;linen:#FAF0E6;magenta:#FF00FF;maroon:#800000;mediumaquamarine:#66CDAA;mediumblue:#0000CD;mediumorchid:#BA55D3;mediumpurple:#9370DB;mediumseagreen:#3CB371;mediumslateblue:#7B68EE;mediumspringgreen:#00FA9A;mediumturquoise:#48D1CC;mediumvioletred:#C71585;midnightblue:#191970;mintcream:#F5FFFA;mistyrose:#FFE4E1;moccasin:#FFE4B5;navajowhite:#FFDEAD;navy:#000080;oldlace:#FDF5E6;olive:#808000;olivedrab:#6B8E23;orange:#FFA500;orangered:#FF4500;orchid:#DA70D6;palegoldenrod:#EEE8AA;palegreen:#98FB98;paleturquoise:#AFEEEE;palevioletred:#DB7093;papayawhip:#FFEFD5;peachpuff:#FFDAB9;peru:#CD853F;pink:#FFC0CB;plum:#DDA0DD;powderblue:#B0E0E6;purple:#800080;rebeccapurple:#663399;red:#FF0000;rosybrown:#BC8F8F;royalblue:#4169E1;saddlebrown:#8B4513;salmon:#FA8072;sandybrown:#F4A460;seagreen:#2E8B57;seashell:#FFF5EE;sienna:#A0522D;silver:#C0C0C0;skyblue:#87CEEB;slateblue:#6A5ACD;slategray:#708090;slategrey:#708090;snow:#FFFAFA;springgreen:#00FF7F;steelblue:#4682B4;tan:#D2B48C;teal:#008080;thistle:#D8BFD8;tomato:#FF6347;turquoise:#40E0D0;violet:#EE82EE;wheat:#F5DEB3;white:#FFFFFF;whitesmoke:#F5F5F5;yellow:#FFFF00;yellowgreen:#9ACD32\";\nconst colors=raw.split(\";\").map(entry=>{const [name,hex]=entry.split(\":\");return {name,hex};});\nconst search=document.querySelector(\"#colorSearch\");\nconst grid=document.querySelector(\"#colorGrid\");\nconst count=document.querySelector(\"#colorCount\");\nfunction rgbFromHex(hex){const n=parseInt(hex.slice(1),16);return [(n>>16)&255,(n>>8)&255,n&255];}\nfunction readableText(hex){\n  const c=rgbFromHex(hex).map(v=>v/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));\n  const luminance=.2126*c[0]+.7152*c[1]+.0722*c[2];\n  return luminance>.45?\"#0d2235\":\"#ffffff\";\n}\nfunction render(){\n  const q=search.value.trim().toLowerCase();\n  const shown=colors.filter(item=>{\n    const rgb=rgbFromHex(item.hex);\n    return [item.name,item.hex.toLowerCase(),rgb.join(\" \"),rgb.join(\",\")].join(\" \").includes(q);\n  });\n  grid.replaceChildren();\n  for(const item of shown){\n    const rgb=rgbFromHex(item.hex);\n    const card=document.createElement(\"article\");card.className=\"color-card\";\n    const swatch=document.createElement(\"div\");swatch.className=\"swatch\";swatch.style.background=item.hex;swatch.style.color=readableText(item.hex);swatch.textContent=item.name;\n    const meta=document.createElement(\"div\");meta.className=\"meta\";\n    const name=document.createElement(\"strong\");name.textContent=item.name;\n    const hex=document.createElement(\"code\");hex.textContent=item.hex;\n    const rgbText=document.createElement(\"code\");rgbText.textContent=\"rgb(\"+rgb.join(\" \")+\")\";\n    meta.append(name,hex,rgbText);card.append(swatch,meta);grid.append(card);\n  }\n  count.textContent=shown.length+\" of \"+colors.length+\" named colors\";\n}\nsearch.addEventListener(\"input\",render);render();",
-      "referenceSyntax": "named-color | #RRGGBB | rgb(R G B) | hsl(H S L) | transparent | currentColor"
+      "referenceSyntax": "named-color | #RRGGBB | rgb(R G B) | hsl(H S L) | transparent | currentColor",
+      "quiz": [
+        {
+          "question": "Which values represent the same CSS color?",
+          "options": [
+            "tomato and #FF6347",
+            "red and #00FF00",
+            "navy and #FFFF00",
+            "white and #000000"
+          ],
+          "correctIndex": 0,
+          "explanation": "The named color tomato maps to #FF6347."
+        },
+        {
+          "question": "Do you need to memorize all 148 named colors?",
+          "options": [
+            "No—use a reliable reference",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Understanding formats and using a reference is more practical than memorization."
+        }
+      ]
     },
     {
       "id": "css-ref-font",
@@ -10972,7 +11110,31 @@
       "html": "<p class=\"text\">Readable typography reference</p>",
       "css": "body{font-family:system-ui;padding:28px}.text{font-size:1.2rem;line-height:1.7;font-weight:650}",
       "js": "",
-      "referenceSyntax": "font-family | font-size | font-weight | line-height | letter-spacing"
+      "referenceSyntax": "font-family | font-size | font-weight | line-height | letter-spacing",
+      "quiz": [
+        {
+          "question": "Which property controls space between text lines?",
+          "options": [
+            "line-height",
+            "letter-spacing",
+            "font-style",
+            "text-transform"
+          ],
+          "correctIndex": 0,
+          "explanation": "line-height controls line-box height and line spacing."
+        },
+        {
+          "question": "Why end a font stack with a generic family?",
+          "options": [
+            "To provide a fallback",
+            "To increase specificity",
+            "To enable Grid",
+            "To create an animation"
+          ],
+          "correctIndex": 0,
+          "explanation": "A generic family gives the browser a fallback category."
+        }
+      ]
     },
     {
       "id": "css-ref-display",
@@ -11005,7 +11167,31 @@
       "html": "<div class=\"layout\"><span>A</span><span>B</span></div>",
       "css": "body{font-family:system-ui;padding:28px}.layout{display:flex;gap:10px}.layout span{padding:12px;background:#eef8fd}",
       "js": "",
-      "referenceSyntax": "display: block | inline | inline-block | flex | grid | none"
+      "referenceSyntax": "display: block | inline | inline-block | flex | grid | none",
+      "quiz": [
+        {
+          "question": "Which value creates a flex formatting context?",
+          "options": [
+            "display:flex",
+            "display:block",
+            "display:none",
+            "display:inline"
+          ],
+          "correctIndex": 0,
+          "explanation": "display:flex makes the element a flex container."
+        },
+        {
+          "question": "What does display:none generally do?",
+          "options": [
+            "Removes the element from layout rendering",
+            "Only makes text transparent",
+            "Keeps its layout space",
+            "Turns it into Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "display:none removes the box from normal rendering/layout."
+        }
+      ]
     },
     {
       "id": "css-ref-position",
@@ -11038,7 +11224,31 @@
       "html": "<div class=\"card\"><span>NEW</span>Positioned badge</div>",
       "css": "body{font-family:system-ui;padding:28px}.card{position:relative;padding:30px;background:#eef8fd}.card span{position:absolute;top:8px;right:8px}",
       "js": "",
-      "referenceSyntax": "position: static | relative | absolute | fixed | sticky"
+      "referenceSyntax": "position: static | relative | absolute | fixed | sticky",
+      "quiz": [
+        {
+          "question": "Which position mode can stick after crossing a scroll threshold?",
+          "options": [
+            "sticky",
+            "static",
+            "inherit-only",
+            "inline"
+          ],
+          "correctIndex": 0,
+          "explanation": "position:sticky combines normal-flow participation with threshold-based sticking."
+        },
+        {
+          "question": "Which mode commonly establishes a containing block for absolutely positioned descendants?",
+          "options": [
+            "relative",
+            "static only",
+            "inline",
+            "none"
+          ],
+          "correctIndex": 0,
+          "explanation": "A positioned ancestor such as position:relative commonly serves that role."
+        }
+      ]
     },
     {
       "id": "css-ref-flexbox",
@@ -11071,7 +11281,31 @@
       "html": "<div class=\"row\"><span>A</span><span>B</span><span>C</span></div>",
       "css": "body{font-family:system-ui;padding:28px}.row{display:flex;gap:10px;justify-content:space-between}.row span{padding:12px;background:#eef8fd}",
       "js": "",
-      "referenceSyntax": "display:flex; flex-direction; justify-content; align-items; flex; gap"
+      "referenceSyntax": "display:flex; flex-direction; justify-content; align-items; flex; gap",
+      "quiz": [
+        {
+          "question": "Which property distributes free space on the flex main axis?",
+          "options": [
+            "justify-content",
+            "align-items",
+            "font-size",
+            "grid-column"
+          ],
+          "correctIndex": 0,
+          "explanation": "justify-content works on the main axis."
+        },
+        {
+          "question": "Which property creates consistent spacing between flex items?",
+          "options": [
+            "gap",
+            "z-index",
+            "opacity",
+            "float"
+          ],
+          "correctIndex": 0,
+          "explanation": "gap directly expresses spacing between flex items."
+        }
+      ]
     },
     {
       "id": "css-ref-grid",
@@ -11104,7 +11338,31 @@
       "html": "<div class=\"grid\"><span>1</span><span>2</span><span>3</span></div>",
       "css": "body{font-family:system-ui;padding:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid span{padding:12px;background:#eef8fd}",
       "js": "",
-      "referenceSyntax": "display:grid; grid-template-columns; grid-column; gap; place-items"
+      "referenceSyntax": "display:grid; grid-template-columns; grid-column; gap; place-items",
+      "quiz": [
+        {
+          "question": "Which property defines explicit Grid columns?",
+          "options": [
+            "grid-template-columns",
+            "grid-auto-flow",
+            "align-items",
+            "flex-basis"
+          ],
+          "correctIndex": 0,
+          "explanation": "grid-template-columns declares explicit column tracks."
+        },
+        {
+          "question": "What does `1fr` represent?",
+          "options": [
+            "A fraction of available Grid space",
+            "One pixel",
+            "One font size",
+            "One row only"
+          ],
+          "correctIndex": 0,
+          "explanation": "fr units divide available grid space."
+        }
+      ]
     },
     {
       "id": "css-ref-media",
@@ -11137,7 +11395,31 @@
       "html": "<div class=\"box\">Resize the result</div>",
       "css": "body{font-family:system-ui;padding:28px}.box{padding:20px;background:#eef8fd}@media(max-width:500px){.box{background:#dff8ef}}",
       "js": "",
-      "referenceSyntax": "@media (max-width: 700px) { ... }"
+      "referenceSyntax": "@media (max-width: 700px) { ... }",
+      "quiz": [
+        {
+          "question": "What does an @media query do?",
+          "options": [
+            "Applies CSS when media conditions match",
+            "Creates HTML elements",
+            "Fetches JSON",
+            "Changes JavaScript scope"
+          ],
+          "correctIndex": 0,
+          "explanation": "Media queries conditionally apply styles based on media features."
+        },
+        {
+          "question": "Which is a media feature?",
+          "options": [
+            "max-width",
+            "grid-column",
+            "font-weight",
+            "z-index"
+          ],
+          "correctIndex": 0,
+          "explanation": "max-width can be used in media-query conditions."
+        }
+      ]
     },
     {
       "id": "css-ref-container",
@@ -11170,7 +11452,31 @@
       "html": "<div class=\"wrap\"><div class=\"box\">Container-aware</div></div>",
       "css": "body{font-family:system-ui;padding:28px}.wrap{container-type:inline-size}.box{padding:20px;background:#eef8fd}@container(min-width:30rem){.box{border-left:6px solid #0879b7}}",
       "js": "",
-      "referenceSyntax": "container-type:inline-size; @container (min-width: 30rem) { ... }"
+      "referenceSyntax": "container-type:inline-size; @container (min-width: 30rem) { ... }",
+      "quiz": [
+        {
+          "question": "What do container queries respond to?",
+          "options": [
+            "A query container's size/style conditions",
+            "Only the viewport",
+            "Only JavaScript variables",
+            "Only font files"
+          ],
+          "correctIndex": 0,
+          "explanation": "Container queries let descendants respond to an ancestor query container."
+        },
+        {
+          "question": "Which property can establish an inline-size query container?",
+          "options": [
+            "container-type:inline-size",
+            "display:inline",
+            "position:container",
+            "query-type:size"
+          ],
+          "correctIndex": 0,
+          "explanation": "container-type:inline-size enables size queries on the inline axis."
+        }
+      ]
     },
     {
       "id": "css-ref-transform",
@@ -11203,7 +11509,29 @@
       "html": "<div class=\"box\">Transform</div>",
       "css": "body{font-family:system-ui;padding:60px}.box{width:160px;padding:18px;background:#0879b7;color:white;transform:rotate(-5deg) scale(1.05)}",
       "js": "",
-      "referenceSyntax": "transform: translate() rotate() scale();"
+      "referenceSyntax": "transform: translate() rotate() scale();",
+      "quiz": [
+        {
+          "question": "Which transform rotates an element?",
+          "options": [
+            "rotate()",
+            "translate()",
+            "scale()",
+            "minmax()"
+          ],
+          "correctIndex": 0,
+          "explanation": "rotate() changes rotational orientation."
+        },
+        {
+          "question": "Do CSS transforms normally reflow surrounding layout boxes?",
+          "options": [
+            "No",
+            "Yes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Transforms change visual rendering without normally reflowing neighboring boxes."
+        }
+      ]
     },
     {
       "id": "css-ref-transition",
@@ -11236,7 +11564,31 @@
       "html": "<button class=\"btn\">Hover</button>",
       "css": "body{font-family:system-ui;padding:40px}.btn{padding:12px;transition:transform .2s ease}.btn:hover{transform:translateY(-3px)}",
       "js": "",
-      "referenceSyntax": "transition: property duration easing delay;"
+      "referenceSyntax": "transition: property duration easing delay;",
+      "quiz": [
+        {
+          "question": "What does a transition animate?",
+          "options": [
+            "A change between property values",
+            "The HTML parser",
+            "Database rows",
+            "File downloads"
+          ],
+          "correctIndex": 0,
+          "explanation": "Transitions interpolate supported property changes over time."
+        },
+        {
+          "question": "Which part controls the motion curve?",
+          "options": [
+            "timing function",
+            "z-index",
+            "selector type",
+            "margin collapse"
+          ],
+          "correctIndex": 0,
+          "explanation": "A timing function such as ease or cubic-bezier controls progression."
+        }
+      ]
     },
     {
       "id": "css-ref-animation",
@@ -11269,7 +11621,31 @@
       "html": "<div class=\"dot\"></div>",
       "css": "body{padding:60px}.dot{width:28px;height:28px;border-radius:50%;background:#0879b7;animation:pulse 1s ease-in-out infinite}@keyframes pulse{50%{transform:scale(1.5);opacity:.5}}",
       "js": "",
-      "referenceSyntax": "animation: name 1s ease infinite; @keyframes name { ... }"
+      "referenceSyntax": "animation: name 1s ease infinite; @keyframes name { ... }",
+      "quiz": [
+        {
+          "question": "What defines animation stages?",
+          "options": [
+            "@keyframes",
+            "@media",
+            "@font-face",
+            "@layer only"
+          ],
+          "correctIndex": 0,
+          "explanation": "@keyframes defines animation keyframes."
+        },
+        {
+          "question": "Which property controls how many times an animation repeats?",
+          "options": [
+            "animation-iteration-count",
+            "animation-name",
+            "transform-origin",
+            "display"
+          ],
+          "correctIndex": 0,
+          "explanation": "animation-iteration-count sets repeat count."
+        }
+      ]
     },
     {
       "id": "css-ref-custom-properties",
@@ -11302,7 +11678,31 @@
       "html": "<div class=\"box\">Token</div>",
       "css": " :root{--brand:#0879b7}body{font-family:system-ui;padding:28px}.box{padding:20px;border-left:5px solid var(--brand);color:var(--brand)}",
       "js": "",
-      "referenceSyntax": "--brand:#0879b7; color:var(--brand);"
+      "referenceSyntax": "--brand:#0879b7; color:var(--brand);",
+      "quiz": [
+        {
+          "question": "How does a CSS custom property name begin?",
+          "options": [
+            "--",
+            "##",
+            "@@",
+            "$$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Custom properties use names beginning with two hyphens."
+        },
+        {
+          "question": "Which function reads a custom property?",
+          "options": [
+            "var()",
+            "calc-only()",
+            "attr-only()",
+            "read()"
+          ],
+          "correctIndex": 0,
+          "explanation": "var() substitutes a custom property's value."
+        }
+      ]
     },
     {
       "id": "css-ref-functions",
@@ -11335,7 +11735,31 @@
       "html": "<div class=\"box\">Functions</div>",
       "css": "body{font-family:system-ui;padding:28px}.box{width:min(90%,40rem);font-size:clamp(1rem,3vw,2rem);padding:20px;background:#eef8fd}",
       "js": "",
-      "referenceSyntax": "width:min(90%,40rem); font-size:clamp(1rem,3vw,2rem);"
+      "referenceSyntax": "width:min(90%,40rem); font-size:clamp(1rem,3vw,2rem);",
+      "quiz": [
+        {
+          "question": "Which function provides minimum, preferred, and maximum values?",
+          "options": [
+            "clamp()",
+            "url()",
+            "rotate()",
+            "rgb()"
+          ],
+          "correctIndex": 0,
+          "explanation": "clamp(min, preferred, max) constrains a fluid value."
+        },
+        {
+          "question": "Which function can perform arithmetic with compatible CSS numeric values?",
+          "options": [
+            "calc()",
+            "var() only",
+            "linear-gradient()",
+            "attr() only"
+          ],
+          "correctIndex": 0,
+          "explanation": "calc() evaluates CSS math expressions."
+        }
+      ]
     },
     {
       "id": "css-ref-pseudo",
@@ -11368,7 +11792,31 @@
       "html": "<button class=\"btn\">Hover/focus</button>",
       "css": "body{font-family:system-ui;padding:40px}.btn{padding:12px}.btn:hover{background:#eef8fd}.btn:focus-visible{outline:3px solid #5bd6ff}",
       "js": "",
-      "referenceSyntax": ":hover :focus-visible :checked :nth-child() ::before ::after ::marker"
+      "referenceSyntax": ":hover :focus-visible :checked :nth-child() ::before ::after ::marker",
+      "quiz": [
+        {
+          "question": "Which pseudo-class is designed for keyboard-visible focus styling?",
+          "options": [
+            ":focus-visible",
+            ":before",
+            ":marker",
+            ":root-only"
+          ],
+          "correctIndex": 0,
+          "explanation": ":focus-visible helps target focus indication when the browser determines it should be shown."
+        },
+        {
+          "question": "Which is a pseudo-element?",
+          "options": [
+            "::before",
+            ":hover",
+            ":checked",
+            ":nth-child()"
+          ],
+          "correctIndex": 0,
+          "explanation": "::before is a pseudo-element."
+        }
+      ]
     },
     {
       "id": "css-ref-at-rules",
@@ -11401,7 +11849,31 @@
       "html": "<div class=\"box\">At-rule demo</div>",
       "css": "@layer base,components;@layer base{body{font-family:system-ui;padding:28px}}@layer components{.box{padding:20px;background:#eef8fd}}",
       "js": "",
-      "referenceSyntax": "@media | @supports | @layer | @keyframes | @property | @scope"
+      "referenceSyntax": "@media | @supports | @layer | @keyframes | @property | @scope",
+      "quiz": [
+        {
+          "question": "Which at-rule defines animation keyframes?",
+          "options": [
+            "@keyframes",
+            "@media",
+            "@supports",
+            "@scope"
+          ],
+          "correctIndex": 0,
+          "explanation": "@keyframes defines animation stages."
+        },
+        {
+          "question": "Which at-rule can group cascade layers?",
+          "options": [
+            "@layer",
+            "@font-face only",
+            "@page only",
+            "@counter-style only"
+          ],
+          "correctIndex": 0,
+          "explanation": "@layer creates or orders cascade layers."
+        }
+      ]
     },
     {
       "id": "js-dom-counter",
@@ -11452,6 +11924,13 @@
           "correctIndex": 1,
           "explanation": "The counter only needs plain text, so textContent is clear and appropriate."
         }
+      ],
+      "definition": "A small interactive UI often follows a simple loop: an event happens, application state changes, then the UI is rendered from the new state.",
+      "learn": [
+        "Event listeners",
+        "State stored in JavaScript",
+        "Rendering state into the DOM",
+        "Why state and DOM updates are easier to debug when separated"
       ]
     },
     {
@@ -11503,6 +11982,13 @@
           "correctIndex": 1,
           "explanation": "find() stops when it finds the first match and returns that item."
         }
+      ],
+      "definition": "`filter()` returns a new array containing every matching item; `find()` returns the first matching item or `undefined`.",
+      "learn": [
+        "When to use filter()",
+        "When to use find()",
+        "Difference in return value shape",
+        "How the right method can avoid unnecessary work and confusing code"
       ]
     },
     {
@@ -11554,6 +12040,13 @@
           "correctIndex": 0,
           "explanation": "Silently turning invalid input into 0 can corrupt business meaning."
         }
+      ],
+      "definition": "Defensive numeric input validation converts untrusted text into a valid number only after checking blank, malformed, and out-of-range cases.",
+      "learn": [
+        "Trim and blank checks",
+        "Integer.parseInt()",
+        "NumberFormatException",
+        "Range validation before business logic"
       ]
     },
     {
@@ -11605,6 +12098,13 @@
           "correctIndex": 0,
           "explanation": "Constructing from the decimal string avoids first converting through a binary floating-point value."
         }
+      ],
+      "definition": "`BigDecimal` represents decimal values with explicit precision and rounding control, making it appropriate when exact decimal money rules matter.",
+      "learn": [
+        "Why binary floating point can surprise you",
+        "Constructing BigDecimal from decimal strings",
+        "Multiplication with BigDecimal",
+        "Explicit scale and rounding"
       ]
     },
     {
@@ -11642,7 +12142,38 @@
           "Check price hierarchy and product readability at the target social-media size.",
           "Keep the original source available for later campaign variants."
         ]
-      }
+      },
+      "definition": "A Photoshop Smart Object preserves an embedded or linked source so repeated transforms and many edits can remain reversible instead of permanently changing the source pixels.",
+      "learn": [
+        "Why Smart Objects help repeated transforms",
+        "Non-destructive masking",
+        "Keeping a reusable source for revisions",
+        "Checking the final campaign result at delivery size"
+      ],
+      "quiz": [
+        {
+          "question": "Why convert reusable product artwork to a Smart Object before repeated resizing?",
+          "options": [
+            "To preserve a cleaner reversible editing path",
+            "To permanently erase unused pixels",
+            "To disable masks",
+            "To flatten every layer"
+          ],
+          "correctIndex": 0,
+          "explanation": "Smart Objects help preserve the source while transforms and revisions continue."
+        },
+        {
+          "question": "Which workflow is more non-destructive while testing a composition?",
+          "options": [
+            "Use masks and reversible adjustments",
+            "Erase the only source layer permanently",
+            "Rasterize after every move",
+            "Flatten before trying variants"
+          ],
+          "correctIndex": 0,
+          "explanation": "Masks and reversible adjustments preserve options for later revisions."
+        }
+      ]
     },
     {
       "id": "canva-brand-system-qyntro",
@@ -11680,7 +12211,38 @@
           "Extend the same visual language to social and lifestyle applications.",
           "Review the complete deck for spacing, copy, and consistency before export."
         ]
-      }
+      },
+      "definition": "A brand system is a repeatable set of visual decisions—such as typography, palette, spacing, logo use, and layout rules—that keeps many pages and applications feeling related.",
+      "learn": [
+        "Reusable visual rules",
+        "Consistent typography and palette",
+        "Template/layout reuse",
+        "Reviewing the complete multi-page system for drift"
+      ],
+      "quiz": [
+        {
+          "question": "What makes a brand guide feel like one system instead of unrelated pages?",
+          "options": [
+            "Consistent reusable visual rules",
+            "A different typeface on every page",
+            "Random spacing for variety",
+            "Changing the palette every section"
+          ],
+          "correctIndex": 0,
+          "explanation": "A system repeats intentional typography, color, spacing, and layout logic."
+        },
+        {
+          "question": "What is a useful efficiency habit after a layout is already proven?",
+          "options": [
+            "Duplicate it and replace only what needs to change",
+            "Redesign every page from zero",
+            "Ignore spacing consistency",
+            "Use as many styles as possible"
+          ],
+          "correctIndex": 0,
+          "explanation": "Reusing a proven structure reduces accidental style drift."
+        }
+      ]
     },
     {
       "id": "capcut-vertical-ad-structure",
@@ -11718,7 +12280,38 @@
           "Keep text overlays readable inside vertical safe areas.",
           "End with one CTA and review the full export at mobile size."
         ]
-      }
+      },
+      "definition": "A short vertical ad is easier to follow when its clips, text, and pacing serve one story—typically moving from attention to problem, solution/benefit, proof, and one clear CTA.",
+      "learn": [
+        "Hook and audience problem",
+        "One message per beat",
+        "Readable vertical text placement",
+        "Ending with one clear CTA"
+      ],
+      "quiz": [
+        {
+          "question": "What is a stronger short-ad structure?",
+          "options": [
+            "One connected story from hook to CTA",
+            "A random montage of unrelated clips",
+            "Several competing offers at once",
+            "Transitions chosen before the message"
+          ],
+          "correctIndex": 0,
+          "explanation": "A connected story helps viewers understand the offer quickly."
+        },
+        {
+          "question": "Why review a vertical ad once with sound off?",
+          "options": [
+            "To test whether visual/text hierarchy still communicates the story",
+            "To remove the CTA",
+            "To make every clip longer",
+            "To avoid captions"
+          ],
+          "correctIndex": 0,
+          "explanation": "A sound-off pass reveals whether the visuals and text can still carry the message."
+        }
+      ]
     },
     {
       "id": "java-ternary-cleaner-conditions",
@@ -11779,6 +12372,13 @@
           "correctIndex": 1,
           "explanation": "Maintainability and clarity matter more than minimizing line count."
         }
+      ],
+      "definition": "The ternary operator `condition ? valueIfTrue : valueIfFalse` is a compact expression for a simple two-way value choice.",
+      "learn": [
+        "Ternary syntax",
+        "Simple value selection",
+        "When ternary improves readability",
+        "When normal if/else is clearer"
       ]
     },
     {
@@ -11843,6 +12443,13 @@
           "correctIndex": 1,
           "explanation": "Objects share the class definition but can store different field values."
         }
+      ],
+      "definition": "A class defines the structure and behavior that objects can have; an object is one concrete instance created from that class.",
+      "learn": [
+        "Class as blueprint",
+        "Object/instance",
+        "Fields as object data",
+        "Methods as object behavior"
       ]
     },
     {
@@ -11926,6 +12533,13 @@
           "correctIndex": 1,
           "explanation": "For small inputs O(n) can be very fast. Big O is about how the work scales as input grows."
         }
+      ],
+      "definition": "Big O notation describes how the amount of computational work grows as the input size grows; it is a scaling model, not an exact timer.",
+      "learn": [
+        "O(1) direct-access intuition",
+        "O(log n) growth intuition",
+        "O(n) linear scan",
+        "O(n²) nested-work growth"
       ]
     }
   ]
