@@ -25,7 +25,8 @@ const sources = [
   '../assets/js/knowledge-lab-java-applied.js',
   '../assets/js/knowledge-lab-java-exam-fundamentals.js',
   '../assets/js/knowledge-lab-java-design-jdbc.js',
-  '../assets/js/knowledge-lab-java-exam-reviewer.js'
+  '../assets/js/knowledge-lab-java-exam-reviewer.js',
+  '../assets/js/knowledge-lab-java-capstone-projects.js'
 ];
 for (const source of sources) require(source);
 
@@ -35,7 +36,7 @@ const onlyId = process.argv[2] === '--lesson' ? process.argv[3] : null;
 if (process.argv.length > 2 && (!onlyId || process.argv.length !== 4)) {
   throw new Error('Usage: node scripts/verify-knowledge-lab-java.cjs [--lesson <lesson-id>]');
 }
-if (!onlyId) assert.equal(lessons.length, 87, 'Expected 87 independently authored Java references');
+if (!onlyId) assert.equal(lessons.length, 91, 'Expected 91 Java references including four capstone projects');
 assert.equal(new Set(lessons.map(x => x.id)).size, lessons.length, 'Duplicate Java lesson ID');
 
 const reviewer = lessons.find(x => x.id === 'java-exam-reviewer-master-quiz');
