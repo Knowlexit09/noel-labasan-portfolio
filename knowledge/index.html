@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="Noel Labasan Knowledge Lab — organized tutorials, tested code, practical tips, and proof-backed creative workflows.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data:; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data: https://onecompiler.com; form-action 'self'">
   <title>Knowledge Lab — Noel Labasan</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-4">
+  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-5">
 </head>
 <body>
   <header class="kl-topbar">
@@ -238,6 +238,25 @@
             <span>Verified output</span>
             <pre data-reference-output></pre>
           </div>
+          <div class="kl-java-ide" data-java-ide hidden>
+            <div class="kl-java-ide-intro">
+              <h3>Java Practice IDE — compile and run your own code</h3>
+              <p>Edit the Java source below. The integrated OneCompiler Java editor runs actual code on the provider's servers after you choose to open it. Internet access is required. Do not paste passwords, API keys, private files, or sensitive business data.</p>
+              <p>The verified output above belongs to the original sample. Your modified code's real output appears in the external Java IDE, not in that reference panel.</p>
+            </div>
+            <label for="javaPracticeSource">Java source — Main.java</label>
+            <textarea id="javaPracticeSource" data-java-ide-source spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" rows="13" aria-describedby="javaPracticeNotice"></textarea>
+            <p id="javaPracticeNotice" class="kl-java-ide-notice">External service: OneCompiler. Loading or syncing this editor transfers your Java code to OneCompiler. It is not part of the isolated HTML/CSS/JavaScript runner.</p>
+            <div class="kl-java-ide-actions">
+              <button type="button" class="kl-btn kl-btn-run" data-java-ide-open>Open real Java IDE</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-java-ide-sync disabled>Send current code to IDE</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-java-ide-reset>Reset sample</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-java-ide-close hidden>Close external IDE</button>
+            </div>
+            <p role="status" aria-live="polite" data-java-ide-status>Ready to practice. Opening the real Java IDE is optional.</p>
+            <div class="kl-java-ide-frame" data-java-ide-frame hidden></div>
+            <p class="kl-java-ide-fallback"><a href="https://onecompiler.com/java" target="_blank" rel="noopener noreferrer">Open OneCompiler Java in a new tab ↗</a> if third-party embedding is blocked.</p>
+          </div>
         </section>
 
         <section class="kl-proof" data-proof-lab hidden>
@@ -359,6 +378,7 @@
   <script src="../assets/js/knowledge-lab-java-intro.js?v=20261012-1"></script>
   <script src="../assets/js/knowledge-lab-i18n.js?v=20261012-5"></script>
   <script src="../assets/js/knowledge-lab-javascript-tl.js?v=20261012-1"></script>
+  <script src="../assets/js/knowledge-lab-java-ide.js?v=20261012-1"></script>
   <script src="../assets/js/knowledge-lab-runner.js?v=20261012-5"></script>
 </body>
 </html>
