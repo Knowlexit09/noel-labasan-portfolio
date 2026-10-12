@@ -1,156 +1,153 @@
 (function () {
   'use strict';
-
-  // The Java compiler is external, opt-in, and separated from the HTML/CSS/JS
-  // runner. The toolbar matches the first-party Knowledge Lab IDE, but Java
-  // compilation/output remain fully owned by OneCompiler.
+  // Same first-party HTML/CSS/JS IDE shell. Java alone uses an opt-in
+  // external runtime inside the Result pane: NEVER fake a local JVM/stdout.
   const ORIGIN = 'https://onecompiler.com';
-  const SOURCE_URL = ORIGIN + '/embed/java?listenToEvents=true&codeChangeEvent=true&hideLanguageSelection=true&hideNew=true&hideRun=true&theme=dark';
-  const MAX_SOURCE_LENGTH = 160000;
-  const $ = (selector) => document.querySelector(selector);
+  const URL = ORIGIN + '/embed/java?listenToEvents=true&hideLanguageSelection=true&hideNew=true&hideRun=true&hideTitle=true&theme=dark';
+  const $ = selector => document.querySelector(selector);
   const root = $('[data-java-ide]');
   if (!root) return;
-
   const source = $('[data-java-ide-source]');
-  const openButton = $('[data-java-ide-open]');
   const runButton = $('[data-java-ide-run]');
-  const syncButton = $('[data-java-ide-sync]');
+  const enableButton = $('[data-java-ide-open]');
   const resetButton = $('[data-java-ide-reset]');
-  const closeButton = $('[data-java-ide-close]');
-  const sourceShell = $('[data-java-ide-source-shell]');
-  const frameShell = $('[data-java-ide-frame-shell]');
-  const frameHost = $('[data-java-ide-frame]');
+  const copyButton = $('[data-java-ide-copy]');
+  const fullButton = $('[data-java-ide-fullscreen]');
+  const stopButton = $('[data-java-ide-close]');
   const status = $('[data-java-ide-status]');
-  let canonicalSource = '';
-  let activeLessonId = null;
-  let activeFrame = null;
-  let frameReady = false;
+  const saveState = $('[data-java-ide-save-state]');
+  const consent = $('[data-java-ide-consent]');
+  const placeholder = $('[data-java-ide-placeholder]');
+  const frameHost = $('[data-java-ide-frame]');
+  const outputTabs = Array.from(root.querySelectorAll('[data-java-output-tab]'));
+  const outputPanels = Array.from(root.querySelectorAll('[data-java-output-panel]'));
+  let lessonId = null;
+  let originalSource = '';
+  let frame = null;
+  let ready = false;
 
-  function setStatus(message) { status.textContent = message; }
-
+  function announce(message) { status.textContent = message; }
+  function showOutput(name) {
+    outputTabs.forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.javaOutputTab === name)));
+    outputPanels.forEach(panel => { panel.hidden = panel.dataset.javaOutputPanel !== name; });
+  }
   function closeFrame() {
-    if (activeFrame) {
-      activeFrame.remove();
-      activeFrame = null;
-    }
-    frameReady = false;
+    ready = false;
+    if (frame) { frame.remove(); frame = null; }
     frameHost.replaceChildren();
     frameHost.hidden = true;
-    frameShell.hidden = true;
-    sourceShell.hidden = false;
-    openButton.hidden = false;
-    runButton.hidden = true;
-    runButton.disabled = true;
-    syncButton.hidden = true;
-    closeButton.hidden = true;
+    placeholder.hidden = false;
+    consent.hidden = true;
   }
-
-  function syncCode() {
-    if (!frameReady || !activeFrame?.contentWindow) {
-      setStatus('The external Java IDE is not ready. Edit the draft or reopen the IDE.');
-      return;
-    }
-    // Strict target origin; never broadcast code with "*".
-    activeFrame.contentWindow.postMessage({
+  function sendSource() {
+    if (!ready || !frame?.contentWindow) return false;
+    frame.contentWindow.postMessage({
       eventType: 'populateCode',
       language: 'java',
       files: [{ name: 'Main.java', content: source.value }]
     }, ORIGIN);
-    setStatus('Main.java sent to external editor. Run Java ▶ executes the code in that editor, with its real output below.');
+    return true;
   }
-
-  function runJava() {
-    if (!frameReady || !activeFrame?.contentWindow) {
-      setStatus('The online Java compiler is still loading. Run is not available yet.');
+  function run() {
+    showOutput('result');
+    if (!frame) {
+      consent.hidden = false;
+      announce('Java requires your permission to send source to OneCompiler. Choose Enable Java compiler in Result.');
       return;
     }
-    // Official OneCompiler embed protocol; this triggers the actual remote
-    // Java execution, not a JavaScript simulation or the verified-output panel.
-    activeFrame.contentWindow.postMessage({ eventType: 'triggerRun' }, ORIGIN);
-    setStatus('Run requested from OneCompiler. Look for compilation errors and output in the embedded Java IDE. External execution is not locally verifiable.');
+    if (!ready) {
+      announce('Java compiler is still loading. Use Run after it becomes ready.');
+      return;
+    }
+    // The compiler receives the latest first-party textarea contents before
+    // its triggerRun event. The compiler owns all stdout/stderr presentation.
+    sendSource();
+    frame.contentWindow.postMessage({ eventType: 'triggerRun' }, ORIGIN);
+    announce('Run sent to external Java compiler. Actual output and errors appear in its Result panel.');
   }
 
-  openButton.addEventListener('click', () => {
-    if (activeFrame || !canonicalSource) return;
-    const frame = document.createElement('iframe');
-    frame.title = 'OneCompiler Java code editor and real Java output — external service';
-    frame.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin allow-popups');
-    frame.setAttribute('referrerpolicy', 'no-referrer');
-    frame.setAttribute('allow', 'clipboard-write');
-    frame.className = 'kl-java-ide-iframe';
-    frame.src = SOURCE_URL;
-    frame.addEventListener('load', () => {
-      if (activeFrame !== frame) return;
-      frameReady = true;
-      runButton.disabled = false;
-      syncCode();
+  enableButton.addEventListener('click', () => {
+    if (frame || !lessonId) return;
+    const embedded = document.createElement('iframe');
+    embedded.title = 'External OneCompiler Java editor and real compilation output';
+    embedded.className = 'kl-java-ide-iframe';
+    embedded.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin allow-popups');
+    embedded.setAttribute('referrerpolicy', 'no-referrer');
+    embedded.setAttribute('allow', 'clipboard-write');
+    embedded.src = URL;
+    embedded.addEventListener('load', () => {
+      if (frame !== embedded) return;
+      ready = true;
+      sendSource();
+      announce('Java compiler ready. Use the Knowledge Lab Run ▶ button to execute your code.');
     });
-    activeFrame = frame;
-    frameShell.hidden = false;
-    sourceShell.hidden = true;
+    frame = embedded;
+    ready = false;
+    consent.hidden = true;
+    placeholder.hidden = true;
     frameHost.hidden = false;
-    frameHost.replaceChildren(frame);
-    openButton.hidden = true;
-    syncButton.hidden = false;
-    closeButton.hidden = false;
-    runButton.hidden = false;
-    runButton.disabled = true;
-    setStatus('Loading the external Java compiler. Only OneCompiler receives and runs the sample after this deliberate click.');
+    frameHost.replaceChildren(embedded);
+    announce('Loading external Java compiler after your approval…');
   });
 
-  runButton.addEventListener('click', runJava);
-  syncButton.addEventListener('click', syncCode);
+  runButton.addEventListener('click', run);
   resetButton.addEventListener('click', () => {
-    source.value = canonicalSource;
-    if (frameReady) syncCode();
-    else setStatus('Restored original Java 21 reference sample.');
+    source.value = originalSource;
+    saveState.textContent = 'Original example';
+    if (ready) sendSource();
+    announce('Restored original Main.java code. Press Run to execute it.');
   });
-  closeButton.addEventListener('click', () => {
+  stopButton.addEventListener('click', () => {
     closeFrame();
-    setStatus('External Java IDE closed. Continue editing Main.java locally.');
+    showOutput('result');
+    announce('Compiler panel closed. This stops the local session; remote server execution may continue.');
   });
-
-  source.addEventListener('keydown', (event) => {
-    if (!(event.key === 'Enter' && (event.ctrlKey || event.metaKey))) return;
-    if (!frameReady) return; // never enable third-party code transfer by shortcut
-    event.preventDefault();
-    syncCode();
-    runJava();
+  copyButton.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(source.value);
+      announce('Java source copied.');
+    } catch (_) {
+      source.focus();
+      source.select();
+      announce('Select the Java code and copy it manually.');
+    }
   });
-
-  // Keep locally editable source in step with remote edits when OneCompiler
-  // supports codeChangeEvent. Ignore every other origin and frame.
-  window.addEventListener('message', (event) => {
-    if (!activeFrame || event.origin !== ORIGIN || event.source !== activeFrame.contentWindow) return;
-    const data = event.data;
-    if (!data || typeof data !== 'object' || data.language !== 'java' || !Array.isArray(data.files)) return;
-    const file = data.files.find((f) => f && f.name === 'Main.java' && typeof f.content === 'string');
-    if (file && file.content.length <= MAX_SOURCE_LENGTH) source.value = file.content;
+  fullButton.addEventListener('click', async () => {
+    try {
+      if (document.fullscreenElement === root) await document.exitFullscreen();
+      else if (root.requestFullscreen) await root.requestFullscreen();
+    } catch (_) { announce('Full screen is unavailable in this browser.'); }
   });
+  source.addEventListener('input', () => {
+    saveState.textContent = source.value === originalSource ? 'Original example' : 'Unsaved practice edit';
+  });
+  source.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      run();
+    }
+  });
+  outputTabs.forEach(tab => tab.addEventListener('click', () => showOutput(tab.dataset.javaOutputTab)));
 
   window.KNOWLEDGE_LAB_JAVA_IDE = {
     render(lesson) {
       const isJava = Boolean(lesson && lesson.mode === 'reference' &&
         lesson.language === 'Java' && lesson.verified && typeof lesson.code === 'string');
-      // A language switch re-renders the *same* lesson. Never discard the
-      // learner's edits or iframe during a translation-only change.
-      if (isJava && activeLessonId === lesson.id) {
-        root.hidden = false;
-        return;
-      }
-      // Changing lessons is a new workspace; the old cross-origin compiler
-      // is torn down so its output cannot be confused with the next lesson.
+      // Language-only re-renders preserve the draft and any consented session.
+      if (isJava && lessonId === lesson.id) { root.hidden = false; return; }
       closeFrame();
-      activeLessonId = isJava ? lesson.id : null;
+      lessonId = isJava ? lesson.id : null;
       root.hidden = !isJava;
       if (!isJava) {
-        canonicalSource = '';
+        originalSource = '';
         source.value = '';
         return;
       }
-      canonicalSource = lesson.code;
-      source.value = canonicalSource;
-      setStatus('Ready to edit Main.java. Enable Java IDE only when you agree to use the external compiler.');
+      originalSource = lesson.code;
+      source.value = originalSource;
+      saveState.textContent = 'Original example';
+      showOutput('result');
+      announce('Ready. Edit Main.java and press Run ▶.');
     }
   };
 })();
