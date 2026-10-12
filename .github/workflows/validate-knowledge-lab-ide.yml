@@ -812,6 +812,12 @@ jobs:
             if (!(await page.inputValue('[data-java-ide-source]')).includes('public class Main')) throw new Error('Editable Java source missing.');
             if (!(await page.locator('[data-java-ide-run]').isHidden())) throw new Error('Run Java must not be active before consent.');
             await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (!(await page.inputValue('[data-java-ide-source]')).includes('Edited Java')) throw new Error('Language switch erased the Java draft.');
+            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Unexpected external iframe before consent.');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
             await page.click('[data-java-ide-open]');
             const externalJavaFrame = page.frameLocator('[data-java-ide-frame] iframe');
             await externalJavaFrame.locator('#ready').waitFor();
@@ -822,6 +828,12 @@ jobs:
             await externalJavaFrame.locator('body[data-run="requested"]').waitFor({ timeout: 5000 });
             await page.click('[data-java-ide-reset]');
             await externalJavaFrame.locator('body[data-code*="Hello from Java"]').waitFor({ timeout: 5000 });
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (await page.locator('[data-java-ide-frame] iframe').count() !== 1) throw new Error('Translation closed the live Java compiler.');
+            if (await page.locator('[data-java-ide-run]').isDisabled()) throw new Error('Translation disabled Java Run.');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
             await page.click('[data-java-ide-close]');
             if (await page.locator('[data-java-ide-run]').isVisible()) throw new Error('Run Java still visible after closing editor.');
             if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java iframe did not close.');
