@@ -372,3 +372,19 @@ a{color:inherit}
 .kl-practice-check{border-top:1px solid var(--line);padding-top:12px;margin-bottom:0;color:#435b70}
 .kl-practice-check strong{color:var(--ink,#142235)}
 @media(max-width:600px){.kl-practice{padding:17px}}
+
+
+/* Java practice uses an opt-in external compile/run provider and NEVER the internal JS iframe. */
+.kl-java-ide{padding:20px 22px;background:#102538;border-top:1px solid #31506b;color:#d9eaf7}
+.kl-java-ide-intro h3{margin:0 0 10px;font-size:20px;line-height:1.35;color:#fff}
+.kl-java-ide-intro p,.kl-java-ide-notice,.kl-java-ide-fallback{font-size:12px;line-height:1.65;color:#c2d6e6}
+.kl-java-ide label{display:block;font-size:12px;font-weight:800;margin:18px 0 9px}
+.kl-java-ide textarea{box-sizing:border-box;display:block;width:100%;min-height:250px;resize:vertical;white-space:pre;overflow:auto;background:#07131f;color:#d9eaf7;border:1px solid #4c6880;border-radius:10px;padding:14px;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}
+.kl-java-ide textarea:focus-visible{outline:3px solid #77ceef;outline-offset:2px}
+.kl-java-ide-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.kl-java-ide-actions button{font-size:12px}
+.kl-java-ide [data-java-ide-status]{font-size:12px;color:#e6f4fb;line-height:1.65}
+.kl-java-ide-frame{margin-top:16px;border:1px solid #365672;border-radius:12px;overflow:hidden;background:#081725}
+.kl-java-ide-iframe{width:100%;display:block;border:0;height:620px;min-height:440px;background:#07131f}
+.kl-java-ide-fallback a{color:#85dffc}
+@media(max-width:600px){.kl-java-ide{padding:16px}.kl-java-ide-iframe{height:550px}.kl-java-ide-actions .kl-btn{flex:1 1 150px}}
