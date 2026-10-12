@@ -776,6 +776,13 @@ jobs:
             if (!(await page.textContent('[data-reference-output]')).includes('Rejected: insufficient stock')) throw new Error('Java inventory project output reference missing.');
             if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java project exposed fake local browser Run IDE.');
 
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-dao-crud', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            if (!(await page.textContent('[data-reference-output]')).includes('Remaining: 0')) throw new Error('Java DAO capstone output missing.');
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-resource-close-order', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            if (!(await page.textContent('[data-reference-output]')).includes('Close connection')) throw new Error('Java resource cleanup output missing.');
+
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-exam-reviewer-master-quiz', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-quiz-lab]:not([hidden])');
             if (!(await page.textContent('[data-quiz-count]')).includes('33')) throw new Error('Java exam reviewer 33-question counter missing.');
