@@ -867,6 +867,14 @@
     $('[data-mistake]').textContent = lesson.mistake;
     $('[data-expected]').textContent = lesson.expected;
     $('[data-real-use]').textContent = lesson.realUse;
+    const practice = lesson.practice && typeof lesson.practice === 'object' ? lesson.practice : null;
+    const prompt = typeof practice?.prompt === 'string' ? practice.prompt.trim() : '';
+    const check = typeof practice?.check === 'string' ? practice.check.trim() : '';
+    const practicePanel = $('[data-practice-lab]');
+    practicePanel.hidden = !prompt || !check;
+    $('[data-practice-prompt]').textContent = prompt;
+    $('[data-practice-check]').textContent = check;
+
 
     const codeLab = $('[data-code-lab]');
     const referenceLab = $('[data-reference-lab]');
