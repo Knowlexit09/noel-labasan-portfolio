@@ -482,11 +482,11 @@ const versions={
 };
 for(const [id,version] of Object.entries(versions)) i18n.lessons.tl[id]=version;
 if(i18n.ui?.en)Object.assign(i18n.ui.en,{
-  javaIdeTitle:'Java Practice IDE',javaIdeEnable:'Enable Java IDE',javaIdeRun:'Run Java ▶',
+  javaIdeTitle:'Browser IDE · Java',javaIdeEnable:'Enable Java IDE',javaIdeRun:'Run Java ▶',
   javaIdeSync:'Sync editor',javaIdeClose:'Close IDE'
 });
 if(i18n.ui?.tl)Object.assign(i18n.ui.tl,{
-  javaIdeTitle:'Java Practice IDE',javaIdeEnable:'Buksan ang Java IDE',javaIdeRun:'Patakbuhin ang Java ▶',
+  javaIdeTitle:'Browser IDE · Java',javaIdeEnable:'Buksan ang Java IDE',javaIdeRun:'Patakbuhin ang Java ▶',
   javaIdeSync:'I-sync ang code',javaIdeClose:'Isara ang IDE'
 });
 if(i18n.stages?.tl){
