@@ -1202,7 +1202,7 @@ jobs:
             }
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-deliverable-handoff', { waitUntil:'domcontentloaded' });
             if (!(await page.textContent('[data-title]')).includes('Expert handoff') ||
-                !(await page.textContent('[data-practice-prompt]')).includes('Ihanda ang editable PSD')) {
+                !(await page.textContent('[data-practice-prompt]')).includes('I-save ang PSD')) {
               throw new Error('Photoshop expert production lesson not accessible.');
             }
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-project-client-capstone', { waitUntil:'domcontentloaded' });
