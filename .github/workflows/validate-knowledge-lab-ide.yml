@@ -69,6 +69,15 @@ jobs:
           node --check assets/js/knowledge-lab-java-full-tl-07.js
           node --check assets/js/knowledge-lab-java-full-tl-08.js
           node --check assets/js/knowledge-lab-photoshop-tl.js
+          node --check assets/js/knowledge-lab-photoshop-course-core.js
+          node --check assets/js/knowledge-lab-photoshop-course-01.js
+          node --check assets/js/knowledge-lab-photoshop-course-02.js
+          node --check assets/js/knowledge-lab-photoshop-course-03.js
+          node --check assets/js/knowledge-lab-photoshop-course-04.js
+          node --check assets/js/knowledge-lab-photoshop-course-05.js
+          node --check assets/js/knowledge-lab-photoshop-course-06.js
+          node --check assets/js/knowledge-lab-photoshop-course-07.js
+          node --check assets/js/knowledge-lab-photoshop-course-08.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-js-quality-tl.js
           node --check assets/js/knowledge-lab-i18n.js
@@ -135,6 +144,15 @@ jobs:
           require('./assets/js/knowledge-lab-java-full-tl-07.js');
           require('./assets/js/knowledge-lab-java-full-tl-08.js');
           require('./assets/js/knowledge-lab-photoshop-tl.js');
+          require('./assets/js/knowledge-lab-photoshop-course-core.js');
+          require('./assets/js/knowledge-lab-photoshop-course-01.js');
+          require('./assets/js/knowledge-lab-photoshop-course-02.js');
+          require('./assets/js/knowledge-lab-photoshop-course-03.js');
+          require('./assets/js/knowledge-lab-photoshop-course-04.js');
+          require('./assets/js/knowledge-lab-photoshop-course-05.js');
+          require('./assets/js/knowledge-lab-photoshop-course-06.js');
+          require('./assets/js/knowledge-lab-photoshop-course-07.js');
+          require('./assets/js/knowledge-lab-photoshop-course-08.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
           const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
@@ -542,10 +560,56 @@ jobs:
           // Audit every currently published Photoshop lesson; this is a real
           // project proof, not a claim that a full Photoshop course exists.
           const photoshopLessons = data.lessons.filter(x => x.categoryId === 'photoshop');
-          if (photoshopLessons.length !== 1) {
-            throw new Error('Photoshop lesson inventory changed; re-audit every published lesson.');
+          if (photoshopLessons.length !== 49) {
+            throw new Error('Expected 48 authored guided Photoshop lessons + 1 verified proof, found '+photoshopLessons.length);
           }
-          const originalPhotoshop = photoshopLessons[0];
+          const guidedPhotoshop = photoshopLessons.filter(x => x.mode === 'guide');
+          const proofPhotoshop = photoshopLessons.filter(x => x.mode === 'proof');
+          if (guidedPhotoshop.length !== 48 || proofPhotoshop.length !== 1) {
+            throw new Error('Photoshop guide/proof integrity mismatch.');
+          }
+          const stages = data.categories.find(x=>x.id==='photoshop')?.learningPath;
+          if (stages?.length !== 9 || new Set(stages).size !== 9) {
+            throw new Error('Photoshop nine-stage learning path missing.');
+          }
+          for (let s=0;s<8;s++) {
+            const group = guidedPhotoshop.filter(x=>x.stage===stages[s]);
+            if (group.length !== 6) throw new Error('Expected 6 lessons in Photoshop stage '+s);
+          }
+          if (proofPhotoshop[0].stage !== stages[8]) throw new Error('Real portfolio proof must remain separate.');
+          const uniquePhotoshopIds = new Set(photoshopLessons.map(x=>x.id));
+          if (uniquePhotoshopIds.size !== 49) throw new Error('Duplicate Photoshop lesson IDs.');
+          const guidedFields = ['title','summary','definition','objective','explanation','tip','hack','mistake','expected','realUse'];
+          for (const original of guidedPhotoshop) {
+            const localized = i18n.lessons?.tl?.[original.id];
+            if (!localized || localized.translationCoverage) throw new Error('Photoshop course translation missing '+original.id);
+            for (const key of guidedFields) {
+              if (!original[key]?.trim() || !localized[key]?.trim() ||
+                  original[key]===localized[key]) throw new Error('Missing Photoshop bilingual '+key+' '+original.id);
+            }
+            if (original.learn?.length !== 3 || localized.learn?.length !== 3 ||
+                original.learn[0] === localized.learn[0] ||
+                !original.practice?.prompt || !original.practice?.check ||
+                !localized.practice?.prompt || !localized.practice?.check) {
+              throw new Error('Photoshop guided exercise incomplete '+original.id);
+            }
+            for (const ver of [original,localized]) {
+              if (!ver.shortcut?.longCode || !ver.shortcut.shortCode ||
+                  !ver.shortcut.caution || !ver.shortcut.note ||
+                  !ver.shortcut.longCode.includes('—') ||
+                  ver.quiz?.length !== 2 ||
+                  ver.quiz.some(q=>q.correctIndex!==1 || q.options?.length!==3 || !q.explanation)) {
+                throw new Error('Photoshop keys or quizzes missing '+original.id);
+              }
+            }
+            if (original.quiz[0].question===localized.quiz[0].question ||
+                original.quiz[0].options[1]===localized.quiz[0].options[1]) {
+              throw new Error('Photoshop bilingual quiz untranslated '+original.id);
+            }
+          }
+          if (!i18n.stages?.tl?.photoshop || Object.keys(i18n.stages.tl.photoshop).length!==9)
+            throw new Error('Photoshop stage names not localized.');
+          const originalPhotoshop = proofPhotoshop[0];
           const photoshopTl = i18n.lessons?.tl?.[originalPhotoshop.id];
           const requiredPhotoshopFields = [
             'title','level','summary','definition','objective','explanation','tip',
@@ -1111,6 +1175,47 @@ jobs:
             if (javaOutput.trim() !== '436.50') throw new Error('Unexpected Java reference output.');
 
             // Photoshop full content, original proof URL and quiz survive switching.
+            // Beginner -> expert Photoshop path uses guided exercises, not fake editors.
+            await page.goto('http://127.0.0.1:4173/knowledge/#category/photoshop', { waitUntil:'domcontentloaded' });
+            await page.waitForSelector('[data-category-lessons] .kl-learning-stage');
+            if ((await page.locator('[data-category-lessons] .kl-learning-stage').count()) !== 9 ||
+                !(await page.textContent('[data-category-count]')).includes('49')) {
+              throw new Error('Photoshop Beginner-to-Expert stages/count missing.');
+            }
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-workspace-basics', { waitUntil:'domcontentloaded' });
+            await page.waitForSelector('[data-shortcut-lab]:not([hidden])');
+            if (!(await page.textContent('[data-shortcut-label]')).includes('Keyboard Shortcuts') ||
+                !(await page.textContent('[data-shortcut-long]')).includes('Move Tool — V') ||
+                !(await page.textContent('[data-shortcut-short]')).includes('Move Tool — V') ||
+                !(await page.textContent('[data-tested-badge]')).includes('not an in-browser editor') ||
+                await page.locator('[data-code-lab]:visible, [data-proof-lab]:visible, [data-reference-lab]:visible').count()) {
+              throw new Error('Photoshop guide shortcut mapping or no-fake-runner contract invalid.');
+            }
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (!(await page.textContent('[data-title]')).includes('Ano ang Photoshop') ||
+                !(await page.textContent('[data-practice-prompt]')).includes('Buksan ang Photoshop') ||
+                !(await page.textContent('[data-shortcut-label]')).includes('Shortcut Keys') ||
+                !(await page.textContent('[data-language-status]')).includes('Curated Filipino')) {
+              throw new Error('Photoshop fundamentals Taglish/shortcut toggle missing.');
+            }
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-deliverable-handoff', { waitUntil:'domcontentloaded' });
+            if (!(await page.textContent('[data-title]')).includes('Expert handoff') ||
+                !(await page.textContent('[data-practice-prompt]')).includes('Ihanda ang editable PSD')) {
+              throw new Error('Photoshop expert production lesson not accessible.');
+            }
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-project-client-capstone', { waitUntil:'domcontentloaded' });
+            if (!(await page.textContent('[data-title]')).includes('Capstone') ||
+                !(await page.textContent('[data-explanation]')).includes('fictional')) {
+              throw new Error('Photoshop capstone transparency/practice missing.');
+            }
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
+            if (!(await page.textContent('[data-title]')).includes('Capstone: professional Photoshop') ||
+                !(await page.textContent('[data-shortcut-long]')).includes('Ctrl + S')) {
+              throw new Error('Photoshop capstone English source/Windows shortcuts not restored.');
+            }
+
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-smart-object-workflow', { waitUntil: 'domcontentloaded' });
             await page.waitForSelector('[data-proof-lab]:not([hidden])');
             const photoshopEnglishTitle = await page.textContent('[data-title]');
