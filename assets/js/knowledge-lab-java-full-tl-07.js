@@ -190,7 +190,7 @@
     ]
   },
   "java-principle-ocp": {
-    "t": "OCP: Open/Closed Principle",
+    "t": "OCP: Open/Closed Principle sa pag-extend ng behavior",
     "s": "Magdagdag ng bagong behavior nang hindi laging binabago ang stable callers.",
     "l": [
       "Kilalanin ang extension point",
