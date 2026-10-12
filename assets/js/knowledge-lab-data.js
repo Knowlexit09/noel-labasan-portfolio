@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_V2={
-  "version": "2026-10-12-v9",
+  "version": "2026-10-12-v10",
   "categories": [
     {
       "id": "html",
@@ -12183,6 +12183,1429 @@
           ],
           "correctIndex": 0,
           "explanation": "A clearfix hack"
+        }
+      ]
+    },
+    {
+      "id": "css-multicolumn",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 100,
+      "level": "Intermediate",
+      "title": "Multi-column layout",
+      "summary": "Focused lesson: Multi-column layout.",
+      "definition": "CSS multi-column layout flows content into columns using properties such as `column-count` and `column-width`.",
+      "learn": [
+        "Multi-column layout",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Multi-column layout well enough to use it intentionally.",
+      "explanation": "Multi-column is useful for article-like content where text should flow from one column to the next. It is different from Grid because you are not manually placing each child into tracks.",
+      "tip": "Use multi-column for flowing prose, not for card dashboards where each item needs independent placement.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use column-count for interactive cards and then struggle with unpredictable reading flow.",
+      "expected": "The runnable example demonstrates Multi-column layout.",
+      "realUse": "Useful in production interfaces when multi-column layout matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "multi",
+        "column",
+        "layout"
+      ],
+      "html": "<main><article class=\"sample\"><h1>Multi-column article</h1><p>CSS can flow long-form text into newspaper-like columns when enough width is available.</p><p>This works best for prose because the content continues from one column into the next automatically.</p><p>Resize the result panel and watch the number of columns adapt.</p></article></main>",
+      "css": "body{font-family:Georgia,serif;padding:28px}.sample{max-width:780px;column-width:220px;column-gap:28px;line-height:1.65}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What kind of content fits multi-column layout well?",
+          "options": [
+            "Flowing article-style prose",
+            "Independent dashboard cards",
+            "Modal dialogs only",
+            "Canvas drawings"
+          ],
+          "correctIndex": 0,
+          "explanation": "Flowing article-style prose"
+        },
+        {
+          "question": "How is multi-column different from Grid?",
+          "options": [
+            "Content flows automatically between columns",
+            "It has no columns",
+            "It only works on tables",
+            "It changes HTML order"
+          ],
+          "correctIndex": 0,
+          "explanation": "Content flows automatically between columns"
+        }
+      ]
+    },
+    {
+      "id": "css-column-rules-span",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 110,
+      "level": "Intermediate",
+      "title": "Column gaps, rules, and spanning headings",
+      "summary": "Focused lesson: Column gaps, rules, and spanning headings.",
+      "definition": "Multi-column layout supports `column-gap`, decorative `column-rule`, and `column-span` for content such as a heading that should span all columns.",
+      "learn": [
+        "Column gaps, rules, and spanning headings",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Column gaps, rules, and spanning headings well enough to use it intentionally.",
+      "explanation": "These properties refine a multi-column reading layout. Column rules are decoration between columns, not semantic separators.",
+      "tip": "Keep column rules subtle so they guide reading without becoming visual noise.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use heavy rules and tiny column gaps that make text feel cramped.",
+      "expected": "The runnable example demonstrates Column gaps, rules, and spanning headings.",
+      "realUse": "Useful in production interfaces when column gaps, rules, and spanning headings matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "column",
+        "gaps",
+        "rules",
+        "and",
+        "spanning",
+        "headings"
+      ],
+      "html": "<main><article class=\"article\"><h1>One heading spans all columns</h1><p>First block of text flows through the columns.</p><p>Second block continues naturally and the rule is only decorative.</p><p>Third block demonstrates the same flow.</p></article></main>",
+      "css": "body{font-family:Georgia,serif;padding:28px}.article{column-count:3;column-gap:28px;column-rule:1px solid #cad9e3;line-height:1.6}.article h1{column-span:all;font-family:system-ui;color:#0879b7}.article p{margin-top:0}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property can make a heading span all columns?",
+          "options": [
+            "column-span",
+            "grid-span",
+            "text-span",
+            "float-span"
+          ],
+          "correctIndex": 0,
+          "explanation": "column-span"
+        },
+        {
+          "question": "What is column-rule mainly for?",
+          "options": [
+            "A visual separator between columns",
+            "Changing source order",
+            "Submitting forms",
+            "Loading fonts"
+          ],
+          "correctIndex": 0,
+          "explanation": "A visual separator between columns"
+        }
+      ]
+    },
+    {
+      "id": "css-navbar-pattern",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "Navigation bar styling patterns",
+      "summary": "Focused lesson: Navigation bar styling patterns.",
+      "definition": "A CSS navigation bar styles a semantic nav/list of links using layout, spacing, active states, hover/focus states, and responsive behavior.",
+      "learn": [
+        "Navigation bar styling patterns",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Navigation bar styling patterns well enough to use it intentionally.",
+      "explanation": "The CSS should enhance real navigation markup rather than turning arbitrary divs into links. Flexbox is usually a good fit for horizontal navigation; wrapping or a separate mobile pattern handles narrow widths.",
+      "tip": "Style :hover and :focus-visible together where appropriate so keyboard users receive equivalent feedback.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Build navigation from non-link divs or hide important links until hover.",
+      "expected": "The runnable example demonstrates Navigation bar styling patterns.",
+      "realUse": "Useful in production interfaces when navigation bar styling patterns matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "navigation",
+        "bar",
+        "styling",
+        "patterns"
+      ],
+      "html": "<nav class=\"nav\" aria-label=\"Primary\"><a href=\"#\" aria-current=\"page\">Home</a><a href=\"#\">Learn</a><a href=\"#\">Projects</a><a href=\"#\">Contact</a></nav>",
+      "css": "body{font-family:system-ui;padding:24px}.nav{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:#0d2235;border-radius:12px}.nav a{padding:9px 12px;color:white;text-decoration:none;border-radius:8px}.nav a[aria-current=\"page\"],.nav a:hover,.nav a:focus-visible{background:#0879b7;outline:none}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which HTML element should represent major navigation?",
+          "options": [
+            "nav",
+            "div only",
+            "canvas",
+            "table"
+          ],
+          "correctIndex": 0,
+          "explanation": "nav"
+        },
+        {
+          "question": "Which keyboard state should be visibly styled?",
+          "options": [
+            ":focus-visible",
+            ":empty",
+            ":root only",
+            ":visited only"
+          ],
+          "correctIndex": 0,
+          "explanation": ":focus-visible"
+        }
+      ]
+    },
+    {
+      "id": "css-dropdown-pattern",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "Dropdown styling without hover-only traps",
+      "summary": "Focused lesson: Dropdown styling without hover-only traps.",
+      "definition": "A dropdown visual pattern places secondary content near a trigger; CSS controls placement and appearance, but interaction semantics should come from suitable HTML/JavaScript or native disclosure/popover behavior.",
+      "learn": [
+        "Dropdown styling without hover-only traps",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Dropdown styling without hover-only traps well enough to use it intentionally.",
+      "explanation": "Pure hover dropdowns are fragile on touch and keyboard input. This lesson uses a native details/summary disclosure so CSS can focus on presentation while HTML provides accessible open/close behavior.",
+      "tip": "Use native details or popover for simple menus before writing a custom widget.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Make a dropdown available only on :hover.",
+      "expected": "The runnable example demonstrates Dropdown styling without hover-only traps.",
+      "realUse": "Useful in production interfaces when dropdown styling without hover-only traps matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "dropdown",
+        "styling",
+        "without",
+        "hover",
+        "only",
+        "traps"
+      ],
+      "html": "<details class=\"menu\"><summary>Resources</summary><nav class=\"panel\" aria-label=\"Resources\"><a href=\"#\">HTML</a><a href=\"#\">CSS</a><a href=\"#\">JavaScript</a></nav></details>",
+      "css": "body{font-family:system-ui;padding:28px}.menu{position:relative;display:inline-block}.menu summary{cursor:pointer;padding:10px 14px;border:1px solid #0879b7;border-radius:9px;list-style:none}.panel{position:absolute;top:calc(100% + 6px);left:0;min-width:180px;padding:8px;background:white;border:1px solid #d2e0e8;border-radius:10px;box-shadow:0 16px 30px #17344b22}.panel a{display:block;padding:8px;color:#17344b;text-decoration:none;border-radius:6px}.panel a:hover,.panel a:focus-visible{background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is the problem with hover-only dropdowns?",
+          "options": [
+            "They can fail for keyboard and touch users",
+            "They always delete CSS",
+            "They cannot have links",
+            "They disable Flexbox"
+          ],
+          "correctIndex": 0,
+          "explanation": "They can fail for keyboard and touch users"
+        },
+        {
+          "question": "What native element can provide simple disclosure behavior?",
+          "options": [
+            "details",
+            "meta",
+            "colgroup",
+            "canvas"
+          ],
+          "correctIndex": 0,
+          "explanation": "details"
+        }
+      ]
+    },
+    {
+      "id": "css-tooltips",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 100,
+      "level": "Intermediate",
+      "title": "Tooltip styling and arrows",
+      "summary": "Focused lesson: Tooltip styling and arrows.",
+      "definition": "A tooltip is brief supplemental information associated with a trigger; CSS can style its surface and arrow, while the interaction must remain keyboard/touch accessible.",
+      "learn": [
+        "Tooltip styling and arrows",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Tooltip styling and arrows well enough to use it intentionally.",
+      "explanation": "A tooltip should not contain essential instructions that exist nowhere else. Native `title` is limited; richer tooltips need deliberate trigger/focus behavior. This visual demo keeps the tip visible to focus and hover.",
+      "tip": "Keep tooltip copy short and make the trigger understandable without relying on the tooltip.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Put critical task instructions only inside a hover tooltip.",
+      "expected": "The runnable example demonstrates Tooltip styling and arrows.",
+      "realUse": "Useful in production interfaces when tooltip styling and arrows matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "tooltip",
+        "styling",
+        "and",
+        "arrows"
+      ],
+      "html": "<main><button class=\"tip\">Save<span role=\"tooltip\">Save your current changes</span></button></main>",
+      "css": "body{font-family:system-ui;padding:70px}.tip{position:relative}.tip span{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);padding:8px 10px;border-radius:8px;background:#0d2235;color:white;white-space:nowrap;opacity:0;pointer-events:none}.tip span::after{content:\"\";position:absolute;top:100%;left:50%;translate:-50% 0;border:6px solid transparent;border-top-color:#0d2235}.tip:hover span,.tip:focus-visible span{opacity:1}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Should essential instructions live only in a tooltip?",
+          "options": [
+            "No",
+            "Yes always",
+            "Only on mobile",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "No"
+        },
+        {
+          "question": "What should also reveal a tooltip besides hover?",
+          "options": [
+            "Keyboard focus",
+            "Only animation end",
+            "Only page load",
+            "Only right-click"
+          ],
+          "correctIndex": 0,
+          "explanation": "Keyboard focus"
+        }
+      ]
+    },
+    {
+      "id": "css-buttons-groups",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 110,
+      "level": "Intermediate",
+      "title": "Buttons, variants, and button groups",
+      "summary": "Focused lesson: Buttons, variants, and button groups.",
+      "definition": "CSS button systems style native button or link controls with consistent sizing, focus states, disabled states, and intentional variants.",
+      "learn": [
+        "Buttons, variants, and button groups",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Buttons, variants, and button groups well enough to use it intentionally.",
+      "explanation": "A primary button should look more important than a secondary one, but both need readable contrast and keyboard focus. Grouped buttons should keep enough separation and hit area.",
+      "tip": "Base all variants on shared button rules, then change only the values that communicate hierarchy.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Create each button from scratch and end up with inconsistent padding, focus, and disabled states.",
+      "expected": "The runnable example demonstrates Buttons, variants, and button groups.",
+      "realUse": "Useful in production interfaces when buttons, variants, and button groups matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "buttons",
+        "variants",
+        "and",
+        "button",
+        "groups"
+      ],
+      "html": "<main><div class=\"group\"><button class=\"btn primary\">Save</button><button class=\"btn\">Preview</button><button class=\"btn\" disabled>Unavailable</button></div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.group{display:flex;flex-wrap:wrap;gap:8px}.btn{padding:10px 14px;border:1px solid #0879b7;border-radius:9px;background:white;color:#0879b7;font:inherit}.btn.primary{background:#0879b7;color:white}.btn:focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}.btn:disabled{opacity:.5;cursor:not-allowed}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What should button variants share?",
+          "options": [
+            "A common base style and interaction states",
+            "Different random padding",
+            "No focus indicator",
+            "Different font families"
+          ],
+          "correctIndex": 0,
+          "explanation": "A common base style and interaction states"
+        },
+        {
+          "question": "What should disabled styling communicate?",
+          "options": [
+            "The control is unavailable without hiding it",
+            "That it is the primary action",
+            "That it is a link",
+            "That it is selected"
+          ],
+          "correctIndex": 0,
+          "explanation": "The control is unavailable without hiding it"
+        }
+      ]
+    },
+    {
+      "id": "css-pagination",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 120,
+      "level": "Intermediate",
+      "title": "Pagination styling",
+      "summary": "Focused lesson: Pagination styling.",
+      "definition": "Pagination CSS styles a semantic set of navigation links or buttons for moving between result pages.",
+      "learn": [
+        "Pagination styling",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Pagination styling well enough to use it intentionally.",
+      "explanation": "The current page should be indicated visually and semantically, and controls need clear focus states. Pagination layout should wrap on small screens instead of shrinking to unusable targets.",
+      "tip": "Use aria-current='page' on the active page link and keep touch targets comfortable.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Indicate the active page by color alone with no semantic current-page state.",
+      "expected": "The runnable example demonstrates Pagination styling.",
+      "realUse": "Useful in production interfaces when pagination styling matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "pagination",
+        "styling"
+      ],
+      "html": "<nav class=\"pages\" aria-label=\"Pagination\"><a href=\"#\">Previous</a><a href=\"#\">1</a><a href=\"#\" aria-current=\"page\">2</a><a href=\"#\">3</a><a href=\"#\">Next</a></nav>",
+      "css": "body{font-family:system-ui;padding:28px}.pages{display:flex;flex-wrap:wrap;gap:6px}.pages a{min-width:42px;min-height:42px;display:grid;place-items:center;border:1px solid #c7d7e1;border-radius:8px;color:#17344b;text-decoration:none}.pages a[aria-current=\"page\"]{background:#0879b7;color:white;border-color:#0879b7}.pages a:focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which attribute can mark the current page?",
+          "options": [
+            "aria-current=\"page\"",
+            "checked",
+            "selected-only",
+            "data-active is always required"
+          ],
+          "correctIndex": 0,
+          "explanation": "aria-current=\"page\""
+        },
+        {
+          "question": "What should happen on narrow screens?",
+          "options": [
+            "Controls can wrap while staying usable",
+            "Targets shrink to 8px",
+            "All controls disappear",
+            "z-index increases"
+          ],
+          "correctIndex": 0,
+          "explanation": "Controls can wrap while staying usable"
+        }
+      ]
+    },
+    {
+      "id": "css-counters",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 250,
+      "level": "Intermediate",
+      "title": "CSS counters",
+      "summary": "Focused lesson: CSS counters.",
+      "definition": "CSS counters create automatic numbering with `counter-reset`, `counter-increment`, and the `counter()` or `counters()` functions.",
+      "learn": [
+        "CSS counters",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand CSS counters well enough to use it intentionally.",
+      "explanation": "Counters can number headings, steps, figures, or custom list-like structures while keeping numbering generated from document order.",
+      "tip": "Use real ol markup when the content is naturally an ordered list; use counters when numbering spans a custom structure.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Replace a simple ordered list with complex counters for no reason.",
+      "expected": "The runnable example demonstrates CSS counters.",
+      "realUse": "Useful in production interfaces when css counters matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "css",
+        "counters"
+      ],
+      "html": "<main class=\"steps\"><h2>Learn</h2><p>Read the concept.</p><h2>Practice</h2><p>Run the example.</p><h2>Apply</h2><p>Build something.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.steps{counter-reset:step}.steps h2{counter-increment:step}.steps h2::before{content:\"Step \" counter(step) \" · \";color:#0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property increments a CSS counter?",
+          "options": [
+            "counter-increment",
+            "counter-add",
+            "number-step",
+            "list-increment"
+          ],
+          "correctIndex": 0,
+          "explanation": "counter-increment"
+        },
+        {
+          "question": "When is a real ordered list better?",
+          "options": [
+            "When the content is naturally a simple sequence",
+            "Never",
+            "Only for forms",
+            "Only inside Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "When the content is naturally a simple sequence"
+        }
+      ]
+    },
+    {
+      "id": "css-counter-style",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 90,
+      "level": "Advanced",
+      "title": "@counter-style for custom list markers",
+      "summary": "Focused lesson: @counter-style for custom list markers.",
+      "definition": "`@counter-style` defines a custom counter style with symbols, system behavior, suffixes, fallbacks, and other descriptors.",
+      "learn": [
+        "@counter-style for custom list markers",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand @counter-style for custom list markers well enough to use it intentionally.",
+      "explanation": "It is more maintainable than hard-coding pseudo-element text when you need a reusable numbering system across lists or counters.",
+      "tip": "Use a standard list-style-type when it already fits; reach for @counter-style only for a real custom marker system.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Create decorative symbols that make sequence/order harder to understand.",
+      "expected": "The runnable example demonstrates @counter-style for custom list markers.",
+      "realUse": "Useful in production interfaces when @counter-style for custom list markers matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "modern css",
+        "counter",
+        "style",
+        "for",
+        "custom",
+        "list",
+        "markers"
+      ],
+      "html": "<main><ol class=\"demo\"><li>Learn</li><li>Practice</li><li>Apply</li></ol></main>",
+      "css": "@counter-style labsteps{system:cyclic;symbols:\"◆\" \"●\" \"■\";suffix:\"  \"}body{font-family:system-ui;padding:28px}.demo{list-style:labsteps}.demo li{padding:.35rem}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does @counter-style define?",
+          "options": [
+            "A reusable custom numbering or marker style",
+            "A Grid layout",
+            "A custom HTML element",
+            "A media query"
+          ],
+          "correctIndex": 0,
+          "explanation": "A reusable custom numbering or marker style"
+        },
+        {
+          "question": "When should you prefer a built-in list style?",
+          "options": [
+            "When it already communicates the list clearly",
+            "Never",
+            "Only on desktop",
+            "Only with JavaScript"
+          ],
+          "correctIndex": 0,
+          "explanation": "When it already communicates the list clearly"
+        }
+      ]
+    },
+    {
+      "id": "css-image-gallery",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "Responsive image gallery",
+      "summary": "Focused lesson: Responsive image gallery.",
+      "definition": "A CSS image gallery arranges semantic images/figures using responsive layout rules while preserving image aspect ratios and captions.",
+      "learn": [
+        "Responsive image gallery",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Responsive image gallery well enough to use it intentionally.",
+      "explanation": "Grid with auto-fit/minmax is a strong default because it adapts the number of columns to available space. Real images still need proper alt text and dimensions in HTML.",
+      "tip": "Let CSS handle layout while HTML carries image meaning and captions.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use background images for gallery content that users need to understand or save.",
+      "expected": "The runnable example demonstrates Responsive image gallery.",
+      "realUse": "Useful in production interfaces when responsive image gallery matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "responsive",
+        "image",
+        "gallery"
+      ],
+      "html": "<main class=\"gallery\"><figure><div class=\"pic\">A</div><figcaption>Project A</figcaption></figure><figure><div class=\"pic\">B</div><figcaption>Project B</figcaption></figure><figure><div class=\"pic\">C</div><figcaption>Project C</figcaption></figure></main>",
+      "css": "body{font-family:system-ui;padding:24px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.gallery figure{margin:0;padding:10px;border:1px solid #d7e3eb;border-radius:12px}.pic{aspect-ratio:4/3;display:grid;place-items:center;background:linear-gradient(135deg,#0879b7,#5bd6ff);color:white;border-radius:8px}.gallery figcaption{padding-top:8px;font-size:.9rem}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which layout pattern adapts gallery columns well?",
+          "options": [
+            "Grid with auto-fit and minmax()",
+            "Absolute positioning every image",
+            "Repeated br tags",
+            "text-indent"
+          ],
+          "correctIndex": 0,
+          "explanation": "Grid with auto-fit and minmax()"
+        },
+        {
+          "question": "Where should image meaning live?",
+          "options": [
+            "In semantic HTML and alt/caption text",
+            "Only in background CSS",
+            "Only in z-index",
+            "Only in a gradient"
+          ],
+          "correctIndex": 0,
+          "explanation": "In semantic HTML and alt/caption text"
+        }
+      ]
+    },
+    {
+      "id": "css-image-sprites",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Image sprites: legacy technique and when not to use it",
+      "summary": "Focused lesson: Image sprites: legacy technique and when not to use it.",
+      "definition": "An image sprite combines multiple small images into one file and reveals a region using background-position.",
+      "learn": [
+        "Image sprites: legacy technique and when not to use it",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Image sprites: legacy technique and when not to use it well enough to use it intentionally.",
+      "explanation": "Sprites reduced HTTP requests in older web stacks. Modern HTTP, SVG icons, icon components, and caching often make sprites less necessary, but understanding them helps when maintaining legacy CSS.",
+      "tip": "Prefer SVG or individual optimized assets for new work unless a sprite solves a measured problem.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Adopt sprites automatically because they were once a performance best practice.",
+      "expected": "The runnable example demonstrates Image sprites: legacy technique and when not to use it.",
+      "realUse": "Useful in production interfaces when image sprites: legacy technique and when not to use it matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "image",
+        "sprites",
+        "legacy",
+        "technique",
+        "and",
+        "when"
+      ],
+      "html": "<main><div class=\"sample\" aria-label=\"Sprite region demo\"></div><p>This gradient simulates selecting one region from a larger sprite sheet.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{width:64px;height:64px;background:linear-gradient(90deg,#0879b7 0 33%,#d94d72 33% 66%,#22a06b 66%) 0 0/192px 64px;background-position:-64px 0}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What property selects a region from a sprite?",
+          "options": [
+            "background-position",
+            "Yes always",
+            "Only if the image is blue",
+            "Only in HTML"
+          ],
+          "correctIndex": 0,
+          "explanation": "background-position"
+        },
+        {
+          "question": "Are sprites automatically the best modern icon strategy?",
+          "options": [
+            "No"
+          ],
+          "correctIndex": 0,
+          "explanation": "No"
+        }
+      ]
+    },
+    {
+      "id": "css-shape-outside",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Images & Visual Effects",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "shape-outside for text wrapping",
+      "summary": "Focused lesson: shape-outside for text wrapping.",
+      "definition": "`shape-outside` defines a non-rectangular shape around which inline content wraps, typically on a floated element.",
+      "learn": [
+        "shape-outside for text wrapping",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand shape-outside for text wrapping well enough to use it intentionally.",
+      "explanation": "It can make editorial layouts wrap text around circles or polygons. It is for visual flow; it does not change the element's actual hit area or semantic shape.",
+      "tip": "Use shape-outside for decorative/editorial wrapping, not for essential control geometry.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Assume the visual wrap shape also changes click or accessibility boundaries.",
+      "expected": "The runnable example demonstrates shape-outside for text wrapping.",
+      "realUse": "Useful in production interfaces when shape-outside for text wrapping matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "images & visual effects",
+        "shape",
+        "outside",
+        "for",
+        "text",
+        "wrapping"
+      ],
+      "html": "<main><div class=\"shape\"></div><p>Text wraps around the circular shape instead of the element's rectangular box. This is useful for magazine-like compositions and editorial layouts where an image should influence the surrounding text flow.</p></main>",
+      "css": "body{font-family:Georgia,serif;padding:28px;line-height:1.65}.shape{float:left;width:160px;aspect-ratio:1;margin:0 20px 12px 0;border-radius:50%;shape-outside:circle(50%);background:linear-gradient(135deg,#0879b7,#5bd6ff)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What layout feature usually works with shape-outside?",
+          "options": [
+            "A float",
+            "Yes always",
+            "Only on mobile",
+            "Only for SVG"
+          ],
+          "correctIndex": 0,
+          "explanation": "A float"
+        },
+        {
+          "question": "Does shape-outside change the clickable hit area?",
+          "options": [
+            "No"
+          ],
+          "correctIndex": 0,
+          "explanation": "No"
+        }
+      ]
+    },
+    {
+      "id": "css-resize-caret",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 130,
+      "level": "Intermediate",
+      "title": "resize, caret-color, and editable UI details",
+      "summary": "Focused lesson: resize, caret-color, and editable UI details.",
+      "definition": "`resize` controls whether an element such as textarea can be user-resized; `caret-color` controls the text insertion caret color.",
+      "learn": [
+        "resize, caret-color, and editable UI details",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand resize, caret-color, and editable UI details well enough to use it intentionally.",
+      "explanation": "These small UI properties matter in forms. Disabling resize can harm users when a textarea needs more room, so do it only when the layout provides another comfortable solution.",
+      "tip": "Allow vertical textarea resizing unless the product has a strong reason not to.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Disable resize on a tiny textarea and trap users in an uncomfortable editing area.",
+      "expected": "The runnable example demonstrates resize, caret-color, and editable UI details.",
+      "realUse": "Useful in production interfaces when resize, caret-color, and editable ui details matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "resize",
+        "caret",
+        "color",
+        "and",
+        "editable",
+        "ui"
+      ],
+      "html": "<main><label for=\"notes\">Notes</label><br><textarea id=\"notes\">Try resizing me vertically.</textarea></main>",
+      "css": "body{font-family:system-ui;padding:28px}textarea{width:min(100%,420px);min-height:100px;padding:12px;resize:vertical;caret-color:#d94d72;border:1px solid #b9c9d5;border-radius:9px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which value lets a textarea resize vertically?",
+          "options": [
+            "resize: vertical",
+            "resize: y-only",
+            "height:auto only",
+            "overflow:stretch"
+          ],
+          "correctIndex": 0,
+          "explanation": "resize: vertical"
+        },
+        {
+          "question": "What does caret-color style?",
+          "options": [
+            "The text insertion caret",
+            "The mouse pointer",
+            "The border image",
+            "The scrollbar thumb only"
+          ],
+          "correctIndex": 0,
+          "explanation": "The text insertion caret"
+        }
+      ]
+    },
+    {
+      "id": "css-dynamic-viewport-units",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Responsive Design",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "svh, lvh, and dvh viewport units",
+      "summary": "Focused lesson: svh, lvh, and dvh viewport units.",
+      "definition": "Small, large, and dynamic viewport units account for changing browser UI on devices where the visible viewport height can expand or shrink.",
+      "learn": [
+        "svh, lvh, and dvh viewport units",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand svh, lvh, and dvh viewport units well enough to use it intentionally.",
+      "explanation": "`100vh` can be surprising on mobile because browser chrome changes available space. `svh`, `lvh`, and `dvh` provide different interpretations: small, large, and dynamic viewport sizes.",
+      "tip": "Use dvh for full-height interactive areas that should track the current visible viewport, then test real mobile browsers.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Assume 100vh always equals the currently visible phone screen.",
+      "expected": "The runnable example demonstrates svh, lvh, and dvh viewport units.",
+      "realUse": "Useful in production interfaces when svh, lvh, and dvh viewport units matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "responsive design",
+        "svh",
+        "lvh",
+        "and",
+        "dvh",
+        "viewport",
+        "units"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{margin:0;font-family:system-ui}.sample{min-height:60dvh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#0d2235,#0879b7);color:white}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which unit tracks the dynamic viewport size?",
+          "options": [
+            "dvh",
+            "pxh",
+            "rwh",
+            "emh"
+          ],
+          "correctIndex": 0,
+          "explanation": "dvh"
+        },
+        {
+          "question": "Why can 100vh surprise on mobile?",
+          "options": [
+            "Browser UI can change the visible viewport",
+            "CSS disables scrolling",
+            "HTML changes language",
+            "Grid removes height"
+          ],
+          "correctIndex": 0,
+          "explanation": "Browser UI can change the visible viewport"
+        }
+      ]
+    },
+    {
+      "id": "css-user-preference-media",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Accessibility",
+      "order": 50,
+      "level": "Advanced",
+      "title": "User preference media features",
+      "summary": "Focused lesson: User preference media features.",
+      "definition": "CSS media features can respond to preferences such as reduced motion, higher contrast, reduced transparency, color scheme, or reduced data where supported.",
+      "learn": [
+        "User preference media features",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand User preference media features well enough to use it intentionally.",
+      "explanation": "These queries let users' system choices influence presentation. They are enhancement signals, not permission to make the default experience inaccessible.",
+      "tip": "Design a usable default first, then honor user preferences to reduce motion, improve contrast, or simplify effects.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Hide important content in the preference-specific branch.",
+      "expected": "The runnable example demonstrates User preference media features.",
+      "realUse": "Useful in production interfaces when user preference media features matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "accessibility",
+        "user",
+        "preference",
+        "media",
+        "features"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:20px;background:#eef8fd;transition:transform .4s ease}.sample:hover{transform:translateY(-5px)}@media(prefers-reduced-motion:reduce){.sample{transition:none}}@media(prefers-contrast:more){.sample{border:3px solid currentColor}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which query can reduce non-essential animation?",
+          "options": [
+            "prefers-reduced-motion",
+            "prefers-grid",
+            "prefers-padding",
+            "hover:none only"
+          ],
+          "correctIndex": 0,
+          "explanation": "prefers-reduced-motion"
+        },
+        {
+          "question": "What should still be usable without a preference query?",
+          "options": [
+            "The default experience",
+            "Nothing",
+            "Only print styles",
+            "Only animation"
+          ],
+          "correctIndex": 0,
+          "explanation": "The default experience"
+        }
+      ]
+    },
+    {
+      "id": "css-starting-style",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 100,
+      "level": "Advanced",
+      "title": "@starting-style for entry transitions",
+      "summary": "Focused lesson: @starting-style for entry transitions.",
+      "definition": "`@starting-style` defines starting values used when an element begins rendering from a state that previously had no rendered box, enabling entry transitions in supported browsers.",
+      "learn": [
+        "@starting-style for entry transitions",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand @starting-style for entry transitions well enough to use it intentionally.",
+      "explanation": "It is useful for popovers, dialogs, or dynamically inserted UI where a normal transition otherwise has no previous rendered state. Browser support should be verified.",
+      "tip": "Use it as progressive enhancement; the content must still appear correctly without the transition.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Depend on starting-style for visibility or functionality rather than visual enhancement.",
+      "expected": "The runnable example demonstrates @starting-style for entry transitions.",
+      "realUse": "Useful in production interfaces when @starting-style for entry transitions matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "modern css",
+        "starting",
+        "style",
+        "for",
+        "entry",
+        "transitions"
+      ],
+      "html": "<main><div class=\"sample\">Entry-transition concept</div><pre><code>@starting-style { .sample { opacity: 0; transform: translateY(8px); } }</code></pre></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:18px;background:#eef8fd;opacity:1;transform:none;transition:opacity .3s,transform .3s}@starting-style{.sample{opacity:0;transform:translateY(8px)}}pre{padding:12px;background:#0d2235;color:white;border-radius:10px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What problem does @starting-style help solve?",
+          "options": [
+            "Transitioning an element as it starts being rendered",
+            "Changing HTML semantics",
+            "Loading fonts",
+            "Creating Grid rows"
+          ],
+          "correctIndex": 0,
+          "explanation": "Transitioning an element as it starts being rendered"
+        },
+        {
+          "question": "How should it be treated?",
+          "options": [
+            "As progressive visual enhancement",
+            "As required business logic",
+            "As a database rule",
+            "As an accessibility replacement"
+          ],
+          "correctIndex": 0,
+          "explanation": "As progressive visual enhancement"
+        }
+      ]
+    },
+    {
+      "id": "css-transition-behavior",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 110,
+      "level": "Advanced",
+      "title": "transition-behavior and discrete transitions",
+      "summary": "Focused lesson: transition-behavior and discrete transitions.",
+      "definition": "`transition-behavior: allow-discrete` allows supported discrete properties to participate in transitions together with features such as @starting-style.",
+      "learn": [
+        "transition-behavior and discrete transitions",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand transition-behavior and discrete transitions well enough to use it intentionally.",
+      "explanation": "Some CSS properties do not interpolate through numeric intermediate values. Modern discrete-transition support can coordinate visibility/display changes with opacity or transforms.",
+      "tip": "Keep the final shown/hidden states correct even if the discrete transition is unsupported.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use a transition to hide focusable content while it remains interactable unexpectedly.",
+      "expected": "The runnable example demonstrates transition-behavior and discrete transitions.",
+      "realUse": "Useful in production interfaces when transition-behavior and discrete transitions matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "modern css",
+        "transition",
+        "behavior",
+        "and",
+        "discrete",
+        "transitions"
+      ],
+      "html": "<main><div class=\"sample\">Discrete transition concept</div><p>Edit the CSS and inspect the syntax.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:18px;background:#eef8fd;transition:opacity .3s,display .3s;transition-behavior:allow-discrete}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What kind of properties does allow-discrete address?",
+          "options": [
+            "Properties with discrete state changes",
+            "Only colors",
+            "Only font families",
+            "Only Grid gaps"
+          ],
+          "correctIndex": 0,
+          "explanation": "Properties with discrete state changes"
+        },
+        {
+          "question": "What remains essential?",
+          "options": [
+            "Correct visible and hidden states without relying on animation",
+            "A huge z-index",
+            "A background sprite",
+            "An iframe"
+          ],
+          "correctIndex": 0,
+          "explanation": "Correct visible and hidden states without relying on animation"
+        }
+      ]
+    },
+    {
+      "id": "css-scroll-driven-animation",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Transforms & Animation",
+      "order": 80,
+      "level": "Advanced",
+      "title": "Scroll-driven animations",
+      "summary": "Focused lesson: Scroll-driven animations.",
+      "definition": "Scroll-driven animations can use scroll or view progress as an animation timeline instead of ordinary elapsed time.",
+      "learn": [
+        "Scroll-driven animations",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Scroll-driven animations well enough to use it intentionally.",
+      "explanation": "They can power progress indicators and reveal effects tied to scrolling. Because this is advanced and motion-sensitive, support and reduced-motion preferences should be checked.",
+      "tip": "Use scroll-driven motion to communicate progress or context, not as constant decoration.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Make reading or navigation depend on motion that cannot be reduced.",
+      "expected": "The runnable example demonstrates Scroll-driven animations.",
+      "realUse": "Useful in production interfaces when scroll-driven animations matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "transforms & animation",
+        "scroll",
+        "driven",
+        "animations"
+      ],
+      "html": "<div class=\"bar\" aria-hidden=\"true\"></div><main><h1>Scroll the result</h1><p>The top bar follows scroll progress in supporting browsers.</p></main>",
+      "css": "body{font-family:system-ui;margin:0;min-height:160vh}.bar{position:fixed;inset:0 0 auto;height:6px;background:#0879b7;transform-origin:left;animation:grow linear;animation-timeline:scroll(root)}@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}main{padding:40px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What can drive a scroll-driven animation?",
+          "options": [
+            "Scroll or view progress",
+            "Only elapsed seconds",
+            "Only mouse clicks",
+            "Only font loading"
+          ],
+          "correctIndex": 0,
+          "explanation": "Scroll or view progress"
+        },
+        {
+          "question": "What accessibility preference should be considered?",
+          "options": [
+            "prefers-reduced-motion",
+            "prefers-grid",
+            "prefers-margin",
+            "orientation only"
+          ],
+          "correctIndex": 0,
+          "explanation": "prefers-reduced-motion"
+        }
+      ]
+    },
+    {
+      "id": "css-view-transitions",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 120,
+      "level": "Advanced",
+      "title": "View Transition CSS",
+      "summary": "Focused lesson: View Transition CSS.",
+      "definition": "The View Transition API can capture old/new visual states, while CSS pseudo-elements and `view-transition-name` style the transition in supporting browsers.",
+      "learn": [
+        "View Transition CSS",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand View Transition CSS well enough to use it intentionally.",
+      "explanation": "CSS can customize how named elements morph/fade between states or documents. It remains progressive enhancement: navigation/content must work without the transition.",
+      "tip": "Use view transitions to preserve spatial continuity, not to slow down every navigation.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Make route changes depend on transition animations or hide real loading state.",
+      "expected": "The runnable example demonstrates View Transition CSS.",
+      "realUse": "Useful in production interfaces when view transition css matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "modern css",
+        "view",
+        "transition",
+        "css"
+      ],
+      "html": "<main><div class=\"sample\">Card with <code>view-transition-name</code></div><pre><code>.card { view-transition-name: featured-card; }</code></pre></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{view-transition-name:featured-card;padding:20px;background:#eef8fd;border-radius:12px}pre{padding:12px;background:#0d2235;color:white;border-radius:10px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property gives an element a named view-transition identity?",
+          "options": [
+            "view-transition-name",
+            "transition-id",
+            "view-name",
+            "animation-route"
+          ],
+          "correctIndex": 0,
+          "explanation": "view-transition-name"
+        },
+        {
+          "question": "Should navigation still work without the animation?",
+          "options": [
+            "Yes",
+            "No",
+            "Only on desktop",
+            "Only if Grid is disabled"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "css-anchor-positioning",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Modern CSS",
+      "order": 130,
+      "level": "Advanced",
+      "title": "CSS anchor positioning",
+      "summary": "Focused lesson: CSS anchor positioning.",
+      "definition": "CSS anchor positioning lets positioned UI align relative to another element designated as an anchor, reducing manual offset calculations in supporting browsers.",
+      "learn": [
+        "CSS anchor positioning",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand CSS anchor positioning well enough to use it intentionally.",
+      "explanation": "It is useful for popovers, tooltips, and menus that need to track a trigger. The feature is modern, so production code needs support checks or a fallback.",
+      "tip": "Use anchor positioning when it simplifies relationship-based overlays and provide a sensible fallback.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Assume anchor positioning is universally available or use it for essential content with no fallback.",
+      "expected": "The runnable example demonstrates CSS anchor positioning.",
+      "realUse": "Useful in production interfaces when css anchor positioning matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "modern css",
+        "css",
+        "anchor",
+        "positioning"
+      ],
+      "html": "<main><button class=\"anchor\">Anchor</button><div class=\"sample\">Anchored panel concept</div><pre><code>.anchor { anchor-name: --trigger; }\n.panel { position-anchor: --trigger; }</code></pre></main>",
+      "css": "body{font-family:system-ui;padding:60px}.anchor{anchor-name:--trigger;padding:10px 14px}.sample{position:absolute;position-anchor:--trigger;top:anchor(bottom);left:anchor(left);margin-top:8px;padding:12px;background:#eef8fd;border:1px solid #bfd3df;border-radius:9px}pre{margin-top:90px;padding:12px;background:#0d2235;color:white;border-radius:10px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What identifies a reference element for anchor positioning?",
+          "options": [
+            "anchor-name",
+            "grid-name",
+            "target-id only",
+            "float-name"
+          ],
+          "correctIndex": 0,
+          "explanation": "anchor-name"
+        },
+        {
+          "question": "What is required for production use of modern features?",
+          "options": [
+            "Support checking and a fallback when needed",
+            "A bigger z-index only",
+            "Removing HTML",
+            "Using !important"
+          ],
+          "correctIndex": 0,
+          "explanation": "Support checking and a fallback when needed"
+        }
+      ]
+    },
+    {
+      "id": "css-field-sizing",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 140,
+      "level": "Advanced",
+      "title": "field-sizing for content-aware form controls",
+      "summary": "Focused lesson: field-sizing for content-aware form controls.",
+      "definition": "`field-sizing: content` allows supported form controls to size more closely to their content instead of fixed default sizing.",
+      "learn": [
+        "field-sizing for content-aware form controls",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand field-sizing for content-aware form controls well enough to use it intentionally.",
+      "explanation": "It can create compact inputs or expanding textareas, but constraints such as min/max size remain important so forms do not become too small or grow without limit.",
+      "tip": "Pair content sizing with min/max inline/block sizes for predictable usability.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Let a content-sized field shrink below a comfortable input target or grow across the whole page.",
+      "expected": "The runnable example demonstrates field-sizing for content-aware form controls.",
+      "realUse": "Useful in production interfaces when field-sizing for content-aware form controls matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "field",
+        "sizing",
+        "for",
+        "content",
+        "aware",
+        "form"
+      ],
+      "html": "<main><label for=\"tag\">Tag </label><input id=\"tag\" value=\"CSS\"></main>",
+      "css": "body{font-family:system-ui;padding:28px}input{field-sizing:content;min-width:10ch;max-width:32ch;padding:10px;border:1px solid #b9c9d5;border-radius:8px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does field-sizing:content aim to do?",
+          "options": [
+            "Size a supported form control closer to its content",
+            "Change its validation",
+            "Load a font",
+            "Create a Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "Size a supported form control closer to its content"
+        },
+        {
+          "question": "What should still constrain the field?",
+          "options": [
+            "Reasonable min and max sizes",
+            "Only z-index",
+            "Only opacity",
+            "Only background"
+          ],
+          "correctIndex": 0,
+          "explanation": "Reasonable min and max sizes"
+        }
+      ]
+    },
+    {
+      "id": "css-reset-strategy",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Architecture & Performance",
+      "order": 60,
+      "level": "Intermediate",
+      "title": "CSS reset and sensible defaults",
+      "summary": "Focused lesson: CSS reset and sensible defaults.",
+      "definition": "A CSS reset or baseline stylesheet intentionally normalizes selected browser defaults so components start from a predictable foundation.",
+      "learn": [
+        "CSS reset and sensible defaults",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand CSS reset and sensible defaults well enough to use it intentionally.",
+      "explanation": "Modern resets are usually small and targeted: border-box sizing, body margin, responsive media, form font inheritance, and sensible text wrapping. Removing every native style can create extra accessibility work.",
+      "tip": "Reset only defaults you understand and plan to replace.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use a destructive reset that removes focus, lists, form appearance, and useful semantics without rebuilding them.",
+      "expected": "The runnable example demonstrates CSS reset and sensible defaults.",
+      "realUse": "Useful in production interfaces when css reset and sensible defaults matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "architecture & performance",
+        "css",
+        "reset",
+        "and",
+        "sensible",
+        "defaults"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "*,*::before,*::after{box-sizing:border-box}html{color-scheme:light}body{margin:0;font-family:system-ui;line-height:1.5;padding:28px}img,svg,video{max-width:100%;display:block}button,input,textarea,select{font:inherit}.sample{padding:20px;background:#eef8fd;border-radius:12px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is a good reset goal?",
+          "options": [
+            "Predictable defaults without removing useful behavior",
+            "Remove every browser style blindly",
+            "Maximize specificity",
+            "Add animations globally"
+          ],
+          "correctIndex": 0,
+          "explanation": "Predictable defaults without removing useful behavior"
+        },
+        {
+          "question": "What should not be removed carelessly?",
+          "options": [
+            "Focus and useful native control behavior",
+            "Whitespace in source",
+            "HTML comments",
+            "Image filenames"
+          ],
+          "correctIndex": 0,
+          "explanation": "Focus and useful native control behavior"
+        }
+      ]
+    },
+    {
+      "id": "css-utility-architecture",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Architecture & Performance",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Utility classes vs component classes",
+      "summary": "Focused lesson: Utility classes vs component classes.",
+      "definition": "Utility classes encode small reusable style decisions, while component classes group styles around a named UI component; both can coexist in a maintainable architecture.",
+      "learn": [
+        "Utility classes vs component classes",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Utility classes vs component classes well enough to use it intentionally.",
+      "explanation": "A utility such as `.stack` or `.sr-only` can solve repeated patterns. Component classes such as `.card` organize a specific UI. The important part is choosing a convention that keeps changes predictable.",
+      "tip": "Use utilities for truly cross-component patterns and components for domain-specific UI.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Create hundreds of one-off utilities that are only used once and obscure the design intent.",
+      "expected": "The runnable example demonstrates Utility classes vs component classes.",
+      "realUse": "Useful in production interfaces when utility classes vs component classes matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "architecture & performance",
+        "utility",
+        "classes",
+        "vs",
+        "component",
+        "classes"
+      ],
+      "html": "<main class=\"stack\"><article class=\"card stack\"><h1>Component</h1><p class=\"muted\">A reusable utility provides muted text.</p><button>Action</button></article></main>",
+      "css": "body{font-family:system-ui;padding:28px}.stack>*+*{margin-top:12px}.muted{color:#607086}.card{padding:20px;border:1px solid #d7e3eb;border-radius:14px;background:white}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is a good utility class candidate?",
+          "options": [
+            "A small pattern reused across components",
+            "A one-off page-specific hack",
+            "A database query",
+            "An HTML ID"
+          ],
+          "correctIndex": 0,
+          "explanation": "A small pattern reused across components"
+        },
+        {
+          "question": "What is a component class for?",
+          "options": [
+            "Styles belonging to a named UI component",
+            "Only font loading",
+            "Only media queries",
+            "Only animations"
+          ],
+          "correctIndex": 0,
+          "explanation": "Styles belonging to a named UI component"
+        }
+      ]
+    },
+    {
+      "id": "css-website-layout-pattern",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Projects & Expert Practice",
+      "order": 5,
+      "level": "Applied",
+      "title": "Website layout pattern: header, sidebar, main, footer",
+      "summary": "Focused lesson: Website layout pattern: header, sidebar, main, footer.",
+      "definition": "A production website shell combines semantic HTML with Grid/Flexbox so major regions adapt without absolute positioning.",
+      "learn": [
+        "Website layout pattern: header, sidebar, main, footer",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Website layout pattern: header, sidebar, main, footer well enough to use it intentionally.",
+      "explanation": "This applied lesson builds a common app/document layout. Grid defines the major areas; a media query collapses the sidebar on narrower screens. The source order stays logical.",
+      "tip": "Solve the large page regions first, then style the components inside them.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Absolutely position header/sidebar/main/footer and create overlap problems on smaller screens.",
+      "expected": "The runnable example demonstrates Website layout pattern: header, sidebar, main, footer.",
+      "realUse": "Useful in production interfaces when website layout pattern: header, sidebar, main, footer matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "projects & expert practice",
+        "website",
+        "layout",
+        "pattern",
+        "header",
+        "sidebar",
+        "main"
+      ],
+      "html": "<div class=\"shell\"><header class=\"head\">Header</header><aside class=\"side\">Sidebar</aside><main class=\"main\"><h1>Main content</h1><p>Responsive website shell.</p></main><footer class=\"foot\">Footer</footer></div>",
+      "css": "body{margin:0;font-family:system-ui;background:#eef4f8}.shell{min-height:100dvh;display:grid;grid-template:\"head head\" auto \"side main\" 1fr \"foot foot\" auto/220px 1fr;gap:12px;padding:12px}.shell>*{padding:18px;background:white;border-radius:12px}.head{grid-area:head}.side{grid-area:side}.main{grid-area:main}.foot{grid-area:foot}@media(max-width:680px){.shell{grid-template:\"head\" auto \"main\" 1fr \"side\" auto \"foot\" auto/1fr}}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which layout system is well suited to named page regions?",
+          "options": [
+            "CSS Grid",
+            "Repeated br tags",
+            "Text-indent",
+            "Image sprites"
+          ],
+          "correctIndex": 0,
+          "explanation": "CSS Grid"
+        },
+        {
+          "question": "What should stay logical even when layout changes?",
+          "options": [
+            "The HTML source order",
+            "The z-index count",
+            "The image filename",
+            "The font license"
+          ],
+          "correctIndex": 0,
+          "explanation": "The HTML source order"
         }
       ]
     },
