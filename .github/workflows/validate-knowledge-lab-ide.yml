@@ -35,6 +35,7 @@ jobs:
           node --check assets/js/knowledge-lab-data.js
           node --check assets/js/knowledge-lab-javascript-foundations.js
           node --check assets/js/knowledge-lab-javascript-intermediate.js
+          node --check assets/js/knowledge-lab-java-foundations.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -62,6 +63,7 @@ jobs:
           require('./assets/js/knowledge-lab-data.js');
           require('./assets/js/knowledge-lab-javascript-foundations.js');
           require('./assets/js/knowledge-lab-javascript-intermediate.js');
+          require('./assets/js/knowledge-lab-java-foundations.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -323,7 +325,18 @@ jobs:
             throw new Error('Java shorthand comparison is missing.');
           }
 
+          const javaCategory = data.categories.find(x => x.id === 'java');
+          if (!['Foundation','Control Flow','Collections','OOP Foundations','Problem Solving','Applied Java']
+            .every(stage => javaCategory?.learningPath?.includes(stage))) throw new Error('Java stages missing.');
+          const requiredJavaIds = ['java-first-program','java-if-and-for','java-methods-and-contracts','java-arraylist-hashmap'];
+          for (const id of requiredJavaIds) {
+            const lesson = data.lessons.find(x => x.id === id);
+            if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
+              || !lesson.code || !lesson.expectedOutput || !lesson.practice?.prompt || !lesson.practice?.check
+              || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
+          }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
+          if (javaLessons.length < 9) throw new Error('Missing Java 21 references.');
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
@@ -609,6 +622,16 @@ jobs:
             await page.click('[data-quiz-next]');
             if (!(await page.textContent('[data-quiz-count]')).includes('Question 2')) {
               throw new Error('Quiz did not advance.');
+            }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-first-program', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            await page.waitForSelector('[data-practice-lab]:not([hidden])');
+            if (await page.locator('[data-code-lab]:visible').count()) {
+              throw new Error('CI-tested Java examples must not display a fake browser Run IDE.');
+            }
+            if ((await page.textContent('[data-reference-output]')).trim() !== 'Liempo: 375\\nAvailable: true') {
+              throw new Error('Java first-program reference output mismatch.');
             }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-bigdecimal-money', { waitUntil: 'networkidle' });
