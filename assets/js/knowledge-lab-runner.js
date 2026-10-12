@@ -823,6 +823,7 @@
     const category = localizeCategory(rawCategory);
     currentLesson = lesson;
     currentCategory = category || null;
+    window.KNOWLEDGE_LAB_JAVA_IDE?.render(lesson);
     setView('lesson');
     renderSidebar($('[data-search]').value);
 
