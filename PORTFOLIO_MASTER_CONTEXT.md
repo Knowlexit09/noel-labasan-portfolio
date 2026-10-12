@@ -1,5 +1,19 @@
 # PORTFOLIO MASTER CONTEXT
 
+## LATEST UI DECISION — Original Java reference restored (2026-10-12)
+
+**This supersedes ALL earlier directions in this file recommending a Java browser Run button or OneCompiler iframe.** The user explicitly preferred the FIRST Java lesson version after comparing it with external Java IDE iterations. We restored the **original Java reference-only layout**: always visible Java source code, Copy Code, and Expected Output, with no browser Java Run button, opt-in/Enable IDE, external iframe or third-party code transfer. Java can be compiled locally with a trusted JDK 21; the repository retains a separate offline CI verification script for canonical Java samples. Do not silently re-add OneCompiler or promise identical runtime with JavaScript. Changing Java execution architecture requires explicit renewed approval and evidence.
+
+**Actual changes to main:** `knowledge/index.html` removed the entire Java IDE section and provider script, reverted `frame-src` CSP to `'self' blob: data:` and restored the original `kl-reference` markup with direct source `<pre>`, Copy Code and clearly labelled Expected Output. `assets/js/knowledge-lab-runner.js` removed the Java IDE lifecycle hook and changed the badge to `Java 21 · Reference lesson`. `assets/css/knowledge-lab.css` removed only the appended Java IDE CSS while keeping original reference styling and all language/practice CSS. Deleted now-unused `assets/js/knowledge-lab-java-ide.js`. Curated Filipino Java lesson and stage translations remain; removed only dead `javaIde*` UI labels. CI stopped linting/mock-testing the removed Java IDE and instead explicitly asserts a Java code/copy/output reference, no Java browser runner, no OneCompiler integration/CSP permission; the existing Java 21 verifier, course schema, language/exam quizzes, and HTML/CSS/JS runner gates are preserved.
+
+**Preserved learning assets:** all **91 Java reference lessons** (including four capstones), **59 JavaScript lessons**, 33-question English and Filipino Java exam reviewer, manual Filipino lessons, practice challenges, other HTML/CSS lessons, and all previous security/backend/Publish Live policies. The previously audited 401-record curriculum stays source-of-truth; this UI rollback does not alter lesson data.
+
+**Verification performed:** GitHub main source checked for absence of Java IDE markup, Java IDE loader, JS hook and external CSP allowance; CSS original Java reference source style present; English/Filipino reviewer loader and all Java capstone modules present; current GitHub CI Java 91 and isolated `scripts/verify-knowledge-lab-java.cjs` gates retained. The two embedded Node CI test programs syntax parsed; HTML section tags balanced. **Actual GitHub Actions completion, deployed Pages/browser regression and 91 Java program runtime pass remain NOT CONFIRMED in this session.** Do not claim remote CI/deployment success without it.
+
+**Risk: Low for lesson/code integrity; Medium for UI/regression if stale browser cache or CI selectors persist.** All backend, POS, authentication, Admin Publish Live and security state untouched. Vendor data-transfer risk eliminated by removing the external compiler. Rollback path: normal git revert of this targeted UI reversion commits if user deliberately chooses future Java execution again, without force-push or unrelated lesson rollback.
+
+
+
 ## Original IDE restoration (user preference) — 2026-10-12
 
 **Latest explicit UI directive:** User found Java Run different from old HTML/CSS/JavaScript Run, and chose the **old original IDE** as the standard. Continue with that exact direction; don't reintroduce a full-width embedded vendor IDE that replaces the user's editor.
