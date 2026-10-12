@@ -39,12 +39,14 @@ jobs:
           node --check assets/js/knowledge-lab-js-core-expansion.js
           node --check assets/js/knowledge-lab-js-collections-quality.js
           node --check assets/js/knowledge-lab-js-projects.js
+          node --check assets/js/knowledge-lab-javascript-deep-dive.js
           node --check scripts/verify-knowledge-lab-js-examples.cjs
           node scripts/verify-knowledge-lab-js-examples.cjs
           node --check assets/js/knowledge-lab-java-foundations.js
           node --check assets/js/knowledge-lab-java-core-expansion.js
           node --check assets/js/knowledge-lab-java-modern-expansion.js
           node --check assets/js/knowledge-lab-java-intro.js
+          node --check assets/js/knowledge-lab-java-professional.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -78,10 +80,12 @@ jobs:
           require('./assets/js/knowledge-lab-js-core-expansion.js');
           require('./assets/js/knowledge-lab-js-collections-quality.js');
           require('./assets/js/knowledge-lab-js-projects.js');
+          require('./assets/js/knowledge-lab-javascript-deep-dive.js');
           require('./assets/js/knowledge-lab-java-foundations.js');
           require('./assets/js/knowledge-lab-java-core-expansion.js');
           require('./assets/js/knowledge-lab-java-modern-expansion.js');
           require('./assets/js/knowledge-lab-java-intro.js');
+          require('./assets/js/knowledge-lab-java-professional.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -100,7 +104,7 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length !== 37) throw new Error('Expected 37 JavaScript lessons, got ' + jsFoundations.length);
+          if (jsFoundations.length !== 51) throw new Error('Expected 51 JavaScript lessons, got ' + jsFoundations.length);
           const requiredJavaScript = ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops',
             'js-arrays-foundation', 'js-objects-properties', 'js-map-reduce', 'js-form-input-validation',
             'js-event-delegation', 'js-promises-async-await', 'js-debugging-errors', 'js-project-live-product-search',
@@ -108,7 +112,8 @@ jobs:
             'js-nullish-defaults','js-while-loop','js-string-search-methods','js-number-input-conversion','js-lexical-closure',
             'js-array-slice-splice','js-array-sort-safely','js-set-unique-values','js-map-keyed-lookup',
             'js-object-destructuring','js-json-basics','js-classes-constructor','js-promise-all',
-            'js-try-catch','js-safe-text-rendering','js-project-stock-cart','js-project-accessible-tabs'];
+            'js-try-catch','js-safe-text-rendering','js-project-stock-cart','js-project-accessible-tabs',
+            'js-callback-values','js-recursion-base-case','js-spread-immutable-update','js-some-every','js-regex-test','js-utc-date','js-bigint-integers','js-prototype-lookup','js-extends-super','js-generators-yield','js-allsettled','js-microtask-order','js-freeze-shallow','js-this-binding'];
           const requiredJavaScriptStages = ['Foundation', 'Operators & Decisions', 'Strings & Numbers', 'Functions & Scope', 'Arrays', 'Objects & Data', 'DOM & Forms', 'Asynchronous Thinking', 'Projects & Practice'];
           const jsCategory = data.categories.find(x => x.id === 'javascript');
           if (!jsCategory || requiredJavaScriptStages.some(stage => !jsCategory.learningPath?.includes(stage))) {
@@ -349,7 +354,7 @@ jobs:
           }
 
           const javaCategory = data.categories.find(x => x.id === 'java');
-          if (!['Foundation','Control Flow','Strings & Arrays','Collections','OOP Foundations','OOP Advanced','Exceptions & IO','Modern Java','Problem Solving','Applied Java']
+          if (!['Foundation','Control Flow','Strings & Arrays','Collections','OOP Foundations','OOP Advanced','Exceptions & IO','Modern Java','Problem Solving','Applied Java','Concurrency & JVM','Testing & Delivery']
             .every(stage => javaCategory?.learningPath?.includes(stage))) throw new Error('Java stages missing.');
           const requiredJavaIds = ['java-first-program','java-if-and-for','java-methods-and-contracts','java-arraylist-hashmap',
             'java-types-casting','java-string-immutability','java-array-basics','java-switch-expression',
@@ -358,7 +363,8 @@ jobs:
             'java-method-overloading','java-recursion-base-case','java-stringbuilder','java-enum-states',
             'java-comparator-sort','java-record-introduction','java-optional-values',
             'java-bigdecimal-rounding','java-time-localdate','java-try-with-resources',
-            'java-what-is-java','java-jdk-jvm-jre'];
+            'java-what-is-java','java-jdk-jvm-jre',
+            'java-static-final','java-string-formatting','java-multidimensional-arrays','java-equals-hashcode','java-set-deduplication','java-files-utf8','java-path-normalization','java-lambda-predicate','java-method-references','java-collectors-joining','java-thread-join','java-completablefuture','java-virtual-thread-executor','java-assertion-tests'];
           for (const id of requiredJavaIds) {
             const lesson = data.lessons.find(x => x.id === id);
             if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
@@ -366,7 +372,7 @@ jobs:
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 31) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 45) throw new Error('Missing Java 21 references.');
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
