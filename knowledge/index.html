@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="Noel Labasan Knowledge Lab — organized tutorials, tested code, practical tips, and proof-backed creative workflows.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data:; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data: https://onecompiler.com; form-action 'self'">
   <title>Knowledge Lab — Noel Labasan</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-8">
+  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-9">
 </head>
 <body>
   <header class="kl-topbar">
@@ -224,6 +224,68 @@
           </div>
         </section>
 
+        <section class="kl-java-ide kl-ide" data-java-ide hidden aria-labelledby="javaIdeTitle">
+            <div class="kl-ide-head">
+              <div>
+                <span class="kl-section-kicker" data-i18n="tryItYourself">Try it yourself</span>
+                <h2 id="javaIdeTitle">Browser IDE · Java</h2>
+                <p>Edit Main.java and use Run ▶. The first Java execution requires consent to use an external compiler.</p>
+              </div>
+              <div class="kl-ide-actions">
+                <button type="button" class="kl-btn kl-btn-muted" data-java-ide-reset data-i18n="reset">Reset</button>
+                <button type="button" class="kl-btn kl-btn-muted" data-java-ide-copy data-i18n="copy">Copy</button>
+                <button type="button" class="kl-btn kl-btn-muted" data-java-ide-fullscreen data-i18n="fullScreen">Full screen</button>
+                <button type="button" class="kl-btn kl-btn-stop" data-java-ide-close data-i18n="stop">Stop</button>
+                <button type="button" class="kl-btn kl-btn-run" data-java-ide-run><span data-i18n="run">Run</span> ▶</button>
+              </div>
+            </div>
+            <div class="kl-ide-workspace">
+              <div class="kl-editor-pane">
+                <div class="kl-editor-tabs" role="group" aria-label="Java source file">
+                  <span class="kl-java-editor-tab">Main.java</span>
+                  <span class="kl-save-state" data-java-ide-save-state>Original example</span>
+                </div>
+                <div class="kl-editor-stack">
+                  <label class="kl-sr-only" for="javaPracticeSource">Java source editor</label>
+                  <textarea class="kl-code-editor is-active" id="javaPracticeSource" data-java-ide-source
+                    aria-label="Java code editor" spellcheck="false" autocomplete="off" autocapitalize="off"
+                    autocorrect="off" aria-describedby="javaPracticeNotice"></textarea>
+                </div>
+              </div>
+              <div class="kl-output-pane">
+                <div class="kl-output-tabs" role="tablist" aria-label="Java output">
+                  <button type="button" role="tab" aria-selected="true" data-java-output-tab="result">Result</button>
+                  <button type="button" role="tab" aria-selected="false" data-java-output-tab="console">Console</button>
+                  <span class="kl-run-status" data-java-ide-status role="status" aria-live="polite">Ready</span>
+                </div>
+                <div class="kl-result-wrap kl-java-result" data-java-output-panel="result">
+                  <div class="kl-java-result-placeholder" data-java-ide-placeholder>
+                    <strong>Java Result</strong>
+                    <p>Run your Java code to see real compiler output in this panel.</p>
+                    <p id="javaPracticeNotice">The optional Java runtime uses OneCompiler, a third-party service. Your current code is sent to that provider only after your explicit approval. Do not enter secrets, passwords or confidential business data.</p>
+                    <div class="kl-java-consent" data-java-ide-consent hidden>
+                      <p>Allow a third-party service to compile and run this Java code? Only approve if it contains no private information.</p>
+                      <button type="button" class="kl-btn kl-btn-run" data-java-ide-open>Allow external Java execution</button>
+                    </div>
+                  </div>
+                  <div class="kl-java-ide-frame" data-java-ide-frame hidden></div>
+                </div>
+                <div class="kl-console kl-java-console" data-java-output-panel="console" hidden>
+                  <div class="kl-console-empty">
+                    Java stdout, errors and compilation diagnostics appear inside the external compiler in the Result tab. This website cannot directly read that output from the third-party iframe.
+                  </div>
+                  <p><a href="https://onecompiler.com/java" target="_blank" rel="noopener noreferrer">Open the Java compiler in a new tab ↗</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="kl-safety-row">
+              <span>Java runtime:</span>
+              <strong>Opt-in external compiler</strong>
+              <strong>No third-party iframe before consent</strong>
+              <strong>Source stays editable in Knowledge Lab</strong>
+            </div>
+        </section>
+
         <section class="kl-reference" data-reference-lab hidden>
           <div class="kl-reference-head">
             <div>
@@ -369,6 +431,7 @@
   <script src="../assets/js/knowledge-lab-javascript-tl.js?v=20261012-1"></script>
   <script src="../assets/js/knowledge-lab-java-review-tl.js?v=20261012-1"></script>
   <script src="../assets/js/knowledge-lab-java-exam-reviewer-tl.js?v=20261012-1"></script>
-  <script src="../assets/js/knowledge-lab-runner.js?v=20261012-6"></script>
+  <script src="../assets/js/knowledge-lab-java-ide.js?v=20261012-4"></script>
+  <script src="../assets/js/knowledge-lab-runner.js?v=20261012-7"></script>
 </body>
 </html>
