@@ -842,9 +842,12 @@
         languageStatus.hidden = true;
         languageStatus.classList.remove('is-curated', 'is-fallback');
       } else {
-        const curated = Boolean(lessonTranslation(rawLesson.id));
+        const translation = lessonTranslation(rawLesson.id);
+        const definitionOnly = translation?.translationCoverage === 'definition-only';
+        const curated = Boolean(translation && !definitionOnly);
         languageStatus.hidden = false;
-        languageStatus.textContent = curated ? tr('curatedLanguage') : tr('englishFallback');
+        languageStatus.textContent = definitionOnly ? tr('partialLanguage') :
+          curated ? tr('curatedLanguage') : tr('englishFallback');
         languageStatus.classList.toggle('is-curated', curated);
         languageStatus.classList.toggle('is-fallback', !curated);
       }
