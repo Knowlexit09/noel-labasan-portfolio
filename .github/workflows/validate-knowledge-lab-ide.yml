@@ -96,6 +96,16 @@ jobs:
             throw new Error('Curated Filipino CSS definition is missing.');
           }
 
+          const completeTeachingFields = ['definition','objective','explanation','tip','hack','mistake','expected','realUse'];
+          for (const lesson of data.lessons) {
+            const missing = completeTeachingFields.filter(key => !lesson[key]);
+            if (!Array.isArray(lesson.learn) || lesson.learn.length < 3) missing.push('learn');
+            if (!Array.isArray(lesson.quiz) || lesson.quiz.length < 2) missing.push('quiz');
+            if (missing.length) {
+              throw new Error('Published lesson is incomplete: ' + lesson.id + ' -> ' + missing.join(', '));
+            }
+          }
+
           const htmlCategory = data.categories.find(x => x.id === 'html');
           const htmlLessons = data.lessons.filter(x => x.categoryId === 'html');
           if (!htmlCategory?.learningPath || htmlLessons.length < 45) {
