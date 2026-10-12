@@ -18,7 +18,7 @@
   const category = data.categories.find(x => x.id === 'photoshop');
   if (!category) throw new Error('Missing Photoshop category.');
   category.learningPath = stages.concat(['09 · Real Portfolio Evidence']);
-  category.status = '49 guided + real-workflow lessons';
+  category.status = '49 lessons · 48 guided + 1 real proof';
   category.description = 'Step-by-step Photoshop desktop course: foundations through expert production and real-world portfolio projects, with Windows/macOS shortcut keys, practice and quizzes.';
   const names = [
     'Beginner Fundamentals','Core Tools & Layers','Masking & Retouching',
