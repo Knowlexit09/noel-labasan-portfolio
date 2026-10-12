@@ -1,5 +1,17 @@
 # PORTFOLIO MASTER CONTEXT
 
+## Latest Java IDE placement clarification — bottom of lesson (2026-10-12)
+
+User said **"yung nasa baba yun ang tanda ko"** after clarifying they mean the original **code editor with Run**, not reference-only. This means the IDE is remembered in the **lower lesson content**, not near the top. Preserve the code editor + Run/Reset/Copy/Stop design while showing Java lesson material first.
+
+**Current source order for Java lessons:** definition/learning → explanatory content → original Java reference/example → practice instructions → **Java IDE with Run ▶** → quiz → previous/next. This places the Java IDE below the supporting lesson/reference and practice challenge, immediately before the quiz. Other HTML/CSS/JavaScript IDE remains unchanged. `knowledge/index.html` was changed only by relocating the existing `kl-java-ide` section; source and Run controller remained intact. The reference text now points users to the IDE **below** instead of above.
+
+GitHub Playwright workflow now asserts this exact DOM order: `reference,practice,ide,quiz`, in addition to prior Java Run/consent/layout tests. Source section nesting and both embedded Node CI scripts parsed. **Live browser Pages, full Actions run and actual OneCompiler Java output remain UNVERIFIED.**
+
+Risk low for data and course integrity, medium for possible visual layout or external Java provider regressions. No backend, data, security, POS/accounting/inventory, or Admin Publish Live changes. Normal git revert is available.
+
+
+
 ## Latest clarification — restore the first code IDE (2026-10-12)
 
 **AUTHORITATIVE MOST-RECENT USER DECISION.** User clarified “unang version ng IDE ibig kong sabihin” after the assistant mistakenly reverted Java to a reference-only page. They mean the **original old HTML/CSS/JavaScript-style IDE WITH a code editor, Run ▶, Result/Console split and familiar toolbar**, applied to Java—not reference-only. This supersedes previous guidance in this file to remove Java Run and leave code/expected output only.
