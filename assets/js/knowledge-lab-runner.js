@@ -823,7 +823,6 @@
     const category = localizeCategory(rawCategory);
     currentLesson = lesson;
     currentCategory = category || null;
-    window.KNOWLEDGE_LAB_JAVA_IDE?.render(lesson);
     setView('lesson');
     renderSidebar($('[data-search]').value);
 
@@ -832,7 +831,7 @@
     $('[data-level]').textContent = lesson.level || 'Lesson';
     $('[data-tested-badge]').textContent =
       lesson.mode === 'code' ? '✓ Live browser runner' :
-      lesson.mode === 'reference' && lesson.language === 'Java' ? '☕ Java 21 · Run in practice IDE' :
+      lesson.mode === 'reference' && lesson.language === 'Java' ? '☕ Java 21 · Reference lesson' :
       lesson.mode === 'reference' && lesson.verified ? 'Reference example · CI gated' :
       lesson.mode === 'proof' ? '✓ Real portfolio proof' : 'Reference';
 
