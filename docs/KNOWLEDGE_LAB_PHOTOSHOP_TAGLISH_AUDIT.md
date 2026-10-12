@@ -61,6 +61,8 @@ All other course IDs, the **91 Java lessons**, their Java 21 compile/output chec
 - https://helpx.adobe.com/photoshop/desktop/create-manage-layers/smart-objects/duplicate-an-embedded-smart-object.html — independent Smart Object copies
 
 ## Release verification
+**Verified PASS on application-code commit `1f1e13ed7d6c1c1d95e5fb4a93ad749c50f6c942`:** [Validate Knowledge Lab IDE #38285977284](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38285977284) completed **SUCCESS**. Every required job step is green: static JS/source, 49 Photoshop bilingual shortcut+quiz integrity, all 91 Java 21 lesson outputs in isolated compilation folders, and Playwright browser journeys (beginner / expert / capstone / original proof, switching English↔Taglish, Windows/macOS shortcut labels, no fake browser editor). [Matching GitHub Pages deployment #38285977278](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38285977278) completed **SUCCESS** on that same application commit. A later documentation-only deploy is not required for app-code acceptance, but may independently complete.
+
 
 Source-only and GitHub Actions checks must be recorded for the **exact current application-code SHA**. Passing CI verifies JavaScript load, static schema/source invariants and browser behavior; it is not a substitute for an installed Adobe Photoshop practical examination or native-speaker human copy-editing. Document the last confirmed successful GitHub Actions / Pages run separately.
 
