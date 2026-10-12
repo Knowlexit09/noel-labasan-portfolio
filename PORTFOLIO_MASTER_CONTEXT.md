@@ -364,7 +364,16 @@ Current category structure:
 - Latest combined HTML/language/IDE regression: **Validate Knowledge Lab IDE Run #44 — SUCCESS** at `1b7d0da190889cbb2b37c07d57713aff7b55fc83`.
 - Matching Pages deployment: **Run #371 — SUCCESS**.
 
-- CSS course expanded from 49 to **128 focused learning lessons**, plus a separate **20-page CSS Reference** category for quick lookup.
+- CSS course expanded from 49 to **176 focused learning lessons**, plus a separate **20-page CSS Reference** category for quick lookup.
+- A second systematic CSS gap audit was performed against the current W3Schools CSS tutorial menu and modern MDN CSS references. The public course now covers the remaining major tutorial-level gaps instead of stopping at the earlier 128-lesson expansion.
+- Newly added gap-audit lessons include: CSS parser recovery/errors; selector lists; @import/order; global inheritance keywords; !important; background shorthand/origin/clip; modern Lab/LCH/OKLab/OKLCH colors; color-mix()/light-dark(); focused box-shadow; border-image; @font-face; font shorthand/variable fonts; overflow-wrap/word-break/hyphens; writing-mode; text-wrap; line clamping; list markers; generated content; ::selection/::placeholder; focus/form-state selectors; centering; vertical-align; flow-root/block formatting context; multi-column layout and rules/span; navbars; dropdowns; tooltips; button systems; pagination; CSS counters; @counter-style; responsive galleries; legacy image sprites (with modern-context caveat); shape-outside; resize/caret-color; dynamic viewport units; user-preference media features; @starting-style; transition-behavior; scroll-driven animation; View Transition CSS; anchor positioning; field-sizing; reset strategy; utility-vs-component architecture; and a semantic responsive website-layout pattern.
+- These additions are **focused lessons**, not raw reference stubs: every CSS course lesson is required to have definition, learning goals, explanation, tip, practical hack, common mistake, expected result, real-world use, runnable HTML/CSS example, and at least two quiz questions.
+- The course intentionally does **not** turn every single CSS property or experimental spec feature into a standalone lesson. Niche/experimental details belong in Reference or future advanced updates; tutorial coverage is optimized for learning value, production relevance, and maintainability.
+- Current CSS coverage gate requires exactly **176 course lessons** and keeps the **20 CSS Reference pages** separate.
+- Browser regression additionally checks the multi-column lesson, navbar lesson, CSS counters lesson, product-grid project, color explorer, CSS Reference category, and existing core CSS/HTML/Java regressions.
+- Latest comprehensive CSS validation: **Validate Knowledge Lab IDE Run #66 — SUCCESS** at `8ed24e58f0f95696b3cc6dfe783038506e8ef947`.
+- Matching Pages deployment: **Run #397 — SUCCESS**.
+
 - Added **CSS Colors: names, HEX, RGB, and complete color codes** under Colors & Backgrounds. It teaches color formats and includes an interactive searchable explorer with **all 148 opaque standardized CSS named colors**.
 - The color explorer shows each CSS keyword, HEX code, and RGB value, supports search by name/HEX/RGB, and separately calls out `transparent` and `currentColor` as special color keywords.
 - The existing CSS Reference color page was upgraded to the same complete searchable color-code explorer instead of creating a duplicate reference category.
