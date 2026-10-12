@@ -49,6 +49,8 @@ jobs:
           node --check assets/js/knowledge-lab-java-intro.js
           node --check assets/js/knowledge-lab-java-professional.js
           node --check assets/js/knowledge-lab-java-applied.js
+          node --check assets/js/knowledge-lab-java-exam-fundamentals.js
+          node --check assets/js/knowledge-lab-java-design-jdbc.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -90,6 +92,8 @@ jobs:
           require('./assets/js/knowledge-lab-java-intro.js');
           require('./assets/js/knowledge-lab-java-professional.js');
           require('./assets/js/knowledge-lab-java-applied.js');
+          require('./assets/js/knowledge-lab-java-exam-fundamentals.js');
+          require('./assets/js/knowledge-lab-java-design-jdbc.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -359,7 +363,7 @@ jobs:
           }
 
           const javaCategory = data.categories.find(x => x.id === 'java');
-          if (!['Foundation','Control Flow','Strings & Arrays','Collections','OOP Foundations','OOP Advanced','Exceptions & IO','Modern Java','Problem Solving','Applied Java','Concurrency & JVM','Testing & Delivery']
+          if (!['Foundation','Control Flow','Strings & Arrays','Collections','OOP Foundations','OOP Advanced','Design Principles','Exceptions & IO','Database & JDBC','Modern Java','Problem Solving','Applied Java','Concurrency & JVM','Testing & Delivery']
             .every(stage => javaCategory?.learningPath?.includes(stage))) throw new Error('Java stages missing.');
           const requiredJavaIds = ['java-first-program','java-if-and-for','java-methods-and-contracts','java-arraylist-hashmap',
             'java-types-casting','java-string-immutability','java-array-basics','java-switch-expression',
@@ -370,7 +374,8 @@ jobs:
             'java-bigdecimal-rounding','java-time-localdate','java-try-with-resources',
             'java-what-is-java','java-jdk-jvm-jre',
             'java-static-final','java-string-formatting','java-multidimensional-arrays','java-equals-hashcode','java-set-deduplication','java-files-utf8','java-path-normalization','java-lambda-predicate','java-method-references','java-collectors-joining','java-thread-join','java-completablefuture','java-virtual-thread-executor','java-assertion-tests',
-            'java-composition','java-abstract-methods','java-generic-method','java-immutable-collections','java-pattern-sku','java-grouping-report','java-timezone-conversion','java-project-inventory-cli'];
+            'java-composition','java-abstract-methods','java-generic-method','java-immutable-collections','java-pattern-sku','java-grouping-report','java-timezone-conversion','java-project-inventory-cli',
+            'java-review-class-instance','java-review-primitives-wrappers','java-review-references-null','java-review-widening-narrowing','java-review-naming','java-review-constructors','java-review-method-signatures','java-review-this-super','java-review-modifiers','java-review-inheritance-types','java-review-modern-interface','java-review-exception-tree','java-review-checked','java-review-unchecked','java-review-try-catch-finally','java-review-autocloseable','java-review-suppressed','java-pattern-dao','java-pattern-dto-pojo','java-principle-srp','java-principle-dry','java-principle-ocp','java-principle-lsp','java-principle-isp','java-principle-dip','java-design-cohesion-coupling','java-design-association','java-design-dependency-injection','java-design-instanceof','java-jdbc-preparedstatement','java-jdbc-resource-lifecycle','java-jdbc-safe-sql','java-jdbc-transaction'];
           for (const id of requiredJavaIds) {
             const lesson = data.lessons.find(x => x.id === id);
             if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
@@ -378,7 +383,7 @@ jobs:
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 53) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 86) throw new Error('Missing Java 21 references.');
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
@@ -729,13 +734,18 @@ jobs:
             // requests are needed to test our consent, iframe, or code-sync contract.
             await page.route('https://onecompiler.com/**', route => route.fulfill({
               status: 200, contentType: 'text/html',
-              body: '<!doctype html><title>Offline Java IDE integration fixture</title><div id="ready">Ready</div><script>window.addEventListener("message", event => {if(event.data?.eventType==="populateCode"){document.body.dataset.event=event.data.eventType;document.body.dataset.language=event.data.language;document.body.dataset.code=event.data.files?.[0]?.content || "";}});</script>'
+              body: '<!doctype html><title>Offline Java IDE integration fixture</title><div id="ready">Ready</div><script>window.addEventListener("message", event => {if(event.data?.eventType==="populateCode"){document.body.dataset.event=event.data.eventType;document.body.dataset.language=event.data.language;document.body.dataset.code=event.data.files?.[0]?.content || "";}if(event.data?.eventType==="triggerRun"){document.body.dataset.run="requested";}});</script>'
             }));
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-inventory-cli', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
             if (!(await page.textContent('[data-reference-output]')).includes('Rejected: insufficient stock')) throw new Error('Java inventory project output reference missing.');
             if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java project exposed fake local browser Run IDE.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-jdbc-preparedstatement', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            if (!(await page.textContent('[data-definition]')).includes('PreparedStatement')) throw new Error('PreparedStatement lesson did not load.');
+            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Third-party Java IDE loaded without consent.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-what-is-java', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
@@ -744,16 +754,20 @@ jobs:
             await page.waitForSelector('[data-java-ide]:not([hidden])');
             if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java IDE must be opt-in and not autoload.');
             if (!(await page.inputValue('[data-java-ide-source]')).includes('public class Main')) throw new Error('Editable Java source missing.');
+            if (!(await page.locator('[data-java-ide-run]').isHidden())) throw new Error('Run Java must not be active before consent.');
+            await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
             await page.click('[data-java-ide-open]');
             const externalJavaFrame = page.frameLocator('[data-java-ide-frame] iframe');
             await externalJavaFrame.locator('#ready').waitFor();
-            await externalJavaFrame.locator('body[data-event="populateCode"]').waitFor();
-            if ((await externalJavaFrame.locator('body').getAttribute('data-language')) !== 'java') throw new Error('External Java editor did not receive Java language.');
-            if (!(await externalJavaFrame.locator('body').getAttribute('data-code')).includes('Hello from Java')) throw new Error('Java sample was not transmitted on consent.');
-            await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
-            await page.click('[data-java-ide-sync]');
             await externalJavaFrame.locator('body[data-code*="Edited Java"]').waitFor({ timeout: 5000 });
+            if ((await externalJavaFrame.locator('body').getAttribute('data-language')) !== 'java') throw new Error('External Java editor did not receive Java language.');
+            if (await page.locator('[data-java-ide-run]').isDisabled()) throw new Error('Run Java did not enable after editor readiness.');
+            await page.click('[data-java-ide-run]');
+            await externalJavaFrame.locator('body[data-run="requested"]').waitFor({ timeout: 5000 });
+            await page.click('[data-java-ide-reset]');
+            await externalJavaFrame.locator('body[data-code*="Hello from Java"]').waitFor({ timeout: 5000 });
             await page.click('[data-java-ide-close]');
+            if (await page.locator('[data-java-ide-run]').isVisible()) throw new Error('Run Java still visible after closing editor.');
             if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java iframe did not close.');
 
 
