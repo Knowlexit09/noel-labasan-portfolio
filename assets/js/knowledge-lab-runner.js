@@ -832,7 +832,8 @@
     $('[data-level]').textContent = lesson.level || 'Lesson';
     $('[data-tested-badge]').textContent =
       lesson.mode === 'code' ? '✓ Live browser runner' :
-      lesson.mode === 'reference' && lesson.verified ? '✓ Compile-tested in CI' :
+      lesson.mode === 'reference' && lesson.language === 'Java' ? '☕ Java 21 · Run in practice IDE' :
+      lesson.mode === 'reference' && lesson.verified ? 'Reference example · CI gated' :
       lesson.mode === 'proof' ? '✓ Real portfolio proof' : 'Reference';
 
     const languageStatus = $('[data-language-status]');
