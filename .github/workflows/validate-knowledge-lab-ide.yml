@@ -402,6 +402,11 @@ jobs:
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
           if (javaLessons.length < 86) throw new Error('Missing Java 21 references.');
+          for (const lesson of javaLessons) {
+            if (!lesson.practice?.prompt || !lesson.practice?.check) {
+              throw new Error('Java lesson lacks an actionable practice challenge: ' + lesson.id);
+            }
+          }
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
