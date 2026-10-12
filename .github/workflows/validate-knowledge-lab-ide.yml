@@ -68,6 +68,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-full-tl-06.js
           node --check assets/js/knowledge-lab-java-full-tl-07.js
           node --check assets/js/knowledge-lab-java-full-tl-08.js
+          node --check assets/js/knowledge-lab-photoshop-tl.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-js-quality-tl.js
           node --check assets/js/knowledge-lab-i18n.js
@@ -133,6 +134,7 @@ jobs:
           require('./assets/js/knowledge-lab-java-full-tl-06.js');
           require('./assets/js/knowledge-lab-java-full-tl-07.js');
           require('./assets/js/knowledge-lab-java-full-tl-08.js');
+          require('./assets/js/knowledge-lab-photoshop-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
           const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
@@ -536,6 +538,63 @@ jobs:
           if (proofLessons.length < 3) throw new Error('Expected at least three proof-backed creative lessons.');
           for (const lesson of proofLessons) {
             if (!lesson.proof?.src || !lesson.proof?.caseUrl) throw new Error('Incomplete proof lesson: ' + lesson.id);
+          }
+          // Audit every currently published Photoshop lesson; this is a real
+          // project proof, not a claim that a full Photoshop course exists.
+          const photoshopLessons = data.lessons.filter(x => x.categoryId === 'photoshop');
+          if (photoshopLessons.length !== 1) {
+            throw new Error('Photoshop lesson inventory changed; re-audit every published lesson.');
+          }
+          const originalPhotoshop = photoshopLessons[0];
+          const photoshopTl = i18n.lessons?.tl?.[originalPhotoshop.id];
+          const requiredPhotoshopFields = [
+            'title','level','summary','definition','objective','explanation','tip',
+            'hack','mistake','expected','realUse'
+          ];
+          if (!photoshopTl || photoshopTl.translationCoverage) {
+            throw new Error('Photoshop Taglish lesson is incomplete.');
+          }
+          for (const field of requiredPhotoshopFields) {
+            if (!photoshopTl[field]?.trim() ||
+                photoshopTl[field] === originalPhotoshop[field]) {
+              throw new Error('Untranslated Photoshop field: ' + field);
+            }
+          }
+          if (!Array.isArray(photoshopTl.learn) ||
+              photoshopTl.learn.length !== originalPhotoshop.learn.length ||
+              photoshopTl.learn.some((item,i) => !item || item === originalPhotoshop.learn[i])) {
+            throw new Error('Photoshop learning points not fully translated.');
+          }
+          if (!photoshopTl.practice?.prompt || !photoshopTl.practice?.check ||
+              !originalPhotoshop.practice?.prompt || !originalPhotoshop.practice?.check) {
+            throw new Error('Both Photoshop lesson languages require real hands-on practice.');
+          }
+          const enProof = originalPhotoshop.proof, tlProof = photoshopTl.proof;
+          if (!enProof?.src || !enProof.caseUrl || enProof.kind !== 'image' ||
+              enProof.steps?.length !== 4 ||
+              !tlProof?.alt || !tlProof.label || !tlProof.note || !tlProof.caseLabel ||
+              tlProof.steps?.length !== enProof.steps.length ||
+              tlProof.steps.some((step,i) => !step || step === enProof.steps[i]) ||
+              tlProof.src || tlProof.caseUrl || tlProof.kind) {
+            throw new Error('Photoshop project proof translation changed source, link or steps.');
+          }
+          if (!originalPhotoshop.tip.includes('New Smart Object via Copy') ||
+              !photoshopTl.tip.includes('New Smart Object via Copy')) {
+            throw new Error('Photoshop duplicate Smart Object teaching must be technically accurate.');
+          }
+          if (photoshopTl.quiz?.length !== originalPhotoshop.quiz?.length ||
+              photoshopTl.quiz.some((q,i) =>
+                !q.question || q.question === originalPhotoshop.quiz[i].question ||
+                !q.explanation || q.explanation === originalPhotoshop.quiz[i].explanation ||
+                q.correctIndex !== originalPhotoshop.quiz[i].correctIndex ||
+                q.options?.length !== originalPhotoshop.quiz[i].options.length ||
+                q.options.some((opt,j) => !opt || opt === originalPhotoshop.quiz[i].options[j])
+              )) {
+            throw new Error('Photoshop quiz translation or answer-key parity is incomplete.');
+          }
+          if (!i18n.categories?.tl?.photoshop?.description?.includes('non-destructive') ||
+              !i18n.categories?.tl?.photoshop?.status) {
+            throw new Error('Photoshop category information not localized.');
           }
           NODE
 
@@ -1050,6 +1109,44 @@ jobs:
             }
             const javaOutput = await page.textContent('[data-reference-output]');
             if (javaOutput.trim() !== '436.50') throw new Error('Unexpected Java reference output.');
+
+            // Photoshop full content, original proof URL and quiz survive switching.
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/photoshop-smart-object-workflow', { waitUntil: 'domcontentloaded' });
+            await page.waitForSelector('[data-proof-lab]:not([hidden])');
+            const photoshopEnglishTitle = await page.textContent('[data-title]');
+            const photoshopEnglishProof = await page.getAttribute('[data-proof-media] img', 'src');
+            if (!photoshopEnglishTitle.includes('Keep repeated product transforms') ||
+                !photoshopEnglishProof?.includes('gatchalian-meatshop-social-media-campaign')) {
+              throw new Error('Photoshop original English lesson or real portfolio proof missing.');
+            }
+            if (!(await page.textContent('[data-practice-prompt]')).includes('In Photoshop')) {
+              throw new Error('English Photoshop hands-on challenge missing.');
+            }
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (!(await page.textContent('[data-title]')).includes('non-destructive na product editing') ||
+                !(await page.textContent('[data-definition]')).includes('Smart Object') ||
+                !(await page.textContent('[data-explanation]')).includes('Layer Mask') ||
+                !(await page.textContent('[data-tip]')).includes('New Smart Object via Copy') ||
+                !(await page.textContent('[data-practice-prompt]')).includes('Sa Photoshop')) {
+              throw new Error('Photoshop Filipino / Taglish narration or practice not displayed.');
+            }
+            if (!(await page.textContent('[data-language-status]')).includes('Curated Filipino') ||
+                (await page.locator('[data-proof-steps] li').count()) !== 4 ||
+                !(await page.textContent('[data-proof-note]')).includes('Totoong portfolio') ||
+                !(await page.textContent('[data-quiz-question]')).includes('Smart Object')) {
+              throw new Error('Photoshop proof steps, quiz or full curated status not localized.');
+            }
+            if ((await page.getAttribute('[data-proof-media] img', 'src')) !== photoshopEnglishProof ||
+                !(await page.getAttribute('[data-proof-link]', 'href')).includes('gatchalian-meatshop.html')) {
+              throw new Error('Photoshop translation corrupted actual project image or link.');
+            }
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
+            if ((await page.textContent('[data-title]')) !== photoshopEnglishTitle ||
+                !(await page.textContent('[data-proof-note]')).includes('Real portfolio deliverable')) {
+              throw new Error('Photoshop did not restore original English lesson after language switch.');
+            }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/canva-brand-system-qyntro', { waitUntil: 'domcontentloaded' });
             await page.waitForSelector('[data-proof-lab]:not([hidden])');
