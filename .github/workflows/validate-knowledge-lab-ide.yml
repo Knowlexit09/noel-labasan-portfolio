@@ -630,7 +630,7 @@ jobs:
             if (await page.locator('[data-code-lab]:visible').count()) {
               throw new Error('CI-tested Java examples must not display a fake browser Run IDE.');
             }
-            if ((await page.textContent('[data-reference-output]')).trim() !== 'Liempo: 375\\nAvailable: true') {
+            if ((await page.textContent('[data-reference-output]')).trim() !== 'Liempo: 375\nAvailable: true') {
               throw new Error('Java first-program reference output mismatch.');
             }
 
