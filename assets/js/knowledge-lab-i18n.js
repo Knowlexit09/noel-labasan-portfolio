@@ -1,5 +1,5 @@
 (function(){'use strict';window.KNOWLEDGE_LAB_I18N={
-  "version": "2026-10-12-curated-tl-v4",
+  "version": "2026-10-12-curated-tl-v5",
   "defaultLanguage": "en",
   "languages": {
     "en": {
@@ -148,8 +148,8 @@
   "categories": {
     "tl": {
       "css": {
-        "description": "Comprehensive CSS course na hinati sa focused lessons mula fundamentals hanggang advanced/expert practice, may runnable examples, quizzes, shortcuts, at mini projects.",
-        "status": "127 focused lessons + projects"
+        "description": "Comprehensive CSS learning path mula fundamentals hanggang modern CSS at expert practice, may runnable examples, quizzes, color/code explorers, accessibility guidance, real-world patterns, at projects.",
+        "status": "176 focused lessons + projects"
       },
       "html": {
         "description": "Step-by-step HTML course mula sa “Ano ang HTML?” hanggang semantic structure, forms, accessibility, metadata, modern HTML, performance, at production-ready page structure.",
