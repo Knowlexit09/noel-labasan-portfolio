@@ -1,5 +1,21 @@
 # PORTFOLIO MASTER CONTEXT
 
+## LATEST — Photoshop Taglish audited, complete for published lesson (2026-10-13)
+
+**User continuation:** After Java 91/91 full Taglish, user said “sa photoshop naman,” referring to the same full-language audit. Live `main` initially `7de2b97c9aa1033f19ba64f5464994203881695a`. Actual loaded Knowledge Lab dataset has **exactly one Photoshop lesson** (`photoshop-smart-object-workflow`) with proof mode; it was English-only, no Filipino version, and the source did not have a hands-on practice field. **Do not claim a Photoshop Beginner-to-Expert course exists.**
+
+**Implemented:** `assets/js/knowledge-lab-photoshop-tl.js` supplies independently authored Taglish title, level, summary, definition, learn array (4), objective, explanation, tip, hack, mistake, expected result, real-world application, four project proof workflow steps, accessible alt, proof note, proof/case-study labels and both complete 4-option quizzes (preserving correct indices). It also localizes the Photoshop category description/status, explicitly disclosing that only one proof-backed lesson is published. New **practical Photoshop challenge with outcome checks** added in both the canonical English runtime lesson and Taglish pack. Proof image, image type, and project case-study URL remain original. The proof verifies finished portfolio output and documented tool workflow, not every exact Smart Object/masking click.
+
+**Accuracy repair:** English original had misleading “Duplicate a Smart Object only when you want independent contents” tip; changed to clarify regular Smart Object duplicates share embedded content, and independent contents require **Layer > Smart Objects > New Smart Object Via Copy**. Same guidance included in Taglish and checked against Adobe Photoshop official documentation (https://helpx.adobe.com/photoshop/desktop/create-manage-layers/smart-objects/duplicate-an-embedded-smart-object.html, updated February 23 2026). Smart Objects do not increase intrinsic low-res source resolution.
+
+**QA:** Source-only runtime check loading real GitHub dataset + locale + Photoshop pack: exactly 1 Photoshop, all 15 translated field groups nonempty, both quiz correct indexes unchanged, 4 proof steps, same original proof image and case URL, English and Taglish practice present; no JS errors. [GitHub Actions Validate Knowledge Lab IDE #38282711361](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38282711361) **SUCCESS** on code commit `64594d79a53bd74d15c6b7fe758ca784d0bfdd45`: complete static/source validation, 91 Java 21 programs, Chromium browser Photoshop English↔Taglish screen, proof photo/link preservation, practice/quiz/steps plus original Java IDE checks. [GitHub Pages deployment #38282829013](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38282829013) is the docs-only follow-on; check its latest status before claiming specific final HEAD deployed. Final release never assumes real Adobe app execution or manual screen-reader proof.
+
+**Audit/roadmap:** `docs/KNOWLEDGE_LAB_PHOTOSHOP_TAGLISH_AUDIT.md`. Photoshop has one published lesson; future Beginner-to-Expert lessons require substantive curriculum and real reviewed creative evidence per publishing gate, not fake proof. User's accepted Java IDE, HTML/CSS/JS browser IDE, data/auth/admin security, 91 Java/61 JS, portfolio assets and login remain intact.
+
+**Risk: Low–Medium** localization/editorial/proof step UI; no backend, inventory/accounting or authorization integrity impact. Safeguards original proof URLs, answer keys, English source, static + Playwright browser tests, and Adobe docs technical confirmation. **Rollback:** normal targeted Git reverts of new Photoshop locale module, Knowledge Lab script-loader insert and dedicated CI checks, not broad rollback of Java or course data. No force push.
+
+---
+
 ## LATEST ACCEPTED WORK — ALL 91 JAVA LESSONS IN FULL FILIPINO/TAGLISH (2026-10-13)
 
 **User request:** Inspect Java lessons individually and do not stop until all 91 are fully translated, not merely their definition fields.
