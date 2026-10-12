@@ -10,6 +10,16 @@ Updated 2026-10-12. **This is an honest coverage map, not a claim that every top
 4. Milestone projects must be genuinely reproducible and tested, not merely suggested. Filipino/Taglish is separately written and reviewed; unreviewed content retains visibly marked English fallback.
 5. Security, accessibility, responsive design, runner isolation, and existing regression tests remain intact. Final completion requires full GitHub CI and Pages browser verification.
 
+
+## Verified local progress — October 12, 2026 curriculum correction
+
+- **Implemented records (not a complete-course claim):** JavaScript **37** lessons including two interactive application projects; Java **31** Java 21 reference lessons. Overall Knowledge Lab **319** published records, with pre-existing 52 HTML, 176 CSS, 20 CSS Reference, and 3 proof-backed creative records unchanged.
+- The JS course now includes focused exercises for decisions/loops, strings and types, arrays/collections, closures, JSON, async Promises, error handling and safe DOM output, plus a stock-limited cart and keyboard-accessible tabs. Important topics remain, especially complete module architecture, fetch/network architecture without compromising runner CSP, the full event loop, performance, accessibility and larger capstone projects.
+- Java now includes introductory What-is-Java/JDK/JVM entry, foundational code, OOP and interfaces, exceptions, Strings/arrays, generics/collections, Streams, records, Optional, explicit money rounding, time and resource cleanup. Major gaps still include full JUnit 5/Maven tracks, production file I/O, concurrency, architecture/design patterns, security and capstone projects.
+- **Local validation:** 20/20 standalone JS result snippets matched expected output in controlled execution; two full browser projects passed scripted interaction simulations; 22/22 newly authored Java 21 examples were compiled/run locally with expected results (minor formatting differences in the local verification source). CI is configured to compile/run canonical Java repo sources. Static audit showed no duplicate IDs, missing teaching fields, broken JS syntax, or misplaced stages.
+- **Not yet verified:** GitHub Actions workflow conclusion; GitHub Pages deployment; entire Playwright browser run. Do not mark this roadmap complete or use a success badge for the entire course.
+- **No automatic translation:** just 3 curated Filipino/Taglish JS lessons beyond the prior 38 HTML/CSS versions. All other content must keep the visible English fallback.
+
 ## Coverage roadmap — core lesson groups
 
 ### JavaScript
