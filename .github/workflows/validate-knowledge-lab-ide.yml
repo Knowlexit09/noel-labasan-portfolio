@@ -74,8 +74,8 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length < 4) throw new Error('JavaScript curriculum extension did not load.');
-          for (const id of ['js-first-steps', 'js-variables-types']) {
+          if (jsFoundations.length < 7) throw new Error('JavaScript curriculum extension did not load.');
+          for (const id of ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops']) {
             const lesson = jsFoundations.find(x => x.id === id);
             if (!lesson || !lesson.definition || !lesson.expected || !lesson.realUse || !Array.isArray(lesson.quiz) || lesson.quiz.length < 2) throw new Error('Incomplete JavaScript foundation: ' + id);
             new Function(lesson.js);
