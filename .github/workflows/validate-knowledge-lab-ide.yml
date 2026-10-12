@@ -48,6 +48,7 @@ jobs:
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
+          node --check assets/js/knowledge-lab-java-ide.js
           node --check assets/js/knowledge-lab-sandbox.js
           node --check assets/js/future-modules.js
           node --check admin/admin.js
@@ -57,6 +58,8 @@ jobs:
           grep -q 'data-view="home"' knowledge/index.html
           grep -q 'data-proof-lab' knowledge/index.html
           grep -q 'data-reference-lab' knowledge/index.html
+          grep -q 'data-java-ide-open' knowledge/index.html
+          grep -q 'frame-src .*https://onecompiler.com' knowledge/index.html
           grep -q 'data-quiz-lab' knowledge/index.html
           grep -q 'data-practice-lab' knowledge/index.html
           grep -q 'data-practice-prompt' knowledge/index.html
@@ -690,10 +693,32 @@ jobs:
               throw new Error('Quiz did not advance.');
             }
 
+            // Mock only the external compiler's transport. No unapproved network
+            // requests are needed to test our consent, iframe, or code-sync contract.
+            await page.route('https://onecompiler.com/**', route => route.fulfill({
+              status: 200, contentType: 'text/html',
+              body: '<!doctype html><title>Offline Java IDE integration fixture</title><div id="ready">Ready</div><script>window.addEventListener("message", event => {if(event.data?.eventType==="populateCode"){document.body.dataset.event=event.data.eventType;document.body.dataset.language=event.data.language;document.body.dataset.code=event.data.files?.[0]?.content || "";}});</script>'
+            }));
+
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-what-is-java', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
             if ((await page.textContent('[data-reference-output]')).trim() !== 'Hello from Java') throw new Error('Java entry lesson output missing.');
             if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java intro exposed a fake runner.');
+            await page.waitForSelector('[data-java-ide]:not([hidden])');
+            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java IDE must be opt-in and not autoload.');
+            if (!(await page.inputValue('[data-java-ide-source]')).includes('public class Main')) throw new Error('Editable Java source missing.');
+            await page.click('[data-java-ide-open]');
+            const externalJavaFrame = page.frameLocator('[data-java-ide-frame] iframe');
+            await externalJavaFrame.locator('#ready').waitFor();
+            await externalJavaFrame.locator('body[data-event="populateCode"]').waitFor();
+            if ((await externalJavaFrame.locator('body').getAttribute('data-language')) !== 'java') throw new Error('External Java editor did not receive Java language.');
+            if (!(await externalJavaFrame.locator('body').getAttribute('data-code')).includes('Hello from Java')) throw new Error('Java sample was not transmitted on consent.');
+            await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
+            await page.click('[data-java-ide-sync]');
+            if (!(await externalJavaFrame.locator('body').getAttribute('data-code')).includes('Edited Java')) throw new Error('Edited Java source did not sync.');
+            await page.click('[data-java-ide-close]');
+            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java iframe did not close.');
+
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-inheritance-polymorphism', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
