@@ -51,6 +51,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-applied.js
           node --check assets/js/knowledge-lab-java-exam-fundamentals.js
           node --check assets/js/knowledge-lab-java-design-jdbc.js
+          node --check assets/js/knowledge-lab-java-exam-reviewer.js
           node --check assets/js/knowledge-lab-java-review-tl.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
@@ -95,6 +96,7 @@ jobs:
           require('./assets/js/knowledge-lab-java-applied.js');
           require('./assets/js/knowledge-lab-java-exam-fundamentals.js');
           require('./assets/js/knowledge-lab-java-design-jdbc.js');
+          require('./assets/js/knowledge-lab-java-exam-reviewer.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           require('./assets/js/knowledge-lab-java-review-tl.js');
@@ -400,8 +402,18 @@ jobs:
               || !lesson.code || !lesson.expectedOutput || !lesson.practice?.prompt || !lesson.practice?.check
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
           }
+          const reviewer = data.lessons.find(x => x.id === 'java-exam-reviewer-master-quiz');
+          if (!reviewer || reviewer.stage !== 'Testing & Delivery' || reviewer.quiz?.length !== 33) {
+            throw new Error('The 33-question Java exam reviewer is missing or incomplete.');
+          }
+          for (const question of reviewer.quiz) {
+            if (!question.question || !Array.isArray(question.options) ||
+              !question.options[question.correctIndex] || !question.explanation) {
+              throw new Error('Incomplete Java exam reviewer answer explanation.');
+            }
+          }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 86) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 87) throw new Error('Missing Java 21 references.');
           for (const lesson of javaLessons) {
             if (!lesson.practice?.prompt || !lesson.practice?.check) {
               throw new Error('Java lesson lacks an actionable practice challenge: ' + lesson.id);
@@ -764,6 +776,11 @@ jobs:
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
             if (!(await page.textContent('[data-reference-output]')).includes('Rejected: insufficient stock')) throw new Error('Java inventory project output reference missing.');
             if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java project exposed fake local browser Run IDE.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-exam-reviewer-master-quiz', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-quiz-lab]:not([hidden])');
+            if (!(await page.textContent('[data-quiz-count]')).includes('33')) throw new Error('Java exam reviewer 33-question counter missing.');
+            if (!(await page.textContent('[data-reference-output]')).includes('Throwable: true')) throw new Error('Java reviewer reference output missing.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-review-modern-interface', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-java-ide]:not([hidden])');
