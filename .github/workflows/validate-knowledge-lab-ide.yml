@@ -56,6 +56,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-exam-reviewer.js
           node --check assets/js/knowledge-lab-java-capstone-projects.js
           node --check assets/js/knowledge-lab-java-review-tl.js
+          node --check assets/js/knowledge-lab-java-exam-reviewer-tl.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -104,6 +105,7 @@ jobs:
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           require('./assets/js/knowledge-lab-java-review-tl.js');
+          require('./assets/js/knowledge-lab-java-exam-reviewer-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
           const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
@@ -407,6 +409,19 @@ jobs:
             if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
               || !lesson.code || !lesson.expectedOutput || !lesson.practice?.prompt || !lesson.practice?.check
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
+          }
+          const tlExam = i18n.lessons?.tl?.['java-exam-reviewer-master-quiz'];
+          if (!tlExam || tlExam.quiz?.length !== 33 || !tlExam.practice?.check ||
+              tlExam.learn?.length < 3 || !tlExam.explanation) {
+            throw new Error('33-item manually curated Filipino Java exam is missing.');
+          }
+          const tlCorrectPositions = [0,1,2].map(i => tlExam.quiz.filter(q => q.correctIndex === i).length);
+          if (tlCorrectPositions.some(count => count !== 11)) {
+            throw new Error('Filipino Java reviewer answer positions should be balanced.');
+          }
+          for (const q of tlExam.quiz) {
+            if (!q.question || !q.options?.[q.correctIndex] || !q.explanation)
+              throw new Error('Incomplete Filipino Java exam answer explanation.');
           }
           const reviewer = data.lessons.find(x => x.id === 'java-exam-reviewer-master-quiz');
           if (!reviewer || reviewer.stage !== 'Testing & Delivery' || reviewer.quiz?.length !== 33) {
@@ -787,6 +802,12 @@ jobs:
             await page.waitForSelector('[data-quiz-lab]:not([hidden])');
             if (!(await page.textContent('[data-quiz-count]')).includes('33')) throw new Error('Java exam reviewer 33-question counter missing.');
             if (!(await page.textContent('[data-reference-output]')).includes('Throwable: true')) throw new Error('Java reviewer reference output missing.');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (!(await page.textContent('[data-title]')).includes('JAVA Exam Reviewer')) throw new Error('Filipino Java exam title missing.');
+            if (!(await page.textContent('[data-quiz-question]')).includes('class sa Java')) throw new Error('Curated Filipino exam questions not selected.');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-review-modern-interface', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-java-ide]:not([hidden])');
