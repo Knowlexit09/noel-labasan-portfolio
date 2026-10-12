@@ -1,3 +1,12 @@
+## CONTROLLING UI CHECKPOINT — 22 additional JS + 22 additional Java lessons
+
+The user specifically requested restoration of the Java IDE that accompanied curriculum growth from **37 to 59 JavaScript lessons** and **31 to 53 Java lessons**, from GitHub snapshot **`d4ab74fd094e2539e81b672bac047ed0daf8cf84`**. It is an **inline Java Practice IDE placed inside the Java reference panel, after the source and expected output**, with Main.java textarea, external-code privacy note, **Open real Java IDE**, **Send current code to IDE**, **Reset sample**, **Close external IDE**, and an optional OneCompiler iframe. This original checkpoint UI **does not have a separate Java Run ▶ button** on our website; the genuine Java Run button belongs to the embedded provider after explicit opt-in. Do not conflate it with the later two-column separate `Browser IDE · Java` implementation or the reference-only rollback.
+
+The checkpoint's matching HTML, CSS, and Java IDE controller were restored, with same-lesson language draft preservation and popup permission removed as non-visual improvements. Keep latest **91 Java + 59 JavaScript** lessons, all exams, and the isolated HTML/CSS/JS runner; this is solely a historical *UI* restoration, not a course content rollback.
+
+Static verification and mocked Open/Sync/Reset/Close/target-origin/language preservation checks passed. CI regressions updated for checkpoint-specific DOM placement and controls. Remote CI, GitHub Pages deployment and real OneCompiler execution remain unverified. Risk Medium due to optional third-party Java source transfer; opt-in, strict origin, restrictive iframe, normal revert and no backend mutation remain safeguards.
+
+
 ## Current IDE clarification — first code IDE restored (2026-10-12)
 
 This newest decision **supersedes all reference-only Java rollback notes** in this file. The user's “unang version ng IDE” means the original browser IDE with **code editor + Run ▶**, visually shared across HTML/CSS/JavaScript/Java. Java again displays Main.java in the left editor, right Result/Console, toolbar Reset/Copy/Full Screen/Stop and responsive split layout. The old code example and **Expected Output** are available as supplemental lesson reference, but they do not pretend to be the result of editing/running Java.
