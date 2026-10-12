@@ -602,8 +602,9 @@ jobs:
                 throw new Error('Photoshop keys or quizzes missing '+original.id);
               }
             }
+            const exactAdobeCommand = original.quiz[0].options[1] === 'New Smart Object via Copy.';
             if (original.quiz[0].question===localized.quiz[0].question ||
-                original.quiz[0].options[1]===localized.quiz[0].options[1]) {
+                (original.quiz[0].options[1]===localized.quiz[0].options[1] && !exactAdobeCommand)) {
               throw new Error('Photoshop bilingual quiz untranslated '+original.id);
             }
           }
