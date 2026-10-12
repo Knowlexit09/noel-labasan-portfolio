@@ -363,3 +363,12 @@ a{color:inherit}
   .kl-language-button [data-language-button-label]{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .kl-language-menu{right:-4px}
 }
+
+
+/* Optional lesson practice: deliberately separate from explanatory material. */
+.kl-practice{margin-top:24px;padding:22px 24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.kl-practice h2{font-size:clamp(20px,2.8vw,26px);margin:9px 0 12px;line-height:1.25}
+.kl-practice p{max-width:76ch;line-height:1.65;white-space:pre-line}
+.kl-practice-check{border-top:1px solid var(--line);padding-top:12px;margin-bottom:0;color:#435b70}
+.kl-practice-check strong{color:var(--ink,#142235)}
+@media(max-width:600px){.kl-practice{padding:17px}}
