@@ -10744,6 +10744,1449 @@
       ]
     },
     {
+      "id": "css-errors-parser-recovery",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "CSS Fundamentals",
+      "order": 70,
+      "level": "Beginner",
+      "title": "CSS errors and parser recovery",
+      "summary": "Focused lesson: CSS errors and parser recovery.",
+      "definition": "Browsers parse CSS declaration by declaration. An invalid declaration is usually ignored while valid declarations around it can still apply.",
+      "learn": [
+        "CSS errors and parser recovery",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand CSS errors and parser recovery well enough to use it intentionally.",
+      "explanation": "CSS is designed to fail gracefully. If one property name or value is invalid, the browser commonly drops that declaration rather than the entire stylesheet. This is why a page can look partly correct even when CSS contains mistakes.",
+      "tip": "Use DevTools to look for crossed-out or invalid declarations before rewriting a whole selector.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Assume that because some styles still work, every declaration in the rule is valid.",
+      "expected": "The runnable example demonstrates CSS errors and parser recovery.",
+      "realUse": "Useful in production interfaces when css errors and parser recovery matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "css fundamentals",
+        "css",
+        "errors",
+        "and",
+        "parser",
+        "recovery"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:20px;background:#eef8fd;color:#17344b;colr:red;border-left:5px solid #0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What usually happens to an invalid CSS declaration?",
+          "options": [
+            "The invalid declaration is ignored",
+            "The whole HTML document is deleted",
+            "Every stylesheet stops permanently",
+            "JavaScript recompiles it"
+          ],
+          "correctIndex": 0,
+          "explanation": "The invalid declaration is ignored"
+        },
+        {
+          "question": "What is a good first debugging step?",
+          "options": [
+            "Inspect the rule in DevTools",
+            "Add !important everywhere",
+            "Duplicate the selector",
+            "Increase z-index"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inspect the rule in DevTools"
+        }
+      ]
+    },
+    {
+      "id": "css-grouping-selector-lists",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "CSS Fundamentals",
+      "order": 80,
+      "level": "Beginner",
+      "title": "Grouping selectors with selector lists",
+      "summary": "Focused lesson: Grouping selectors with selector lists.",
+      "definition": "A comma-separated selector list applies the same declaration block to multiple selectors.",
+      "learn": [
+        "Grouping selectors with selector lists",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Grouping selectors with selector lists well enough to use it intentionally.",
+      "explanation": "Instead of repeating identical rules for h1, h2, and h3, a selector list can group them. One important rule: if a selector in a legacy-style selector list is invalid, the whole list can fail; forgiving selector functions such as :is() behave differently.",
+      "tip": "Group selectors when the declarations truly belong together, not just to save a few characters.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Create giant selector lists that mix unrelated components and become hard to maintain.",
+      "expected": "The runnable example demonstrates Grouping selectors with selector lists.",
+      "realUse": "Useful in production interfaces when grouping selectors with selector lists matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "css fundamentals",
+        "grouping",
+        "selectors",
+        "with",
+        "selector",
+        "lists"
+      ],
+      "html": "<main><h1>Heading one</h1><h2>Heading two</h2><p class=\"sample\">Same color through a grouped selector.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}h1,h2,.sample{color:#0879b7}h1,h2{margin-block:.35em}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What separates selectors in a selector list?",
+          "options": [
+            "Commas",
+            "Semicolons",
+            "Plus signs",
+            "Slashes"
+          ],
+          "correctIndex": 0,
+          "explanation": "Commas"
+        },
+        {
+          "question": "When is grouping appropriate?",
+          "options": [
+            "When the selectors genuinely share the same declarations",
+            "Whenever selectors are on the same page",
+            "Only for IDs",
+            "Only inside Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "When the selectors genuinely share the same declarations"
+        }
+      ]
+    },
+    {
+      "id": "css-import-stylesheet-order",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "CSS Fundamentals",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "@import and stylesheet order",
+      "summary": "Focused lesson: @import and stylesheet order.",
+      "definition": "@import loads another stylesheet from within CSS and must appear before most other style rules; normal cascade order still matters.",
+      "learn": [
+        "@import and stylesheet order",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand @import and stylesheet order well enough to use it intentionally.",
+      "explanation": "External <link> elements are often preferred for predictable loading, but @import is valid CSS and can also work with layers/support conditions. Imported rules participate in the cascade where the import occurs.",
+      "tip": "Prefer HTML <link> for primary site stylesheets unless @import solves a specific architecture need.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use long chains of @import files that delay discovery of critical CSS.",
+      "expected": "The runnable example demonstrates @import and stylesheet order.",
+      "realUse": "Useful in production interfaces when @import and stylesheet order matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "css fundamentals",
+        "import",
+        "and",
+        "stylesheet",
+        "order"
+      ],
+      "html": "<main><h1>@import concept</h1><p class=\"sample\">This demo does not fetch an external stylesheet; edit the shown syntax instead.</p><pre><code>@import url(\"theme.css\");</code></pre></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:16px;background:#eef8fd}pre{padding:12px;background:#0d2235;color:white;border-radius:10px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Where must @import normally appear?",
+          "options": [
+            "Before most ordinary style rules",
+            "Only at the very bottom",
+            "Inside every selector",
+            "Inside HTML body"
+          ],
+          "correctIndex": 0,
+          "explanation": "Before most ordinary style rules"
+        },
+        {
+          "question": "What is often preferred for a primary stylesheet?",
+          "options": [
+            "An HTML link element",
+            "A background image",
+            "A table cell",
+            "A z-index"
+          ],
+          "correctIndex": 0,
+          "explanation": "An HTML link element"
+        }
+      ]
+    },
+    {
+      "id": "css-inheritance-keywords",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "inherit, initial, unset, revert, and revert-layer",
+      "summary": "Focused lesson: inherit, initial, unset, revert, and revert-layer.",
+      "definition": "CSS global keywords let a declaration intentionally reuse inherited values, return to property defaults, or roll back cascade levels.",
+      "learn": [
+        "inherit, initial, unset, revert, and revert-layer",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand inherit, initial, unset, revert, and revert-layer well enough to use it intentionally.",
+      "explanation": "`inherit` takes the parent's computed value. `initial` uses the property's initial value. `unset` behaves like inherit for inherited properties and initial otherwise. `revert` and `revert-layer` roll back parts of the cascade.",
+      "tip": "Use global keywords when you can explain exactly which cascade behavior you want.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use unset/revert as random reset buttons without understanding inherited vs non-inherited properties.",
+      "expected": "The runnable example demonstrates inherit, initial, unset, revert, and revert-layer.",
+      "realUse": "Useful in production interfaces when inherit, initial, unset, revert, and revert-layer matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "inherit",
+        "initial",
+        "unset",
+        "revert",
+        "and",
+        "revert"
+      ],
+      "html": "<main><div class=\"sample\">Inherited blue text; <strong>this strong uses initial color.</strong></div></main>",
+      "css": "body{font-family:system-ui;padding:28px;color:#0879b7}.sample{padding:18px;color:inherit;border:1px solid currentColor}.sample strong{color:initial}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does inherit do?",
+          "options": [
+            "Uses the parent’s computed value",
+            "Uses a random browser value",
+            "Always sets zero",
+            "Disables the property"
+          ],
+          "correctIndex": 0,
+          "explanation": "Uses the parent’s computed value"
+        },
+        {
+          "question": "How does unset behave on an inherited property?",
+          "options": [
+            "Like inherit",
+            "Like display:none",
+            "Like !important",
+            "Like z-index:auto only"
+          ],
+          "correctIndex": 0,
+          "explanation": "Like inherit"
+        }
+      ]
+    },
+    {
+      "id": "css-important",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "!important without creating a specificity war",
+      "summary": "Focused lesson: !important without creating a specificity war.",
+      "definition": "`!important` changes a declaration's importance in the cascade and should be reserved for cases where that stronger priority is truly required.",
+      "learn": [
+        "!important without creating a specificity war",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand !important without creating a specificity war well enough to use it intentionally.",
+      "explanation": "`!important` is not 'maximum specificity'. Importance is a separate cascade step. Overuse makes components difficult to override and can create escalating conflicts.",
+      "tip": "Before adding !important, inspect cascade origin, layer, specificity, and source order.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use !important as the default fix whenever a declaration loses.",
+      "expected": "The runnable example demonstrates !important without creating a specificity war.",
+      "realUse": "Useful in production interfaces when !important without creating a specificity war matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "important",
+        "without",
+        "creating",
+        "a",
+        "specificity",
+        "war"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{color:#0879b7!important}.demo .sample{color:#d94d72}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Is !important simply a bigger specificity score?",
+          "options": [
+            "No, importance is a separate cascade step",
+            "Yes, it adds 1000 points",
+            "Only for IDs",
+            "Only in inline CSS"
+          ],
+          "correctIndex": 0,
+          "explanation": "No, importance is a separate cascade step"
+        },
+        {
+          "question": "What should you inspect first?",
+          "options": [
+            "Cascade, layers, specificity, and source order",
+            "Screen brightness",
+            "HTML file size",
+            "Image dimensions"
+          ],
+          "correctIndex": 0,
+          "explanation": "Cascade, layers, specificity, and source order"
+        }
+      ]
+    },
+    {
+      "id": "css-background-origin-clip-shorthand",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 150,
+      "level": "Intermediate",
+      "title": "background shorthand, origin, and clip",
+      "summary": "Focused lesson: background shorthand, origin, and clip.",
+      "definition": "The background shorthand combines multiple background properties; background-origin chooses the positioning box and background-clip chooses where the background is painted.",
+      "learn": [
+        "background shorthand, origin, and clip",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand background shorthand, origin, and clip well enough to use it intentionally.",
+      "explanation": "Origin can reference the border-box, padding-box, or content-box. Clip controls how far the painted background extends. These are especially useful for layered effects and precise card surfaces.",
+      "tip": "Use longhand properties while learning/debugging, then compress to shorthand only when it stays readable.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Put many background shorthand values in the wrong order and then guess why the image moved.",
+      "expected": "The runnable example demonstrates background shorthand, origin, and clip.",
+      "realUse": "Useful in production interfaces when background shorthand, origin, and clip matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "background",
+        "shorthand",
+        "origin",
+        "and",
+        "clip"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:28px;border:12px dashed #0879b7;background:linear-gradient(135deg,#5bd6ff,#0879b7) padding-box;background-clip:padding-box;color:#0d2235}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does background-clip control?",
+          "options": [
+            "How far the background paint extends",
+            "Which HTML tag is selected",
+            "The font weight",
+            "The DOM order"
+          ],
+          "correctIndex": 0,
+          "explanation": "How far the background paint extends"
+        },
+        {
+          "question": "Why use longhands while debugging?",
+          "options": [
+            "They make each background responsibility easier to inspect",
+            "They increase specificity",
+            "They disable gradients",
+            "They hide borders"
+          ],
+          "correctIndex": 0,
+          "explanation": "They make each background responsibility easier to inspect"
+        }
+      ]
+    },
+    {
+      "id": "css-modern-color-spaces",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 160,
+      "level": "Advanced",
+      "title": "Modern color spaces: lab(), lch(), oklab(), and oklch()",
+      "summary": "Focused lesson: Modern color spaces: lab(), lch(), oklab(), and oklch().",
+      "definition": "Modern CSS color functions can express colors in Lab/LCH and OKLab/OKLCH spaces, which model perceptual color relationships more directly than sRGB channels.",
+      "learn": [
+        "Modern color spaces: lab(), lch(), oklab(), and oklch()",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Modern color spaces: lab(), lch(), oklab(), and oklch() well enough to use it intentionally.",
+      "explanation": "OKLCH is especially useful for systematic design palettes because lightness, chroma, and hue can be adjusted independently. Production targets should still be verified.",
+      "tip": "Use modern color spaces when they make palette relationships easier to maintain, not just because they are newer.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Assume the same numeric change produces identical visual contrast across every color space.",
+      "expected": "The runnable example demonstrates Modern color spaces: lab(), lch(), oklab(), and oklch().",
+      "realUse": "Useful in production interfaces when modern color spaces: lab(), lch(), oklab(), and oklch() matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "modern",
+        "color",
+        "spaces",
+        "lab",
+        "lch",
+        "oklab"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:28px;border-radius:14px;background:oklch(70% .17 230);color:oklch(22% .04 230)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which modern format uses lightness, chroma, and hue?",
+          "options": [
+            "oklch()",
+            "rgb()",
+            "url()",
+            "calc()"
+          ],
+          "correctIndex": 0,
+          "explanation": "oklch()"
+        },
+        {
+          "question": "What should still be checked before production use?",
+          "options": [
+            "Target browser support and contrast",
+            "Database indexes",
+            "HTML table width",
+            "Git branch name"
+          ],
+          "correctIndex": 0,
+          "explanation": "Target browser support and contrast"
+        }
+      ]
+    },
+    {
+      "id": "css-color-mix-light-dark",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Colors & Backgrounds",
+      "order": 170,
+      "level": "Advanced",
+      "title": "color-mix() and light-dark()",
+      "summary": "Focused lesson: color-mix() and light-dark().",
+      "definition": "`color-mix()` blends colors in a chosen color space; `light-dark()` can choose between light and dark color values when the page supports those schemes.",
+      "learn": [
+        "color-mix() and light-dark()",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand color-mix() and light-dark() well enough to use it intentionally.",
+      "explanation": "These functions reduce hard-coded duplicate shades. color-mix() is useful for tints and borders from a token; light-dark() can pair with color-scheme for theme-aware values.",
+      "tip": "Keep base design tokens meaningful so generated mixes remain predictable.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Generate every state from one color without checking contrast.",
+      "expected": "The runnable example demonstrates color-mix() and light-dark().",
+      "realUse": "Useful in production interfaces when color-mix() and light-dark() matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "colors & backgrounds",
+        "color",
+        "mix",
+        "and",
+        "light",
+        "dark"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": ":root{color-scheme:light dark;--brand:#0879b7}body{font-family:system-ui;padding:28px;background:light-dark(#f5f9fc,#0d2235);color:light-dark(#17344b,#eef8fd)}.sample{padding:20px;border:2px solid color-mix(in srgb,var(--brand) 60%,transparent);background:color-mix(in srgb,var(--brand) 12%,transparent)}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does color-mix() do?",
+          "options": [
+            "Blends color values",
+            "Loads images",
+            "Changes DOM order",
+            "Creates Grid tracks"
+          ],
+          "correctIndex": 0,
+          "explanation": "Blends color values"
+        },
+        {
+          "question": "What helps light-dark() choose an appropriate branch?",
+          "options": [
+            "The supported color scheme",
+            "z-index",
+            "Margin collapse",
+            "Font size"
+          ],
+          "correctIndex": 0,
+          "explanation": "The supported color scheme"
+        }
+      ]
+    },
+    {
+      "id": "css-box-shadow-focused",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 140,
+      "level": "Intermediate",
+      "title": "box-shadow: elevation, rings, and inset shadows",
+      "summary": "Focused lesson: box-shadow: elevation, rings, and inset shadows.",
+      "definition": "`box-shadow` draws one or more shadows around an element and can also draw inset shadows.",
+      "learn": [
+        "box-shadow: elevation, rings, and inset shadows",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand box-shadow: elevation, rings, and inset shadows well enough to use it intentionally.",
+      "explanation": "A shadow includes horizontal/vertical offset, blur, optional spread, and color. Multiple shadows can combine subtle elevation with ring-like effects.",
+      "tip": "Use shadows to communicate hierarchy sparingly; borders often work better for dense interfaces.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use large dark shadows on every card so the page looks noisy and heavy.",
+      "expected": "The runnable example demonstrates box-shadow: elevation, rings, and inset shadows.",
+      "realUse": "Useful in production interfaces when box-shadow: elevation, rings, and inset shadows matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "box",
+        "shadow",
+        "elevation",
+        "rings",
+        "and",
+        "inset"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:50px;background:#eef4f8}.sample{padding:28px;background:white;border-radius:16px;box-shadow:0 18px 40px #17344b20,0 0 0 1px #17344b12}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Can box-shadow accept multiple comma-separated shadows?",
+          "options": [
+            "Yes",
+            "No",
+            "Only for images",
+            "Only with JavaScript"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yes"
+        },
+        {
+          "question": "What is often better than a heavy shadow in dense UI?",
+          "options": [
+            "A subtle border",
+            "A bigger z-index",
+            "More blur",
+            "More !important"
+          ],
+          "correctIndex": 0,
+          "explanation": "A subtle border"
+        }
+      ]
+    },
+    {
+      "id": "css-border-image",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Box Model & Sizing",
+      "order": 150,
+      "level": "Intermediate",
+      "title": "border-image",
+      "summary": "Focused lesson: border-image.",
+      "definition": "`border-image` slices an image or generated image and uses it to paint an element's border area.",
+      "learn": [
+        "border-image",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand border-image well enough to use it intentionally.",
+      "explanation": "It can create decorative frames from gradients or images. Because the syntax has multiple parts, use it when a normal border cannot express the design.",
+      "tip": "Prefer ordinary borders for standard UI; use border-image for genuinely decorative frames.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use border-image for basic separators that would be clearer with border-color/style.",
+      "expected": "The runnable example demonstrates border-image.",
+      "realUse": "Useful in production interfaces when border-image matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "box model & sizing",
+        "border",
+        "image"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:40px}.sample{padding:26px;border:8px solid transparent;border-image:linear-gradient(135deg,#0879b7,#5bd6ff,#d94d72) 1}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What can be used as a border-image source?",
+          "options": [
+            "An image or generated gradient",
+            "Only plain text",
+            "Only an ID selector",
+            "Only a table"
+          ],
+          "correctIndex": 0,
+          "explanation": "An image or generated gradient"
+        },
+        {
+          "question": "When is a normal border preferable?",
+          "options": [
+            "For standard UI separators and boundaries",
+            "Never",
+            "Only in print",
+            "Only in Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "For standard UI separators and boundaries"
+        }
+      ]
+    },
+    {
+      "id": "css-font-face",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 180,
+      "level": "Intermediate",
+      "title": "@font-face and custom web fonts",
+      "summary": "Focused lesson: @font-face and custom web fonts.",
+      "definition": "`@font-face` defines a downloadable font face and maps it to a font-family name that other rules can use.",
+      "learn": [
+        "@font-face and custom web fonts",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand @font-face and custom web fonts well enough to use it intentionally.",
+      "explanation": "A complete font-face can include source URLs, formats, weight/style ranges, and font-display behavior. Real font licensing and optimized formats matter in production.",
+      "tip": "Use only font files you are licensed to serve, and provide a sensible fallback stack.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Load many unused font weights or unlicensed font files.",
+      "expected": "The runnable example demonstrates @font-face and custom web fonts.",
+      "realUse": "Useful in production interfaces when @font-face and custom web fonts matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "font",
+        "face",
+        "and",
+        "custom",
+        "web",
+        "fonts"
+      ],
+      "html": "<main><h1>Custom font concept</h1><p class=\"sample\">This runnable demo keeps a system fallback so it needs no network font.</p><pre><code>@font-face { font-family: \"MyFont\"; src: url(\"myfont.woff2\") format(\"woff2\"); }</code></pre></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{padding:16px;background:#eef8fd}pre{padding:14px;background:#0d2235;color:white;border-radius:10px;overflow:auto}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does @font-face define?",
+          "options": [
+            "A font face that CSS can reference",
+            "A Grid line",
+            "A database field",
+            "A media query"
+          ],
+          "correctIndex": 0,
+          "explanation": "A font face that CSS can reference"
+        },
+        {
+          "question": "What must be checked before serving a custom font?",
+          "options": [
+            "Its license and loading cost",
+            "Only its filename length",
+            "Its z-index",
+            "Its HTML tag"
+          ],
+          "correctIndex": 0,
+          "explanation": "Its license and loading cost"
+        }
+      ]
+    },
+    {
+      "id": "css-font-shorthand-variable-fonts",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 190,
+      "level": "Intermediate",
+      "title": "font shorthand and variable font axes",
+      "summary": "Focused lesson: font shorthand and variable font axes.",
+      "definition": "The `font` shorthand can combine style, weight, size, line-height, and family; variable fonts may expose continuous axes such as weight.",
+      "learn": [
+        "font shorthand and variable font axes",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand font shorthand and variable font axes well enough to use it intentionally.",
+      "explanation": "Shorthand reduces repetition but can reset omitted font sub-properties, so use it carefully. Variable fonts can provide many weights/styles in one file when the font supports those axes.",
+      "tip": "Use longhands when debugging typography; use shorthand once intended values are clear.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Forget that font shorthand can reset font properties you set earlier.",
+      "expected": "The runnable example demonstrates font shorthand and variable font axes.",
+      "realUse": "Useful in production interfaces when font shorthand and variable font axes matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "font",
+        "shorthand",
+        "and",
+        "variable",
+        "font",
+        "axes"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{font:italic 750 1.4rem/1.6 system-ui,sans-serif;padding:18px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What must the font shorthand include to be valid?",
+          "options": [
+            "A font-size and font-family",
+            "A z-index and margin",
+            "A Grid area",
+            "A background image"
+          ],
+          "correctIndex": 0,
+          "explanation": "A font-size and font-family"
+        },
+        {
+          "question": "What is a variable-font advantage?",
+          "options": [
+            "One font can expose continuous style axes",
+            "It removes HTML",
+            "It guarantees every browser feature",
+            "It makes images smaller"
+          ],
+          "correctIndex": 0,
+          "explanation": "One font can expose continuous style axes"
+        }
+      ]
+    },
+    {
+      "id": "css-overflow-wrap-word-break-hyphens",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 200,
+      "level": "Intermediate",
+      "title": "overflow-wrap, word-break, and hyphens",
+      "summary": "Focused lesson: overflow-wrap, word-break, and hyphens.",
+      "definition": "These properties control how long words or strings may break when they do not fit a line.",
+      "learn": [
+        "overflow-wrap, word-break, and hyphens",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand overflow-wrap, word-break, and hyphens well enough to use it intentionally.",
+      "explanation": "`overflow-wrap:anywhere` can prevent long URLs or IDs from overflowing. `word-break` changes breaking rules more aggressively. `hyphens:auto` can add language-aware hyphenation when supported.",
+      "tip": "Start with overflow-wrap for unbroken strings; use word-break only when its stronger behavior is appropriate.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Force `word-break: break-all` on normal paragraphs and make text difficult to read.",
+      "expected": "The runnable example demonstrates overflow-wrap, word-break, and hyphens.",
+      "realUse": "Useful in production interfaces when overflow-wrap, word-break, and hyphens matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "overflow",
+        "wrap",
+        "word",
+        "break",
+        "and",
+        "hyphens"
+      ],
+      "html": "<main><div class=\"sample\">AReallyLongUnbrokenIdentifierThatWouldNormallyOverflowTheCard123456789</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{max-width:260px;padding:16px;background:#eef8fd;overflow-wrap:anywhere;hyphens:auto}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property can safely break a long unbroken identifier?",
+          "options": [
+            "overflow-wrap",
+            "z-index",
+            "object-position",
+            "border-image"
+          ],
+          "correctIndex": 0,
+          "explanation": "overflow-wrap"
+        },
+        {
+          "question": "Why can break-all be harmful on paragraphs?",
+          "options": [
+            "It can break words at difficult-to-read points",
+            "It disables color",
+            "It removes padding",
+            "It changes DOM order"
+          ],
+          "correctIndex": 0,
+          "explanation": "It can break words at difficult-to-read points"
+        }
+      ]
+    },
+    {
+      "id": "css-writing-mode",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 210,
+      "level": "Intermediate",
+      "title": "writing-mode and text-orientation",
+      "summary": "Focused lesson: writing-mode and text-orientation.",
+      "definition": "`writing-mode` controls whether lines flow horizontally or vertically; `text-orientation` affects glyph orientation in vertical writing modes.",
+      "learn": [
+        "writing-mode and text-orientation",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand writing-mode and text-orientation well enough to use it intentionally.",
+      "explanation": "These properties are important for international typography and specialized labels. Logical properties pair naturally with writing-mode because they adapt to block/inline directions.",
+      "tip": "Prefer logical properties when a component may appear in different writing modes.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Hard-code left/right spacing everywhere and then expect vertical writing to adapt.",
+      "expected": "The runnable example demonstrates writing-mode and text-orientation.",
+      "realUse": "Useful in production interfaces when writing-mode and text-orientation matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "writing",
+        "mode",
+        "and",
+        "text",
+        "orientation"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{writing-mode:vertical-rl;text-orientation:mixed;padding:18px;min-height:180px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does writing-mode change?",
+          "options": [
+            "The direction in which lines and blocks flow",
+            "Only font weight",
+            "Only color",
+            "Network loading"
+          ],
+          "correctIndex": 0,
+          "explanation": "The direction in which lines and blocks flow"
+        },
+        {
+          "question": "What CSS family pairs well with writing modes?",
+          "options": [
+            "Logical properties",
+            "Image sprites",
+            "z-index only",
+            "Table captions"
+          ],
+          "correctIndex": 0,
+          "explanation": "Logical properties"
+        }
+      ]
+    },
+    {
+      "id": "css-text-wrap",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 220,
+      "level": "Intermediate",
+      "title": "text-wrap: balance and pretty",
+      "summary": "Focused lesson: text-wrap: balance and pretty.",
+      "definition": "Modern text wrapping values can improve line distribution: `balance` balances short multi-line text, while `pretty` aims for better paragraph wrapping where supported.",
+      "learn": [
+        "text-wrap: balance and pretty",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand text-wrap: balance and pretty well enough to use it intentionally.",
+      "explanation": "`balance` is useful for headings because it avoids one awkward short final line. It should not be applied indiscriminately to very long body text.",
+      "tip": "Use balance on headings and short blocks; test `pretty` on real paragraphs and target browsers.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Balance huge articles and assume there is no layout cost or readability tradeoff.",
+      "expected": "The runnable example demonstrates text-wrap: balance and pretty.",
+      "realUse": "Useful in production interfaces when text-wrap: balance and pretty matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "text",
+        "wrap",
+        "balance",
+        "and",
+        "pretty"
+      ],
+      "html": "<main><h1 class=\"sample\">Build CSS lessons that are easier to understand and practice</h1></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{max-width:520px;font-size:2rem;font-weight:850;line-height:1.1;text-wrap:balance}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which value is especially useful for multi-line headings?",
+          "options": [
+            "text-wrap: balance",
+            "display:none",
+            "float:left",
+            "z-index:auto"
+          ],
+          "correctIndex": 0,
+          "explanation": "text-wrap: balance"
+        },
+        {
+          "question": "What should you do with newer wrapping behavior?",
+          "options": [
+            "Test real content and target browsers",
+            "Assume every browser behaves identically",
+            "Use !important",
+            "Remove line-height"
+          ],
+          "correctIndex": 0,
+          "explanation": "Test real content and target browsers"
+        }
+      ]
+    },
+    {
+      "id": "css-line-clamp",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 230,
+      "level": "Intermediate",
+      "title": "Multi-line truncation with line clamping",
+      "summary": "Focused lesson: Multi-line truncation with line clamping.",
+      "definition": "Line clamping limits a text block to a fixed number of visible lines; production code may still use the widely supported prefixed pattern depending on target browsers.",
+      "learn": [
+        "Multi-line truncation with line clamping",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Multi-line truncation with line clamping well enough to use it intentionally.",
+      "explanation": "Clamping is useful for card previews, but it hides content. Critical instructions, names, prices, or identifiers should not be cut off without a way to access the full value.",
+      "tip": "Use line clamping for previews only; preserve the full content in the document or detail view.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Clamp critical information with no accessible path to the complete text.",
+      "expected": "The runnable example demonstrates Multi-line truncation with line clamping.",
+      "realUse": "Useful in production interfaces when multi-line truncation with line clamping matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "multi",
+        "line",
+        "truncation",
+        "with",
+        "line",
+        "clamping"
+      ],
+      "html": "<main><p class=\"sample\">This is a longer card preview used to demonstrate multi-line truncation. The content continues beyond three lines so the browser can clamp the visible preview without deleting the underlying text from the source.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{max-width:420px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;padding:16px;background:#eef8fd}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What is a safe use for line clamping?",
+          "options": [
+            "A non-critical content preview",
+            "An essential legal warning",
+            "A product SKU that must be exact",
+            "A password"
+          ],
+          "correctIndex": 0,
+          "explanation": "A non-critical content preview"
+        },
+        {
+          "question": "What should remain available?",
+          "options": [
+            "The full content when users need it",
+            "Only the clipped portion",
+            "Only hover animation",
+            "Only the first word"
+          ],
+          "correctIndex": 0,
+          "explanation": "The full content when users need it"
+        }
+      ]
+    },
+    {
+      "id": "css-list-style-marker",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Typography & Text",
+      "order": 240,
+      "level": "Intermediate",
+      "title": "list-style and ::marker",
+      "summary": "Focused lesson: list-style and ::marker.",
+      "definition": "List style properties control markers, while `::marker` targets the marker box of list items.",
+      "learn": [
+        "list-style and ::marker",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand list-style and ::marker well enough to use it intentionally.",
+      "explanation": "You can change marker type, position, and image, or style the marker's color/font. Keeping real list semantics is usually better than recreating bullets with arbitrary divs.",
+      "tip": "Start with semantic ul/ol markup, then customize markers in CSS.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Remove list markers and all visual grouping without providing another clear list structure.",
+      "expected": "The runnable example demonstrates list-style and ::marker.",
+      "realUse": "Useful in production interfaces when list-style and ::marker matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "typography & text",
+        "list",
+        "style",
+        "and",
+        "marker"
+      ],
+      "html": "<main><ul class=\"demo\"><li>Learn</li><li>Practice</li><li>Apply</li></ul></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{list-style-type:square}.demo li{padding:.3rem}.demo li::marker{color:#0879b7;font-size:1.2em}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which pseudo-element styles a list marker?",
+          "options": [
+            "::marker",
+            "::before only",
+            ":marker()",
+            "@marker"
+          ],
+          "correctIndex": 0,
+          "explanation": "::marker"
+        },
+        {
+          "question": "What should remain in the HTML?",
+          "options": [
+            "A real semantic list",
+            "Only decorative divs",
+            "A table",
+            "A canvas"
+          ],
+          "correctIndex": 0,
+          "explanation": "A real semantic list"
+        }
+      ]
+    },
+    {
+      "id": "css-generated-content",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "Generated content with ::before, ::after, and content",
+      "summary": "Focused lesson: Generated content with ::before, ::after, and content.",
+      "definition": "`::before` and `::after` create generated pseudo-elements whose generated content can be controlled with the `content` property.",
+      "learn": [
+        "Generated content with ::before, ::after, and content",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Generated content with ::before, ::after, and content well enough to use it intentionally.",
+      "explanation": "Generated content is useful for decoration and small non-essential labels. Essential information should usually remain in HTML because generated content has accessibility and copy/translation caveats.",
+      "tip": "Use pseudo-elements for decoration first; keep important text in the document.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Put critical instructions only in `content:` and assume every user will receive them the same way.",
+      "expected": "The runnable example demonstrates Generated content with ::before, ::after, and content.",
+      "realUse": "Useful in production interfaces when generated content with ::before, ::after, and content matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "generated",
+        "content",
+        "with",
+        "before",
+        "after",
+        "and"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{display:inline-flex;gap:8px;align-items:center;padding:12px;background:#eef8fd}.sample::before{content:\"★\";color:#0879b7}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which property supplies generated pseudo-element content?",
+          "options": [
+            "content",
+            "text-value",
+            "innerHTML",
+            "marker-text"
+          ],
+          "correctIndex": 0,
+          "explanation": "content"
+        },
+        {
+          "question": "What content should usually stay in HTML?",
+          "options": [
+            "Essential information",
+            "Pure decoration only",
+            "A shadow",
+            "A gradient"
+          ],
+          "correctIndex": 0,
+          "explanation": "Essential information"
+        }
+      ]
+    },
+    {
+      "id": "css-selection-placeholder",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Selectors & Cascade",
+      "order": 100,
+      "level": "Intermediate",
+      "title": "::selection and ::placeholder",
+      "summary": "Focused lesson: ::selection and ::placeholder.",
+      "definition": "`::selection` styles user-selected text; `::placeholder` styles placeholder text inside compatible form controls.",
+      "learn": [
+        "::selection and ::placeholder",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand ::selection and ::placeholder well enough to use it intentionally.",
+      "explanation": "Selection styles should preserve contrast. Placeholder text is a hint, not a label, and should not be made so faint that it becomes unreadable.",
+      "tip": "Treat placeholder styling as secondary; keep a real label in HTML.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use placeholder as the only field label or reduce its contrast until users cannot read it.",
+      "expected": "The runnable example demonstrates ::selection and ::placeholder.",
+      "realUse": "Useful in production interfaces when ::selection and ::placeholder matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "selectors & cascade",
+        "selection",
+        "and",
+        "placeholder"
+      ],
+      "html": "<main><label for=\"search\">Search</label><br><input id=\"search\" placeholder=\"Try selecting this page text\"></main>",
+      "css": "body{font-family:system-ui;padding:28px}::selection{background:#0879b7;color:white}input{padding:12px;border:1px solid #b9c9d5;border-radius:8px}input::placeholder{color:#607086}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which pseudo-element styles selected text?",
+          "options": [
+            "::selection",
+            "::selected",
+            ":focus",
+            "::marker"
+          ],
+          "correctIndex": 0,
+          "explanation": "::selection"
+        },
+        {
+          "question": "Can placeholder replace a real label?",
+          "options": [
+            "No",
+            "Yes always",
+            "Only on desktop",
+            "Only with Grid"
+          ],
+          "correctIndex": 0,
+          "explanation": "No"
+        }
+      ]
+    },
+    {
+      "id": "css-focus-state-selectors",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Accessibility",
+      "order": 40,
+      "level": "Intermediate",
+      "title": ":focus-visible and :focus-within",
+      "summary": "Focused lesson: :focus-visible and :focus-within.",
+      "definition": "`:focus-visible` targets focus when a visible focus indicator is appropriate; `:focus-within` matches an element when it or a descendant has focus.",
+      "learn": [
+        ":focus-visible and :focus-within",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand :focus-visible and :focus-within well enough to use it intentionally.",
+      "explanation": "These selectors help build keyboard-visible states without forcing the same ring on every pointer click, and they let a whole form group react when a child control is focused.",
+      "tip": "Never remove focus styling unless you replace it with an equally visible indicator.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Style only :hover and leave keyboard users with no visible focus.",
+      "expected": "The runnable example demonstrates :focus-visible and :focus-within.",
+      "realUse": "Useful in production interfaces when :focus-visible and :focus-within matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "accessibility",
+        "focus",
+        "visible",
+        "and",
+        "focus",
+        "within"
+      ],
+      "html": "<main><div class=\"field\"><label for=\"mail\">Email</label><br><input id=\"mail\" type=\"email\"></div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.field{padding:12px;border:2px solid #ccdbe5;border-radius:10px}.field:focus-within{border-color:#0879b7}.field input{padding:10px}.field input:focus-visible{outline:3px solid #5bd6ff;outline-offset:2px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which selector can match the parent when a child is focused?",
+          "options": [
+            ":focus-within",
+            ":hover-within",
+            ":parent-focus",
+            "::focus"
+          ],
+          "correctIndex": 0,
+          "explanation": ":focus-within"
+        },
+        {
+          "question": "What should keyboard users always get?",
+          "options": [
+            "A visible focus indication",
+            "Only hover color",
+            "No outline ever",
+            "A hidden input"
+          ],
+          "correctIndex": 0,
+          "explanation": "A visible focus indication"
+        }
+      ]
+    },
+    {
+      "id": "css-form-state-selectors",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Forms, Tables & UI",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Form state selectors: :checked, :disabled, :valid, :invalid",
+      "summary": "Focused lesson: Form state selectors: :checked, :disabled, :valid, :invalid.",
+      "definition": "Form pseudo-classes let CSS respond to native control states such as checked, disabled, valid, or invalid.",
+      "learn": [
+        "Form state selectors: :checked, :disabled, :valid, :invalid",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Form state selectors: :checked, :disabled, :valid, :invalid well enough to use it intentionally.",
+      "explanation": "These selectors can communicate state visually without replacing native form semantics. Validation color should be paired with text/icon cues where users need to understand the issue.",
+      "tip": "Use native HTML attributes and states as the source of truth, then style them.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Communicate invalid or valid state with color alone.",
+      "expected": "The runnable example demonstrates Form state selectors: :checked, :disabled, :valid, :invalid.",
+      "realUse": "Useful in production interfaces when form state selectors: :checked, :disabled, :valid, :invalid matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "forms, tables & ui",
+        "form",
+        "state",
+        "selectors",
+        "checked",
+        "disabled",
+        "valid"
+      ],
+      "html": "<main class=\"demo\"><label>Email <input type=\"email\" required placeholder=\"name@example.com\"></label><label><input type=\"checkbox\" checked> Checked option</label><input value=\"Disabled\" disabled></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:grid;gap:10px;max-width:360px}input{padding:10px;border:2px solid #c8d5de;border-radius:8px}input:valid{border-color:#16835f}input:invalid:not(:placeholder-shown){border-color:#c13b58}input:disabled{opacity:.55}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which pseudo-class matches a checked checkbox?",
+          "options": [
+            ":checked",
+            ":selected-only",
+            ":active-form",
+            "::checked"
+          ],
+          "correctIndex": 0,
+          "explanation": ":checked"
+        },
+        {
+          "question": "What should accompany validation color?",
+          "options": [
+            "A clear text or other state cue",
+            "Nothing",
+            "A bigger shadow only",
+            "A hidden label"
+          ],
+          "correctIndex": 0,
+          "explanation": "A clear text or other state cue"
+        }
+      ]
+    },
+    {
+      "id": "css-centering-patterns",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 70,
+      "level": "Intermediate",
+      "title": "Modern centering patterns",
+      "summary": "Focused lesson: Modern centering patterns.",
+      "definition": "CSS can center content with different tools depending on whether you need text alignment, block auto margins, Flexbox, or Grid alignment.",
+      "learn": [
+        "Modern centering patterns",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand Modern centering patterns well enough to use it intentionally.",
+      "explanation": "There is no single 'center everything' property. `margin-inline:auto` centers a sized block, `text-align:center` centers inline content, and Grid/Flex alignment centers layout items.",
+      "tip": "Choose the centering method based on what kind of box or content you are centering.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Use absolute positioning plus magic translate values for every centering problem.",
+      "expected": "The runnable example demonstrates Modern centering patterns.",
+      "realUse": "Useful in production interfaces when modern centering patterns matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "modern",
+        "centering",
+        "patterns"
+      ],
+      "html": "<main class=\"demo\"><h1>CSS Focus</h1><p>Edit the CSS, run it again, and compare the result.</p><div class=\"sample\">Sample element</div></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{min-height:220px;display:grid;place-items:center;background:#f3f8fb}.sample{width:min(90%,320px);padding:24px;background:white;border:1px solid #d7e3eb;border-radius:14px;text-align:center}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Which shorthand can center Grid items on both axes?",
+          "options": [
+            "place-items: center",
+            "float:center",
+            "position:center",
+            "margin:center"
+          ],
+          "correctIndex": 0,
+          "explanation": "place-items: center"
+        },
+        {
+          "question": "Which method centers a sized block horizontally in normal flow?",
+          "options": [
+            "margin-inline: auto",
+            "z-index:auto",
+            "text-shadow",
+            "overflow:hidden"
+          ],
+          "correctIndex": 0,
+          "explanation": "margin-inline: auto"
+        }
+      ]
+    },
+    {
+      "id": "css-vertical-align",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 80,
+      "level": "Intermediate",
+      "title": "vertical-align: what it actually aligns",
+      "summary": "Focused lesson: vertical-align: what it actually aligns.",
+      "definition": "`vertical-align` affects inline-level and table-cell boxes; it does not vertically center arbitrary block containers.",
+      "learn": [
+        "vertical-align: what it actually aligns",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand vertical-align: what it actually aligns well enough to use it intentionally.",
+      "explanation": "This property is commonly misunderstood. In inline formatting it can align text and images relative to the baseline. For general component centering, Flexbox or Grid is usually clearer.",
+      "tip": "If you are centering a card child vertically, use Flexbox or Grid rather than vertical-align.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Set vertical-align:middle on an ordinary block container and expect its child to center.",
+      "expected": "The runnable example demonstrates vertical-align: what it actually aligns.",
+      "realUse": "Useful in production interfaces when vertical-align: what it actually aligns matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "vertical",
+        "align",
+        "what",
+        "it",
+        "actually",
+        "aligns"
+      ],
+      "html": "<main><p class=\"sample\"><img alt=\"\">Image box aligned to the middle of this inline line.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.sample{font-size:20px}.sample img{width:44px;height:44px;background:#0879b7;vertical-align:middle;margin-right:8px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "Where does vertical-align primarily apply?",
+          "options": [
+            "Inline-level and table-cell boxes",
+            "Every block layout automatically",
+            "Only Grid containers",
+            "Only fixed elements"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inline-level and table-cell boxes"
+        },
+        {
+          "question": "What is clearer for general two-axis centering?",
+          "options": [
+            "Flexbox or Grid",
+            "word-spacing",
+            "border-image",
+            "font-style"
+          ],
+          "correctIndex": 0,
+          "explanation": "Flexbox or Grid"
+        }
+      ]
+    },
+    {
+      "id": "css-flow-root",
+      "categoryId": "css",
+      "mode": "code",
+      "stage": "Display & Positioning",
+      "order": 90,
+      "level": "Intermediate",
+      "title": "display: flow-root and block formatting contexts",
+      "summary": "Focused lesson: display: flow-root and block formatting contexts.",
+      "definition": "`display: flow-root` creates a block formatting context, which can contain internal floats and isolate certain layout interactions.",
+      "learn": [
+        "display: flow-root and block formatting contexts",
+        "How it behaves",
+        "A practical use case",
+        "A common mistake"
+      ],
+      "objective": "Understand display: flow-root and block formatting contexts well enough to use it intentionally.",
+      "explanation": "It is a clean modern clearfix replacement when a container should encompass floated children. Block formatting contexts also affect margin interaction and float behavior.",
+      "tip": "Use flow-root when you need normal block flow plus float containment without extra clearfix pseudo-elements.",
+      "hack": "Change one related property at a time in the browser IDE and compare the result.",
+      "mistake": "Add clearfix hacks by habit without checking whether flow-root solves the problem more cleanly.",
+      "expected": "The runnable example demonstrates display: flow-root and block formatting contexts.",
+      "realUse": "Useful in production interfaces when display: flow-root and block formatting contexts matches the design or maintenance need.",
+      "tags": [
+        "css",
+        "display & positioning",
+        "display",
+        "flow",
+        "root",
+        "and",
+        "block",
+        "formatting"
+      ],
+      "html": "<main class=\"demo\"><div class=\"float\"></div><p>The flow-root container expands around this floated box and the text wrapping beside it.</p></main>",
+      "css": "body{font-family:system-ui;padding:28px}.demo{display:flow-root;padding:12px;background:#eef8fd}.float{float:left;width:90px;height:90px;margin-right:14px;background:#0879b7;border-radius:10px}",
+      "js": "",
+      "quiz": [
+        {
+          "question": "What does display:flow-root create?",
+          "options": [
+            "A new block formatting context",
+            "A Grid track",
+            "An iframe",
+            "A new DOM node"
+          ],
+          "correctIndex": 0,
+          "explanation": "A new block formatting context"
+        },
+        {
+          "question": "What legacy pattern can it often replace?",
+          "options": [
+            "A clearfix hack",
+            "A media query",
+            "A font face",
+            "A color token"
+          ],
+          "correctIndex": 0,
+          "explanation": "A clearfix hack"
+        }
+      ]
+    },
+    {
       "id": "css-ref-selectors",
       "categoryId": "css-reference",
       "mode": "code",
