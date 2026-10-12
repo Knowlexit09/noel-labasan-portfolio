@@ -1,3 +1,12 @@
+
+## CURRENT UI STANDARD — Java returned to original reference-only lessons (October 12, 2026)
+
+**Newest directive takes precedence over the earlier Java IDE proposals below.** The user decided the first Java implementation was cleaner than the embedded third-party IDE. Java lessons therefore display their original `Main.java` source, **Copy Code**, and **Expected Output**, with **no fake Run**, no third-party iframe or Enable IDE step. HTML/CSS/JavaScript keep their working native browser IDE unchanged. To execute Java manually use a trusted Java 21 JDK (`javac Main.java`, then `java Main`); the repository's 91-sample verifier remains in GitHub CI for independent reference validation.
+
+The previous OneCompiler frame, accompanying Java-only styles, Java JS lifecycle hook and CSP origin allowance were removed. All 91 Java course records, DAO/SOLID/JDBC material, four Java capstones, 33-question bilingual exam and 59 JavaScript lessons stay intact. Old sections describing a live Java IDE are **historical**, not the current state. There is no permission prompt, no external source transfer and no Java browser Run control.
+
+Static HTML/CSS/JavaScript syntax, reference UI structure and CI Node test block parsing were checked. Remote GitHub Actions/Pages and browser end-to-end results are **not confirmed**. Risk low for content integrity, medium for UI/CI regressions; normal git revert is available. Do not mark Java beginner-to-expert complete merely because the lessons were preserved.
+
 # Knowledge Lab — JavaScript & Java Complete-Coverage Blueprint
 
 Updated 2026-10-12. **This is an honest coverage map, not a claim that every topic below is already taught.** W3Schools and modern language fundamentals are topic *benchmarks*, not source content. Author all explanations and quizzes independently.
