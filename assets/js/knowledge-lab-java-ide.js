@@ -22,6 +22,7 @@
   const frameHost = $('[data-java-ide-frame]');
   const status = $('[data-java-ide-status]');
   let canonicalSource = '';
+  let activeLessonId = null;
   let activeFrame = null;
   let frameReady = false;
 
@@ -129,9 +130,18 @@
 
   window.KNOWLEDGE_LAB_JAVA_IDE = {
     render(lesson) {
-      closeFrame();
       const isJava = Boolean(lesson && lesson.mode === 'reference' &&
         lesson.language === 'Java' && lesson.verified && typeof lesson.code === 'string');
+      // A language switch re-renders the *same* lesson. Never discard the
+      // learner's edits or iframe during a translation-only change.
+      if (isJava && activeLessonId === lesson.id) {
+        root.hidden = false;
+        return;
+      }
+      // Changing lessons is a new workspace; the old cross-origin compiler
+      // is torn down so its output cannot be confused with the next lesson.
+      closeFrame();
+      activeLessonId = isJava ? lesson.id : null;
       root.hidden = !isJava;
       if (!isJava) {
         canonicalSource = '';
