@@ -58,6 +58,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-capstone-projects.js
           node --check assets/js/knowledge-lab-java-review-tl.js
           node --check assets/js/knowledge-lab-java-exam-reviewer-tl.js
+          node --check assets/js/knowledge-lab-java-definitions-tl.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-js-quality-tl.js
           node --check assets/js/knowledge-lab-i18n.js
@@ -113,6 +114,7 @@ jobs:
           require('./assets/js/knowledge-lab-js-quality-tl.js');
           require('./assets/js/knowledge-lab-java-review-tl.js');
           require('./assets/js/knowledge-lab-java-exam-reviewer-tl.js');
+          require('./assets/js/knowledge-lab-java-definitions-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
           const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
@@ -457,6 +459,27 @@ jobs:
             }
           }
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
+          // Every Java definition must be authored in Filipino / Taglish. A definition-only
+          // patch must not be advertised as a completely translated lesson.
+          let definitionOnlyCount = 0;
+          for (const lesson of javaLessons) {
+            const version = i18n.lessons?.tl?.[lesson.id];
+            if (!version?.definition || version.definition === lesson.definition) {
+              throw new Error('Missing distinct Taglish Java definition: ' + lesson.id);
+            }
+            if (version.translationCoverage === 'definition-only') {
+              definitionOnlyCount++;
+              if (version.title || version.explanation || version.quiz) {
+                throw new Error('Definition-only patch falsely includes reviewed fields: ' + lesson.id);
+              }
+            } else if (!version.title || !version.explanation || !Array.isArray(version.quiz)) {
+              throw new Error('Existing curated Java translation must remain complete: ' + lesson.id);
+            }
+          }
+          if (definitionOnlyCount !== 79) {
+            throw new Error('Expected 79 definition-only Java translations; got ' + definitionOnlyCount);
+          }
+
 
           // Exact source, stdout and practice verification follows in a separate,
           // isolated Java 21 runner (no stale Main.class across lessons).
@@ -875,6 +898,29 @@ jobs:
               throw new Error('PreparedStatement lesson failed to load.');
             if (await page.locator('[data-java-ide-frame] iframe').count())
               throw new Error('External Java compiler loaded before consent.');
+
+            // Separate manually authored Taglish definition from English fallback
+            // without changing the verified code or the optional Java IDE.
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-jdbc-transaction', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-definition]');
+            const originalDefinition = await page.textContent('[data-definition]');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            const taglishDefinition = await page.textContent('[data-definition]');
+            if (!taglishDefinition.includes('Ang JDBC transaction') ||
+                taglishDefinition === originalDefinition) {
+              throw new Error('JDBC transaction Taglish definition is missing.');
+            }
+            if (!(await page.textContent('[data-language-status]')).includes('Taglish na ang kahulugan')) {
+              throw new Error('Partially translated lesson falsely marked as fully curated.');
+            }
+            if (await page.locator('[data-java-ide-frame] iframe').count())
+              throw new Error('Changing definition language loaded an external compiler.');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
+            if ((await page.textContent('[data-definition]')) !== originalDefinition) {
+              throw new Error('Switching back to English did not restore original definition.');
+            }
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-what-is-java', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
