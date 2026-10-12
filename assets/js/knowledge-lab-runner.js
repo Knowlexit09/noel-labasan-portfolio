@@ -383,6 +383,7 @@
     if (lesson.mode === 'code') return 'RUNNABLE';
     if (lesson.mode === 'reference' && lesson.verified) return 'CI VERIFIED';
     if (lesson.mode === 'proof') return 'REAL PROOF';
+    if (lesson.mode === 'guide') return 'GUIDED PRACTICE';
     return 'REFERENCE';
   }
 
@@ -407,6 +408,16 @@
     $('[data-shortcut-short]').textContent = shortcut.shortCode || '';
     $('[data-shortcut-note]').textContent = shortcut.note || '';
     $('[data-shortcut-caution]').textContent = shortcut.caution || '';
+    const photoshop = lesson.categoryId === 'photoshop';
+    const header = panel.querySelector('.kl-section-kicker');
+    const rule = panel.querySelector('.kl-shortcut-rule');
+    const labels = panel.querySelectorAll('.kl-shortcut-notes strong');
+    if (header) header.textContent = photoshop ? 'PHOTOSHOP KEYBOARD SHORTCUTS' : 'CLEANER / SHORTER WAY';
+    if (rule) rule.textContent = photoshop
+      ? 'Installed Photoshop desktop · check custom key bindings'
+      : 'Shorter is only better when it stays readable.';
+    if (labels[0]) labels[0].textContent = photoshop ? 'Practice note:' : 'Why use it:';
+    if (labels[1]) labels[1].textContent = photoshop ? 'Shortcut caution:' : 'Do not force it:';
   }
 
   function formatWork(value) {
@@ -834,7 +845,8 @@
       lesson.mode === 'code' ? '✓ Live browser runner' :
       lesson.mode === 'reference' && lesson.language === 'Java' ? '☕ Java 21 · Practice IDE' :
       lesson.mode === 'reference' && lesson.verified ? 'Reference example · CI gated' :
-      lesson.mode === 'proof' ? '✓ Real portfolio proof' : 'Reference';
+      lesson.mode === 'proof' ? '✓ Real portfolio proof' :
+      lesson.mode === 'guide' ? 'Photoshop lesson · guided exercise (not an in-browser editor)' : 'Reference';
 
     const languageStatus = $('[data-language-status]');
     if (languageStatus) {
