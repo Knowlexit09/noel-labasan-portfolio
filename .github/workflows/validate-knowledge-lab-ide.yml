@@ -721,7 +721,7 @@ jobs:
             if (!(await externalJavaFrame.locator('body').getAttribute('data-code')).includes('Hello from Java')) throw new Error('Java sample was not transmitted on consent.');
             await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
             await page.click('[data-java-ide-sync]');
-            if (!(await externalJavaFrame.locator('body').getAttribute('data-code')).includes('Edited Java')) throw new Error('Edited Java source did not sync.');
+            await externalJavaFrame.locator('body[data-code*="Edited Java"]').waitFor({ timeout: 5000 });
             await page.click('[data-java-ide-close]');
             if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java iframe did not close.');
 
