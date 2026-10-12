@@ -388,3 +388,28 @@ a{color:inherit}
 .kl-java-ide-iframe{width:100%;display:block;border:0;height:620px;min-height:440px;background:#07131f}
 .kl-java-ide-fallback a{color:#85dffc}
 @media(max-width:600px){.kl-java-ide{padding:16px}.kl-java-ide-iframe{height:550px}.kl-java-ide-actions .kl-btn{flex:1 1 150px}}
+
+
+/* Java IDE V2: one consistent Knowledge Lab editor chrome, genuine external JVM. */
+.kl-java-reference-source{padding:9px 20px;border-top:1px solid #17324a;background:#091927}
+.kl-java-reference-source summary{cursor:pointer;color:#9edcf8;font-size:11px;font-weight:750;line-height:1.65}
+.kl-java-reference-source pre{max-height:250px;overflow:auto;white-space:pre;padding:14px;color:#dceaf6;font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}
+.kl-java-ide.kl-ide{padding:0;border:0;border-radius:0;background:var(--code);margin:0;box-shadow:none;color:var(--code-text)}
+.kl-java-ide .kl-ide-head{padding:20px 22px}
+.kl-java-ide .kl-ide-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.kl-java-ide .kl-ide-actions .kl-btn{font-size:11px}
+.kl-java-ide .kl-java-ide-notice{padding:12px 20px;background:#163048;color:#e5f3fd;font-size:12px;line-height:1.65;border-bottom:1px solid #365777}
+.kl-java-ide-workspace{min-width:0;background:#07131f}
+.kl-java-ide-workspace .kl-editor-pane{border:0;min-width:0}
+.kl-java-editor-tab{font-size:12px;color:#d8f0fa;font-weight:800;padding:7px 9px}
+.kl-java-ide .kl-editor-tabs .kl-save-state{margin-left:auto;color:#a0bacc;font-size:10px}
+.kl-java-ide .kl-editor-stack{height:460px}
+.kl-java-ide .kl-code-editor{display:block;box-sizing:border-box;width:100%;height:460px;min-height:280px;padding:20px;background:#07131f;color:#dcecf7;border:0;border-radius:0;resize:vertical;font:13px/1.68 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre;overflow:auto}
+.kl-java-ide .kl-code-editor:focus-visible{outline:3px solid #70d6f8;outline-offset:-4px}
+.kl-java-ide .kl-java-ide-frame{margin:0;border:0;border-radius:0;overflow:hidden}
+.kl-java-ide .kl-java-ide-iframe{height:630px;min-height:440px;width:100%;border:0;display:block}
+.kl-java-ide .kl-java-ide-status{margin:0;padding:12px 20px;border-top:1px solid #2a465e;background:#0c2131;color:#d2eaf4;font-size:12px;line-height:1.65}
+.kl-java-ide .kl-java-ide-fallback{margin:0;padding:10px 20px 15px;background:#0c2131;color:#b1cadc;font-size:11px;line-height:1.6}
+.kl-java-ide .kl-java-ide-fallback a{color:#8de8ff}
+.kl-java-ide .kl-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:600px){.kl-java-ide .kl-ide-head{padding:17px;flex-direction:column;align-items:stretch}.kl-java-ide .kl-ide-actions{justify-content:flex-start}.kl-java-ide .kl-ide-actions .kl-btn{flex:1 1 140px}.kl-java-ide .kl-code-editor{font-size:12px;height:410px}.kl-java-ide .kl-java-ide-iframe{height:600px}}
