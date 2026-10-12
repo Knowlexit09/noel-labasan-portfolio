@@ -1,5 +1,19 @@
 # PORTFOLIO MASTER CONTEXT
 
+## AUTHORITATIVE UI RESTORE — 59 JavaScript / 53 Java checkpoint IDE
+
+User clarified that the exact Java IDE they want was **the one present when 22 JavaScript lessons and 22 Java lessons were added**, moving course counts **37→59 JavaScript** and **31→53 Java**. The verified GitHub checkpoint is **`d4ab74fd094e2539e81b672bac047ed0daf8cf84`**, whose source proves the user means the **original inline `Java Practice IDE — compile and run your own code` underneath the Java reference example/output**, NOT the later two-column `Browser IDE · Java` with a Java-only Run toolbar, nor the reference-only Java lesson rollback. This is the **newest, controlling UI preference**. Supersedes previous contradictory UI sections in this context file.
+
+**RESTORED ON MAIN:** `knowledge/index.html` now uses that exact checkpoint's embedded Java reference + Java Practice IDE structure: Java code and expected reference output, local Main.java textarea, privacy notice, buttons **Open real Java IDE / Send current code to IDE / Reset sample / Close external IDE**, optional iframe only after Open, fallback separate OneCompiler page. The inline Java IDE occurs **within the reference panel before the standalone practice challenge and quiz**, precisely as it did at that checkpoint. The page does **not** display the later separate split-pane Java Run toolbar. Restored original checkpoint's matching Java-only CSS and `assets/js/knowledge-lab-java-ide.js` control flow. Minimal non-visual safeguards retained: do not erase drafts on same-lesson translation changes and no iframe popup permission. Target-origin `postMessage` remains strictly `https://onecompiler.com`; no pre-consent iframe. Original local HTML/CSS/JS Browser IDE remains UNCHANGED.
+
+**Curriculum preserved:** 91 current Java records (including DAO/SOLID/JDBC/4 capstones), 59 current JavaScript records, HTML/CSS records, original + Filipino 33-question Java exam reviewer, all translation and practice records. No rollback of course content or backend. The 59/53 count is **only the historical IDE checkpoint identification**, not a rollback of curriculum to those counts. Latest curriculum total stays **401**.
+
+**Testing:** Source HTML sections balance, old Java controls/reference CSS present, external CSP restricted, code renderer still uses Java IDE lifecycle, original no fake in-browser JVM principle preserved. Browser CI updated to test inline Java reference placement, old Open/Sync/Reset/Close behavior and consent, translation draft preservation, no later Java-only Run toolbar; 91 Java output verifier still configured. Controlled DOM mock PASS for no automatic external frame, locally preserved edits, user-click open, exact-target-origin source sync, reset, close and cleanup. **Real remote OneCompiler compilation, full GitHub Actions run and latest GitHub Pages deployment are UNVERIFIED**; don't claim full live CI or deployment success.
+
+**Risk: Medium** — third-party Java source transfer/privacy/availability and regression during UI reversion. Mitigations: explicit user opt-in, strict `postMessage` origin, sandbox no popups and referrer suppression, no change to backend, preserved CI assertions and original isolated JS runner. Rollback via targeted normal Git revert of interface-only commits; no force push, history rewrite, data or Admin Publish Live changes.
+
+
+
 ## Latest Java IDE placement clarification — bottom of lesson (2026-10-12)
 
 User said **"yung nasa baba yun ang tanda ko"** after clarifying they mean the original **code editor with Run**, not reference-only. This means the IDE is remembered in the **lower lesson content**, not near the top. Preserve the code editor + Run/Reset/Copy/Stop design while showing Java lesson material first.
