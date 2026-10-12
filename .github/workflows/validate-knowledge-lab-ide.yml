@@ -38,11 +38,13 @@ jobs:
           node --check assets/js/knowledge-lab-javascript-intermediate.js
           node --check assets/js/knowledge-lab-js-core-expansion.js
           node --check assets/js/knowledge-lab-js-collections-quality.js
+          node --check assets/js/knowledge-lab-js-projects.js
           node --check scripts/verify-knowledge-lab-js-examples.cjs
           node scripts/verify-knowledge-lab-js-examples.cjs
           node --check assets/js/knowledge-lab-java-foundations.js
           node --check assets/js/knowledge-lab-java-core-expansion.js
           node --check assets/js/knowledge-lab-java-modern-expansion.js
+          node --check assets/js/knowledge-lab-java-intro.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -72,9 +74,11 @@ jobs:
           require('./assets/js/knowledge-lab-javascript-intermediate.js');
           require('./assets/js/knowledge-lab-js-core-expansion.js');
           require('./assets/js/knowledge-lab-js-collections-quality.js');
+          require('./assets/js/knowledge-lab-js-projects.js');
           require('./assets/js/knowledge-lab-java-foundations.js');
           require('./assets/js/knowledge-lab-java-core-expansion.js');
           require('./assets/js/knowledge-lab-java-modern-expansion.js');
+          require('./assets/js/knowledge-lab-java-intro.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -93,7 +97,7 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length !== 35) throw new Error('Expected 35 JavaScript lessons, got ' + jsFoundations.length);
+          if (jsFoundations.length !== 37) throw new Error('Expected 37 JavaScript lessons, got ' + jsFoundations.length);
           const requiredJavaScript = ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops',
             'js-arrays-foundation', 'js-objects-properties', 'js-map-reduce', 'js-form-input-validation',
             'js-event-delegation', 'js-promises-async-await', 'js-debugging-errors', 'js-project-live-product-search',
@@ -101,7 +105,7 @@ jobs:
             'js-nullish-defaults','js-while-loop','js-string-search-methods','js-number-input-conversion','js-lexical-closure',
             'js-array-slice-splice','js-array-sort-safely','js-set-unique-values','js-map-keyed-lookup',
             'js-object-destructuring','js-json-basics','js-classes-constructor','js-promise-all',
-            'js-try-catch','js-safe-text-rendering'];
+            'js-try-catch','js-safe-text-rendering','js-project-stock-cart','js-project-accessible-tabs'];
           const requiredJavaScriptStages = ['Foundation', 'Operators & Decisions', 'Strings & Numbers', 'Functions & Scope', 'Arrays', 'Objects & Data', 'DOM & Forms', 'Asynchronous Thinking', 'Projects & Practice'];
           const jsCategory = data.categories.find(x => x.id === 'javascript');
           if (!jsCategory || requiredJavaScriptStages.some(stage => !jsCategory.learningPath?.includes(stage))) {
@@ -350,7 +354,8 @@ jobs:
             'java-exceptions-cleanup','java-generics-list','java-stream-filter-map',
             'java-method-overloading','java-recursion-base-case','java-stringbuilder','java-enum-states',
             'java-comparator-sort','java-record-introduction','java-optional-values',
-            'java-bigdecimal-rounding','java-time-localdate','java-try-with-resources'];
+            'java-bigdecimal-rounding','java-time-localdate','java-try-with-resources',
+            'java-what-is-java','java-jdk-jvm-jre'];
           for (const id of requiredJavaIds) {
             const lesson = data.lessons.find(x => x.id === id);
             if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
@@ -358,7 +363,7 @@ jobs:
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 29) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 31) throw new Error('Missing Java 21 references.');
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
@@ -586,6 +591,25 @@ jobs:
             console.log('COUNTER_RESULT=' + count);
             if (count !== '1') throw new Error('Counter interaction failed. Actual count: ' + count);
 
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-project-stock-cart', { waitUntil: 'networkidle' });
+            let cartFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await cartFrame.waitForSelector('#add');
+            for (let i = 0; i < 4; i++) await cartFrame.click('#add');
+            if ((await cartFrame.textContent('#quantity')).trim() !== '3') throw new Error('Cart did not stop at available stock.');
+            if ((await cartFrame.textContent('#total')).trim() !== '375') throw new Error('Cart subtotal mismatch.');
+            await cartFrame.click('#remove');
+            if ((await cartFrame.textContent('#quantity')).trim() !== '2') throw new Error('Cart removal failed.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-project-accessible-tabs', { waitUntil: 'networkidle' });
+            let tabsFrame = await (await page.$('[data-result-frame]')).contentFrame();
+            await tabsFrame.waitForSelector('#tab-details');
+            await tabsFrame.click('#tab-details');
+            if ((await tabsFrame.getAttribute('#tab-details','aria-selected')) !== 'true') throw new Error('Tab selection did not update.');
+            if (await tabsFrame.locator('#panel-details').isHidden()) throw new Error('Selected panel should be visible.');
+            await tabsFrame.focus('#tab-details');
+            await tabsFrame.keyboard.press('ArrowLeft');
+            if ((await tabsFrame.getAttribute('#tab-overview','aria-selected')) !== 'true') throw new Error('Keyboard tab navigation failed.');
+
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-safe-text-rendering', { waitUntil: 'networkidle' });
             let safeFrame = await (await page.$('[data-result-frame]')).contentFrame();
             await safeFrame.waitForSelector('#result');
@@ -665,6 +689,11 @@ jobs:
             if (!(await page.textContent('[data-quiz-count]')).includes('Question 2')) {
               throw new Error('Quiz did not advance.');
             }
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-what-is-java', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            if ((await page.textContent('[data-reference-output]')).trim() !== 'Hello from Java') throw new Error('Java entry lesson output missing.');
+            if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java intro exposed a fake runner.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-inheritance-polymorphism', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
