@@ -830,6 +830,13 @@ jobs:
             if ((await page.textContent('[data-reference-output]')).trim() !== 'Hello from Java') throw new Error('Java entry lesson output missing.');
             if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java intro exposed a fake runner.');
             await page.waitForSelector('[data-java-ide]:not([hidden])');
+            const lessonSectionOrder = await page.locator('[data-view="lesson"]').evaluate(section =>
+              Array.from(section.querySelectorAll('[data-reference-lab], [data-practice-lab], [data-java-ide], [data-quiz-lab]'))
+                .map(el => el.hasAttribute('data-reference-lab') ? 'reference' :
+                  el.hasAttribute('data-practice-lab') ? 'practice' :
+                  el.hasAttribute('data-java-ide') ? 'ide' : 'quiz'));
+            if (lessonSectionOrder.join(',') !== 'reference,practice,ide,quiz')
+              throw new Error('Java IDE should appear below the lesson reference and practice, before quiz.');
             if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java IDE must be opt-in and not autoload.');
             if (!(await page.inputValue('[data-java-ide-source]')).includes('public class Main')) throw new Error('Editable Java source missing.');
             if (!(await page.locator('[data-java-ide-run]').isVisible())) throw new Error('Shared Java Run should be visible from first render.');
