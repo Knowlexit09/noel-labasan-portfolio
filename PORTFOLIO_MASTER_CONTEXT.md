@@ -5,7 +5,7 @@
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
 > Public site: `https://knowlexit09.github.io/noel-labasan-portfolio/`  
 > Admin: `https://knowlexit09.github.io/noel-labasan-portfolio/admin/`  
-> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab CSS complete named-color explorer**  
+> Last consolidated: **2026-10-12 (Asia/Manila) — Knowledge Lab published-lesson completeness audit**  
 > Verified deployment baseline before the exact Exponify cover update: **GitHub Pages Run #282 — success**, head `c853ca7b41f4920e2dc6c9856d5ec3197616be3f`.
 > Exponify cover integration validation: **Validate Exponify cover integration Run #1 — success** (`37590939117`), including JS syntax checks, exact PNG SHA-256/size verification, active-path SVG/old-preview absence checks, and preserved MP4 assertions.
 > Knowledge Lab V1 staging baseline before merge: `main` / Pages Run #286 were verified successful at `9a37d7a32631a77b406d0a958c6803bb5f01390e`.
@@ -381,6 +381,15 @@ Current category structure:
 - Latest CSS expansion regression: **Validate Knowledge Lab IDE Run #52 — SUCCESS** at `4f26e1d65b0527bc891b0cac5feca67db69c3e14`.
 - Matching Pages deployment at that code state: **Run #380 — SUCCESS**.
 - New CSS lessons remain English source until each Filipino/Taglish version is manually reviewed. The existing curated Filipino CSS lessons remain intact; no automatic translation is introduced.
+
+- Published-lesson completeness audit (2026-10-12): all **210 currently published Knowledge Lab lesson/reference/proof records** now pass the full teaching-schema requirement: Definition, 3+ You Will Learn items, Objective, Explanation, Tip, Hack, Common Mistake, Expected Result, Real Work Use, and 2+ quiz questions.
+- Closed the previously missing fields on the 2 JavaScript lessons, 5 Java lessons, and the three proof-backed creative lessons (Photoshop, Canva, CapCut).
+- Added quizzes to all **20 CSS Reference** pages, including the full named-color reference.
+- Creative quizzes are based only on the documented proof-backed workflow/result; no unsupported project claims or invented metrics were added.
+- CI now fails if **any published lesson** is missing required teaching fields or at least two quiz questions.
+- Latest global completeness regression: **Validate Knowledge Lab IDE Run #59 — SUCCESS** at `1a8e79cbd067692586e3f2143e517f0f94706c20`.
+- Matching Pages deployment: **Run #389 — SUCCESS**.
+- Important scope boundary: this means all *currently published lesson records* are structurally complete. Empty roadmap categories are still intentionally not fabricated: Git & GitHub and Google Apps Script are future code-course tracks; Blender and Roblox Studio remain proof-gated until real walkthrough/proof material is attached.
 
 - Language UX rule (2026-10-12): do **not** use automatic/literal translation for learning content. Filipino must be an authored/curated lesson version, written naturally for comprehension while preserving real technical terms (CSS, selector, property, cascade, Flexbox, Grid, etc.) in English when that is clearer and industry-standard.
 - Knowledge Lab now has a persistent top-bar language switch: **English** ↔ **Filipino / Taglish**.
