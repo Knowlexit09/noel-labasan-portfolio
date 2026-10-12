@@ -48,6 +48,7 @@ jobs:
           node --check assets/js/knowledge-lab-java-modern-expansion.js
           node --check assets/js/knowledge-lab-java-intro.js
           node --check assets/js/knowledge-lab-java-professional.js
+          node --check assets/js/knowledge-lab-java-applied.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
@@ -88,6 +89,7 @@ jobs:
           require('./assets/js/knowledge-lab-java-modern-expansion.js');
           require('./assets/js/knowledge-lab-java-intro.js');
           require('./assets/js/knowledge-lab-java-professional.js');
+          require('./assets/js/knowledge-lab-java-applied.js');
           require('./assets/js/knowledge-lab-i18n.js');
           require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
@@ -367,7 +369,8 @@ jobs:
             'java-comparator-sort','java-record-introduction','java-optional-values',
             'java-bigdecimal-rounding','java-time-localdate','java-try-with-resources',
             'java-what-is-java','java-jdk-jvm-jre',
-            'java-static-final','java-string-formatting','java-multidimensional-arrays','java-equals-hashcode','java-set-deduplication','java-files-utf8','java-path-normalization','java-lambda-predicate','java-method-references','java-collectors-joining','java-thread-join','java-completablefuture','java-virtual-thread-executor','java-assertion-tests'];
+            'java-static-final','java-string-formatting','java-multidimensional-arrays','java-equals-hashcode','java-set-deduplication','java-files-utf8','java-path-normalization','java-lambda-predicate','java-method-references','java-collectors-joining','java-thread-join','java-completablefuture','java-virtual-thread-executor','java-assertion-tests',
+            'java-composition','java-abstract-methods','java-generic-method','java-immutable-collections','java-pattern-sku','java-grouping-report','java-timezone-conversion','java-project-inventory-cli'];
           for (const id of requiredJavaIds) {
             const lesson = data.lessons.find(x => x.id === id);
             if (!lesson || lesson.mode !== 'reference' || lesson.language !== 'Java' || !lesson.verified
@@ -375,7 +378,7 @@ jobs:
               || lesson.quiz?.length < 2) throw new Error('Incomplete verified Java 21 lesson: ' + id);
           }
           const javaLessons = data.lessons.filter(x => x.mode === 'reference' && x.language === 'Java' && x.verified);
-          if (javaLessons.length < 45) throw new Error('Missing Java 21 references.');
+          if (javaLessons.length < 53) throw new Error('Missing Java 21 references.');
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
           for (const lesson of javaLessons) {
@@ -728,6 +731,11 @@ jobs:
               status: 200, contentType: 'text/html',
               body: '<!doctype html><title>Offline Java IDE integration fixture</title><div id="ready">Ready</div><script>window.addEventListener("message", event => {if(event.data?.eventType==="populateCode"){document.body.dataset.event=event.data.eventType;document.body.dataset.language=event.data.language;document.body.dataset.code=event.data.files?.[0]?.content || "";}});</script>'
             }));
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-project-inventory-cli', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-reference-lab]:not([hidden])');
+            if (!(await page.textContent('[data-reference-output]')).includes('Rejected: insufficient stock')) throw new Error('Java inventory project output reference missing.');
+            if (await page.locator('[data-code-lab]:visible').count()) throw new Error('Java project exposed fake local browser Run IDE.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-what-is-java', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
