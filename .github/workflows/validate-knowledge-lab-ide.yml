@@ -481,6 +481,7 @@ jobs:
           // badge or original English-only paragraph may silently survive.
           const localizedFields = ['title','summary','definition','objective','explanation','tip','hack','mistake','expected','realUse'];
           if (javaLessons.length !== 91) throw new Error('Java lesson total changed: ' + javaLessons.length);
+          const javaLocalizationDefects = [];
           for (const lesson of javaLessons) {
             const patch = i18n.lessons?.tl?.[lesson.id];
             if (!patch || patch.translationCoverage) {
@@ -489,7 +490,7 @@ jobs:
             for (const field of localizedFields) {
               if (typeof patch[field] !== 'string' || !patch[field].trim() ||
                   patch[field] === lesson[field]) {
-                throw new Error('Missing or English-only Java field: ' + lesson.id + '/' + field);
+                javaLocalizationDefects.push(lesson.id + '/' + field);
               }
             }
             if (!Array.isArray(patch.learn) || patch.learn.length < 3 ||
@@ -516,6 +517,10 @@ jobs:
                 if (!question.options[j]) throw new Error('Empty Java quiz option '+lesson.id);
               }
             }
+          }
+
+          if (javaLocalizationDefects.length) {
+            throw new Error('Java localization needs revisions: ' + javaLocalizationDefects.join(', '));
           }
 
           // Exact source, stdout and practice verification follows in a separate,
