@@ -76,6 +76,7 @@
       "reviewCopy": "70% is the current pass mark. Review the explanations, then retake the quiz.",
       "curatedLanguage": "Curated Filipino / Taglish • not auto-translated",
       "englishFallback": "English source • Filipino version is still under manual review",
+      "partialLanguage": "Taglish definition • other sections still in English",
       "lessonGoal": "Lesson goal"
     },
     "tl": {
@@ -142,6 +143,7 @@
       "reviewCopy": "70% ang current pass mark. Balikan muna ang paliwanag, tapos ulitin ang quiz.",
       "curatedLanguage": "Curated Filipino / Taglish • hindi auto-translate",
       "englishFallback": "English source muna • nire-review pa nang mano-mano ang Filipino version",
+      "partialLanguage": "Taglish na ang kahulugan • may English pa sa ibang bahagi",
       "lessonGoal": "Goal ng lesson"
     }
   },
