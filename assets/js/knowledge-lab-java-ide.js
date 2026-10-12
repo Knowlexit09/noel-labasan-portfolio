@@ -71,7 +71,7 @@
     const embedded = document.createElement('iframe');
     embedded.title = 'External OneCompiler Java editor and real compilation output';
     embedded.className = 'kl-java-ide-iframe';
-    embedded.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin allow-popups');
+    embedded.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin');
     embedded.setAttribute('referrerpolicy', 'no-referrer');
     embedded.setAttribute('allow', 'clipboard-write');
     embedded.src = URL;
