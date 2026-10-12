@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/validate-knowledge-lab-ide.yml"
       - "knowledge/**"
+      - "scripts/verify-knowledge-lab-js-examples.cjs"
       - "assets/js/knowledge-lab-*.js"
       - "assets/css/knowledge-lab.css"
       - "assets/js/future-modules.js"
@@ -37,6 +38,8 @@ jobs:
           node --check assets/js/knowledge-lab-javascript-intermediate.js
           node --check assets/js/knowledge-lab-js-core-expansion.js
           node --check assets/js/knowledge-lab-js-collections-quality.js
+          node --check scripts/verify-knowledge-lab-js-examples.cjs
+          node scripts/verify-knowledge-lab-js-examples.cjs
           node --check assets/js/knowledge-lab-java-foundations.js
           node --check assets/js/knowledge-lab-java-core-expansion.js
           node --check assets/js/knowledge-lab-java-modern-expansion.js
