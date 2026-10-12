@@ -1,3 +1,14 @@
+## Verified ALL 91 Java full Filipino/Taglish lessons — 2026-10-13
+
+- **Latest user requirement achieved at source and CI level:** all **91/91 Java lessons** have complete Filipino/Taglish titles, summaries, definitions, learning points, goals, explanations, tips, hacks, mistakes, expected-result descriptions, real-world use, practice/check, and fully explained quiz questions/options. Prior 12 curated Java lesson/exam translations preserved; 79 former definition-only entries filled with eight new manually authored full learning packs. No partial lesson translation status remains for Java.
+- **Independent source-of-truth checklist:** `docs/KNOWLEDGE_LAB_JAVA_TAGLISH_91_AUDIT.md` enumerates all 91 IDs, original vs newly authored language versions, required fields and rollback.
+- **GitHub CI verified green:** [Validate Knowledge Lab IDE #38278685288](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38278685288) on `4516cbc0d84b806e30614294e1d4cb8b9fdbdaa0`: all 91 Java 21 source/example output checks, full-field language/quiz index validation, syntax and Playwright tests passed. [Pages #38278685278](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38278685278) successfully deployed the matching application-code commit.
+- **No hidden lesson rollback:** Java 91, JavaScript 61, Knowledge Lab **403**. Java source/`expectedOutput`, 4 capstones, bilingual 33-item Java exam, accepted historical inline Java IDE, security/privacy gates, original English lessons and browser HTML/CSS/JS IDE are unchanged.
+- **Honesty:** This completes the **Taglish learning-content coverage**, NOT the separate full Beginner-to-Expert expert-curriculum roadmap, native-speaker human editorial approval or independent external OneCompiler production smoke. Java keywords/code/output strings can intentionally stay English.
+- **Risk Low–Medium** for language/editorial quality and CI/locale UI regression; the optional OneCompiler source-transfer risk remains Medium and strictly consent-based. Safeguards: original bilingual sources, content integrity/quiz gating, mock browser consent test, standard Git revert of translation-only commits, no force push or authentication/data modification.
+
+---
+
 ## Java Taglish definition coverage — 2026-10-12
 
 **Confirmed remote:** [GitHub Actions #38270225891](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38270225891) passed every job step, including full Java compilation/output and Playwright; [Pages #38270225903](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38270225903) successfully deployed the identical application commit `381ef658`. Separate external OneCompiler real execution remains unverified.
