@@ -45,49 +45,49 @@ const lesson={
     {
       "question": "Which expression instantiates an object?",
       "options": [
+        "public interface Product {}",
         "new Product(\"Fish\")",
-        "class Product {} alone",
-        "public interface Product {}"
+        "class Product {} alone"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "new calls an appropriate constructor to create an object."
     },
     {
       "question": "Which is a primitive type?",
       "options": [
-        "int",
         "Integer",
-        "String"
+        "String",
+        "int"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "int is primitive; Integer and String are reference types."
     },
     {
       "question": "What can happen when unboxing a null Integer?",
       "options": [
-        "NullPointerException",
+        "Compiler inserts a default value",
         "It automatically becomes 0",
-        "Compiler inserts a default value"
+        "NullPointerException"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Unboxing null has no primitive value to extract."
     },
     {
       "question": "Is widening from long to double always exact?",
       "options": [
-        "No, it can lose integer precision",
         "Yes, always exact",
+        "No, it can lose integer precision",
         "Only when negative"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "double cannot exactly represent every long value."
     },
     {
       "question": "When is a compiler-provided default constructor generated?",
       "options": [
         "When no constructor is declared",
-        "Every time, regardless of other constructors",
-        "Only when fields are static"
+        "Only when fields are static",
+        "Every time, regardless of other constructors"
       ],
       "correctIndex": 0,
       "explanation": "Declaring any constructor prevents the compiler from adding the implicit default one."
@@ -105,49 +105,49 @@ const lesson={
     {
       "question": "Which keyword refers to the current object?",
       "options": [
+        "static",
         "this",
-        "super",
-        "static"
+        "super"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "this refers to the current instance."
     },
     {
       "question": "Can a Java class extend two different classes?",
       "options": [
-        "No",
         "Yes",
-        "Only if one is abstract"
+        "Only if one is abstract",
+        "No"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Java class inheritance is single, though multiple interfaces can be implemented."
     },
     {
       "question": "Can an interface have default and static methods with bodies?",
       "options": [
-        "Yes",
+        "Only via a superclass",
         "No, signatures only",
-        "Only via a superclass"
+        "Yes"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Modern interfaces can contain default, static and private implementations."
     },
     {
       "question": "Which is the common superclass of Exception and Error?",
       "options": [
-        "Throwable",
         "RuntimeException",
+        "Throwable",
         "IOException"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Throwable is the root for both branches."
     },
     {
       "question": "Which is a checked exception?",
       "options": [
         "IOException",
-        "IllegalArgumentException",
-        "NullPointerException"
+        "NullPointerException",
+        "IllegalArgumentException"
       ],
       "correctIndex": 0,
       "explanation": "IOException requires catch-or-declare in relevant methods."
@@ -165,49 +165,49 @@ const lesson={
     {
       "question": "Which family is unchecked?",
       "options": [
+        "SQLException",
         "RuntimeException",
-        "IOException",
-        "SQLException"
+        "IOException"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "RuntimeException and Error families are unchecked."
     },
     {
       "question": "What makes try-with-resources close a resource automatically?",
       "options": [
-        "The resource implements AutoCloseable",
         "The variable is static",
-        "The class uses an interface named DAO"
+        "The class uses an interface named DAO",
+        "The resource implements AutoCloseable"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "The language invokes AutoCloseable.close() when exiting the scope."
     },
     {
       "question": "If the try body and close both throw, what happens to the close exception?",
       "options": [
-        "It is usually suppressed onto the primary exception",
+        "The compiler deletes it",
         "It always replaces the body exception",
-        "The compiler deletes it"
+        "It is usually suppressed onto the primary exception"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "try-with-resources preserves the primary body exception and suppresses close failures."
     },
     {
       "question": "What is the main role of a DAO?",
       "options": [
-        "Separate data access from business rules",
         "Format CSS",
+        "Separate data access from business rules",
         "Represent every view as a database table"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "DAO encapsulates persistence operations behind a clear boundary."
     },
     {
       "question": "Which statement about DTO and POJO is accurate?",
       "options": [
         "DTO describes data-transfer purpose, POJO describes an ordinary Java object",
-        "DTO and POJO are identical terms",
-        "Every DTO must extend a framework class"
+        "Every DTO must extend a framework class",
+        "DTO and POJO are identical terms"
       ],
       "correctIndex": 0,
       "explanation": "DTO is a role; POJO is a general object style."
@@ -225,49 +225,49 @@ const lesson={
     {
       "question": "What does DRY primarily avoid?",
       "options": [
+        "All inheritance",
         "Duplicated business knowledge and rules",
-        "Any repeated character",
-        "All inheritance"
+        "Any repeated character"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A shared rule should not drift across copied implementations."
     },
     {
       "question": "Which principle encourages extension without rewriting stable clients?",
       "options": [
-        "OCP",
         "ISP",
-        "DRY only"
+        "DRY only",
+        "OCP"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Open/Closed encourages stable abstractions that accept extensions."
     },
     {
       "question": "What is LSP about?",
       "options": [
-        "Subtypes honoring base behavioral expectations",
+        "Making all fields protected",
         "Overloading every method",
-        "Making all fields protected"
+        "Subtypes honoring base behavioral expectations"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Substitution must preserve the contract, not just satisfy syntax."
     },
     {
       "question": "Which is an example of ISP?",
       "options": [
-        "Small client-focused interfaces",
         "One interface with hundreds of unrelated methods",
+        "Small client-focused interfaces",
         "No interfaces under any circumstances"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "Clients should not depend on methods they do not use."
     },
     {
       "question": "What is the difference between DIP and dependency injection?",
       "options": [
         "DIP is a principle; DI is one technique for supplying dependencies",
-        "They are identical",
-        "DI requires inheritance"
+        "DI requires inheritance",
+        "They are identical"
       ],
       "correctIndex": 0,
       "explanation": "DIP directs dependencies toward abstractions, while DI supplies collaborators."
@@ -285,49 +285,49 @@ const lesson={
     {
       "question": "What is cohesion?",
       "options": [
+        "The number of threads opened",
         "How well a module's responsibilities fit together",
-        "The number of interfaces implemented",
-        "The number of threads opened"
+        "The number of interfaces implemented"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "High useful cohesion means related responsibilities belong together."
     },
     {
       "question": "Which expression checks an object's runtime type?",
       "options": [
-        "instanceof",
         "throws",
-        "final"
+        "final",
+        "instanceof"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "instanceof checks type compatibility."
     },
     {
       "question": "What does a PreparedStatement '?' normally bind?",
       "options": [
-        "A data value",
+        "Any SQL syntax keyword",
         "An arbitrary table name",
-        "Any SQL syntax keyword"
+        "A data value"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "SQL placeholders bind values; identifiers need allowlist validation."
     },
     {
       "question": "Which resource can be in try-with-resources?",
       "options": [
-        "PreparedStatement",
         "An int primitive",
+        "PreparedStatement",
         "A bare method parameter with no close behavior"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "PreparedStatement inherits AutoCloseable from Statement."
     },
     {
       "question": "Does closing a PreparedStatement guarantee every database lock is released?",
       "options": [
         "No; transaction/database state matters",
-        "Yes, all users can immediately use all rows",
-        "Only with static methods"
+        "Only with static methods",
+        "Yes, all users can immediately use all rows"
       ],
       "correctIndex": 0,
       "explanation": "Transaction state and database isolation control lock behavior."
@@ -345,24 +345,24 @@ const lesson={
     {
       "question": "What is the purpose of rollback?",
       "options": [
+        "Make bad SQL compile",
         "Revert uncommitted transaction changes",
-        "Restore a deleted Java class",
-        "Make bad SQL compile"
+        "Restore a deleted Java class"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": "A rollback reverts changes not yet committed within that transaction."
     },
     {
       "question": "What is a strong ownership relationship typically called?",
       "options": [
-        "Composition",
         "Class overloading",
-        "Package-private access"
+        "Package-private access",
+        "Composition"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "explanation": "Composition models stronger lifecycle ownership; Java syntax alone does not enforce it."
     }
   ]
 };
-if(!data.lessons.some(l=>l.id===lesson.id))data.lessons.push(lesson);
+if(!data.lessons.some(x=>x.id===lesson.id))data.lessons.push(lesson);
 })();
