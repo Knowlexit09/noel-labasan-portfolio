@@ -41,6 +41,10 @@ The original English tip could be misunderstood as suggesting ordinary duplicati
 
 ## Release evidence
 
+**Verified remote application-code run:** [GitHub Actions #38282711361](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38282711361) completed **SUCCESS** against `64594d79a53bd74d15c6b7fe758ca784d0bfdd45`. It passed all steps, including field-level Photoshop localization, 91 Java 21 source/output checks and real Chromium UI interactions. A follow-on docs-only GitHub Pages run should be independently checked for matching final documentation HEAD; the application source was already committed and tested. Independent Adobe Photoshop program execution and human editorial review are not part of this CI.
+
+**Adobe official reference:** https://helpx.adobe.com/photoshop/desktop/create-manage-layers/smart-objects/duplicate-an-embedded-smart-object.html — regular Smart Object duplicates share content; New Smart Object Via Copy separates it.
+
 Validate latest GitHub Actions **Validate Knowledge Lab IDE** and matching **Deploy portfolio to GitHub Pages** run for the exact code commit before calling release green. No independent manual Photoshop application session or professional editorial sign-off has been performed.
 
 ## Current gap and sensible next learning path
