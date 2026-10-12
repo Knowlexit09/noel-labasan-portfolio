@@ -72,6 +72,20 @@
     panels:['Hide / Show panels','Tab','Tab'],
     kbd:['Keyboard Shortcuts dialog','Ctrl + Alt + Shift + K','Cmd + Option + Shift + K']
   });
+  const proofShortcuts = {
+    label:'Photoshop Desktop · Keyboard Shortcuts',longLabel:'Windows',shortLabel:'macOS',
+    longCode:'Free Transform — Ctrl + T\\nMove Tool — V\\nNew Layer via Copy — Ctrl + J\\nSave — Ctrl + S',
+    shortCode:'Free Transform — Cmd + T\\nMove Tool — V\\nNew Layer via Copy — Cmd + J\\nSave — Cmd + S',
+    note:'Use Free Transform on a Smart Object when testing multiple layouts. New Smart Object via Copy is a menu command, not the same as ordinary Ctrl/Cmd + J duplicate.',
+    caution:'These are default installed Photoshop desktop shortcuts, not Photoshop-on-the-web key bindings. Customized keyboard maps or text-field focus may change behavior.'
+  };
+  existing.shortcut=proofShortcuts;
+  const proofTl = i18n.lessons.tl[existing.id];
+  if (!proofTl) throw new Error('Photoshop real proof Taglish overlay must load before course.');
+  proofTl.shortcut={...proofShortcuts,
+    label:'Photoshop Desktop · Shortcut Keys',
+    note:'Gamitin ang Free Transform sa Smart Object habang nagte-test ng maraming layout. Ang New Smart Object via Copy ay hiwalay na menu command; hindi ito ordinaryong Ctrl/Cmd + J duplicate.',
+    caution:'Default Photoshop desktop shortcuts ito, hindi Photoshop web keys. Maaaring iba ang custom keymap o kapag text field ang may focus.'};
   const add = (entries,stageIndex) => {
     if (!Array.isArray(entries) || entries.length !== 6) throw new Error('Expected six Photoshop lessons per learning stage '+stageIndex);
     for (let j=0;j<entries.length;j++) {
