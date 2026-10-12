@@ -152,7 +152,7 @@
   [
     "project-client-capstone",
     "Capstone: professional Photoshop client delivery",
-    "Capstone: professional Photoshop client delivery",
+    "Capstone: kumpletong Photoshop client delivery",
     "A client-ready project includes discovery, production, QA, revision and a verified handoff.",
     "Ang client-ready Photoshop project ay may brief, paggawa, quality check, revision at maayos na delivery.",
     "Simulate a realistic brief using only invented or approved product details. Produce a hero image, price card, mobile story and editable source. Include source rights, versioning, export sizes, and a short review note. Do not publish as a verified paid client commission unless true.",
