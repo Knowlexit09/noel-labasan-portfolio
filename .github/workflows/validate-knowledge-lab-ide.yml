@@ -34,6 +34,8 @@ jobs:
         run: |
           node --check assets/js/knowledge-lab-data.js
           node --check assets/js/knowledge-lab-javascript-foundations.js
+          node --check assets/js/knowledge-lab-javascript-intermediate.js
+          node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-i18n.js
           node --check assets/js/knowledge-lab-runner.js
           node --check assets/js/knowledge-lab-sandbox.js
@@ -46,6 +48,8 @@ jobs:
           grep -q 'data-proof-lab' knowledge/index.html
           grep -q 'data-reference-lab' knowledge/index.html
           grep -q 'data-quiz-lab' knowledge/index.html
+          grep -q 'data-practice-lab' knowledge/index.html
+          grep -q 'data-practice-prompt' knowledge/index.html
           grep -q 'data-shortcut-lab' knowledge/index.html
           grep -q 'data-interactive-lab' knowledge/index.html
 
@@ -57,7 +61,9 @@ jobs:
           global.window = {};
           require('./assets/js/knowledge-lab-data.js');
           require('./assets/js/knowledge-lab-javascript-foundations.js');
+          require('./assets/js/knowledge-lab-javascript-intermediate.js');
           require('./assets/js/knowledge-lab-i18n.js');
+          require('./assets/js/knowledge-lab-javascript-tl.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
           const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
@@ -74,11 +80,34 @@ jobs:
           }
 
           const jsFoundations = data.lessons.filter(x => x.categoryId === 'javascript');
-          if (jsFoundations.length < 7) throw new Error('JavaScript curriculum extension did not load.');
-          for (const id of ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops']) {
+          if (jsFoundations.length !== 15) throw new Error('Expected 15 JavaScript lessons, got ' + jsFoundations.length);
+          const requiredJavaScript = ['js-first-steps', 'js-variables-types', 'js-conditions', 'js-functions', 'js-loops',
+            'js-arrays-foundation', 'js-objects-properties', 'js-map-reduce', 'js-form-input-validation',
+            'js-event-delegation', 'js-promises-async-await', 'js-debugging-errors', 'js-project-live-product-search'];
+          const requiredJavaScriptStages = ['Foundation', 'Arrays', 'Objects & Data', 'DOM & Forms', 'Asynchronous Thinking', 'Projects & Practice'];
+          const jsCategory = data.categories.find(x => x.id === 'javascript');
+          if (!jsCategory || requiredJavaScriptStages.some(stage => !jsCategory.learningPath?.includes(stage))) {
+            throw new Error('JavaScript learning path stages missing.');
+          }
+          for (const id of requiredJavaScript) {
             const lesson = jsFoundations.find(x => x.id === id);
-            if (!lesson || !lesson.definition || !lesson.expected || !lesson.realUse || !Array.isArray(lesson.quiz) || lesson.quiz.length < 2) throw new Error('Incomplete JavaScript foundation: ' + id);
+            if (!lesson || !lesson.definition || lesson.learn?.length < 3 || !lesson.expected || !lesson.realUse || !Array.isArray(lesson.quiz) || lesson.quiz.length < 2) throw new Error('Incomplete JavaScript lesson: ' + id);
             new Function(lesson.js);
+          }
+          for (const lesson of jsFoundations) {
+            if (!lesson.practice?.prompt || !lesson.practice?.check) {
+              throw new Error('Missing Learn Practice Apply challenge: ' + lesson.id);
+            }
+          }
+          for (const id of ['js-first-steps', 'js-variables-types', 'js-form-input-validation']) {
+            const curated = i18n.lessons?.tl?.[id];
+            if (!curated?.title || !curated?.definition || !curated?.practice?.prompt ||
+                !curated?.practice?.check || curated.quiz?.length < 2) {
+              throw new Error('Manually reviewed Filipino JavaScript lesson incomplete: ' + id);
+            }
+          }
+          if (!i18n.lessons.tl['js-first-steps'].definition.includes('Ang JavaScript ay')) {
+            throw new Error('Curated Filipino JavaScript definition not rendered from source.');
           }
           const quizLessons = data.lessons.filter(x => Array.isArray(x.quiz) && x.quiz.length);
           if (quizLessons.length < 6) throw new Error('Expected multiple quiz-backed lessons.');
@@ -521,6 +550,39 @@ jobs:
             const count = await frame.textContent('#count');
             console.log('COUNTER_RESULT=' + count);
             if (count !== '1') throw new Error('Counter interaction failed. Actual count: ' + count);
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-first-steps', { waitUntil: 'networkidle' });
+            await page.waitForSelector('[data-practice-lab]:not([hidden])');
+            frame = await (await page.$('[data-result-frame]')).contentFrame();
+            await frame.waitForSelector('#go');
+            await frame.click('#go');
+            if ((await frame.textContent('#message')) !== 'JavaScript is working!') throw new Error('New first-interaction JavaScript lesson did not run.');
+
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="tl"]');
+            if (!(await page.textContent('[data-title]')).includes('Ano ang JavaScript?')) throw new Error('Curated Filipino JavaScript title missing.');
+            if (!(await page.textContent('[data-practice-prompt]')).includes('Palitan ang success message')) throw new Error('Filipino practice challenge missing.');
+            await page.click('[data-language-toggle]');
+            await page.click('[data-language-option="en"]');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-form-input-validation', { waitUntil: 'networkidle' });
+            frame = await (await page.$('[data-result-frame]')).contentFrame();
+            await frame.waitForSelector('#order');
+            await frame.fill('#quantity', '0');
+            await frame.click('#order button[type="submit"]');
+            if (!(await frame.textContent('#message')).includes('Enter a whole number')) throw new Error('Form validation failed to reject zero.');
+            await frame.fill('#quantity', '3');
+            await frame.click('#order button[type="submit"]');
+            if ((await frame.textContent('#message')) !== 'Accepted: 3 pack(s)') throw new Error('Form validation failed to accept an in-range integer.');
+
+            await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-project-live-product-search', { waitUntil: 'networkidle' });
+            frame = await (await page.$('[data-result-frame]')).contentFrame();
+            await frame.waitForSelector('#search');
+            await frame.fill('#search', 'ch');
+            if ((await frame.textContent('#count')) !== '1 matching products') throw new Error('Live search count did not update.');
+            if (!(await frame.locator('#results').innerText()).includes('Chicken Breast')) throw new Error('Live search did not show the matching product.');
+            await frame.fill('#search', 'xyz');
+            if (!(await frame.locator('#results').innerText()).includes('No products found')) throw new Error('Live search empty state missing.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-ternary-cleaner-conditions', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-shortcut-lab]:not([hidden])');
