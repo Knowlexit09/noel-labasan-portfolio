@@ -1,5 +1,7 @@
 ## Java Taglish definition coverage — 2026-10-12
 
+**Confirmed remote:** [GitHub Actions #38270225891](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38270225891) passed every job step, including full Java compilation/output and Playwright; [Pages #38270225903](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/38270225903) successfully deployed the identical application commit `381ef658`. Separate external OneCompiler real execution remains unverified.
+
 - **Definition-specific request completed in GitHub source:** all **91 Java lessons now have a separately authored Filipino/Taglish definition** in `Filipino / Taglish` language mode. **12** prior Java lessons have full manually curated translations including the reviewer; **79** more now have definition-only Taglish patches. Existing English source is preserved. This does **not** mean 91 fully localized lessons or beginner-to-expert course completion.
 - New `assets/js/knowledge-lab-java-definitions-tl.js` is loaded after full Java locale modules and before renderer. Existing full translations win; it fills only missing definition fields. Lesson IDs/Java code/expected output/quiz answer keys are untouched.
 - Language indicator explicitly distinguishes partial coverage (“Taglish na ang kahulugan • may English pa sa ibang bahagi”) from wholly curated translations, rather than mislabeling the entire lesson.
