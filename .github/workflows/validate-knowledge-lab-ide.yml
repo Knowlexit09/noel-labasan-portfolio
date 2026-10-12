@@ -607,7 +607,7 @@ jobs:
             if ((await tabsFrame.getAttribute('#tab-details','aria-selected')) !== 'true') throw new Error('Tab selection did not update.');
             if (await tabsFrame.locator('#panel-details').isHidden()) throw new Error('Selected panel should be visible.');
             await tabsFrame.focus('#tab-details');
-            await tabsFrame.keyboard.press('ArrowLeft');
+            await page.keyboard.press('ArrowLeft');
             if ((await tabsFrame.getAttribute('#tab-overview','aria-selected')) !== 'true') throw new Error('Keyboard tab navigation failed.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/js-safe-text-rendering', { waitUntil: 'networkidle' });
