@@ -71,6 +71,8 @@ jobs:
           grep -q 'data-proof-lab' knowledge/index.html
           grep -q 'data-reference-lab' knowledge/index.html
           grep -q 'data-java-ide-open' knowledge/index.html
+          grep -q 'data-java-output-tab' knowledge/index.html
+          grep -q 'data-java-ide-copy' knowledge/index.html
           grep -q 'frame-src .*https://onecompiler.com' knowledge/index.html
           grep -q 'data-quiz-lab' knowledge/index.html
           grep -q 'data-practice-lab' knowledge/index.html
@@ -815,7 +817,7 @@ jobs:
             await page.click('[data-language-option="tl"]');
             if (!(await page.textContent('[data-title]')).includes('Java Interface')) throw new Error('Curated Filipino Java title missing.');
             if (!(await page.textContent('[data-practice-prompt]')).includes('Palitan')) throw new Error('Curated Filipino Java challenge missing.');
-            if (!(await page.textContent('[data-java-ide-run]')).includes('Patakbuhin')) throw new Error('Filipino Java IDE Run label missing.');
+            if (!(await page.textContent('[data-java-ide-run]')).includes('I-run')) throw new Error('Shared Filipino Run label missing on Java IDE.');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="en"]');
 
@@ -831,34 +833,66 @@ jobs:
             await page.waitForSelector('[data-java-ide]:not([hidden])');
             if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java IDE must be opt-in and not autoload.');
             if (!(await page.inputValue('[data-java-ide-source]')).includes('public class Main')) throw new Error('Editable Java source missing.');
-            if (!(await page.locator('[data-java-ide-run]').isHidden())) throw new Error('Run Java must not be active before consent.');
+            if (!(await page.locator('[data-java-ide-run]').isVisible())) throw new Error('Shared Java Run should be visible from first render.');
+            if (!(await page.locator('[data-java-ide-copy]').isVisible()) ||
+                !(await page.locator('[data-java-ide-reset]').isVisible()) ||
+                !(await page.locator('[data-java-ide-close]').isVisible())) {
+              throw new Error('Original IDE Reset/Copy/Stop controls missing from Java.');
+            }
+            const style = await page.locator('[data-java-ide] .kl-ide-workspace').evaluate(node => ({
+              display: getComputedStyle(node).display,
+              columns: getComputedStyle(node).gridTemplateColumns,
+              editor: node.children[0].className,
+              output: node.children[1].className
+            }));
+            if (style.display !== 'grid' || !style.editor.includes('kl-editor-pane') ||
+                !style.output.includes('kl-output-pane') ||
+                style.columns.trim().split(/\\s+/).length !== 2) {
+              throw new Error('Java workspace no longer matches original two-column editor/result layout.');
+            }
             await page.fill('[data-java-ide-source]', 'public class Main { public static void main(String[] a) { System.out.println("Edited Java"); } }');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="tl"]');
-            if (!(await page.inputValue('[data-java-ide-source]')).includes('Edited Java')) throw new Error('Language switch erased the Java draft.');
-            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Unexpected external iframe before consent.');
+            if (!(await page.inputValue('[data-java-ide-source]')).includes('Edited Java'))
+              throw new Error('Language switch erased the Java draft.');
+            if (await page.locator('[data-java-ide-frame] iframe').count())
+              throw new Error('Unexpected external iframe before consent.');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="en"]');
+            await page.click('[data-java-ide-run]');
+            if (!(await page.locator('[data-java-ide-consent]').isVisible()))
+              throw new Error('Run must ask before first external Java code transfer.');
+            if (await page.locator('[data-java-ide-frame] iframe').count())
+              throw new Error('Consent request unexpectedly loaded Java compiler.');
             await page.click('[data-java-ide-open]');
             const externalJavaFrame = page.frameLocator('[data-java-ide-frame] iframe');
             await externalJavaFrame.locator('#ready').waitFor();
             await externalJavaFrame.locator('body[data-code*="Edited Java"]').waitFor({ timeout: 5000 });
-            if ((await externalJavaFrame.locator('body').getAttribute('data-language')) !== 'java') throw new Error('External Java editor did not receive Java language.');
-            if (await page.locator('[data-java-ide-run]').isDisabled()) throw new Error('Run Java did not enable after editor readiness.');
+            if ((await externalJavaFrame.locator('body').getAttribute('data-language')) !== 'java')
+              throw new Error('External Java editor did not receive Java language.');
+            if (!(await page.locator('[data-java-ide-source]').isVisible()))
+              throw new Error('Java source editor disappeared when compiler opened.');
             await page.click('[data-java-ide-run]');
             await externalJavaFrame.locator('body[data-run="requested"]').waitFor({ timeout: 5000 });
             await page.click('[data-java-ide-reset]');
             await externalJavaFrame.locator('body[data-code*="Hello from Java"]').waitFor({ timeout: 5000 });
+            await page.click('[data-java-ide-output-tab="console"]');
+            if (!(await page.textContent('[data-java-output-panel="console"]')).includes('inside the external compiler'))
+              throw new Error('Java console lacks truthful provider-output disclosure.');
+            await page.click('[data-java-output-tab="result"]');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="tl"]');
-            if (await page.locator('[data-java-ide-frame] iframe').count() !== 1) throw new Error('Translation closed the live Java compiler.');
-            if (await page.locator('[data-java-ide-run]').isDisabled()) throw new Error('Translation disabled Java Run.');
+            if (await page.locator('[data-java-ide-frame] iframe').count() !== 1)
+              throw new Error('Translation closed the live Java compiler.');
+            if (!(await page.locator('[data-java-ide-run]').isVisible()))
+              throw new Error('Translation hid Java Run.');
             await page.click('[data-language-toggle]');
             await page.click('[data-language-option="en"]');
             await page.click('[data-java-ide-close]');
-            if (await page.locator('[data-java-ide-run]').isVisible()) throw new Error('Run Java still visible after closing editor.');
-            if (await page.locator('[data-java-ide-frame] iframe').count()) throw new Error('Java iframe did not close.');
-
+            if (await page.locator('[data-java-ide-frame] iframe').count())
+              throw new Error('Stop did not close the external compiler frame.');
+            if (!(await page.locator('[data-java-ide-run]').isVisible()))
+              throw new Error('Stop removed original Java IDE toolbar.');
 
             await page.goto('http://127.0.0.1:4173/knowledge/#lesson/java-inheritance-polymorphism', { waitUntil: 'networkidle' });
             await page.waitForSelector('[data-reference-lab]:not([hidden])');
