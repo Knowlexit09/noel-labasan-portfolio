@@ -59,6 +59,15 @@ jobs:
           node --check assets/js/knowledge-lab-java-review-tl.js
           node --check assets/js/knowledge-lab-java-exam-reviewer-tl.js
           node --check assets/js/knowledge-lab-java-definitions-tl.js
+          node --check assets/js/knowledge-lab-java-full-tl-base.js
+          node --check assets/js/knowledge-lab-java-full-tl-01.js
+          node --check assets/js/knowledge-lab-java-full-tl-02.js
+          node --check assets/js/knowledge-lab-java-full-tl-03.js
+          node --check assets/js/knowledge-lab-java-full-tl-04.js
+          node --check assets/js/knowledge-lab-java-full-tl-05.js
+          node --check assets/js/knowledge-lab-java-full-tl-06.js
+          node --check assets/js/knowledge-lab-java-full-tl-07.js
+          node --check assets/js/knowledge-lab-java-full-tl-08.js
           node --check assets/js/knowledge-lab-javascript-tl.js
           node --check assets/js/knowledge-lab-js-quality-tl.js
           node --check assets/js/knowledge-lab-i18n.js
@@ -115,6 +124,15 @@ jobs:
           require('./assets/js/knowledge-lab-java-review-tl.js');
           require('./assets/js/knowledge-lab-java-exam-reviewer-tl.js');
           require('./assets/js/knowledge-lab-java-definitions-tl.js');
+          require('./assets/js/knowledge-lab-java-full-tl-base.js');
+          require('./assets/js/knowledge-lab-java-full-tl-01.js');
+          require('./assets/js/knowledge-lab-java-full-tl-02.js');
+          require('./assets/js/knowledge-lab-java-full-tl-03.js');
+          require('./assets/js/knowledge-lab-java-full-tl-04.js');
+          require('./assets/js/knowledge-lab-java-full-tl-05.js');
+          require('./assets/js/knowledge-lab-java-full-tl-06.js');
+          require('./assets/js/knowledge-lab-java-full-tl-07.js');
+          require('./assets/js/knowledge-lab-java-full-tl-08.js');
           const data = global.window.KNOWLEDGE_LAB_V2;
           const i18n = global.window.KNOWLEDGE_LAB_I18N;
           if (!data || !Array.isArray(data.categories) || !Array.isArray(data.lessons)) {
@@ -459,27 +477,46 @@ jobs:
             }
           }
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
-          // Every Java definition must be authored in Filipino / Taglish. A definition-only
-          // patch must not be advertised as a completely translated lesson.
-          let definitionOnlyCount = 0;
+          // Audit ALL 91 Java lessons field by field. No partial language
+          // badge or original English-only paragraph may silently survive.
+          const localizedFields = ['title','summary','definition','objective','explanation','tip','hack','mistake','expected','realUse'];
+          if (javaLessons.length !== 91) throw new Error('Java lesson total changed: ' + javaLessons.length);
           for (const lesson of javaLessons) {
-            const version = i18n.lessons?.tl?.[lesson.id];
-            if (!version?.definition || version.definition === lesson.definition) {
-              throw new Error('Missing distinct Taglish Java definition: ' + lesson.id);
+            const patch = i18n.lessons?.tl?.[lesson.id];
+            if (!patch || patch.translationCoverage) {
+              throw new Error('Incomplete Java Taglish lesson: ' + lesson.id);
             }
-            if (version.translationCoverage === 'definition-only') {
-              definitionOnlyCount++;
-              if (version.title || version.explanation || version.quiz) {
-                throw new Error('Definition-only patch falsely includes reviewed fields: ' + lesson.id);
+            for (const field of localizedFields) {
+              if (typeof patch[field] !== 'string' || !patch[field].trim() ||
+                  patch[field] === lesson[field]) {
+                throw new Error('Missing or English-only Java field: ' + lesson.id + '/' + field);
               }
-            } else if (!version.title || !version.explanation || !Array.isArray(version.quiz)) {
-              throw new Error('Existing curated Java translation must remain complete: ' + lesson.id);
+            }
+            if (!Array.isArray(patch.learn) || patch.learn.length < 3 ||
+                patch.learn.some((s,i) => !s?.trim() || s === lesson.learn?.[i])) {
+              throw new Error('Java learning points not localized: ' + lesson.id);
+            }
+            if (!patch.practice?.prompt || !patch.practice?.check ||
+                patch.practice.prompt === lesson.practice?.prompt ||
+                patch.practice.check === lesson.practice?.check) {
+              throw new Error('Java practice not localized: ' + lesson.id);
+            }
+            if (!Array.isArray(patch.quiz) || patch.quiz.length !== lesson.quiz.length) {
+              throw new Error('Java quiz length changed: ' + lesson.id);
+            }
+            for (let i = 0; i < lesson.quiz.length; i++) {
+              const original = lesson.quiz[i], question = patch.quiz[i];
+              if (question.correctIndex !== original.correctIndex ||
+                  question.options?.length !== original.options.length ||
+                  !question.question || question.question === original.question ||
+                  !question.explanation || question.explanation === original.explanation) {
+                throw new Error('Java quiz translation or answer changed: ' + lesson.id + ' #' + (i+1));
+              }
+              for (let j=0;j<original.options.length;j++) {
+                if (!question.options[j]) throw new Error('Empty Java quiz option '+lesson.id);
+              }
             }
           }
-          if (definitionOnlyCount !== 79) {
-            throw new Error('Expected 79 definition-only Java translations; got ' + definitionOnlyCount);
-          }
-
 
           // Exact source, stdout and practice verification follows in a separate,
           // isolated Java 21 runner (no stale Main.class across lessons).
@@ -911,8 +948,15 @@ jobs:
                 taglishDefinition === originalDefinition) {
               throw new Error('JDBC transaction Taglish definition is missing.');
             }
-            if (!(await page.textContent('[data-language-status]')).includes('Taglish na ang kahulugan')) {
-              throw new Error('Partially translated lesson falsely marked as fully curated.');
+            if (!(await page.textContent('[data-language-status]')).includes('Curated Filipino / Taglish')) {
+              throw new Error('Fully localized Java lesson was not marked curated.');
+            }
+            if (!(await page.textContent('[data-title]')).includes('JDBC transactions: commit') ||
+                !(await page.textContent('[data-explanation]')).includes('database operations')) {
+              throw new Error('Java Taglish title and explanation did not render.');
+            }
+            if (!(await page.textContent('[data-practice-prompt]')).includes('operations')) {
+              throw new Error('Java Taglish practice did not render.');
             }
             if (await page.locator('[data-java-ide-frame] iframe').count())
               throw new Error('Changing definition language loaded an external compiler.');
