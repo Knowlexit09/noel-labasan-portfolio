@@ -8,6 +8,7 @@ on:
       - ".github/workflows/validate-knowledge-lab-ide.yml"
       - "knowledge/**"
       - "scripts/verify-knowledge-lab-js-examples.cjs"
+      - "scripts/verify-knowledge-lab-java.cjs"
       - "assets/js/knowledge-lab-*.js"
       - "assets/css/knowledge-lab.css"
       - "assets/js/future-modules.js"
@@ -42,6 +43,7 @@ jobs:
           node --check assets/js/knowledge-lab-javascript-deep-dive.js
           node --check assets/js/knowledge-lab-javascript-dom-practice.js
           node --check scripts/verify-knowledge-lab-js-examples.cjs
+          node --check scripts/verify-knowledge-lab-java.cjs
           node scripts/verify-knowledge-lab-js-examples.cjs
           node --check assets/js/knowledge-lab-java-foundations.js
           node --check assets/js/knowledge-lab-java-core-expansion.js
@@ -421,18 +423,8 @@ jobs:
           }
           if (!javaLessons.length) throw new Error('No verified Java reference lessons found.');
 
-          for (const lesson of javaLessons) {
-            fs.mkdirSync('/tmp/kl-java', { recursive: true });
-            fs.writeFileSync('/tmp/kl-java/Main.java', lesson.code);
-            cp.execFileSync('javac', ['Main.java'], { cwd: '/tmp/kl-java', stdio: 'inherit' });
-            const output = cp.execFileSync('java', ['Main'], { cwd: '/tmp/kl-java', encoding: 'utf8' }).trim();
-            const expected = String(lesson.expectedOutput || '').trim();
-            console.log(lesson.id + ': ' + JSON.stringify(output));
-            if (output !== expected) {
-              throw new Error(lesson.id + ' output mismatch. Expected ' + JSON.stringify(expected) + ', got ' + JSON.stringify(output));
-            }
-            for (const file of fs.readdirSync('/tmp/kl-java')) fs.rmSync('/tmp/kl-java/' + file, { force: true });
-          }
+          // Exact source, stdout and practice verification follows in a separate,
+          // isolated Java 21 runner (no stale Main.class across lessons).
 
           const proofLessons = data.lessons.filter(x => x.mode === 'proof');
           if (proofLessons.length < 3) throw new Error('Expected at least three proof-backed creative lessons.');
@@ -440,6 +432,9 @@ jobs:
             if (!lesson.proof?.src || !lesson.proof?.caseUrl) throw new Error('Incomplete proof lesson: ' + lesson.id);
           }
           NODE
+
+      - name: Verify all Java 21 lesson outputs in isolated folders
+        run: node scripts/verify-knowledge-lab-java.cjs
 
       - name: Install Playwright
         run: |
