@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; connect-src 'none'; media-src 'self' data: blob: https://isoiolgajmpldkrvqbkp.supabase.co; object-src 'none'; base-uri 'self'; frame-src 'self' blob: data: https://onecompiler.com; form-action 'self'">
   <title>Knowledge Lab — Noel Labasan</title>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-9">
+  <link rel="stylesheet" href="../assets/css/knowledge-lab.css?v=20261012-10">
 </head>
 <body>
   <header class="kl-topbar">
@@ -231,17 +231,33 @@
             <div>
               <span class="kl-section-kicker">Java 21 reference</span>
               <h2><span data-reference-language>Java</span> example</h2>
-              <p>The result below is the expected output of the original example—not the output of your edits. Use the Java IDE below the practice challenge to run code through the optional external compiler.</p>
+              <p>Study the example and its expected output, then use the Java Practice IDE below to edit and run your own version with an optional external compiler.</p>
             </div>
             <button type="button" class="kl-btn kl-btn-muted" data-reference-copy>Copy code</button>
           </div>
-          <details class="kl-java-reference-source">
-            <summary>View original Java source</summary>
-            <pre><code data-reference-code></code></pre>
-          </details>
+          <pre><code data-reference-code></code></pre>
           <div class="kl-reference-output">
-            <span>Expected output</span>
+            <span>Expected example output</span>
             <pre data-reference-output></pre>
+          </div>
+          <div class="kl-java-ide" data-java-ide hidden>
+            <div class="kl-java-ide-intro">
+              <h3>Java Practice IDE — compile and run your own code</h3>
+              <p>Edit the Java source below. The integrated OneCompiler Java editor runs actual code on the provider's servers after you choose to open it. Internet access is required. Do not paste passwords, API keys, private files, or sensitive business data.</p>
+              <p>The expected output above belongs to the original sample. The output of your edits appears in the external Java IDE after you choose to open it.</p>
+            </div>
+            <label for="javaPracticeSource">Java source — Main.java</label>
+            <textarea id="javaPracticeSource" data-java-ide-source spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" rows="13" aria-describedby="javaPracticeNotice"></textarea>
+            <p id="javaPracticeNotice" class="kl-java-ide-notice">External service: OneCompiler. Loading or syncing this editor transfers your Java code to OneCompiler. It is not part of the isolated HTML/CSS/JavaScript runner.</p>
+            <div class="kl-java-ide-actions">
+              <button type="button" class="kl-btn kl-btn-run" data-java-ide-open>Open real Java IDE</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-java-ide-sync disabled>Send current code to IDE</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-java-ide-reset>Reset sample</button>
+              <button type="button" class="kl-btn kl-btn-muted" data-java-ide-close hidden>Close external IDE</button>
+            </div>
+            <p role="status" aria-live="polite" data-java-ide-status>Ready to practice. Opening the real Java IDE is optional.</p>
+            <div class="kl-java-ide-frame" data-java-ide-frame hidden></div>
+            <p class="kl-java-ide-fallback"><a href="https://onecompiler.com/java" target="_blank" rel="noopener noreferrer">Open OneCompiler Java in a new tab ↗</a> if third-party embedding is blocked.</p>
           </div>
         </section>
 
@@ -318,67 +334,7 @@
           <p class="kl-practice-check"><strong data-i18n="practiceCheck">Check your result:</strong> <span data-practice-check></span></p>
         </section>
 
-        <section class="kl-java-ide kl-ide" data-java-ide hidden aria-labelledby="javaIdeTitle">
-            <div class="kl-ide-head">
-              <div>
-                <span class="kl-section-kicker" data-i18n="tryItYourself">Try it yourself</span>
-                <h2 id="javaIdeTitle">Browser IDE · Java</h2>
-                <p>Edit Main.java and use Run ▶. The first Java execution requires consent to use an external compiler.</p>
-              </div>
-              <div class="kl-ide-actions">
-                <button type="button" class="kl-btn kl-btn-muted" data-java-ide-reset data-i18n="reset">Reset</button>
-                <button type="button" class="kl-btn kl-btn-muted" data-java-ide-copy data-i18n="copy">Copy</button>
-                <button type="button" class="kl-btn kl-btn-muted" data-java-ide-fullscreen data-i18n="fullScreen">Full screen</button>
-                <button type="button" class="kl-btn kl-btn-stop" data-java-ide-close data-i18n="stop">Stop</button>
-                <button type="button" class="kl-btn kl-btn-run" data-java-ide-run><span data-i18n="run">Run</span> ▶</button>
-              </div>
-            </div>
-            <div class="kl-ide-workspace">
-              <div class="kl-editor-pane">
-                <div class="kl-editor-tabs" role="group" aria-label="Java source file">
-                  <span class="kl-java-editor-tab">Main.java</span>
-                  <span class="kl-save-state" data-java-ide-save-state>Original example</span>
-                </div>
-                <div class="kl-editor-stack">
-                  <label class="kl-sr-only" for="javaPracticeSource">Java source editor</label>
-                  <textarea class="kl-code-editor is-active" id="javaPracticeSource" data-java-ide-source
-                    aria-label="Java code editor" spellcheck="false" autocomplete="off" autocapitalize="off"
-                    autocorrect="off" aria-describedby="javaPracticeNotice"></textarea>
-                </div>
-              </div>
-              <div class="kl-output-pane">
-                <div class="kl-output-tabs" role="tablist" aria-label="Java output">
-                  <button type="button" role="tab" aria-selected="true" data-java-output-tab="result">Result</button>
-                  <button type="button" role="tab" aria-selected="false" data-java-output-tab="console">Console</button>
-                  <span class="kl-run-status" data-java-ide-status role="status" aria-live="polite">Ready</span>
-                </div>
-                <div class="kl-result-wrap kl-java-result" data-java-output-panel="result">
-                  <div class="kl-java-result-placeholder" data-java-ide-placeholder>
-                    <strong>Java Result</strong>
-                    <p>Run your Java code to see real compiler output in this panel.</p>
-                    <p id="javaPracticeNotice">The optional Java runtime uses OneCompiler, a third-party service. Your current code is sent to that provider only after your explicit approval. Do not enter secrets, passwords or confidential business data.</p>
-                    <div class="kl-java-consent" data-java-ide-consent hidden>
-                      <p>Allow a third-party service to compile and run this Java code? Only approve if it contains no private information.</p>
-                      <button type="button" class="kl-btn kl-btn-run" data-java-ide-open>Allow external Java execution</button>
-                    </div>
-                  </div>
-                  <div class="kl-java-ide-frame" data-java-ide-frame hidden></div>
-                </div>
-                <div class="kl-console kl-java-console" data-java-output-panel="console" hidden>
-                  <div class="kl-console-empty">
-                    Java stdout, errors and compilation diagnostics appear inside the external compiler in the Result tab. This website cannot directly read that output from the third-party iframe.
-                  </div>
-                  <p><a href="https://onecompiler.com/java" target="_blank" rel="noopener noreferrer">Open the Java compiler in a new tab ↗</a></p>
-                </div>
-              </div>
-            </div>
-            <div class="kl-safety-row">
-              <span>Java runtime:</span>
-              <strong>Opt-in external compiler</strong>
-              <strong>No third-party iframe before consent</strong>
-              <strong>Source stays editable in Knowledge Lab</strong>
-            </div>
-        </section>
+
 
         <section class="kl-quiz" data-quiz-lab hidden>
           <div class="kl-quiz-head">
@@ -436,7 +392,7 @@
   <script src="../assets/js/knowledge-lab-javascript-tl.js?v=20261012-1"></script>
   <script src="../assets/js/knowledge-lab-java-review-tl.js?v=20261012-1"></script>
   <script src="../assets/js/knowledge-lab-java-exam-reviewer-tl.js?v=20261012-1"></script>
-  <script src="../assets/js/knowledge-lab-java-ide.js?v=20261012-4"></script>
+  <script src="../assets/js/knowledge-lab-java-ide.js?v=20261012-5"></script>
   <script src="../assets/js/knowledge-lab-runner.js?v=20261012-7"></script>
 </body>
 </html>
