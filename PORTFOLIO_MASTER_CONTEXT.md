@@ -1,5 +1,20 @@
 # PORTFOLIO MASTER CONTEXT
 
+## Knowledge Lab expansion checkpoint — 2026-10-12 (latest GitHub batch)
+
+- Audited the live lesson source: **258 records** before this batch = HTML 52, CSS 176, CSS Reference 20, JavaScript 2, Java 5, Photoshop/Canva/CapCut 1 each. Published records meet existing structural teaching-schema and 2-quiz minimum checks. **Structural completeness does not establish deep pedagogical quality or complete subject coverage.**
+- Manual Filipino/Taglish lesson versions: **38** (HTML 20, CSS 18); others must retain the explicit English-source fallback and must not be auto-translated.
+- Remaining broad gaps: JavaScript and Java fundamentals-to-advanced sequencing; Git/GitHub and Apps Script tracks; more hands-on practice/challenges; selective HTML/CSS pedagogy refinements; additional curated Filipino lessons. Blender/Roblox Studio and any creative walkthrough expansion remain proof-gated.
+- Implemented first JavaScript expansion batch with **2 independently written runnable beginner lessons**: JavaScript/DOM/click introduction and variables/types. Each includes explanation, definitions, goals, tips/hacks, mistakes, expected output, real work, code, Try It Yourself prompt and 2 explained quiz questions. Existing JavaScript lessons preserved, bringing total to **4** after extension loads.
+- The additive module `assets/js/knowledge-lab-javascript-foundations.js` is loaded between the core data and the runner; the extension checks existing IDs to avoid duplicate loading. `knowledge/index.html` loads it. Updated `.github/workflows/validate-knowledge-lab-ide.yml` checks its JS syntax, inclusion, count, lesson schema and example syntax. Existing CI assertions were not removed/weakened.
+- Commits: module `3a9cf4de0c8bc2a6e060f593135c57b0ef5bb813`; loader `efe967b9f2156ccd953a2cf614600393e3183af1`; CI `1972409f454421d8eaf217a32446c155ccc5b00a`.
+- Validation: standalone new JavaScript snippets passed JavaScript parsing in patch preparation. **Full browser, workflow result, and Pages deployment remain unverified at this checkpoint**; do not report SUCCESS until live run confirmed.
+- Next: verify CI/Pages, add conditions/functions/loops/arrays/DOM/forms/fetch/async lessons in focused batches, add practice progression and CI checks; expand Java and Git/Apps Script without filler.
+- Publication: no Supabase Draft or Live mutation, and no Admin Publish Live action.
+- Risk **low–medium**: new lessons may have runner or pedagogy regressions; safeguards include additive module, existing CSP/sandbox, unchanged earlier records and CI checks. No accounting/inventory/backend/security data affected. Roll back via normal revert of these commits, never force-push.
+
+
+
 > **Primary continuity/source-of-truth for future chats**
 >
 > Repository: `Knowlexit09/noel-labasan-portfolio`  
