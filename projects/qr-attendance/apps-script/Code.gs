@@ -59,9 +59,9 @@ function _rows(ss,name){
  const s=ss.getSheetByName(name),data=s.getDataRange().getValues();
  if(data.length<=1)return [];
  const h=ATT.HEADERS[name];
- return data.slice(1).filter(r=>r[0]!=='').map((r,i)=>{
+ return data.slice(1).map((r,i)=>{
     const obj={_sheetRow:i+2};h.forEach((key,k)=>obj[key]=r[k]);return obj;
- });
+ }).filter(obj=>String(obj[h[0]])!=='');
 }
 function _text(value,max){
  const x=String(value===undefined||value===null?'':value).trim();
