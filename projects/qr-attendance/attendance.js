@@ -22,9 +22,9 @@ function initialDemo(){
  attendance:people.filter(p=>p[3]).map(p=>({id:idGen(),employeeId:p[0],day:day,inAt:day+"T"+p[3]+":00",outAt:"",lateMinutes:p[3]>"09:10"?16:0})),
  leaves:[{id:idGen(),employeeId:"E-1003",from:day,to:day,reason:"Approved personal leave"}],clock:clockStr(starterClock)};
 }
-let state={employees:[],attendance:[],leaves:[],clock:clockStr(now)}, section="dashboard", scanner=null, working=false, selectedQr="", filter="";
+let serverOffset=0;let state={employees:[],attendance:[],leaves:[],clock:clockStr(now)}, section="dashboard", scanner=null, working=false, selectedQr="", filter="";
 function store(){if(!PROD)localStorage.setItem(KEY,JSON.stringify(state))}
-function currentTime(){return PROD?new Date():new Date(state.clock+":00")}
+function currentTime(){return PROD?new Date(Date.now()+serverOffset):new Date(state.clock+":00")}
 function backend(method,...args){return new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(e=>reject(new Error(e&&e.message||String(e))))[method](...args))}
 function toast(message,error){$("toast").textContent=message;$("toast").className="alert"+(error?" error":"");$("toast").classList.remove("hidden");clearTimeout(toast.timer);toast.timer=setTimeout(()=>$("toast").classList.add("hidden"),4500)}
 function dateStatus(e,day,at){
@@ -33,7 +33,7 @@ function dateStatus(e,day,at){
  if(leave)return {label:"On Leave",kind:"leave"};
  const record=state.attendance.find(a=>a.employeeId===e.id&&a.day===day);
  if(record&&record.inAt){
-  if(record.outAt)return {label:"Timed Out",kind:"out",record};
+  if(record.outAt)return {label:(Number(record.lateMinutes)||0)>0?"Late · Out":"Timed Out",kind:(Number(record.lateMinutes)||0)>0?"late":"out",record};
   const late=Number(record.lateMinutes)||0;
   return {label:late>0?"Late":"Present",kind:late>0?"late":"present",record};
  }
@@ -55,7 +55,7 @@ function render(){
  $("clockHelp").textContent=PROD?"Production time is set by the Google server.":"Change the date and time below, then press Apply Test Clock.";
  $("testControls").classList.toggle("hidden",PROD);
  const people=state.employees.filter(e=>e.active), list=people.map(e=>({e,status:dateStatus(e,day,at)}));
- for(const kind of ["present","late","absent","leave","waiting"]){$("count-"+kind).textContent=list.filter(x=>x.status.kind===kind||(kind==="present"&&x.status.kind==="out")).length}
+ for(const kind of ["present","late","absent","leave"]){$("count-"+kind).textContent=list.filter(x=>x.status.kind===kind||(kind==="present"&&x.status.kind==="out")).length}
  $("headcount").textContent=people.length;
  const rows=list.filter(x=>(x.e.name+" "+x.e.id+" "+x.e.department).toLowerCase().includes(filter.toLowerCase()));
  $("dailyTable").innerHTML=rows.length?rows.map(({e,status:s})=>{const a=s.record||{};return '<tr><td class="person">'+esc(e.name)+'<small>'+esc(e.id)+'</small></td><td>'+esc(e.department)+'</td><td>'+esc(e.shiftStart)+'</td><td>'+fmtStamp(a.inAt)+'</td><td>'+fmtStamp(a.outAt)+'</td><td><span class="status '+s.kind+'">'+esc(s.label)+'</span></td></tr>'}).join(""):tableEmpty();
@@ -73,7 +73,7 @@ async function mutate(api,localFn,args){
  try{if(PROD){const result=await backend(api,...args);if(result&&result.ok===false)throw Error(result.message);await refresh()}else{localFn();store();render()}toast("Saved successfully.");return true}
  catch(e){toast(e.message||"Operation failed.",true);return false}finally{working=false}
 }
-async function refresh(){if(PROD){const r=await backend("apiBootstrap");state.employees=r.employees||[];state.attendance=r.attendance||[];state.leaves=r.leaves||[];state.clock=clockStr(new Date(r.serverNow));}render()}
+async function refresh(){if(PROD){const r=await backend("apiBootstrap");state.employees=r.employees||[];state.attendance=r.attendance||[];state.leaves=r.leaves||[];serverOffset=new Date(r.serverNow).getTime()-Date.now();state.clock=clockStr(new Date(r.serverNow));}render()}
 function validateEmployee(form){
  const id=String(form.id||"").trim().toUpperCase(),name=String(form.name||"").trim(),dep=String(form.department||"").trim();
  if(!/^[A-Z0-9_-]{2,24}$/.test(id))throw Error("Employee ID: 2–24 letters, numbers, - or _.");
