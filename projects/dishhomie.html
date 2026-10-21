@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="DishHomie (Ano'ng Ulam?) case study: a mobile-friendly Filipino recipe roulette, lunch and dinner picker, weekly meal planner, and grocery checklist.">
+  <meta name="theme-color" content="#071a2b">
+  <title>DishHomie — Filipino Meal Planner Case Study | Noel Labasan</title>
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet" href="../assets/css/accessibility-performance.css?v=20260916-1">
+  <script defer src="../assets/js/accessibility-performance.js?v=20260916-1"></script>
+</head>
+<body>
+  <main class="case-main">
+    <a class="case-back" href="../index.html#projects">← Back to portfolio projects</a>
+    <article class="case-hero">
+      <div class="case-hero-cover">
+        <img src="../assets/images/dishhomie-cover.svg" alt="Illustrated DishHomie Filipino meal planner cover with recipe roulette; not a screenshot" width="1200" height="660">
+      </div>
+      <div>
+        <div class="section-kicker">Live Web App · Personal Project</div>
+        <h1>DishHomie — Ano'ng Ulam?</h1>
+        <p class="case-lead">A mobile-friendly Filipino meal-planning app that helps answer “Ano'ng ulam?” with a recipe picker, animated roulette, seven-day Lunch/Dinner planning, and grocery checklists.</p>
+        <div class="case-meta">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">LocalStorage</span>
+          <span class="chip">GitHub Pages</span>
+        </div>
+        <p style="display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 0">
+          <a class="btn btn-primary" href="https://knowlexit09.github.io/DishHomie/" target="_blank" rel="noopener noreferrer">Open Live DishHomie ↗</a>
+          <a class="btn btn-outline" href="https://github.com/Knowlexit09/DishHomie" target="_blank" rel="noopener noreferrer" style="color:#fff;border-color:#a2b8c8">View GitHub Source ↗</a>
+        </p>
+      </div>
+    </article>
+    <div class="case-layout">
+      <nav class="case-toc panel" aria-label="DishHomie case study sections">
+        <strong>On this page</strong>
+        <a href="#problem">Problem &amp; Approach</a>
+        <a href="#features">Features</a>
+        <a href="#implementation">Implementation</a>
+        <a href="#privacy">Data &amp; Limitations</a>
+        <a href="#learnings">What I Practiced</a>
+        <a href="#try-it">Try the Project</a>
+      </nav>
+      <div class="case-content">
+        <section class="case-section" id="problem">
+          <h2>Why I Built DishHomie</h2>
+          <p>Deciding what to cook every day can take longer than it should, especially when planning both lunch and dinner. DishHomie turns that routine question into a simple visual workflow: browse Filipino ulam ideas, ask the roulette to suggest one, review the recipe, and build a practical weekly plan.</p>
+          <p>The published app is branded <strong>Ano'ng Ulam?</strong> in its on-screen header, while its GitHub repository and project identity use <strong>DishHomie</strong>.</p>
+        </section>
+        <section class="case-section" id="features">
+          <h2>Key Features</h2>
+          <ul>
+            <li><strong>70 built-in recipe ideas:</strong> ten default dishes for each day from Monday to Sunday, with ingredients and cooking steps.</li>
+            <li><strong>Lunch / Dinner selection:</strong> separate choices and confirmations for each meal in the weekly planner.</li>
+            <li><strong>Animated dish roulette:</strong> spin for a suggestion, try again, view the recipe, or explicitly confirm a pick.</li>
+            <li><strong>Recipe management:</strong> add, edit, delete, reorder, search, filter, and favorite dishes.</li>
+            <li><strong>Weekly grocery checklist:</strong> generate a grocery view from the dishes selected for the week, with copy and checked-item controls.</li>
+            <li><strong>Personalized local planning:</strong> saves custom dishes and meal selections in the same browser, with downloadable JSON backup and restore.</li>
+          </ul>
+        </section>
+        <section class="case-section" id="implementation">
+          <h2>How It Works</h2>
+          <div class="architecture-grid">
+            <div class="arch-card"><strong>Browser interface</strong><span>Responsive HTML + CSS designed around weekly day and meal selection</span></div>
+            <div class="arch-card"><strong>Client-side logic</strong><span>JavaScript for roulette, recipe interactions, meal choices and grocery list generation</span></div>
+            <div class="arch-card"><strong>Local persistence</strong><span>Browser localStorage and manual JSON export/import; no backend account database</span></div>
+          </div>
+          <p>DishHomie is served as a static website through GitHub Pages. Its recipe catalogue and interactive logic run in the user's browser, so the core features do not require a login or paid API.</p>
+        </section>
+        <section class="case-section" id="privacy">
+          <h2>Data, Privacy &amp; Current Limitations</h2>
+          <p>DishHomie stores meal selections, custom dishes, favorites, and checklist state locally in the browser. Information does <strong>not</strong> automatically sync across phones and computers. If browser storage is cleared, locally saved changes may disappear unless the user exported a JSON backup first.</p>
+          <p>Recipe quantities are approximate and generally intended for around 3–4 servings. Serving-size scaling, consolidated grocery quantities, cost estimates, cloud accounts, and cross-device sync are not presented as completed features.</p>
+        </section>
+        <section class="case-section" id="learnings">
+          <h2>What I Practiced</h2>
+          <ul>
+            <li>Translating a common everyday problem into an interactive, mobile-friendly workflow.</li>
+            <li>Managing selections, favorites, search results, and weekly planning state with browser JavaScript.</li>
+            <li>Handling local persistence and user-controlled JSON backups without requiring an account.</li>
+            <li>Designing simple affordances around random suggestions: the roulette proposes, while the user confirms.</li>
+            <li>Deploying and maintaining a public static application from its GitHub repository.</li>
+          </ul>
+        </section>
+        <section class="case-section" id="try-it">
+          <h2>Try the Project</h2>
+          <p>Open the live application to plan this week's meals, or review its public repository for the source and implementation details.</p>
+          <p><a href="https://knowlexit09.github.io/DishHomie/" target="_blank" rel="noopener noreferrer">Launch DishHomie (Live App) ↗</a> · <a href="https://github.com/Knowlexit09/DishHomie" target="_blank" rel="noopener noreferrer">Explore DishHomie on GitHub ↗</a></p>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
