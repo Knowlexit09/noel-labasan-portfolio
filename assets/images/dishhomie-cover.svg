@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+<title id="title">DishHomie — Ano'ng Ulam? project cover</title>
+<desc id="desc">Stylized illustration of a Filipino meal planning roulette, recipe cards, and a weekly menu. Not an application screenshot.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a2335"/><stop offset="1" stop-color="#17455b"/></linearGradient>
+  <linearGradient id="board" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff9ef"/><stop offset="1" stop-color="#f8e6ca"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#001b28" flood-opacity=".4"/></filter>
+</defs>
+<rect width="1200" height="660" fill="url(#bg)"/>
+<path d="M0 530Q240 425 420 550T880 520T1200 570V660H0Z" fill="#1d5867" opacity=".55"/>
+<circle cx="1054" cy="74" r="240" fill="#ed7655" opacity=".075"/><circle cx="840" cy="520" r="255" fill="#ffffff" opacity=".04"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <rect x="60" y="74" width="212" height="38" rx="19" fill="#f6c571" opacity=".18"/>
+  <text x="82" y="100" font-size="20" font-weight="700" letter-spacing="2" fill="#ffd79b">RECIPE • PLAN • COOK</text>
+  <text x="60" y="207" font-weight="800" font-size="92" letter-spacing="-2" fill="#fff6e8">Dish<tspan fill="#ffad7a">Homie</tspan></text>
+  <text x="63" y="262" font-weight="700" font-size="35" fill="#e7dec9">Ano'ng ulam natin?</text>
+  <text x="63" y="316" font-weight="400" font-size="22" fill="#afcdd4">Pick a dish · Spin the wheel</text>
+  <text x="63" y="350" font-weight="400" font-size="22" fill="#afcdd4">Plan your Lunch &amp; Dinner</text>
+  <rect x="62" y="413" width="178" height="53" rx="26" fill="#f28765"/><text x="95" y="449" font-size="24" font-weight="800" fill="#fff">70 RECIPES</text>
+  <rect x="255" y="413" width="193" height="53" rx="26" fill="#1d6871" stroke="#69adb3" stroke-width="2"/><text x="289" y="449" font-size="22" font-weight="700" fill="#dcf5e9">7-DAY PLAN</text>
+  <text x="64" y="585" font-size="21" fill="#9ac6d0">Filipino meal planner and recipe roulette</text>
+</g>
+<g filter="url(#shadow)" transform="translate(642 87)">
+  <rect x="0" y="0" width="485" height="485" rx="35" fill="url(#board)" stroke="#eabf9e" stroke-width="4"/>
+  <rect x="28" y="26" width="430" height="49" rx="16" fill="#fffdfa"/>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700"><text x="49" y="58" fill="#8b5744">MON</text><text x="140" y="58" fill="#8b5744">TUE</text><text x="230" y="58" fill="#e57152">WED</text><text x="332" y="58" fill="#8b5744">THU</text></g>
+  <path d="M242 115V289L257 259Z" fill="#b45435"/>
+  <circle cx="243" cy="261" r="155" fill="#edb46e" stroke="#fefefe" stroke-width="16"/>
+  <path d="M243 261L243 110A151 151 0 0 1 373 185Z" fill="#ef805e"/>
+  <path d="M243 261L373 185A151 151 0 0 1 371 335Z" fill="#e7a144"/>
+  <path d="M243 261L371 335A151 151 0 0 1 243 412Z" fill="#75a58c"/>
+  <path d="M243 261L243 412A151 151 0 0 1 115 334Z" fill="#f2be72"/>
+  <path d="M243 261L115 334A151 151 0 0 1 113 185Z" fill="#a7bf83"/>
+  <path d="M243 261L113 185A151 151 0 0 1 243 110Z" fill="#eec6a3"/>
+  <g stroke="#fff4df" stroke-width="3"><path d="M243 261V110"/><path d="M243 261L373 185"/><path d="M243 261L371 335"/><path d="M243 261V412"/><path d="M243 261L115 334"/><path d="M243 261L113 185"/></g>
+  <circle cx="243" cy="261" r="61" fill="#fffbf3" stroke="#e9aa82" stroke-width="9"/>
+  <circle cx="243" cy="261" r="39" fill="#fff" stroke="#d7bca1" stroke-width="3"/>
+  <g fill="#4b936e"><ellipse cx="235" cy="253" rx="12" ry="21" transform="rotate(-40 235 253)"/><ellipse cx="258" cy="249" rx="10" ry="19" transform="rotate(35 258 249)"/></g>
+  <path d="M223 270q20-28 41 1q-13 24-41-1Z" fill="#e77a54"/>
+  <path d="M243 94l-21-24h42Z" fill="#8b4a35"/>
+  <rect x="49" y="431" width="387" height="36" rx="18" fill="#e67b55"/>
+  <text x="242" y="455" font-size="18" fill="white" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800">SPIN FOR TODAY'S ULAM</text>
+</g>
+</svg>
