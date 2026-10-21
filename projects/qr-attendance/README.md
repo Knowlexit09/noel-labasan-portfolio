@@ -4,23 +4,23 @@ Status (2026-10-22): **public browser demo + owner-deployable Google Apps Script
 
 ## Try the live portfolio demo
 
-Open \`https://knowlexit09.github.io/noel-labasan-portfolio/projects/qr-attendance/\`.
+Open `https://knowlexit09.github.io/noel-labasan-portfolio/projects/qr-attendance/`.
 
-The public preview starts with five fictional employees and synthetic punches. It uses this browser's \`localStorage\`, **not Google Sheets**. Select **Employees** to create/edit employee records, view/download a QR card, or press **Test Scan**. In **QR Scanner**, click Time In/Time Out. **Test Clock** edits simulation time (Philippine local time). Test Present, Late, Absent, On Leave, same-day Time Out, duplicate punches, and CSV export. **Reset Demo** wipes only browser demo storage.
+The public preview starts with five fictional employees and synthetic punches. It uses this browser's `localStorage`, **not Google Sheets**. Select **Employees** to create/edit employee records, view/download a QR card, or press **Test Scan**. In **QR Scanner**, click Time In/Time Out. **Test Clock** edits simulation time (Philippine local time). Test Present, Late, Absent, On Leave, same-day Time Out, duplicate punches, and CSV export. **Reset Demo** wipes only browser demo storage.
 
 ## Deploy the private Google Sheets edition
 
 1. Open Google Apps Script at https://script.google.com/, select **New project** (using the Google account that will manage attendance).
-2. Paste \`apps-script/Code.gs\` into the editor's \`Code.gs\` file. Add an **HTML** file named **Index** and paste \`apps-script/Index.html\` (not the GitHub Pages index). Save. Do not publish employee data or deploy open to strangers.
+2. Paste `apps-script/Code.gs` into the editor's `Code.gs` file. Add an **HTML** file named **Index** and paste `apps-script/Index.html` (not the GitHub Pages index). Save. Do not publish employee data or deploy open to strangers.
 3. In **Project Settings**, set **Time zone: (GMT+08:00) Philippine Standard Time**. In the editor, run **setupAttendance** **once**; grant Google Sheets permission. The function automatically creates a spreadsheet named **Clockwise QR Attendance - Company Database** (or reuses the same ID saved in Script Properties) and four tabs: **Employees**, **Attendance**, **Leaves**, **Audit**. Retrieve the Google Sheet URL from the Apps Script execution logs.
-4. Under **Project Settings → Script properties**, verify \`ATTENDANCE_SHEET_ID\` and \`ATTENDANCE_ADMIN_EMAILS\`. The first run adds the owner's active email as the sole admin. To add authorized managers, set \`ATTENDANCE_ADMIN_EMAILS\` to comma-separated exact Google-account emails and **share the backing Google Sheet** with those managers; only add trusted administrators. Do not store passwords or private employee data on GitHub.
+4. Under **Project Settings → Script properties**, verify `ATTENDANCE_SHEET_ID` and `ATTENDANCE_ADMIN_EMAILS`. The first run adds the owner's active email as the sole admin. To add authorized managers, set `ATTENDANCE_ADMIN_EMAILS` to comma-separated exact Google-account emails and **share the backing Google Sheet** with those managers; only add trusted administrators. Do not store passwords or private employee data on GitHub.
 5. **Deploy → New deployment → Web app.** Choose **Execute as: User accessing the web app**; **Who has access: Only myself** for an owner-only pilot, or **Only users in your Google Workspace domain** for an internal company domain deployment. **Never use Anyone / Anyone anonymous**, and never use **Execute as me** for this personnel-data version. Share the resulting internal Apps Script web app URL with authorized admins; NOT the public portfolio link.
-6. Open the Apps Script web app while signed into an authorized Google account. Add employees and test QR scanning. Official Time In/Time Out use server timestamps, regardless of browser clock or test controls. The production UI loads its frontend from **an immutable GitHub commit pinned in \`apps-script/Index.html\`** plus versioned QR library CDNs.
+6. Open the Apps Script web app while signed into an authorized Google account. Add employees and test QR scanning. Official Time In/Time Out use server timestamps, regardless of browser clock or test controls. The production UI loads its frontend from **an immutable GitHub commit pinned in `apps-script/Index.html`** plus versioned QR library CDNs.
 7. Treat the generated badge value and QR as a credential. Restrict their distribution and supervise the kiosk. Anyone with a copy of an active badge **could impersonate that employee**; this MVP does not offer anti-passback, geofencing, face recognition, individual employee logins, or cryptographically rotating QR proofs.
 
 ## Status and record rules
 
-- **Present**: time in at or before \`shiftStart + grace\`; for active employee.
+- **Present**: time in at or before `shiftStart + grace`; for active employee.
 - **Late**: time in after the grace window; still Late after Time Out.
 - **Absent**: no time-in 30 minutes after shift start (for today); missing punches on past days are Absent.
 - **On Leave**: approved date range overrides Absent. Manager records/revokes leave.
@@ -61,13 +61,13 @@ The public preview starts with five fictional employees and synthetic punches. I
 
 ## Developer paths
 
-- \`index.html\`: public demo / browser UI
-- \`attendance.js\`: client controller with DEMO localStorage and PRODUCTION google.script.run adapters
-- \`attendance.css\`: responsive dashboard styles
-- \`apps-script/Code.gs\`: Google Sheet creation, authorized CRUD, lock-protected punches, audit log
-- \`apps-script/Index.html\`: Apps Script HTML Service copy of UI with immutable asset links
-- \`../qr-attendance.html\`: recruiter-facing portfolio case study
+- `index.html`: public demo / browser UI
+- `attendance.js`: client controller with DEMO localStorage and PRODUCTION google.script.run adapters
+- `attendance.css`: responsive dashboard styles
+- `apps-script/Code.gs`: Google Sheet creation, authorized CRUD, lock-protected punches, audit log
+- `apps-script/Index.html`: Apps Script HTML Service copy of UI with immutable asset links
+- `../qr-attendance.html`: recruiter-facing portfolio case study
 
 ## Rollback
 
-All additions are isolated under \`projects/qr-attendance/\` plus new case-study/cover/card entries in existing portfolio files. Revert the feature merge or the targeted project-card config/fragment and new files, without touching other featured projects or Supabase/Admin. Removing static files **does not delete deployed Google Sheets data**; separately revoke Apps Script deployment, retain/back up real business records as needed.
+All additions are isolated under `projects/qr-attendance/` plus new case-study/cover/card entries in existing portfolio files. Revert the feature merge or the targeted project-card config/fragment and new files, without touching other featured projects or Supabase/Admin. Removing static files **does not delete deployed Google Sheets data**; separately revoke Apps Script deployment, retain/back up real business records as needed.
