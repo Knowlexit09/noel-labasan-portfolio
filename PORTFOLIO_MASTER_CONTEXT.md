@@ -1,6 +1,28 @@
 # PORTFOLIO MASTER CONTEXT
 
 
+## LATEST ACCEPTED WORK — DishHomie Featured Project (2026-10-22, Asia/Manila)
+
+**User instruction:** “may ginawa akong project dishhomie. palagay sa project ko” — add owned DishHomie web app as a project in public `Knowlexit09/noel-labasan-portfolio`. ChatGPT is the developer/operator; this was implemented directly in GitHub, not merely drafted.
+
+**Source verification:** Actual owned public GitHub repository `Knowlexit09/DishHomie`, `main` HEAD at time of addition `7f2ba496db99e993266c9b9804396a002064faf2`; GitHub Pages latest deployment [#39315745709](https://github.com/Knowlexit09/DishHomie/actions/runs/39315745709) **SUCCESS**. Public app URL `https://knowlexit09.github.io/DishHomie/`. Its README calls it DishHomie; the actual in-app website header/title is **“Ano'ng Ulam?”** — project card therefore correctly names **DishHomie — Ano'ng Ulam?**. Features verified in repo: 70 default ulam recipes (10 per weekday), separate Lunch/Dinner picks, roulette requiring user confirmation, ingredients and recipe steps, search/filter/favorites, add/edit/delete/reorder, weekly grocery list, browser `localStorage` saves and JSON backup/restore. Do **not** misrepresent missing account/cloud sync/serving adjuster/consolidated shopping/budget estimations as completed.
+
+**Completed GitHub modifications:**
+- `assets/images/dishhomie-cover.svg`: original stylized illustrated cover, expressly **not** a screenshot or fabricated proof.
+- `projects/dishhomie.html`: independent recruiter-facing case study with features, technical architecture, usage-rights/data limitations, live GitHub Pages demo and public GitHub source links. Uses existing portfolio CSS and mobile responsiveness; safe external `rel="noopener noreferrer"`.
+- `assets/js/config.js`: add DishHomie as the **third** featured, published project; other three unchanged, with actual case-study URL, tags, alt, search tokens.
+- `assets/js/fragments/work.js`: same card in static fallback markup; existing runtime config still remains source of truth for rendered project grid.
+- `assets/css/responsive.css`: optimize 4 featured cards as 2×2 desktop/tablet and one column mobile. Prior special last-card grid span now applies only to an odd count to preserve original 3-card behavior; `:has()` desktop enhancement has safe 3-column fallback on unsupported browsers.
+
+**Verification:** GitHub source QA was performed against actual current files: JS config+fragment evaluate without error; exactly four unique cards and same other three projects; featured project case/image paths and Live/GitHub hrefs exist; illustrated SVG source has valid root/closing tags; mobile grid selectors; honest browser-only storage caveat. All targeted 9 assertions **PASS**. [Portfolio GitHub Pages deploy #39643968310](https://github.com/Knowlexit09/noel-labasan-portfolio/actions/runs/39643968310) **SUCCESS** at code commit `b6928a45db2c19102cbfa79b6f609f82c876dff0`. Direct independent public browser rendering was *not* verified by `web.open` (web fetch was unavailable); CI deployment confirmation + source checks are what was verified.
+
+**Important source-of-truth / Supabase interaction:** On Oct 22 the Supabase plugin `list_projects` shows the connected `noel-labasan-portfolio-admin` project (ID `isoiolgajmpldkrvqbkp`) status **INACTIVE**. Public `assets/js/backend-loader.js` uses static `window.PORTFOLIO_CONFIG` fallback when live Supabase read fails, so the new DishHomie project is in the GitHub Pages static fallback. If Supabase later becomes active and its old `portfolio_states` live row returns a full `content.projects` array *without DishHomie*, it will override the fallback project list and DishHomie may disappear. **Do not bypass AAL2/Admin Publish Live or directly write production database through service-level SQL as a workaround.** After the owner restores an active Supabase project, reconcile through secured **Admin → Projects Draft → Preview → Publish Live**, preserving other state, and verify the live project appears with no duplicate. Do not automatically restore a paused project, use unsafe credentials, or change account/auth policies. This is an outstanding operational synchronization caveat, not a failure of GitHub Pages project integration.
+
+**Patch risk LOW** for static content, visual mobile layout and links; residual **MEDIUM future visibility risk** if protected remote publication state later overrides the static list. Safeguards: only public owned links, real audited features, accessible illustrated art labeled as not a screenshot, no backend writes or policy bypass, source tests and successful GH Pages deploy. No POS, finance, inventory, security/Auth, Java IDE, Knowledge Lab or existing proof media changed. **Rollback:** normal targeted Git reverts of SVG, case-study HTML, config+fragment project card and responsive CSS patch; no force-push and no data rollback.
+
+---
+
+
 ## NEW LATEST — PHOTOSHOP BEGINNER→EXPERT GUIDED COURSE + WINDOWS/MAC SHORTCUTS (2026-10-13)
 
 **User requirement:** Asked why the Photoshop Knowledge Lab contained no Beginner-to-Expert lessons and specifically asked for keyboard shortcut keys. Previous verified baseline had only one proof-backed Photoshop Smart Object lesson. **Implemented actual 49-lesson Photoshop track on `main`: 48 new manually authored bilingual English + natural Taglish guides (eight stages × six) + untouched existing honest proof-backed Gatchalian Meatshop campaign lesson.** This is not 49 real proof-backed videos or an in-browser Photoshop emulator.
