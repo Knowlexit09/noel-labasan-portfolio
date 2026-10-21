@@ -39,7 +39,7 @@ function dateStatus(e,day,at){
  }
  if(day<dateKey(at))return {label:"Absent",kind:"absent"};
  if(day>dateKey(at))return {label:"Scheduled",kind:"waiting"};
- const cutoff=new Date(day+"T"+e.shiftStart+":00");cutoff.setMinutes(cutoff.getMinutes()+30);
+ const cutoff=new Date(day+"T"+e.shiftStart+":00");cutoff.setMinutes(cutoff.getMinutes()+Math.max(30,Number(e.grace)||0));
  return at>=cutoff?{label:"Absent",kind:"absent"}:{label:"Not Yet In",kind:"waiting"};
 }
 function clockMinutes(hm){const parts=String(hm||"09:00").split(":").map(Number);return parts[0]*60+parts[1]}
@@ -49,7 +49,7 @@ function nowTitle(){const d=currentTime();$("clockDisplay").textContent=d.toLoca
 function tableEmpty(n=6){return '<tr><td colspan="'+n+'" class="empty">No records found.</td></tr>'}
 function render(){
  const at=currentTime(), day=$("viewDate").value||dateKey(at);
- nowTitle();$("clockEdit").value=state.clock;$("clockEdit").disabled=PROD;
+ nowTitle();if($("reportDate"))$("reportDate").value=day;$("clockEdit").value=state.clock;$("clockEdit").disabled=PROD;
  $("modeText").textContent=PROD?"GOOGLE SHEETS CONNECTED":"DEMO · BROWSER DATA";
  $("modeInfo").textContent=PROD?"Protected manager web app · official server timestamps":"Safe sample data · demo clock editable · records stay in this browser";
  $("clockHelp").textContent=PROD?"Production time is set by the Google server.":"Change the date and time below, then press Apply Test Clock.";
@@ -148,7 +148,7 @@ async function startScan(){
 async function stopScan(){if(scanner){const s=scanner;scanner=null;try{if(s.isScanning)await s.stop();await s.clear()}catch(e){}}$("reader").classList.add("hidden");$("startCamera").textContent="Start Camera Scan"}
 function bind(){
  document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.page)));
- $("viewDate").addEventListener("change",render);$("employeeSearch").addEventListener("input",render);$("dailySearch").addEventListener("input",()=>{filter=$("dailySearch").value;render()});
+ $("viewDate").addEventListener("change",render);$("reportDate").addEventListener("change",()=>{$("viewDate").value=$("reportDate").value;render()});$("refreshData").addEventListener("click",()=>{refresh().catch(e=>toast(e.message,true))});$("employeeSearch").addEventListener("input",render);$("dailySearch").addEventListener("input",()=>{filter=$("dailySearch").value;render()});
  $("addEmployee").addEventListener("click",()=>openEmployee());$("cancelEmployee").addEventListener("click",()=>{$("employeePanel").classList.remove("open");resetEmployeeForm()});
  $("employeeForm").addEventListener("submit",saveEmployee);$("leaveForm").addEventListener("submit",saveLeave);
  $("clockApply").addEventListener("click",()=>{if(PROD)return;const value=$("clockEdit").value;if(!value||isNaN(new Date(value).getTime())){toast("Select a valid test date and time.",true);return}state.clock=value;$("viewDate").value=value.slice(0,10);store();render();toast("Demo clock updated — attendance recalculated.")});
