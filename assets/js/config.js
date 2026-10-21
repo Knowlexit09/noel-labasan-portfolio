@@ -108,6 +108,20 @@ window.PORTFOLIO_CONFIG = {
       },
       {
         published:true,
+        title:'Clockwise QR Attendance',
+        type:'Employee Time In / Time Out System',
+        status:'Interactive Demo',
+        statusClass:'status-active',
+        description:'QR-based employee time clock with editable demo clock, Present/Late/Absent/On Leave dashboard, leave records, reports, and owner-deployable Google Sheets backend.',
+        tags:['Google Apps Script','Google Sheets','QR Scanner','JavaScript'],
+        imageUrl:'assets/images/qr-attendance-cover.svg',
+        imageAlt:'Original Clockwise QR attendance dashboard and badge illustration, not a screenshot',
+        url:'projects/qr-attendance.html',
+        linkLabel:'View Case Study & Demo →',
+        search:'qr attendance time in time out employee timesheet tardiness late present absent on leave google sheets apps script staff hr'
+      },
+      {
+        published:true,
         title:'PHP + Google Sheets CRUD',
         type:'Web Application Learning Project',
         status:'Learning Project',
