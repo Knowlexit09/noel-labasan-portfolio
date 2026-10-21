@@ -94,6 +94,20 @@ window.PORTFOLIO_CONFIG = {
       },
       {
         published:true,
+        title:'DishHomie — Ano\'ng Ulam?',
+        type:'Filipino Recipe & Meal Planning Web App',
+        status:'Live Web App',
+        statusClass:'status-active',
+        description:'Mobile-friendly Filipino meal planner with 70 recipes, Lunch/Dinner picks, animated dish roulette, a weekly grocery checklist, recipe management, and browser-saved plans.',
+        tags:['HTML / CSS','JavaScript','LocalStorage','GitHub Pages'],
+        imageUrl:'assets/images/dishhomie-cover.svg',
+        imageAlt:'DishHomie illustrated project cover featuring a meal roulette and weekly planning',
+        url:'projects/dishhomie.html',
+        linkLabel:'View Case Study & Live Demo →',
+        search:'dishhomie ano ng ulam anong ulam filipino recipes lunch dinner roulette weekly meal planner groceries grocery list cooking html css javascript localstorage'
+      },
+      {
+        published:true,
         title:'PHP + Google Sheets CRUD',
         type:'Web Application Learning Project',
         status:'Learning Project',
